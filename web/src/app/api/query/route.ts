@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
-import { readIndex, readKBFile } from '@/lib/articles'
+import fs from 'fs'
+import path from 'path'
+import { readIndex, readIndexInVault, readKBFile, resolveContentRoot, DEFAULT_KB_ROOT } from '@/lib/articles'
 
 export const dynamic = 'force-dynamic'
 
@@ -138,12 +140,17 @@ export async function POST(request: NextRequest): Promise<Response> {
       }
 
       try {
+        // Resolve active vault from cookie
+        const vaultRoot = request.cookies.get('active_vault_path')?.value || DEFAULT_KB_ROOT
+        const isDefault = vaultRoot === DEFAULT_KB_ROOT
+        const contentRoot = resolveContentRoot(vaultRoot)
+
         // Step 1: Read the index
         send({ type: 'thinking', content: 'Reading wiki index...' })
-        const indexContent = readIndex()
+        const indexContent = isDefault ? readIndex() : readIndexInVault(vaultRoot)
 
         if (!indexContent) {
-          send({ type: 'error', content: 'Could not read wiki index' })
+          send({ type: 'error', content: 'Could not read wiki index for this vault. Make sure an index.md exists.' })
           controller.close()
           return
         }
@@ -160,10 +167,20 @@ export async function POST(request: NextRequest): Promise<Response> {
         const articles: Array<{ path: string; content: string }> = []
         for (const pagePath of pagePaths) {
           send({ type: 'reading', path: pagePath })
-          const content = readKBFile(pagePath)
-          if (content) {
-            articles.push({ path: pagePath, content })
+          let content = ''
+          if (isDefault) {
+            content = readKBFile(pagePath)
+          } else {
+            const candidates = [
+              path.join(vaultRoot, pagePath),
+              path.join(contentRoot, pagePath),
+              path.join(contentRoot, pagePath.replace(/^wiki\//, '')),
+            ]
+            for (const c of candidates) {
+              try { content = fs.readFileSync(c, 'utf8'); break } catch { /* try next */ }
+            }
           }
+          if (content) articles.push({ path: pagePath, content })
         }
 
         // Step 4: Synthesize answer (streaming)

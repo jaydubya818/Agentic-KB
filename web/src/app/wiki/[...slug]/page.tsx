@@ -1,6 +1,8 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
-import { findArticleBySlug, getBacklinks, type ArticleMeta } from '@/lib/articles'
+import { cookies } from 'next/headers'
+import path from 'path'
+import { findArticleBySlug, findArticleInVault, getBacklinks, type ArticleMeta, DEFAULT_KB_ROOT } from '@/lib/articles'
 import WikiLayout from '@/components/WikiLayout'
 import ArticleRenderer from '@/components/ArticleRenderer'
 import TableOfContents from '@/components/TableOfContents'
@@ -76,14 +78,22 @@ function InfoBox({ meta }: { meta: ArticleMeta | undefined }): React.ReactElemen
 export default async function ArticlePage({ params }: ArticlePageProps): Promise<React.ReactElement> {
   const { slug: slugParts } = await params
   const slug = slugParts.join('/')
-
-  const article = findArticleBySlug(slug)
+  const cookieStore = await cookies()
+  const vaultRoot = cookieStore.get('active_vault_path')?.value || DEFAULT_KB_ROOT
+  const isDefault = vaultRoot === DEFAULT_KB_ROOT
+  const vaultName = path.basename(vaultRoot)
+  const article = isDefault ? findArticleBySlug(slug) : findArticleInVault(slug, vaultRoot)
 
   if (!article) {
     notFound()
   }
 
-  const backlinks = getBacklinks(article.meta.slug)
+  const backlinks = isDefault ? getBacklinks(article.meta.slug) : []
+  // Obsidian deep-link: obsidian://open?vault=VaultName&file=relative/path.md
+  const obsidianRelPath = path.relative(vaultRoot, article.meta.path).replace(/\\/g, '/')
+  const obsidianHref = `obsidian://open?vault=${encodeURIComponent(vaultName)}&file=${encodeURIComponent(obsidianRelPath)}`
+  // Breadcrumb folder segments from slug (e.g. "folder/sub/article" → ["folder", "sub"])
+  const breadcrumbFolders = slug.split('/').slice(0, -1)
 
   return (
     <WikiLayout
@@ -138,13 +148,83 @@ export default async function ArticlePage({ params }: ArticlePageProps): Promise
             display: 'flex',
             gap: '1rem',
             flexWrap: 'wrap',
+            alignItems: 'center',
           }}>
-            <span>
-              <Link href="/wiki" style={{ color: '#0645ad' }}>Agentic KB</Link>
-              {' → '}
-              <span style={{ textTransform: 'capitalize' }}>{article.meta.type}</span>
+            {/* Breadcrumb */}
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', flexWrap: 'wrap' }}>
+              <Link href="/wiki" style={{ color: '#0645ad' }}>
+                {isDefault ? 'Agentic KB' : vaultName}
+              </Link>
+              {isDefault ? (
+                <>
+                  {' → '}
+                  <span style={{ textTransform: 'capitalize' }}>{article.meta.type}</span>
+                </>
+              ) : (
+                breadcrumbFolders.map((folder, i) => (
+                  <React.Fragment key={i}>
+                    {' → '}
+                    <Link
+                      href={`/wiki/${breadcrumbFolders.slice(0, i + 1).join('/')}`}
+                      style={{ color: '#0645ad', textTransform: 'capitalize' }}
+                    >
+                      {folder.replace(/-/g, ' ')}
+                    </Link>
+                  </React.Fragment>
+                ))
+              )}
             </span>
-            {article.meta.created && <span>Created: {article.meta.created instanceof Date ? article.meta.created.toISOString().slice(0, 10) : String(article.meta.created)}</span>}
+            {article.meta.created && <span>Created: {String(article.meta.created)}</span>}
+            {article.meta.vault && (
+              <span style={{
+                background: '#d4af37',
+                color: '#fff',
+                padding: '0.1rem 0.5rem',
+                borderRadius: '2px',
+                fontSize: '0.7rem',
+                fontWeight: 'bold',
+                letterSpacing: '0.03em',
+              }}>
+                ✦ VAULT
+              </span>
+            )}
+            {article.meta.visibility === 'private' && (
+              <span style={{
+                background: '#7c3aed',
+                color: '#fff',
+                padding: '0.1rem 0.5rem',
+                borderRadius: '2px',
+                fontSize: '0.7rem',
+                fontWeight: 'bold',
+                letterSpacing: '0.03em',
+              }}>
+                🔒 PRIVATE
+              </span>
+            )}
+            {/* Open in Obsidian — always visible, especially useful for non-KB vaults */}
+            <a
+              href={obsidianHref}
+              title={`Open in Obsidian: ${obsidianRelPath}`}
+              style={{
+                marginLeft: 'auto',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+                fontSize: '0.72rem',
+                color: '#7c3aed',
+                textDecoration: 'none',
+                border: '1px solid #c4b5fd',
+                borderRadius: '2px',
+                padding: '0.1rem 0.5rem',
+                background: '#f5f3ff',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#7c3aed">
+                <path d="M12.003 0C9.53 0 7.332.968 5.617 2.555c-.36.33-.697.685-1.007 1.061C2.985 5.5 2 7.652 2 10.003c0 2.456 1.07 4.668 2.772 6.22l6.716 7.444a.7.7 0 001.037 0l6.716-7.444C20.931 14.67 22 12.459 22 10.003 22 4.48 17.525 0 12.003 0z"/>
+              </svg>
+              Open in Obsidian
+            </a>
           </div>
         </div>
 

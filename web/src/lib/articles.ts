@@ -2,8 +2,15 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
-export const KB_ROOT = '/Users/jaywest/Agentic-KB'
+export const DEFAULT_KB_ROOT = '/Users/jaywest/Agentic-KB'
+export const KB_ROOT = DEFAULT_KB_ROOT  // keep for backward compat
 export const WIKI_ROOT = path.join(KB_ROOT, 'wiki')
+
+/** Resolve the content root for any vault: uses wiki/ subdir if present, else vault root. */
+export function resolveContentRoot(vaultRoot: string): string {
+  const wikiDir = path.join(vaultRoot, 'wiki')
+  return fs.existsSync(wikiDir) ? wikiDir : vaultRoot
+}
 
 export interface ArticleMeta {
   path: string        // relative path from KB_ROOT e.g. "wiki/concepts/foo.md"
@@ -21,6 +28,8 @@ export interface ArticleMeta {
   jay_experience?: string
   difficulty?: string
   time_estimate?: string
+  visibility: 'public' | 'private'
+  vault: boolean
 }
 
 export interface ArticleContent {
@@ -70,6 +79,13 @@ export function parseArticle(filePath: string): ArticleContent | null {
       return String(v)
     }
 
+    // personal/ section is always private; otherwise respect frontmatter (default: public)
+    const isPersonalSection = relPath.startsWith('wiki/personal/')
+    const visibilityRaw = toStr(data.visibility)
+    const visibility: 'public' | 'private' = isPersonalSection
+      ? 'private'
+      : visibilityRaw === 'private' ? 'private' : 'public'
+
     const meta: ArticleMeta = {
       path: relPath,
       slug,
@@ -86,6 +102,8 @@ export function parseArticle(filePath: string): ArticleContent | null {
       jay_experience: toStr(data.jay_experience),
       difficulty: toStr(data.difficulty),
       time_estimate: toStr(data.time_estimate),
+      visibility,
+      vault: data.vault === true,
     }
 
     return { meta, content, rawContent: raw }
@@ -235,7 +253,11 @@ export interface SearchResult {
   score: number
 }
 
-export function searchArticles(query: string, limit = 20): SearchResult[] {
+export function searchArticles(
+  query: string,
+  limit = 20,
+  scope: 'public' | 'private' | 'all' = 'public',
+): SearchResult[] {
   if (!query.trim()) return []
 
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
@@ -245,6 +267,11 @@ export function searchArticles(query: string, limit = 20): SearchResult[] {
   for (const filePath of allFiles) {
     const article = parseArticle(filePath)
     if (!article) continue
+
+    // Scope filtering
+    if (scope === 'public' && article.meta.visibility !== 'public') continue
+    if (scope === 'private' && article.meta.visibility !== 'private') continue
+    // scope === 'all' includes everything
 
     const fullText = (article.meta.title + ' ' + article.content).toLowerCase()
     let score = 0
@@ -351,3 +378,122 @@ export function writeRawMaterial(material: RawMaterial): string {
 }
 
 export { WIKI_SECTIONS }
+
+// ─── Vault-aware variants ───────────────────────────────────────────────────
+
+/** List all .md files under a given root recursively. */
+export function listFilesUnder(root: string): string[] {
+  const results: string[] = []
+  const skip = new Set(['.obsidian', '.git', 'node_modules', '.next'])
+  function walk(dir: string): void {
+    if (!fs.existsSync(dir)) return
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (skip.has(entry.name)) continue
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) walk(full)
+      else if (entry.name.endsWith('.md')) results.push(full)
+    }
+  }
+  walk(root)
+  return results
+}
+
+/** Parse any markdown file relative to an arbitrary vault root. */
+export function parseFileInVault(filePath: string, vaultRoot: string): ArticleContent | null {
+  try {
+    const raw = fs.readFileSync(filePath, 'utf8')
+    const { data, content } = matter(raw)
+    const contentRoot = resolveContentRoot(vaultRoot)
+    const relPath = path.relative(vaultRoot, filePath).replace(/\\/g, '/')
+    const slug = path.relative(contentRoot, filePath).replace(/\\/g, '/').replace(/\.md$/, '')
+    const toStr = (v: unknown): string | undefined => {
+      if (v === undefined || v === null) return undefined
+      if (v instanceof Date) return v.toISOString().slice(0, 10)
+      return String(v)
+    }
+    let title = toStr(data.title) || ''
+    if (!title) {
+      const h1 = content.match(/^#\s+(.+)$/m)
+      title = h1 ? h1[1].trim() : path.basename(filePath, '.md').replace(/-/g, ' ')
+    }
+    const meta: ArticleMeta = {
+      path: relPath,
+      slug,
+      title,
+      type: toStr(data.type) || 'article',
+      tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+      confidence: toStr(data.confidence),
+      created: toStr(data.created),
+      updated: toStr(data.updated),
+      description: toStr(data.description),
+      category: toStr(data.category),
+      vendor: toStr(data.vendor),
+      version: toStr(data.version),
+      jay_experience: toStr(data.jay_experience),
+      difficulty: toStr(data.difficulty),
+      time_estimate: toStr(data.time_estimate),
+      visibility: toStr(data.visibility) === 'private' ? 'private' : 'public',
+      vault: data.vault === true,
+    }
+    return { meta, content, rawContent: raw }
+  } catch { return null }
+}
+
+/** Find an article by slug within any vault. */
+export function findArticleInVault(slug: string, vaultRoot: string): ArticleContent | null {
+  const contentRoot = resolveContentRoot(vaultRoot)
+  const cleanSlug = slug.replace(/\.md$/, '')
+  const direct = path.join(contentRoot, cleanSlug + '.md')
+  if (fs.existsSync(direct)) return parseFileInVault(direct, vaultRoot)
+  for (const filePath of listFilesUnder(contentRoot)) {
+    const rel = path.relative(contentRoot, filePath).replace(/\\/g, '/').replace(/\.md$/, '')
+    if (rel === cleanSlug) return parseFileInVault(filePath, vaultRoot)
+  }
+  return null
+}
+
+/** Search across any vault. */
+export function searchInVault(
+  query: string,
+  vaultRoot: string,
+  limit = 20,
+  scope: 'public' | 'private' | 'all' = 'public',
+): SearchResult[] {
+  if (!query.trim()) return []
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
+  const contentRoot = resolveContentRoot(vaultRoot)
+  const results: SearchResult[] = []
+  for (const filePath of listFilesUnder(contentRoot)) {
+    const article = parseFileInVault(filePath, vaultRoot)
+    if (!article) continue
+    if (scope === 'public' && article.meta.visibility !== 'public') continue
+    if (scope === 'private' && article.meta.visibility !== 'private') continue
+    const fullText = (article.meta.title + ' ' + article.content).toLowerCase()
+    let score = 0; let matchPos = -1
+    for (const term of terms) {
+      const idx = fullText.indexOf(term)
+      if (idx !== -1) {
+        score++
+        if (matchPos === -1) matchPos = idx
+        if (article.meta.title.toLowerCase().includes(term)) score += 2
+      }
+    }
+    if (score > 0) {
+      const rawLower = article.content.toLowerCase()
+      let start = 0
+      for (const term of terms) {
+        const idx = rawLower.indexOf(term)
+        if (idx !== -1) { start = Math.max(0, idx - 60); break }
+      }
+      results.push({ meta: article.meta, snippet: article.content.slice(start, start + 200), score })
+    }
+  }
+  return results.sort((a, b) => b.score - a.score).slice(0, limit)
+}
+
+/** Read index.md from any vault (falls back to first .md if no index). */
+export function readIndexInVault(vaultRoot: string): string {
+  const contentRoot = resolveContentRoot(vaultRoot)
+  const indexPath = path.join(contentRoot, 'index.md')
+  try { return fs.readFileSync(indexPath, 'utf8') } catch { return '' }
+}

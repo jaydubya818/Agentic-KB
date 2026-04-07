@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import WikiLayout from '@/components/WikiLayout'
 import IngestForm from '@/components/IngestForm'
 
@@ -50,11 +51,11 @@ export default function IngestPage(): React.ReactElement {
                 </tr>
                 <tr>
                   <td className="label">Step 2</td>
-                  <td>Open Claude Code in KB dir</td>
+                  <td><Link href="/process" style={{ color: '#0645ad' }}>Go to Process Raw Materials →</Link></td>
                 </tr>
                 <tr>
                   <td className="label">Step 3</td>
-                  <td>Run: &ldquo;Ingest raw/...&rdquo;</td>
+                  <td>Click &ldquo;Ingest&rdquo; on the file or &ldquo;Process All&rdquo;</td>
                 </tr>
                 <tr>
                   <td className="label">Result</td>
@@ -70,8 +71,10 @@ export default function IngestPage(): React.ReactElement {
             The raw directory is <em>read-only for the wiki</em> — it is the immutable source of truth.
           </p>
           <p>
-            To process the raw material into the wiki, open a Claude Code session in{' '}
-            <code>/Users/jaywest/Agentic-KB/</code> and say:{' '}
+            To process the raw material into the wiki, go to{' '}
+            <Link href="/process" style={{ color: '#0645ad', fontWeight: 500 }}>Process Raw Materials</Link>{' '}
+            and click <strong>Ingest</strong> next to the file, or <strong>Process All</strong> to ingest everything at once.
+            Alternatively, open a Claude Code session in <code>/Users/jaywest/Agentic-KB/</code> and say:{' '}
             <strong>&ldquo;Ingest raw/{'{type}'}/{'{slug}'}.md&rdquo;</strong>
           </p>
           <p>

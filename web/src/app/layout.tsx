@@ -6,6 +6,7 @@ import './globals.css'
 import { useState } from 'react'
 import TopBar from '@/components/TopBar'
 import QueryPanel from '@/components/QueryPanel'
+import { PrivateModeProvider } from '@/lib/private-mode-context'
 
 export default function RootLayout({
   children,
@@ -22,9 +23,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
-        <TopBar onOpenQuery={() => setQueryPanelOpen(true)} />
-        <QueryPanel isOpen={queryPanelOpen} onClose={() => setQueryPanelOpen(false)} />
-        {children}
+        <PrivateModeProvider>
+          <TopBar onOpenQuery={() => setQueryPanelOpen(true)} />
+          <QueryPanel isOpen={queryPanelOpen} onClose={() => setQueryPanelOpen(false)} />
+          {children}
+        </PrivateModeProvider>
       </body>
     </html>
   )

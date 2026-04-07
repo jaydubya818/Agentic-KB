@@ -1,0 +1,13 @@
+{
+  "name": "agentic-kb-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Agentic Engineering KB",
+  "main": "server.js",
+  "type": "module",
+  "bin": {
+    "agentic-kb-mcp": "./server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}

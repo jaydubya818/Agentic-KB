@@ -1,0 +1,8 @@
+{
+  "name": "agentic-kb-cli",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "kb": "./kb.js"
+  }
+}
