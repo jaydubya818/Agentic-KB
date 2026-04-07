@@ -20,7 +20,7 @@ status: stable
 
 ## TL;DR
 
-An agent loop is the control structure that drives an LLM to take actions until a terminal condition is reached. ReAct (Reason+Act) is the dominant paradigm. The loop is where most reliability problems live — infinite loops, context blowout, and premature stopping are all loop-level failures.
+An agent loop is the control structure that drives an LLM to take actions until a terminal condition is reached. ReAct (Reason+Act) is the dominant paradigm. The loop is where most reliability problems live: infinite loops, context blowout, and premature stopping are all loop level failures. 
 
 ---
 

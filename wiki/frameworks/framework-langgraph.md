@@ -1,251 +1,148 @@
 ---
 title: LangGraph
 type: framework
-vendor: LangChain Inc.
-version: "0.2.x (2025)"
-language: python
-license: open-source
-github: "https://github.com/langchain-ai/langgraph"
-tags: [langgraph, orchestration, multi-agent, state-machine, graph, python, langchain]
-last_checked: 2026-04-04
-jay_experience: limited
+tags: [langchain, orchestration, agents, workflow, deployment, memory]
+created: 2026-01-01
+updated: 2026-04-05
+visibility: public
+confidence: high
+related: [framework-crewai.md, framework-autogen.md, concepts/state-persistence.md, concepts/multi-tenancy-agents.md]
+source: https://docs.langchain.com/oss/python/deepagents/going-to-production
 ---
 
-## Overview
+# LangGraph
 
-LangGraph is a graph-based agent orchestration framework built on top of LangChain. Where LangChain gives you chains and LCEL (LangChain Expression Language) for sequential pipelines, LangGraph gives you state machines — directed graphs where nodes are functions/agents and edges define control flow. This distinction matters: LangGraph can handle cycles, conditional branching, human-in-the-loop interrupts, and multi-agent coordination that flat chains cannot express.
+LangGraph is LangChain's graph-based agent orchestration framework. It models agent execution as a stateful directed graph, enabling complex multi-step, multi-agent workflows with built-in durability and checkpointing.
 
-LangGraph is the most practically useful component of the LangChain ecosystem for multi-agent work. The broader LangChain abstraction layer has been criticized as over-engineered, but LangGraph itself has a cleaner API and a sound architectural model.
+## What It Does
 
----
+- Defines agent workflows as nodes and edges in a directed graph
+- Checkpoints state at every step, enabling resumable and rewindable runs
+- Supports multi-agent coordination, tool use, and human-in-the-loop interrupts
+- Integrates natively with LangSmith for production deployment and observability
 
-## Core Concepts
+## Key Concepts
 
-### Nodes
-Nodes are the units of computation in a graph — Python functions or LangChain runnables that take the current state and return a state update:
+### Core Primitives (Production)
+
+| Primitive | Description |
+|---|---|
+| **Thread** | A single conversation with scoped message history and scratch files |
+| **User** | Individual interacting with the agent; memory can be private or shared |
+| **Assistant** | Configured agent instance with tied or shared memory and files |
+
+### Durability
+
+LangGraph checkpoints at every step. Interrupted runs resume from the last recorded state without reprocessing. This enables:
+- Indefinite interrupts and human-in-the-loop pauses
+- Time travel / rewinding to earlier states
+- Safe handling of sensitive or destructive operations
+
+### Memory Scoping
+
+| Scope | Use Case |
+|---|---|
+| User | Per-user preferences (recommended default) |
+| Assistant | Shared instructions for one assistant |
+| Global | Read-only organization policies |
+
+Memory uses file-based storage routed to a `StoreBackend`. A `CompositeBackend` provides both ephemeral scratch space and persistent long-term memory.
+
+> ⚠️ **Security**: Shared memory is a prompt injection vector. Enforce read-only access where appropriate.
+
+### Execution / Sandbox Backends
+
+- **StateBackend** — ephemeral, conversation-scoped
+- **StoreBackend** — persistent across conversations
+- **CompositeBackend** — mixed persistent + ephemeral routing
+- **Thread-scoped sandbox** — fresh isolated container per conversation, cleaned up on TTL expiry
+- **Assistant-scoped sandbox** — conversations share one sandbox; cloned repos and dependencies persist
+
+Secrets are injected via a sandbox auth proxy rather than being held directly in sandbox code.
+
+## Production Deployment (LangSmith)
+
+LangSmith Deployments is the recommended production path. It automatically provisions assistants, threads, runs, storage, checkpointing, auth, webhooks, cron jobs, and observability.
+
+Configuration via `langgraph.json`:
+
+```json
+{
+  "dependencies": ["."],
+  "graphs": { "agent": "./agent.py:agent" },
+  "env": ".env"
+}
+```
+
+## Multi-Tenancy
+
+Three requirements for user identity: verification, access control, and credential management.
+
+- **Authorization handlers** tag resources with ownership metadata, filter user-specific access, or deny with HTTP 403
+- **Agent Auth** manages OAuth 2.0 flows — agents interrupt, present consent URLs, then resume with auto-refreshing tokens
+- **Sandbox auth proxy** injects credentials into outbound requests so sandbox code never holds raw API keys
+
+See also: [Multi-Tenancy Agents](../concepts/multi-tenancy-agents.md)
+
+## Guardrails & Middleware
+
+### Rate Limiting
 
 ```python
-def research_node(state: AgentState) -> dict:
-    # Takes state, returns partial state update
-    result = llm.invoke(state["messages"])
-    return {"messages": [result], "research_complete": True}
+ModelCallLimitMiddleware(run_limit=50)
+ToolCallLimitMiddleware(run_limit=200)
 ```
 
-### Edges
-Edges define control flow between nodes. Three types:
-- **Direct edges**: always go from A to B
-- **Conditional edges**: function decides the next node based on current state
-- **Entry/exit points**: `START` and `END` built-in nodes
+Use `run_limit` for per-invocation caps, `thread_limit` for conversation-wide caps.
+
+### Error Handling
+
+- Transient failures: automatic retry with exponential backoff
+- Model-recoverable errors: feed back to the LLM
+- Human-input errors: pause execution
+- Fallback middleware: switches to an alternative model if the primary provider fails
+
+### Data Privacy
 
 ```python
-graph.add_edge("research", "analyze")          # direct
-graph.add_conditional_edges("analyze", router) # conditional
+PIIMiddleware("email", strategy="redact", apply_to_input=True)
 ```
 
-### State
-The graph passes a single mutable state object between all nodes. State is typed (TypedDict or Pydantic), and each node returns a partial update — LangGraph merges updates using reducers (default: last-write-wins; can use `Annotated[list, operator.add]` for append semantics).
+Strategies: `redact`, `mask`, `hash`, or `block`.
 
-```python
-from typing import TypedDict, Annotated
-from operator import add
+## Frontend Integration
 
-class AgentState(TypedDict):
-    messages: Annotated[list, add]  # append-mode — nodes add to list
-    current_task: str
-    completed_tasks: Annotated[list, add]
-    error: str | None
+The `useStream` hook connects React (and Vue, Svelte, Angular) UIs to agents:
+
+```tsx
+const stream = useStream({
+  apiUrl: "https://your-deployment.langsmith.dev",
+  assistantId: "agent",
+  reconnectOnMount: true,   // resumes in-progress runs after page refresh
+  fetchStateHistory: true   // loads full history for returning users
+});
 ```
 
-### Persistence — Checkpointing
-LangGraph supports checkpointing: saving graph state after every node execution. This enables:
-- **Resume from failure**: re-run from last checkpoint, not from the beginning
-- **Human-in-the-loop**: pause at a node, get human approval, resume
-- **Audit trail**: full execution history
+## When to Use It
 
-Built-in checkpointers: `MemorySaver` (in-memory), `SqliteSaver`, `PostgresSaver`. Production deployments use Postgres.
+- You need stateful, multi-step agent workflows with durability guarantees
+- Your agent requires human-in-the-loop interrupts or approval steps
+- You want time-travel debugging or the ability to rewind agent state
+- You are deploying to production with multi-tenancy, auth, and observability requirements
+- You are already in the LangChain ecosystem
 
-```python
-from langgraph.checkpoint.memory import MemorySaver
+## Limitations
 
-checkpointer = MemorySaver()
-app = graph.compile(checkpointer=checkpointer)
+- Graph-based model adds conceptual overhead vs. simpler linear frameworks
+- Tight coupling with LangSmith for production features (observability, deployment)
+- Shared memory scope is a prompt injection risk requiring explicit access controls
+- Async discipline required throughout — I/O-bound LLM calls demand native async tools
 
-# Run with a thread_id for session continuity
-result = app.invoke(initial_state, config={"configurable": {"thread_id": "session-42"}})
-```
+## See Also
 
----
-
-## Architecture
-
-```
-Graph definition (StateGraph):
-    ├── add_node("name", function)
-    ├── add_edge("from", "to")
-    ├── add_conditional_edges("from", router_fn, {"option": "target"})
-    └── set_entry_point("first_node")
-
-Compiled graph (CompiledGraph):
-    ├── invoke(state) — synchronous, blocking
-    ├── ainvoke(state) — async
-    ├── stream(state) — yield node outputs as they complete
-    └── astream_events(state) — fine-grained streaming (token-level)
-
-State flow:
-    START → node_1 → [conditional] → node_2a | node_2b → END
-                          ↑                              |
-                          └──────── cycle back ──────────┘
-```
-
-### Multi-Agent Patterns
-
-**Supervisor pattern**: one node hosts the supervisor LLM which decides which worker to call next. Workers are nodes; supervisor controls edges.
-
-```python
-def supervisor(state):
-    # LLM picks next agent
-    response = supervisor_llm.invoke(state["messages"])
-    return {"next": response.next_agent}
-
-graph.add_conditional_edges("supervisor", lambda s: s["next"], {
-    "researcher": "researcher_agent",
-    "writer": "writer_agent",
-    "FINISH": END
-})
-```
-
-**Swarm pattern**: agents can hand off to each other directly, creating peer-to-peer routing without a central supervisor. Each agent decides who should handle next.
-
-**Hierarchical graphs**: nodes can themselves be compiled subgraphs. Useful for complex orchestration with logical subsystems.
-
----
-
-## Strengths
-
-- **Expressive control flow**: cycles, conditionals, and hierarchies that are impossible in linear chains
-- **Checkpointing is first-class**: the only orchestration framework with built-in resumable state out of the box
-- **Streaming at every level**: stream node-level events, token-level output, or fine-grained SSE events
-- **Human-in-the-loop**: built-in interrupt mechanism at any node; resume after approval
-- **LangSmith integration**: automatic tracing when `LANGCHAIN_TRACING_V2=true` — every node, every LLM call, every tool use tracked
-- **TypeScript support**: `@langchain/langgraph` exists but Python is primary
-- **Strong community**: most production Python multi-agent systems in 2025 use LangGraph
-
----
-
-## Weaknesses
-
-- **Python-first**: TypeScript version lags behind; Jay's stack is TypeScript-heavy
-- **LangChain dependency**: inherits LangChain abstraction overhead; simple tasks require more boilerplate than raw SDK usage
-- **State type complexity**: TypedDict + reducer annotations get verbose for complex state; Pydantic models help but add more boilerplate
-- **Debugging requires LangSmith**: without LangSmith, tracing a multi-node execution is painful — stdout logs are insufficient
-- **Overhead for simple pipelines**: a two-step pipeline in LangGraph is 3x more code than the same thing with direct API calls
-- **Not Jay's primary tool**: Jay builds in TypeScript and uses Claude Code as his runtime; LangGraph is Python-first and Claude Code-agnostic
-
----
-
-## Minimal Working Example
-
-```python
-from typing import TypedDict, Annotated
-from operator import add
-from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import HumanMessage, AIMessage
-from langgraph.graph import StateGraph, START, END
-
-llm = ChatAnthropic(model="claude-sonnet-4-6")
-
-class State(TypedDict):
-    messages: Annotated[list, add]
-    research_done: bool
-
-def researcher(state: State) -> dict:
-    response = llm.invoke([
-        *state["messages"],
-        HumanMessage(content="Research this topic and summarize key points.")
-    ])
-    return {"messages": [response], "research_done": True}
-
-def writer(state: State) -> dict:
-    response = llm.invoke([
-        *state["messages"],
-        HumanMessage(content="Write a polished article based on the research above.")
-    ])
-    return {"messages": [response]}
-
-def route_after_research(state: State) -> str:
-    return "writer" if state["research_done"] else END
-
-# Build graph
-graph = StateGraph(State)
-graph.add_node("researcher", researcher)
-graph.add_node("writer", writer)
-graph.add_edge(START, "researcher")
-graph.add_conditional_edges("researcher", route_after_research, {
-    "writer": "writer",
-    END: END
-})
-graph.add_edge("writer", END)
-
-app = graph.compile()
-
-# Run
-result = app.invoke({
-    "messages": [HumanMessage(content="Explain the fan-out agent pattern")],
-    "research_done": False
-})
-print(result["messages"][-1].content)
-```
-
----
-
-## LangGraph vs Pure Python Orchestration
-
-| Dimension | LangGraph | Raw Python + SDK |
-|-----------|-----------|-----------------|
-| State management | Built-in TypedDict + reducers | Manual dict passing |
-| Checkpointing | First-class, pluggable | DIY |
-| Parallelism | Explicit parallel nodes (Send API) | asyncio/threading |
-| Debugging | LangSmith traces | Print statements |
-| Boilerplate | Medium-high | Low |
-| Flexibility | High (any callable as node) | Unlimited |
-| Learning curve | 1-2 days | Immediate |
-
-For small graphs (<5 nodes, no cycles), raw Python is simpler. For production multi-agent systems with resume, audit, and human-in-the-loop requirements, LangGraph earns its keep.
-
----
-
-## Integration Points
-
-- **[[entities/langchain-ecosystem]]**: LangGraph is the graph layer of the LangChain ecosystem; LangSmith provides observability
-- **[[frameworks/framework-claude-api]]**: LangGraph uses `ChatAnthropic` which wraps the Anthropic SDK
-- **[[entities/model-landscape]]**: Any LLM with a LangChain provider can be swapped in
-- **[[evaluations/eval-orchestration-frameworks]]**: LangGraph scored against GSD, AutoGen, CrewAI
-- LangSmith: `pip install langsmith`; set `LANGCHAIN_API_KEY` and `LANGCHAIN_TRACING_V2=true`
-
----
-
-## Jay's Experience
-
-Limited. Jay evaluated LangGraph for Python-side orchestration but his primary stack is TypeScript + Claude Code. Key observations:
-- The checkpointing story is genuinely best-in-class — nothing else gives you resumable state this cleanly out of the box
-- LangSmith integration is powerful but requires buying into the LangChain telemetry ecosystem
-- For TypeScript/Claude Code native work, GSD + Claude Code's Agent tool provides equivalent orchestration without the Python dependency
-
-Would revisit if building a complex Python-native agent system requiring: resumable long-running tasks, human-in-the-loop approval flows, or production audit trails with LangSmith.
-
----
-
-## Version Notes
-
-- 0.1.x: initial release; supervisor pattern established
-- 0.2.x: Send API for parallel node execution; subgraph support improved
-- TypeScript `@langchain/langgraph` generally lags Python by 1-2 minor versions
-- LangGraph Platform (cloud-hosted): managed deployment, persistence, monitoring — separate product
-
----
-
-## Sources
-
-- [[entities/langchain-ecosystem]]
-- [[evaluations/eval-orchestration-frameworks]]
-- LangGraph documentation (knowledge cutoff — verify current API)
+- [LangChain Ecosystem](../entities/langchain-ecosystem.md)
+- [State Persistence](../concepts/state-persistence.md)
+- [Multi-Tenancy Agents](../concepts/multi-tenancy-agents.md)
+- [Sandboxed Execution](../concepts/sandboxed-execution.md)
+- [Guardrails](../concepts/guardrails.md)
+- [Human-in-the-Loop](../concepts/human-in-the-loop.md)

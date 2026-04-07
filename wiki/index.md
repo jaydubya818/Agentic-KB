@@ -120,6 +120,23 @@
 
 ---
 
+- [[summaries/nvidia-gtc-2026-agentic-enterprise|Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026]] — LinkedIn practitioner post covering NVIDIA's GTC 2026 Agent Toolkit launch, 17 enterprise platform partners, OpenShell runtime governance, and a 20-item enterprise AI compliance checklist
+- [[summaries/19-oss-agent-repos-curated|19 OSS Agent Repos — Curated List]] — Practitioner map of 19 free GitHub repos covering the full agentic stack: orchestration, coding agents, memory, and production tooling
+- [[summaries/langchain-deepagents-production|LangChain Deep Agents — Going to Production]] — Official LangChain production guide covering LangSmith deployment, multi-tenancy auth, durable checkpointing, scoped memory, sandboxed execution, and middleware guardrails
+- [[summaries/karpathy-llm-wiki-gist|Karpathy LLM Wiki Pattern — Gist]] — Karpathy's minimal pattern for LLM-maintained knowledge bases: immutable raw sources, LLM-owned wiki, co-evolving schema, and three core workflows (Ingest, Query, Lint)
+- [[summaries/andrej-karpathy-thinks-rag-is-broken|Andrej Karpathy Thinks RAG Is Broken]] — Note covering Karpathy's LLM Wiki project: a compounding, AI-maintained wiki pattern proposed as a replacement for stateless RAG
+- [[summaries/farzapedia-personal-wiki|Farzapedia Personal Wiki]] — Personal wiki over iMessages/Notes/diary using agentic index-navigation (Librarian pattern) instead of RAG
+- [[summaries/karpathy-llm-wiki-video|Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)]] — Transcript explaining the LLM-wiki architectural pattern: persistent interlinked wikis as a compound-knowledge alternative to stateless RAG, with three-layer architecture, core operations (ingest/query/lint), and live Claude Code demo
+- [[summaries/nate-herk-llm-wiki|Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)]] — Walkthrough of the LLM wiki pattern: markdown-only KB, hot cache, lint workflow, and 95% token reduction vs RAG
+- [[summaries/19-oss-agent-repos-curated|19 OSS Agent Repos — Curated List]] — Curated overview of 19 open-source GitHub repos spanning multi-agent orchestration, autonomous coding agents, memory/reasoning, and production tooling
+- [[summaries/nvidia-gtc-2026-agentic-enterprise|Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026]] — NVIDIA GTC 2026 launch recap (via AgentLayer LinkedIn post): OpenShell runtime, enterprise agent adoption stats, and a 20-requirement compliance checklist for enterprise AI governance
+- [[summaries/karpathy-llm-wiki-gist|Karpathy LLM Wiki Pattern — Gist]] — Karpathy's minimal spec for an LLM-maintained knowledge base: immutable raw sources, LLM-owned wiki, and a co-evolving schema file
+- [[summaries/langchain-deepagents-production|LangChain Deep Agents — Going to Production]] — LangSmith/LangGraph production stack: durable checkpointing, scoped memory, sandbox execution, middleware guardrails, and multi-tenancy patterns
+- [[summaries/andrej-karpathy-thinks-rag-is-broken|Andrej Karpathy Thinks RAG Is Broken]] — Note summarizing Karpathy's LLM Wiki project: a persistent, compounding knowledge base pattern proposed as a replacement for RAG
+- [[summaries/private-test-note|Private Test Note]] — Internal test fixture for verifying PIN lock system across web UI, MCP, and CLI surfaces
+- [[summaries/farzapedia-personal-wiki|Farzapedia Personal Wiki]] — Personal wiki over iMessages/Notes/diary using agentic Librarian navigation (no RAG); inspired by Karpathy LLM wiki pattern
+- [[summaries/karpathy-llm-wiki-video|Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)]] — Transcript explaining the LLM wiki pattern: three-layer architecture (raw/wiki/schema), INGEST/QUERY/LINT operations, and division of labor between human curator and LLM maintainer
+- [[summaries/nate-herk-llm-wiki|Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)]] — Walkthrough of Karpathy's LLM wiki pattern: markdown-only KB, hot cache, lint cycle, and LLM wiki vs RAG tradeoffs; one user cut token usage 95%
 ## Personal (Jay's patterns)
 
 | Page | Category | Confidence | Description |

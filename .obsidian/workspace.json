@@ -11,17 +11,14 @@
             "id": "1484b4be2a387ad9",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": 0,
-                  "y": 0,
-                  "zoom": 0
-                }
+                "file": "wiki/personal/private-test-note.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
+              "icon": "lucide-file",
+              "title": "private-test-note"
             }
           }
         ]
@@ -97,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Untitled.canvas",
+                "file": "mcp/node_modules/@hono/node-server/README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -107,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Untitled"
+              "title": "Backlinks for README"
             }
           },
           {
@@ -116,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Untitled.canvas",
+                "file": "mcp/node_modules/@hono/node-server/README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Untitled"
+              "title": "Outgoing links from README"
             }
           },
           {
@@ -159,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Untitled.canvas",
+                "file": "mcp/node_modules/@hono/node-server/README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of README"
             }
           }
         ]
@@ -188,42 +185,42 @@
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
-    "web/next-env.d.ts",
-    "web/tsconfig.tsbuildinfo",
-    "web/node_modules/@next/eslint-plugin-next/dist/utils/url.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/utils/node-attributes.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/rules/no-unwanted-polyfillio.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/rules/no-typos.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/rules/no-title-in-document-head.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/rules/no-sync-scripts.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/rules/no-styled-jsx-in-document.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/rules/no-script-component-in-head.d.ts",
-    "web/node_modules/@next/eslint-plugin-next/dist/rules/no-page-custom-font.d.ts",
-    "web/node_modules/eslint-config-next/node_modules/globals/readme.md",
-    "web/node_modules/@jridgewell/remapping/README.md",
-    "web/node_modules/@babel/helper-compilation-targets/node_modules/semver/README.md",
-    "web/node_modules/@babel/core/node_modules/semver/README.md",
-    "web/node_modules/@babel/core/node_modules/json5/README.md",
-    "web/node_modules/@babel/core/node_modules/json5/LICENSE.md",
-    "web/node_modules/@babel/types/README.md",
-    "web/node_modules/@babel/traverse/README.md",
-    "web/node_modules/@babel/template/README.md",
-    "web/node_modules/@babel/parser/README.md",
-    "web/node_modules/@babel/parser/CHANGELOG.md",
-    "web/node_modules/@babel/helpers/README.md",
-    "web/node_modules/@babel/helper-validator-option/README.md",
-    "web/node_modules/@babel/helper-validator-identifier/README.md",
-    "web/node_modules/@babel/helper-string-parser/README.md",
-    "web/node_modules/@babel/helper-module-transforms/README.md",
-    "web/node_modules/@babel/helper-module-imports/README.md",
-    "web/node_modules/@babel/helper-globals/README.md",
-    "web/node_modules/@babel/helper-compilation-targets/README.md",
-    "web/node_modules/@babel/generator/README.md",
-    "web/node_modules/@babel/core/README.md",
-    "web/node_modules/@babel/compat-data/README.md",
-    "web/node_modules/@babel/code-frame/README.md",
-    "web/node_modules/yallist/README.md",
-    "web/node_modules/hermes-estree/README.md",
+    "wiki/patterns/pattern-deviation-rules.md",
+    "wiki/patterns/pattern-scientific-debugging.md",
+    "wiki/patterns/pattern-write-to-disk-worker.md",
+    "wiki/patterns/pattern-structured-assumptions.md",
+    "wiki/patterns/pattern-structured-comparison-table.md",
+    "wiki/summaries/private-test-note.md",
+    "raw/note/karpathy-wiki-test.md",
+    "wiki/patterns/pattern-database-review.md",
+    "wiki/concepts/tool-use-verify.md",
+    "wiki/patterns/pattern-code-review-agent.md",
+    "wiki/concepts/multi-tenancy.md",
+    "wiki/patterns/pattern-sandbox-auth-proxy.md",
+    "wiki/patterns/pattern-architecture-decision-record.md",
+    "wiki/concepts/llm-owned-wiki.md",
+    "wiki/concepts/agent-sandboxing.md",
+    "wiki/patterns/pattern-runtime-preparation.md",
+    "wiki/patterns/pattern-single-task-code-agent.md",
+    "wiki/patterns/pattern-task-validation-agent.md",
+    "wiki/patterns/pattern-code-generation-agent.md",
+    "wiki/patterns/pattern-clarification-task.md",
+    "wiki/patterns/pattern-context-manager-agent.md",
+    "wiki/patterns/pattern-milestone-task-breakdown.md",
+    "wiki/patterns/pattern-task-breakdown-agent.md",
+    "wiki/patterns/pattern-milestone-planning.md",
+    "wiki/patterns/pattern-adversarial-plan-review.md",
+    "wiki/patterns/pattern-architecture-first.md",
+    "web/src/lib/graph-search.ts",
+    "web/src/components/CompilePanel.tsx",
+    "web/src/app/api/ingest/webhook/route.ts",
+    "web/src/app/api/lint/route.ts",
+    "web/src/app/api/compile/route.ts",
+    "web/src/lib/audit.ts",
+    "web/src/app/api/ingest/webhook",
+    "web/src/app/api/lint",
+    "web/src/app/api/compile",
+    "web/src/components/VaultWatcher.tsx",
     "Untitled.canvas"
   ]
 }

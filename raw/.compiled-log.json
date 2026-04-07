@@ -1,0 +1,155 @@
+{
+  "articles/19-oss-agent-repos-curated.md": {
+    "compiledAt": "2026-04-07T23:19:30.305Z",
+    "pagesAffected": [
+      "syntheses/oss-agent-ecosystem-map.md",
+      "log.md"
+    ]
+  },
+  "articles/nvidia-gtc-2026-agentic-enterprise.md": {
+    "compiledAt": "2026-04-07T23:20:12.009Z",
+    "pagesAffected": [
+      "concepts/enterprise-ai-governance.md",
+      "entities/agentlayer.md",
+      "log.md"
+    ]
+  },
+  "framework-docs/karpathy-llm-wiki-gist.md": {
+    "compiledAt": "2026-04-07T23:21:35.479Z",
+    "pagesAffected": [
+      "concepts/llm-wiki.md",
+      "entities/andrej-karpathy.md",
+      "log.md"
+    ]
+  },
+  "framework-docs/langchain-deepagents-production.md": {
+    "compiledAt": "2026-04-07T23:23:08.312Z",
+    "pagesAffected": [
+      "frameworks/framework-langgraph.md",
+      "concepts/multi-tenancy-agents.md",
+      "log.md"
+    ]
+  },
+  "my-agents/01-architecture-agent.md": {
+    "compiledAt": "2026-04-07T23:23:30.728Z",
+    "pagesAffected": [
+      "patterns/pattern-architecture-first.md",
+      "log.md"
+    ]
+  },
+  "my-agents/02-plan-review-agent.md": {
+    "compiledAt": "2026-04-07T23:24:15.751Z",
+    "pagesAffected": [
+      "patterns/pattern-adversarial-plan-review.md",
+      "concepts/agent-failure-modes.md",
+      "log.md"
+    ]
+  },
+  "my-agents/03-planning-agent.md": {
+    "compiledAt": "2026-04-07T23:24:53.884Z",
+    "pagesAffected": [
+      "patterns/pattern-milestone-planning.md",
+      "concepts/task-decomposition.md",
+      "log.md"
+    ]
+  },
+  "my-agents/04-task-breakdown-agent.md": {
+    "compiledAt": "2026-04-07T23:25:36.128Z",
+    "pagesAffected": [
+      "concepts/task-decomposition.md",
+      "patterns/pattern-clarification-task.md",
+      "log.md"
+    ]
+  },
+  "my-agents/05-context-manager-agent.md": {
+    "compiledAt": "2026-04-07T23:26:17.663Z",
+    "pagesAffected": [
+      "patterns/pattern-context-manager-agent.md",
+      "concepts/context-management.md",
+      "log.md"
+    ]
+  },
+  "my-agents/06-code-generation-agent.md": {
+    "compiledAt": "2026-04-07T23:26:46.988Z",
+    "pagesAffected": [
+      "patterns/pattern-single-task-code-agent.md",
+      "log.md"
+    ]
+  },
+  "my-agents/07-task-validation-agent.md": {
+    "compiledAt": "2026-04-07T23:27:16.962Z",
+    "pagesAffected": [
+      "patterns/pattern-task-validation-agent.md",
+      "log.md"
+    ]
+  },
+  "my-agents/08-runtime-preparation-agent.md": {
+    "compiledAt": "2026-04-07T23:51:32.517Z",
+    "pagesAffected": [
+      "patterns/pattern-runtime-preparation.md",
+      "log.md"
+    ]
+  },
+  "my-agents/architect.md": {
+    "compiledAt": "2026-04-07T23:52:10.538Z",
+    "pagesAffected": [
+      "patterns/pattern-architecture-decision-record.md",
+      "patterns/pattern-architecture-first.md",
+      "log.md"
+    ]
+  },
+  "my-agents/code-reviewer.md": {
+    "compiledAt": "2026-04-07T23:52:35.023Z",
+    "pagesAffected": [
+      "patterns/pattern-code-review-agent.md",
+      "log.md"
+    ]
+  },
+  "my-agents/db-reviewer.md": {
+    "compiledAt": "2026-04-07T23:53:02.625Z",
+    "pagesAffected": [
+      "patterns/pattern-database-review.md",
+      "log.md"
+    ]
+  },
+  "my-agents/gsd-advisor-researcher.md": {
+    "compiledAt": "2026-04-07T23:53:44.034Z",
+    "pagesAffected": [
+      "frameworks/framework-gsd.md",
+      "patterns/pattern-structured-comparison-table.md",
+      "log.md"
+    ]
+  },
+  "my-agents/gsd-assumptions-analyzer.md": {
+    "compiledAt": "2026-04-07T23:54:28.491Z",
+    "pagesAffected": [
+      "frameworks/framework-gsd.md",
+      "patterns/pattern-structured-assumptions.md",
+      "log.md"
+    ]
+  },
+  "my-agents/gsd-codebase-mapper.md": {
+    "compiledAt": "2026-04-07T23:55:12.006Z",
+    "pagesAffected": [
+      "frameworks/framework-gsd.md",
+      "patterns/pattern-write-to-disk-worker.md",
+      "log.md"
+    ]
+  },
+  "my-agents/gsd-debugger.md": {
+    "compiledAt": "2026-04-07T23:55:57.131Z",
+    "pagesAffected": [
+      "frameworks/framework-gsd.md",
+      "patterns/pattern-scientific-debugging.md",
+      "log.md"
+    ]
+  },
+  "my-agents/gsd-executor.md": {
+    "compiledAt": "2026-04-07T23:56:43.532Z",
+    "pagesAffected": [
+      "frameworks/framework-gsd.md",
+      "patterns/pattern-deviation-rules.md",
+      "log.md"
+    ]
+  }
+}

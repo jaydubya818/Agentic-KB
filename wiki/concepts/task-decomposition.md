@@ -1,178 +1,93 @@
 ---
 title: Task Decomposition
 type: concept
-tags: [agentic, planning, decomposition, parallelism, subtasks, dag]
+tags: [agents, orchestration, workflow, architecture, patterns]
+created: 2025-01-01
+updated: 2026-04-07
+visibility: public
 confidence: high
-sources:
-  - "Anthropic: Building Effective Agents (2024)"
-  - "HuggingGPT / TaskMatrix research (2023)"
-  - "Tree of Thoughts: Yao et al. (2023)"
-created: 2026-04-04
-updated: 2026-04-04
-related:
-  - "[[concepts/multi-agent-systems]]"
-  - "[[concepts/agent-loops]]"
-  - "[[patterns/pattern-plan-execute-verify]]"
-  - "[[patterns/pattern-fan-out-worker]]"
-  - "[[patterns/pattern-supervisor-worker]]"
-status: stable
+related: [pattern-pipeline, pattern-fan-out-worker, concepts/agent-loops, concepts/system-prompt-design]
 ---
 
-## TL;DR
-
-Task decomposition is the process of breaking a complex goal into subtasks that are individually solvable, assignable, and verifiable. The decomposition strategy determines whether you can parallelize, how you handle partial failures, and how reliably a plan can be executed. Bad decomposition is the most common reason agent plans fail silently.
-
----
+# Task Decomposition
 
 ## Definition
 
-Task decomposition is the systematic process of breaking a high-level goal into a dependency-ordered set of subtasks, where each subtask has: a clear definition of done, bounded scope, defined inputs and outputs, and an identifiable owner (agent or human).
+Task decomposition is the process of breaking down a high-level goal or milestone into atomic, unambiguous units of work that can be executed independently (or in a defined order) by a code generation agent, human developer, or automated system — without requiring further clarification.
 
----
+In agentic pipelines, task decomposition is typically a dedicated agent role: the **Task Breakdown Agent** receives a milestone and produces a structured list of tasks specific enough that the downstream executor needs to ask zero questions.
 
-## How It Works
+## What Makes a Task Atomic
 
-### Dependency Graphs
+A well-decomposed task satisfies all four properties:
 
-Subtasks have dependencies. Representing them as a directed acyclic graph (DAG) reveals which tasks can run in parallel and which must wait.
+1. **Bounded file scope** — it touches a predictable, limited set of files
+2. **Single clear outcome** — one thing is done when this task is complete
+3. **Verifiable** — completion can be confirmed with a specific, runnable check
+4. **Time-bounded** — completable in one focused session
+
+If a task fails any of these, it should be split further.
+
+## Required Task Specification Fields
+
+Each atomic task should include:
+
+| Field | Purpose |
+|---|---|
+| **Task ID** | Hierarchical identifier, e.g. `M2-T3` (Milestone 2, Task 3) |
+| **Title** | Verb-noun format — e.g. "Create UserRepository class" |
+| **Files to create or modify** | Exact paths from the architecture output |
+| **What to implement** | Function signatures, interfaces, explicit behavior |
+| **What NOT to do** | Scope boundaries to prevent creep |
+| **Acceptance criteria** | Specific and testable — max 3; split if more needed |
+| **Dependencies** | Task IDs that must be complete first |
+
+## Why It Matters
+
+Vague tasks are the primary source of rework and agent failure in code generation workflows. When a downstream agent (or developer) has to interpret ambiguity, they introduce assumptions that compound across a codebase. Tight decomposition:
+
+- Eliminates back-and-forth between planning and execution agents
+- Makes progress measurable and verifiable at each step
+- Enables parallel execution where dependencies allow
+- Surfaces ambiguity early — if a task can't be specified, a **clarification task** is written before the implementation task
+
+## Key Rules
+
+- File paths must match the architecture output exactly — no invented paths
+- Function signatures must match API contracts from architecture
+- **"Make it work" is never an acceptance criterion** — it must name a specific, testable condition
+- Max 3 acceptance criteria per task; exceed that → split the task
+- Ambiguous spec → write a clarification task before the implementation task
+
+## Example
 
 ```
-Goal: Deploy new feature to production
-
-Subtasks:
-A: Write tests             → no deps
-B: Implement feature       → no deps (can run with A)
-C: Run test suite          → depends on A, B
-D: Build Docker image      → depends on B
-E: Run security scan       → depends on D
-F: Deploy to staging       → depends on C, D
-G: Run smoke tests         → depends on F
-H: Deploy to production    → depends on E, G
+Task ID: M2-T3
+Title: Create UserRepository class
+Files: src/repositories/user_repository.py
+What to implement:
+  - UserRepository(db: Database)
+  - get_by_id(user_id: str) -> User | None
+  - save(user: User) -> None
+What NOT to do: Do not implement authentication logic here
+Acceptance criteria:
+  1. get_by_id returns None for unknown IDs (unit test passes)
+  2. save persists user to DB and is idempotent on same user_id
+  3. All methods raise RepositoryError (not raw DB errors)
+Dependencies: M2-T1 (Database class), M2-T2 (User model)
 ```
 
-Parallelizable at start: A and B simultaneously.
-Critical path: B → D → E → F → G → H (6 steps, can't compress further).
+## Pitfalls
 
-Building this graph explicitly before execution tells you: minimum wall-clock time, where to parallelize, and which failures block everything downstream.
+- **Over-decomposition**: Tasks so small they lose context and create coordination overhead
+- **Under-decomposition**: Tasks too large to be atomic; executor must make architectural decisions
+- **Missing dependencies**: Parallel execution of dependent tasks causes merge conflicts or test failures
+- **Acceptance criteria that test the wrong thing**: e.g. "function exists" vs. "function returns correct value for edge case X"
 
-### Parallelization Detection
+## See Also
 
-A subtask is parallelizable if:
-- It has no dependency on any other subtask in the current wave
-- It doesn't write to shared state that another parallel task reads
-- Its failure doesn't invalidate the parallel task's work
-
-Simple test: can you swap the execution order without changing the result? If yes, they can be parallelized.
-
-### Task Granularity
-
-**Too coarse**: "Refactor the authentication module" — no clear completion criteria, too many unknowns, can't assign to a focused agent.
-
-**Too fine**: "Change variable name `uid` to `userId` on line 42" — trivial, doesn't need agent planning overhead.
-
-**Right size** (atomic): A task that:
-- Can be completed in one focused agent context session
-- Has unambiguous success criteria
-- Produces a verifiable artifact
-- Has bounded scope (a file, a function, a feature)
-
-Rule of thumb: if you can't describe what "done" looks like in one sentence, decompose further.
-
-### Atomic vs Composite Tasks
-
-**Atomic**: Single-step, single-agent, single-output. No internal decision branches.
-```
-"Write a unit test for the getUserById function in src/users/repository.ts"
-```
-
-**Composite**: Contains multiple steps, requires internal decision-making, spans multiple concerns.
-```
-"Implement user authentication"
-```
-
-The planner's job is to decompose composites into atomics. Executives (sub-agents) should never be handed composite tasks — they'll make implicit decomposition decisions the orchestrator can't see or verify.
-
-### When Decomposition Adds Value
-
-- Task exceeds one context window
-- Subtasks have genuine parallelism (saves wall-clock time)
-- Subtasks require different capabilities or system prompts
-- Independent verifiability: you can check each subtask without running all of them
-- Partial completion is useful: if step 3 of 8 fails, steps 1-2 results are preserved
-
-### When Decomposition Removes Value
-
-- The task is truly atomic — decomposition adds orchestration overhead without benefit
-- The subtasks are so tightly coupled that they need shared context to make good decisions
-- The decomposition plan itself requires more intelligence than executing the task
-- Latency matters: decomposition adds round-trips; sometimes one smart agent call beats five optimized ones
-
----
-
-## Decomposition Patterns
-
-### Top-Down
-Start with the goal, identify the 2-5 major phases, then recursively decompose each phase. Matches BMAD's approach — full plan before any execution.
-
-**Risk**: Early decomposition may be wrong; discovering this late is costly.
-
-### Bottom-Up
-Identify atomic actions first, then compose them into higher-order tasks. More common in code generation scenarios.
-
-**Risk**: May not converge on the right structure if atomic tasks don't compose cleanly.
-
-### Iterative Decomposition
-Decompose one level, execute, observe, re-decompose based on what you learned. GSD's approach — plan phase by phase rather than all upfront.
-
-**Risk**: Less predictable timeline; some backtracking required.
-
-### Dynamic Re-Decomposition
-
-Allow agents to request re-decomposition of their assigned subtask if they discover it was underspecified. Requires a mechanism to signal back to the planner:
-
-```python
-class SubtaskResult:
-    status: Literal["completed", "failed", "needs_decomposition"]
-    output: Any
-    decomposition_request: Optional[list[Subtask]]  # agent's suggested sub-subtasks
-```
-
----
-
-## Verification of Decomposition Quality
-
-Before executing, verify the decomposition:
-1. **Completeness**: Do the subtasks together cover the entire goal? What's missing?
-2. **No circular deps**: Is the DAG actually acyclic?
-3. **Unambiguous boundaries**: Does each subtask have a clear "done" state?
-4. **Failure handling**: What happens if subtask 3 fails? Can we continue? Rollback?
-5. **Correct granularity**: Could any composite task be further decomposed?
-
-The GSD `gsd-assumptions-analyzer` agent performs adversarial verification of decompositions before execution.
-
----
-
-## Risks & Pitfalls
-
-- **Implicit coupling**: Two tasks appear independent but both write to the same file. The plan breaks at execution. Solution: explicit dependency on shared artifacts.
-- **Underspecified atomic tasks**: "Write tests" — which tests? For what? To what coverage level? Underspecification causes executor agents to make assumptions that may contradict the overall plan.
-- **Decomposition depth mismatch**: Orchestrator hands a composite task to a worker that expects atomics. Worker improvises, makes unexpected decisions.
-- **Serial disguised as parallel**: Tasks labeled as parallel but one actually depends on a side effect of the other (writes to a shared config, sets an environment variable).
-
----
-
-## Related Concepts
-
-- [[concepts/multi-agent-systems]] — who executes each subtask
-- [[concepts/agent-loops]] — how each subtask is executed
-- [[patterns/pattern-plan-execute-verify]] — the pattern that structures decomposition formally
-- [[patterns/pattern-fan-out-worker]] — parallel execution of independent subtasks
-- [[patterns/pattern-supervisor-worker]] — routing subtasks to specialized agents
-
----
-
-## Sources
-
-- Anthropic "Building Effective Agents" (2024)
-- Yao et al. "Tree of Thoughts" (2023)
-- HuggingGPT / TaskMatrix: Shen et al. (2023)
+- [Pattern: Pipeline](../patterns/pattern-pipeline.md)
+- [Pattern: Fan-Out Worker](../patterns/pattern-fan-out-worker.md)
+- [Agent Loops](./agent-loops.md)
+- [System Prompt Design](./system-prompt-design.md)
+- [Tool Use](./tool-use.md)
