@@ -2,7 +2,7 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 import { cookies } from 'next/headers'
 import path from 'path'
-import { findArticleBySlug, findArticleInVault, getBacklinks, resolveContentRoot, type ArticleMeta, DEFAULT_KB_ROOT } from '@/lib/articles'
+import { findArticleBySlug, findArticleInVault, getBacklinks, type ArticleMeta, DEFAULT_KB_ROOT } from '@/lib/articles'
 import WikiLayout from '@/components/WikiLayout'
 import ArticleRenderer from '@/components/ArticleRenderer'
 import TableOfContents from '@/components/TableOfContents'
@@ -90,13 +90,8 @@ export default async function ArticlePage({ params }: ArticlePageProps): Promise
 
   const backlinks = isDefault ? getBacklinks(article.meta.slug) : []
   // Obsidian deep-link: obsidian://open?vault=VaultName&file=relative/path.md
-  // meta.path is relative to KB_ROOT for default vault, or relative to contentRoot for others
-  const contentRoot = resolveContentRoot(vaultRoot)
-  const contentRootOffset = path.relative(vaultRoot, contentRoot) // '' or 'wiki'
-  const obsidianRelPath = (contentRootOffset
-    ? path.join(contentRootOffset, article.meta.path)
-    : article.meta.path
-  ).replace(/\\/g, '/')
+  // meta.path is always relative to vaultRoot (both default and non-default vaults)
+  const obsidianRelPath = article.meta.path.replace(/\\/g, '/')
   const obsidianHref = `obsidian://open?vault=${encodeURIComponent(vaultName)}&file=${encodeURIComponent(obsidianRelPath)}`
   // Breadcrumb folder segments from slug (e.g. "folder/sub/article" → ["folder", "sub"])
   const breadcrumbFolders = slug.split('/').slice(0, -1)

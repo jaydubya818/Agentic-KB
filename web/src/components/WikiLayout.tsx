@@ -1,5 +1,6 @@
 import React from 'react'
 import WikiSidebar from './WikiSidebar'
+import VaultWatcher from './VaultWatcher'
 
 interface WikiLayoutProps {
   children: React.ReactNode
@@ -8,7 +9,9 @@ interface WikiLayoutProps {
 
 export default function WikiLayout({ children, toc }: WikiLayoutProps): React.ReactElement {
   return (
-    <div className="wiki-layout">
+    <>
+      <VaultWatcher />
+      <div className="wiki-layout">
       {/* Left sidebar */}
       <aside className="sidebar-column">
         <WikiSidebar />
@@ -24,5 +27,6 @@ export default function WikiLayout({ children, toc }: WikiLayoutProps): React.Re
         {toc}
       </aside>
     </div>
+    </>
   )
 }
