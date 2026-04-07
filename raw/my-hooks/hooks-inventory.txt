@@ -1,0 +1,13 @@
+auto-format.sh
+file-read-guard.sh
+gsd-check-update.js
+gsd-context-monitor.js
+gsd-prompt-guard.js
+gsd-statusline.js
+gsd-workflow-guard.js
+play-sound.js
+pre-tool-memory.py
+pre-tool-memory.sh
+pre-tool-use.js
+prompt-injection-defender
+stop-validation.sh

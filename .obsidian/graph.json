@@ -1,0 +1,72 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:wiki/concepts",
+      "color": {
+        "a": 1,
+        "rgb": 4685824
+      }
+    },
+    {
+      "query": "path:wiki/patterns",
+      "color": {
+        "a": 1,
+        "rgb": 16744272
+      }
+    },
+    {
+      "query": "path:wiki/frameworks",
+      "color": {
+        "a": 1,
+        "rgb": 5592575
+      }
+    },
+    {
+      "query": "path:wiki/entities",
+      "color": {
+        "a": 1,
+        "rgb": 11534336
+      }
+    },
+    {
+      "query": "path:wiki/recipes",
+      "color": {
+        "a": 1,
+        "rgb": 8978432
+      }
+    },
+    {
+      "query": "path:wiki/personal",
+      "color": {
+        "a": 1,
+        "rgb": 9699328
+      }
+    },
+    {
+      "query": "path:wiki/evaluations",
+      "color": {
+        "a": 1,
+        "rgb": 8388863
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1.5,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": true,
+  "centerStrength": 0.518,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 0.17739567617757626,
+  "close": false
+}

@@ -1,0 +1,15 @@
+# Dependencies
+web/node_modules/
+web/.next/
+web/.env.local
+
+# Graphify temp files
+.graphify_*
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Build outputs
+web/tsconfig.tsbuildinfo
+graphify-out/cache/
