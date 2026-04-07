@@ -360,3 +360,29 @@ Harness: `/Users/jaywest/My LLM Wiki/`
 ## Lint Schedule
 Run lint monthly or when the wiki grows by >20 pages.
 Always run lint before a major query session on a topic you haven't touched in 30+ days.
+
+### EXPLORE Workflow
+When asked to explore the knowledge base for connections:
+1. Read `wiki/index.md` in full
+2. Identify the 5 most interesting **unexplored connections** between existing topics — pairs or clusters that haven't been synthesised yet
+3. For each: explain what insight it might reveal, what question it answers, and what source would help confirm it
+4. Offer to create a new `wiki/syntheses/` page for any connection the user wants to develop
+5. Suggest 3 raw sources or web articles that would enrich the weakest areas
+
+### BRIEF Workflow
+When asked for an executive briefing:
+1. Read `wiki/index.md` to identify all relevant pages
+2. Read the top 5-8 relevant pages in full
+3. Write a 400-600 word structured briefing: **Current State → Key Tensions → Open Questions → Recommended Next Steps**
+4. Every claim cites its wiki page: `[Source: wiki/concepts/page-name]`
+5. Save automatically to `outputs/brief-{topic}-{YYYY-MM-DD}.md`
+6. Offer to promote to `wiki/syntheses/` if it surfaces new connections
+
+### OUTPUTS Directory
+`outputs/` holds generated artefacts that aren't wiki pages yet:
+- Executive briefings (`brief-*.md`)
+- One-off comparisons (`compare-*.md`)
+- Query answers worth keeping (`answer-*.md`)
+- Exploration reports (`explore-*.md`)
+
+Promote to `wiki/syntheses/` when content is stable, cross-referenced, and worth linking to from other pages. Never link TO `outputs/` from wiki pages — it's a staging area, not permanent storage.
