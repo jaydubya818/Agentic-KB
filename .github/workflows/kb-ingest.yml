@@ -1,0 +1,110 @@
+name: KB Auto-Ingest
+
+# Automatically pushes content into the Agentic KB when:
+#  - A PR is merged into main
+#  - An issue is closed
+#  - Docs or ADRs are pushed directly to main
+#
+# Requirements (set in repo Settings → Secrets and variables → Actions):
+#   KB_WEBHOOK_URL    - e.g. https://your-kb.ngrok.io  (no trailing slash)
+#   KB_WEBHOOK_SECRET - must match WEBHOOK_SECRET in your .env.local
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+  issues:
+    types: [closed]
+
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'ADRs/**'
+      - 'README.md'
+      - '*.md'
+
+jobs:
+  ingest-pr:
+    name: Ingest merged PR
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push PR to KB
+        run: |
+          curl -sf -X POST "${{ secrets.KB_WEBHOOK_URL }}/api/ingest/webhook" \
+            -H "Authorization: Bearer ${{ secrets.KB_WEBHOOK_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -H "X-GitHub-Event: pull_request" \
+            -d '{
+              "action": "closed",
+              "pull_request": {
+                "title": ${{ toJson(github.event.pull_request.title) }},
+                "body":  ${{ toJson(github.event.pull_request.body) }},
+                "html_url": ${{ toJson(github.event.pull_request.html_url) }},
+                "merged": true,
+                "user": { "login": ${{ toJson(github.event.pull_request.user.login) }} },
+                "base": { "ref": ${{ toJson(github.event.pull_request.base.ref) }} }
+              }
+            }'
+          echo "PR ingested: ${{ github.event.pull_request.title }}"
+
+  ingest-issue:
+    name: Ingest closed issue
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push issue to KB
+        run: |
+          curl -sf -X POST "${{ secrets.KB_WEBHOOK_URL }}/api/ingest/webhook" \
+            -H "Authorization: Bearer ${{ secrets.KB_WEBHOOK_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -H "X-GitHub-Event: issues" \
+            -d '{
+              "action": "closed",
+              "issue": {
+                "title":    ${{ toJson(github.event.issue.title) }},
+                "body":     ${{ toJson(github.event.issue.body) }},
+                "html_url": ${{ toJson(github.event.issue.html_url) }},
+                "labels":   ${{ toJson(github.event.issue.labels) }},
+                "user":     { "login": ${{ toJson(github.event.issue.user.login) }} }
+              }
+            }'
+          echo "Issue ingested: ${{ github.event.issue.title }}"
+
+  ingest-docs:
+    name: Ingest pushed docs
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed markdown files
+        id: changed
+        run: |
+          FILES=$(git diff --name-only HEAD~1 HEAD -- '*.md' 'docs/**' 'ADRs/**' | head -10)
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+
+      - name: Push each changed doc to KB
+        if: steps.changed.outputs.files != ''
+        run: |
+          for FILE in ${{ steps.changed.outputs.files }}; do
+            if [ -f "$FILE" ]; then
+              TITLE=$(head -1 "$FILE" | sed 's/^#* *//')
+              CONTENT=$(cat "$FILE")
+              curl -sf -X POST "${{ secrets.KB_WEBHOOK_URL }}/api/ingest/webhook" \
+                -H "Authorization: Bearer ${{ secrets.KB_WEBHOOK_SECRET }}" \
+                -H "Content-Type: application/json" \
+                -d "{
+                  \"title\": \"$(echo $TITLE | sed 's/\"/\\\"/g')\",
+                  \"content\": $(echo "$CONTENT" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))'),
+                  \"source\": \"github-push\",
+                  \"url\": \"https://github.com/${{ github.repository }}/blob/${{ github.sha }}/$FILE\",
+                  \"tags\": [\"github\", \"docs\"]
+                }"
+              echo "Ingested: $FILE"
+            fi
+          done
