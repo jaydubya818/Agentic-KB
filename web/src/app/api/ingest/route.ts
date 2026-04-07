@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeRawMaterial } from '@/lib/articles'
+import { appendAuditLog } from '@/lib/audit'
 
 export const dynamic = 'force-dynamic'
 
@@ -75,6 +76,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       sourceUrl: sourceUrl?.trim(),
     })
 
+    appendAuditLog({ op: 'ingest', file: savedPath, title: title.trim(), type })
     return NextResponse.json({
       success: true,
       path: savedPath,

@@ -190,6 +190,27 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ['question'],
       },
     },
+    {
+      name: 'compile_wiki',
+      description: 'Process uncompiled raw documents and compile them into structured wiki pages using Claude. Use mode="incremental" for new docs only (default) or mode="full" to recompile everything.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          mode: { type: 'string', enum: ['incremental', 'full'], description: 'incremental=new docs only, full=recompile all', default: 'incremental' },
+          pin: { type: 'string', description: 'PIN required if PRIVATE_PIN is set.' },
+        },
+      },
+    },
+    {
+      name: 'lint_wiki',
+      description: 'Run a health check on the wiki: detects contradictions between pages, orphaned pages with no links, stale content, and knowledge gaps. Writes a lint-report.md to the wiki.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          pin: { type: 'string', description: 'PIN required if PRIVATE_PIN is set.' },
+        },
+      },
+    },
   ],
 }))
 
@@ -309,7 +330,71 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       return { content: [{ type: 'text', text: fullAnswer || 'No answer returned' }] }
     }
 
-    return { content: [{ type: 'text', text: `Unknown tool: ${name}` }], isError: true }
+    if (name === 'compile_wiki') {
+      const mode = String(args.mode || 'incremental')
+      if (PRIVATE_PIN) {
+        const providedPin = String(args.pin || '')
+        if (providedPin !== PRIVATE_PIN) {
+          return { content: [{ type: 'text', text: 'Compile requires a valid PIN.' }], isError: true }
+        }
+      }
+      const res = await fetch(`${API_URL}/api/compile`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(PRIVATE_PIN ? { 'x-private-pin': PRIVATE_PIN } : {}) },
+        body: JSON.stringify({ mode, pin: String(args.pin || '') }),
+      })
+      if (!res.body) return { content: [{ type: 'text', text: 'Compile API unavailable' }] }
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      const lines = []
+      let buf = ''
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        buf += decoder.decode(value, { stream: true })
+        const parts = buf.split('\n\n')
+        buf = parts.pop() || ''
+        for (const part of parts) {
+          if (!part.startsWith('data: ')) continue
+          try {
+            const data = JSON.parse(part.slice(6))
+            if (data.type === 'progress' || data.type === 'done') lines.push(data.message || '')
+            if (data.type === 'page') lines.push((data.op === 'create' ? '[new] ' : '[upd] ') + data.path)
+            if (data.type === 'error') return { content: [{ type: 'text', text: 'Error: ' + data.message }], isError: true }
+          } catch(e) { }
+        }
+      }
+      return { content: [{ type: 'text', text: lines.join('\n') }] }
+    }
+    if (name === 'lint_wiki') {
+      if (PRIVATE_PIN) {
+        const providedPin = String(args.pin || '')
+        if (providedPin !== PRIVATE_PIN) {
+          return { content: [{ type: 'text', text: 'Lint requires a valid PIN.' }], isError: true }
+        }
+      }
+      const res = await fetch(`${API_URL}/api/lint`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(PRIVATE_PIN ? { 'x-private-pin': PRIVATE_PIN } : {}) },
+        body: JSON.stringify({ pin: String(args.pin || '') }),
+      })
+      const data = await res.json()
+      if (data.ok) {
+        return { content: [{ type: 'text', text: [
+          'Wiki Lint Report',
+          'Pages scanned:  ' + data.pagesScanned,
+          'Contradictions: ' + data.contradictions,
+          'Orphaned pages: ' + data.orphans,
+          'Stale pages:    ' + data.stalePages,
+          'Knowledge gaps: ' + data.gaps,
+          '',
+          data.summary,
+          'Full report written to wiki/lint-report.md',
+        ].join('\n') }] }
+      }
+      return { content: [{ type: 'text', text: 'Lint error: ' + (data.error || 'unknown') }], isError: true }
+    }
+        return { content: [{ type: 'text', text: `Unknown tool: ${name}` }], isError: true }
   } catch (err) {
     return { content: [{ type: 'text', text: `Error: ${String(err)}` }], isError: true }
   }

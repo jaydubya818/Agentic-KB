@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import fs from 'fs'
 import path from 'path'
 import { readIndex, readIndexInVault, readKBFile, resolveContentRoot, DEFAULT_KB_ROOT } from '@/lib/articles'
+import { appendAuditLog } from '@/lib/audit'
 
 export const dynamic = 'force-dynamic'
 
@@ -213,6 +214,7 @@ export async function POST(request: NextRequest): Promise<Response> {
           paths: articles.map(a => a.path),
         })
 
+        appendAuditLog({ op: 'query', vault: path.basename(vaultRoot), q: question, scope: queryScope, articlesRead: articles.length })
         send({ type: 'done' })
       } catch (error) {
         console.error('WikiQuery error:', error)

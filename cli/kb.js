@@ -48,6 +48,7 @@ function parseArgs(args) {
   const positional = []
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--scope') opts.scope = args[++i]
+    else if (args[i] === '--mode') opts.mode = args[++i]
     else if (args[i] === '--limit') opts.limit = parseInt(args[++i], 10)
     else if (args[i] === '--pin') opts.pin = args[++i]
     else positional.push(args[i])
@@ -181,6 +182,62 @@ async function pending() {
   }
 }
 
+
+async function compile(mode, pin) {
+  console.log('\n⚙️  Compiling KB (mode: ' + mode + ')...\n')
+  const res = await fetch(`${API_URL}/api/compile`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(pin ? { 'x-private-pin': pin } : {}) },
+    body: JSON.stringify({ mode, pin }),
+  })
+  if (!res.body) { console.error('Compile API unavailable.'); process.exit(1) }
+  const reader = res.body.getReader()
+  const decoder = new TextDecoder()
+  let buf = ''
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done) break
+    buf += decoder.decode(value, { stream: true })
+    const parts = buf.split('\n\n')
+    buf = parts.pop() || ''
+    for (const part of parts) {
+      if (!part.startsWith('data: ')) continue
+      try {
+        const data = JSON.parse(part.slice(6))
+        if (data.type === 'progress') console.log('  i ', data.message)
+        if (data.type === 'compiling') console.log('  . ', data.file)
+        if (data.type === 'page') console.log('    ' + (data.op === 'create' ? '[new]' : '[upd]') + ' ' + data.path)
+        if (data.type === 'skip') console.log('  skip ', data.file, '-', data.reason)
+        if (data.type === 'done') { console.log('\nDone: ' + data.message); break }
+        if (data.type === 'error') { console.error('Error: ' + data.message); process.exit(1) }
+      } catch(e) { }
+    }
+  }
+  console.log()
+}
+
+async function lint(pin) {
+  console.log('\nRunning wiki lint...\n')
+  const res = await fetch(`${API_URL}/api/lint`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(pin ? { 'x-private-pin': pin } : {}) },
+    body: JSON.stringify({ pin }),
+  })
+  const data = await res.json()
+  if (data.ok) {
+    console.log('  Pages scanned:  ' + data.pagesScanned)
+    console.log('  Contradictions: ' + data.contradictions)
+    console.log('  Orphaned pages: ' + data.orphans)
+    console.log('  Stale pages:    ' + data.stalePages)
+    console.log('  Knowledge gaps: ' + data.gaps)
+    console.log('\nReport saved to wiki/lint-report.md')
+    console.log('Done: ' + data.summary)
+  } else {
+    console.error('Error: ' + data.error)
+    process.exit(1)
+  }
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -205,6 +262,10 @@ try {
     await listSection(positional[0])
   } else if (command === 'pending') {
     await pending()
+  } else if (command === 'compile') {
+    await compile(opts.mode || 'incremental', opts.pin)
+  } else if (command === 'lint') {
+    await lint(opts.pin)
   } else {
     console.error(`Unknown command: ${command}`)
     usage()
