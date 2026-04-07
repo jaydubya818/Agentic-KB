@@ -28,7 +28,7 @@ Agentic KB CLI — Query your knowledge base from the terminal
 
 Commands:
   kb search <query> [--scope public|private|all] [--limit N]
-  kb query <question>
+  kb query <question> [--scope public|private|all] [--pin <pin>]
   kb read <slug>
   kb list <section>
   kb pending
@@ -44,11 +44,12 @@ Examples:
 }
 
 function parseArgs(args) {
-  const opts = { scope: 'public', limit: 10 }
+  const opts = { scope: 'public', limit: 10, pin: PRIVATE_PIN }
   const positional = []
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--scope') opts.scope = args[++i]
     else if (args[i] === '--limit') opts.limit = parseInt(args[++i], 10)
+    else if (args[i] === '--pin') opts.pin = args[++i]
     else positional.push(args[i])
   }
   return { opts, positional }
@@ -84,14 +85,14 @@ async function search(query, scope, limit) {
   }
 }
 
-async function query(question) {
+async function query(question, scope = 'public', pin = '') {
   console.log(`\n🤖 Querying KB: ${question}\n`)
   process.stdout.write('   ')
 
   const res = await fetch(`${API_URL}/api/query`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question }),
+    headers: { 'Content-Type': 'application/json', ...(pin ? { 'x-private-pin': pin } : {}) },
+    body: JSON.stringify({ question, scope, pin }),
   })
 
   if (!res.body) {
@@ -110,7 +111,7 @@ async function query(question) {
       if (!line.startsWith('data: ')) continue
       try {
         const data = JSON.parse(line.slice(6))
-        if (data.type === 'token' && data.content) process.stdout.write(data.content)
+        if ((data.type === 'token' || data.type === 'answer') && data.content) process.stdout.write(data.content)
         if (data.type === 'sources' && data.sources?.length) {
           console.log('\n\n📚 Sources:')
           for (const s of data.sources) console.log(`  → ${s}`)
@@ -195,7 +196,7 @@ try {
     await search(positional.join(' '), opts.scope, opts.limit)
   } else if (command === 'query') {
     if (!positional[0]) { console.error('Usage: kb query <question>'); process.exit(1) }
-    await query(positional.join(' '))
+    await query(positional.join(' '), opts.scope, opts.pin)
   } else if (command === 'read') {
     if (!positional[0]) { console.error('Usage: kb read <slug>'); process.exit(1) }
     await readArticle(positional[0])

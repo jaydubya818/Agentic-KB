@@ -135,17 +135,19 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
             default: 'public',
           },
           limit: { type: 'number', description: 'Max results (default 10)', default: 10 },
+          pin: { type: 'string', description: 'PIN required when scope is "private" or "all". Must match PRIVATE_PIN env var.' },
         },
         required: ['query'],
       },
     },
     {
       name: 'read_article',
-      description: 'Read the full content of a wiki article by its slug (e.g. "concepts/tool-use").',
+      description: 'Read the full content of a wiki article by its slug (e.g. "concepts/tool-use"). Private articles require a pin.',
       inputSchema: {
         type: 'object',
         properties: {
           slug: { type: 'string', description: 'Article slug relative to wiki/ (e.g. "concepts/tool-use")' },
+          pin: { type: 'string', description: 'PIN required for private articles. Must match PRIVATE_PIN env var.' },
         },
         required: ['slug'],
       },
@@ -177,6 +179,13 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         type: 'object',
         properties: {
           question: { type: 'string', description: 'The question to answer using the KB' },
+          scope: {
+            type: 'string',
+            enum: ['public', 'private', 'all'],
+            description: 'Content scope: public (default), private, or all',
+            default: 'public',
+          },
+          pin: { type: 'string', description: 'PIN required when scope is "private" or "all".' },
         },
         required: ['question'],
       },
@@ -195,7 +204,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       // Validate PIN for private scopes
       if (scope !== 'public' && PRIVATE_PIN) {
-        // PIN must be in PRIVATE_PIN env for this MCP instance
+        const providedPin = String(args.pin || '')
+        if (providedPin !== PRIVATE_PIN) {
+          return { content: [{ type: 'text', text: '🔒 Private content requires a valid PIN. Pass pin: your-pin with scope: ' + scope + '.' }], isError: true }
+        }
       }
 
       const results = simpleSearch(query, limit, scope)
@@ -213,11 +225,21 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (name === 'read_article') {
       const slug = String(args.slug || '').replace(/\.md$/, '')
       const filePath = path.join(WIKI_ROOT, slug + '.md')
-      const content = readFile(path.relative(KB_ROOT, filePath))
-      if (!content) {
+      const articleContent = readFile(path.relative(KB_ROOT, filePath))
+      if (!articleContent) {
         return { content: [{ type: 'text', text: `Article not found: ${slug}` }] }
       }
-      return { content: [{ type: 'text', text: content }] }
+      // Check visibility — private articles require PIN
+      const meta = parseFrontmatter(articleContent)
+      const isPersonalPath = slug.startsWith('personal/')
+      const visibility = isPersonalPath ? 'private' : (meta.visibility || 'public')
+      if (visibility === 'private' && PRIVATE_PIN) {
+        const providedPin = String(args.pin || '')
+        if (providedPin !== PRIVATE_PIN) {
+          return { content: [{ type: 'text', text: '🔒 This article is private. Pass pin: "<your-pin>" to access it.' }], isError: true }
+        }
+      }
+      return { content: [{ type: 'text', text: articleContent }] }
     }
 
     if (name === 'read_index') {
@@ -248,10 +270,17 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     if (name === 'query_wiki') {
       const question = String(args.question || '')
+      const qscope = (args.scope === 'private' || args.scope === 'all') ? args.scope : 'public'
+      if (qscope !== 'public' && PRIVATE_PIN) {
+        const providedPin = String(args.pin || '')
+        if (providedPin !== PRIVATE_PIN) {
+          return { content: [{ type: 'text', text: '🔒 Private content requires a valid PIN. Pass pin: "<your-pin>" with scope.' }], isError: true }
+        }
+      }
       const res = await fetch(`${API_URL}/api/query`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question }),
+        headers: { 'Content-Type': 'application/json', ...(PRIVATE_PIN && qscope !== 'public' ? { 'x-private-pin': PRIVATE_PIN } : {}) },
+        body: JSON.stringify({ question, scope: qscope, pin: String(args.pin || '') }),
       })
 
       if (!res.body) {

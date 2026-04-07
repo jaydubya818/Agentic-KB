@@ -10,6 +10,8 @@ const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
 
+const PRIVATE_PIN = process.env.PRIVATE_PIN || ''
+
 function encodeSSE(data: object): string {
   return `data: ${JSON.stringify(data)}\n\n`
 }
@@ -17,7 +19,7 @@ function encodeSSE(data: object): string {
 /**
  * Ask Claude to identify relevant wiki pages from the index.
  */
-async function identifyRelevantPages(question: string, indexContent: string): Promise<string[]> {
+async function identifyRelevantPages(question: string, indexContent: string, scope = 'public'): Promise<string[]> {
   const response = await client.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 512,
@@ -128,6 +130,21 @@ export async function POST(request: NextRequest): Promise<Response> {
         status: 400,
         headers: { 'Content-Type': 'text/event-stream' },
       }
+    )
+  }
+
+  // Extract scope/pin for private content access
+  let queryScope = 'public'
+  let queryPin = ''
+  try {
+    const scopeData = await request.clone().json() as { scope?: string; pin?: string }
+    queryScope = (scopeData.scope === 'private' || scopeData.scope === 'all') ? scopeData.scope : 'public'
+    queryPin = scopeData.pin || request.headers.get('x-private-pin') || ''
+  } catch { /* ignore */ }
+  if (queryScope !== 'public' && PRIVATE_PIN && queryPin !== PRIVATE_PIN) {
+    return new Response(
+      encodeSSE({ type: 'error', content: '🔒 Invalid PIN for private content access.' }),
+      { status: 401, headers: { 'Content-Type': 'text/event-stream' } }
     )
   }
 
