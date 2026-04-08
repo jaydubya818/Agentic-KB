@@ -180,11 +180,16 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "logs/audit.log",
+    "logs",
+    "outputs/README.md",
+    "outputs",
     "wiki/patterns/pattern-deviation-rules.md",
     "wiki/patterns/pattern-scientific-debugging.md",
     "wiki/patterns/pattern-write-to-disk-worker.md",
@@ -209,8 +214,6 @@
     "wiki/patterns/pattern-milestone-task-breakdown.md",
     "wiki/patterns/pattern-task-breakdown-agent.md",
     "wiki/patterns/pattern-milestone-planning.md",
-    "wiki/patterns/pattern-adversarial-plan-review.md",
-    "wiki/patterns/pattern-architecture-first.md",
     "web/src/lib/graph-search.ts",
     "web/src/components/CompilePanel.tsx",
     "web/src/app/api/ingest/webhook/route.ts",
@@ -219,8 +222,6 @@
     "web/src/lib/audit.ts",
     "web/src/app/api/ingest/webhook",
     "web/src/app/api/lint",
-    "web/src/app/api/compile",
-    "web/src/components/VaultWatcher.tsx",
     "Untitled.canvas"
   ]
 }
