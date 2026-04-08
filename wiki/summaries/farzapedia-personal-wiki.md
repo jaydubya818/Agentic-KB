@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R988F60A06J7C5ESH2
 title: Farzapedia Personal Wiki
 type: summary
 tags: [memory, personal-knowledge-management, agentic, retrieval, librarian-pattern]

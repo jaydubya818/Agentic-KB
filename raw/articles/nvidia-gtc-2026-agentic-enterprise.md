@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RJRA6HG2H93Z69WA4Z
 title: Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026
 type: article
 source: Apple Notes (LinkedIn post by Raj Kumar, AgentLayer)

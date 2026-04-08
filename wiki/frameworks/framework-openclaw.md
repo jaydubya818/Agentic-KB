@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QV7NZYEYWPFGTYEP3X
 title: OpenClaw
 type: framework
 vendor: Unknown / Jay West (deployed instance)

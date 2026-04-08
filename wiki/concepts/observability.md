@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QH3A6ZMAQ7Y9W4KW6E
 title: Observability
 type: concept
 tags: [agentic, observability, tracing, logging, monitoring, telemetry]

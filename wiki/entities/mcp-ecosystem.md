@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QQ2ZCGPMJVXVEQM22W
 title: MCP Ecosystem
 type: entity
 tags: [mcp, frameworks, tools, architecture]

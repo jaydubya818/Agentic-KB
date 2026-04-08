@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R8EEV2R9S12TZRZW90
 title: Parallel Sub-Agents — Fan-Out Pattern Implementation
 type: recipe
 difficulty: advanced

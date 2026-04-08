@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R3F555C0P0DW8ND77S
 title: "Pattern: Structured Assumptions"
 type: pattern
 tags: [patterns, agents, orchestration, workflow, prompting]

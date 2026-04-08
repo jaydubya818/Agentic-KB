@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RYHPDS0EA721GY2TH9
 name: perf-analyzer
 description: Performance specialist. Use for profiling slow API endpoints, optimizing database queries, reducing frontend bundle size, and identifying memory leaks. Always measures before and after.
 model: claude-sonnet-4-5

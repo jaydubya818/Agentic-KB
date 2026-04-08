@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QRADAAAK7G2DS0X4YN
 title: Eval — Memory Approaches for Agentic Systems
 type: evaluation
 tags: [evaluation, memory, rag, vector-db, wiki, knowledge-graph, context-management]

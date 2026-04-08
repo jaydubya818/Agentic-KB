@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QXKGGE4Q9092GQKSKX
 title: "Pattern: Architecture Decision Record (ADR)"
 type: pattern
 tags: [architecture, workflow, automation, knowledge-base]

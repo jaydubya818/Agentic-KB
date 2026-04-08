@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RF2B2F3NB05WVZTT1Z
 title: Superpowers Framework
 type: summary
 source_file: raw/my-agents/superpowers-code-reviewer.md

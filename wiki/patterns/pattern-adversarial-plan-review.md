@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QX5HM4EFY3ABT7Y2X5
 title: "Adversarial Plan Review"
 type: pattern
 tags: [agents, patterns, workflow, safety, architecture]

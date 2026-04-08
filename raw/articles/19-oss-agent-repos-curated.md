@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RJ5DWMW131B1B8Q137
 title: 19 Open-Source GitHub Repos for AI Agents — Curated List
 type: article
 source: Apple Notes (LinkedIn post, captured April 5, 2026)

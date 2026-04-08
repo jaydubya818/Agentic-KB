@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RPKTYY1N27TPVPCBJ7
 name: gsd-advisor-researcher
 description: Researches a single gray area decision and returns a structured comparison table with rationale. Spawned by discuss-phase advisor mode.
 tools: Read, Bash, Grep, Glob, WebSearch, WebFetch, mcp__context7__*

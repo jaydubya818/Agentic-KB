@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QS8GZH58NF0C66W6HD
 title: Eval — Orchestration Frameworks Comparison
 type: evaluation
 tags: [evaluation, orchestration, multi-agent, gsd, langgraph, autogen, crewai, claude-code]

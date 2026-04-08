@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QDSS37EQRSWJPSGKC9
 title: Enterprise AI Governance
 type: concept
 tags: [enterprise, governance, agents, safety, deployment]

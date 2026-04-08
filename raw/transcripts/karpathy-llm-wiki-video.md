@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2SA4V2YE1B7H7QF0DRM
 title: "Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)"
 source: YouTube video transcript
 author: Unknown (trading-focused channel)

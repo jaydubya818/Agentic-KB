@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QZHMZB9MTNCGM4ZXRG
 title: External Memory
 type: pattern
 category: memory

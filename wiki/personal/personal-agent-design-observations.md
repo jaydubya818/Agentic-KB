@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R6XJFW5SGH7Q5WH4FX
 title: Jay's Agent Design Patterns (Observed)
 type: personal
 category: pattern

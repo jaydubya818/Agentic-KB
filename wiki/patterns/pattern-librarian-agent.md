@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R0RKG5PFHJSYDJRY3Z
 title: Librarian Agent Pattern
 type: pattern
 tags: [agentic, memory, retrieval, personal-knowledge-management, orchestration]

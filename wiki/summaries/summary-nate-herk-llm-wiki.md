@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RFNGW3BCW5C16VVM5E
 title: Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)
 type: summary
 source_file: raw/transcripts/nate-herk-llm-wiki.md

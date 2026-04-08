@@ -1,0 +1,132 @@
+{
+  "Claude Code": {
+    "target": "[[framework-claude-code]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "LangGraph": {
+    "target": "[[framework-langgraph]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "CrewAI": {
+    "target": "[[framework-crewai]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "AutoGen": {
+    "target": "[[framework-autogen]]",
+    "aliases": [],
+    "case_sensitive": true
+  },
+  "OpenClaw": {
+    "target": "[[framework-openclaw]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "Rowboat": {
+    "target": "[[framework-rowboat]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "BMAD": {
+    "target": "[[framework-bmad]]",
+    "aliases": [],
+    "case_sensitive": true
+  },
+  "Superpowers": {
+    "target": "[[framework-superpowers]]",
+    "aliases": [],
+    "case_sensitive": true
+  },
+  "Andrej Karpathy": {
+    "target": "[[andrej-karpathy]]",
+    "aliases": ["Karpathy"],
+    "case_sensitive": true
+  },
+  "Anthropic": {
+    "target": "[[anthropic]]",
+    "aliases": [],
+    "case_sensitive": true
+  },
+  "OpenAI": {
+    "target": "[[openai]]",
+    "aliases": [],
+    "case_sensitive": true
+  },
+  "AgentLayer": {
+    "target": "[[agentlayer]]",
+    "aliases": [],
+    "case_sensitive": true
+  },
+  "oh-my-mermaid": {
+    "target": "[[oh-my-mermaid]]",
+    "aliases": ["omm"],
+    "case_sensitive": false
+  },
+  "LLM Wiki": {
+    "target": "[[llm-wiki]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "Hot Cache": {
+    "target": "[[pattern-hot-cache]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "LLM-as-Judge": {
+    "target": "[[llm-as-judge]]",
+    "aliases": ["LLM as Judge"],
+    "case_sensitive": false
+  },
+  "Chain of Thought": {
+    "target": "[[chain-of-thought]]",
+    "aliases": ["CoT"],
+    "case_sensitive": true
+  },
+  "Multi-Agent Systems": {
+    "target": "[[multi-agent-systems]]",
+    "aliases": ["multi-agent system"],
+    "case_sensitive": false
+  },
+  "Supervisor-Worker": {
+    "target": "[[pattern-supervisor-worker]]",
+    "aliases": ["supervisor/worker", "supervisor worker pattern"],
+    "case_sensitive": false
+  },
+  "Fan-out Worker": {
+    "target": "[[pattern-fan-out-worker]]",
+    "aliases": ["fan out worker", "fan-out"],
+    "case_sensitive": false
+  },
+  "Reflection Loop": {
+    "target": "[[pattern-reflection-loop]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "Rolling Summary": {
+    "target": "[[pattern-rolling-summary]]",
+    "aliases": [],
+    "case_sensitive": false
+  },
+  "Plan-Execute-Verify": {
+    "target": "[[pattern-plan-execute-verify]]",
+    "aliases": ["plan execute verify"],
+    "case_sensitive": false
+  },
+  "Read-Before-Write": {
+    "target": "[[pattern-read-before-write]]",
+    "aliases": ["read before write"],
+    "case_sensitive": false
+  },
+  "MCP": {
+    "target": "[[mcp-ecosystem]]",
+    "aliases": ["Model Context Protocol"],
+    "case_sensitive": true
+  },
+  "Zettelkasten": {
+    "target": "[[llm-wiki-pattern]]",
+    "aliases": [],
+    "case_sensitive": false
+  }
+}

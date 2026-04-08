@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QM35SV0NPBRTC4H227
 title: "Vault Architecture"
 type: concept
 tags: [knowledge-base, architecture, obsidian, workflow]

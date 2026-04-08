@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R4EW4AF184CVZTANCT
 title: Tool Schema Design
 type: pattern
 category: tool-use

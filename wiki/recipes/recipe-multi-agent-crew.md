@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R80MEFPAJ5SG7A6T04
 title: Wire a Multi-Agent Crew with an Orchestrator
 type: recipe
 difficulty: advanced

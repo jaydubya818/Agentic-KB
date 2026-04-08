@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RKCBJYAK26J34WG2Y2
 name: Plan Review Agent
 description: Adversarial review of architecture output before planning begins. Challenges premises, maps failure modes, traces error paths, and forces deployment thinking. Sits between Architecture (01) and Planning (03). Produces a reviewed architecture with an error registry and failure modes map.
 tools: Read, Grep, Glob, Bash, AskUserQuestion

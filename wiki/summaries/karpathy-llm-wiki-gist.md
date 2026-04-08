@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RA9RJZHDS881YHFASP
 title: "Karpathy LLM Wiki Pattern — Gist"
 type: summary
 tags: [llm-wiki, karpathy, knowledge-base, architecture, schema]

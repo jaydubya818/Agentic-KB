@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S8N6NCHRKES06GBTTH
 title: "Andrej Karpathy thinks RAG is broken"
 type: note
 date_ingested: 2026-04-07

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R8581VZ6F4YE5QN7JH
 title: Set Up a Karpathy-Style LLM Knowledge Base
 type: recipe
 difficulty: beginner

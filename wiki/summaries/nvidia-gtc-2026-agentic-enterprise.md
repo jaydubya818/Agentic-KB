@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RA19MMXCTWEK3PKD4E
 title: "Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026"
 type: summary
 tags: [agentic, enterprise, nvidia, governance, orchestration, deployment, compliance]

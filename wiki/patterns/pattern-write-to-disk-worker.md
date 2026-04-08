@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R5F7X97N4HDR0JNATD
 title: Write-to-Disk Worker Pattern
 type: pattern
 tags: [patterns, agents, orchestration, context, memory]

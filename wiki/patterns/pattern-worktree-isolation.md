@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R515GMM6194N4ZE8CT
 title: Worktree Isolation
 type: pattern
 category: safety

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QKZ32AC0Z3D8JBWF4C
 title: System Prompt Design
 type: concept
 tags: [agentic, prompting, system-prompt, persona, constraints, format]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QQD5JETXCZ5JJDVJN8
 title: "Oh My Mermaid (OMM) — KB CLI"
 type: entity
 tags: [architecture, knowledge-base, tools, mcp]

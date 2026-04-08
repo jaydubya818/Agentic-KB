@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R91BG052Q0HATW1BTB
 title: 19 Open-Source GitHub Repos for AI Agents — Curated List
 type: summary
 tags: [agentic, open-source, orchestration, memory, tools, frameworks, coding-agents, observability]

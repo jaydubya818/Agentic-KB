@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QPPC3911MR4RMVQZ5X
 title: Key Agentic AI Researchers
 type: entity
 category: ecosystem

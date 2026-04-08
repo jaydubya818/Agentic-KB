@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RHFRPG3W40Z4D3QFWF
 title: "Architecture: overall-architecture/web-ui"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

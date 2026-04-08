@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S3FBK4RABTB6A30MVK
 name: frontend-testing
 description: Generate Vitest + React Testing Library tests for frontend components, hooks, and utilities. Triggers on testing, spec files, coverage, Vitest, RTL, unit tests, integration tests, or write/review test requests.
 ---

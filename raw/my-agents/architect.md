@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RN792741765B1JGQ15
 name: architect
 description: System design expert. Use for architecture decisions, ADRs, technology choices, system design diagrams, and planning large-scale refactors. Invoke when a decision will have long-lasting structural impact.
 model: claude-opus-4-6

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QCGEK0GQNDSZE0CVFD
 title: Cost Optimization
 type: concept
 tags: [agentic, cost, tokens, caching, model-tiering, optimization, batching]

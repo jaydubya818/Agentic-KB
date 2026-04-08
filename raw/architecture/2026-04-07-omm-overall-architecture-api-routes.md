@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RGFYG5DADXVSSJZSZ0
 title: "Architecture: overall-architecture/api-routes"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

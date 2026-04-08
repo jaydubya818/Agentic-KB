@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RCPM84E8SVV2QTN9E2
 title: GSD Debugger Agent
 type: summary
 source_file: raw/my-agents/gsd-debugger.md

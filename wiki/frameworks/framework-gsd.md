@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QTWCWBWJ8VNSNC2BHP
 title: GSD Framework
 type: framework
 tags: [agents, workflow, automation, orchestration, patterns]

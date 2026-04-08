@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S9PKJPZCFR3S2QGPYC
 title: Karpathy LLM Wiki Pattern
 type: framework-doc
 tags: [knowledge-base, llm, obsidian, rag]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QC0K6NFMCDPQCFK6MT
 title: "Context Management"
 type: concept
 tags: [context, agents, architecture, orchestration]

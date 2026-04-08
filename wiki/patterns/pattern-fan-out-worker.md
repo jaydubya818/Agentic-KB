@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QZHPFN6S4TBYKZYAD7
 title: Fan-Out Worker
 type: pattern
 category: orchestration

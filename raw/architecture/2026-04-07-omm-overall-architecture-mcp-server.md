@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RHB0GJQMNP0S15YW6C
 title: "Architecture: overall-architecture/mcp-server"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R37XYCHXHB9GTDVDEY
 title: "Single-Task Code Generation Agent"
 type: pattern
 tags: [agents, patterns, workflow, automation, architecture]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R132SMXJSVTDW168F2
 title: Read Before Write
 type: pattern
 category: tool-use

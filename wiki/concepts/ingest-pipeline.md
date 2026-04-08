@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QE0E4YGR040749BKZ1
 title: "Ingest Pipeline"
 type: concept
 tags: [architecture, knowledge-base, workflow, automation, mcp]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RN846N0N1V2MTQ2W62
 name: Runtime Preparation Agent
 description: Makes a completed milestone actually runnable. Handles dependencies, env config, migrations, service wiring, and produces a smoke test checklist. Run after a milestone passes full validation, before testing the live system.
 ---

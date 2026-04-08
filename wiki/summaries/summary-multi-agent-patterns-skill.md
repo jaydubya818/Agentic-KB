@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2REJX9ZCQAZ4PXG6W7Q
 title: Multi-Agent Patterns Skill
 type: summary
 source_file: raw/my-skills/multi-agent-patterns-skill.md

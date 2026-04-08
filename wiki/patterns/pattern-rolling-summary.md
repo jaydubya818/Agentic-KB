@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R2RXFB8XKRZ1XKCCNP
 title: Rolling Summary
 type: pattern
 category: memory

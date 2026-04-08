@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QYM61TJ8GESARVABXR
 title: "Code Generation Agent Pattern"
 type: pattern
 tags: [agents, patterns, workflow, automation, architecture]

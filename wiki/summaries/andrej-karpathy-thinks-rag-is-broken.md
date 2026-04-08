@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R9M462HKZKR29AE4WJ
 title: "Andrej Karpathy Thinks RAG Is Broken"
 type: summary
 tags: [rag, memory, agentic, knowledge-management, llm-wiki]

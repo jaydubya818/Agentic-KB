@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RM7EM1Z07KQH0PQJ88
 name: Planning Agent
 description: Takes reviewed architecture output and creates a sequenced implementation plan with milestones, dependencies, and complexity estimates. Run after Plan Review Agent (02), before Task Breakdown (04).
 ---

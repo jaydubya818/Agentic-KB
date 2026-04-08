@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R35NEA0F573T64BY5F
 title: Structured Comparison Table Pattern
 type: pattern
 tags: [patterns, agents, orchestration, workflow, prompting]

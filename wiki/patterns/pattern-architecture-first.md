@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QXZZYNXNHNS0BZC429
 title: "Architecture First Pattern"
 type: pattern
 tags: [architecture, patterns, workflow, agents]

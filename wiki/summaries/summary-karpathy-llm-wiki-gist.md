@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2REK55YMPYEV8TNF7J9
 title: Karpathy LLM Wiki Pattern — Gist
 type: summary
 source_file: raw/framework-docs/karpathy-llm-wiki-gist.md

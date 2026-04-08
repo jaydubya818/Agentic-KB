@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R86S15YT1Z1A49DYQ1
 title: Write and Register a Custom MCP Server
 type: recipe
 difficulty: intermediate

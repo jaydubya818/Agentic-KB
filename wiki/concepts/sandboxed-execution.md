@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QJ3G8SGH595ZX072HP
 title: Sandboxed Execution Environments
 type: concept
 tags: [agentic, safety, deployment, production, isolation]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S9KADM1BQ8QERD2NN2
 title: "Q: what is the best pattern for multi agent orchestration"
 source: qa
 date: 2026-04-08T05:49:38.827Z

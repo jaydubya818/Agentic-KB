@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QM76NTD72QFAH7JTXJ
 title: Trajectory Evaluation
 type: concept
 tags: [agentic, evaluation, trajectory, step-scoring, offline-eval, datasets]

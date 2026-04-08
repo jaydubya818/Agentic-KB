@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QGWC89AW6ZBZSKV0W7
 title: LLM Wiki Pattern
 type: concept
 tags: [agentic, knowledge-base, architecture, rag, memory, karpathy]

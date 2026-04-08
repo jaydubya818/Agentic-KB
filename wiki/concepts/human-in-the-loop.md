@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QEX8BTQE804A4H0Q9K
 title: Human-in-the-Loop
 type: concept
 tags: [agentic, hitl, oversight, approval, escalation, interrupts]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R143CA3SEQ5Z6TTSPS
 title: "Pattern: Milestone → Task Breakdown"
 type: pattern
 tags: [patterns, agents, orchestration, workflow, architecture]

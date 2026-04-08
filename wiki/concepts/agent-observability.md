@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QARG10A27C3DXY2A7C
 title: Agent Observability
 type: concept
 tags: [agentic, observability, production, monitoring, debugging]

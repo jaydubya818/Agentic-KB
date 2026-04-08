@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QFZJKJ9Z858F6CPQMJ
 title: "LLM Wiki Compile Pipeline"
 type: concept
 tags: [knowledge-base, llm, automation, workflow, architecture]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RKD71J10QFMVH8CXNE
 name: Architecture Agent
 description: Use when starting a new project or feature. Reads a spec file and designs the full system architecture — tech stack, data models, service boundaries, API contracts, and folder structure. Run FIRST before planning or code.
 ---

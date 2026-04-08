@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R3ZK1S3661657YCEJR
 title: Supervisor-Worker
 type: pattern
 category: orchestration

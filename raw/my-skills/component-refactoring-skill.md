@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S06CZ72Y9BYRZ98466
 name: component-refactoring
 description: Refactor high-complexity React components in frontend. Use when the user asks for code splitting, hook extraction, or complexity reduction, or when you come across a component that is too complex to understand and refactor it.
 ---

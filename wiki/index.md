@@ -1,3 +1,7 @@
+---
+id: 01KNNVX2QWD5ABN97BE6A2B2MN
+---
+
 # Agentic Engineering KB — Master Index
 > Last updated: 2026-04-04 | Maintained by LLM | Never edit manually
 

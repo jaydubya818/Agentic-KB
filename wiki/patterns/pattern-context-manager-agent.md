@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QYTRD6HZ312G6GG4GJ
 title: "Context Manager Agent Pattern"
 type: pattern
 tags: [agents, context, orchestration, patterns, architecture]

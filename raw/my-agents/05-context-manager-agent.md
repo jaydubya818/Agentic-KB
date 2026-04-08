@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RM869NW9VAYHA4EWD7
 name: Context Manager Agent
 description: Called before each coding task to load exactly the right context — no more, no less. Prevents context bloat by telling the Code Generation Agent precisely which files to read, which to ignore, and what background is relevant.
 ---

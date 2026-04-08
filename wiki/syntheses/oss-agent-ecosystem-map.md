@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RG734VAG483EVMJZCC
 title: "Open-Source Agent Ecosystem Map"
 type: synthesis
 tags: [agents, orchestration, memory, tools, frameworks, open-source]

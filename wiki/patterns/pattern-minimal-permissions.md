@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R1MV5VVRSRAMDFFQK0
 title: Minimal Permissions
 type: pattern
 category: safety

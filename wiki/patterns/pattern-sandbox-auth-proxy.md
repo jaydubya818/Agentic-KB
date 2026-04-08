@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R25ZHE74CTEFFC37SY
 title: Sandbox Auth Proxy
 type: pattern
 tags: [agentic, security, credentials, sandboxing, multi-tenancy]

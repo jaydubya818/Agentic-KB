@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RGZVEPCXJK6WKPNKFR
 title: "Architecture: compile-pipeline"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

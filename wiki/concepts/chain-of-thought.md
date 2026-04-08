@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QC85MCZ8D77YSPZPKS
 title: Chain of Thought
 type: concept
 tags: [agentic, reasoning, cot, extended-thinking, scratchpad, prompting]

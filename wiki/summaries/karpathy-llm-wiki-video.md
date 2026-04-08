@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RAJVYN9RBRFQP9P72S
 title: "Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)"
 type: summary
 tags: [llm-wiki, karpathy, knowledge-base, obsidian, claude-code, rag, architecture]

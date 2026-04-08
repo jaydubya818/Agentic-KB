@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QVSJNS46ZBCATMAE2X
 title: LangGraph
 type: framework
 tags: [langchain, orchestration, agents, workflow, deployment, memory]

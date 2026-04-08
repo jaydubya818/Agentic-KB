@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R0ZVRQD3W9Q2W1PH27
 title: LLM-Maintained Wiki
 type: pattern
 tags: [knowledge-base, architecture, llm-wiki, karpathy]

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R9XXY9EZQCPXZAK6D9
 title: "Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code"
 type: summary
 tags: [agentic, multi-agent, orchestration, claude-code, fan-out, parallelism]

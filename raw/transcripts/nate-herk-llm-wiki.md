@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2SBKW5JCNBC3N75V0K4
 title: "Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)"
 source: YouTube video transcript
 author: Nate Herk | AI Automation

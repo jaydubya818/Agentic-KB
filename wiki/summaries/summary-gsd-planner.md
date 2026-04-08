@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RD9QDFMBR8A4ZC7T81
 title: GSD Planner Agent
 type: summary
 source_file: raw/my-agents/gsd-planner.md

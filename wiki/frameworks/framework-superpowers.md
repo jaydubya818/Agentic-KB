@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QWYX4MY0B3W57ZRH7Z
 title: Superpowers
 type: framework
 vendor: Jay West (personal)

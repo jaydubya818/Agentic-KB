@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QYTJTQH22B09MZ1E48
 title: Confirm Before Destructive
 type: pattern
 category: safety

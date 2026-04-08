@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QZAANR33XB9Q13FSFV
 title: Idempotent Tools
 type: pattern
 category: tool-use

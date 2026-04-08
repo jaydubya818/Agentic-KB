@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RYHT2EEYTNMEWRQN0G
 name: security-reviewer
 description: Security specialist agent. Use for security audits, vulnerability assessments, auth flow reviews, and dependency scanning. Particularly valuable before production deployments and after adding new external integrations.
 model: claude-opus-4-6

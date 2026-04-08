@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QD2X0CM9HQE1VGFQ3C
 title: Few-Shot Prompting
 type: concept
 tags: [agentic, prompting, few-shot, in-context-learning, demonstrations]

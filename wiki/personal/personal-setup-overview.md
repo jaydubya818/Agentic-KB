@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R6JM53CM38W6YGT58C
 title: Jay's Agentic Stack Overview
 type: personal
 category: pattern

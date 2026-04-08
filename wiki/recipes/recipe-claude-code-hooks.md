@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R7ZARTMW08QJD9Q231
 title: Claude Code Hooks — Custom Automation
 type: recipe
 difficulty: intermediate

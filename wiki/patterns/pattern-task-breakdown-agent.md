@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R4FNP4PZFQTXHFAERX
 title: "Pattern: Task Breakdown Agent"
 type: pattern
 tags: [agents, orchestration, workflow, patterns, architecture]

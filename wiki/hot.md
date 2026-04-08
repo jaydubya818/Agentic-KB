@@ -1,3 +1,7 @@
+---
+id: 01KNNVX2QWP0WXED8KH2N8K1JE
+---
+
 # Hot Cache
 > ≤500 words | Most-used patterns and concepts | Updated: 2026-04-04
 

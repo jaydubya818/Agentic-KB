@@ -1,3 +1,7 @@
+---
+id: 01KNNVX2R9T8XQDESPEZVJ3D8D
+---
+
 # Agentic KB — Wiki Schema
 
 > This file is read by `/api/compile` as a system prompt for Claude.

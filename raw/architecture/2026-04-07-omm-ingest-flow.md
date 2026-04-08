@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RGNB42SG1GY6H06VQ9
 title: "Architecture: ingest-flow"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R2ETK70J09ZJJDD0EE
 title: "Pattern: Scientific Debugging"
 type: pattern
 tags: [agents, patterns, workflow, automation]

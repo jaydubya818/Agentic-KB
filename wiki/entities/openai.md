@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QRE2WFCREZ2CT4J3FZ
 title: OpenAI
 type: entity
 category: company

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RDA8ADVTRS2QY25W7N
 title: GSD Framework Skills (Combined)
 type: summary
 source_file: raw/my-agents/gsd-planner.md, raw/my-agents/gsd-executor.md, raw/my-agents/gsd-verifier.md, raw/my-agents/gsd-debugger.md, raw/my-agents/gsd-codebase-mapper.md

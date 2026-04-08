@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S12E508PP9GBYJMBWH
 name: context-optimization
 description: This skill should be used when the user asks to "optimize context", "reduce token costs", "improve context efficiency", "implement KV-cache optimization", "partition context", or mentions context limits, observation masking, context budgeting, or extending effective context capacity.
 ---

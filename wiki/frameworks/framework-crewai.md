@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QTHVCX2TR4TSAP9NXE
 title: CrewAI
 type: framework
 vendor: CrewAI Inc.

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RH1F8F2YEWHSYAGACM
 title: "Architecture: overall-architecture/vault"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

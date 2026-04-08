@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QS8YW3M9H0WWX0PQV5
 title: AutoGen
 type: framework
 vendor: Microsoft Research

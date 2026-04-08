@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QGN219VVFN0GD8BJHG
 title: "LLM Wiki Pattern"
 type: concept
 tags: [knowledge-base, llm, architecture, obsidian, workflow]

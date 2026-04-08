@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R0DQ8B32F9W5P8YVEC
 title: "Milestone-Based Planning Pattern"
 type: pattern
 tags: [agents, orchestration, workflow, patterns, task-decomposition]

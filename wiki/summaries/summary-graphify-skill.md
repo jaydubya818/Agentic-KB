@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RBJPFN9TC4SK1PFHNK
 title: Graphify Skill
 type: summary
 source_file: raw/my-skills/graphify-skill.md

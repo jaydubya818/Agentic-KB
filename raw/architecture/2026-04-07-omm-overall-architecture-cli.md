@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RHTSY6KGBA7AHQY66C
 title: "Architecture: overall-architecture/cli"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

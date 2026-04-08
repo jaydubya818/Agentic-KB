@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2REVW24T22P89GTFFGH
 title: Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern) — Video
 type: summary
 source_file: raw/transcripts/karpathy-llm-wiki-video.md

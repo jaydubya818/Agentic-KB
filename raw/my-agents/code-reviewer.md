@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RPXD99E3Q2TEK6YB9X
 name: code-reviewer
 description: Expert code reviewer. Use after implementing a feature or before creating a PR. Reviews for correctness, security, performance, maintainability, and test coverage. Returns structured feedback with severity levels.
 model: claude-sonnet-4-5

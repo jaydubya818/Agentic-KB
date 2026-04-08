@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RAV3T55J7WA0PVDGX4
 title: "Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)"
 type: summary
 tags: [llm-wiki, knowledge-base, obsidian, claude-code, rag, token-efficiency, hot-cache]

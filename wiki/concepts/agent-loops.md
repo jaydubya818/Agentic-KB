@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2Q91YQFCJVKVB9QEAE7
 title: Agent Loops
 type: concept
 tags: [agentic, loops, react, cot, tool-use, control-flow]

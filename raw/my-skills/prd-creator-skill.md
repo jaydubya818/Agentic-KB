@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S61P5FW673FC7NKQ8X
 name: prd-creator
 description: Guides creation of comprehensive Product Requirement Documents (PRDs) for software projects through structured questioning and validation, then generates implementation task lists in JSON format. Use when users want to document a software idea, create specifications for development, plan a new application feature/bug, or break down requirements into actionable tasks. Transforms ideas into implementation-ready documents with verifiable pass criteria.
 ---

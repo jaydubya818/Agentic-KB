@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QAPZC7A0FQXF5YM9CE
 title: Agent Sandboxing
 type: concept
 tags: [agentic, safety, tools, execution, infrastructure]

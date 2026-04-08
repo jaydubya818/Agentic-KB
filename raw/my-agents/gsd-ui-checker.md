@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RWWA02RREHSKH1PK99
 name: gsd-ui-checker
 description: Validates UI-SPEC.md design contracts against 6 quality dimensions. Produces BLOCK/FLAG/PASS verdicts. Spawned by /gsd:ui-phase orchestrator.
 tools: Read, Bash, Glob, Grep

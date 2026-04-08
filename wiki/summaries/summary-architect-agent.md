@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RBB1EDXPBET2QCT1B2
 title: Architect Agent
 type: summary
 source_file: raw/my-agents/architect.md

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2Q9C1KXNR4GZEYYNDC3
 title: "Agent Failure Modes"
 type: concept
 tags: [agents, safety, architecture, workflow]

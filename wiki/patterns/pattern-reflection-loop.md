@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R1ESDG8SB2K82A0JG4
 title: Reflection Loop
 type: pattern
 category: prompt-engineering

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R6DTW56M9814E05E80
 title: Jay's Framework Selection Philosophy
 type: personal
 category: decision

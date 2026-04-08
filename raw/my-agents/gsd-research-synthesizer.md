@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RVJ7Z8BPFAH80ZE0Z0
 name: gsd-research-synthesizer
 description: Synthesizes research outputs from parallel researcher agents into SUMMARY.md. Spawned by /gsd:new-project after 4 researcher agents complete.
 tools: Read, Write, Bash

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RHX1W10NWSPRHW2RPS
 title: "Architecture: overall-architecture"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

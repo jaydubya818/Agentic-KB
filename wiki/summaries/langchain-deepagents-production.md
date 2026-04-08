@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RAEREB47C8YJDFXM8N
 title: LangChain Deep Agents — Going to Production
 type: summary
 tags: [langchain, langgraph, deployment, production, memory, multi-tenancy, orchestration, agentic, sandboxing, guardrails]

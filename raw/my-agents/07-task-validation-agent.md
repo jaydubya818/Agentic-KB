@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RN54CN68BCH4Z3QXGW
 name: Task Validation Agent
 description: Verifies a completed task against its acceptance criteria. Skeptical by default. Reads the task spec and the code output, checks for spec compliance and code quality, and outputs a PASS or FAIL with specific findings. Run after every Code Generation Agent run.
 ---

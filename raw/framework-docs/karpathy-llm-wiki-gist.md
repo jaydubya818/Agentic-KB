@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RJM0XV3537SWZRMYP3
 title: "Karpathy LLM Wiki Pattern — Gist"
 source: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
 author: Andrej Karpathy

@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RJPQKT9V8PT9B5DP30
 title: "Architecture: query-pipeline"
 source: oh-my-mermaid
 ingested: 2026-04-08T05:01:57Z

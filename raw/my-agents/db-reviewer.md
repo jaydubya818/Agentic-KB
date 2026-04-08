@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RPS3NHZS8G23105C9P
 name: db-reviewer
 description: Database specialist. Use for query optimization, schema design reviews, migration planning, and index analysis. Supports PostgreSQL, MySQL, SQLite, MongoDB, and Redis patterns.
 model: claude-sonnet-4-5

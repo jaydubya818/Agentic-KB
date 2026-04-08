@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QYX5X44TZ2BFBB04TY
 title: "Pattern: Deviation Rules"
 type: pattern
 tags: [agents, automation, workflow, patterns, guardrails]

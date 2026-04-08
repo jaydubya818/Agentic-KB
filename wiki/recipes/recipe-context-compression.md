@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2R71RRZHMC5GWYQDKEV
 title: Context Compression — Rolling Summary for Long Sessions
 type: recipe
 difficulty: intermediate

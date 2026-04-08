@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QMMPN6N0SWA7F2233R
 title: Tool Use
 type: concept
 tags: [agentic, tools, function-calling, json-schema, tool-design]

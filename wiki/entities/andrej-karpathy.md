@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QNRXD9HHWP1VAX9WWE
 title: "Andrej Karpathy"
 type: entity
 tags: [research, llm, knowledge-base, agents]

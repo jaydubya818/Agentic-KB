@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QK8EWFZS8YK1AW9C8J
 title: Task Decomposition
 type: concept
 tags: [agents, orchestration, workflow, architecture, patterns]

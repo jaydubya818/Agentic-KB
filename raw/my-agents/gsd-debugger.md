@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2RR802YRN72X6C91K4J
 name: gsd-debugger
 description: Investigates bugs using scientific method, manages debug sessions, handles checkpoints. Spawned by /gsd:debug orchestrator.
 tools: Read, Write, Edit, Bash, Grep, Glob, WebSearch

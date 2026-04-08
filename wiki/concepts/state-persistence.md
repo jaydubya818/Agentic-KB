@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QJWPX645TKMVM3JX4S
 title: State Persistence
 type: concept
 tags: [agentic, state, checkpointing, recovery, idempotency, resumption]

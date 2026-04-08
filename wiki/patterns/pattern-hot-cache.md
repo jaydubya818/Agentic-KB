@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QZZ9N5QJ97Y8YFZQYZ
 title: Hot Cache
 type: pattern
 category: memory

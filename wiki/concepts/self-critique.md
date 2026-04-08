@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QJRKRQ55825CAXHACJ
 title: Self-Critique
 type: concept
 tags: [agentic, reflection, self-correction, critique, revision, verification]

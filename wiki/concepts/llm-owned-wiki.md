@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QF4DBG83C73SQQCZAG
 title: LLM-Owned Wiki Pattern
 type: concept
 tags: [agentic, knowledge-base, architecture, karpathy]

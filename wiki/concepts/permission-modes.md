@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QJ3DMC9KKRR5QPZVQZ
 title: Permission Modes
 type: concept
 tags: [agentic, claude-code, permissions, safety, tool-access, authorization]

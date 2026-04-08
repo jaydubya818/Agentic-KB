@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QNR2RS6XJ1XA7ARBMH
 title: Anthropic
 type: entity
 category: company

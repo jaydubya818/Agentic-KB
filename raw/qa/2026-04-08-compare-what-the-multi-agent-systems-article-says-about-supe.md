@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S9BA6QZGK8CKBMPWHA
 title: "Q: Compare what the multi-agent-systems article says about supervisor-worker vs wha"
 source: qa
 date: 2026-04-08T05:39:07.799Z

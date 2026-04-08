@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2S96ZWYSGCX4471GYPD
 title: "Q: What is the best pattern for multi-agent orchestration in Claude Code?"
 source: qa
 date: 2026-04-08T05:42:58.955Z

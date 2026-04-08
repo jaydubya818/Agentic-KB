@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QS1B75173VF9RJV3HV
 title: BMAD Method
 type: framework
 vendor: Jay West (personal)

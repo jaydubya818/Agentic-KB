@@ -1,4 +1,5 @@
 ---
+id: 01KNNVX2QX5TBN1JT3AG2QQVKX
 title: "Pattern: Clarification Task"
 type: pattern
 tags: [agents, workflow, patterns, orchestration, architecture]
