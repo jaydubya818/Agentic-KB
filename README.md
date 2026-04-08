@@ -1,8 +1,29 @@
 # Agentic Engineering Knowledge Base
 
-> Jay West | Built: 2026-04-04 | Maintained by LLM + Human
+> Jay West | Built: 2026-04-04 | Last major update: 2026-04-07 | Maintained by LLM + Human
 
 A personal knowledge base for agentic AI engineering — 83+ articles covering concepts, patterns, frameworks, entities, recipes, and evaluations. Queryable via a Wikipedia-style web UI, CLI, and MCP server.
+
+Inspired by [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy) — raw sources are **compiled** by Claude into a persistent, cross-referenced wiki. Not RAG: the compile step is deliberate, auditable, and runs incrementally over a logged state.
+
+---
+
+## What's New — April 7, 2026
+
+Enterprise-scaling pass inspired by the Karpathy LLM-Wiki gist and patterns borrowed from [archivist-oss](https://github.com/NetworkBuild3r/archivist-oss):
+
+- 🔐 **Namespace-level RBAC** — `X-KB-Namespace` header or Bearer-token identity resolution, per-namespace read/write ACLs, audit log now records identity. See [`web/src/lib/rbac.ts`](web/src/lib/rbac.ts) and [`namespaces.example.json`](namespaces.example.json).
+- 📉 **Temporal decay + hotness ranking** — search results are now scored as `baseScore × decay(mtime) × hotness(audit hits)`. 180-day half-life, 30-day hotness window. See [`web/src/lib/ranking.ts`](web/src/lib/ranking.ts).
+- 🕸️ **Graph-based semantic search** — hybrid keyword + graph traversal over graphify's `graph.json` (222 nodes, 299 links, 12 hyperedges). 1-hop traversal + hyperedge expansion. See [`web/src/lib/graph-search.ts`](web/src/lib/graph-search.ts).
+- 🧠 **Karpathy compile pipeline** — `/api/compile` streams SSE progress while Claude batches raw docs into wiki pages using `wiki/schema.md` as system prompt. Incremental via `raw/.compiled-log.json`.
+- 🩺 **Wiki lint + scheduled daily health check** — `/api/lint` detects contradictions, orphans, stale pages, knowledge gaps → `wiki/lint-report.md`. Runs daily at 07:00 via a scheduled task.
+- 🪝 **Webhook ingest with auto-adapters** — `/api/ingest/webhook` accepts GitHub issues/PRs, Slack, and generic JSON. GitHub Actions workflow at `.github/workflows/kb-ingest.yml` auto-ingests merged PRs, closed issues, and pushed docs.
+- 🎥 **YouTube + Twitter ingest CLI** — `kb ingest-youtube <url>` (yt-dlp + SRT parsing) and `kb ingest-twitter <archive.zip>` (parses the Twitter/X data export).
+- 🏛️ **Interactive architecture viewer** — [oh-my-mermaid](https://github.com/oh-my-mermaid/oh-my-mermaid) integration. Clickable drill-down through 6 nested perspectives of the system. Linked from the wiki sidebar.
+- 🔗 **Sidebar Tools section** — one-click jump to the architecture viewer and to Obsidian's global graph view (via Advanced URI plugin).
+- 🧪 **10-stage RLM retrieval pipeline** — reference design documented in [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md). Temporal decay + hotness (stages 4–5) are live; stages 1–3 and 6–10 are the P2 build target.
+
+See [`ENTERPRISE_PLAN.md`](ENTERPRISE_PLAN.md) for the full P0–P3 roadmap.
 
 ---
 
@@ -12,6 +33,13 @@ A personal knowledge base for agentic AI engineering — 83+ articles covering c
 - [Web UI](#web-ui)
 - [CLI](#cli)
 - [MCP Server](#mcp-server)
+- [Compile Pipeline (Karpathy LLM Wiki)](#compile-pipeline-karpathy-llm-wiki)
+- [Enterprise Features](#enterprise-features)
+  - [Namespace RBAC](#namespace-rbac)
+  - [Temporal Decay + Hotness Ranking](#temporal-decay--hotness-ranking)
+  - [Webhook Ingest](#webhook-ingest)
+  - [Scheduled Lint](#scheduled-lint)
+- [Architecture Visualization (oh-my-mermaid)](#architecture-visualization-oh-my-mermaid)
 - [Private Wiki / PIN System](#private-wiki--pin-system)
 - [Multi-Vault Support](#multi-vault-support)
 - [Live Reload](#live-reload)
@@ -26,8 +54,11 @@ A personal knowledge base for agentic AI engineering — 83+ articles covering c
 ```bash
 # 1. Start the web UI
 cd /Users/jaywest/Agentic-KB/web
-npm run dev
-# → http://localhost:3000/wiki
+PORT=3002 npm run dev
+# → http://localhost:3002/wiki
+
+# 1b. (Optional) Architecture viewer
+omm view               # → http://localhost:4567
 
 # 2. Use the CLI
 kb search "multi-agent orchestration"
@@ -42,7 +73,9 @@ kb read concepts/tool-use
 
 ## Web UI
 
-Full Wikipedia-style knowledge base browser at `http://localhost:3000`.
+Full Wikipedia-style knowledge base browser at `http://localhost:3002`.
+
+**Sidebar Tools section** — one-click jump to the interactive architecture viewer (oh-my-mermaid) and to Obsidian's global graph view (via the Advanced URI plugin). Added 2026-04-07.
 
 ### Features
 
@@ -83,24 +116,32 @@ kb --help
 ### Commands
 
 ```bash
-# Search public articles
+# Search (hybrid keyword + graph)
 kb search "tool use patterns"
-
-# Search private articles (requires PRIVATE_PIN env var)
 kb search "my stack" --scope private
 kb search "everything" --scope all --limit 20
 
-# Ask a natural language question (streams answer)
+# Ask a natural language question (SSE-streams the answer)
 kb query "What is the ReAct pattern and when should I use it?"
 kb query "What's my preferred framework?" --scope private
 
-# Read a full article
+# Read / list
 kb read concepts/tool-use
 kb read patterns/pattern-supervisor-worker
-
-# List all articles in a section
 kb list concepts
 kb list personal
+
+# Karpathy compile pipeline (raw → Claude → wiki)
+kb compile                   # incremental: only new/changed raw docs
+kb compile --mode full       # recompile everything
+kb compile --validate        # two-model validation (P2 — coming soon)
+
+# Wiki health check
+kb lint                      # writes wiki/lint-report.md
+
+# Ingest external sources
+kb ingest-youtube <url>      # yt-dlp + SRT parse → raw/transcripts/
+kb ingest-twitter <x.zip>    # parses Twitter/X archive → raw/twitter/
 
 # Check pending ingestion queue
 kb pending
@@ -110,12 +151,12 @@ kb pending
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `KB_API_URL` | `http://localhost:3000` | Web server base URL |
+| `KB_API_URL` | `http://localhost:3002` | Web server base URL |
 | `PRIVATE_PIN` | _(empty)_ | PIN for private content access |
 
 Set in `~/.zshrc`:
 ```bash
-export KB_API_URL=http://localhost:3000
+export KB_API_URL=http://localhost:3002
 export PRIVATE_PIN=1124
 ```
 
@@ -134,7 +175,7 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
       "command": "node",
       "args": ["/Users/jaywest/Agentic-KB/mcp/server.js"],
       "env": {
-        "KB_API_URL": "http://localhost:3000",
+        "KB_API_URL": "http://localhost:3002",
         "PRIVATE_PIN": "1124"
       }
     }
@@ -144,15 +185,19 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
 
 > **Note:** Restart Claude Desktop after changing this config for env vars to take effect.
 
-### Tools
+### Tools (7 total)
 
 | Tool | Description |
 |------|-------------|
-| `search_wiki` | Search articles. Supports `scope` (public/private/all) and `pin` for private access |
+| `search_wiki` | Hybrid keyword + graph search. Supports `scope` (public/private/all) and `pin` |
 | `read_article` | Read full article by slug. Requires `pin` for private articles |
 | `read_index` | Read the master wiki index |
 | `list_articles` | List all articles in a section |
-| `query_wiki` | Ask a natural language question — AI synthesizes answer from relevant articles. Supports `scope` and `pin` |
+| `query_wiki` | Natural language Q&A — Claude synthesizes an answer from ranked wiki pages |
+| `compile_wiki` | Run the Karpathy compile pipeline — batches new/changed raw docs to Claude and writes wiki pages |
+| `lint_wiki` | Health check — returns contradictions, orphans, stale pages, and knowledge gaps |
+
+> **Note on long-running tools:** `compile_wiki` is a synchronous wrapper around an SSE endpoint and can time out on large batches. For full recompiles, use the web UI's `CompilePanel` (streams via `EventSource`, no timeout) or `kb compile --mode full`.
 
 ### Usage Examples
 
@@ -164,6 +209,167 @@ read_article(slug: "personal/my-notes", pin: "1124")
 query_wiki(question: "What is the best pattern for parallel tool execution?")
 query_wiki(question: "What frameworks do I prefer?", scope: "all", pin: "1124")
 ```
+
+---
+
+## Compile Pipeline (Karpathy LLM Wiki)
+
+The compile pipeline is the heart of the KB — it's what makes this *not* a RAG system. Raw markdown in `raw/` is batched, sent to Claude with `wiki/schema.md` as the system prompt, and written back as structured wiki pages. State is tracked in `raw/.compiled-log.json` so re-runs are incremental.
+
+### Running a compile
+
+**Web UI (recommended for full runs):** Open `http://localhost:3002/wiki` and click **Compile New** in the `CompilePanel`. Streams live progress via `EventSource` with no timeout. Use **Recompile All** to force a full rebuild.
+
+**CLI:** `kb compile` (incremental) or `kb compile --mode full`.
+
+**MCP:** `compile_wiki` tool — works for small incremental runs but may time out on large batches.
+
+### How it works
+
+1. `collectMd(raw/)` walks every markdown file under `raw/`
+2. `loadLog()` reads `raw/.compiled-log.json` — a map of `{relPath → {hash, compiledAt}}`
+3. Files whose hash changed (or are new) are selected for this run
+4. Each batch is sent to Claude with:
+   - System prompt: `wiki/schema.md` (directory routing, frontmatter schema, tag vocab)
+   - User content: the raw markdown
+5. Claude returns a JSON array of page ops (`{path, content}`)
+6. Each op is written to disk under `wiki/`
+7. `wiki/log.md` gets an append-only entry for the run
+8. `raw/.compiled-log.json` is updated so the next run skips unchanged files
+
+### Schema file
+
+`wiki/schema.md` is the system prompt Claude sees on every compile. It defines:
+- Directory routing rules (`concepts/`, `patterns/`, `frameworks/`, `entities/`, `recipes/`, `evaluations/`, `personal/`, `syntheses/`)
+- Full frontmatter schema (required + optional fields)
+- Per-type content guidelines
+- Tag vocabulary
+- Contradiction handling rules (never overwrite, always cross-link with dates)
+
+Edit `wiki/schema.md` to change how Claude organizes content in future compile runs.
+
+---
+
+## Enterprise Features
+
+Added 2026-04-07 as part of the enterprise-scaling pass.
+
+### Namespace RBAC
+
+Multi-tenant access control. Every write is scoped to a namespace. One KB, many teams / projects / agents.
+
+**Config file:** `namespaces.json` (copy from [`namespaces.example.json`](namespaces.example.json))
+
+```json
+{
+  "tokens": {
+    "sk-engineering-replace-me": "engineering",
+    "sk-product-replace-me": "product"
+  },
+  "namespaces": {
+    "engineering": { "read": ["*"], "write": ["engineering", "shared"] },
+    "product":     { "read": ["product", "shared"], "write": ["product"] },
+    "readonly":    { "read": ["*"], "write": [] },
+    "default":     { "read": ["*"], "write": ["*"] }
+  }
+}
+```
+
+**Identity resolution order:** `X-KB-Namespace` header → Bearer token lookup → `default` (back-compat).
+
+**File-level enforcement:** writes into `raw/webhooks/<namespace>/`. Reads are filtered via `filterReadable(paths, acl)` which infers each file's namespace from its path prefix.
+
+**Audit log:** every webhook write records `namespace` and `identitySource` (`header` | `token` | `default`) in `logs/audit.log`.
+
+> Deleting `namespaces.json` returns the system to open-access mode. No migration needed.
+
+### Temporal Decay + Hotness Ranking
+
+Search scores are multiplied by a ranking factor that blends recency and popularity:
+
+```
+finalScore = baseScore × decay(mtime) × hotness(audit hits)
+```
+
+- **decay(mtime)** — exponential with 180-day half-life, floored at 0.5. A doc touched 180 days ago scores at 0.5× of a freshly written one.
+- **hotness(path)** — parses `logs/audit.log` for `op:query` entries in the last 30 days, counts hits per file, log-scales: 1 hit → +0.1, 10 hits → +0.33, 100 hits → +0.5 cap. Cached for 60 seconds.
+
+Results include `baseScore`, `decay`, `hotness`, and `score` so the UI can show why a page ranked where it did.
+
+Implementation: [`web/src/lib/ranking.ts`](web/src/lib/ranking.ts). Wired into [`graph-search.ts`](web/src/lib/graph-search.ts).
+
+### Webhook Ingest
+
+`POST /api/ingest/webhook` accepts external payloads and writes them into `raw/webhooks/<namespace>/`.
+
+**Auth:** Bearer token (resolved via RBAC) or legacy `WEBHOOK_SECRET` env var.
+
+**Built-in adapters:**
+
+| Source | Detection | Filter |
+|--------|-----------|--------|
+| GitHub issues | `X-GitHub-Event: issues` header | Only on `action: closed` |
+| GitHub PRs | `X-GitHub-Event: pull_request` header | Only on merged PRs |
+| Slack | `token` or `channel_id` in body | Slash command or Events API |
+| Generic JSON | Fallback | Requires `title` + `content` fields |
+
+**GitHub Actions workflow:** [`.github/workflows/kb-ingest.yml`](.github/workflows/kb-ingest.yml) auto-ingests merged PRs, closed issues, and pushed `docs/**.md` on merge. Requires `KB_WEBHOOK_URL` and `KB_WEBHOOK_SECRET` repo secrets.
+
+### Scheduled Lint
+
+A scheduled task (`kb-daily-lint`) runs `POST /api/lint` every day at 07:00 local time.
+
+**What `/api/lint` checks:**
+- **Contradictions** — Claude-synthesized analysis of conflicting claims across wiki pages
+- **Orphans** — pages with zero inbound wiki-links
+- **Stale pages** — untouched for > 90 days
+- **Knowledge gaps** — raw docs with no corresponding compiled wiki page
+
+Results land in `wiki/lint-report.md`. The scheduled task alerts only on P0 contradictions or > 5 new orphans; otherwise a quiet `KB healthy` summary.
+
+See [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md) for how lint fits into the 10-stage retrieval pipeline reference design.
+
+---
+
+## Architecture Visualization (oh-my-mermaid)
+
+Interactive clickable architecture explorer with drill-down nested perspectives.
+
+### Setup
+
+```bash
+npm install -g oh-my-mermaid
+cd /Users/jaywest/Agentic-KB
+omm setup claude      # register /omm-scan skill with Claude Code
+```
+
+### View it
+
+```bash
+omm view              # launches http://localhost:4567
+```
+
+Or click **Architecture Diagram ↗** in the wiki sidebar Tools section.
+
+### Current perspectives
+
+`.omm/overall-architecture/` with 6 clickable child lenses:
+- `web-ui` — Next.js app components and routes
+- `cli` — `kb` command structure
+- `mcp-server` — 7 MCP tools
+- `api-routes` — all `/api/*` endpoints and their shared libs
+- `github-actions` — kb-ingest workflow
+- `vault` — raw/, wiki/, graphify-out, audit.log
+
+Plus three leaf perspectives: `compile-pipeline`, `query-pipeline`, `ingest-flow`.
+
+### Regenerating
+
+In Claude Code, run `/omm-scan` to have Claude re-analyze the codebase and refresh the diagrams, then run `./scripts/ingest-omm.sh` to sync the refreshed perspectives into `raw/architecture/` (ready for the next compile).
+
+> **Why kebab-case matters:** oh-my-mermaid drills into child elements by matching node IDs to child directory names. Always use kebab-case IDs (`web-ui`, `compile-pipeline`) in diagrams — uppercase or camelCase IDs break drill-down.
+
+See [`docs/OH_MY_MERMAID.md`](docs/OH_MY_MERMAID.md) for the full workflow.
 
 ---
 
@@ -244,16 +450,16 @@ Edit a markdown file in Obsidian → wiki updates in the browser automatically (
 
 ### Via browser
 
-1. Go to `http://localhost:3000/ingest`
+1. Go to `http://localhost:3002/ingest`
 2. Paste raw text or upload a file
 3. The AI processes it, extracts key knowledge, and writes a structured wiki article
-4. View the queue at `http://localhost:3000/process`
+4. View the queue at `http://localhost:3002/process`
 
 ### Via CLI (raw file drop)
 
 1. Drop file into `raw/` subdirectory (`papers/`, `transcripts/`, `framework-docs/`, `note/`, etc.)
 2. Check queue: `kb pending`
-3. Process via browser at `/process` or trigger: `curl -X POST http://localhost:3000/api/process/run-all`
+3. Process via browser at `/process` or trigger: `curl -X POST http://localhost:3002/api/process/run-all`
 
 ### Raw source directories
 
@@ -320,35 +526,70 @@ description: One-line summary
 
 ## Architecture
 
+For an **interactive** version of this diagram with clickable drill-down, click the **Architecture Diagram ↗** link in the wiki sidebar, or run `omm view` and open `http://localhost:4567`.
+
 ```
 Browser
   │
-  ├── /wiki/*           Next.js App Router (force-dynamic, SSR)
-  │     └── reads .md files directly via fs (no DB)
+  ├── /wiki/*                  Next.js App Router (force-dynamic, SSR)
+  │                            reads .md files via fs (no DB)
   │
-  ├── /api/search       Full-text search across vault markdown files
-  ├── /api/query        SSE-streamed AI answer synthesis (Anthropic SDK)
-  ├── /api/vaults       Reads obsidian.json → vault list with file counts
-  ├── /api/switch-vault Sets active_vault_path cookie
-  ├── /api/vault-structure Recursive folder walker for sidebar
-  ├── /api/vault-watch  SSE file watcher (fs.watch) for live reload
-  └── /api/process      Raw material ingestion pipeline
+  ├── /api/compile             Karpathy compile pipeline — SSE, Claude, incremental
+  ├── /api/query               Hybrid search + decay/hotness ranking + Claude synthesis
+  ├── /api/search              Keyword + graph-based hybrid search
+  ├── /api/lint                Wiki health check (contradictions, orphans, stale, gaps)
+  ├── /api/ingest              Raw material upload
+  ├── /api/ingest/webhook      External ingest with namespace RBAC
+  ├── /api/vaults              Reads obsidian.json → vault list
+  ├── /api/switch-vault        Sets active_vault_path cookie
+  ├── /api/vault-structure     Recursive folder walker for sidebar
+  ├── /api/vault-watch         SSE file watcher for live reload
+  └── /api/process             Legacy raw-material pipeline
+
+Shared libs (web/src/lib/)
+  ├── rbac.ts                  Namespace identity resolution + ACL enforcement
+  ├── ranking.ts               decayFactor + hotnessBoost + rankMultiplier
+  ├── graph-search.ts          Semantic search over graphify graph.json
+  ├── audit.ts                 Append-only JSONL at logs/audit.log
+  └── articles.ts              Article loaders, frontmatter parsing, vault resolution
 
 CLI (kb.js)
-  └── HTTP → web API (search, query)
-  └── Direct fs reads (read, list)
+  ├── HTTP → compile, lint, query, search (SSE-streaming where applicable)
+  ├── Direct fs reads (read, list, pending)
+  └── Local yt-dlp + parsers (ingest-youtube, ingest-twitter)
 
-MCP Server (server.js)
-  └── Direct fs reads for search/read (no HTTP roundtrip)
-  └── HTTP → /api/query for AI synthesis
+MCP Server (server.js, 7 tools)
+  ├── Direct fs reads: search_wiki, read_article, read_index, list_articles
+  └── HTTP: query_wiki, compile_wiki, lint_wiki
+
+GitHub Actions (kb-ingest.yml)
+  └── POST /api/ingest/webhook on merged PR / closed issue / pushed doc
+
+Scheduled task (kb-daily-lint)
+  └── POST /api/lint → wiki/lint-report.md (07:00 daily)
 ```
 
 ### Key design decisions
 
-- **No database** — all content is markdown files read directly with `fs.readFileSync`. Every page request reads fresh from disk. `force-dynamic` on all routes.
-- **Cookie-based vault selection** — `active_vault_path` cookie propagates through server components via Next.js `cookies()` API
+- **Compile, not retrieve** — Karpathy LLM-Wiki pattern. Raw docs are deliberately compiled into persistent wiki pages. Query-time retrieval operates over the compiled, curated wiki — not over raw chunks.
+- **No database** — all content is markdown read directly via `fs.readFileSync`. Every request reads fresh from disk. `force-dynamic` on all routes.
+- **Hybrid search, not pure vector** — keyword + graph traversal (over graphify's `graph.json`) + temporal decay + hotness. Vector store is an optional P2 add (see RLM pipeline doc).
+- **Fail-open RBAC** — no `namespaces.json` = open access (back-compat). Add the file to enforce per-namespace ACLs.
+- **Append-only audit log** — every `query`, `ingest`, `compile`, `lint`, `webhook` op writes a JSON line to `logs/audit.log`. Never truncated. Feeds the hotness ranking multiplier.
+- **Cookie-based vault selection** — `active_vault_path` cookie propagates through Next.js server components via `cookies()`
 - **PIN auth is server-enforced** — `PRIVATE_PIN` env var read server-side only; never exposed to client
-- **MCP is filesystem-first** — search and read go direct to disk (fast); only `query_wiki` calls the API for Anthropic synthesis
+- **MCP is filesystem-first** — `search_wiki`, `read_article`, `list_articles` go direct to disk. `query_wiki`, `compile_wiki`, `lint_wiki` call the HTTP API.
+
+### Reference documents
+
+| Doc | Purpose |
+|-----|---------|
+| [`ENTERPRISE_PLAN.md`](ENTERPRISE_PLAN.md) | P0–P3 enterprise scaling roadmap |
+| [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md) | 10-stage retrieval pipeline reference design |
+| [`docs/OH_MY_MERMAID.md`](docs/OH_MY_MERMAID.md) | Architecture visualization workflow |
+| [`wiki/schema.md`](wiki/schema.md) | Compile pipeline system prompt |
+| [`CLAUDE.md`](CLAUDE.md) | Agent workflows (EXPLORE, BRIEF, ingest conventions) |
+| [`namespaces.example.json`](namespaces.example.json) | RBAC config template |
 
 ---
 
