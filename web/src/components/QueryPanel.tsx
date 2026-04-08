@@ -24,6 +24,8 @@ interface QueryState {
   sources: string[]
   error: string | null
   isStreaming: boolean
+  saveStatus: 'idle' | 'saving' | 'saved' | 'error'
+  savedPath: string | null
 }
 
 function pathToSlug(filePath: string): string {
@@ -46,6 +48,8 @@ export default function QueryPanel({ isOpen, onClose }: QueryPanelProps): React.
     sources: [],
     error: null,
     isStreaming: false,
+    saveStatus: 'idle',
+    savedPath: null,
   })
   const abortRef = useRef<AbortController | null>(null)
   const answerRef = useRef<HTMLDivElement>(null)
@@ -80,6 +84,8 @@ export default function QueryPanel({ isOpen, onClose }: QueryPanelProps): React.
       sources: [],
       error: null,
       isStreaming: true,
+      saveStatus: 'idle',
+      savedPath: null,
     })
 
     try {
@@ -153,6 +159,32 @@ export default function QueryPanel({ isOpen, onClose }: QueryPanelProps): React.
       setState(prev => ({ ...prev, isStreaming: false }))
     }
   }, [])
+
+  const handleSaveToKB = useCallback(async (verified: boolean): Promise<void> => {
+    if (!state.answer || state.isStreaming) return
+    setState(prev => ({ ...prev, saveStatus: 'saving' }))
+    try {
+      const res = await fetch('/api/query/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: question.trim(),
+          answer: state.answer,
+          sources: state.sources,
+          verified,
+        }),
+      })
+      const data = await res.json() as { ok?: boolean; path?: string; error?: string }
+      if (!res.ok || !data.ok) {
+        setState(prev => ({ ...prev, saveStatus: 'error', error: data.error || 'Save failed' }))
+        return
+      }
+      setState(prev => ({ ...prev, saveStatus: 'saved', savedPath: data.path || null }))
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Save failed'
+      setState(prev => ({ ...prev, saveStatus: 'error', error: message }))
+    }
+  }, [question, state.answer, state.sources, state.isStreaming])
 
   const hasContent = state.thinking.length > 0 || state.reading.length > 0 || state.answer || state.error
 
@@ -372,6 +404,66 @@ export default function QueryPanel({ isOpen, onClose }: QueryPanelProps): React.
                   {state.answer}
                 </ReactMarkdown>
               </div>
+            </div>
+          )}
+
+          {/* Compounding Loop — save Q&A back to KB */}
+          {state.answer && !state.isStreaming && (
+            <div style={{
+              marginTop: '1rem',
+              padding: '0.6rem 0.75rem',
+              background: '#f1f8ff',
+              border: '1px solid #c8e1ff',
+              borderRadius: '3px',
+              fontSize: '0.75rem',
+            }}>
+              <div style={{ fontWeight: 600, marginBottom: '0.35rem', color: '#24292e' }}>
+                🔄 Compounding Loop
+              </div>
+              <div style={{ color: '#586069', marginBottom: '0.5rem' }}>
+                Save this Q&amp;A to the KB so the next compile folds it into the wiki. Every question makes the next answer better.
+              </div>
+              {state.saveStatus === 'saved' ? (
+                <div style={{ color: '#22863a', fontWeight: 500 }}>
+                  ✓ Saved to <code style={{ fontSize: '0.72rem' }}>{state.savedPath}</code> — run Compile to fold in.
+                </div>
+              ) : (
+                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    disabled={state.saveStatus === 'saving'}
+                    onClick={() => { void handleSaveToKB(false) }}
+                    style={{
+                      padding: '0.25rem 0.7rem',
+                      border: '1px solid #0645ad',
+                      borderRadius: '2px',
+                      background: '#fff',
+                      color: '#0645ad',
+                      cursor: state.saveStatus === 'saving' ? 'default' : 'pointer',
+                      fontSize: '0.75rem',
+                    }}
+                  >
+                    {state.saveStatus === 'saving' ? 'Saving…' : 'Save to KB'}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={state.saveStatus === 'saving'}
+                    onClick={() => { void handleSaveToKB(true) }}
+                    title="Mark as verified — higher weight during compile"
+                    style={{
+                      padding: '0.25rem 0.7rem',
+                      border: '1px solid #22863a',
+                      borderRadius: '2px',
+                      background: '#22863a',
+                      color: '#fff',
+                      cursor: state.saveStatus === 'saving' ? 'default' : 'pointer',
+                      fontSize: '0.75rem',
+                    }}
+                  >
+                    ✓ Save as Verified
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
