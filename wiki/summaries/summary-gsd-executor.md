@@ -14,7 +14,7 @@ confidence: high
 
 ## Key Purpose
 
-The executor is the worker agent in GSD's Plan-Execute-Verify triad. It receives a PLAN.md file and executes it atomically: each task gets its own commit, deviations are handled by predefined rules without asking the user, and every run ends with a SUMMARY.md and STATE.md update. Spawned by `/gsd:execute-phase`.
+The executor is the worker agent in GSD's [[pattern-plan-execute-verify]] triad. It receives a PLAN.md file and executes it atomically: each task gets its own commit, deviations are handled by predefined rules without asking the user, and every run ends with a SUMMARY.md and STATE.md update. Spawned by `/gsd:execute-phase`.
 
 ## Tools Granted
 

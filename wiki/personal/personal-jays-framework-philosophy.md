@@ -19,8 +19,8 @@ Jay runs three AI development frameworks in parallel. They are not interchangeab
 | Signal | Framework | Why |
 |--------|-----------|-----|
 | Experimental MVP, requirements will shift | **GSD** | Step-by-step, no lock-in, fast iteration |
-| Known spec, enterprise/client build, no surprises | **BMAD** | Pre-planned docs, sharded tasks, agents stay on rails |
-| Edge cases are costly (agentic, payments, auth) | **Superpowers** | TDD-first, iron-law verification, no completion without evidence |
+| Known spec, enterprise/client build, no surprises | **[[framework-bmad]]** | Pre-planned docs, sharded tasks, agents stay on rails |
+| Edge cases are costly (agentic, payments, auth) | **[[framework-superpowers]]** | TDD-first, iron-law verification, no completion without evidence |
 | Solo fix, refactor, or simple feature (<3 files) | **None** | Direct Claude is sufficient |
 
 ## Quick Decision Tree

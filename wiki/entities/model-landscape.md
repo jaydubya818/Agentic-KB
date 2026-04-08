@@ -18,10 +18,10 @@ The LLM model landscape as of April 2026. Frontier models change rapidly — tre
 
 | Model | Vendor | Context | Cost Tier | Extended Reasoning | Best For |
 |-------|--------|---------|-----------|-------------------|---------|
-| `claude-opus-4-6` | Anthropic | 200K | High | Extended thinking (explicit) | Architecture, security audits, complex reasoning |
+| `claude-opus-4-6` | [[anthropic]] | 200K | High | Extended thinking (explicit) | Architecture, security audits, complex reasoning |
 | `claude-sonnet-4-6` | Anthropic | 200K | Medium | No | Production default, orchestration, balanced |
 | `claude-haiku-4-5-20251001` | Anthropic | 200K | Low | No | Leaf tasks, classification, boilerplate |
-| `gpt-4o` | OpenAI | 128K | Medium-high | No | Multimodal, vision, broad ecosystem |
+| `gpt-4o` | [[openai]] | 128K | Medium-high | No | Multimodal, vision, broad ecosystem |
 | `o4` | OpenAI | 128K | Very High | Yes (o-series) | Math, programming competition, hard reasoning |
 | `o4-mini` | OpenAI | 128K | Medium | Yes (o-series) | Fast reasoning, code, cost-effective reasoning |
 | `o3` | OpenAI | 128K | High | Yes (o-series) | Complex reasoning, previous gen |
@@ -133,7 +133,7 @@ Cost pressure?
 | 200K | ~160K words; most codebases | Fit entire context without chunking |
 | 1M | ~800K words; entire monorepo | No chunking needed for almost anything |
 
-For multi-agent systems: sub-agents each get their own full context window. The orchestrator's window fills with sub-agent results. With 200K windows, orchestrators can receive results from 4-6 detailed sub-agents before hitting limits.
+For [[multi-agent-systems]]: sub-agents each get their own full context window. The orchestrator's window fills with sub-agent results. With 200K windows, orchestrators can receive results from 4-6 detailed sub-agents before hitting limits.
 
 ---
 

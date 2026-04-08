@@ -182,7 +182,7 @@ Partial credit is important for:
 
 ## Risks & Pitfalls
 
-- **Trajectory annotation cost**: Expert annotation per step is 5-10× more expensive than outcome annotation. Use LLM-as-judge for step scoring with human calibration.
+- **Trajectory annotation cost**: Expert annotation per step is 5-10× more expensive than outcome annotation. Use [[llm-as-judge]] for step scoring with human calibration.
 - **Ground truth plurality**: Many valid trajectories for any task. Anchoring to one canonical path will unfairly penalize valid alternatives.
 - **Trajectory length bias**: Longer trajectories aren't always worse (some tasks genuinely require more steps). Normalize by task complexity.
 - **Offline/online discrepancy**: Agents behave differently when they know they're being evaluated (if evaluation affects context). Blind evaluation is preferred.

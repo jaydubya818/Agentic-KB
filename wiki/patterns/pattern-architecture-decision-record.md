@@ -27,7 +27,7 @@ ADRs typically include:
 
 ## Example
 
-In the Oh My Mermaid (OMM) system, ADR files under `docs/` or tracked ADR paths trigger automatic ingestion via GitHub Actions. When a PR touching these files is merged, the workflow fires and posts to `/api/ingest/webhook`, keeping the KB in sync with architecture evolution.
+In the Oh My Mermaid ([[oh-my-mermaid]]) system, ADR files under `docs/` or tracked ADR paths trigger automatic ingestion via GitHub Actions. When a PR touching these files is merged, the workflow fires and posts to `/api/ingest/webhook`, keeping the KB in sync with architecture evolution.
 
 ### GitHub Actions Integration (OMM)
 

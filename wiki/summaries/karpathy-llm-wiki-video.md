@@ -19,10 +19,10 @@ related:
 status: stable
 ---
 
-# Summary: Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)
+# Summary: Building a Trading Strategies LLM Knowledge Base ([[andrej-karpathy]] Pattern)
 
 ## Source
-YouTube transcript from an unknown trading-focused channel explaining and demonstrating Andrej Karpathy's LLM wiki concept, applied to building a trading strategies knowledge base using Claude Code (opus 4.6) and Obsidian.
+YouTube transcript from an unknown trading-focused channel explaining and demonstrating [[andrej-karpathy]]'s [[llm-wiki]] concept, applied to building a trading strategies knowledge base using [[framework-claude-code]] (opus 4.6) and Obsidian.
 
 ## Core Argument
 RAG-based workflows discard knowledge after every query — nothing accumulates. The LLM-powered wiki pattern inverts this: the LLM builds a persistent, interlinked wiki *up front*, so knowledge compounds over time rather than being rediscovered from scratch on every query.

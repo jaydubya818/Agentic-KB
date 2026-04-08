@@ -2,26 +2,26 @@
 id: 01KNNVX2QWP0WXED8KH2N8K1JE
 ---
 
-# Hot Cache
+# [[pattern-hot-cache]]
 > ≤500 words | Most-used patterns and concepts | Updated: 2026-04-04
 
 ## Jay's Default Framework Decision
 - **Experimental MVP / evolving requirements** → GSD (`/gsd:new-project`)
-- **Locked spec / enterprise** → BMAD (`bmad-init` skill)
-- **High-stakes feature (auth, payments, agents)** → Superpowers (TDD + verification)
+- **Locked spec / enterprise** → [[framework-bmad]] (`bmad-init` skill)
+- **High-stakes feature (auth, payments, agents)** → [[framework-superpowers]] (TDD + verification)
 - **Simple task <3 files** → Direct Claude (no framework overhead)
 
 ## Most-Used Patterns
 
-**Fan-out Worker**: Spawn N parallel agents in a single message → aggregate results → return. Claude Code's Agent tool: multiple calls in one response = true parallelism. See [[summaries/summary-graphify-skill]] for working example.
+**[[pattern-[[pattern-fan-out-worker]]-worker]]**: Spawn N parallel agents in a single message → aggregate results → return. [[framework-claude-code]]'s Agent tool: multiple calls in one response = true parallelism. See [[summaries/summary-graphify-skill]] for working example.
 
-**Supervisor-Worker**: Central orchestrator routes to specialists. Orchestrator has full tools; workers have restricted sets. Beware the Telephone Game Problem: supervisors paraphrase sub-agent responses incorrectly. Fix with a `forward_message` tool that bypasses synthesis when the sub-agent's response is final.
+**[[pattern-supervisor-worker]]**: Central orchestrator routes to specialists. Orchestrator has full tools; workers have restricted sets. Beware the Telephone Game Problem: supervisors paraphrase sub-agent responses incorrectly. Fix with a `forward_message` tool that bypasses synthesis when the sub-agent's response is final.
 
-**Plan-Execute-Verify**: Separate planner, executor, verifier agents. Each has focused context; no single agent holds all three roles. GSD implementation: planner creates PLAN.md (2–3 tasks, ≤50% context), executor commits atomically per task, verifier does goal-backward analysis (trusts code, not SUMMARY claims). See [[summaries/summary-gsd-framework-skills]].
+**[[pattern-plan-execute-verify]]**: Separate planner, executor, verifier agents. Each has focused context; no single agent holds all three roles. GSD implementation: planner creates PLAN.md (2–3 tasks, ≤50% context), executor commits atomically per task, verifier does goal-backward analysis (trusts code, not SUMMARY claims). See [[summaries/summary-gsd-framework-skills]].
 
 **Hot Cache**: ≤500-word summary file. Read first on every query. Update when a pattern is queried 3+ times. Prevents re-reading full wiki on common queries. See [[summaries/summary-nate-herk-llm-wiki]] (95% token reduction with wiki vs. RAG).
 
-**Read-Before-Write**: Every mutating agent operation preceded by a read of current state. Prevents silent overwrites. GSD executor: `git status --short` before every commit staging.
+**[[pattern-read-before-write]]**: Every mutating agent operation preceded by a read of current state. Prevents silent overwrites. GSD executor: `git status --short` before every commit staging.
 
 **Write-and-Return**: Agents write analysis to disk, return only brief confirmation. Keeps orchestrator context clean. See [[summaries/summary-gsd-codebase-mapper]].
 
@@ -58,4 +58,4 @@ Key finding: Letta's filesystem agents scored 74% on LoCoMo using basic file ope
 - Skills: `~/.claude/skills/`
 - This KB: `/Users/jaywest/Agentic-KB/`
 - Raw sources: `/Users/jaywest/Agentic-KB/raw/`
-- LLM Wiki harness: `/Users/jaywest/My LLM Wiki/`
+- [[llm-wiki]] harness: `/Users/jaywest/My LLM Wiki/`

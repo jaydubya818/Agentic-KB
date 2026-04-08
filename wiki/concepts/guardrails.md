@@ -228,5 +228,5 @@ No layer is sufficient alone. A prompt injection that bypasses layer 2 should st
 ## Sources
 
 - NVIDIA NeMo Guardrails documentation (2024)
-- Anthropic Safety best practices (2025)
+- [[anthropic]] Safety best practices (2025)
 - Inan et al. "Llama Guard: LLM-based Input-Output Safeguard" (2023)

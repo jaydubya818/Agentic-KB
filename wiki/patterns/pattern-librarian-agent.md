@@ -42,7 +42,7 @@ RAG retrieves by semantic similarity, which can miss structural or relational co
 ## Known Uses
 - **Farzapedia** (Farzaa/@farzaa) — personal wiki over iMessages, Apple Notes, diary entries
 - **This KB** — WikiQuery agent reads `index.md` and navigates wiki articles agentically
-- **Karpathy LLM wiki pattern** — original inspiration cited by Farzaa
+- **[[andrej-karpathy]] [[llm-wiki]] pattern** — original inspiration cited by Farzaa
 
 ## Notes
 Also called the **WikiQuery pattern** or **index-navigation pattern**. Confidence is low — limited published detail on implementation specifics. Treat as a validated concept awaiting deeper documentation.

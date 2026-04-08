@@ -19,7 +19,7 @@ Enterprise AI governance is the set of policies, processes, roles, and technical
 As agentic systems move from experimentation into production, governance has emerged as the primary differentiator between organizations that can scale agent deployments safely and those that cannot.
 
 > "Governance is the new competitive moat. Open-source agent infrastructure lowers the build barrier. The differentiator is who can govern, audit, and scale agent behavior responsibly."
-> — Raj Kumar, AgentLayer (NVIDIA GTC 2026 commentary)
+> — Raj Kumar, [[agentlayer]] (NVIDIA GTC 2026 commentary)
 
 ## Why It Matters
 

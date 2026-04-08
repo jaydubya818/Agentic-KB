@@ -14,7 +14,7 @@ confidence: high
 
 ## Key Purpose
 
-Converts any folder of files (code, docs, papers, images) into a navigable knowledge graph with community detection. Produces three outputs: interactive HTML, GraphRAG-ready JSON, and a plain-language GRAPH_REPORT.md. Built around Karpathy's `/raw` folder workflow — drop anything in, get a structured graph showing what's connected.
+Converts any folder of files (code, docs, papers, images) into a navigable knowledge graph with community detection. Produces three outputs: interactive HTML, GraphRAG-ready JSON, and a plain-language GRAPH_REPORT.md. Built around [[andrej-karpathy]]'s `/raw` folder workflow — drop anything in, get a structured graph showing what's connected.
 
 Trigger: `/graphify`
 
@@ -49,7 +49,7 @@ If `total_words > 2,000,000` OR `total_files > 200`: show warning, list top 5 su
 
 ### Multiple Export Formats
 
-Default: interactive HTML + JSON. Optional flags: `--svg`, `--graphml` (Gephi/yEd), `--neo4j` (Cypher file), `--neo4j-push bolt://...` (direct push). MCP server mode: `--mcp` starts a stdio server exposing the graph as an agent tool.
+Default: interactive HTML + JSON. Optional flags: `--svg`, `--graphml` (Gephi/yEd), `--neo4j` (Cypher file), `--neo4j-push bolt://...` (direct push). [[mcp-ecosystem]] server mode: `--mcp` starts a stdio server exposing the graph as an agent tool.
 
 ### Query Interface
 
@@ -61,7 +61,7 @@ Beyond building the graph, graphify supports:
 
 ### Integration with Karpathy Pattern
 
-"graphify is built around Andrej Karpathy's /raw folder workflow." The CLAUDE.md for this KB explicitly calls for running graphify after major ingestion runs, with output to `wiki/syntheses/knowledge-graph-{date}.html`.
+"graphify is built around [[andrej-karpathy]]'s /raw folder workflow." The CLAUDE.md for this KB explicitly calls for running graphify after major ingestion runs, with output to `wiki/syntheses/knowledge-graph-{date}.html`.
 
 ## Prompt Patterns Observed
 

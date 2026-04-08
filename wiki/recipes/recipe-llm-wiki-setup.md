@@ -14,7 +14,7 @@ tags: [knowledge-base, wiki, karpathy, obsidian, mcp, memory]
 
 ## Goal
 
-Set up a personal LLM knowledge base (KB) in the style Andrej Karpathy popularized: plain-text markdown files, structured for LLM context injection, queryable via CLI and MCP. The KB grows as you learn; agents write to it; you query it for context in future sessions.
+Set up a personal LLM knowledge base (KB) in the style [[andrej-karpathy]] popularized: plain-text markdown files, structured for LLM context injection, queryable via CLI and [[mcp-ecosystem]]. The KB grows as you learn; agents write to it; you query it for context in future sessions.
 
 This is the same pattern that produced the Agentic-KB you're reading now. Time to first useful query: under an hour.
 
@@ -152,7 +152,7 @@ cat > wiki/index.md << 'EOF'
 EOF
 ```
 
-Create the hot cache:
+Create the [[pattern-hot-cache]]:
 ```bash
 cat > wiki/hot.md << 'EOF'
 # Hot Cache (≤500 words)
@@ -273,7 +273,7 @@ Configure Web Clipper to save to `raw/transcripts/` or `raw/framework-docs/` as 
 
 Take any article, video transcript, or doc you've read recently and run an ingest:
 
-Paste into Claude Code (with your wiki open):
+Paste into [[framework-claude-code]] (with your wiki open):
 ```
 Ingest this content into my wiki at ~/my-llm-wiki/.
 

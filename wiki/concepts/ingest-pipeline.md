@@ -15,7 +15,7 @@ source: architecture/2026-04-07-omm-ingest-flow.md
 
 ## Definition
 
-The ingest pipeline is the set of entry points and routing logic that brings raw content into a knowledge base vault before any compilation or structuring occurs. In the Oh My Mermaid (OMM) system, ingest and compile are explicitly decoupled: content is staged in `raw/` directories and only promoted to structured wiki pages during a separate, explicit compile run.
+The ingest pipeline is the set of entry points and routing logic that brings raw content into a knowledge base vault before any compilation or structuring occurs. In the Oh My Mermaid ([[oh-my-mermaid]]) system, ingest and compile are explicitly decoupled: content is staged in `raw/` directories and only promoted to structured wiki pages during a separate, explicit compile run.
 
 ## Why It Matters
 
@@ -48,7 +48,7 @@ A GitHub Action on a merged PR POSTs to `/api/ingest/webhook` with a namespace t
 
 - **Forgetting to trigger compile**: Content sits in `raw/` indefinitely if no compile run is scheduled or manually triggered.
 - **Namespace token leakage**: Webhook RBAC relies on namespace tokens — rotating and scoping these properly is essential for multi-tenant deployments.
-- **Source fan-out**: Adding new sources requires only a new entry point → `raw/<dir>/` mapping, not changes to the compile logic.
+- **Source [[pattern-fan-out-worker]]**: Adding new sources requires only a new entry point → `raw/<dir>/` mapping, not changes to the compile logic.
 
 ## See Also
 

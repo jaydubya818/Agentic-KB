@@ -23,7 +23,7 @@ updated: 2026-04-04
 
 An agent with access to `delete_file`, `send_email`, `deploy_production`, and `charge_payment` can accidentally or maliciously use any of these — even when the task at hand is simply "analyze this code." The agent's blast radius (maximum possible damage from a mistake) equals the set of all possible effects of all available tools. Broad tool sets create broad blast radius.
 
-The risk compounds in multi-agent systems: if Agent A with broad permissions delegates to Agent B, Agent B inherits the same blast radius even if it only needs read access.
+The risk compounds in [[multi-agent-systems]]: if Agent A with broad permissions delegates to Agent B, Agent B inherits the same blast radius even if it only needs read access.
 
 ---
 
@@ -153,7 +153,7 @@ async def request_additional_permission(
         return f"Permission denied. Proceed with alternative: {alternative}"
 ```
 
-### Claude Code Permission Modes Integration
+### [[framework-claude-code]] Permission Modes Integration
 
 In Claude Code, permission modes map to tool permission tiers:
 
@@ -283,5 +283,5 @@ Document the blast radius for each agent deployment. Alert when an agent's blast
 ## Sources
 
 - Saltzer & Schroeder "Protection of Information in Computer Systems" (1975) — Principle of Least Privilege
-- Anthropic Claude Code permission documentation (2025)
+- [[anthropic]] Claude Code permission documentation (2025)
 - OWASP "Security by Design Principles"

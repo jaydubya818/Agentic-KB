@@ -11,7 +11,7 @@ related: [llm-wiki, llm-wiki-pattern, llm-owned-wiki]
 source: architecture/2026-04-07-omm-compile-pipeline.md
 ---
 
-# LLM Wiki Compile Pipeline
+# [[llm-wiki]] Compile Pipeline
 
 ## Definition
 

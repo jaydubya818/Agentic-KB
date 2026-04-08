@@ -14,7 +14,7 @@ confidence: high
 
 ## Framework Overview
 
-GSD (Get Shit Done) is Jay's primary development framework for experimental MVPs and evolving-requirements projects. It is a multi-agent orchestration system built on Claude Code's Agent tool, organized around a repeating cycle:
+GSD (Get Shit Done) is Jay's primary development framework for experimental MVPs and evolving-requirements projects. It is a multi-agent orchestration system built on [[framework-claude-code]]'s Agent tool, organized around a repeating cycle:
 
 ```
 /gsd:discuss-phase → /gsd:plan-phase → /gsd:execute-phase → /gsd:verify-work
@@ -35,7 +35,7 @@ Each step spawns specialized sub-agents. The orchestrator commands are skills; t
 
 ## Architectural Patterns
 
-### Plan-Execute-Verify Triad
+### [[pattern-plan-execute-verify]] Triad
 
 The three-agent core:
 - **Planner:** Creates context-budget-aware PLAN.md files (2–3 tasks each, complete within 50% context)

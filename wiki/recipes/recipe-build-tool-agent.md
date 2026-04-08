@@ -14,9 +14,9 @@ tags: [tool-use, agent, typescript, anthropic, sdk]
 
 ## Goal
 
-Build a single Claude agent with custom tools from scratch using the Anthropic TypeScript SDK. The agent will have a tool loop, multiple tools, and proper termination handling. Result: a working CLI agent that can use tools to answer questions that require real-world data or computation.
+Build a single Claude agent with custom tools from scratch using the [[anthropic]] TypeScript SDK. The agent will have a tool loop, multiple tools, and proper termination handling. Result: a working CLI agent that can use tools to answer questions that require real-world data or computation.
 
-This is the foundational building block for all more complex multi-agent systems. Master this before attempting [[recipes/recipe-multi-agent-crew]].
+This is the foundational building block for all more complex [[multi-agent-systems]]. Master this before attempting [[recipes/recipe-multi-agent-crew]].
 
 ---
 

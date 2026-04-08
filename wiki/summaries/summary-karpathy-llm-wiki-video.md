@@ -10,11 +10,11 @@ key_concepts: [three-layer-architecture, ingest-query-lint, division-of-labor, c
 confidence: medium
 ---
 
-# Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern) — Video
+# Building a Trading Strategies LLM Knowledge Base ([[andrej-karpathy]] Pattern) — Video
 
 ## Key Purpose
 
-Video transcript explaining Karpathy's LLM wiki pattern and demonstrating a live build in Claude Code. Covers the core architecture, why it beats RAG, and the three core operations.
+Video transcript explaining Karpathy's [[llm-wiki]] pattern and demonstrating a live build in [[framework-claude-code]]. Covers the core architecture, why it beats RAG, and the three core operations.
 
 ## Core Thesis: Knowledge That Compounds
 

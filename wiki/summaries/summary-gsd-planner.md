@@ -18,7 +18,7 @@ Creates executable PLAN.md files that Claude executors can implement without int
 
 ## Tools Granted
 
-`Read, Write, Bash, Glob, Grep, WebFetch, mcp__context7__*` — Color: green. Has web access and Context7 MCP for library docs. This is notably richer than the executor's tool set — the planner needs to discover and research; the executor just needs to build.
+`Read, Write, Bash, Glob, Grep, WebFetch, mcp__context7__*` — Color: green. Has web access and Context7 [[mcp-ecosystem]] for library docs. This is notably richer than the executor's tool set — the planner needs to discover and research; the executor just needs to build.
 
 ## Design Decisions
 

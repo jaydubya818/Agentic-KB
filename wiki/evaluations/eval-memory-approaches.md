@@ -12,7 +12,7 @@ updated: 2026-04-04
 Four approaches to giving an agent persistent memory beyond its context window:
 
 1. **In-context** — put everything in the prompt; no external storage
-2. **File-based wiki** — plaintext markdown files (Karpathy pattern); query via grep/search
+2. **File-based wiki** — plaintext markdown files ([[andrej-karpathy]] pattern); query via grep/search
 3. **Vector DB (RAG)** — embeddings + vector search (Pinecone, Chroma, pgvector, etc.)
 4. **Knowledge Graph** — graph database with entity relationships (LightRAG, Neo4j, etc.)
 
@@ -66,7 +66,7 @@ Context: this is evaluated for the specific use case of a **personal engineering
 
 **File-based wiki (4)**: Create directories, write markdown files, write a simple grep-based query script. 30-60 minutes total setup. The CLAUDE.md schema is the hard part — once defined, adding content is trivial.
 
-**Vector DB (2)**: Requires choosing a vector DB (Chroma, Pinecone, pgvector), setting up an embedding model (OpenAI, Voyage, local), writing an ingestion pipeline, and a query pipeline. Minimum 4-8 hours; realistically a day for a production-quality setup. Maintenance (re-indexing, embedding drift) adds ongoing cost.
+**Vector DB (2)**: Requires choosing a vector DB (Chroma, Pinecone, pgvector), setting up an embedding model ([[openai]], Voyage, local), writing an ingestion pipeline, and a query pipeline. Minimum 4-8 hours; realistically a day for a production-quality setup. Maintenance (re-indexing, embedding drift) adds ongoing cost.
 
 **Knowledge Graph (1)**: Requires a graph database (Neo4j, or LightRAG which provides an abstraction layer), an entity extraction pipeline (LLM-based, error-prone), a relation extraction pipeline, and a Cypher/SPARQL query interface. Minimum 1-2 days; complex entity disambiguation is an unsolved problem in practice.
 
@@ -136,7 +136,7 @@ Context: this is evaluated for the specific use case of a **personal engineering
 
 **File-based wiki wins for Jay's use case.** It provides the best balance of setup simplicity, accuracy, transparency, write quality, and maintenance — all highly weighted criteria for a personal KB used by agents.
 
-The Karpathy pattern (this KB) is validated: plaintext markdown with structure, grep-based search, MCP server for agent access. The scale limit at 500+ pages is a real constraint but Jay is years away from it at current growth rates.
+The Karpathy pattern (this KB) is validated: plaintext markdown with structure, grep-based search, [[mcp-ecosystem]] server for agent access. The scale limit at 500+ pages is a real constraint but Jay is years away from it at current growth rates.
 
 **Vector DB** is the right answer when:
 - Scale exceeds hundreds of documents (thousands+)
@@ -164,7 +164,7 @@ The Karpathy pattern (this KB) is validated: plaintext markdown with structure, 
 Re-evaluate when:
 - Jay's wiki grows beyond 300 pages (keyword search starts producing noisy results)
 - LightRAG or a successor dramatically reduces knowledge graph setup cost
-- Anthropic releases a native memory feature in Claude Code that manages persistence automatically
+- [[anthropic]] releases a native memory feature in [[framework-claude-code]] that manages persistence automatically
 - A semantic search layer can be added to the file-based wiki with <1 hour setup (feasibility test)
 
 Target re-evaluation date: when wiki hits 200 pages (current: ~20 pages).

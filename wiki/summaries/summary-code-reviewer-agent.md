@@ -44,7 +44,7 @@ Reviews cover: Correctness, Security, Performance, Maintainability, Testing, Con
 
 "If the code is good, say so clearly." Explicit instruction to acknowledge good decisions. Reviews are "conversations, not attacks." The reviewer also has a `### ✅ What's Done Well` section in its output format. This prevents reviews from being purely negative.
 
-### Superpowers Reviewer: Plan-Alignment Focus
+### [[framework-superpowers]] Reviewer: Plan-Alignment Focus
 
 The superpowers version adds a dimension the simple reviewer lacks: does the implementation align with the planning document? It checks:
 - Were all planned features implemented?

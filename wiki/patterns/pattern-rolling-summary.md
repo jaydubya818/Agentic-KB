@@ -167,7 +167,7 @@ Why each section:
 
 ---
 
-## Multi-Level Rolling Summary
+## Multi-Level [[pattern-rolling-summary]]
 
 For very long sessions, compress summaries of summaries:
 

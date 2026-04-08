@@ -25,13 +25,13 @@ A high-level task decomposes into N subtasks that are:
 - Each takes non-trivial time (making serial execution inefficient)
 - Each requires full LLM reasoning (not just a lookup or computation)
 
-Running subtasks sequentially wastes the parallelism ceiling. A 10-subtask job taking 30s each runs in 300s serially but ~35s with proper fan-out (accounting for overhead).
+Running subtasks sequentially wastes the parallelism ceiling. A 10-subtask job taking 30s each runs in 300s serially but ~35s with proper [[pattern-fan-out-worker]] (accounting for overhead).
 
 ---
 
 ## Solution
 
-An orchestrator agent dispatches all N subtasks simultaneously via parallel tool calls (Claude Code's Agent tool supports this). Each worker agent receives a focused task with its own context. The orchestrator collects all results, validates them, and aggregates into a final output.
+An orchestrator agent dispatches all N subtasks simultaneously via parallel tool calls ([[framework-claude-code]]'s Agent tool supports this). Each worker agent receives a focused task with its own context. The orchestrator collects all results, validates them, and aggregates into a final output.
 
 ```
 Orchestrator → [Worker 1 | Worker 2 | Worker 3 | ... | Worker N] → Aggregation
@@ -221,5 +221,5 @@ async def retry_failed_workers(
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (2024)
+- [[anthropic]] "Building Effective Agents" (2024)
 - Claude Code Agent tool documentation

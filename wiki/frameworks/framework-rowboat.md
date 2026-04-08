@@ -14,7 +14,7 @@ jay_experience: limited
 
 ## Overview
 
-Rowboat is an agentic orchestration framework Jay runs locally at `~/.rowboat/`. It is a lighter footprint than OpenClaw — its directory structure shows `agents/`, `config/`, `knowledge/`, `runs/`, and `fireflies_transcripts/`. The model config reveals it runs `claude-sonnet-4-5` via Anthropic, with configuration files for scheduling, MCP servers, OAuth, models, and security.
+[[framework-rowboat]] is an agentic orchestration framework Jay runs locally at `~/.rowboat/`. It is a lighter footprint than [[framework-openclaw]] — its directory structure shows `agents/`, `config/`, `knowledge/`, `runs/`, and `fireflies_transcripts/`. The model config reveals it runs `claude-sonnet-4-5` via [[anthropic]], with configuration files for scheduling, [[mcp-ecosystem]] servers, OAuth, models, and security.
 
 Rowboat appears to be a separate agent runtime with its own agent definitions, persistent run tracking, a knowledge base, and integration with Fireflies (an AI meeting transcription service). This last detail is significant: `fireflies_transcripts/` suggests Rowboat processes meeting transcripts as inputs to agent workflows.
 
@@ -25,7 +25,7 @@ Rowboat appears to be a separate agent runtime with its own agent definitions, p
 ## Core Concepts
 
 ### Agent Definitions
-The `agents/` directory contains Rowboat's agent configurations. Unlike Claude Code's `.md`-format agent definitions, these may use JSON or YAML given the config-heavy nature of Rowboat's other files. [INFERRED]
+The `agents/` directory contains Rowboat's agent configurations. Unlike [[framework-claude-code]]'s `.md`-format agent definitions, these may use JSON or YAML given the config-heavy nature of Rowboat's other files. [INFERRED]
 
 ### Run Tracking
 The `runs/` directory suggests Rowboat maintains a log of past agent runs with their inputs, outputs, and status. This is closer to a job queue model than a conversational model. [INFERRED]

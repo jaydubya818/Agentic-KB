@@ -264,5 +264,5 @@ Synthesize a final summary of what was accomplished."""
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (2024)
-- LangGraph multi-agent supervisor pattern documentation
+- [[anthropic]] "Building Effective Agents" (2024)
+- [[framework-langgraph]] multi-agent supervisor pattern documentation

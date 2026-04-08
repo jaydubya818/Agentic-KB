@@ -22,13 +22,13 @@ status: stable
 
 ## TL;DR
 
-Multi-agent systems distribute work across multiple LLM instances that each own a focused context. The topology you choose — orchestrator-worker, peer-to-peer, hierarchical, or pipeline — determines your failure modes, parallelism ceiling, and debug complexity. Pick topology based on task structure, not preference.
+[[multi-agent-systems]] distribute work across multiple LLM instances that each own a focused context. The topology you choose — orchestrator-worker, peer-to-peer, hierarchical, or pipeline — determines your failure modes, parallelism ceiling, and debug complexity. Pick topology based on task structure, not preference.
 
 ---
 
 ## Definition
 
-A multi-agent system is a networked collection of LLM-backed agents where each agent has its own context window, tool set, and role. Agents coordinate to complete tasks that exceed what a single agent context can handle efficiently, either due to length, specialization, or parallelism requirements.
+A [[multi-agent-systems]] is a networked collection of LLM-backed agents where each agent has its own context window, tool set, and role. Agents coordinate to complete tasks that exceed what a single agent context can handle efficiently, either due to length, specialization, or parallelism requirements.
 
 ---
 
@@ -42,7 +42,7 @@ Agents exchange information through one of three mechanisms:
 
 **Message Passing** — Agents send structured messages to each other via a queue or direct call. Decouples agents temporally. Each agent processes its inbox and emits to an outbox. More complex but enables async execution.
 
-**Tool Calls** — One agent invokes another as a tool. The callee runs, returns output, and the caller continues. This is the Claude Code native model — the Agent tool is literally one agent calling another. Clean separation, synchronous by default.
+**Tool Calls** — One agent invokes another as a tool. The callee runs, returns output, and the caller continues. This is the [[framework-claude-code]] native model — the Agent tool is literally one agent calling another. Clean separation, synchronous by default.
 
 ### Topologies
 
@@ -152,6 +152,6 @@ The key advantage of multi-agent over single-agent: **blast radius containment**
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (Dec 2024)
-- LangGraph multi-agent architecture docs
-- OpenAI "Practices for Governing Agentic AI Systems" (2025)
+- [[anthropic]] "Building Effective Agents" (Dec 2024)
+- [[framework-langgraph]] multi-agent architecture docs
+- [[openai]] "Practices for Governing Agentic AI Systems" (2025)

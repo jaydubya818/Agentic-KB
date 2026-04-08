@@ -238,6 +238,6 @@ N/A — always design tool schemas carefully.
 
 ## Sources
 
-- Anthropic Tool Use best practices (2025)
-- OpenAI Function Calling documentation
+- [[anthropic]] Tool Use best practices (2025)
+- [[openai]] Function Calling documentation
 - Empirical studies on LLM tool use reliability (2024)

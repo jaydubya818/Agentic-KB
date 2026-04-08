@@ -257,5 +257,5 @@ def log_handoff(from_stage: str, to_stage: str, input_data: BaseModel, output_da
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (2024)
+- [[anthropic]] "Building Effective Agents" (2024)
 - Pydantic validation documentation

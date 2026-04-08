@@ -33,7 +33,7 @@ Self-critique is a feedback-driven revision pattern where an LLM's output is sub
 
 ## How It Works
 
-### Basic Reflection Loop
+### Basic [[pattern-reflection-loop]]
 
 ```
 Generate(task) → Critique(output) → Revise(output + critique) → [repeat or accept]
@@ -95,7 +95,7 @@ Generic critiques ("is this good?") produce generic revisions. Specific critique
 
 ### Constitutional AI Self-Critique
 
-Anthropic's Constitutional AI approach uses a set of principles as the critique framework. The model critiques its own response against each principle, then revises:
+[[anthropic]]'s Constitutional AI approach uses a set of principles as the critique framework. The model critiques its own response against each principle, then revises:
 
 ```
 Critique: Does this response help a potential bad actor? Consider...

@@ -17,14 +17,14 @@ confidence: high
 status: stable
 ---
 
-# Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code
+# Q&A: Best Pattern for Multi-Agent Orchestration in [[framework-claude-code]]
 
 ## Source
-User Q&A synthesized from wiki articles on multi-agent systems, Claude Code framework, and orchestration evaluation. Not independently verified against external sources.
+User Q&A synthesized from wiki articles on [[multi-agent-systems]], Claude Code framework, and orchestration evaluation. Not independently verified against external sources.
 
 ## Core Answer
 
-The **Fan-Out Orchestrator-Worker pattern using the `Agent` tool** is the best default pattern for multi-agent orchestration in Claude Code. Multiple `Agent` tool calls issued in a **single response turn** execute in parallel; separate turns are sequential — this is the most critical implementation detail.
+The **[[pattern-fan-out-worker]] Orchestrator-Worker pattern using the `Agent` tool** is the best default pattern for multi-agent orchestration in Claude Code. Multiple `Agent` tool calls issued in a **single response turn** execute in parallel; separate turns are sequential — this is the most critical implementation detail.
 
 ## The Three Sub-Patterns
 
@@ -40,7 +40,7 @@ The **Fan-Out Orchestrator-Worker pattern using the `Agent` tool** is the best d
 Sub-agents exist primarily to isolate context, not to anthropomorphize roles. The organizational metaphor (researcher/analyst/writer) is secondary to giving each agent a clean, focused context window.
 
 ### Native Parallelism Score
-Claude Code scores 5/5 on parallelization — highest among compared frameworks. LangGraph, AutoGen, and CrewAI score 3, 2, and 2 respectively.
+Claude Code scores 5/5 on parallelization — highest among compared frameworks. [[framework-langgraph]], [[framework-autogen]], and [[framework-crewai]] score 3, 2, and 2 respectively.
 
 ### Agent Tool Parameters That Matter
 - `tools: string[]` — restrict sub-agent capabilities
@@ -54,7 +54,7 @@ Claude Code scores 5/5 on parallelization — highest among compared frameworks.
 |---|---|
 | Single agent chat | 1× baseline |
 | Single agent with tools | ~4× baseline |
-| Multi-agent system | ~15× baseline |
+| [[multi-agent-systems]] | ~15× baseline |
 
 Upgrading to a better model often yields larger gains than doubling token budget. Use model tiering aggressively.
 

@@ -15,7 +15,7 @@ source: architecture/2026-04-07-omm-overall-architecture-vault.md
 
 ## Definition
 
-The **Vault** is the on-disk state of a compiled knowledge base (KB). It is the canonical, persistent representation of all source material, compiled wiki pages, semantic graph data, and audit logs. In the oh-my-mermaid (OMM) system, the vault is organised into four primary directories, each serving a distinct role in the compile pipeline.
+The **Vault** is the on-disk state of a compiled knowledge base (KB). It is the canonical, persistent representation of all source material, compiled wiki pages, semantic graph data, and audit logs. In the [[oh-my-mermaid]] ([[oh-my-mermaid]]) system, the vault is organised into four primary directories, each serving a distinct role in the compile pipeline.
 
 ## Structure
 

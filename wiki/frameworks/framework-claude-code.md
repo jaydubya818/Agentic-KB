@@ -14,7 +14,7 @@ jay_experience: extensive
 
 ## Overview
 
-Claude Code is Anthropic's official CLI for Claude — an agentic coding assistant that runs in your terminal and operates directly on your filesystem, git repos, and shell. It is not a chat wrapper; it is a fully autonomous coding agent with a rich tool set, spawnable sub-agents, hooks for custom automation, a skills system for slash commands, and a structured memory system. Jay uses Claude Code as his primary development environment and orchestration layer.
+[[framework-claude-code]] is [[anthropic]]'s official CLI for Claude — an agentic coding assistant that runs in your terminal and operates directly on your filesystem, git repos, and shell. It is not a chat wrapper; it is a fully autonomous coding agent with a rich tool set, spawnable sub-agents, hooks for custom automation, a skills system for slash commands, and a structured memory system. Jay uses Claude Code as his primary development environment and orchestration layer.
 
 Unlike IDEs with embedded AI (Copilot, Cursor), Claude Code is a headless agent you control via prompts, permission modes, CLAUDE.md instructions, and hooks — making it fully automatable and composable into larger agentic systems.
 
@@ -33,7 +33,7 @@ Claude Code has five distinct permission modes that determine what it can do wit
 | `plan` | Reads only; produces a plan, no execution |
 | `auto` | Fully autonomous; respects `settings.json` `allow`/`ask` arrays |
 
-In `settings.json`, the `permissions.allow` and `permissions.ask` arrays fine-tune what triggers confirmation even in non-bypass modes. Jay's config allows `Edit(*)`, `Write(*)`, `WebFetch`, and all MCP tools by default, but asks for `git`, `npm`, `rm`, destructive bash, and network tools.
+In `settings.json`, the `permissions.allow` and `permissions.ask` arrays fine-tune what triggers confirmation even in non-bypass modes. Jay's config allows `Edit(*)`, `Write(*)`, `WebFetch`, and all [[mcp-ecosystem]] tools by default, but asks for `git`, `npm`, `rm`, destructive bash, and network tools.
 
 ### Tools
 Claude Code exposes a built-in tool set to the model:
@@ -64,7 +64,7 @@ CLAUDE.md files define the operating instructions for Claude Code at three scope
 CLAUDE.md supports markdown headings, code blocks, tables, and conditional `<important if="...">` tags. Project-level files always override global ones; global fills gaps.
 
 ### Skills System — Slash Commands
-Skills are slash commands that expand to full structured prompts. They live as directories under `~/.claude/skills/<skill-name>/SKILL.md` and are invoked with `/skill-name` or scoped as `/namespace:command`. Jay has 29+ skills installed covering GSD, Superpowers, BMAD, graphify, context management, testing, and more.
+Skills are slash commands that expand to full structured prompts. They live as directories under `~/.claude/skills/<skill-name>/SKILL.md` and are invoked with `/skill-name` or scoped as `/namespace:command`. Jay has 29+ skills installed covering GSD, [[framework-superpowers]], [[framework-bmad]], graphify, context management, testing, and more.
 
 Skills can be chained, invoked from within sub-agent prompts, and passed as `skill:` parameters to Agent tool calls.
 
@@ -108,7 +108,7 @@ Agent tool parameters:
 - model: string           — override model for sub-agent
 ```
 
-Multiple Agent calls in a single response execute in parallel. This is the fan-out pattern — an orchestrator decomposes tasks, dispatches N parallel sub-agents, then collects and merges results. See [[patterns/pattern-fan-out-worker]].
+Multiple Agent calls in a single response execute in parallel. This is the [[pattern-fan-out-worker]] pattern — an orchestrator decomposes tasks, dispatches N parallel sub-agents, then collects and merges results. See [[patterns/pattern-fan-out-worker]].
 
 ---
 

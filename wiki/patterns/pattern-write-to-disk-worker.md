@@ -61,7 +61,7 @@ loads CONVENTIONS.md + STRUCTURE.md for a UI phase
 | Orchestrator context stays small | Output is not immediately available in-memory |
 | Artifacts are persistent and inspectable | File I/O adds latency vs. in-memory return |
 | Downstream agents load lazily, on demand | Stale documents can mislead if codebase changes |
-| Works well with parallel fan-out | Requires a shared filesystem or storage layer |
+| Works well with parallel [[pattern-fan-out-worker]] | Requires a shared filesystem or storage layer |
 | Output is human-readable and debuggable | Worker must handle its own write errors |
 
 ## Prescriptive Document Design

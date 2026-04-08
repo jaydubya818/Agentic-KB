@@ -18,7 +18,7 @@ All wiki pages live under `wiki/` and belong to exactly one section:
 |---|---|
 | `concepts/` | Definitions, mental models, foundational ideas (e.g. agent loop, context window, tool use) |
 | `patterns/` | Reusable design patterns for building agents (name with `pattern-` prefix) |
-| `frameworks/` | Third-party frameworks and tools (LangChain, CrewAI, AutoGen, etc.) |
+| `frameworks/` | Third-party frameworks and tools (LangChain, [[framework-crewai]], [[framework-autogen]], etc.) |
 | `entities/` | People, companies, projects, systems that recur across the KB |
 | `recipes/` | Step-by-step how-tos and implementation guides |
 | `evaluations/` | Benchmark results, model comparisons, capability assessments |

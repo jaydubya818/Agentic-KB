@@ -50,7 +50,7 @@ Each tenant may have distinct API keys or OAuth tokens for downstream services. 
 - **Assistant-scoped sandboxes** trade isolation for efficiency — conversations share one container; appropriate when tenants share the same assistant configuration
 
 ## Relevant Frameworks
-- **LangSmith Deployments / LangGraph** — native support for user/assistant/global memory scoping and authorization handlers
+- **LangSmith Deployments / [[framework-langgraph]]** — native support for user/assistant/global memory scoping and authorization handlers
 
 ## Open Questions
 - How to handle tenant-specific fine-tuned models within a shared deployment?

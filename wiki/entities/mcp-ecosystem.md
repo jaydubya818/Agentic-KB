@@ -10,11 +10,11 @@ confidence: high
 related: [framework-mcp.md, llm-owned-wiki.md, concepts/tool-use.md]
 ---
 
-# MCP Ecosystem
+# [[mcp-ecosystem]] Ecosystem
 
-The Model Context Protocol (MCP) ecosystem encompasses the servers, clients, and tooling that expose structured capabilities to LLM agents via JSON-RPC.
+The [[mcp-ecosystem]] (MCP) ecosystem encompasses the servers, clients, and tooling that expose structured capabilities to LLM agents via JSON-RPC.
 
-## Oh-My-Mermaid MCP Server
+## [[oh-my-mermaid]] MCP Server
 
 The `oh-my-mermaid` project includes an MCP server at `mcp/server.js` that exposes **7 tools** so Claude (or any MCP-compatible client) can directly interact with the knowledge base:
 

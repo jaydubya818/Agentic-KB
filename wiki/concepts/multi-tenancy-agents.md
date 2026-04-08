@@ -49,7 +49,7 @@ Memory must be scoped appropriately to enforce user isolation:
 
 > ⚠️ **Prompt Injection Risk**: Shared or global memory is a prompt injection vector. Enforce read-only access at the storage layer where possible.
 
-## Example (LangGraph)
+## Example ([[framework-langgraph]])
 
 LangGraph's production deployment model illustrates these patterns concretely:
 - **Threads** are user-scoped conversations with isolated message history

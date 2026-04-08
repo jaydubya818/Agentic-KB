@@ -22,8 +22,8 @@ id: 01KNNVX2QXF6XDE9MRJN09WCEF
 - `concepts/multi-tenancy.md` — Multi-Tenancy in Agentic Systems
 - `concepts/sandboxed-execution.md` — Sandboxed Execution Environments
 - `concepts/vault-architecture.md` — Vault Architecture
-- `entities/agentlayer.md` — AgentLayer
-- `entities/oh-my-mermaid.md` — Oh My Mermaid (OMM) — KB CLI
+- `entities/agentlayer.md` — [[agentlayer]]
+- `entities/oh-my-mermaid.md` — Oh My Mermaid ([[oh-my-mermaid]]) — KB CLI
 - `hot.md` — hot
 - `patterns/pattern-code-review-agent.md` — Code Review Agent Pattern
 - `patterns/pattern-context-manager-agent.md` — Context Manager Agent Pattern
@@ -44,8 +44,8 @@ id: 01KNNVX2QXF6XDE9MRJN09WCEF
 - `personal/private-test-note.md` — Private Test Note
 - `schema.md` — schema
 - `summaries/19-oss-agent-repos-curated.md` — 19 Open-Source GitHub Repos for AI Agents — Curated List
-- `summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl.md` — Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code
-- `summaries/andrej-karpathy-thinks-rag-is-broken.md` — Andrej Karpathy Thinks RAG Is Broken
+- `summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl.md` — Q&A: Best Pattern for Multi-Agent Orchestration in [[framework-claude-code]]
+- `summaries/andrej-karpathy-thinks-rag-is-broken.md` — [[andrej-karpathy]] Thinks RAG Is Broken
 - `summaries/farzapedia-personal-wiki.md` — Farzapedia Personal Wiki
 - `summaries/langchain-deepagents-production.md` — LangChain Deep Agents — Going to Production
 - `summaries/nvidia-gtc-2026-agentic-enterprise.md` — Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026

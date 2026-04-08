@@ -17,7 +17,7 @@ A private test article used to verify the PIN lock system works end-to-end acros
 ## Key Points
 - Tests PIN entry via the web UI lock button
 - Tests searching for private articles with `scope=private`
-- Tests MCP `search_wiki` with `scope=private` and PIN
+- Tests [[mcp-ecosystem]] `search_wiki` with `scope=private` and PIN
 - Tests CLI `kb search --scope private`
 
 ## Notes

@@ -258,5 +258,5 @@ The verifier's job is to be the skeptic — assume the executor may have missed 
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (2024)
+- [[anthropic]] "Building Effective Agents" (2024)
 - GSD framework plan-phase / execute-phase / verify-work workflow

@@ -15,10 +15,10 @@ related:
   - "[[concepts/multi-agent-systems]]"
 ---
 
-# Karpathy LLM Wiki Pattern — Gist
+# [[andrej-karpathy]] [[llm-wiki]] Pattern — Gist
 
 ## One-Line Summary
-Andrej Karpathy's minimal spec for an LLM-maintained knowledge base: immutable raw sources, LLM-owned wiki markdown, and a schema file (CLAUDE.md) that co-evolves with the user.
+[[andrej-karpathy]]'s minimal spec for an LLM-maintained knowledge base: immutable raw sources, LLM-owned wiki markdown, and a schema file (CLAUDE.md) that co-evolves with the user.
 
 ## Core Architecture
 

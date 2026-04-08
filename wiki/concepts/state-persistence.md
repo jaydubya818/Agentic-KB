@@ -145,7 +145,7 @@ async def execute_action(action: PlannedAction, checkpoint: AgentCheckpoint):
 | Redis | Fast ephemeral state | Low latency | Data loss on restart |
 | S3/object storage | Large artifacts | Cheap, durable | Not queryable |
 
-For Claude Code agents: local JSON files work for most cases. For production multi-agent systems: a proper DB with transaction support.
+For [[framework-claude-code]] agents: local JSON files work for most cases. For production [[multi-agent-systems]]: a proper DB with transaction support.
 
 ### File Format for Local State
 
@@ -214,6 +214,6 @@ For Claude Code agents: local JSON files work for most cases. For production mul
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (2024)
+- [[anthropic]] "Building Effective Agents" (2024)
 - Distributed systems checkpoint-restart literature
-- LangGraph state management documentation
+- [[framework-langgraph]] state management documentation

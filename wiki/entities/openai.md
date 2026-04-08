@@ -10,7 +10,7 @@ updated: 2026-04-04
 
 ## Overview
 
-OpenAI is the company behind the GPT model family, ChatGPT, the OpenAI API, and DALL-E. Founded in 2015 as a non-profit by Sam Altman, Elon Musk, Greg Brockman, and others (including Dario and Daniela Amodei, who left to found Anthropic). Converted to "capped-profit" structure in 2019. OpenAI is the default reference point for LLM capability — when researchers compare models, GPT-4 or its successor is usually the benchmark.
+[[openai]] is the company behind the GPT model family, ChatGPT, the OpenAI API, and DALL-E. Founded in 2015 as a non-profit by Sam Altman, Elon Musk, Greg Brockman, and others (including Dario and Daniela Amodei, who left to found [[anthropic]]). Converted to "capped-profit" structure in 2019. OpenAI is the default reference point for LLM capability — when researchers compare models, GPT-4 or its successor is usually the benchmark.
 
 OpenAI is not Jay's primary vendor (Jay is Anthropic-first), but it is the dominant ecosystem in terms of third-party tooling, and its function calling format and Assistants API are widely referenced in the agentic AI community.
 
@@ -76,7 +76,7 @@ Difference from Claude: OpenAI uses `parameters` (OpenAPI-style), Claude uses `i
 
 ## Assistants API
 
-The Assistants API is OpenAI's managed agent runtime — analogous to what Claude Code provides but as an API rather than a CLI. Core primitives:
+The Assistants API is OpenAI's managed agent runtime — analogous to what [[framework-claude-code]] provides but as an API rather than a CLI. Core primitives:
 
 **Thread**: A persistent conversation with a unique ID. Store messages, tool results, and files. Threads persist server-side indefinitely.
 
@@ -141,7 +141,7 @@ Note: fine-tuning rarely outperforms good prompting for knowledge tasks; excels 
 | Multimodal | Audio (Realtime API), vision, image gen | Vision; no audio/image gen |
 | Reasoning model | o3/o4 (separate model series) | Extended thinking (Opus, inline mode) |
 | Agent runtime | Assistants API (server-managed) | Claude Code (CLI, user-run) |
-| Tool protocol | Function calling (proprietary) | MCP (open standard) |
+| Tool protocol | Function calling (proprietary) | [[mcp-ecosystem]] (open standard) |
 | Fine-tuning | Public API for GPT-4o-mini | Enterprise only |
 | Safety approach | Varies (board history) | Constitutional AI, RSP |
 | Context window | 128K (GPT-4o), growing | 200K all tiers |
@@ -155,9 +155,9 @@ For Jay's stack specifically: Claude Code's superiority as a development environ
 
 - **[[entities/anthropic]]**: primary competitor; model comparison
 - **[[entities/model-landscape]]**: full model comparison table
-- **[[frameworks/framework-langgraph]]**: LangGraph uses `ChatOpenAI` or `ChatAnthropic` interchangeably
-- **[[frameworks/framework-autogen]]**: AutoGen supports both providers via LiteLLM
-- **[[frameworks/framework-crewai]]**: CrewAI supports both via LiteLLM
+- **[[frameworks/framework-langgraph]]**: [[framework-langgraph]] uses `ChatOpenAI` or `ChatAnthropic` interchangeably
+- **[[frameworks/framework-autogen]]**: [[framework-autogen]] supports both providers via LiteLLM
+- **[[frameworks/framework-crewai]]**: [[framework-crewai]] supports both via LiteLLM
 
 ---
 

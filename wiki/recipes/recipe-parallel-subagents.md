@@ -14,12 +14,12 @@ tags: [multi-agent, parallelism, fan-out, orchestration, claude-code]
 
 ## Goal
 
-Implement the fan-out pattern: spawn N agents in parallel for independent tasks, collect all results, handle partial failures gracefully, and merge into a final output. This is the primary mechanism for achieving real speedup in multi-agent systems.
+Implement the [[pattern-fan-out-worker]] pattern: spawn N agents in parallel for independent tasks, collect all results, handle partial failures gracefully, and merge into a final output. This is the primary mechanism for achieving real speedup in [[multi-agent-systems]].
 
 See [[patterns/pattern-fan-out-worker]] for the pattern definition.
 
 Two paths:
-1. **Claude Code native** (Agent tool) — simplest, no code needed
+1. **[[framework-claude-code]] native** (Agent tool) — simplest, no code needed
 2. **TypeScript SDK** — programmatic control for production systems
 
 ---

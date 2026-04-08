@@ -159,7 +159,7 @@ Few-shot is the right default for most agentic tasks. Fine-tuning pays off when:
 
 - Task has a non-obvious format that zero-shot produces inconsistently
 - Domain is specialized enough that zero-shot examples may be off-pattern
-- CoT examples are needed to establish the expected reasoning style
+- [[chain-of-thought]] examples are needed to establish the expected reasoning style
 - Output format must be highly controlled (parsing-dependent downstream)
 
 ## Risks & Pitfalls

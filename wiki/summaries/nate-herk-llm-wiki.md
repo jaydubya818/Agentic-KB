@@ -17,10 +17,10 @@ related:
 # Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)
 
 ## Source
-YouTube video by Nate Herk | AI Automation, covering Andrej Karpathy's viral post about LLM wikis as a replacement for or complement to traditional RAG.
+YouTube video by Nate Herk | AI Automation, covering [[andrej-karpathy]]'s viral post about LLM wikis as a replacement for or complement to traditional RAG.
 
 ## Core Thesis
-A plain folder of markdown files — organized as a wiki with an index, hot cache, and CLAUDE.md — is sufficient infrastructure for an LLM knowledge base at hundreds-of-pages scale. No vector database or embeddings required. Token efficiency gains can be dramatic (one user reduced token usage by 95%).
+A plain folder of markdown files — organized as a wiki with an index, [[pattern-hot-cache]], and CLAUDE.md — is sufficient infrastructure for an LLM knowledge base at hundreds-of-pages scale. No vector database or embeddings required. Token efficiency gains can be dramatic (one user reduced token usage by 95%).
 
 ## Key Concepts
 
@@ -37,7 +37,7 @@ A ~500-character snippet of most-recent or most-used context. Reduces the need t
 ### Agent Retrieval Pattern
 Connect an executive assistant agent by pointing its CLAUDE.md at the wiki path. Retrieval order: `hot.md` → `index.md` → domain subindex → targeted page search. Instruction pattern: "Don't read from the wiki unless you actually need it."
 
-### LLM Wiki vs Traditional RAG
+### [[llm-wiki]] vs Traditional RAG
 
 | Dimension | LLM Wiki | Traditional RAG |
 |-----------|----------|-----------------|
@@ -59,7 +59,7 @@ Wiki graph approach works well up to hundreds of pages with good indexes. Beyond
 - Obsidian Web Clipper used for ingesting web articles into `raw/`
 - Ingesting one long article (AI2027) produced 23 wiki pages in ~10 minutes
 - Batch ingest of 36 YouTube videos took ~14 minutes
-- Karpathy's original gist was intentionally vague to let builders customize
+- [[andrej-karpathy]]'s original gist was intentionally vague to let builders customize
 
 ## Relevance to This KB
 This source directly describes the architecture pattern this KB implements. The vault structure, hot cache, CLAUDE.md workflow, and lint cycle are all first-class features of the current setup.

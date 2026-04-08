@@ -11,10 +11,10 @@ updated: 2026-04-04
 
 Five approaches to multi-agent orchestration, evaluated from Jay's perspective as a TypeScript-first agentic AI engineer:
 
-1. **GSD** — Jay's custom framework on Claude Code (v1.28.0)
-2. **LangGraph** — Graph-based orchestration from LangChain (Python)
-3. **AutoGen** — Conversational multi-agent from Microsoft (Python)
-4. **CrewAI** — Role-based crew orchestration (Python)
+1. **GSD** — Jay's custom framework on [[framework-claude-code]] (v1.28.0)
+2. **[[framework-langgraph]]** — Graph-based orchestration from LangChain (Python)
+3. **[[framework-autogen]]** — Conversational multi-agent from Microsoft (Python)
+4. **[[framework-crewai]]** — Role-based crew orchestration (Python)
 5. **Raw Claude Code Agents** — Using Claude Code's Agent tool directly without a framework
 
 ---
@@ -23,7 +23,7 @@ Five approaches to multi-agent orchestration, evaluated from Jay's perspective a
 
 | Criterion | Definition | Weight |
 |-----------|------------|--------|
-| **Learning curve** | Time to first working multi-agent system | Medium |
+| **Learning curve** | Time to first working [[multi-agent-systems]] | Medium |
 | **Multi-agent support** | Quality of native multi-agent primitives | High |
 | **State management** | How well it handles state across agent turns | High |
 | **Parallelization** | Native support for parallel agent execution | High |

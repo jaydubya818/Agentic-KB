@@ -11,13 +11,13 @@ related: [concepts/llm-wiki, patterns/pattern-llm-wiki, entities/openai]
 source: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
 ---
 
-# Andrej Karpathy
+# [[andrej-karpathy]]
 
-AI researcher and educator. Formerly at OpenAI (co-founder) and Tesla (Director of AI). Known for influential educational content on deep learning and LLMs.
+AI researcher and educator. Formerly at [[openai]] (co-founder) and Tesla (Director of AI). Known for influential educational content on deep learning and LLMs.
 
 ## Relevance to Agentic KB
 
-Karpathy authored the **LLM Wiki Pattern** — a lightweight architecture for LLM-maintained knowledge bases. The pattern has been widely adopted for personal and enterprise knowledge management.
+[[andrej-karpathy]] authored the **[[llm-wiki]] Pattern** — a lightweight architecture for LLM-maintained knowledge bases. The pattern has been widely adopted for personal and enterprise knowledge management.
 
 ### LLM Wiki Pattern (Gist)
 

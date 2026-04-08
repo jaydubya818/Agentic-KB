@@ -69,7 +69,7 @@ After outputting, the agent signals the next stage:
 |---|---|
 | Executor agent never has to make scope decisions | Adds a pipeline stage and latency |
 | Verification is tractable — each task has specific acceptance criteria | Requires a well-formed architecture output upstream |
-| Enables fan-out: independent tasks can parallelise | Ambiguous specs surface as clarification tasks, which slow throughput |
+| Enables [[pattern-fan-out-worker]]: independent tasks can parallelise | Ambiguous specs surface as clarification tasks, which slow throughput |
 | Scope creep is explicit — "What NOT to do" is first-class | Over-decomposition can produce trivial tasks with unnecessary overhead |
 
 ## Key Rules

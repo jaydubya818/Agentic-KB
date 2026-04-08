@@ -22,7 +22,7 @@ confidence: medium
 # Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026
 
 ## Source
-LinkedIn post by Raj Kumar, Head of AI Strategy at AgentLayer, captured April 6, 2026. Related site: https://agentlayer-ai.netlify.app/. **Note:** This is a vendor-authored LinkedIn post with marketing intent; statistics (86%, 72%, $52B) are AgentLayer-sourced and unverified.
+LinkedIn post by Raj Kumar, Head of AI Strategy at [[agentlayer]], captured April 6, 2026. Related site: https://agentlayer-ai.netlify.app/. **Note:** This is a vendor-authored LinkedIn post with marketing intent; statistics (86%, 72%, $52B) are AgentLayer-sourced and unverified.
 
 ## Core Claim
 NVIDIA GTC 2026 marked the formal start of the "Agentic Enterprise" era. NVIDIA launched an open-source Agent Toolkit with Adobe, Salesforce, SAP, and 13 other platform partners. Jensen Huang framed it as employees being "supercharged by teams of frontier, specialized and custom-built agents."

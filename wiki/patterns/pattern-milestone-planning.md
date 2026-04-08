@@ -76,7 +76,7 @@ Milestone 1: Skeleton end-to-end
 ## Related Patterns
 
 - [Task Decomposition](../concepts/task-decomposition.md) — conceptual foundation for breaking work into atomic units
-- [Fan-Out Worker Pattern](../patterns/pattern-fan-out-worker.md) — once a plan exists, fan-out execution can parallelise independent tasks
+- [Fan-Out Worker Pattern](../patterns/pattern-fan-out-worker.md) — once a plan exists, [[pattern-fan-out-worker]] execution can parallelise independent tasks
 - [Pipeline Pattern](../patterns/pattern-pipeline.md) — the planning agent itself fits within a sequential agent pipeline
 - [Human-in-the-Loop](../concepts/human-in-the-loop.md) — milestones are natural review gates for human oversight
 

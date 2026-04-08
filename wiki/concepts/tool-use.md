@@ -203,6 +203,6 @@ But composition reduces composability — the LLM can't see inside the composed 
 
 ## Sources
 
-- Anthropic Tool Use documentation (2025)
+- [[anthropic]] Tool Use documentation (2025)
 - Schick et al. "Toolformer: Language Models Can Teach Themselves to Use Tools" (2023)
-- OpenAI Function Calling documentation
+- [[openai]] Function Calling documentation

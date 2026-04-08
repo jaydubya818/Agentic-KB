@@ -216,7 +216,7 @@ Without idempotent tools, that 64% has compounding effects. With idempotent tool
 
 - Any tool that creates records, sends messages, or triggers external effects
 - Any tool called in a retry loop
-- Any tool in a multi-agent system where duplicate calls are possible
+- Any tool in a [[multi-agent-systems]] where duplicate calls are possible
 - All payment, email, notification, and deployment operations (non-negotiable)
 
 ## When NOT To Use
@@ -247,5 +247,5 @@ Without idempotent tools, that 64% has compounding effects. With idempotent tool
 ## Sources
 
 - REST API idempotency patterns (Stripe, AWS documentation)
-- Anthropic Tool Use reliability best practices
+- [[anthropic]] Tool Use reliability best practices
 - Richardson & Ruby "RESTful Web Services"

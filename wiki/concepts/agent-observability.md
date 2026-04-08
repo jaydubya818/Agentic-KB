@@ -38,11 +38,11 @@ Identifying where and why agents fail — tool errors, hallucinated tool calls, 
 Breaking down end-to-end latency by component (LLM inference, tool execution, memory retrieval) to identify bottlenecks.
 
 ### 5. Evaluation Hooks
-Capturing ground-truth inputs/outputs for offline evaluation; feeding into LLM-as-judge pipelines.
+Capturing ground-truth inputs/outputs for offline evaluation; feeding into [[llm-as-judge]] pipelines.
 
 ## OSS Tools
 - **AgentOps** — Session replays, cost tracking, error debugging. Cited as production-ready.
-- **LangSmith** (LangChain ecosystem) — Tracing and evaluation for LangChain/LangGraph agents.
+- **LangSmith** (LangChain ecosystem) — Tracing and evaluation for LangChain/[[framework-langgraph]] agents.
 - **Langfuse** — Open-source LLM observability; spans, traces, evaluations.
 
 ## Patterns

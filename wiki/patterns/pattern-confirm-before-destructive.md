@@ -271,9 +271,9 @@ def audit_log(decision: str, tool_name: str, args: dict, outcome: Optional[str])
 
 ## Real Examples
 
-- Claude Code default mode: prompts before file writes and bash commands
+- [[framework-claude-code]] default mode: prompts before file writes and bash commands
 - GSD verify-work: human reviews before shipping
-- Superpowers "verification before completion": tests pass before claiming done
+- [[framework-superpowers]] "verification before completion": tests pass before claiming done
 - CI/CD: staging deployment auto-approved; production requires manual approval
 
 ---
@@ -289,5 +289,5 @@ def audit_log(decision: str, tool_name: str, args: dict, outcome: Optional[str])
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (2024)
+- [[anthropic]] "Building Effective Agents" (2024)
 - Agentic safety engineering patterns (2024-2025)

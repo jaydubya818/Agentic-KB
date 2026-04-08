@@ -226,6 +226,6 @@ Optional (calibrate to risk tolerance):
 
 ## Sources
 
-- Anthropic "Building Effective Agents" (2024)
-- OpenAI "Practices for Governing Agentic AI Systems" (2025)
+- [[anthropic]] "Building Effective Agents" (2024)
+- [[openai]] "Practices for Governing Agentic AI Systems" (2025)
 - AI Safety Institute: Agentic AI oversight frameworks (2025)

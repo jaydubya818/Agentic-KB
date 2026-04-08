@@ -14,7 +14,7 @@ jay_experience: none
 
 ## Overview
 
-AutoGen is Microsoft Research's multi-agent framework built around a conversational paradigm — agents coordinate by talking to each other in structured conversations, rather than through a graph or explicit orchestration layer. The fundamental primitive is the agent-to-agent conversation: you define agents with roles and capabilities, and AutoGen manages the message passing, termination conditions, and tool execution between them.
+[[framework-autogen]] is Microsoft Research's multi-agent framework built around a conversational paradigm — agents coordinate by talking to each other in structured conversations, rather than through a graph or explicit orchestration layer. The fundamental primitive is the agent-to-agent conversation: you define agents with roles and capabilities, and AutoGen manages the message passing, termination conditions, and tool execution between them.
 
 AutoGen underwent a major architectural revision in 0.4.x (renamed the core runtime, introduced async-first design). The 0.2.x API is widely documented in tutorials but is legacy. This page covers the current 0.4.x design.
 
@@ -59,7 +59,7 @@ The code executor is pluggable: local subprocess, Docker container, or Jupyter k
 - `TERMINATE`: human reviews before conversation ends
 - `ALWAYS`: human reviews every message
 
-This is AutoGen's built-in human-in-the-loop mechanism — cleaner than LangGraph's interrupt model for conversational use cases, but less flexible for graph-based flows.
+This is AutoGen's built-in human-in-the-loop mechanism — cleaner than [[framework-langgraph]]'s interrupt model for conversational use cases, but less flexible for graph-based flows.
 
 ### AutoGen Studio
 Low-code browser-based UI for building and testing AutoGen agent systems. Define agents, connect them in conversations, test with inputs. Good for prototyping and non-technical collaborators. Not production-ready for complex systems.
@@ -93,7 +93,7 @@ AutoGen 0.4.x introduced a runtime layer:
 
 ## Strengths
 
-- **Code execution is first-class**: the UserProxy+code executor combo is uniquely powerful for data science and coding tasks; no equivalent in LangGraph or CrewAI
+- **Code execution is first-class**: the UserProxy+code executor combo is uniquely powerful for data science and coding tasks; no equivalent in LangGraph or [[framework-crewai]]
 - **Conversational flexibility**: when the task genuinely benefits from agents debating a solution, AutoGen's group chat captures this naturally
 - **Human-in-the-loop simplicity**: `human_input_mode` is one parameter; easier to configure than LangGraph interrupts
 - **AutoGen Studio**: lowers barrier for non-engineers to prototype agent systems
@@ -188,16 +188,16 @@ proxy.initiate_chat(manager, message="Write a report on the fan-out agent patter
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-api]]**: AutoGen supports Anthropic as an LLM provider (Claude as the model backing AssistantAgents)
+- **[[frameworks/framework-claude-api]]**: AutoGen supports [[anthropic]] as an LLM provider (Claude as the model backing AssistantAgents)
 - **[[entities/langchain-ecosystem]]**: AutoGen is a separate ecosystem from LangChain; not compatible without wrappers
 - **[[evaluations/eval-orchestration-frameworks]]**: AutoGen scored against GSD, LangGraph, CrewAI
-- **[[entities/model-landscape]]**: AutoGen is model-agnostic; supports OpenAI, Anthropic, local models
+- **[[entities/model-landscape]]**: AutoGen is model-agnostic; supports [[openai]], Anthropic, local models
 
 ---
 
 ## Jay's Experience
 
-None. Jay has not used AutoGen in production. Assessment is based on documentation and public research. Key reason for non-adoption: Jay's stack is TypeScript-native and Claude Code-first; AutoGen is Python-only and conversational in a way that doesn't map to the GSD/Superpowers workflow. Would evaluate if needing a Python-native self-correcting code execution loop.
+None. Jay has not used AutoGen in production. Assessment is based on documentation and public research. Key reason for non-adoption: Jay's stack is TypeScript-native and [[framework-claude-code]]-first; AutoGen is Python-only and conversational in a way that doesn't map to the GSD/[[framework-superpowers]] workflow. Would evaluate if needing a Python-native self-correcting code execution loop.
 
 ---
 

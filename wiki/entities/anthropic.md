@@ -10,7 +10,7 @@ updated: 2026-04-04
 
 ## Overview
 
-Anthropic is an AI safety company founded in 2021 by former OpenAI researchers Dario Amodei (CEO), Daniela Amodei (President), and others. Its primary product is the Claude family of language models. Anthropic's strategic differentiation from OpenAI is an explicit safety-first research mandate — Constitutional AI, the Responsible Scaling Policy, and interpretability research are central to its identity, not marketing.
+[[anthropic]] is an AI safety company founded in 2021 by former [[openai]] researchers Dario Amodei (CEO), Daniela Amodei (President), and others. Its primary product is the Claude family of language models. Anthropic's strategic differentiation from OpenAI is an explicit safety-first research mandate — Constitutional AI, the Responsible Scaling Policy, and interpretability research are central to its identity, not marketing.
 
 Anthropic is the vendor behind Jay's primary toolchain: [[frameworks/framework-claude-api]], [[frameworks/framework-claude-code]], and [[frameworks/framework-mcp]].
 
@@ -44,10 +44,10 @@ Direct REST + SDK access to Claude models. See [[frameworks/framework-claude-api
 - Prompt caching (ephemeral cache on system prompts, ~90% cost reduction on long system prompts)
 - 200K context window across all tiers
 
-### Claude Code
-Anthropic's official CLI for Claude — an agentic coding assistant and multi-agent runtime. See [[frameworks/framework-claude-code]] for full coverage. Key capabilities: Agent tool for sub-agent spawning, hooks system, MCP hosting, skills/slash commands, CLAUDE.md instruction layer.
+### [[framework-claude-code]]
+Anthropic's official CLI for Claude — an agentic coding assistant and multi-agent runtime. See [[frameworks/framework-claude-code]] for full coverage. Key capabilities: Agent tool for sub-agent spawning, hooks system, [[mcp-ecosystem]] hosting, skills/slash commands, CLAUDE.md instruction layer.
 
-### Model Context Protocol (MCP)
+### [[mcp-ecosystem]] (MCP)
 Open protocol published by Anthropic for standardizing agent-to-tool connectivity. See [[frameworks/framework-mcp]]. MCP enables any MCP-compatible host to use tools from any MCP server without custom integration per-pair.
 
 ### Claude.ai

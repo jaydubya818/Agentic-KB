@@ -77,4 +77,4 @@ Periodic health check. The LLM scans for: contradictions between pages, orphaned
 - **Agentic engineering KB** — This KB. Ingests framework docs, transcripts, and personal patterns.
 
 ## Origin
-Originated by Andrej Karpathy. See [[summaries/karpathy-llm-wiki-gist]].
+Originated by [[andrej-karpathy]]. See [[summaries/karpathy-llm-wiki-gist]].

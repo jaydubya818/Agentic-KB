@@ -11,7 +11,7 @@ related: [framework-crewai.md, framework-autogen.md, concepts/state-persistence.
 source: https://docs.langchain.com/oss/python/deepagents/going-to-production
 ---
 
-# LangGraph
+# [[framework-langgraph]]
 
 LangGraph is LangChain's graph-based agent orchestration framework. It models agent execution as a stateful directed graph, enabling complex multi-step, multi-agent workflows with built-in durability and checkpointing.
 

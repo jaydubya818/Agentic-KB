@@ -11,7 +11,7 @@ related: [concepts/enterprise-ai-governance.md, concepts/human-in-the-loop.md, c
 source: https://agentlayer-ai.netlify.app/
 ---
 
-# AgentLayer
+# [[agentlayer]]
 
 ## Overview
 

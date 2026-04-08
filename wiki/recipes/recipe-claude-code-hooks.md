@@ -14,7 +14,7 @@ tags: [claude-code, hooks, automation, workflow, shell]
 
 ## Goal
 
-Write Claude Code hooks for custom automation — scripts that run before/after tool calls, at session end, and on notifications. After this recipe you'll have three working hooks: a lint-on-edit hook, a large-file guard, and a bash command logger.
+Write [[framework-claude-code]] hooks for custom automation — scripts that run before/after tool calls, at session end, and on notifications. After this recipe you'll have three working hooks: a lint-on-edit hook, a large-file guard, and a bash command logger.
 
 See [[frameworks/framework-claude-code]] for the full hooks architecture.
 
@@ -50,7 +50,7 @@ ls ~/.claude/settings.json
 The `matcher` field is a regex matched against the tool name. Examples:
 - `"Bash"` — only Bash tool calls
 - `"Edit|Write"` — Edit or Write
-- `"mcp__.*"` — all MCP tool calls
+- `"mcp__.*"` — all [[mcp-ecosystem]] tool calls
 - `""` — all tools (empty string matches everything)
 
 ### Hook Exit Codes

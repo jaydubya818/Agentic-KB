@@ -18,7 +18,7 @@ related:
 # Farzapedia Personal Wiki
 
 ## Source Overview
-A personal wiki system built by Farzaa, inspired by Andrej Karpathy's LLM wiki pattern. The system ingests personal data from iMessages, Apple Notes, and diary entries into a navigable wiki. Retrieval is handled by a WikiQuery agent that reads an index file and navigates articles agentically — no vector search or RAG involved.
+A personal wiki system built by Farzaa, inspired by [[andrej-karpathy]]'s [[llm-wiki]] pattern. The system ingests personal data from iMessages, Apple Notes, and diary entries into a navigable wiki. Retrieval is handled by a WikiQuery agent that reads an index file and navigates articles agentically — no vector search or RAG involved.
 
 ## Key Ideas
 
@@ -40,7 +40,7 @@ Unlike typical personal knowledge management systems that chunk content and retr
 
 These are presumably pre-processed and structured into wiki-style articles before the agent interacts with them.
 
-### Karpathy LLM Wiki Pattern
+### [[andrej-karpathy]] LLM Wiki Pattern
 The underlying pattern (attributed to Andrej Karpathy) involves maintaining a human-readable wiki that an LLM can navigate as a first-class agent task — treating the wiki as a structured knowledge graph traversed via reasoning rather than a flat vector store.
 
 ## Limitations / Open Questions

@@ -13,7 +13,7 @@ This is a **private** test article used to verify the PIN lock system works end-
 
 ## TL;DR
 
-If you can read this, PIN `1124` is working correctly across web, CLI, and MCP.
+If you can read this, PIN `1124` is working correctly across web, CLI, and [[mcp-ecosystem]].
 
 ## What This Verifies
 

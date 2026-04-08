@@ -56,7 +56,7 @@ Distinct from ReAct: the LLM reasons through multiple steps internally before co
 
 ### Tool-Use Loops
 
-The LLM emits a tool call schema (JSON), the host executes the tool, the result is appended to context as a tool result, and the LLM continues. This is the mechanism behind Claude's function calling and Claude Code's native loop.
+The LLM emits a tool call schema (JSON), the host executes the tool, the result is appended to context as a tool result, and the LLM continues. This is the mechanism behind Claude's function calling and [[framework-claude-code]]'s native loop.
 
 ```python
 while True:
@@ -112,7 +112,7 @@ Three mechanisms:
 Each loop iteration appends tool results to context. Without management, the context fills up within 10-20 iterations on complex tasks.
 
 Strategies:
-- **Rolling summary**: Compress early context before it blooms — see [[patterns/pattern-rolling-summary]]
+- **[[pattern-rolling-summary]]**: Compress early context before it blooms — see [[patterns/pattern-rolling-summary]]
 - **Tool output trimming**: Truncate tool results to relevant sections before appending
 - **Selective retention**: Only keep the last N observations in context; summarize older ones
 - **Checkpoint files**: Write state to disk, compress context, restore from checkpoint on next iteration
@@ -152,7 +152,7 @@ for iteration in range(MAX_ITERATIONS):
 | Loop Type | Reasoning Style | Tool Access | Stop Mechanism |
 |-----------|----------------|-------------|----------------|
 | ReAct | Explicit thought traces | Yes | Model judgment or finish tool |
-| CoT-only | Internal | No | end_turn |
+| [[chain-of-thought]]-only | Internal | No | end_turn |
 | Tool-use | Implicit | Yes | end_turn after tools |
 | Scratchpad | File-backed | Yes (file write/read) | Model judgment |
 | Debate | Multi-agent exchange | Optional | Judge agent declares winner |
@@ -187,5 +187,5 @@ for iteration in range(MAX_ITERATIONS):
 ## Sources
 
 - Yao et al. "ReAct: Synergizing Reasoning and Acting in Language Models" (2022)
-- Anthropic Extended Thinking documentation (2025)
+- [[anthropic]] Extended Thinking documentation (2025)
 - LangChain Agent Executor internals

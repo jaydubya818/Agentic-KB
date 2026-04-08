@@ -14,11 +14,11 @@ jay_experience: extensive
 
 ## Overview
 
-Superpowers is Jay West's TDD-first, verification-driven agentic framework for high-stakes features where mistakes are costly. Where GSD optimizes for speed and iteration, Superpowers optimizes for correctness and auditability. It applies to any feature where an edge case is expensive: authentication systems, payment processing, agentic systems with real-world side effects, security-sensitive code.
+[[framework-superpowers]] is Jay West's TDD-first, verification-driven agentic framework for high-stakes features where mistakes are costly. Where GSD optimizes for speed and iteration, Superpowers optimizes for correctness and auditability. It applies to any feature where an edge case is expensive: authentication systems, payment processing, agentic systems with real-world side effects, security-sensitive code.
 
 Superpowers is implemented as a set of skills (slash commands) in `~/.claude/skills/superpowers/` plus a specialized code reviewer agent (`superpowers-code-reviewer`). It is a workflow framework — the discipline is in the process, not in a library.
 
-Version 5.0.6. Jay uses it alongside GSD (GSD for MVP, Superpowers for hardening) and alongside BMAD (BMAD for planning, Superpowers for implementation of risky modules).
+Version 5.0.6. Jay uses it alongside GSD (GSD for MVP, Superpowers for hardening) and alongside [[framework-bmad]] (BMAD for planning, Superpowers for implementation of risky modules).
 
 ---
 
@@ -88,7 +88,7 @@ All skills live in `~/.claude/skills/superpowers/`:
 | `superpowers:writing-plans` | After spec, before any code | Produce a detailed design doc with edge cases, error states, success criteria |
 | `superpowers:test-driven-development` | Any new feature or bugfix | Red → Green → Refactor cycle with explicit steps |
 | `superpowers:systematic-debugging` | Any bug or unexpected behavior | Root cause first, fix second |
-| `superpowers:subagent-driven-development` | Executing plans with independent tasks | Fan-out to sub-agents per task, two-stage review per task |
+| `superpowers:subagent-driven-development` | Executing plans with independent tasks | [[pattern-fan-out-worker]] to sub-agents per task, two-stage review per task |
 | `superpowers:dispatching-parallel-agents` | 2+ independent failures or tasks | Parallel agent dispatch with result collection |
 | `superpowers:verification-before-completion` | Before any "done" claim or PR | Fresh verification evidence, full test suite |
 | `superpowers:finishing-a-development-branch` | After all tests pass | Cleanup, changelog, commit, PR prep |
@@ -239,7 +239,7 @@ Sequence of skill invocations for adding a new payment webhook handler:
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-code]]**: Superpowers skills are invoked within Claude Code; two-stage review uses the Agent tool to spawn the code-reviewer agent
+- **[[frameworks/framework-claude-code]]**: Superpowers skills are invoked within [[framework-claude-code]]; two-stage review uses the Agent tool to spawn the code-reviewer agent
 - **[[frameworks/framework-gsd]]**: Hybrid pattern: GSD for MVP, Superpowers for hardening; frameworks are composable
 - **[[frameworks/framework-bmad]]**: BMAD plans the spec-locked module; Superpowers implements it with TDD
 - **[[entities/jay-west-agent-stack]]**: Superpowers is the stability layer of Jay's stack

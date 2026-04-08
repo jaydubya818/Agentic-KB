@@ -36,7 +36,7 @@ Central agent maintains global state, routes to specialists, synthesizes results
 
 **Critical failure mode: The Telephone Game Problem**
 
-LangGraph benchmarks found supervisor architectures initially performed 50% worse than optimized versions because supervisors paraphrase sub-agent responses incorrectly, losing fidelity. The fix: a `forward_message` tool that allows sub-agents to pass responses directly to the user without supervisor synthesis when the response is final and complete.
+[[framework-langgraph]] benchmarks found supervisor architectures initially performed 50% worse than optimized versions because supervisors paraphrase sub-agent responses incorrectly, losing fidelity. The fix: a `forward_message` tool that allows sub-agents to pass responses directly to the user without supervisor synthesis when the response is final and complete.
 
 ### Pattern 2: Peer-to-Peer/Swarm
 
@@ -60,7 +60,7 @@ Production data on token multipliers:
 |--------------|-----------------|----------|
 | Single agent chat | 1× baseline | Simple queries |
 | Single agent with tools | ~4× baseline | Tool-using tasks |
-| Multi-agent system | ~15× baseline | Complex research |
+| [[multi-agent-systems]] | ~15× baseline | Complex research |
 
 BrowseComp evaluation: three factors explain 95% of performance variance — token usage (80%), number of tool calls, model choice. This validates distributing work across agents for parallel reasoning.
 

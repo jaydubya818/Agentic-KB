@@ -23,7 +23,7 @@ related:
 Official LangChain documentation for Deep Agents production deployment. Captured 2026-04-05.
 
 ## One-Line Summary
-LangChain's opinionated production stack for agentic systems: LangSmith Deployments handles infra (auth, storage, observability) while LangGraph provides durable, checkpointed execution with scoped memory, sandboxed execution environments, and middleware-based guardrails.
+LangChain's opinionated production stack for agentic systems: LangSmith Deployments handles infra (auth, storage, observability) while [[framework-langgraph]] provides durable, checkpointed execution with scoped memory, sandboxed execution environments, and middleware-based guardrails.
 
 ## Core Primitives
 

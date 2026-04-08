@@ -48,7 +48,7 @@ Intent to write file X
 
 ### In Tool Design (Enforcement at the Tool Level)
 
-The most robust approach: make read-before-write a property of the write tool itself, not a discipline the agent must remember.
+The most robust approach: make [[pattern-read-before-write]] a property of the write tool itself, not a discipline the agent must remember.
 
 ```python
 def write_file(path: str, content: str, mode: Literal["overwrite", "append", "create_only"] = "overwrite") -> str:
@@ -213,5 +213,5 @@ This is the database equivalent of optimistic locking — check before write, ab
 
 ## Sources
 
-- Anthropic Tool Use best practices (2025)
+- [[anthropic]] Tool Use best practices (2025)
 - Practical agentic reliability engineering patterns

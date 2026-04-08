@@ -17,10 +17,10 @@ related:
 status: evolving
 ---
 
-# LLM Wiki Pattern
+# [[llm-wiki]] Pattern
 
 ## Definition
-An architectural pattern in which an LLM incrementally builds and maintains a persistent, interlinked wiki of structured markdown files positioned between the user and their raw source material. Popularized by Andrej Karpathy (2026).
+An architectural pattern in which an LLM incrementally builds and maintains a persistent, interlinked wiki of structured markdown files positioned between the user and their raw source material. Popularized by [[andrej-karpathy]] (2026).
 
 Distinguished from RAG by its **pre-computation of synthesis**: rather than retrieving and re-weaving fragments at query time, cross-references, summaries, and contradiction flags are written once and compound over time.
 
@@ -73,7 +73,7 @@ Periodic maintenance pass. LLM scans for contradictions between pages, stale or 
 
 > Key insight: Wikis fail because human maintenance burden grows faster than perceived value. LLMs eliminate this — they don't get bored, don't forget conventions, and can update 15 files in one pass at near-zero marginal cost.
 
-## Design Principles (Karpathy)
+## Design Principles ([[andrej-karpathy]])
 1. **Explicit** — all knowledge is visible in a navigable wiki, not buried in embeddings
 2. **Yours** — local markdown files, no vendor lock-in
 3. **File over app** — plain `.md` works with any viewer, CLI, or editor
@@ -81,7 +81,7 @@ Periodic maintenance pass. LLM scans for contradictions between pages, stale or 
 
 ## Tooling
 - **Obsidian** is the recommended IDE/frontend (backlinks, graph view, search)
-- **Claude Code** is the primary LLM harness for running operations
+- **[[framework-claude-code]]** is the primary LLM harness for running operations
 - Files are plain markdown — no proprietary format dependency
 
 ## Scalability Notes

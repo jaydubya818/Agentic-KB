@@ -14,7 +14,7 @@ jay_experience: moderate
 
 ## Overview
 
-Model Context Protocol (MCP) is an open protocol from Anthropic that standardizes how AI agents connect to external tools, data sources, and services. Instead of each agent framework inventing its own plugin API, MCP defines a universal client/server interface: you write an MCP server once and any MCP-compatible host (Claude Code, Claude Desktop, OpenClaw, custom harnesses) can use its tools.
+[[mcp-ecosystem]] ([[mcp-ecosystem]]) is an open protocol from [[anthropic]] that standardizes how AI agents connect to external tools, data sources, and services. Instead of each agent framework inventing its own plugin API, MCP defines a universal client/server interface: you write an MCP server once and any MCP-compatible host ([[framework-claude-code]], Claude Desktop, [[framework-openclaw]], custom harnesses) can use its tools.
 
 MCP is to AI agents what REST was to web services — a shared contract that decouples the consumer (the model/agent) from the provider (the tool implementation).
 
@@ -254,7 +254,7 @@ asyncio.run(main())
 | **filesystem** | Scoped file read/write for specific directories | `npx @modelcontextprotocol/server-filesystem` |
 | **GitHub** | Issues, PRs, repo operations | `npx @modelcontextprotocol/server-github` |
 | **Postgres** | Query databases, inspect schemas | `npx @modelcontextprotocol/server-postgres` |
-| **Jay's LLM Wiki** | This KB as a tool (`search_wiki`, `read_wiki_page`) | Local — `packages/mcp` |
+| **Jay's [[llm-wiki]]** | This KB as a tool (`search_wiki`, `read_wiki_page`) | Local — `packages/mcp` |
 
 ---
 

@@ -12,7 +12,7 @@ related: [concepts/llm-owned-wiki.md, concepts/llm-wiki.md, frameworks/framework
 
 # Oh My Mermaid — KB CLI
 
-**Oh My Mermaid (OMM)** is the project that houses the Agentic KB toolchain. Its CLI entry point is a single-file Node.js script at `cli/kb.js`, acting as a thin client over a Next.js web API layer. All substantive processing occurs in the Next.js API routes — the CLI itself only handles I/O, streaming, and argument parsing.
+**Oh My Mermaid ([[oh-my-mermaid]])** is the project that houses the Agentic KB toolchain. Its CLI entry point is a single-file Node.js script at `cli/kb.js`, acting as a thin client over a Next.js web API layer. All substantive processing occurs in the Next.js API routes — the CLI itself only handles I/O, streaming, and argument parsing.
 
 ## Architecture Overview
 

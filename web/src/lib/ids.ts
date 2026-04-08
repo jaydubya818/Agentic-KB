@@ -19,10 +19,12 @@ import { DEFAULT_KB_ROOT } from '@/lib/articles'
 const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'
 
 function encodeBase32(n: bigint, length: number): string {
+  const MASK = BigInt(31)
+  const FIVE = BigInt(5)
   let out = ''
   for (let i = 0; i < length; i++) {
-    out = CROCKFORD[Number(n & 31n)] + out
-    n >>= 5n
+    out = CROCKFORD[Number(n & MASK)] + out
+    n = n >> FIVE
   }
   return out
 }
@@ -30,8 +32,9 @@ function encodeBase32(n: bigint, length: number): string {
 export function ulid(now: number = Date.now()): string {
   const time = encodeBase32(BigInt(now), 10)
   const rand = crypto.randomBytes(10)
-  let r = 0n
-  for (const b of rand) r = (r << 8n) | BigInt(b)
+  let r = BigInt(0)
+  const EIGHT = BigInt(8)
+  for (const b of rand) r = (r << EIGHT) | BigInt(b)
   const randStr = encodeBase32(r, 16)
   return time + randStr
 }

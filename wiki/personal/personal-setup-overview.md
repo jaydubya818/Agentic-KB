@@ -14,7 +14,7 @@ Jay West. Expert AI builder, multi-agent architect, agentic-native developer. Th
 
 ---
 
-## Primary Tool: Claude Code CLI
+## Primary Tool: [[framework-claude-code]] CLI
 
 **Model defaults**:
 - `claude-sonnet-4-6` — default for most work (best cost/quality ratio)
@@ -32,8 +32,8 @@ Three frameworks installed. Selection is task-driven, not habitual.
 | Task Type | Framework |
 |-----------|-----------|
 | Experimental MVP, requirements will shift | **GSD** |
-| Known spec, enterprise/client build, locked requirements | **BMAD** |
-| Auth, payments, agentic systems — edge cases costly | **Superpowers** |
+| Known spec, enterprise/client build, locked requirements | **[[framework-bmad]]** |
+| Auth, payments, agentic systems — edge cases costly | **[[framework-superpowers]]** |
 | Refactor or simple feature (< 3 files) | **Direct Claude** |
 
 **Hybrid pattern for large apps**: GSD for working MVP → Superpowers for stability layer → BMAD for future spec-locked modules.

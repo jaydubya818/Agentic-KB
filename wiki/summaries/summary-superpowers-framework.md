@@ -10,7 +10,7 @@ key_concepts: [iron-laws, tdd-first, verification-before-completion, subagent-dr
 confidence: high
 ---
 
-# Superpowers Framework
+# [[framework-superpowers]] Framework
 
 ## Framework Overview
 

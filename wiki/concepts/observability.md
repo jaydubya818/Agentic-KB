@@ -223,7 +223,7 @@ def log_state_diff(before: AgentState, after: AgentState, step_id: str):
 ## When To Use
 
 - Any agent deployed in production (non-negotiable)
-- Any multi-agent system where failures are hard to reproduce
+- Any [[multi-agent-systems]] where failures are hard to reproduce
 - Any agent that costs more than $1/task — visibility into cost distribution is required
 - Any agent operating in regulated domains (compliance requires audit logs)
 
@@ -253,4 +253,4 @@ def log_state_diff(before: AgentState, after: AgentState, step_id: str):
 - OpenTelemetry documentation (2024)
 - LangSmith tracing documentation (2024)
 - Honeycomb "Observability Engineering" (book, 2022)
-- Anthropic agent monitoring guidance (2025)
+- [[anthropic]] agent monitoring guidance (2025)

@@ -14,9 +14,9 @@ jay_experience: none
 
 ## Overview
 
-CrewAI is a Python multi-agent framework built around the metaphor of a crew of workers — agents are defined by **role**, **goal**, and **backstory**, and they execute **tasks** in either sequential or hierarchical order. The framing is deliberately human-analogous: a Researcher agent, a Writer agent, a QA agent each have a professional identity that shapes their behavior.
+[[framework-crewai]] is a Python multi-agent framework built around the metaphor of a crew of workers — agents are defined by **role**, **goal**, and **backstory**, and they execute **tasks** in either sequential or hierarchical order. The framing is deliberately human-analogous: a Researcher agent, a Writer agent, a QA agent each have a professional identity that shapes their behavior.
 
-CrewAI sits between AutoGen (conversational) and LangGraph (graph/state machine) on the flexibility spectrum. It is more opinionated than LangGraph but less verbose than AutoGen for structured pipelines. Best suited for well-defined workflows where the task sequence is known upfront and agents have clear, non-overlapping responsibilities.
+CrewAI sits between [[framework-autogen]] (conversational) and [[framework-langgraph]] (graph/state machine) on the flexibility spectrum. It is more opinionated than LangGraph but less verbose than AutoGen for structured pipelines. Best suited for well-defined workflows where the task sequence is known upfront and agents have clear, non-overlapping responsibilities.
 
 ---
 
@@ -217,7 +217,7 @@ print(result.raw)
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-api]]**: CrewAI supports Anthropic models via LiteLLM integration (`llm="claude-sonnet-4-6"`)
+- **[[frameworks/framework-claude-api]]**: CrewAI supports [[anthropic]] models via LiteLLM integration (`llm="claude-sonnet-4-6"`)
 - **[[entities/langchain-ecosystem]]**: CrewAI tools are LangChain-compatible; uses LangChain's tool interface
 - **[[evaluations/eval-orchestration-frameworks]]**: CrewAI scored against GSD, LangGraph, AutoGen
 - **[[entities/model-landscape]]**: Supports any model via LiteLLM
@@ -226,14 +226,14 @@ print(result.raw)
 
 ## Jay's Experience
 
-None. Jay has not used CrewAI. Assessment based on documentation and public demos. Key reason for non-adoption: CrewAI's role/backstory metaphor doesn't align with Jay's Claude Code + GSD workflow; GSD provides equivalent structured role-based execution with agents that understand his specific project context. Would evaluate if hiring collaborators who prefer the "crew" mental model as a low-code starting point.
+None. Jay has not used CrewAI. Assessment based on documentation and public demos. Key reason for non-adoption: CrewAI's role/backstory metaphor doesn't align with Jay's [[framework-claude-code]] + GSD workflow; GSD provides equivalent structured role-based execution with agents that understand his specific project context. Would evaluate if hiring collaborators who prefer the "crew" mental model as a low-code starting point.
 
 ---
 
 ## Version Notes
 
 - 0.80.x (2025): memory system stable; parallel process improved; output_file for tasks
-- Switched from direct OpenAI SDK to LiteLLM for provider abstraction
+- Switched from direct [[openai]] SDK to LiteLLM for provider abstraction
 - CrewAI Enterprise: hosted version with monitoring; separate product
 - `pip install crewai crewai-tools` — tools are a separate package
 

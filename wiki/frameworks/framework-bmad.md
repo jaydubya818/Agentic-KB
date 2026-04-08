@@ -14,7 +14,7 @@ jay_experience: extensive
 
 ## Overview
 
-BMAD (Breakthrough Method for Agentic Development) is Jay West's framework for spec-locked projects — enterprise builds, client deliverables, and modules with requirements that are fully known before any code is written. Where GSD embraces uncertainty with iterative phases, BMAD front-loads all ambiguity resolution into a rigorous pre-planning stage so that implementation can proceed with maximum confidence.
+[[framework-bmad]] (Breakthrough Method for Agentic Development) is Jay West's framework for spec-locked projects — enterprise builds, client deliverables, and modules with requirements that are fully known before any code is written. Where GSD embraces uncertainty with iterative phases, BMAD front-loads all ambiguity resolution into a rigorous pre-planning stage so that implementation can proceed with maximum confidence.
 
 BMAD's core discipline: **no implementation starts until the spec is complete, validated, and sharded into agent-sized tasks**. This prevents mid-build spec changes from invalidating large chunks of work — the risk BMAD is designed to eliminate.
 
@@ -30,7 +30,7 @@ BMAD is implemented as skills in `~/.claude/skills/bmad/` organized into four gr
 | Requirements fully locked before any code | Yes |
 | Client/enterprise deliverable with approval gates | Yes |
 | Requirements will shift mid-build | No (use GSD) |
-| High-stakes features with edge case risk | No (use Superpowers) |
+| High-stakes features with edge case risk | No (use [[framework-superpowers]]) |
 | Spec might change when you show it to stakeholders | No (use GSD first) |
 
 **Critical anti-pattern**: using BMAD when you actually don't know the requirements. A wrong spec executed perfectly is a perfectly wrong product. If requirements aren't locked, use GSD to discover them first.
@@ -245,7 +245,7 @@ BMAD Framework
 
 - **[[frameworks/framework-gsd]]**: GSD for exploration → BMAD for locked-spec execution; or BMAD for planning, GSD-executor for implementation
 - **[[frameworks/framework-superpowers]]**: BMAD plans the spec; Superpowers implements high-stakes slices with TDD
-- **[[frameworks/framework-claude-code]]**: BMAD skills run inside Claude Code; party-mode uses the Agent tool for multi-persona spawning
+- **[[frameworks/framework-claude-code]]**: BMAD skills run inside [[framework-claude-code]]; party-mode uses the Agent tool for multi-persona spawning
 - **[[entities/jay-west-agent-stack]]**: BMAD is Jay's enterprise/client framework
 - Obsidian: BMAD artifacts (PRD, architecture) are stored as markdown and can be cross-referenced from the Agentic-KB
 

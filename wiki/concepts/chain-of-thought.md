@@ -20,7 +20,7 @@ status: stable
 
 ## TL;DR
 
-Chain-of-thought prompting elicits step-by-step reasoning from LLMs before producing final answers. It consistently improves accuracy on multi-step reasoning tasks. The tradeoff is token cost and latency. Extended thinking (Claude's native CoT) runs reasoning in a separate block invisible to users but available to the model. Use CoT when reasoning steps matter; skip it for lookup or simple generation tasks.
+Chain-of-thought prompting elicits step-by-step reasoning from LLMs before producing final answers. It consistently improves accuracy on multi-step reasoning tasks. The tradeoff is token cost and latency. Extended thinking (Claude's native [[chain-of-thought]]) runs reasoning in a separate block invisible to users but available to the model. Use CoT when reasoning steps matter; skip it for lookup or simple generation tasks.
 
 ---
 
@@ -210,5 +210,5 @@ complex_response = client.messages.create(
 
 - Wei et al. "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models" (2022)
 - Kojima et al. "Large Language Models are Zero-Shot Reasoners" (2022)
-- Anthropic Extended Thinking documentation (2025)
+- [[anthropic]] Extended Thinking documentation (2025)
 - Yao et al. "Tree of Thoughts" (2023)

@@ -11,9 +11,9 @@ related: [pattern-llm-wiki, entities/andrej-karpathy, concepts/llm-wiki-pattern]
 source: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
 ---
 
-# LLM Wiki Pattern
+# [[llm-wiki]] Pattern
 
-Originated by Andrej Karpathy. A method for building and maintaining a personal or project knowledge base where LLMs do the maintenance work and humans retain editorial control.
+Originated by [[andrej-karpathy]]. A method for building and maintaining a personal or project knowledge base where LLMs do the maintenance work and humans retain editorial control.
 
 ## Definition
 
@@ -31,7 +31,7 @@ Raw Sources → Wiki (LLM-generated markdown) → Schema (CLAUDE.md / system pro
 
 The pattern transfers tedious maintenance work — cross-references, consistency checks, updates, index management — to LLMs, while keeping intellectual work (curation, direction, analysis) with the human.
 
-> "Left vague so that you can hack it and customize it to your own project." — Andrej Karpathy
+> "Left vague so that you can hack it and customize it to your own project." — Andrej [[andrej-karpathy]]
 
 At scale (~100 articles / ~400K words), no RAG pipeline is needed. The LLM can auto-maintain indexes and navigate the KB directly.
 

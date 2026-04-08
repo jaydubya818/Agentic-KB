@@ -18,7 +18,7 @@ status: stable
 # LLM-Owned Wiki Pattern
 
 ## Definition
-A knowledge management architecture where an LLM is the sole author and maintainer of a structured wiki, while humans retain ownership of raw source material and schema decisions. Coined and popularized by Andrej Karpathy.
+A knowledge management architecture where an LLM is the sole author and maintainer of a structured wiki, while humans retain ownership of raw source material and schema decisions. Coined and popularized by [[andrej-karpathy]].
 
 ## Core Invariants
 1. **Raw sources are immutable** — humans add files; LLM never modifies them.
@@ -52,7 +52,7 @@ A periodic health check. The LLM scans the wiki for:
 - Schema should be intentionally minimal at first — add conventions only when you feel the pain of not having them.
 
 ## Relationship to Agentic Patterns
-The LLM-owned wiki is itself an agentic system: the INGEST workflow is a fan-out pattern (one source → many pages), LINT is a reflection/self-critique loop, and QUERY with filing is a retrieval-augmented generation loop with memory write-back.
+The LLM-owned wiki is itself an agentic system: the INGEST workflow is a [[pattern-fan-out-worker]] pattern (one source → many pages), LINT is a reflection/self-critique loop, and QUERY with filing is a retrieval-augmented generation loop with memory write-back.
 
 ## Source
 - [[summaries/karpathy-llm-wiki-gist]]

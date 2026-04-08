@@ -14,7 +14,7 @@ tags: [mcp, tool-use, typescript, claude-code, integration]
 
 ## Goal
 
-Write a TypeScript MCP server with two tools and register it in Claude Code. After completing this recipe, Claude Code will have access to your custom tools in every session, accessible as `mcp__your-server__tool-name`.
+Write a TypeScript [[mcp-ecosystem]] server with two tools and register it in [[framework-claude-code]]. After completing this recipe, Claude Code will have access to your custom tools in every session, accessible as `mcp__your-server__tool-name`.
 
 This recipe builds a "notes" MCP server with `create_note` and `search_notes` tools — simple enough to follow but realistic enough to extend.
 

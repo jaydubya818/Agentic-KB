@@ -17,7 +17,7 @@ tags: [multi-agent, orchestration, fan-out, claude-code, sub-agents]
 Wire an orchestrator agent that spawns and coordinates three specialist sub-agents: a Researcher, an Analyst, and a Writer. The orchestrator fans out work, each specialist executes independently with its own tool set, and results are aggregated into a final output.
 
 This recipe covers two implementation paths:
-1. **Claude Code Agent tool** (recommended for Jay's stack) — zero-boilerplate sub-agent spawning
+1. **[[framework-claude-code]] Agent tool** (recommended for Jay's stack) — zero-boilerplate sub-agent spawning
 2. **TypeScript SDK** — manual sub-agent orchestration for programmatic control
 
 ---
@@ -385,5 +385,5 @@ Cause: no error recovery. Fix: wrap each specialist call in try-catch; on failur
 ## Related Recipes
 
 - [[recipes/recipe-build-tool-agent]] — prerequisite; build a single tool-using agent first
-- [[recipes/recipe-parallel-subagents]] — fan-out pattern in detail; handle partial failures
+- [[recipes/recipe-parallel-subagents]] — [[pattern-fan-out-worker]] pattern in detail; handle partial failures
 - [[recipes/recipe-claude-code-hooks]] — add hooks to monitor specialist execution

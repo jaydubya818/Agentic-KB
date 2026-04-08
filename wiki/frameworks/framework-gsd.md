@@ -12,7 +12,7 @@ related: [pattern-architecture-first, concepts/task-decomposition, concepts/agen
 
 # GSD Framework
 
-The GSD (Get Stuff Done) framework is a structured multi-agent system for milestone-driven software development. Agents specialise in discrete roles — planning, execution, auditing, and integration checking — and are composed into a pipeline that verifies work at each phase boundary.
+The GSD (Get Stuff Done) framework is a structured [[multi-agent-systems]] for milestone-driven software development. Agents specialise in discrete roles — planning, execution, auditing, and integration checking — and are composed into a pipeline that verifies work at each phase boundary.
 
 ## What It Does
 

@@ -10,7 +10,7 @@ key_concepts: [three-layer-architecture, ingest-query-lint, index-md, log-md, gi
 confidence: high
 ---
 
-# Karpathy LLM Wiki Pattern — Gist
+# [[andrej-karpathy]] [[llm-wiki]] Pattern — Gist
 
 ## Key Purpose
 
@@ -58,7 +58,7 @@ Research wikis, fiction writing (character/theme tracking), enterprise knowledge
 
 ## Intentional Vagueness
 
-"Left vague so that you can hack it and customize it to your own project." — Andrej Karpathy
+"Left vague so that you can hack it and customize it to your own project." — [[andrej-karpathy]]
 
 This is the founding document for the pattern that Jay's Agentic-KB is built on. The schema (CLAUDE.md in this vault) is a heavily expanded version of the minimal pattern Karpathy described.
 

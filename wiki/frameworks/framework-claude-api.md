@@ -14,7 +14,7 @@ jay_experience: extensive
 
 ## Overview
 
-The Anthropic Claude API is the direct REST + SDK interface to Claude models — distinct from Claude Code CLI, which wraps the API with an agentic runtime. Using the API directly gives you full control over the request/response cycle, streaming, tool schemas, system prompts, context construction, and model selection. It is the foundation layer on which Claude Code, OpenClaw, and any custom agent harness are built.
+The [[anthropic]] Claude API is the direct REST + SDK interface to Claude models — distinct from [[framework-claude-code]] CLI, which wraps the API with an agentic runtime. Using the API directly gives you full control over the request/response cycle, streaming, tool schemas, system prompts, context construction, and model selection. It is the foundation layer on which Claude Code, [[framework-openclaw]], and any custom agent harness are built.
 
 Primary SDKs: `@anthropic-ai/sdk` (TypeScript/Node), `anthropic` (Python). Both are official and maintained by Anthropic. REST API is also directly accessible.
 
@@ -271,11 +271,11 @@ console.log(answer)
 ## Integration Points
 
 - **[[frameworks/framework-claude-code]]**: Claude Code wraps this API; understanding the API directly helps debug unexpected model behavior
-- **[[frameworks/framework-mcp]]**: MCP servers provide tools that can be registered in Claude Code; same tool-use format applies
+- **[[frameworks/framework-mcp]]**: [[mcp-ecosystem]] servers provide tools that can be registered in Claude Code; same tool-use format applies
 - **[[entities/anthropic]]**: Model selection, pricing, and rate limits documented at console.anthropic.com
 - **[[entities/model-landscape]]**: Comparative model selection guide
 - **Prompt caching**: use `cache_control` on system prompts longer than ~1,000 tokens to reduce costs in production agents
-- **LangGraph**: LangGraph's `ChatAnthropic` node wraps this API; understanding the raw format helps debug chain behavior
+- **[[framework-langgraph]]**: LangGraph's `ChatAnthropic` node wraps this API; understanding the raw format helps debug chain behavior
 
 ---
 

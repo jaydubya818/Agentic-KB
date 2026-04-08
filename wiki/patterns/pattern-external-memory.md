@@ -162,7 +162,7 @@ List the file paths to load (max 5, only the most relevant):"""
     return [parse_entry(e) for e in entries]
 ```
 
-### Read-Before-Write
+### [[pattern-read-before-write]]
 
 Before writing a new memory entry, check if one already exists for this topic:
 
@@ -233,7 +233,7 @@ For distributed systems: use DB transactions or optimistic locking rather than f
 ## When To Use
 
 - Multi-session projects where agents need to remember prior work
-- Multi-agent systems where agents need to share state
+- [[multi-agent-systems]] where agents need to share state
 - Any knowledge that should outlive the current session
 - Checkpointing long-running tasks
 

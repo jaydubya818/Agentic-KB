@@ -14,10 +14,10 @@ The researchers and practitioners who have most shaped the agentic AI landscape 
 
 ---
 
-## Andrej Karpathy
+## [[andrej-karpathy]]
 
-**Affiliation**: Eureka Labs (founder); former OpenAI co-founder, Tesla AI Director
-**Most relevant to Jay**: LLM wiki pattern (direct inspiration for this KB)
+**Affiliation**: Eureka Labs (founder); former [[openai]] co-founder, Tesla AI Director
+**Most relevant to Jay**: [[llm-wiki]] pattern (direct inspiration for this KB)
 
 See [[entities/andrej-karpathy]] for full coverage.
 
@@ -31,7 +31,7 @@ See [[entities/andrej-karpathy]] for full coverage.
 ## Harrison Chase
 
 **Affiliation**: LangChain Inc. (co-founder, CEO)
-**Most relevant to Jay**: Created LangChain and LangGraph — the dominant Python multi-agent framework
+**Most relevant to Jay**: Created LangChain and [[framework-langgraph]] — the dominant Python multi-agent framework
 
 **Key contributions**:
 - **LangChain** (2022): established the first widely-adopted framework for LLM application development; introduced the chain metaphor, agent executor pattern, and tool use abstractions that influenced all subsequent frameworks
@@ -55,7 +55,7 @@ See [[entities/langchain-ecosystem]] and [[frameworks/framework-langgraph]].
 - Established vocabulary: "task agent", "objective-driven agents", autonomous task decomposition
 - **Limitations he acknowledged**: BabyAGI loops infinitely without meaningful progress; it revealed the hard problems of task decomposition, prioritization, and termination that subsequent frameworks solved
 
-**Why he matters**: BabyAGI wasn't production-ready, but it was the proof-of-concept that made non-ML engineers believe in autonomous agents. The frameworks that followed (AutoGen, CrewAI, LangGraph) are all responses to BabyAGI's limitations.
+**Why he matters**: BabyAGI wasn't production-ready, but it was the proof-of-concept that made non-ML engineers believe in autonomous agents. The frameworks that followed ([[framework-autogen]], [[framework-crewai]], LangGraph) are all responses to BabyAGI's limitations.
 
 ---
 
@@ -127,7 +127,7 @@ This maps directly to the concepts in this KB's `concepts/` directory.
 
 ## Integration Points
 
-- **[[entities/andrej-karpathy]]**: Full page on Karpathy
+- **[[entities/andrej-karpathy]]**: Full page on [[andrej-karpathy]]
 - **[[entities/langchain-ecosystem]]**: Harrison Chase's company
 - **[[frameworks/framework-langgraph]]**: Chase's primary technical output
 - **[[frameworks/framework-autogen]]**: AutoGen influenced by BabyAGI and multi-agent collaboration research

@@ -14,7 +14,7 @@ tags: [evaluation, llm-as-judge, testing, quality, observability]
 
 ## Goal
 
-Build a repeatable evaluation harness for an agent using LLM-as-judge: define test cases, run them through the agent, score each response with a judge model, aggregate results, and produce a report. Result: a scored benchmark you can run before/after any agent change to measure quality regression or improvement.
+Build a repeatable evaluation harness for an agent using [[llm-as-judge]]: define test cases, run them through the agent, score each response with a judge model, aggregate results, and produce a report. Result: a scored benchmark you can run before/after any agent change to measure quality regression or improvement.
 
 This is the production-quality version of "did my agent work?" — replacing manual testing with systematic, quantified evaluation.
 

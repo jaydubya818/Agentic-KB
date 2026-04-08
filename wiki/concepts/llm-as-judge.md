@@ -21,7 +21,7 @@ status: stable
 
 ## TL;DR
 
-LLM-as-judge uses one LLM to evaluate another's output. It scales better than human eval and generalizes better than regex/exact-match. The core challenge is bias: judges systematically favor verbose, confident, or self-similar outputs. Mitigate via structured rubrics, multiple judges, and calibration against human labels. Never use the same model to both generate and judge its own output without controls.
+[[llm-as-judge]] uses one LLM to evaluate another's output. It scales better than human eval and generalizes better than regex/exact-match. The core challenge is bias: judges systematically favor verbose, confident, or self-similar outputs. Mitigate via structured rubrics, multiple judges, and calibration against human labels. Never use the same model to both generate and judge its own output without controls.
 
 ---
 

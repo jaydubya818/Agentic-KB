@@ -20,7 +20,7 @@ status: stable
 
 ## TL;DR
 
-Claude Code's permission system controls which tools the model can invoke and whether it needs user confirmation before acting. Four permission modes exist along a spectrum from maximum oversight to maximum autonomy. Choosing the wrong mode either slows down legitimate automation or eliminates safety rails that prevent mistakes. Default mode is correct for most interactive work; bypassPermissions is for trusted automation only.
+[[framework-claude-code]]'s permission system controls which tools the model can invoke and whether it needs user confirmation before acting. Four permission modes exist along a spectrum from maximum oversight to maximum autonomy. Choosing the wrong mode either slows down legitimate automation or eliminates safety rails that prevent mistakes. Default mode is correct for most interactive work; bypassPermissions is for trusted automation only.
 
 ---
 
@@ -156,7 +156,7 @@ This is preferable to starting with broad permissions "just in case." The escala
 - **No safety net**: bypassPermissions removes the one human checkpoint before irreversible actions. In default mode, a human would have rejected "delete all .env files" — in bypassPermissions, it executes.
 - **Scope creep**: Without confirmation prompts, agents may edit files outside the intended scope before you notice.
 - **Audit gap**: Confirmation prompts are implicit audit logs. bypassPermissions means you only find out what happened after the fact.
-- **Cascading errors**: In multi-agent systems with bypassPermissions, one agent's bad action can trigger downstream agents before any human sees it.
+- **Cascading errors**: In [[multi-agent-systems]] with bypassPermissions, one agent's bad action can trigger downstream agents before any human sees it.
 
 ---
 
@@ -180,5 +180,5 @@ This is preferable to starting with broad permissions "just in case." The escala
 
 ## Sources
 
-- Anthropic Claude Code documentation (2025)
+- [[anthropic]] Claude Code documentation (2025)
 - Claude Code permission system design notes

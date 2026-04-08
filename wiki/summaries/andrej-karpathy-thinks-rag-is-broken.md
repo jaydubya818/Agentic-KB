@@ -16,10 +16,10 @@ related:
 status: stable
 ---
 
-# Andrej Karpathy Thinks RAG Is Broken
+# [[andrej-karpathy]] Thinks RAG Is Broken
 
 ## Source
-Short-form note summarizing Andrej Karpathy's public announcement of **LLM Wiki**, a project that gained 5,000 GitHub stars within 48 hours of release (circa April 2026).
+Short-form note summarizing Andrej [[andrej-karpathy]]'s public announcement of **[[llm-wiki]]**, a project that gained 5,000 GitHub stars within 48 hours of release (circa April 2026).
 
 ## Core Claim
 Traditional RAG (Retrieval-Augmented Generation) is fundamentally broken because it **re-derives knowledge on every query**. It retrieves fragments, assembles an answer, then forgets everything. LLM Wiki proposes a replacement: a **persistent, compounding knowledge base** that is built and maintained automatically by an LLM.
@@ -51,8 +51,8 @@ Traditional RAG (Retrieval-Augmented Generation) is fundamentally broken because
 > *Obsidian is the IDE. The LLM is the programmer. The wiki is the codebase. You never write the wiki yourself — you source, explore, and ask questions. The AI does all the grunt work.*
 
 ## Relevance to This KB
-This KB is itself an instantiation of the LLM Wiki pattern. The INGEST workflow described in `CLAUDE.md` directly implements the mechanics Karpathy describes: fan-out updates to multiple pages per source, automatic cross-referencing, and compounding synthesis over time.
+This KB is itself an instantiation of the LLM Wiki pattern. The INGEST workflow described in `CLAUDE.md` directly implements the mechanics Karpathy describes: [[pattern-fan-out-worker]] updates to multiple pages per source, automatic cross-referencing, and compounding synthesis over time.
 
 ## Key Entities
-- **Andrej Karpathy** — AI researcher, former OpenAI/Tesla; author of LLM Wiki concept.
+- **Andrej Karpathy** — AI researcher, former [[openai]]/Tesla; author of LLM Wiki concept.
 - **LLM Wiki** — The pattern/project described; open-source, 5k stars in 48 hours.

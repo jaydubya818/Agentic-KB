@@ -43,7 +43,7 @@ The single highest-leverage cost decision is which model to use for which task. 
 | Claude Sonnet 4.6 | ~5-10× | Orchestration, code generation, standard reasoning |
 | Claude Opus 4.6 | ~20-30× | Architecture decisions, complex reasoning, security audits |
 
-**Tiering pattern for multi-agent systems**:
+**Tiering pattern for [[multi-agent-systems]]**:
 
 ```python
 TASK_MODEL_MAP = {
@@ -94,7 +94,7 @@ class BudgetedAgent:
 
 ### Prompt Caching
 
-Anthropic's prompt cache stores processed prompt prefixes and reuses them across calls. Cached tokens cost ~10% of regular input token cost.
+[[anthropic]]'s prompt cache stores processed prompt prefixes and reuses them across calls. Cached tokens cost ~10% of regular input token cost.
 
 **Requirements for cache hit**:
 - The prompt prefix must be identical (including whitespace)

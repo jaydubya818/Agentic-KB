@@ -14,7 +14,7 @@ confidence: medium
 
 ## Key Purpose
 
-Practical 5-minute setup walkthrough of the Karpathy LLM wiki pattern. Emphasizes simplicity, token efficiency, and the hot cache concept. Notable for specific production metrics and a clear comparison with RAG.
+Practical 5-minute setup walkthrough of the [[andrej-karpathy]] [[llm-wiki]] pattern. Emphasizes simplicity, token efficiency, and the [[pattern-hot-cache]] concept. Notable for specific production metrics and a clear comparison with RAG.
 
 ## Key Quantitative Insights
 

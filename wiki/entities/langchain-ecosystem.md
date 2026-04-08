@@ -10,7 +10,7 @@ updated: 2026-04-04
 
 ## Overview
 
-LangChain is a family of products built around LLM application development. The ecosystem has gone through significant criticism (over-engineered abstractions, frequent breaking changes) and refinement. As of 2026, the most practically valuable component for multi-agent work is **LangGraph** — the graph-based orchestration layer. LangChain itself (the chain/LCEL layer) is useful but often replaced by direct API calls for simplicity.
+LangChain is a family of products built around LLM application development. The ecosystem has gone through significant criticism (over-engineered abstractions, frequent breaking changes) and refinement. As of 2026, the most practically valuable component for multi-agent work is **[[framework-langgraph]]** — the graph-based orchestration layer. LangChain itself (the chain/LCEL layer) is useful but often replaced by direct API calls for simplicity.
 
 The four products:
 1. **LangChain** — chains, LCEL, prompt templates, document loaders
@@ -90,7 +90,7 @@ Every LangChain/LangGraph call is automatically traced — LLM calls, tool execu
 **Why this matters for multi-agent work**: tracing a multi-agent LangGraph execution shows exactly which node called which LLM with what prompt, what the response was, and what tool was called — invaluable for debugging unexpected agent behavior.
 
 ### Evaluation
-LangSmith supports LLM-as-judge evaluation:
+LangSmith supports [[llm-as-judge]] evaluation:
 - Define a dataset of (input, expected output) pairs
 - Define an evaluator (LLM judge or custom function)
 - Run evaluation; LangSmith tracks pass/fail per criterion
@@ -106,7 +106,7 @@ prompt = hub.pull("my-org/my-prompt:v3")
 ### Cost
 - Free tier: 5K traces/month
 - Developer tier: $X/month for higher volume
-- For Jay's stack: LangSmith is valuable for debugging LangGraph pipelines but adds external dependency; Jay's own Multi-Agent-Observability hooks provide similar visibility for Claude Code sessions
+- For Jay's stack: LangSmith is valuable for debugging LangGraph pipelines but adds external dependency; Jay's own Multi-Agent-Observability hooks provide similar visibility for [[framework-claude-code]] sessions
 
 ---
 
@@ -162,7 +162,7 @@ LangChain Ecosystem
 
 **LangGraph is genuinely excellent** for Python-native multi-agent orchestration with resumable state. No other framework offers first-class checkpointing + graph control flow + human-in-the-loop in one package.
 
-**LangChain core is optional**: for simple pipelines, the direct Anthropic SDK (`@anthropic-ai/sdk` or `anthropic`) is simpler and produces less debugging overhead. LangChain's value is in the integrations (vector stores, document loaders, 50+ model providers) — if you need those, it earns its place.
+**LangChain core is optional**: for simple pipelines, the direct [[anthropic]] SDK (`@anthropic-ai/sdk` or `anthropic`) is simpler and produces less debugging overhead. LangChain's value is in the integrations (vector stores, document loaders, 50+ model providers) — if you need those, it earns its place.
 
 **LangSmith is underrated**: the trace visualization is the best debugging interface for multi-agent Python systems. If you're building in Python + LangGraph, use LangSmith; the free tier is enough for development.
 
@@ -178,7 +178,7 @@ LangChain Ecosystem
 - **[[entities/openai]]**: LangChain's `ChatOpenAI` is one of the primary model providers
 - **[[entities/anthropic]]**: `langchain-anthropic` wraps the Anthropic API
 - **[[entities/model-landscape]]**: LangChain supports 50+ models via provider packages
-- **[[evaluations/eval-orchestration-frameworks]]**: LangGraph scored against GSD, AutoGen, CrewAI
+- **[[evaluations/eval-orchestration-frameworks]]**: LangGraph scored against GSD, [[framework-autogen]], [[framework-crewai]]
 
 ---
 

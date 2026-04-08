@@ -13,11 +13,11 @@ tags: [context-management, compression, long-sessions, memory, token-optimizatio
 
 ## Goal
 
-Implement rolling summary compression to keep a long agentic session within a context window. When the conversation history grows too large, compress old turns into a dense summary and replace them — preserving the essential state while freeing context for new work.
+Implement [[pattern-rolling-summary]] compression to keep a long agentic session within a context window. When the conversation history grows too large, compress old turns into a dense summary and replace them — preserving the essential state while freeing context for new work.
 
 This prevents the most common production failure mode for long-running agents: running out of context and losing everything, or degrading in quality as the context fills with irrelevant old turns.
 
-See [[frameworks/framework-claude-code]] — Claude Code's `autoCompactThreshold: 0.75` implements exactly this pattern.
+See [[frameworks/framework-claude-code]] — [[framework-claude-code]]'s `autoCompactThreshold: 0.75` implements exactly this pattern.
 
 ---
 
@@ -366,5 +366,5 @@ Cause: the summarizer model invented information. Fix: (1) use a more capable mo
 ## Related Recipes
 
 - [[recipes/recipe-build-tool-agent]] — the base agent this integrates with
-- [[recipes/recipe-multi-agent-crew]] — multi-agent systems need compression too; apply per-agent
+- [[recipes/recipe-multi-agent-crew]] — [[multi-agent-systems]] need compression too; apply per-agent
 - [[frameworks/framework-claude-code]] — `autoCompactThreshold` is this pattern built-in

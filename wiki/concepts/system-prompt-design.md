@@ -142,7 +142,7 @@ For agents with long sessions: prefer shorter, more focused system prompts. Use 
 
 ### Prompt Caching
 
-Anthropic supports prompt caching — if the system prompt is identical across requests, the token processing cost is dramatically reduced (cached tokens cost ~10% of regular). Design system prompts to be stable across a session; inject dynamic content at the user turn, not in the system prompt, to maximize cache hits.
+[[anthropic]] supports prompt caching — if the system prompt is identical across requests, the token processing cost is dramatically reduced (cached tokens cost ~10% of regular). Design system prompts to be stable across a session; inject dynamic content at the user turn, not in the system prompt, to maximize cache hits.
 
 ---
 
@@ -185,4 +185,4 @@ Treat system prompts as code:
 
 - Anthropic System Prompts best practices (2025)
 - Schulhoff et al. "The Prompt Report: A Systematic Survey of Prompting Techniques" (2024)
-- OpenAI GPT-4 technical report system prompt guidelines
+- [[openai]] GPT-4 technical report system prompt guidelines

@@ -26,7 +26,7 @@ In long-running agentic sessions or multi-session workflows, agents repeatedly r
 
 ## Solution
 
-Maintain a hot cache file (`context-cache.md` or `.agent-cache.md`) containing a ≤500-word distillation of the most frequently-needed context. The agent is instructed to read the cache file first at the start of every session. The cache is updated only when the underlying information changes.
+Maintain a [[pattern-hot-cache]] file (`context-cache.md` or `.agent-cache.md`) containing a ≤500-word distillation of the most frequently-needed context. The agent is instructed to read the cache file first at the start of every session. The cache is updated only when the underlying information changes.
 
 ```
 Session start → read context-cache.md → [has needed context] → proceed
@@ -187,7 +187,7 @@ Never evict:
 
 ## Real Examples
 
-- `.agent-cache.md` in every project root for Claude Code sessions
+- `.agent-cache.md` in every project root for [[framework-claude-code]] sessions
 - `kb/hot-context.md` in a multi-agent knowledge base system
 - `context-snapshot.md` maintained by the GSD session-report workflow
 
@@ -205,4 +205,4 @@ Never evict:
 ## Sources
 
 - Practical agentic system design patterns (2024-2025)
-- Anthropic Prompt Caching documentation
+- [[anthropic]] Prompt Caching documentation

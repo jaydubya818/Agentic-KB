@@ -14,7 +14,7 @@ jay_experience: moderate
 
 ## Overview
 
-OpenClaw is an agentic system Jay runs locally at `~/.openclaw/`. Based on the directory structure, it is a multi-agent orchestration platform with persistent workspaces, a browser automation layer, subagent support, a skill system, scheduling/cron capabilities, identity management, and a Telegram delivery channel. It appears to be either a heavily customized Claude Code variant, a third-party agentic runtime, or Jay's own orchestration layer built on the Anthropic API.
+[[framework-openclaw]] is an agentic system Jay runs locally at `~/.openclaw/`. Based on the directory structure, it is a multi-agent orchestration platform with persistent workspaces, a browser automation layer, subagent support, a skill system, scheduling/cron capabilities, identity management, and a Telegram delivery channel. It appears to be either a heavily customized [[framework-claude-code]] variant, a third-party agentic runtime, or Jay's own orchestration layer built on the [[anthropic]] API.
 
 Key indicator: the config version `2026.3.24` and the `clawdbot.json` file suggest this is a running assistant service (possibly "Clawd" — one of Jay's projects listed in his stack). The `workspace-*` directories (main, casey, coach, sofie, minion-1, minion-2) suggest multiple persistent agent identities or workspaces, each with their own context and state.
 
@@ -52,7 +52,7 @@ OpenClaw has its own skill system separate from Claude Code's `~/.claude/skills/
 - `gstack` — headless browser automation/QA
 - `agent-standup` — agent status reporting
 - `antfarm-workflows` — antfarm orchestration patterns
-- `brainstorming` — structured ideation (parallel to Superpowers brainstorming)
+- `brainstorming` — structured ideation (parallel to [[framework-superpowers]] brainstorming)
 - `computer-use` — computer use API integration
 - `dispatching-parallel-agents`
 - `docclaw` — document processing
@@ -65,7 +65,7 @@ OpenClaw has its own skill system separate from Claude Code's `~/.claude/skills/
 ### Model Configuration
 From `~/.rowboat/config/models.json` (related system): `claude-sonnet-4-5` with Anthropic flavor. OpenClaw's `openclaw.json` uses the same Anthropic API stack.
 
-### MCP Servers
+### [[mcp-ecosystem]] Servers
 The `mcp-servers/` directory indicates OpenClaw registers and manages MCP servers, making it a full MCP host in addition to whatever native tools it provides.
 
 ### Cron / Scheduling

@@ -139,7 +139,7 @@ Agents read from semantic memory via targeted file reads or vector search. Write
 - Tool usage guidelines
 - Error handling patterns
 
-**Implementation** (Claude Code native): `~/.claude/skills/` contains skill files. The Agent tool's `system` parameter is procedural memory for sub-agents. CLAUDE.md files in project roots are procedural memory for the main agent.
+**Implementation** ([[framework-claude-code]] native): `~/.claude/skills/` contains skill files. The Agent tool's `system` parameter is procedural memory for sub-agents. CLAUDE.md files in project roots are procedural memory for the main agent.
 
 ```yaml
 # skill: handle-database-migration.md
@@ -201,4 +201,4 @@ Apply whenever the task involves creating or modifying a Prisma migration.
 
 - Cognitive Psychology: Atkinson-Shiffrin Multi-Store Model
 - Cognitive Architectures for Language Agents (CoALA), Sumers et al. (2023)
-- Anthropic "Building Effective Agents" (2024)
+- [[anthropic]] "Building Effective Agents" (2024)

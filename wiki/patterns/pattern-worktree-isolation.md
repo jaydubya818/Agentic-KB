@@ -164,9 +164,9 @@ async def run_agent_isolated(task: str, task_name: str, repo_path: str) -> Agent
             pass
 ```
 
-### Integration with Claude Code's Isolation Mode
+### Integration with [[framework-claude-code]]'s Isolation Mode
 
-In the Superpowers framework, the `using-git-worktrees` skill formalizes this:
+In the [[framework-superpowers]] framework, the `using-git-worktrees` skill formalizes this:
 
 ```bash
 # Claude Code running in isolation mode:
@@ -261,5 +261,5 @@ Automate cleanup after each session — orphaned worktrees accumulate.
 ## Sources
 
 - Git worktree documentation (`man git-worktree`)
-- Anthropic Claude Code isolation mode documentation
+- [[anthropic]] Claude Code isolation mode documentation
 - Superpowers `using-git-worktrees` skill
