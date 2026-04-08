@@ -1,0 +1,36 @@
+graph TB
+    subgraph Clients
+        WEB[Web UI<br/>Next.js :3002]
+        CLI[kb CLI<br/>cli/kb.js]
+        MCP[MCP Server<br/>mcp/server.js]
+        GH[GitHub Actions<br/>kb-ingest.yml]
+    end
+
+    subgraph API["Next.js API routes"]
+        COMPILE[/api/compile<br/>SSE stream/]
+        QUERY[/api/query<br/>Claude synthesis/]
+        SEARCH[/api/search<br/>hybrid/]
+        INGEST[/api/ingest<br/>direct/]
+        WEBHOOK[/api/ingest/webhook<br/>RBAC/]
+        LINT[/api/lint<br/>health check/]
+    end
+
+    subgraph Vault["Agentic-KB vault"]
+        RAW[(raw/<br/>source docs)]
+        WIKI[(wiki/<br/>compiled pages)]
+        GRAPH[(graphify-out/<br/>graph.json)]
+        AUDIT[(logs/<br/>audit.log)]
+    end
+
+    WEB --> COMPILE & QUERY & SEARCH & LINT
+    CLI --> COMPILE & QUERY & INGEST & LINT
+    MCP --> QUERY & SEARCH & COMPILE & LINT
+    GH --> WEBHOOK
+
+    INGEST & WEBHOOK --> RAW
+    COMPILE --> RAW
+    COMPILE --> WIKI
+    QUERY --> WIKI
+    SEARCH --> WIKI
+    SEARCH --> GRAPH
+    QUERY & INGEST & WEBHOOK & COMPILE & LINT --> AUDIT

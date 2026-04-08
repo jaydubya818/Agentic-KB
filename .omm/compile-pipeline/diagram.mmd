@@ -1,0 +1,15 @@
+flowchart TB
+    START([User clicks Compile New]) -->|POST SSE| API[/api/compile/]
+    API -->|read| RAW[(raw/**/*.md)]
+    API -->|read state| LOG[(raw/.compiled-log.json)]
+    API -->|filter| NEW{New or<br/>changed?}
+    NEW -->|no| DONE([SSE done event])
+    NEW -->|yes| BATCH[Batch with<br/>wiki/schema.md]
+    BATCH -->|prompt| CLAUDE{{Claude API}}
+    CLAUDE -->|JSON ops| WRITE[Write<br/>wiki/**.md]
+    WRITE -->|progress| SSE[SSE event stream]
+    SSE -->|rendered| UI[CompilePanel]
+    WRITE -->|loop| NEW
+    WRITE -->|append| RUNLOG[(wiki/log.md)]
+    WRITE -->|save state| LOG
+    DONE --> UI

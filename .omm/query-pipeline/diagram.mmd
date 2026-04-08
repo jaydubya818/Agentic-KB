@@ -1,0 +1,12 @@
+flowchart LR
+    Q[User query] --> API[/api/query/]
+    API --> KW[Keyword scan<br/>wiki/*.md]
+    API --> GS[Graph search<br/>graph.json]
+    KW --> MERGE[Hybrid merge<br/>dedupe by filePath]
+    GS --> MERGE
+    MERGE --> RANK[ranking.ts<br/>decay × hotness]
+    RANK --> TOP[Top-K pages]
+    TOP --> CLAUDE[Claude synthesis<br/>w/ citations]
+    CLAUDE --> ANSWER[SSE answer stream]
+    CLAUDE --> AUDIT[(audit.log<br/>op:query)]
+    AUDIT -.feeds.-> RANK

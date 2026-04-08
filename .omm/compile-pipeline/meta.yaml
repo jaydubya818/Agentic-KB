@@ -1,0 +1,29 @@
+created: 2026-04-08T04:39:09.611Z
+updated: 2026-04-08T04:39:23.469Z
+update_count: 3
+last_field: diagram
+git_commit: a092005
+git_branch: main
+prev_diagram: |
+  sequenceDiagram
+      participant User
+      participant UI as CompilePanel
+      participant API as /api/compile
+      participant FS as raw/ + logs
+      participant Claude
+
+      User->>UI: Click "Compile New"
+      UI->>API: POST (SSE)
+      API->>FS: collectMd(raw/)
+      API->>FS: loadLog(.compiled-log.json)
+      API->>API: filter new/changed docs
+      loop each batch
+          API->>Claude: schema.md + raw docs
+          Claude-->>API: JSON page ops
+          API->>FS: write wiki/<path>.md
+          API->>UI: SSE progress event
+      end
+      API->>FS: append wiki/log.md
+      API->>FS: saveLog(.compiled-log.json)
+      API-->>UI: SSE done
+      UI->>User: Render final log

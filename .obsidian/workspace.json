@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "wiki/personal/private-test-note.md",
+                "file": "wiki/entities/jay-west-agent-stack.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "private-test-note"
+              "title": "jay-west-agent-stack"
             }
           }
         ]
@@ -186,6 +186,7 @@
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "wiki/personal/private-test-note.md",
     "logs/audit.log",
     "logs",
     "outputs/README.md",
@@ -221,7 +222,6 @@
     "web/src/app/api/compile/route.ts",
     "web/src/lib/audit.ts",
     "web/src/app/api/ingest/webhook",
-    "web/src/app/api/lint",
     "Untitled.canvas"
   ]
 }
