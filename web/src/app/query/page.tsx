@@ -337,7 +337,13 @@ export default function QueryPage(): React.ReactElement {
                   ))}
                   {state.reading.map((filePath, i) => (
                     <div key={`r-${i}`} className="reading-step">
-                      📄 {filePath}
+                      📄{' '}
+                      <Link
+                        href={`/wiki/${pathToSlug(filePath)}`}
+                        style={{ color: '#0645ad', textDecoration: 'none' }}
+                      >
+                        {filePath}
+                      </Link>
                     </div>
                   ))}
                 </div>

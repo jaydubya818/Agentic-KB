@@ -344,7 +344,14 @@ export default function QueryPanel({ isOpen, onClose }: QueryPanelProps): React.
           {/* Reading files */}
           {state.reading.map((filePath, i) => (
             <div key={i} className="reading-step">
-              📄 {filePath}
+              📄{' '}
+              <Link
+                href={`/wiki/${pathToSlug(filePath)}`}
+                onClick={onClose}
+                style={{ color: '#0645ad', textDecoration: 'none' }}
+              >
+                {filePath}
+              </Link>
             </div>
           ))}
 
