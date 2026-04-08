@@ -14,6 +14,7 @@
 import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
+import { rankMultiplier, rankBreakdown } from '@/lib/ranking'
 
 // ── Graph types ───────────────────────────────────────────────────────────────
 
@@ -54,7 +55,10 @@ interface KnowledgeGraph {
 export interface GraphSearchResult {
   filePath: string      // absolute path on disk
   relPath: string       // relative to vaultRoot, for matching with article meta
-  score: number         // 0–1, higher = more relevant
+  score: number         // final score after decay + hotness (higher = more relevant)
+  baseScore: number     // raw graph match score before ranking multiplier
+  decay: number         // temporal decay factor (0.5–1.0)
+  hotness: number       // hotness multiplier (1.0–1.5)
   matchReason: string   // human-readable explanation
   nodeLabel: string     // the graph node label that matched
   relation?: string     // edge relation if arrived via traversal
@@ -139,17 +143,23 @@ export function searchGraph(
     adjacency.get(link.target)!.push({ nodeId: link.source, relation: link.relation, score: link.confidence_score })
   }
 
-  function addResult(node: GraphNode, score: number, reason: string, relation?: string) {
+  function addResult(node: GraphNode, baseScore: number, reason: string, relation?: string) {
     if (!node.source_file) return
     const absPath = path.join(vaultRoot, node.source_file)
     if (!fs.existsSync(absPath)) return
 
+    const { decay, hotness, multiplier } = rankBreakdown(absPath, node.source_file)
+    const finalScore = baseScore * multiplier
+
     const existing = results.get(node.id)
-    if (!existing || score > existing.score) {
+    if (!existing || finalScore > existing.score) {
       results.set(node.id, {
         filePath: absPath,
         relPath: node.source_file,
-        score,
+        score: finalScore,
+        baseScore,
+        decay,
+        hotness,
         matchReason: reason,
         nodeLabel: node.label,
         relation,

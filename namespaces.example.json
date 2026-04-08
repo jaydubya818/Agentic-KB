@@ -1,0 +1,26 @@
+{
+  "_comment": "Copy to namespaces.json and customize. Deleting this file = open access (back-compat).",
+  "tokens": {
+    "sk-engineering-replace-me": "engineering",
+    "sk-product-replace-me": "product",
+    "sk-readonly-replace-me": "readonly"
+  },
+  "namespaces": {
+    "engineering": {
+      "read": ["*"],
+      "write": ["engineering", "shared"]
+    },
+    "product": {
+      "read": ["product", "shared", "engineering"],
+      "write": ["product", "shared"]
+    },
+    "readonly": {
+      "read": ["*"],
+      "write": []
+    },
+    "default": {
+      "read": ["*"],
+      "write": ["*"]
+    }
+  }
+}

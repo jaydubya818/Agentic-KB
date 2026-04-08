@@ -19,15 +19,18 @@ import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 import { appendAuditLog } from '@/lib/audit'
+import { resolveIdentity, canWrite } from '@/lib/rbac'
 
 export const dynamic = 'force-dynamic'
 
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || ''
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
+// RBAC is primary; WEBHOOK_SECRET is a legacy fallback for non-namespaced
+// deployments. If neither matches, reject.
 
-function isAuthorized(request: NextRequest): boolean {
-  if (!WEBHOOK_SECRET) return true  // no secret = open (dev only)
+function legacySecretOk(request: NextRequest): boolean {
+  if (!WEBHOOK_SECRET) return true
   const auth = request.headers.get('authorization') || ''
   return auth === `Bearer ${WEBHOOK_SECRET}`
 }
@@ -135,8 +138,10 @@ function slugify(str: string): string {
     .slice(0, 60)
 }
 
-function writeRawDoc(vaultRoot: string, doc: NormalizedDoc): string {
-  const rawDir = path.join(vaultRoot, 'raw', 'webhooks')
+function writeRawDoc(vaultRoot: string, doc: NormalizedDoc, namespace = 'default'): string {
+  // Namespace-scoped write path: raw/webhooks/<namespace>/
+  const nsSegment = namespace === 'default' ? '' : namespace
+  const rawDir = path.join(vaultRoot, 'raw', 'webhooks', nsSegment)
   fs.mkdirSync(rawDir, { recursive: true })
 
   const date = new Date().toISOString().slice(0, 10)
@@ -162,7 +167,9 @@ function writeRawDoc(vaultRoot: string, doc: NormalizedDoc): string {
 // ── Route handler ─────────────────────────────────────────────────────────────
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  if (!isAuthorized(request)) {
+  const identity = resolveIdentity(request)
+  // Reject only if: legacy secret is set AND doesn't match AND caller has no namespace token
+  if (identity.source === 'default' && !legacySecretOk(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -181,8 +188,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ ok: true, skipped: true, reason: 'unsupported event type' })
   }
 
+  // Enforce namespace write permission — caller's namespace must be allowed
+  // to write into its own bucket. Docs land under raw/webhooks/<namespace>/.
+  if (!canWrite(identity.acl, identity.namespace)) {
+    return NextResponse.json(
+      { error: `Namespace "${identity.namespace}" has no write permission` },
+      { status: 403 }
+    )
+  }
+
   const vaultRoot = DEFAULT_KB_ROOT
-  const relPath = writeRawDoc(vaultRoot, doc)
+  const relPath = writeRawDoc(vaultRoot, doc, identity.namespace)
 
   appendAuditLog({
     op: 'webhook',
@@ -190,6 +206,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     title: doc.title,
     file: relPath,
     githubEvent: githubEvent || undefined,
+    namespace: identity.namespace,
+    identitySource: identity.source,
   })
 
   return NextResponse.json({
