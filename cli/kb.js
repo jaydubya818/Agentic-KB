@@ -470,7 +470,7 @@ async function ingestTwitterArchive(archivePath) {
 
   if (totalSaved === 0) {
     console.log('\n⚠️  No tweets or bookmarks found.')
-    console.log('   Make sure you're passing the archive folder or .zip file.')
+    console.log("   Make sure you're passing the archive folder or .zip file.")
     console.log('   Twitter archives contain data/tweets.js and data/bookmarks.js')
   } else {
     console.log('\n✅ Archive imported to raw/twitter/')

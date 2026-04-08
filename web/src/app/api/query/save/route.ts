@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 import { appendAuditLog } from '@/lib/audit'
+import { ulid, invalidateIdIndex } from '@/lib/ids'
 
 export const dynamic = 'force-dynamic'
 
@@ -74,11 +75,17 @@ export async function POST(request: NextRequest): Promise<Response> {
 
   const fm = [
     '---',
+    `id: ${ulid()}`,
+    `type: qa`,
+    `status: active`,
     `title: ${yaml('Q: ' + question.slice(0, 80))}`,
     `source: qa`,
     `date: ${now.toISOString()}`,
+    `created: ${dateStr}`,
+    `updated: ${dateStr}`,
     `question: ${yaml(question)}`,
     `sources: ${yaml(sources)}`,
+    `related: ${yaml(sources.map(s => '[[' + s.replace(/\.md$/, '').replace(/^wiki\//, '') + ']]'))}`,
     `tags: ${yaml(tags)}`,
     `verified: ${verified}`,
     '---',
@@ -98,6 +105,7 @@ export async function POST(request: NextRequest): Promise<Response> {
 
   try {
     fs.writeFileSync(target, doc, 'utf8')
+    invalidateIdIndex()
   } catch (err) {
     return NextResponse.json({ error: `write failed: ${(err as Error).message}` }, { status: 500 })
   }

@@ -13,6 +13,7 @@ import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT, resolveContentRoot } from '@/lib/articles'
 import { appendAuditLog } from '@/lib/audit'
+import { ensureId, invalidateIdIndex } from '@/lib/ids'
 
 export const dynamic = 'force-dynamic'
 
@@ -202,6 +203,7 @@ Rules:
             fs.mkdirSync(path.dirname(pagePath), { recursive: true })
             const existed = fs.existsSync(pagePath)
             fs.writeFileSync(pagePath, op.content, 'utf8')
+            ensureId(pagePath)
             affectedPages.push(op.path)
             if (existed) totalPagesUpdated++; else totalPagesCreated++
             send({ type: 'page', op: op.op, path: op.path })
@@ -213,6 +215,7 @@ Rules:
             pagesAffected: affectedPages,
           }
           saveLog(vaultRoot, compiledLog)
+          invalidateIdIndex()
 
           // Append to wiki/log.md
           const logEntry = `\n## ${new Date().toISOString().slice(0, 10)} — Compiled \`${relFile}\`\n\nPages affected: ${affectedPages.map(p => `\`${p}\``).join(', ')}\n`

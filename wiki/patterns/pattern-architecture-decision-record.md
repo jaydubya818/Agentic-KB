@@ -1,88 +1,59 @@
 ---
-title: "Architecture Decision Record (ADR) Pattern"
+title: "Pattern: Architecture Decision Record (ADR)"
 type: pattern
-tags: [architecture, patterns, workflow, documentation]
-created: 2025-01-30
-updated: 2025-01-30
+tags: [architecture, workflow, automation, knowledge-base]
+created: 2026-04-07
+updated: 2026-04-08
 visibility: public
 confidence: high
-related: [pattern-architecture-first, concepts/system-prompt-design, concepts/task-decomposition]
+related: [concepts/llm-owned-wiki.md, concepts/agent-observability.md, frameworks/framework-mcp.md]
 ---
 
-# Architecture Decision Record (ADR) Pattern
-
-A structured format for capturing significant architecture decisions, their context, trade-offs, and consequences — so that future developers understand not just *what* was decided but *why*.
+# Pattern: Architecture Decision Record (ADR)
 
 ## When to Use
 
-- A decision will have long-lasting structural impact (tech stack choice, service boundaries, API contracts)
-- Multiple reasonable options exist and the rejection rationale matters
-- You need an audit trail for compliance, onboarding, or retrospectives
-- A decision involves trade-offs the team should explicitly accept
+Use ADRs to capture significant architectural decisions as they happen, including context, options considered, and rationale. In agentic KB systems, ADRs are often auto-ingested to keep the knowledge base current with evolving system design.
 
 ## Structure
 
-Each ADR is a standalone markdown document with a sequential identifier:
-
-```markdown
-# ADR-NNN: [Decision Title]
-
-**Date**: YYYY-MM-DD
-**Status**: Proposed | Accepted | Superseded
-
-## Context
-[What situation prompted this decision? What are the constraints?]
-
-## Decision
-[What was decided?]
-
-## Rationale
-[Why this option over others? What trade-offs were evaluated?]
-
-## Alternatives Considered
-1. [Option A] — rejected because [reason]
-2. [Option B] — rejected because [reason]
-
-## Consequences
-**Positive**: [benefits]
-**Negative**: [costs, risks, limitations]
-**Neutral**: [things that change but aren't good/bad]
-
-## Implementation Notes
-[How to implement; any migration steps needed]
-```
+ADRs typically include:
+- **Title** — short description of the decision
+- **Status** — proposed, accepted, deprecated, superseded
+- **Context** — the problem being solved
+- **Decision** — what was chosen
+- **Consequences** — trade-offs and follow-on effects
 
 ## Example
 
-An agent asked to evaluate a message queue technology produces:
+In the Oh My Mermaid (OMM) system, ADR files under `docs/` or tracked ADR paths trigger automatic ingestion via GitHub Actions. When a PR touching these files is merged, the workflow fires and posts to `/api/ingest/webhook`, keeping the KB in sync with architecture evolution.
 
-- **ADR-012: Use Kafka over RabbitMQ for event streaming** — with context (high-throughput requirements, replay needs), rationale (log compaction, consumer groups), alternatives rejected (RabbitMQ: no replay; SQS: vendor lock-in), and negative consequences (operational complexity).
+### GitHub Actions Integration (OMM)
+
+The KB ingest workflow (`.github/workflows/kb-ingest.yml`) fires on:
+- Merged pull requests
+- Closed issues
+- Pushes touching `docs/` or ADR files
+
+It posts to `/api/ingest/webhook` with the `X-GitHub-Event` header so the webhook adapter knows which payload shape to parse. Required repo secrets: `KB_WEBHOOK_URL` and `KB_WEBHOOK_SECRET`.
+
+This creates a tight feedback loop: architecture decisions are written once (as ADRs or docs), and the KB stays current automatically.
 
 ## Trade-offs
 
-| Benefit | Cost |
+| Pro | Con |
 |---|---|
-| Decisions are revisitable and auditable | Adds documentation overhead |
-| Rejection reasoning prevents re-litigating old debates | Requires discipline to maintain status field |
-| Onboarding is faster when context is preserved | ADRs can go stale if not updated to "Superseded" |
-
-## Design Principles Behind Good ADRs
-
-- **Present multiple options before recommending one** — a single option is a decree, not a decision
-- **Design for 18-month scale, not 10-year scale** — avoid speculative over-engineering
-- **Prefer boring technology** unless there is a clear, documented reason for novelty
-- **Data migrations are the hardest part** — plan them first and note them explicitly in Implementation Notes
-- **Observability is not optional** — flag logging, tracing, and metrics requirements in Consequences
-- **Flag team decisions vs. unilateral ones** — note which decisions require broader sign-off
+| Decisions are traceable over time | Requires discipline to write ADRs consistently |
+| Auto-ingestion keeps KB current | Secrets management adds operational overhead |
+| Decouples authoring from KB maintenance | Webhook failures can silently drop updates |
 
 ## Related Patterns
 
-- [Architecture First Pattern](pattern-architecture-first.md) — establish system structure before implementation
-- [Clarification Before Task Pattern](pattern-clarification-task.md) — surface ambiguities before committing to a design
-- [Adversarial Plan Review](pattern-adversarial-plan-review.md) — stress-test ADR alternatives before accepting
+- [Architecture First](pattern-architecture-first.md) — ADRs support up-front design discipline
+- [LLM-Owned Wiki](../concepts/llm-owned-wiki.md) — ADRs are a primary ingest source for living KB systems
+- [Agent Observability](../concepts/agent-observability.md) — webhook delivery and ingest events should be observable
 
 ## See Also
 
-- [Task Decomposition](../concepts/task-decomposition.md)
-- [System Prompt Design](../concepts/system-prompt-design.md)
-- [Agent Observability](../concepts/agent-observability.md)
+- [MCP Framework](../frameworks/framework-mcp.md)
+- [Context Management](../concepts/context-management.md)

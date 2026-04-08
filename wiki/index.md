@@ -137,6 +137,7 @@
 - [[summaries/farzapedia-personal-wiki|Farzapedia Personal Wiki]] — Personal wiki over iMessages/Notes/diary using agentic Librarian navigation (no RAG); inspired by Karpathy LLM wiki pattern
 - [[summaries/karpathy-llm-wiki-video|Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)]] — Transcript explaining the LLM wiki pattern: three-layer architecture (raw/wiki/schema), INGEST/QUERY/LINT operations, and division of labor between human curator and LLM maintainer
 - [[summaries/nate-herk-llm-wiki|Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)]] — Walkthrough of Karpathy's LLM wiki pattern: markdown-only KB, hot cache, lint cycle, and LLM wiki vs RAG tradeoffs; one user cut token usage 95%
+- [[summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl|Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code]] — Synthesized Q&A recommending the Fan-Out Orchestrator-Worker pattern as the default; covers three sub-patterns, Agent tool parameters, token economics (~15× multiplier for multi-agent), the Telephone Game failure mode, and when to avoid multi-agent altogether
 ## Personal (Jay's patterns)
 
 | Page | Category | Confidence | Description |

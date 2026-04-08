@@ -151,5 +151,47 @@
       "patterns/pattern-deviation-rules.md",
       "log.md"
     ]
+  },
+  "architecture/2026-04-07-omm-compile-pipeline.md": {
+    "compiledAt": "2026-04-08T05:08:59.001Z",
+    "pagesAffected": [
+      "concepts/llm-wiki-compile-pipeline.md",
+      "log.md"
+    ]
+  },
+  "architecture/2026-04-07-omm-ingest-flow.md": {
+    "compiledAt": "2026-04-08T05:09:18.423Z",
+    "pagesAffected": [
+      "concepts/ingest-pipeline.md",
+      "log.md"
+    ]
+  },
+  "architecture/2026-04-07-omm-overall-architecture-api-routes.md": {
+    "compiledAt": "2026-04-08T05:09:33.920Z",
+    "pagesAffected": [
+      "entities/oh-my-mermaid.md",
+      "log.md"
+    ]
+  },
+  "architecture/2026-04-07-omm-overall-architecture-cli.md": {
+    "compiledAt": "2026-04-08T05:09:48.214Z",
+    "pagesAffected": [
+      "entities/oh-my-mermaid.md",
+      "log.md"
+    ]
+  },
+  "architecture/2026-04-07-omm-overall-architecture-github-actions.md": {
+    "compiledAt": "2026-04-08T05:10:05.373Z",
+    "pagesAffected": [
+      "patterns/pattern-architecture-decision-record.md",
+      "log.md"
+    ]
+  },
+  "architecture/2026-04-07-omm-overall-architecture-mcp-server.md": {
+    "compiledAt": "2026-04-08T05:10:18.594Z",
+    "pagesAffected": [
+      "entities/mcp-ecosystem.md",
+      "log.md"
+    ]
   }
 }

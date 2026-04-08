@@ -1,21 +1,14 @@
 # Wiki Compile Log
 
-## 2026-04-07
+## 2026-04-08
 
-### Source: `my-agents/gsd-executor.md`
+### Updated: `entities/mcp-ecosystem.md`
+- **Source**: `architecture/2026-04-07-omm-overall-architecture-mcp-server.md`
+- **Changes**: Added Oh-My-Mermaid MCP server section documenting the 7 exposed tools (`query_wiki`, `ingest_raw`, `search_wiki`, `list_articles`, `read_article`, `compile_wiki`, `lint_wiki`), the thin-wrapper architecture pattern, and the Mermaid flow diagram showing JSON-RPC → server.js → /api/ routing.
+- **Decision**: Updated existing `mcp-ecosystem.md` rather than creating a new page — the content is a component detail of the broader MCP ecosystem entity.
 
-**Updated:** `frameworks/framework-gsd.md`
-- Added detailed section on the GSD Executor agent
-- Documented execution patterns (A: autonomous, B: checkpoint, C: continuation)
-- Documented atomic commit protocol, state files (PLAN.md, STATE.md, SUMMARY.md)
-- Documented project context loading (CLAUDE.md, skills system)
-- Documented all four deviation rules with trigger conditions and permission levels
+## 2026-04-08 — Compiled `architecture/2026-04-07-omm-overall-architecture-mcp-server.md`
 
-**Created:** `patterns/pattern-deviation-rules.md`
-- New pattern page extracting the deviation rules system as a reusable design pattern
-- Covers structure, example, trade-offs, and related patterns
-- Cross-referenced with guardrails, human-in-the-loop, adversarial plan review
+Pages affected: `entities/mcp-ecosystem.md`, `log.md`
 
-## 2026-04-07 — Compiled `my-agents/gsd-executor.md`
-
-Pages affected: `frameworks/framework-gsd.md`, `patterns/pattern-deviation-rules.md`, `log.md`
+[2026-04-08 05:47] INGEST | raw/qa/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl.md | Created summary page for multi-agent orchestration Q&A; created new pattern page wiki/patterns/pattern-pipeline.md (pipeline pattern was not in index); no new concept pages needed as multi-agent-systems, task-decomposition, and fan-out-worker already exist
