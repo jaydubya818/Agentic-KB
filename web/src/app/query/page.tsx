@@ -20,6 +20,9 @@ interface QueryState {
   sources: string[]
   error: string | null
   isStreaming: boolean
+  saveStatus: 'idle' | 'saving' | 'saved' | 'error'
+  savedPath: string | null
+  autoCompile: boolean
 }
 
 const EXAMPLE_QUESTIONS = [
@@ -53,6 +56,9 @@ export default function QueryPage(): React.ReactElement {
     sources: [],
     error: null,
     isStreaming: false,
+    saveStatus: 'idle',
+    savedPath: null,
+    autoCompile: false,
   })
   const abortRef = useRef<AbortController | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -71,14 +77,17 @@ export default function QueryPage(): React.ReactElement {
     if (abortRef.current) abortRef.current.abort()
     abortRef.current = new AbortController()
 
-    setState({
+    setState(prev => ({
       thinking: [],
       reading: [],
       answer: '',
       sources: [],
       error: null,
       isStreaming: true,
-    })
+      saveStatus: 'idle',
+      savedPath: null,
+      autoCompile: prev.autoCompile,
+    }))
 
     try {
       const response = await fetch('/api/query', {
@@ -149,6 +158,33 @@ export default function QueryPage(): React.ReactElement {
     void handleSubmit(q)
     textareaRef.current?.focus()
   }, [handleSubmit])
+
+  const handleSaveToKB = useCallback(async (verified: boolean): Promise<void> => {
+    if (!state.answer || state.isStreaming) return
+    setState(prev => ({ ...prev, saveStatus: 'saving' }))
+    try {
+      const res = await fetch('/api/query/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: question.trim(),
+          answer: state.answer,
+          sources: state.sources,
+          verified,
+          autoCompile: state.autoCompile,
+        }),
+      })
+      const data = await res.json() as { ok?: boolean; path?: string; error?: string }
+      if (!res.ok || !data.ok) {
+        setState(prev => ({ ...prev, saveStatus: 'error', error: data.error || 'Save failed' }))
+        return
+      }
+      setState(prev => ({ ...prev, saveStatus: 'saved', savedPath: data.path || null }))
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Save failed'
+      setState(prev => ({ ...prev, saveStatus: 'error', error: message }))
+    }
+  }, [question, state.answer, state.sources, state.isStreaming, state.autoCompile])
 
   const hasResponse = state.thinking.length > 0 || state.answer || state.error
 
@@ -348,6 +384,76 @@ export default function QueryPage(): React.ReactElement {
                       verticalAlign: 'middle',
                       marginLeft: '2px',
                     }} />
+                  )}
+                </div>
+              )}
+
+              {/* Compounding Loop — save Q&A back to KB */}
+              {state.answer && !state.isStreaming && (
+                <div style={{
+                  margin: '1rem 0',
+                  padding: '0.75rem 1rem',
+                  background: '#f1f8ff',
+                  border: '1px solid #c8e1ff',
+                  borderRadius: '3px',
+                  fontFamily: '-apple-system, sans-serif',
+                }}>
+                  <div style={{ fontWeight: 600, marginBottom: '0.35rem', color: '#24292e', fontSize: '0.85rem' }}>
+                    🔄 Compounding Loop
+                  </div>
+                  <div style={{ color: '#586069', marginBottom: '0.6rem', fontSize: '0.8rem' }}>
+                    Save this Q&amp;A to the KB so the next compile folds it into the wiki. Every question makes the next answer better.
+                  </div>
+                  {state.saveStatus === 'saved' ? (
+                    <div style={{ color: '#22863a', fontWeight: 500, fontSize: '0.8rem' }}>
+                      ✓ Saved to <code style={{ fontSize: '0.75rem' }}>{state.savedPath}</code>
+                      {state.autoCompile ? ' — compile triggered.' : ' — run Compile to fold in.'}
+                    </div>
+                  ) : (
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                      <button
+                        type="button"
+                        disabled={state.saveStatus === 'saving'}
+                        onClick={() => { void handleSaveToKB(false) }}
+                        style={{
+                          padding: '0.3rem 0.8rem',
+                          border: '1px solid #0645ad',
+                          borderRadius: '2px',
+                          background: '#fff',
+                          color: '#0645ad',
+                          cursor: state.saveStatus === 'saving' ? 'default' : 'pointer',
+                          fontSize: '0.8rem',
+                        }}
+                      >
+                        {state.saveStatus === 'saving' ? 'Saving…' : 'Save to KB'}
+                      </button>
+                      <button
+                        type="button"
+                        disabled={state.saveStatus === 'saving'}
+                        onClick={() => { void handleSaveToKB(true) }}
+                        title="Mark as verified — higher weight during compile & ranking"
+                        style={{
+                          padding: '0.3rem 0.8rem',
+                          border: '1px solid #22863a',
+                          borderRadius: '2px',
+                          background: '#22863a',
+                          color: '#fff',
+                          cursor: state.saveStatus === 'saving' ? 'default' : 'pointer',
+                          fontSize: '0.8rem',
+                        }}
+                      >
+                        ✓ Save as Verified
+                      </button>
+                      <label style={{ fontSize: '0.75rem', color: '#586069', marginLeft: '0.5rem' }}>
+                        <input
+                          type="checkbox"
+                          checked={state.autoCompile}
+                          onChange={e => setState(prev => ({ ...prev, autoCompile: e.target.checked }))}
+                          style={{ marginRight: '0.3rem' }}
+                        />
+                        Auto-compile after save
+                      </label>
+                    </div>
                   )}
                 </div>
               )}

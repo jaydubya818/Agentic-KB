@@ -12,6 +12,7 @@ interface SaveBody {
   sources?: string[]
   tags?: string[]
   verified?: boolean
+  autoCompile?: boolean
 }
 
 function slugify(s: string): string {
@@ -111,9 +112,30 @@ export async function POST(request: NextRequest): Promise<Response> {
     verified,
   })
 
+  // Auto-compile: fire-and-forget POST to /api/compile?mode=incremental.
+  // We don't await — saves should feel instant and compile is streamed.
+  let compileTriggered = false
+  if (body.autoCompile) {
+    try {
+      const origin = new URL(request.url).origin
+      void fetch(`${origin}/api/compile?mode=incremental`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          cookie: request.headers.get('cookie') || '',
+        },
+        body: JSON.stringify({}),
+      }).catch(() => { /* fire and forget */ })
+      compileTriggered = true
+    } catch { /* ignore */ }
+  }
+
   return NextResponse.json({
     ok: true,
     path: rel,
-    message: 'Saved. Run Compile to fold this into the wiki.',
+    compileTriggered,
+    message: compileTriggered
+      ? 'Saved. Compile triggered in background.'
+      : 'Saved. Run Compile to fold this into the wiki.',
   })
 }

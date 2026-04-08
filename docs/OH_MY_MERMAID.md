@@ -34,6 +34,36 @@ rm -rf .omm
 
 The compile log (`raw/.compiled-log.json`) will pick up the new files and skip the unchanged ones.
 
+## Ingest flow (with Compounding Loop)
+
+```mermaid
+flowchart LR
+  subgraph sources[Raw Sources]
+    omm[".omm/ architecture diagrams"]
+    wh["raw/webhooks/ (external push)"]
+    qa["raw/qa/ (Compounding Loop)"]
+    arch["raw/architecture/"]
+    other["raw/articles, transcripts, ..."]
+  end
+
+  subgraph compile[Compile Pipeline]
+    log[".compiled-log.json"]
+    llm["Claude synth → wiki/*.md"]
+  end
+
+  omm --> arch
+  wh --> log
+  qa --> log
+  arch --> log
+  other --> log
+  log --> llm
+  llm --> wiki["wiki/ compiled articles"]
+  wiki --> query["/api/query AI WikiQuery"]
+  query -- "Save to KB (verified)" --> qa
+```
+
+The `raw/qa/` loop is the system's memory of its own answers: every verified Q&A becomes a raw doc, compiled into the wiki, and eligible to be cited by the next query. `verified: true` in frontmatter triggers a ×1.25 ranking boost (see `web/src/lib/ranking.ts`).
+
 ## Tag convention
 
 All auto-generated architecture docs carry `tags: [architecture, mermaid, autogen]`. Use this to filter them in search or exclude them from lint orphan detection (they're autogen and don't need inbound links).

@@ -92,14 +92,45 @@ export function hotnessBoost(relPath: string): number {
   return 1.0 + boost
 }
 
-/** Combined decay + hotness multiplier */
+// ── Verified boost ───────────────────────────────────────────────────────────
+// Docs saved via /api/query/save with verified:true in frontmatter get a
+// ranking multiplier so human-validated Q&A outranks raw source material.
+
+const VERIFIED_BOOST = 1.25
+interface VerifiedCacheEntry { verified: boolean; mtimeMs: number }
+const _verifiedCache = new Map<string, VerifiedCacheEntry>()
+
+export function verifiedBoost(absPath: string): number {
+  try {
+    const stat = fs.statSync(absPath)
+    const cached = _verifiedCache.get(absPath)
+    if (cached && cached.mtimeMs === stat.mtimeMs) {
+      return cached.verified ? VERIFIED_BOOST : 1.0
+    }
+    // Read only the frontmatter region (first ~1KB is plenty)
+    const fd = fs.openSync(absPath, 'r')
+    const buf = Buffer.alloc(1024)
+    fs.readSync(fd, buf, 0, 1024, 0)
+    fs.closeSync(fd)
+    const head = buf.toString('utf8')
+    const fmMatch = head.match(/^---\n([\s\S]*?)\n---/)
+    const verified = fmMatch ? /^verified:\s*true\s*$/m.test(fmMatch[1]) : false
+    _verifiedCache.set(absPath, { verified, mtimeMs: stat.mtimeMs })
+    return verified ? VERIFIED_BOOST : 1.0
+  } catch {
+    return 1.0
+  }
+}
+
+/** Combined decay + hotness + verified multiplier */
 export function rankMultiplier(absPath: string, relPath: string): number {
-  return decayForFile(absPath) * hotnessBoost(relPath)
+  return decayForFile(absPath) * hotnessBoost(relPath) * verifiedBoost(absPath)
 }
 
 /** Explain the components for debugging/UI */
 export function rankBreakdown(absPath: string, relPath: string) {
   const decay = decayForFile(absPath)
   const hotness = hotnessBoost(relPath)
-  return { decay, hotness, multiplier: decay * hotness }
+  const verified = verifiedBoost(absPath)
+  return { decay, hotness, verified, multiplier: decay * hotness * verified }
 }
