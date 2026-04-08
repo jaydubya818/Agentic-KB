@@ -76,6 +76,31 @@ export default function WikiSidebar(): React.ReactElement {
         </ul>
       </div>
 
+      {/* External tools — architecture viewer + Obsidian graph */}
+      <div key="__tools__">
+        <h3>Tools</h3>
+        <ul>
+          <li>
+            <a
+              href="http://localhost:4567"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="oh-my-mermaid viewer — interactive architecture diagrams"
+            >
+              Architecture Diagram ↗
+            </a>
+          </li>
+          <li>
+            <a
+              href="obsidian://open?vault=Agentic-KB"
+              title="Open the Obsidian vault; then press Cmd+G for the graph view"
+            >
+              Knowledge Graph (Obsidian) ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+
       {/* Dynamic vault sections */}
       {structure.sections.map((section) => (
         <div key={section.title}>
