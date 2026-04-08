@@ -1,0 +1,7 @@
+flowchart LR
+    compile-cmd[kb compile] -->|SSE| compile-api[/api/compile/]
+    lint-cmd[kb lint] -->|POST| lint-api[/api/lint/]
+    query-cmd[kb query] -->|SSE| query-api[/api/query/]
+    youtube-cmd[kb ingest-youtube] -->|yt-dlp + parse| raw-dir[(raw/transcripts/)]
+    twitter-cmd[kb ingest-twitter] -->|unzip + parse| raw-tw[(raw/twitter/)]
+    search-cmd[kb search] -->|GET| search-api[/api/search/]

@@ -1,0 +1,11 @@
+flowchart LR
+    mcp-client[MCP client<br/>Claude] -->|JSON-RPC| server[server.js]
+    server -->|routes| query-wiki[query_wiki]
+    server -->|routes| ingest-raw[ingest_raw]
+    server -->|routes| search-wiki[search_wiki]
+    server -->|routes| list-articles[list_articles]
+    server -->|routes| read-article[read_article]
+    server -->|routes| compile-wiki[compile_wiki]
+    server -->|routes| lint-wiki[lint_wiki]
+    query-wiki -->|POST| query-api[/api/query/]
+    compile-wiki -->|POST| compile-api[/api/compile/]

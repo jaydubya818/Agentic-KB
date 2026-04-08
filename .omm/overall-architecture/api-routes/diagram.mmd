@@ -1,0 +1,12 @@
+flowchart TB
+    compile[compile] -->|reads| raw[(raw/)]
+    compile -->|writes| wiki[(wiki/)]
+    query -->|reads| wiki
+    query -->|ranks via| ranking-lib[ranking.ts]
+    search -->|keyword| wiki
+    search -->|graph| graph-search[graph-search.ts]
+    ingest -->|writes| raw
+    webhook -->|RBAC| rbac-lib[rbac.ts]
+    webhook -->|writes| raw
+    lint -->|analyzes| wiki
+    compile & query & search & ingest & webhook & lint -->|appends| audit[audit.ts]

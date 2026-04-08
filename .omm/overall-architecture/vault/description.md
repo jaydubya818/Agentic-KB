@@ -1,0 +1,1 @@
+The Vault is the on-disk state of the KB. raw/ holds source material (notes, transcripts, webhooks) staged for compilation. wiki/ holds compiled pages that Claude produced via the compile pipeline. graphify-out/graph.json is the knowledge graph (222 nodes, 299 links, 12 hyperedges) used for semantic search. logs/audit.log is an append-only JSONL record of every operation.

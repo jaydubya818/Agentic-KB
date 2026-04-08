@@ -1,0 +1,10 @@
+flowchart LR
+    wiki-page[/wiki page/] -->|renders| wiki-layout[WikiLayout]
+    query-page[/query page/] -->|renders| query-ui[QueryUI]
+    ingest-page[/ingest page/] -->|renders| ingest-ui[IngestUI]
+    wiki-layout -->|uses| wiki-sidebar[WikiSidebar]
+    wiki-layout -->|uses| article-renderer[ArticleRenderer]
+    wiki-layout -->|uses| compile-panel[CompilePanel]
+    wiki-sidebar -->|fetches| vault-api[/api/vault-structure/]
+    compile-panel -->|SSE| compile-api[/api/compile/]
+    query-ui -->|SSE| query-api[/api/query/]

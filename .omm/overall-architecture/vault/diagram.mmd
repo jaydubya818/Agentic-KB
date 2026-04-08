@@ -1,0 +1,6 @@
+flowchart LR
+    raw[(raw/<br/>source docs)] -->|compile| wiki[(wiki/<br/>compiled pages)]
+    wiki -->|graphify| graph[(graphify-out/<br/>graph.json)]
+    raw -->|every write| audit[(logs/audit.log)]
+    wiki -->|every write| audit
+    wiki -->|lint report| lint-report[(wiki/lint-report.md)]

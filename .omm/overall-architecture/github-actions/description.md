@@ -1,0 +1,1 @@
+GitHub Actions workflow at .github/workflows/kb-ingest.yml. Fires on merged PRs, closed issues, and pushes that touch docs/ or ADR files. Posts to /api/ingest/webhook with the X-GitHub-Event header so the webhook adapter knows which shape to parse. Requires KB_WEBHOOK_URL + KB_WEBHOOK_SECRET repo secrets.

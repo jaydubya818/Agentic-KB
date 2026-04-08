@@ -1,0 +1,1 @@
+Next.js API routes under web/src/app/api/. The actual logic of the system lives here — the UI, CLI, and MCP server are all thin clients. Key routes: compile (SSE streaming Claude), query (hybrid retrieval + Claude synthesis), search (keyword + graph), ingest/webhook (RBAC-gated), lint (wiki health check). All writes pass through audit.ts.
