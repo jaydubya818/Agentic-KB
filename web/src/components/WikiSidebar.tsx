@@ -92,8 +92,8 @@ export default function WikiSidebar(): React.ReactElement {
           </li>
           <li>
             <a
-              href="obsidian://open?vault=Agentic-KB"
-              title="Open the Obsidian vault; then press Cmd+G for the graph view"
+              href="obsidian://advanced-uri?vault=Agentic-KB&commandid=graph%3Aopen"
+              title="Open the Obsidian global graph view directly"
             >
               Knowledge Graph (Obsidian) ↗
             </a>
