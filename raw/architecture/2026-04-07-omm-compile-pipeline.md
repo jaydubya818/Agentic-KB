@@ -1,7 +1,7 @@
 ---
 title: "Architecture: compile-pipeline"
 source: oh-my-mermaid
-ingested: 2026-04-08T04:40:14Z
+ingested: 2026-04-08T05:01:57Z
 tags: [architecture, mermaid, autogen]
 omm_perspective: "compile-pipeline"
 ---

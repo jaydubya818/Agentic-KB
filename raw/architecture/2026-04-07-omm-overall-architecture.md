@@ -1,7 +1,7 @@
 ---
 title: "Architecture: overall-architecture"
 source: oh-my-mermaid
-ingested: 2026-04-08T04:40:14Z
+ingested: 2026-04-08T05:01:57Z
 tags: [architecture, mermaid, autogen]
 omm_perspective: "overall-architecture"
 ---
@@ -13,41 +13,31 @@ Agentic-KB is a Karpathy-pattern "LLM Wiki" knowledge base. Raw markdown (raw/) 
 ## Diagram
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph Clients
-        WEB[Web UI<br/>Next.js :3002]
-        CLI[kb CLI<br/>cli/kb.js]
-        MCP[MCP Server<br/>mcp/server.js]
-        GH[GitHub Actions<br/>kb-ingest.yml]
+        web-ui[Web UI<br/>Next.js :3002]
+        cli[kb CLI]
+        mcp-server[MCP Server]
+        github-actions[GitHub Actions]
     end
 
-    subgraph API["Next.js API routes"]
-        COMPILE[/api/compile<br/>SSE stream/]
-        QUERY[/api/query<br/>Claude synthesis/]
-        SEARCH[/api/search<br/>hybrid/]
-        INGEST[/api/ingest<br/>direct/]
-        WEBHOOK[/api/ingest/webhook<br/>RBAC/]
-        LINT[/api/lint<br/>health check/]
+    api-routes[API Routes]
+
+    subgraph Vault
+        raw[(raw/)]
+        wiki[(wiki/)]
+        graph[(graphify-out)]
+        audit-log[(logs/audit.log)]
     end
 
-    subgraph Vault["Agentic-KB vault"]
-        RAW[(raw/<br/>source docs)]
-        WIKI[(wiki/<br/>compiled pages)]
-        GRAPH[(graphify-out/<br/>graph.json)]
-        AUDIT[(logs/<br/>audit.log)]
-    end
+    web-ui -->|calls| api-routes
+    cli -->|calls| api-routes
+    mcp-server -->|calls| api-routes
+    github-actions -->|webhook| api-routes
 
-    WEB --> COMPILE & QUERY & SEARCH & LINT
-    CLI --> COMPILE & QUERY & INGEST & LINT
-    MCP --> QUERY & SEARCH & COMPILE & LINT
-    GH --> WEBHOOK
-
-    INGEST & WEBHOOK --> RAW
-    COMPILE --> RAW
-    COMPILE --> WIKI
-    QUERY --> WIKI
-    SEARCH --> WIKI
-    SEARCH --> GRAPH
-    QUERY & INGEST & WEBHOOK & COMPILE & LINT --> AUDIT
+    api-routes -->|reads/writes| raw
+    api-routes -->|reads/writes| wiki
+    api-routes -->|reads| graph
+    api-routes -->|appends| audit-log
 ```
 
