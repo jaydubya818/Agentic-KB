@@ -1,0 +1,60 @@
+agent_id: planning-agent
+tier: lead
+domain: engineering
+team: platform
+namespace: engineering
+context_policy:
+  budget_bytes: 81920
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+    - class: hot
+      scope: self
+      priority: 20
+    - class: learned
+      scope: self
+      priority: 30
+    - class: rewrite
+      scope: all
+      status: [submitted, under_review, approved]
+      priority: 45
+    - path: wiki/projects/{{project}}/prd.md
+      priority: 40
+    - path: wiki/projects/{{project}}/specs.md
+      priority: 42
+    - path: wiki/projects/{{project}}/implementation-plan.md
+      priority: 44
+    - path: wiki/domains/{{domain}}/**
+      priority: 50
+  subscriptions:
+    bus:
+      - channel: discovery
+        status: open
+      - channel: escalation
+        to: self
+      - channel: standards
+        from_tier: [orchestrator]
+        status: active
+allowed_writes:
+  - wiki/agents/leads/planning-agent/**
+  - wiki/system/bus/discovery/**
+  - wiki/system/bus/escalation/**
+  - wiki/system/bus/standards/**
+  - wiki/system/bus/handoffs/**
+  - wiki/projects/{{project}}/implementation-plan.md
+  - wiki/projects/{{project}}/decisions.md
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/workers/**
+  - wiki/system/policies/**
+task_end_actions:
+  - update_hot_memory
+  - append_sprint_state
+  - promote_worker_discoveries
+  - publish_handoffs
+  - review_rewrites
+promotion_targets:
+  - orchestrator:architecture-agent
+escalation_targets:
+  - orchestrator:architecture-agent

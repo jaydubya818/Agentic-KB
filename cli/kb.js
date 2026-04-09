@@ -19,6 +19,12 @@
 const API_URL = process.env.KB_API_URL || 'http://localhost:3002'
 const PRIVATE_PIN = process.env.PRIVATE_PIN || ''
 
+// Resolve KB root from this script location: cli/kb.js -> repo root
+import pathMod from 'path'
+import { fileURLToPath } from 'url'
+const AGENT_KB_ROOT = pathMod.resolve(pathMod.dirname(fileURLToPath(import.meta.url)), '..')
+const AGENT_RUNTIME_PATH = pathMod.join(AGENT_KB_ROOT, 'lib/agent-runtime/index.mjs')
+
 const args = process.argv.slice(2)
 const command = args[0]
 
@@ -483,6 +489,118 @@ async function ingestTwitterArchive(archivePath) {
   }
 }
 
+// ─── Agent Runtime Commands ───────────────────────────────────────────────
+
+async function agentCmd(sub, rest) {
+  const rt = await import(AGENT_RUNTIME_PATH)
+  if (sub === 'list') {
+    const contracts = rt.listContracts(AGENT_KB_ROOT)
+    if (contracts.length === 0) { console.log('No agents configured.'); return }
+    for (const c of contracts) {
+      console.log(`- ${c.agent_id} [${c.tier}] domain=${c.domain || '-'} team=${c.team || '-'}`)
+    }
+    return
+  }
+  if (sub === 'show') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent show <agent-id>')
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    if (!c) throw new Error(`Agent not found: ${id}`)
+    console.log(JSON.stringify(c, null, 2))
+    return
+  }
+  if (sub === 'context') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent context <agent-id> [--project <p>]')
+    const projectIdx = rest.indexOf('--project')
+    const project = projectIdx >= 0 ? rest[projectIdx + 1] : null
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    if (!c) throw new Error(`Agent not found: ${id}`)
+    const bundle = rt.loadAgentContext(AGENT_KB_ROOT, c, { project, domain: c.domain, agent: id })
+    console.log(`\n=== Context for ${id} (${c.tier}) ===`)
+    console.log(`Budget: ${bundle.trace.budget_used}/${bundle.trace.budget_bytes} bytes${bundle.trace.truncated ? ' (TRUNCATED)' : ''}`)
+    console.log(`Files included (${bundle.files.length}):`)
+    for (const f of bundle.files) console.log(`  [${f.class}] ${f.path} (${f.bytes}B) — ${f.reason}`)
+    if (bundle.trace.excluded.length) {
+      console.log(`\nExcluded (${bundle.trace.excluded.length}):`)
+      for (const e of bundle.trace.excluded) console.log(`  ${e.path} — ${e.reason}`)
+    }
+    return
+  }
+  if (sub === 'close-task') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent close-task <agent-id> --payload <file.json>')
+    const payloadIdx = rest.indexOf('--payload')
+    if (payloadIdx < 0) throw new Error('Missing --payload <file.json>')
+    const fs = await import('fs')
+    const payload = JSON.parse(fs.readFileSync(rest[payloadIdx + 1], 'utf8'))
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    if (!c) throw new Error(`Agent not found: ${id}`)
+    const result = rt.closeTask(AGENT_KB_ROOT, c, payload)
+    if (!result.ok) {
+      console.error(`❌ Close rejected (${result.rejected.length} rejections):`)
+      for (const r of result.rejected) console.error(`  ${r.path} — ${r.reason}`)
+      process.exit(2)
+    }
+    console.log(`✅ Task closed.`)
+    console.log(`   Writes committed: ${result.trace.writes_committed.length}`)
+    console.log(`   Bus items published: ${result.trace.bus_items.length}`)
+    for (const w of result.trace.writes_committed) console.log(`   [${w.op}] ${w.path}`)
+    for (const b of result.trace.bus_items) console.log(`   [bus:${b.channel}] ${b.id}`)
+    return
+  }
+  if (sub === 'trace') {
+    const id = rest[0]
+    const limitIdx = rest.indexOf('--last')
+    const limit = limitIdx >= 0 ? parseInt(rest[limitIdx + 1], 10) : 10
+    const traces = rt.readRuntimeTraces(AGENT_KB_ROOT, limit, id ? { agent_id: id } : {})
+    for (const t of traces) {
+      console.log(`[${t.ts}] ${t.type} ${t.agent_id || ''} ${t.project || ''}`)
+      if (t.budget_used !== undefined) console.log(`  budget ${t.budget_used}/${t.budget_bytes} truncated=${t.truncated}`)
+      if (t.writes_committed) console.log(`  committed=${t.writes_committed.length} rejected=${(t.writes_rejected||[]).length} bus=${(t.bus_items||[]).length}`)
+    }
+    return
+  }
+  throw new Error(`Unknown agent subcommand: ${sub}`)
+}
+
+async function busCmd(sub, rest) {
+  const rt = await import(AGENT_RUNTIME_PATH)
+  if (sub === 'list') {
+    const channel = rest[0] || 'discovery'
+    const items = rt.listBusItems(AGENT_KB_ROOT, channel)
+    if (items.length === 0) { console.log(`No items in bus/${channel}`); return }
+    for (const it of items) {
+      console.log(`- ${it.meta.id} [${it.meta.status}] from=${it.meta.from} to=${it.meta.to || '-'} project=${it.meta.project || '-'}`)
+      console.log(`  ${(it.body || '').trim().split('\n')[0].slice(0, 100)}`)
+    }
+    return
+  }
+  if (sub === 'show') {
+    const [channel, id] = rest
+    const it = rt.readBusItem(AGENT_KB_ROOT, channel, id)
+    if (!it) { console.log('Not found'); return }
+    console.log(JSON.stringify(it.meta, null, 2))
+    console.log('\n' + it.body)
+    return
+  }
+  throw new Error(`Unknown bus subcommand: ${sub}`)
+}
+
+async function promoteCmd(rest) {
+  const rt = await import(AGENT_RUNTIME_PATH)
+  const [channel, id] = rest
+  if (!channel || !id) throw new Error('Usage: kb promote <channel> <item-id> [--target <path>] [--approver <name>]')
+  const targetIdx = rest.indexOf('--target')
+  const approverIdx = rest.indexOf('--approver')
+  const target = targetIdx >= 0 ? rest[targetIdx + 1] : undefined
+  const approver = approverIdx >= 0 ? rest[approverIdx + 1] : 'cli-user'
+  const r = rt.promoteLearning(AGENT_KB_ROOT, { channel, id, targetPath: target, approver })
+  console.log(`✅ Promoted ${id}`)
+  console.log(`   source: ${r.source}`)
+  console.log(`   target: ${r.target}`)
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -516,6 +634,12 @@ try {
     await ingestYoutube(positional[0])
   } else if (command === 'ingest-twitter') {
     await ingestTwitterArchive(positional[0])
+  } else if (command === 'agent') {
+    await agentCmd(args[1], args.slice(2))
+  } else if (command === 'bus') {
+    await busCmd(args[1], args.slice(2))
+  } else if (command === 'promote') {
+    await promoteCmd(args.slice(1))
   } else {
     console.error(`Unknown command: ${command}`)
     usage()

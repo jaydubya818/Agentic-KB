@@ -1,0 +1,53 @@
+agent_id: architecture-agent
+tier: orchestrator
+domain: engineering
+team: platform
+namespace: engineering
+context_policy:
+  budget_bytes: 163840
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+    - class: hot
+      scope: self
+      priority: 20
+    - class: learned
+      scope: self
+      priority: 30
+    - class: learned
+      scope: lead:planning-agent
+      priority: 35
+    - path: wiki/system/policies/**
+      priority: 15
+    - path: wiki/system/routing/**
+      priority: 18
+    - path: wiki/projects/{{project}}/prd.md
+      priority: 40
+    - path: wiki/projects/{{project}}/decisions.md
+      priority: 42
+    - path: wiki/domains/**
+      priority: 55
+  subscriptions:
+    bus:
+      - channel: escalation
+        to: self
+      - channel: standards
+        status: proposed
+allowed_writes:
+  - wiki/agents/orchestrators/architecture-agent/**
+  - wiki/system/policies/**
+  - wiki/system/routing/**
+  - wiki/system/bus/standards/**
+  - wiki/system/bus/handoffs/**
+  - wiki/projects/{{project}}/decisions.md
+forbidden_paths:
+  - wiki/agents/leads/**
+  - wiki/agents/workers/**
+task_end_actions:
+  - update_hot_memory
+  - append_decisions
+  - publish_standards
+  - acknowledge_escalations
+promotion_targets: []
+escalation_targets: []

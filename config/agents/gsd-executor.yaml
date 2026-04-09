@@ -1,0 +1,53 @@
+agent_id: gsd-executor
+tier: worker
+domain: engineering
+team: platform
+namespace: engineering
+context_policy:
+  budget_bytes: 40960
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+    - class: hot
+      scope: self
+      priority: 20
+    - class: learned
+      scope: self
+      priority: 30
+    - class: learned
+      scope: lead:planning-agent
+      priority: 35
+    - path: wiki/projects/{{project}}/specs.md
+      priority: 40
+    - path: wiki/projects/{{project}}/implementation-plan.md
+      priority: 42
+    - path: wiki/domains/platform/**
+      priority: 50
+  subscriptions:
+    bus:
+      - channel: standards
+        from_tier: [lead, orchestrator]
+        status: active
+      - channel: handoffs
+        to: self
+  priority_order: [profile, hot, project, subscriptions, learned, standards]
+allowed_writes:
+  - wiki/agents/workers/gsd-executor/**
+  - wiki/system/bus/discovery/**
+  - wiki/system/bus/escalation/**
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/leads/**
+  - wiki/projects/**
+  - wiki/system/policies/**
+task_end_actions:
+  - update_hot_memory
+  - append_task_log
+  - publish_discoveries
+  - publish_escalations_if_blocked
+promotion_targets:
+  - lead:planning-agent
+escalation_targets:
+  - lead:planning-agent
+  - orchestrator:architecture-agent

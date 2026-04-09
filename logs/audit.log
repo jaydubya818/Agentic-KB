@@ -10,3 +10,16 @@
 {"ts":"2026-04-08T05:49:38.828Z","op":"query-save","vault":"Agentic-KB","file":"raw/qa/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration.md","q":"what is the best pattern for multi agent orchestration","sourcesCount":0,"verified":true}
 {"ts":"2026-04-08T05:50:34.114Z","op":"query","vault":"Agentic-KB","q":"what is the best pattern for multi agent orchestration","scope":"public","articlesRead":5}
 {"ts":"2026-04-08T05:57:59.372Z","op":"lint","vault":"Agentic-KB","pagesScanned":136,"contradictions":0,"orphans":34,"gaps":0}
+{"ts":"2026-04-08T14:45:24.838Z","op":"ingest","file":"raw/note/agentic-pi-harness-project-plan.md","title":"Agentic Pi Harness — Project Plan","type":"note"}
+{"ts":"2026-04-09T05:49:25.170Z","op":"query-save","vault":"Agentic-KB","file":"raw/qa/2026-04-09-what-is-the-best-pattern-for-multi-agent-orchestration.md","q":"what is the best pattern for multi agent orchestration","sourcesCount":5,"verified":false}
+{"ts":"2026-04-09T07:40:09.804Z","op":"agent-write","agent_id":"gsd-executor","path":"wiki/agents/workers/gsd-executor/task-log.md","kind":"append"}
+{"ts":"2026-04-09T07:40:09.805Z","op":"agent-write","agent_id":"gsd-executor","path":"wiki/agents/workers/gsd-executor/hot.md","kind":"replace"}
+{"ts":"2026-04-09T07:40:09.805Z","op":"agent-write","agent_id":"gsd-executor","path":"wiki/agents/workers/gsd-executor/gotchas.md","kind":"append"}
+{"ts":"2026-04-09T07:40:09.806Z","op":"agent-write","agent_id":"gsd-executor","path":"wiki/agents/workers/gsd-executor/rewrites/specs/example-project-2026-04-09T07-40-09-796Z.md","kind":"create"}
+{"ts":"2026-04-09T07:40:09.806Z","op":"bus-publish","channel":"discovery","id":"discovery-2026-04-09-001","from":"gsd-executor","to":null,"project":"example-project","path":"wiki/system/bus/discovery/discovery-2026-04-09-001.md"}
+{"ts":"2026-04-09T07:40:09.806Z","op":"agent-close-task","agent_id":"gsd-executor","status":"ok","committed":4,"bus":1}
+{"ts":"2026-04-09T07:40:20.186Z","op":"bus-transition","channel":"discovery","id":"discovery-2026-04-09-001","from":"open","to":"promoted","actor":"planning-agent"}
+{"ts":"2026-04-09T07:40:20.186Z","op":"agent-promote","channel":"discovery","id":"discovery-2026-04-09-001","target":"wiki/system/bus/standards/promoted-discovery-2026-04-09-001.md","approver":"planning-agent"}
+{"ts":"2026-04-09T07:40:50.702Z","op":"agent-write","agent_id":"gsd-executor","path":"wiki/agents/workers/gsd-executor/rewrites/../../../orchestrators/architecture-agent/rewrites/pwn/example-project-2026-04-09T07-40-50-700Z.md","kind":"create"}
+{"ts":"2026-04-09T07:40:50.702Z","op":"agent-close-task","agent_id":"gsd-executor","status":"ok","committed":1,"bus":0}
+{"ts":"2026-04-09T07:41:11.440Z","op":"agent-close-task","agent_id":"gsd-executor","status":"rejected","rejected":1}

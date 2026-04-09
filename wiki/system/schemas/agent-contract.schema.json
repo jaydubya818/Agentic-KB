@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-contract",
+  "title": "Agent Contract",
+  "type": "object",
+  "required": ["agent_id", "tier"],
+  "properties": {
+    "agent_id": { "type": "string" },
+    "tier": { "enum": ["orchestrator", "lead", "worker"] },
+    "domain": { "type": "string" },
+    "team": { "type": "string" },
+    "namespace": { "type": "string" },
+    "context_policy": {
+      "type": "object",
+      "properties": {
+        "budget_bytes": { "type": "integer" },
+        "include": { "type": "array" },
+        "subscriptions": { "type": "object" },
+        "priority_order": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "allowed_writes": { "type": "array", "items": { "type": "string" } },
+    "forbidden_paths": { "type": "array", "items": { "type": "string" } },
+    "task_end_actions": { "type": "array", "items": { "type": "string" } },
+    "promotion_targets": { "type": "array", "items": { "type": "string" } },
+    "escalation_targets": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -126,6 +126,13 @@ export default function ProcessPage(): React.ReactElement {
 
   const pendingCount = files.filter(f => !f.alreadyIngested).length
 
+  const pathToWikiHref = (filePath: string): string => {
+    // wiki/summaries/foo.md -> /wiki/summaries/foo
+    const withoutPrefix = filePath.replace(/^wiki\//, '')
+    const withoutMd = withoutPrefix.replace(/\.md$/, '')
+    return '/wiki/' + withoutMd
+  }
+
   return (
     <div style={{ minHeight: '100vh', background: '#f8f9fa', fontFamily: '-apple-system, sans-serif' }}>
       {/* Top bar */}
@@ -279,7 +286,11 @@ export default function ProcessPage(): React.ReactElement {
                     }}>
                       {state.log.map((line, i) => (
                         <div key={i} style={{ marginBottom: '0.2rem', color: line.type === 'error' ? '#c00' : line.type === 'wrote' ? '#006400' : line.type === 'done' ? '#004d00' : '#202122' }}>
-                          {line.type === 'wrote' && `✓ Created: ${line.path}`}
+                          {line.type === 'wrote' && (
+                          <span>✓ Created:{' '}
+                            <Link href={pathToWikiHref(line.path!)} style={{ color: '#0645ad', textDecoration: 'underline' }}>{line.path}</Link>
+                          </span>
+                        )}
                           {line.type === 'skipped' && `⊘ Skipped: ${line.path} (${line.reason})`}
                           {line.type === 'status' && `  ${line.message}`}
                           {line.type === 'error' && `✗ Error: ${line.message}`}
@@ -289,7 +300,13 @@ export default function ProcessPage(): React.ReactElement {
                               {line.summary && <div style={{ color: '#202122', fontFamily: 'sans-serif', marginTop: '0.25rem' }}>{line.summary}</div>}
                               {line.filesCreated && line.filesCreated.length > 0 && (
                                 <div style={{ marginTop: '0.25rem' }}>
-                                  Files created: {line.filesCreated.join(', ')}
+                                  {'Files created: '}
+                                  {line.filesCreated.map((fp, fi) => (
+                                    <span key={fi}>
+                                      {fi > 0 && ', '}
+                                      <Link href={pathToWikiHref(fp)} style={{ color: '#0645ad', textDecoration: 'underline' }}>{fp}</Link>
+                                    </span>
+                                  ))}
                                 </div>
                               )}
                             </div>
