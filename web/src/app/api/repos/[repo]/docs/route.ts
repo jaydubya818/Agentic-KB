@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
-import { getRepo, repoDocsRoot } from '../../../../../../../../lib/repo-runtime/index.mjs'
+import { getRepo, repoDocsRoot } from '../../../../../../../lib/repo-runtime/index.mjs'
 
 export const dynamic = 'force-dynamic'
 

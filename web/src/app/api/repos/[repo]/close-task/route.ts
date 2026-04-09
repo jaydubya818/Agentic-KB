@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
-import { getRepo, writeRepoTaskLog, appendRepoProgress } from '../../../../../../../../lib/repo-runtime/index.mjs'
+import { getRepo, writeRepoTaskLog, appendRepoProgress } from '../../../../../../../lib/repo-runtime/index.mjs'
 
 export const dynamic = 'force-dynamic'
 

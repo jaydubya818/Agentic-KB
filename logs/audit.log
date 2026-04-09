@@ -23,3 +23,35 @@
 {"ts":"2026-04-09T07:40:50.702Z","op":"agent-write","agent_id":"gsd-executor","path":"wiki/agents/workers/gsd-executor/rewrites/../../../orchestrators/architecture-agent/rewrites/pwn/example-project-2026-04-09T07-40-50-700Z.md","kind":"create"}
 {"ts":"2026-04-09T07:40:50.702Z","op":"agent-close-task","agent_id":"gsd-executor","status":"ok","committed":1,"bus":0}
 {"ts":"2026-04-09T07:41:11.440Z","op":"agent-close-task","agent_id":"gsd-executor","status":"rejected","rejected":1}
+{"ts":"2026-04-09T18:55:38.476Z","op":"repo-sync-fetch-error","error":"Failed to fetch tree from GitHub: GitHub tree fetch failed: 404 Not Found"}
+{"ts":"2026-04-09T18:55:45.271Z","op":"repo-sync-fetch-error","error":"Failed to fetch tree from GitHub: GitHub tree fetch failed: 404 Not Found"}
+{"ts":"2026-04-09T18:56:29.812Z","op":"repo-sync-fetch-error","error":"Failed to fetch tree from GitHub: GitHub tree fetch failed: 404 Not Found"}
+{"ts":"2026-04-09T18:56:33.214Z","op":"repo-sync-fetch-error","error":"Failed to fetch tree from GitHub: GitHub tree fetch failed: 404 Not Found"}
+{"ts":"2026-04-09T18:57:45.416Z","op":"repo-sync-fetch-error","error":"Failed to fetch tree from GitHub: GitHub tree fetch failed: 404 Not Found"}
+{"ts":"2026-04-09T18:58:20.001Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/CLAUDE.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.004Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/ENTERPRISE_PLAN.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.008Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/README.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.009Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/Untitled.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.011Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OBSIDIAN_GRAPH.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.013Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OH_MY_MERMAID.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.014Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/RLM_PIPELINE.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.016Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-dry-wiki.md","action":"write"}
+{"ts":"2026-04-09T18:58:20.018Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-write-wiki.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.175Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/CLAUDE.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.178Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/ENTERPRISE_PLAN.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.180Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/README.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.181Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/Untitled.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.182Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OBSIDIAN_GRAPH.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.182Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OH_MY_MERMAID.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.183Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/RLM_PIPELINE.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.185Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-dry-wiki.md","action":"write"}
+{"ts":"2026-04-09T18:58:24.186Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-write-wiki.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.358Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/CLAUDE.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.360Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/ENTERPRISE_PLAN.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.363Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/README.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.365Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/Untitled.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.366Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OBSIDIAN_GRAPH.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.367Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OH_MY_MERMAID.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.369Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/RLM_PIPELINE.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.370Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-dry-wiki.md","action":"write"}
+{"ts":"2026-04-09T18:58:37.372Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-write-wiki.md","action":"write"}

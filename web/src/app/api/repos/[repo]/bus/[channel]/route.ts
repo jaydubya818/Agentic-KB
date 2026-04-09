@@ -4,8 +4,8 @@ import {
   getRepo,
   listRepoBusItems,
   publishRepoBusItem,
-} from '../../../../../../../../../lib/repo-runtime/index.mjs'
-import { resolveIdentity } from '../../../../../../../../../lib/agent-runtime/index.mjs'
+} from '../../../../../../../../lib/repo-runtime/index.mjs'
+import { resolveIdentity } from '../../../../../../../../lib/agent-runtime/index.mjs'
 
 export const dynamic = 'force-dynamic'
 

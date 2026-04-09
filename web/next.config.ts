@@ -2,9 +2,9 @@ import type { NextConfig } from 'next'
 import path from 'path'
 
 const nextConfig: NextConfig = {
-  // Silence workspace root warning (multiple lockfiles detected)
+  // Set Turbopack root to repo root so routes can resolve lib/ modules outside web/
   turbopack: {
-    root: path.resolve(__dirname),
+    root: path.resolve(__dirname, '..'),
   },
 }
 

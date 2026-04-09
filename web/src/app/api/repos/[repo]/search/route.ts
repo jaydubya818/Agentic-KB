@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
-import { getRepo, repoWikiRoot } from '../../../../../../../../lib/repo-runtime/index.mjs'
-import { parseFrontmatter } from '../../../../../../../../lib/agent-runtime/frontmatter.mjs'
+import { getRepo, repoWikiRoot } from '../../../../../../../lib/repo-runtime/index.mjs'
+import { parseFrontmatter } from '../../../../../../../lib/agent-runtime/index.mjs'
 
 export const dynamic = 'force-dynamic'
 
@@ -116,7 +116,8 @@ export async function GET(
 
       try {
         const content = fs.readFileSync(fullPath, 'utf8')
-        const { data } = parseFrontmatter(content)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data } = parseFrontmatter(content) as any
         const title = (data?.title as string) || path.basename(relFile)
 
         const score = scoreMatch(content, query, title)

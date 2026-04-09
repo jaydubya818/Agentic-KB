@@ -750,29 +750,6 @@ async function agentCmd(sub, rest) {
   throw new Error(`Unknown agent subcommand: ${sub}`)
 }
 
-async function busCmd(sub, rest) {
-  const rt = await import(AGENT_RUNTIME_PATH)
-  if (sub === 'list') {
-    const channel = rest[0] || 'discovery'
-    const items = rt.listBusItems(AGENT_KB_ROOT, channel)
-    if (items.length === 0) { console.log(`No items in bus/${channel}`); return }
-    for (const it of items) {
-      console.log(`- ${it.meta.id} [${it.meta.status}] from=${it.meta.from} to=${it.meta.to || '-'} project=${it.meta.project || '-'}`)
-      console.log(`  ${(it.body || '').trim().split('\n')[0].slice(0, 100)}`)
-    }
-    return
-  }
-  if (sub === 'show') {
-    const [channel, id] = rest
-    const it = rt.readBusItem(AGENT_KB_ROOT, channel, id)
-    if (!it) { console.log('Not found'); return }
-    console.log(JSON.stringify(it.meta, null, 2))
-    console.log('\n' + it.body)
-    return
-  }
-  throw new Error(`Unknown bus subcommand: ${sub}`)
-}
-
 async function promoteCmd(rest) {
   const rt = await import(AGENT_RUNTIME_PATH)
   const [channel, id] = rest
@@ -823,10 +800,15 @@ async function repoCmd(sub, rest) {
     const token = tokenIdx >= 0 ? rest[tokenIdx + 1] : process.env.GITHUB_PAT
     console.log(`\n📦 Syncing repo: ${name}...`)
     const result = await rt.syncRepo(AGENT_KB_ROOT, name, { token })
+    if (result.errors?.length) {
+      console.error(`❌ Sync failed: ${result.errors[0].message}`)
+      process.exit(1)
+    }
     console.log(`✅ Sync complete`)
-    console.log(`   Files: ${result.filesWritten || 0}`)
-    console.log(`   Size: ${(result.bytesWritten || 0) / 1024}KB`)
-    console.log(`   Last SHA: ${result.lastSHA || 'unknown'}`)
+    console.log(`   Created: ${result.created?.length || 0}`)
+    console.log(`   Updated: ${result.updated?.length || 0}`)
+    console.log(`   Archived: ${result.archived?.length || 0}`)
+    console.log(`   Commit SHA: ${result.commit_sha || 'unknown'}`)
     return
   }
 

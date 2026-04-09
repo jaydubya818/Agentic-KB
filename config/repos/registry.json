@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "updated_at": "2026-04-09T00:00:00.000Z",
+  "updated_at": "2026-04-09T18:56:23.087Z",
   "repos": [
     {
       "repo_name": "Agentic-KB",
-      "owner": "jaywest",
+      "owner": "jaydubya818",
       "visibility": "public",
       "default_branch": "main",
       "source_type": "github",
       "auth_mode": "public",
       "sync_enabled": true,
-      "last_sync_at": "2026-04-09T00:00:00.000Z",
-      "last_synced_commit": "abc123def456",
-      "markdown_file_count": 5,
+      "last_sync_at": null,
+      "last_synced_commit": null,
+      "markdown_file_count": 0,
       "status": "active",
       "description": "Personal knowledge base and organizational brain for agentic AI engineering",
       "topics": [
@@ -34,16 +34,16 @@
     },
     {
       "repo_name": "Agentic-Pi-Harness",
-      "owner": "jaywest",
+      "owner": "jaydubya818",
       "visibility": "private",
       "default_branch": "main",
       "source_type": "github",
       "auth_mode": "pat",
-      "sync_enabled": false,
+      "sync_enabled": true,
       "last_sync_at": null,
       "last_synced_commit": null,
       "markdown_file_count": 0,
-      "status": "pending",
+      "status": "active",
       "description": "Agentic Claude Code harness running on Raspberry Pi for local AI execution",
       "topics": [
         "claude-code",
@@ -61,20 +61,20 @@
         "API.md"
       ],
       "created_at": "2025-09-15T00:00:00.000Z",
-      "updated_at": "2025-09-15T00:00:00.000Z"
+      "updated_at": "2026-04-09T18:56:23.087Z"
     },
     {
       "repo_name": "Pi",
-      "owner": "jaywest",
+      "owner": "jaydubya818",
       "visibility": "private",
       "default_branch": "main",
       "source_type": "github",
       "auth_mode": "pat",
-      "sync_enabled": false,
+      "sync_enabled": true,
       "last_sync_at": null,
       "last_synced_commit": null,
       "markdown_file_count": 0,
-      "status": "pending",
+      "status": "active",
       "description": "Raspberry Pi system management, OS configuration, and infrastructure scripts",
       "topics": [
         "raspberry-pi",
@@ -92,20 +92,20 @@
         "TROUBLESHOOTING.md"
       ],
       "created_at": "2025-03-20T00:00:00.000Z",
-      "updated_at": "2025-03-20T00:00:00.000Z"
+      "updated_at": "2026-04-09T18:56:23.087Z"
     },
     {
       "repo_name": "MissionControl",
-      "owner": "jaywest",
+      "owner": "jaydubya818",
       "visibility": "private",
       "default_branch": "main",
       "source_type": "github",
       "auth_mode": "pat",
-      "sync_enabled": false,
+      "sync_enabled": true,
       "last_sync_at": null,
       "last_synced_commit": null,
       "markdown_file_count": 0,
-      "status": "pending",
+      "status": "active",
       "description": "Multi-agent orchestration and mission planning interface",
       "topics": [
         "multi-agent",
@@ -124,20 +124,20 @@
         "AGENT_DESIGN.md"
       ],
       "created_at": "2025-11-10T00:00:00.000Z",
-      "updated_at": "2025-11-10T00:00:00.000Z"
+      "updated_at": "2026-04-09T18:56:23.087Z"
     },
     {
       "repo_name": "LLMwiki",
-      "owner": "jaywest",
+      "owner": "jaydubya818",
       "visibility": "public",
       "default_branch": "main",
       "source_type": "github",
       "auth_mode": "public",
-      "sync_enabled": false,
+      "sync_enabled": true,
       "last_sync_at": null,
       "last_synced_commit": null,
       "markdown_file_count": 0,
-      "status": "pending",
+      "status": "active",
       "description": "LLM-powered wiki compilation system and knowledge management tooling",
       "topics": [
         "llm",
@@ -156,7 +156,7 @@
         "API_REFERENCE.md"
       ],
       "created_at": "2025-07-22T00:00:00.000Z",
-      "updated_at": "2025-07-22T00:00:00.000Z"
+      "updated_at": "2026-04-09T18:56:23.087Z"
     }
   ]
 }

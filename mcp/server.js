@@ -316,6 +316,162 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         },
       },
     },
+    {
+      name: 'list_repos',
+      description: 'List all tracked repos with their sync status and doc counts.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          status: { type: 'string', enum: ['active', 'pending', 'archived'], description: 'Filter by status' },
+        },
+      },
+    },
+    {
+      name: 'get_repo_home',
+      description: 'Get the home page and overview for a tracked repo.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+        },
+        required: ['repo'],
+      },
+    },
+    {
+      name: 'sync_repo_markdown',
+      description: 'Sync a repository from GitHub — fetches .md/.mjs/.ts/.json files and writes them to wiki/repos/<repo>/repo-docs/.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          token: { type: 'string', description: 'GitHub PAT (optional, uses env GITHUB_PAT if absent)' },
+        },
+        required: ['repo'],
+      },
+    },
+    {
+      name: 'search_repo_docs',
+      description: 'Full-text search within a specific repo namespace (canonical docs, imported docs, bus).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          query: { type: 'string' },
+          limit: { type: 'number', default: 20 },
+        },
+        required: ['repo', 'query'],
+      },
+    },
+    {
+      name: 'load_repo_context',
+      description: 'Load prioritized context bundle for an agent working on a specific repo.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          agent_id: { type: 'string' },
+          budget_bytes: { type: 'number', default: 50000 },
+        },
+        required: ['repo'],
+      },
+    },
+    {
+      name: 'append_repo_progress',
+      description: 'Append a progress entry to wiki/repos/<repo>/progress.md.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          entry: { type: 'string' },
+        },
+        required: ['repo', 'entry'],
+      },
+    },
+    {
+      name: 'write_repo_task_log',
+      description: 'Append a task log entry for an agent working on a repo.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          agent_id: { type: 'string' },
+          entry: { type: 'string' },
+        },
+        required: ['repo', 'agent_id', 'entry'],
+      },
+    },
+    {
+      name: 'write_rewrite_artifact',
+      description: 'Create a rewrite artifact in wiki/repos/<repo>/rewrites/<type>/.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          type: { type: 'string', enum: ['prds', 'specs', 'plans', 'test-plans'] },
+          project: { type: 'string' },
+          content: { type: 'string' },
+          author: { type: 'string' },
+        },
+        required: ['repo', 'type', 'project', 'content', 'author'],
+      },
+    },
+    {
+      name: 'publish_repo_discovery',
+      description: 'Publish a discovery bus item to wiki/repos/<repo>/bus/discovery/.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          from: { type: 'string' },
+          body: { type: 'string' },
+          project: { type: 'string' },
+        },
+        required: ['repo', 'from', 'body'],
+      },
+    },
+    {
+      name: 'publish_repo_escalation',
+      description: 'Publish an escalation bus item to wiki/repos/<repo>/bus/escalation/.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          from: { type: 'string' },
+          body: { type: 'string' },
+          to: { type: 'string' },
+        },
+        required: ['repo', 'from', 'body'],
+      },
+    },
+    {
+      name: 'list_repo_bus_items',
+      description: 'List bus items for a repo channel (discovery, escalation, standards, handoffs).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          channel: { type: 'string', enum: ['discovery', 'escalation', 'standards', 'handoffs'] },
+          status: { type: 'string' },
+          limit: { type: 'number' },
+        },
+        required: ['repo', 'channel'],
+      },
+    },
+    {
+      name: 'promote_repo_learning',
+      description: 'Promote a repo bus item to a canonical or learned location with provenance.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          channel: { type: 'string' },
+          id: { type: 'string' },
+          target_path: { type: 'string' },
+          approver: { type: 'string' },
+        },
+        required: ['repo', 'channel', 'id', 'approver'],
+      },
+    },
   ],
 }))
 
@@ -552,6 +708,135 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (name === 'list_agents') {
       const contracts = agentRuntime.listContracts(KB_ROOT)
       return { content: [{ type: 'text', text: JSON.stringify(contracts.map(c => ({ agent_id: c.agent_id, tier: c.tier, domain: c.domain })), null, 2) }] }
+    }
+
+    // ─── Repo Runtime Tools ─────────────────────────────────────────────────────
+
+    if (name === 'list_repos') {
+      const repos = repoRuntime.listRepos(KB_ROOT)
+      const filtered = args.status ? repos.filter(r => r.status === String(args.status)) : repos
+      const lines = filtered.map(r => `${r.name} [${r.status || 'unknown'}] - ${r.docCount || 0} docs, last-sync: ${r.lastSync || 'never'}`)
+      return { content: [{ type: 'text', text: lines.length > 0 ? lines.join('\n') : 'No repos tracked.' }] }
+    }
+
+    if (name === 'get_repo_home') {
+      const repo = String(args.repo)
+      const homePath = path.join(KB_ROOT, 'wiki', 'repos', repo, 'home.md')
+      const content = readFile(path.relative(KB_ROOT, homePath))
+      if (!content) return { content: [{ type: 'text', text: `Repo not found: ${repo}` }], isError: true }
+      return { content: [{ type: 'text', text: content }] }
+    }
+
+    if (name === 'sync_repo_markdown') {
+      const repo = String(args.repo)
+      const token = args.token || process.env.GITHUB_PAT
+      const result = await repoRuntime.syncRepo(KB_ROOT, repo, { token })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'search_repo_docs') {
+      const repo = String(args.repo)
+      const query = String(args.query || '')
+      const limit = Math.min(Number(args.limit || 20), 100)
+      const repoDocsDir = path.join(KB_ROOT, 'wiki', 'repos', repo)
+      if (!fs.existsSync(repoDocsDir)) return { content: [{ type: 'text', text: `Repo not found: ${repo}` }], isError: true }
+
+      const results = []
+      const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
+      function walkDir(d) {
+        if (!fs.existsSync(d)) return
+        for (const entry of fs.readdirSync(d, { withFileTypes: true })) {
+          const full = path.join(d, entry.name)
+          if (entry.isDirectory()) walkDir(full)
+          else if (entry.name.endsWith('.md')) {
+            const content = fs.readFileSync(full, 'utf8')
+            let score = 0
+            for (const term of terms) if (content.toLowerCase().includes(term)) score++
+            if (score > 0) {
+              const snippet = content.slice(0, 200)
+              results.push({ path: path.relative(repoDocsDir, full), snippet, score })
+            }
+          }
+        }
+      }
+      walkDir(repoDocsDir)
+      results.sort((a, b) => b.score - a.score)
+      const text = results.slice(0, limit).map(r => `${r.path}\n  ${r.snippet.slice(0, 150)}...`).join('\n\n')
+      return { content: [{ type: 'text', text: text || 'No results found.' }] }
+    }
+
+    if (name === 'load_repo_context') {
+      const repo = String(args.repo)
+      const agentId = args.agent_id ? String(args.agent_id) : null
+      const budget = Number(args.budget_bytes || 50000)
+      const result = repoRuntime.loadRepoContext(KB_ROOT, repo, { agentId, budgetBytes: budget })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'append_repo_progress') {
+      const repo = String(args.repo)
+      const entry = String(args.entry)
+      const result = repoRuntime.appendRepoProgress(KB_ROOT, repo, entry)
+      return { content: [{ type: 'text', text: JSON.stringify({ written: result }, null, 2) }] }
+    }
+
+    if (name === 'write_repo_task_log') {
+      const repo = String(args.repo)
+      const agentId = String(args.agent_id)
+      const entry = String(args.entry)
+      const result = repoRuntime.writeRepoTaskLog(KB_ROOT, repo, agentId, entry)
+      return { content: [{ type: 'text', text: JSON.stringify({ written: result }, null, 2) }] }
+    }
+
+    if (name === 'write_rewrite_artifact') {
+      const repo = String(args.repo)
+      const type = String(args.type)
+      const project = String(args.project)
+      const content = String(args.content)
+      const author = String(args.author)
+      const now = new Date().toISOString().slice(0, 10)
+      const dir = path.join(KB_ROOT, 'wiki', 'repos', repo, 'rewrites', type)
+      fs.mkdirSync(dir, { recursive: true })
+      const filePath = path.join(dir, `${project}-${now}.md`)
+      const frontmatter = `---\ntitle: "${project} ${type} rewrite"\ntype: rewrite\nrepo: ${repo}\nproject: ${project}\nauthor: ${author}\ndate: ${now}\nstatus: draft\n---\n\n`
+      fs.writeFileSync(filePath, frontmatter + content, 'utf8')
+      return { content: [{ type: 'text', text: JSON.stringify({ path: path.relative(KB_ROOT, filePath) }, null, 2) }] }
+    }
+
+    if (name === 'publish_repo_discovery') {
+      const repo = String(args.repo)
+      const from = String(args.from)
+      const body = String(args.body)
+      const project = args.project ? String(args.project) : null
+      const result = repoRuntime.publishRepoBusItem(KB_ROOT, repo, { channel: 'discovery', from, body, project })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'publish_repo_escalation') {
+      const repo = String(args.repo)
+      const from = String(args.from)
+      const body = String(args.body)
+      const to = args.to ? String(args.to) : null
+      const result = repoRuntime.publishRepoBusItem(KB_ROOT, repo, { channel: 'escalation', from, body, to })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'list_repo_bus_items') {
+      const repo = String(args.repo)
+      const channel = String(args.channel)
+      const limit = Number(args.limit || 50)
+      const items = repoRuntime.listRepoBusItems(KB_ROOT, repo, channel, { status: args.status ? String(args.status) : null, limit })
+      return { content: [{ type: 'text', text: JSON.stringify(items, null, 2) }] }
+    }
+
+    if (name === 'promote_repo_learning') {
+      const repo = String(args.repo)
+      const channel = String(args.channel)
+      const id = String(args.id)
+      const targetPath = args.target_path ? String(args.target_path) : null
+      const approver = String(args.approver)
+      const result = repoRuntime.transitionRepoBusItem(KB_ROOT, repo, channel, id, 'promoted', { targetPath, approver })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
     }
 
         return { content: [{ type: 'text', text: `Unknown tool: ${name}` }], isError: true }
