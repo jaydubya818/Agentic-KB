@@ -4,6 +4,17 @@ import { loadContract, loadAgentContext } from '../../../../../../../lib/agent-r
 
 export const dynamic = 'force-dynamic'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AgentContract = Record<string, any>
+
+interface ContextFile {
+  path: string
+  class: string
+  reason: string
+  bytes: number
+  priority: number
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -12,20 +23,20 @@ export async function GET(
   const { searchParams } = new URL(request.url)
   const project = searchParams.get('project') || null
 
-  const contract = loadContract(DEFAULT_KB_ROOT, id)
+  const contract = loadContract(DEFAULT_KB_ROOT, id) as AgentContract | null
   if (!contract) {
     return NextResponse.json({ error: 'Agent not found' }, { status: 404 })
   }
   const bundle = loadAgentContext(DEFAULT_KB_ROOT, contract, {
     project,
-    domain: contract.domain,
+    domain: contract.domain as string | undefined,
     agent: id,
   })
   return NextResponse.json({
     agent_id: id,
-    tier: contract.tier,
+    tier: contract.tier as string,
     trace: bundle.trace,
-    files: bundle.files.map((f: { path: string; class: string; reason: string; bytes: number; priority: number }) => ({
+    files: (bundle.files as ContextFile[]).map((f) => ({
       path: f.path,
       class: f.class,
       reason: f.reason,

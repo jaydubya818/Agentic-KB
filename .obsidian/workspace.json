@@ -187,6 +187,13 @@
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "web/src/app/api/agents/[id]/trace/route.ts",
+    "web/src/app/api/agents/[id]/trace",
+    "wiki/agents/orchestrators/architecture-agent/gotchas.md",
+    "wiki/agents/orchestrators/architecture-agent/task-log.md",
+    "wiki/agents/orchestrators/architecture-agent/rewrites",
+    "wiki/agents/leads/planning-agent/gotchas.md",
+    "wiki/agents/leads/planning-agent/task-log.md",
     "wiki/frameworks/framework-markitdown.md",
     "wiki/patterns/pattern-two-step-ingest.md",
     "wiki/patterns/pattern-episodic-judgment-log.md",
@@ -200,11 +207,9 @@
     "web/src/app/api/agents/bus",
     "web/src/app/api/agents/[id]/close-task/route.ts",
     "web/src/app/api/agents/[id]/close-task",
-    "lib/agent-runtime/index.d.ts",
     "wiki/concepts/multi-agent-systems.md",
     "wiki/entities/jay-west-agent-stack.md",
     "wiki/personal/private-test-note.md",
-    "logs/audit.log",
     "outputs/README.md",
     "wiki/patterns/pattern-deviation-rules.md",
     "wiki/patterns/pattern-scientific-debugging.md",
@@ -218,11 +223,6 @@
     "wiki/patterns/pattern-code-review-agent.md",
     "wiki/concepts/multi-tenancy.md",
     "wiki/patterns/pattern-sandbox-auth-proxy.md",
-    "wiki/patterns/pattern-architecture-decision-record.md",
-    "wiki/concepts/llm-owned-wiki.md",
-    "wiki/concepts/agent-sandboxing.md",
-    "wiki/patterns/pattern-runtime-preparation.md",
-    "wiki/patterns/pattern-single-task-code-agent.md",
     "Untitled.canvas"
   ]
 }

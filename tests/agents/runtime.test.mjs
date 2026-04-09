@@ -199,3 +199,206 @@ test('promoteLearning creates target with provenance and marks source promoted',
   const src = fs.readFileSync(path.join(root, r.source), 'utf8')
   assert.match(src, /status: promoted/)
 })
+
+// ─── 6. mergeRewrite ─────────────────────────────────────────────────────────
+
+test('mergeRewrite merges approved rewrite into canonical with provenance', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+
+  // Create a rewrite artifact in approved state
+  const rwRel = 'wiki/agents/workers/w1/rewrites/specs/p1-ts.md'
+  const rwFull = path.join(root, rwRel)
+  fs.mkdirSync(path.dirname(rwFull), { recursive: true })
+  fs.writeFileSync(rwFull, '---\nmemory_class: rewrite\nstatus: approved\nauthor: w1\n---\n\nNew spec content\n')
+
+  const canRel = 'wiki/projects/p1/spec-merged.md'
+  const r = rt.mergeRewrite(root, { rewritePath: rwRel, canonicalPath: canRel, approver: 'l1' })
+
+  assert.ok(fs.existsSync(path.join(root, r.canonical)))
+  const merged = fs.readFileSync(path.join(root, r.canonical), 'utf8')
+  assert.match(merged, /merged_from/)
+  assert.match(merged, /New spec content/)
+
+  // Source rewrite should now be in merged state
+  const rwContent = fs.readFileSync(rwFull, 'utf8')
+  assert.match(rwContent, /status: merged/)
+
+  // Before hash and after hash should differ
+  assert.notEqual(r.beforeHash, r.afterHash)
+})
+
+test('mergeRewrite rejects rewrite not in approved state', () => {
+  const root = makeFixture()
+  const rwRel = 'wiki/agents/workers/w1/rewrites/specs/p1-draft.md'
+  const rwFull = path.join(root, rwRel)
+  fs.mkdirSync(path.dirname(rwFull), { recursive: true })
+  fs.writeFileSync(rwFull, '---\nmemory_class: rewrite\nstatus: draft\n---\n\nDraft content\n')
+
+  assert.throws(
+    () => rt.mergeRewrite(root, { rewritePath: rwRel, canonicalPath: 'wiki/projects/p1/spec.md', approver: 'l1' }),
+    /Cannot merge rewrite in state/
+  )
+})
+
+// ─── 7. Retention ────────────────────────────────────────────────────────────
+
+test('compactHotMemory snapshots hot file above word threshold', () => {
+  const root = makeFixture()
+  const agentId = 'w1'
+  const hotRel = 'wiki/agents/workers/w1/hot.md'
+  const hotFull = path.join(root, hotRel)
+  // Write a hot file > 500 words
+  const bigContent = '---\nmemory_class: hot\n---\n\n' + 'word '.repeat(600)
+  fs.writeFileSync(hotFull, bigContent)
+
+  const result = rt.compactHotMemory(root, agentId, 'worker')
+  assert.ok(result.snapshot, 'should have created a snapshot')
+  assert.ok(fs.existsSync(path.join(root, result.snapshot)))
+  // Original should now have needs_compaction: true
+  const updated = fs.readFileSync(hotFull, 'utf8')
+  assert.match(updated, /needs_compaction: true/)
+})
+
+test('compactHotMemory skips hot file below threshold', () => {
+  const root = makeFixture()
+  const result = rt.compactHotMemory(root, 'w1', 'worker')
+  // fixture hot.md is tiny
+  assert.equal(result.skipped, true)
+})
+
+test('runBusTTL archives items older than ttlDays', () => {
+  const root = makeFixture()
+  // Publish an old item
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'old discovery' })
+  // Backdate it by writing created_at 31 days ago
+  const itemPath = path.join(root, `wiki/system/bus/discovery/${id}.md`)
+  const content = fs.readFileSync(itemPath, 'utf8')
+  const old = new Date(Date.now() - 31 * 86400000).toISOString()
+  fs.writeFileSync(itemPath, content.replace(/created_at:.*/, `created_at: ${old}`))
+
+  const result = rt.runBusTTL(root, { ttlDays: 30, channels: ['discovery'] })
+  assert.equal(result.archived.length, 1)
+})
+
+test('rotateTaskLog rotates log above line threshold', () => {
+  const root = makeFixture()
+  const logRel = 'wiki/agents/workers/w1/task-log.md'
+  const logFull = path.join(root, logRel)
+  // Write a log with > threshold lines
+  fs.writeFileSync(logFull, '---\nmemory_class: working\n---\n\n' + 'line\n'.repeat(200))
+
+  const result = rt.rotateTaskLog(root, 'w1', 'worker', 100)
+  assert.ok(result.snapshot)
+  assert.ok(fs.existsSync(path.join(root, result.snapshot)))
+  // Fresh log should be nearly empty
+  const fresh = fs.readFileSync(logFull, 'utf8')
+  assert.ok(fresh.split('\n').length < 20)
+})
+
+// ─── 8. Identity model ────────────────────────────────────────────────────────
+
+test('identity factories produce correct shapes', () => {
+  const agent = rt.agentIdentity({ agent_id: 'w1', tier: 'worker', domain: 'eng', team: 'platform', namespace: 'eng' })
+  assert.equal(agent.kind, 'agent')
+  assert.equal(agent.tier, 'worker')
+
+  const human = rt.humanIdentity('jay', 'platform')
+  assert.equal(human.kind, 'human')
+  assert.equal(human.namespace, 'platform')
+
+  const svc = rt.serviceIdentity('ingest-bot', 'ops')
+  assert.equal(svc.kind, 'service')
+
+  const team = rt.teamIdentity('frontend')
+  assert.equal(team.kind, 'team')
+  assert.equal(team.namespace, 'frontend')
+})
+
+test('resolveIdentity parses explicit kind+id headers', () => {
+  const headers = { 'x-identity-kind': 'human', 'x-identity-id': 'jay', 'x-identity-team': 'platform' }
+  const identity = rt.resolveIdentity(headers)
+  assert.equal(identity.kind, 'human')
+  assert.equal(identity.id, 'jay')
+  assert.equal(identity.namespace, 'platform')
+})
+
+test('resolveIdentity falls back to anonymous when no headers', () => {
+  const identity = rt.resolveIdentity({})
+  assert.equal(identity.id, 'anonymous')
+  assert.equal(identity.kind, 'human')
+})
+
+// ─── 9. State machines ────────────────────────────────────────────────────────
+
+test('standards state machine: draft → proposed → approved → active', () => {
+  const r1 = rt.transition('standards', 'draft', 'proposed', 'l1')
+  assert.equal(r1.status, 'proposed')
+  const r2 = rt.transition('standards', 'proposed', 'approved', 'o1')
+  assert.equal(r2.status, 'approved')
+  const r3 = rt.transition('standards', 'approved', 'active', 'o1')
+  assert.equal(r3.status, 'active')
+})
+
+test('standards state machine rejects illegal transition', () => {
+  assert.throws(() => rt.transition('standards', 'draft', 'active', 'l1'), /Illegal/)
+})
+
+test('rewrite state machine: draft → submitted → approved → merged', () => {
+  const r1 = rt.transition('rewrite', 'draft', 'submitted', 'w1')
+  assert.equal(r1.status, 'submitted')
+  const r2 = rt.transition('rewrite', 'submitted', 'under_review', 'l1')
+  assert.equal(r2.status, 'under_review')
+  const r3 = rt.transition('rewrite', 'under_review', 'approved', 'o1')
+  assert.equal(r3.status, 'approved')
+  const r4 = rt.transition('rewrite', 'approved', 'merged', 'o1')
+  assert.equal(r4.status, 'merged')
+})
+
+// ─── 10. priority_order in context loader ─────────────────────────────────────
+
+test('context loader respects priority_order when present', () => {
+  const root = makeFixture()
+  // Add a contract with priority_order that puts hot before profile
+  fs.writeFileSync(path.join(root, 'config/agents/w1.yaml'), `
+agent_id: w1
+tier: worker
+domain: eng
+context_policy:
+  budget_bytes: 20480
+  priority_order: [hot, profile, project, learned]
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+    - class: hot
+      scope: self
+      priority: 20
+    - path: wiki/projects/{{project}}/specs.md
+      priority: 40
+allowed_writes:
+  - wiki/agents/workers/w1/**
+  - wiki/system/bus/discovery/**
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/leads/**
+`.trim())
+  const c = rt.loadContract(root, 'w1')
+  const bundle = rt.loadAgentContext(root, c, { project: 'p1' })
+  const paths = bundle.files.map(f => f.path)
+  // hot should come before profile when priority_order says so
+  const hotIdx = paths.indexOf('wiki/agents/workers/w1/hot.md')
+  const profileIdx = paths.indexOf('wiki/agents/workers/w1/profile.md')
+  assert.ok(hotIdx < profileIdx, `hot (${hotIdx}) should precede profile (${profileIdx}) per priority_order`)
+})
+
+// ─── 11. generateTemplate ────────────────────────────────────────────────────
+
+test('generateTemplate produces valid frontmatter for all memory classes', () => {
+  const classes = ['profile', 'hot', 'working', 'learned', 'rewrite', 'bus']
+  for (const cls of classes) {
+    const tmpl = rt.generateTemplate(cls, { agentId: 'test-agent', tier: 'worker', domain: 'eng' })
+    assert.ok(tmpl.startsWith('---\n'), `${cls} template should start with frontmatter`)
+    assert.match(tmpl, /memory_class:/, `${cls} template should include memory_class`)
+  }
+})

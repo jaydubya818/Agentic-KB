@@ -275,6 +275,32 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
+      name: 'merge_rewrite',
+      description: 'Merge an approved rewrite artifact into the canonical project document. Snapshots previous canonical, writes new with provenance, transitions rewrite to merged. Requires rewrite to be in approved state.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          rewrite_path: { type: 'string', description: 'Relative path to the rewrite artifact (must have status: approved)' },
+          canonical_path: { type: 'string', description: 'Relative path to the target canonical document' },
+          approver: { type: 'string', description: 'Identity of the approver (agent_id or human name)' },
+        },
+        required: ['rewrite_path', 'canonical_path', 'approver'],
+      },
+    },
+    {
+      name: 'agent_trace',
+      description: 'Return recent runtime traces (context loads and close-task writes) for an agent from logs/agent-runtime.log. Useful for debugging context budget issues and rejected writes.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+          limit: { type: 'number', description: 'Max traces to return (default 20)' },
+          type: { type: 'string', enum: ['context-load', 'close-task'], description: 'Filter by trace type' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
       name: 'list_agents',
       description: 'List all agent contracts in the vault.',
       inputSchema: { type: 'object', properties: {} },
@@ -503,6 +529,23 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (name === 'promote_learning') {
       const result = agentRuntime.promoteLearning(KB_ROOT, args)
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'merge_rewrite') {
+      const result = agentRuntime.mergeRewrite(KB_ROOT, {
+        rewritePath: String(args.rewrite_path),
+        canonicalPath: String(args.canonical_path),
+        approver: String(args.approver),
+      })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'agent_trace') {
+      const limit = Math.min(Number(args.limit || 20), 200)
+      const filter = { agent_id: String(args.agent_id) }
+      if (args.type) filter.type = String(args.type)
+      const traces = agentRuntime.readRuntimeTraces(KB_ROOT, limit, filter)
+      return { content: [{ type: 'text', text: JSON.stringify({ agent_id: args.agent_id, count: traces.length, traces }, null, 2) }] }
     }
 
     if (name === 'list_agents') {
