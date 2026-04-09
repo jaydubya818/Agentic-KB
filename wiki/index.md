@@ -43,11 +43,12 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Frameworks (11)
+## Frameworks (12)
 
 | Page | Vendor | Version | Jay's Experience | Last Checked |
 |------|--------|---------|-----------------|--------------|
 | [[frameworks/framework-autogen]] | Microsoft | 0.4.x | none | 2026-04-04 |
+| [[frameworks/framework-markitdown]] | Microsoft | 0.1.x | none | 2026-04-09 |
 | [[frameworks/framework-bmad]] | Jay West | current | extensive | 2026-04-04 |
 | [[frameworks/framework-claude-api]] | [[anthropic]] | claude-sonnet-4-6 | extensive | 2026-04-04 |
 | [[frameworks/framework-claude-code]] | Anthropic | 1.x | extensive | 2026-04-04 |
@@ -56,7 +57,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[frameworks/framework-langgraph]] | LangChain | 0.2.x | limited | 2026-04-04 |
 | [[frameworks/framework-mcp]] | Anthropic | 1.x | moderate | 2026-04-04 |
 | [[frameworks/framework-openclaw]] | Unknown | 2026.3.24 | moderate | 2026-04-04 |
-| [[frameworks/framework-rowboat]] | Unknown | unknown | limited | 2026-04-04 |
+| [[frameworks/framework-rowboat]] | Rowboat Labs | unknown | limited | 2026-04-09 |
 | [[frameworks/framework-superpowers]] | Jay West | 5.0.6 | extensive | 2026-04-04 |
 
 ---

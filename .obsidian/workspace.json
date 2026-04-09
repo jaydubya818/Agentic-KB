@@ -187,6 +187,7 @@
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "wiki/frameworks/framework-markitdown.md",
     "wiki/patterns/pattern-two-step-ingest.md",
     "wiki/patterns/pattern-episodic-judgment-log.md",
     "wiki/recipes/recipe-codebase-memory.md",
@@ -222,7 +223,6 @@
     "wiki/concepts/agent-sandboxing.md",
     "wiki/patterns/pattern-runtime-preparation.md",
     "wiki/patterns/pattern-single-task-code-agent.md",
-    "wiki/patterns/pattern-task-validation-agent.md",
     "Untitled.canvas"
   ]
 }

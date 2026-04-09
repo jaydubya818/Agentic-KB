@@ -2,77 +2,96 @@
 id: 01KNNVX2QWP84CV07MDHY2TR09
 title: Rowboat
 type: framework
-vendor: Unknown / Jay West (deployed instance)
+vendor: Rowboat Labs
 version: "unknown"
-language: any
-license: proprietary
-github: ""
-tags: [rowboat, multi-agent, orchestration, agentic]
-last_checked: 2026-04-04
+language: typescript
+license: open-source
+github: "https://github.com/rowboatlabs/rowboat"
+tags: [rowboat, multi-agent, orchestration, agentic, memory, knowledge-graph, mcp]
+last_checked: 2026-04-09
 jay_experience: limited
 ---
 
 ## Overview
 
-[[framework-rowboat]] is an agentic orchestration framework Jay runs locally at `~/.rowboat/`. It is a lighter footprint than [[framework-openclaw]] — its directory structure shows `agents/`, `config/`, `knowledge/`, `runs/`, and `fireflies_transcripts/`. The model config reveals it runs `claude-sonnet-4-5` via [[anthropic]], with configuration files for scheduling, [[mcp-ecosystem]] servers, OAuth, models, and security.
+Rowboat is an open-source, local-first AI assistant that builds a persistent knowledge graph of work context — emails, calendar, meetings, documents — and uses that accumulated context to help execute tasks. Where the [[concepts/llm-wiki-pattern]] builds a flat wiki of markdown pages, Rowboat structures the same markdown foundation into an explicit entity-relationship graph: people, projects, decisions, and commitments are tracked as linked entities, not just mentioned in prose.
 
-Rowboat appears to be a separate agent runtime with its own agent definitions, persistent run tracking, a knowledge base, and integration with Fireflies (an AI meeting transcription service). This last detail is significant: `fireflies_transcripts/` suggests Rowboat processes meeting transcripts as inputs to agent workflows.
+The key design claim: "For personal research, a flat wiki is enough. For work, you need explicit relationships between decisions and commitments tracked across sources." Karpathy endorsed this framing.
 
-**Note**: This page is based on filesystem observation only. All behavioral claims are [INFERRED]. Jay should update this page with direct knowledge.
+Jay runs an instance at `~/.rowboat/`. The filesystem (agents/, config/, knowledge/, runs/, fireflies_transcripts/) aligns with the GitHub architecture. Prior page was built from filesystem inference only; this version integrates confirmed GitHub details.
+
+**Still inferred from Jay's local instance**: agent definition format, run output schema, specific knowledge/ structure.
 
 ---
 
 ## Core Concepts
 
-### Agent Definitions
-The `agents/` directory contains Rowboat's agent configurations. Unlike [[framework-claude-code]]'s `.md`-format agent definitions, these may use JSON or YAML given the config-heavy nature of Rowboat's other files. [INFERRED]
+### Knowledge Graph (not flat wiki)
+The fundamental architectural distinction from standard LLM wikis: Rowboat tracks **entities** (people, projects, decisions, commitments) as first-class nodes with explicit typed relationships between them. A flat wiki has pages that link to other pages. Rowboat has an entity graph where the relationship type and strength are stored alongside the link — "Alice owns decision X which blocks project Y" is a traversable relationship, not just a mention.
 
-### Run Tracking
-The `runs/` directory suggests Rowboat maintains a log of past agent runs with their inputs, outputs, and status. This is closer to a job queue model than a conversational model. [INFERRED]
+This is implemented as structured markdown notes with backlinks in an Obsidian-compatible vault, with Qdrant (vector DB) as an optional search layer.
 
-### Knowledge Base
-The `knowledge/` directory is a dedicated knowledge store for Rowboat's agents — separate from Jay's Agentic-KB and OpenClaw's knowledge directory. Purpose unknown; likely context injection for agent runs. [INFERRED]
+### Live Notes
+Notes that auto-update based on connected sources (email, calendar, meetings). A note about a person or project reflects current state, not just historical ingest. This is distinct from the immutable `raw/` + compiled `wiki/` model — Rowboat's notes are mutable and source-driven.
 
-### Fireflies Integration
-`fireflies_transcripts/` indicates Rowboat ingests meeting transcripts from Fireflies.ai. This suggests a use case pattern: meetings happen → Fireflies transcribes → Rowboat processes transcripts through agent workflows → outputs (action items, summaries, follow-ups) are produced. This is a common agentic automation pattern for knowledge workers. [INFERRED]
+### Decision & Commitment Tracking
+Explicit capture of: prior decisions and open questions (for meeting prep), action items and owners (to prevent dropped tasks), relevant conversation threads per relationship. These are structured fields on entity nodes, not prose buried in summaries.
 
-### Configuration Layer
-Rowboat's `config/` directory contains:
-- `models.json` — model selection (confirmed: claude-sonnet-4-5 via Anthropic)
-- `models.dev.json` — development model config
+### Explicit Agent Actions with Human Review
+Rowboat executes tasks (drafting, summarizing, generating artifacts) grounded in the accumulated knowledge graph. Actions require human review before execution — it's not fully autonomous.
+
+### Configuration Layer (Jay's instance)
+- `models.json` — model selection (claude-sonnet-4-5 via Anthropic)
 - `mcp.json` — MCP server registrations
-- `agent-schedule.json` — scheduled agent runs
-- `agent-schedule-state.json` — schedule execution state
-- `granola.json` — unknown (Granola is a meeting notes app; may relate to transcript ingestion)
-- `oauth.json` — OAuth credentials for external service integrations
-- `prebuilt.json` — pre-built agent configurations
-- `security.json` — security settings
+- `agent-schedule.json` / `agent-schedule-state.json` — scheduled agent runs
+- `granola.json` — Granola meeting notes integration
+- `oauth.json` — OAuth for external service integrations
 - `note_creation.json` — automated note creation config
+- `prebuilt.json` — pre-built agent configurations
 
 ---
 
-## Architecture (Inferred)
+## Architecture
+
+**Stack**: TypeScript (96.7%), Docker/Python support. Model-agnostic — supports Ollama, LM Studio, or any hosted API (bring-your-own-key).
 
 ```
-Rowboat (~/.rowboat/)
-    │
-    ├── Model: claude-sonnet-4-5 (Anthropic API)
-    ├── Agents: agent definitions (agents/ directory)
-    │
-    ├── Inputs:
-    │   ├── Fireflies meeting transcripts (fireflies_transcripts/)
-    │   ├── Granola meeting notes (granola.json)
-    │   └── Scheduled triggers (agent-schedule.json)
-    │
-    ├── Knowledge: context store (knowledge/)
-    │
-    ├── Runs: job tracking (runs/)
-    │
-    └── Integrations:
-        ├── MCP servers (config/mcp.json)
-        ├── OAuth providers (config/oauth.json)
-        └── External scheduling
+External sources (email, calendar, Fireflies, Granola, documents)
+      ↓
+MCP integration layer (config/mcp.json)
+      ↓
+Knowledge graph builder
+      ├── Entity nodes: people, projects, decisions, commitments
+      ├── Typed relationships with explicit strength
+      └── Stored as: Obsidian-compatible markdown vault (knowledge/)
+                     + optional Qdrant vector DB
+      ↓
+Agent layer (agents/)
+      ├── Model: claude-sonnet-4-5 via Anthropic API (Jay's instance)
+      ├── Scheduled runs (agent-schedule.json)
+      └── Human-reviewed action execution
+      ↓
+Run tracking (runs/) + outputs
 ```
+
+**Data portability**: all knowledge stored as plain markdown — inspect, edit, back up, or delete at any time. No proprietary embeddings.
+
+---
+
+## Flat Wiki vs Knowledge Graph
+
+The post that prompted this update framed the distinction cleanly: "Persistent MD wikis are great for compiling research. For work, you need a knowledge graph that links decisions and commitments across sources."
+
+| Dimension | Flat LLM Wiki (Karpathy pattern) | Rowboat Knowledge Graph |
+|-----------|----------------------------------|------------------------|
+| Structure | Markdown pages with prose links | Entity nodes with typed relationships |
+| Relationship tracking | Implicit (mentioned in text) | Explicit (stored with type + strength) |
+| Decision tracking | Buried in summary pages | First-class entity field |
+| Commitment tracking | None by default | Action items + owners per entity |
+| Source model | Immutable raw/ + compiled wiki/ | Mutable live notes auto-updated from sources |
+| Best for | Research, knowledge compilation | Work context — meetings, projects, people |
+
+Both store data as markdown and are Obsidian-compatible. The difference is schema and intent.
 
 ---
 
@@ -91,20 +110,23 @@ Hypothesis: Rowboat handles Jay's **asynchronous knowledge worker automation** (
 
 ---
 
-## Strengths (Inferred)
+## Strengths
 
-- **Meeting transcript pipeline**: automated ingestion of Fireflies/Granola transcripts into agent workflows — removes manual meeting follow-up work
-- **Scheduled automation**: cron-like scheduling without manual invocation
-- **Clean separation of concerns**: lighter than OpenClaw; focused use case
-- **MCP extensibility**: full MCP host
+- **Explicit relationship graph**: decisions and commitments are queryable entities, not text buried in summaries
+- **Meeting transcript pipeline**: Fireflies/Granola → knowledge graph → action items/follow-ups; removes manual meeting follow-up
+- **Local-first, open-source**: no cloud lock-in; plain markdown vault is portable and inspectable
+- **Model-agnostic**: swap Anthropic for Ollama or any OpenAI-compatible API without architecture changes
+- **Human-review gate**: agent actions require approval before execution — safer than fully autonomous
+- **MCP extensibility**: full MCP host; Jay's instance has multiple MCP servers registered
 
 ---
 
-## Weaknesses (Inferred)
+## Weaknesses
 
-- **Limited visibility**: least-documented system in Jay's stack
-- **Single-domain focus**: appears specialized for meeting/knowledge-worker workflows; not a general orchestrator
-- **Unknown debugging surface**: no evidence of observability tooling
+- **Live notes mutable by design**: unlike the immutable `raw/` pattern, Rowboat updates notes in place — harder to audit what changed and when
+- **Qdrant dependency for search at scale**: adds infrastructure complexity vs. pure filesystem search
+- **TypeScript-only**: no Python SDK; harder to extend for Python-native data pipelines
+- **Limited observability in Jay's instance**: no evidence of structured trace logging
 
 ---
 
