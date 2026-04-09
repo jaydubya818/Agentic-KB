@@ -187,6 +187,8 @@
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "wiki/patterns/pattern-two-step-ingest.md",
+    "wiki/patterns/pattern-episodic-judgment-log.md",
     "wiki/recipes/recipe-codebase-memory.md",
     "raw/note/agent-memory-runtime-plan.md",
     "scripts/agents-demo.sh",
@@ -221,8 +223,6 @@
     "wiki/patterns/pattern-runtime-preparation.md",
     "wiki/patterns/pattern-single-task-code-agent.md",
     "wiki/patterns/pattern-task-validation-agent.md",
-    "wiki/patterns/pattern-code-generation-agent.md",
-    "wiki/patterns/pattern-clarification-task.md",
     "Untitled.canvas"
   ]
 }

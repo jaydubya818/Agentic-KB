@@ -43,12 +43,28 @@ The [Context Manager Agent pattern](../patterns/pattern-context-manager-agent.md
 | **Token budgets** | Set hard limits on context output (e.g. 400 tokens) as a forcing function for selectivity |
 | **Role-scoped prompts** | Remind the agent of its exact scope at the end of every context package |
 
+## The Primacy-Recency (U-Shaped) Attention Curve
+
+LLMs do not attend uniformly across a prompt. Recall probability follows a rough U-shape: content near the **beginning** (primacy) and near the **end** (recency) of the context window is reliably attended to; content buried in the **middle** is systematically underweighted. This is the mechanism behind the "lost in the middle" effect.
+
+**Practical implication**: structure your prompts so that the most critical instructions occupy the first ~100 lines and the immediate task occupies the last section. Supporting material, extended examples, and reference data go in the middle where the model will still use them but where their absence wouldn't break the task.
+
+This has direct consequences for long instruction files:
+- A 1,200-line voice guide where the most distinctive rules are in the middle will produce consistent drift by paragraph four, even if the model started correctly
+- The fix is not to shorten the file — it's to **front-load** the critical rules (signature phrases, hard bans, core patterns) in the first 100 lines and push extended examples and edge cases further down
+- Token budgets act as a forcing function: if you cap a context package at 400 tokens, the module author is forced to front-load only what actually matters
+
+Applied to skill files and CLAUDE.md: the routing/priority rules and the hardest constraints go first. Nuance and examples go last. Assume the model will read the beginning reliably, the end reliably, and the middle partially.
+
+---
+
 ## Common Pitfalls
 
 - **Assuming more context is safer** — it rarely is; it increases hallucination surface and token cost
 - **Including test files by default** — tests define behaviour but are rarely needed when implementing non-test code
 - **No explicit ignore list** — without it, the execution agent may independently fetch irrelevant files via tool calls
 - **Context creep across milestones** — files from earlier project phases stay in context long after they stop being relevant
+- **Critical rules buried in the middle** — the primacy-recency curve means anything important in lines 200-800 of a 1,000-line prompt is at highest risk of being underweighted
 
 ## See Also
 

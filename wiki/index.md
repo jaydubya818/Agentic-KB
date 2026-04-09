@@ -34,13 +34,12 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Patterns (0)
-
-*No pattern pages yet — create with `pattern-` prefix per schema.*
+## Patterns (2)
 
 | Page | Category | Problem | Confidence |
 |------|----------|---------|------------|
-| *(none)* | | | |
+| [[patterns/pattern-episodic-judgment-log]] | memory | Agents have your files but not your judgment — they give generic advice on decisions you've already thought through | medium |
+| [[patterns/pattern-two-step-ingest]] | prompt-engineering | Single-call compilation conflates analysis with generation, producing lower-quality wiki pages with weak cross-links | medium |
 
 ---
 
