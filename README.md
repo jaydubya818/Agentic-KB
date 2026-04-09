@@ -1,10 +1,26 @@
 # Agentic Engineering Knowledge Base
 
-> Jay West | Built: 2026-04-04 | Last major update: 2026-04-07 | Maintained by LLM + Human
+> Jay West | Built: 2026-04-04 | Last major update: 2026-04-09 | Maintained by LLM + Human
 
-A personal knowledge base for agentic AI engineering — 83+ articles covering concepts, patterns, frameworks, entities, recipes, and evaluations. Queryable via a Wikipedia-style web UI, CLI, and MCP server.
+A personal knowledge base for agentic AI engineering — 87+ articles covering concepts, patterns, frameworks, entities, recipes, and evaluations. Queryable via a Wikipedia-style web UI, CLI, and MCP server.
 
 Inspired by [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy) — raw sources are **compiled** by Claude into a persistent, cross-referenced wiki. Not RAG: the compile step is deliberate, auditable, and runs incrementally over a logged state.
+
+---
+
+## What's New — April 9, 2026
+
+RLM pipeline upgrade pass — stages 6–9 now live, two-step compile, auto-reindex, raw file watcher:
+
+- 🧠 **Two-step compile pipeline** — `/api/compile` now runs two separate Claude calls per raw doc. **Call 1 (Analysis)** extracts a structured knowledge graph (entities with salience, typed relationships with evidence, key claims, candidate pages, contradictions, tags) using a pure analyst persona. **Call 2 (Generation)** feeds that JSON into the wiki curator to write page content. Improves page quality and surfaces contradictions automatically as `⚠️ Contradictions` sections. Analysis failure is non-fatal — generation still runs. SSE now emits `{type:'analysis'}` progress events per doc.
+- 🔄 **Auto-reindex** — after every compile run, `reindexWiki()` walks all 9 wiki sections and updates `## Section (N)` counts in `index.md` automatically. No more stale counts.
+- 🎯 **Confidence weighting** (RLM stage 6) — `ranking.ts` now reads frontmatter `confidence` field and applies a multiplier: `high → ×1.10`, `medium → ×1.00`, `low → ×0.85`. Cached per mtime. High-confidence articles rank above speculation automatically.
+- 🚫 **Contradiction filtering** (RLM stage 7) — `query/route.ts` parses `wiki/lint-report.md` for flagged contradictions and deprioritizes those pages to the end of synthesis context. `sources` SSE response includes a `contradicted[]` array so the UI can warn users.
+- 📦 **Token-budget packing** (RLM stage 9) — query synthesis now caps context at `MAX_CONTEXT_CHARS = 24,000`. `packArticles()` distributes budget proportionally; `extractArticleSummary()` keeps frontmatter + first 3 paragraphs when an article is over budget. No more context overflow silently truncating critical pages.
+- ⚖️ **Proportional bucket allocation** — `graph-search.ts` now enforces `{direct: 60%, graph: 20%, hot: 5%, citation: 15%}` across result buckets. Graph traversal can no longer crowd out direct keyword matches. Results tagged with their bucket for debugging.
+- 👁️ **Raw file watcher** — `vault-watch/route.ts` now monitors `raw/` separately and emits `{type:'raw_pending'}` SSE events when new files appear, prompting the UI to surface them in the process queue immediately.
+- 📄 **CLI: `ingest-file`** — `kb ingest-file <path>` converts any file to markdown via markitdown (PDF, DOCX, PPTX, XLSX, audio, YouTube URLs), writes it to the correct `raw/` subdirectory with frontmatter, and reports word count.
+- 📊 **CLI: `reindex`** — `kb reindex` updates `wiki/index.md` section counts from actual directory listings without running a full compile.
 
 ---
 
@@ -21,7 +37,7 @@ Enterprise-scaling pass inspired by the Karpathy LLM-Wiki gist and patterns borr
 - 🎥 **YouTube + Twitter ingest CLI** — `kb ingest-youtube <url>` (yt-dlp + SRT parsing) and `kb ingest-twitter <archive.zip>` (parses the Twitter/X data export).
 - 🏛️ **Interactive architecture viewer** — [oh-my-mermaid](https://github.com/oh-my-mermaid/oh-my-mermaid) integration. Clickable drill-down through 6 nested perspectives of the system. Linked from the wiki sidebar.
 - 🔗 **Sidebar Tools section** — one-click jump to the architecture viewer and to Obsidian's global graph view (via Advanced URI plugin).
-- 🧪 **10-stage RLM retrieval pipeline** — reference design documented in [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md). Temporal decay + hotness (stages 4–5) are live; stages 1–3 and 6–10 are the P2 build target.
+- 🧪 **10-stage RLM retrieval pipeline** — reference design documented in [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md). Temporal decay + hotness (stages 4–5) were live; **stages 6–9 are now live as of April 9**.
 
 See [`ENTERPRISE_PLAN.md`](ENTERPRISE_PLAN.md) for the full P0–P3 roadmap.
 
@@ -116,7 +132,7 @@ kb --help
 ### Commands
 
 ```bash
-# Search (hybrid keyword + graph)
+# Search (hybrid keyword + graph with bucket allocation)
 kb search "tool use patterns"
 kb search "my stack" --scope private
 kb search "everything" --scope all --limit 20
@@ -131,13 +147,19 @@ kb read patterns/pattern-supervisor-worker
 kb list concepts
 kb list personal
 
-# Karpathy compile pipeline (raw → Claude → wiki)
+# Karpathy compile pipeline (raw → analyze → generate → wiki + auto-reindex)
 kb compile                   # incremental: only new/changed raw docs
 kb compile --mode full       # recompile everything
-kb compile --validate        # two-model validation (P2 — coming soon)
+
+# Update index.md section counts from directory listings (no recompile)
+kb reindex
 
 # Wiki health check
 kb lint                      # writes wiki/lint-report.md
+
+# Ingest a file (PDF, DOCX, PPTX, XLSX, audio, YouTube URL → raw/ + markitdown)
+kb ingest-file <path>              # auto-detects raw/ subdirectory
+kb ingest-file <path> --dir papers # override target subdirectory
 
 # Ingest external sources
 kb ingest-youtube <url>      # yt-dlp + SRT parse → raw/transcripts/
@@ -227,15 +249,20 @@ The compile pipeline is the heart of the KB — it's what makes this *not* a RAG
 ### How it works
 
 1. `collectMd(raw/)` walks every markdown file under `raw/`
-2. `loadLog()` reads `raw/.compiled-log.json` — a map of `{relPath → {hash, compiledAt}}`
-3. Files whose hash changed (or are new) are selected for this run
-4. Each batch is sent to Claude with:
-   - System prompt: `wiki/schema.md` (directory routing, frontmatter schema, tag vocab)
-   - User content: the raw markdown
-5. Claude returns a JSON array of page ops (`{path, content}`)
+2. `loadLog()` reads `raw/.compiled-log.json` — a map of `{relPath → {compiledAt, pagesAffected}}`
+3. Files not yet in the log are selected for this run (or all files in `--mode full`)
+4. **For each file — Call 1 (Analysis, analyst persona):**
+   - Extracts a structured `KnowledgeAnalysis` JSON: entities (name, type, salience 0–1), typed relationships (from, to, label, strength, evidence), key claims, candidate pages (1–3 paths), contradictions, tags
+   - Analysis failure is non-fatal; generation still runs with an empty graph
+   - SSE emits `{type:'analysis', entities, candidates, contradictions, tags}`
+5. **For each file — Call 2 (Generation, wiki curator persona):**
+   - Receives the analysis JSON + raw excerpt + existing page list
+   - Returns a JSON array of page ops `[{op, path, content}]`
+   - Contradictions found in analysis surface as `⚠️ Contradictions` sections in pages
 6. Each op is written to disk under `wiki/`
 7. `wiki/log.md` gets an append-only entry for the run
-8. `raw/.compiled-log.json` is updated so the next run skips unchanged files
+8. `raw/.compiled-log.json` is updated so the next run skips already-compiled files
+9. **After the loop — Auto-reindex:** `reindexWiki()` updates all `## Section (N)` counts in `index.md`
 
 ### Schema file
 
@@ -283,18 +310,19 @@ Multi-tenant access control. Every write is scoped to a namespace. One KB, many 
 
 > Deleting `namespaces.json` returns the system to open-access mode. No migration needed.
 
-### Temporal Decay + Hotness Ranking
+### Temporal Decay + Hotness Ranking + Confidence Weighting
 
-Search scores are multiplied by a ranking factor that blends recency and popularity:
+Search scores are multiplied by a ranking factor that blends recency, popularity, and declared confidence:
 
 ```
-finalScore = baseScore × decay(mtime) × hotness(audit hits)
+finalScore = baseScore × decay(mtime) × hotness(audit hits) × confidence(frontmatter)
 ```
 
 - **decay(mtime)** — exponential with 180-day half-life, floored at 0.5. A doc touched 180 days ago scores at 0.5× of a freshly written one.
 - **hotness(path)** — parses `logs/audit.log` for `op:query` entries in the last 30 days, counts hits per file, log-scales: 1 hit → +0.1, 10 hits → +0.33, 100 hits → +0.5 cap. Cached for 60 seconds.
+- **confidence(path)** — reads the `confidence:` frontmatter field via a 512-byte head read (mtime-cached). `high → ×1.10`, `medium → ×1.00`, `low → ×0.85`. Pages marked low-confidence surface below speculation-free articles automatically. _(RLM stage 6, added 2026-04-09)_
 
-Results include `baseScore`, `decay`, `hotness`, and `score` so the UI can show why a page ranked where it did.
+Results include `baseScore`, `decay`, `hotness`, `confidence`, and `score` so the UI can show why a page ranked where it did.
 
 Implementation: [`web/src/lib/ranking.ts`](web/src/lib/ranking.ts). Wired into [`graph-search.ts`](web/src/lib/graph-search.ts).
 
@@ -548,15 +576,17 @@ Browser
 
 Shared libs (web/src/lib/)
   ├── rbac.ts                  Namespace identity resolution + ACL enforcement
-  ├── ranking.ts               decayFactor + hotnessBoost + rankMultiplier
-  ├── graph-search.ts          Semantic search over graphify graph.json
+  ├── ranking.ts               decayFactor + hotnessBoost + confidenceBoost + rankMultiplier
+  ├── graph-search.ts          Semantic search over graphify graph.json + 60/20/5/15 bucket allocation
   ├── audit.ts                 Append-only JSONL at logs/audit.log
   └── articles.ts              Article loaders, frontmatter parsing, vault resolution
 
 CLI (kb.js)
   ├── HTTP → compile, lint, query, search (SSE-streaming where applicable)
   ├── Direct fs reads (read, list, pending)
-  └── Local yt-dlp + parsers (ingest-youtube, ingest-twitter)
+  ├── Local yt-dlp + parsers (ingest-youtube, ingest-twitter)
+  ├── markitdown conversion (ingest-file → raw/ with frontmatter)
+  └── Local index recount (reindex → index.md section counts)
 
 MCP Server (server.js, 7 tools)
   ├── Direct fs reads: search_wiki, read_article, read_index, list_articles
@@ -579,6 +609,23 @@ Scheduled task (kb-daily-lint)
 - **Cookie-based vault selection** — `active_vault_path` cookie propagates through Next.js server components via `cookies()`
 - **PIN auth is server-enforced** — `PRIVATE_PIN` env var read server-side only; never exposed to client
 - **MCP is filesystem-first** — `search_wiki`, `read_article`, `list_articles` go direct to disk. `query_wiki`, `compile_wiki`, `lint_wiki` call the HTTP API.
+
+### RLM Pipeline Stage Status
+
+10-stage Recursive Layered Memory retrieval pipeline — see [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md) for full spec.
+
+| Stage | Name | Status | Notes |
+|-------|------|--------|-------|
+| 1 | Semantic chunking | ⏳ Planned | P2 — vector/BM25 hybrid |
+| 2 | Vector + BM25 search | ⏳ Planned | P2 — excluded from current scope |
+| 3 | Two-step ingest (analyze → generate) | ✅ Live | `/api/compile` — 2026-04-09 |
+| 4 | Temporal decay | ✅ Live | `ranking.ts` — 2026-04-07 |
+| 5 | Hotness boost | ✅ Live | `ranking.ts` audit-log counts — 2026-04-07 |
+| 6 | Confidence weighting | ✅ Live | `ranking.ts` frontmatter `confidence:` — 2026-04-09 |
+| 7 | Contradiction filtering | ✅ Live | `query/route.ts` lint-report parse — 2026-04-09 |
+| 8 | Graph traversal + bucket allocation | ✅ Live | `graph-search.ts` 60/20/5/15 — 2026-04-09 |
+| 9 | Token-budget packing | ✅ Live | `query/route.ts` 24k char cap — 2026-04-09 |
+| 10 | Two-model validation | ⏳ Planned | P2 — excluded from current scope |
 
 ### Reference documents
 
