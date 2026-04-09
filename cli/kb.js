@@ -38,14 +38,21 @@ Commands:
   kb read <slug>
   kb list <section>
   kb pending
+  kb compile [--mode full|incremental]
+  kb lint
+  kb reindex            Rebuild wiki/index.md from actual files on disk
+  kb ingest-file <path> Convert any file to markdown (via markitdown) and drop into raw/
+  kb ingest-youtube <url>
+  kb ingest-twitter <archive.zip>
 
 Examples:
   kb search "multi-agent orchestration"
-  kb search "tool design" --scope all
   kb query "What is the best pattern for supervisor-worker agents?"
   kb read concepts/tool-use
   kb list frameworks
-  kb pending
+  kb reindex
+  kb ingest-file ~/Downloads/paper.pdf
+  kb ingest-file ~/Documents/spec.docx --dir framework-docs
 `)
 }
 
@@ -489,6 +496,162 @@ async function ingestTwitterArchive(archivePath) {
   }
 }
 
+// ─── ingest-file (markitdown) ────────────────────────────────────────────────
+
+async function ingestFile(filePath, opts) {
+  const { spawnSync } = await import('child_process')
+  const fs = await import('fs')
+  const path = await import('path')
+
+  if (!filePath) {
+    console.error('Usage: kb ingest-file <path> [--dir <raw-subdir>]')
+    process.exit(1)
+  }
+
+  const resolved = filePath.replace(/^~/, process.env.HOME)
+  if (!fs.existsSync(resolved)) {
+    console.error(`❌ File not found: ${resolved}`)
+    process.exit(1)
+  }
+
+  // Check markitdown is installed
+  const check = spawnSync('python3', ['-m', 'markitdown', '--version'], { encoding: 'utf8' })
+  const check2 = check.status !== 0
+    ? spawnSync('markitdown', ['--version'], { encoding: 'utf8' })
+    : { status: 0 }
+
+  if (check.status !== 0 && check2.status !== 0) {
+    console.error('\n❌ markitdown is not installed.')
+    console.error('   Install it with: pip install markitdown[all] --break-system-packages')
+    console.error('   Or:              pip3 install markitdown[all]')
+    process.exit(1)
+  }
+
+  const cmd = check.status === 0 ? 'python3' : 'markitdown'
+  const cmdArgs = check.status === 0 ? ['-m', 'markitdown', resolved] : [resolved]
+
+  console.log(`\n📄 Converting ${path.basename(resolved)} via markitdown...`)
+
+  const result = spawnSync(cmd, cmdArgs, { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 })
+  if (result.status !== 0) {
+    console.error('❌ markitdown conversion failed:')
+    console.error(result.stderr || result.stdout)
+    process.exit(1)
+  }
+
+  const markdown = result.stdout
+  if (!markdown || markdown.trim().length < 50) {
+    console.error('❌ markitdown returned empty or very short output. File may be unsupported.')
+    process.exit(1)
+  }
+
+  // Determine output subdirectory
+  const subdir = opts.dir || inferRawSubdir(resolved)
+  const KB_ROOT = new URL('..', import.meta.url).pathname
+  const outDir = path.join(KB_ROOT, 'raw', subdir)
+  fs.mkdirSync(outDir, { recursive: true })
+
+  // Generate output filename
+  const basename = path.basename(resolved, path.extname(resolved))
+  const slug = basename.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60)
+  const date = new Date().toISOString().slice(0, 10)
+  const outFilename = `${date}-${slug}.md`
+  const outPath = path.join(outDir, outFilename)
+
+  // Prepend minimal frontmatter
+  const frontmatter = [
+    '---',
+    `title: "${basename.replace(/"/g, "'")}"`,
+    `source_file: ${path.basename(resolved)}`,
+    `date_ingested: ${date}`,
+    `tags: [${subdir}]`,
+    '---',
+    '',
+  ].join('\n')
+
+  fs.writeFileSync(outPath, frontmatter + markdown, 'utf8')
+
+  console.log(`✅ Saved to raw/${subdir}/${outFilename}`)
+  console.log(`   Words: ~${Math.round(markdown.length / 5)}`)
+  console.log(`   Run: kb compile  to ingest into the wiki`)
+}
+
+function inferRawSubdir(filePath) {
+  const ext = filePath.split('.').pop()?.toLowerCase() || ''
+  if (['pdf'].includes(ext)) return 'papers'
+  if (['docx', 'doc'].includes(ext)) return 'framework-docs'
+  if (['pptx', 'ppt'].includes(ext)) return 'conversations'
+  if (['mp3', 'mp4', 'wav', 'm4a', 'webm'].includes(ext)) return 'transcripts'
+  if (['xlsx', 'xls', 'csv'].includes(ext)) return 'framework-docs'
+  return 'note'
+}
+
+// ─── reindex ─────────────────────────────────────────────────────────────────
+
+async function reindex(pin) {
+  console.log('\n🗂️  Rebuilding wiki/index.md...\n')
+  const res = await fetch(`${API_URL}/api/reindex`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(pin ? { 'x-private-pin': pin } : {}) },
+    body: JSON.stringify({ pin }),
+  })
+  if (!res.ok) {
+    // If the API endpoint doesn't exist yet, do a local rebuild
+    console.log('   (API not available — using local rebuild)')
+    await reindexLocal()
+    return
+  }
+  const data = await res.json()
+  if (data.ok) {
+    console.log(`✅ Index rebuilt: ${data.pagesIndexed} pages across ${data.sections} sections`)
+  } else {
+    // Fallback to local
+    await reindexLocal()
+  }
+}
+
+async function reindexLocal() {
+  const fs = await import('fs')
+  const path = await import('path')
+  const KB_ROOT = new URL('..', import.meta.url).pathname
+  const wikiDir = path.join(KB_ROOT, 'wiki')
+
+  const sections = ['concepts', 'patterns', 'frameworks', 'entities', 'recipes', 'evaluations', 'summaries', 'syntheses', 'personal']
+  const counts = {}
+  let total = 0
+
+  for (const section of sections) {
+    const sectionDir = path.join(wikiDir, section)
+    if (!fs.existsSync(sectionDir)) { counts[section] = 0; continue }
+    const files = fs.readdirSync(sectionDir).filter(f => f.endsWith('.md'))
+    counts[section] = files.length
+    total += files.length
+  }
+
+  // Read current index.md and update section count headers
+  const indexPath = path.join(wikiDir, 'index.md')
+  if (!fs.existsSync(indexPath)) {
+    console.error('❌ wiki/index.md not found')
+    process.exit(1)
+  }
+
+  let content = fs.readFileSync(indexPath, 'utf8')
+  for (const [section, count] of Object.entries(counts)) {
+    const capitalized = section.charAt(0).toUpperCase() + section.slice(1)
+    // Update count in section headers like "## Concepts (16)"
+    content = content.replace(
+      new RegExp(`## ${capitalized}s?\\s*\\(\\d+\\)`, 'g'),
+      `## ${capitalized}${section.endsWith('s') ? '' : 's'} (${count})`
+    )
+  }
+
+  fs.writeFileSync(indexPath, content, 'utf8')
+  console.log(`✅ Index counts updated: ${total} pages across ${sections.length} sections`)
+  for (const [s, c] of Object.entries(counts)) {
+    if (c > 0) console.log(`   ${s}: ${c}`)
+  }
+}
+
 // ─── Agent Runtime Commands ───────────────────────────────────────────────
 
 async function agentCmd(sub, rest) {
@@ -634,6 +797,11 @@ try {
     await ingestYoutube(positional[0])
   } else if (command === 'ingest-twitter') {
     await ingestTwitterArchive(positional[0])
+  } else if (command === 'ingest-file') {
+    if (!positional[0]) { console.error('Usage: kb ingest-file <path> [--dir <raw-subdir>]'); process.exit(1) }
+    await ingestFile(positional[0], opts)
+  } else if (command === 'reindex') {
+    await reindex(opts.pin)
   } else if (command === 'agent') {
     await agentCmd(args[1], args.slice(2))
   } else if (command === 'bus') {

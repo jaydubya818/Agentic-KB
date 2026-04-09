@@ -4,6 +4,16 @@
  * Reads raw/ docs → Claude synthesizes/updates wiki pages →
  * cross-references updated → log.md appended → compiled-log updated.
  *
+ * Two-step ingest pipeline (RLM stage 3):
+ *   Call 1 — Analysis: extract a structured knowledge graph from the raw doc
+ *             (entities, relationships, key_claims, candidate_pages, contradictions, tags)
+ *   Call 2 — Generation: use the analysis JSON to write exact wiki page ops
+ *
+ * This separation improves page quality and reduces JSON hallucination by letting
+ * the model think structurally before committing to file content.
+ *
+ * After all docs are compiled, index.md section counts are auto-updated (reindex).
+ *
  * mode=incremental  compile only raw docs not yet in .compiled-log.json
  * mode=full         recompile everything
  */
@@ -62,6 +72,68 @@ function listWikiPages(wikiRoot: string): string[] {
 
 function encodeSSE(data: object): string {
   return `data: ${JSON.stringify(data)}\n\n`
+}
+
+// ── Analysis types (Call 1 output) ────────────────────────────────────────────
+
+interface AnalysisEntity {
+  name: string
+  type: string       // concept | pattern | framework | person | company | tool | other
+  salience: number   // 0–1, how central to the doc
+  description: string
+}
+
+interface AnalysisRelationship {
+  from: string       // entity name
+  to: string         // entity name
+  label: string      // e.g. "extends", "replaces", "uses", "contradicts"
+  strength: number   // 0–1
+  evidence: string   // short quote or paraphrase from source
+}
+
+interface AnalysisCandidatePage {
+  path: string       // suggested wiki path, e.g. concepts/tool-use.md
+  type: string       // concept | pattern | framework | recipe | summary | synthesis | entity
+  primary_entities: string[]
+}
+
+interface KnowledgeAnalysis {
+  entities: AnalysisEntity[]
+  relationships: AnalysisRelationship[]
+  key_claims: string[]
+  candidate_pages: AnalysisCandidatePage[]
+  contradictions: string[]
+  tags: string[]
+}
+
+// ── Auto-reindex: update section counts in index.md ──────────────────────────
+
+const WIKI_SECTIONS = [
+  'concepts', 'patterns', 'frameworks', 'entities',
+  'recipes', 'evaluations', 'summaries', 'syntheses', 'personal',
+] as const
+
+function reindexWiki(wikiRoot: string): void {
+  const indexPath = path.join(wikiRoot, 'index.md')
+  if (!fs.existsSync(indexPath)) return
+
+  let indexContent = fs.readFileSync(indexPath, 'utf8')
+
+  for (const section of WIKI_SECTIONS) {
+    const sectionDir = path.join(wikiRoot, section)
+    const count = fs.existsSync(sectionDir)
+      ? fs.readdirSync(sectionDir).filter(f => f.endsWith('.md') && !f.startsWith('.')).length
+      : 0
+
+    // Match headers like "## Concepts (12)" or "## Concepts" and update/add count
+    const capSection = section.charAt(0).toUpperCase() + section.slice(1)
+    indexContent = indexContent.replace(
+      new RegExp(`(##\\s+${capSection})(?:\\s*\\(\\d+\\))?`, 'i'),
+      `$1 (${count})`
+    )
+  }
+
+  fs.writeFileSync(indexPath, indexContent, 'utf8')
 }
 
 export async function POST(request: NextRequest): Promise<Response> {
@@ -135,52 +207,123 @@ export async function POST(request: NextRequest): Promise<Response> {
 
           send({ type: 'compiling', file: relFile })
 
-          // Ask Claude to compile this doc into wiki updates
-          const systemPrompt = schema
-            ? `You are a wiki curator. Follow this schema when creating/updating pages:\n\n${schema}`
-            : `You are a wiki curator. You maintain a structured markdown wiki. Create clean, well-organized pages with frontmatter.`
+          // ── Call 1: Analysis ────────────────────────────────────────────────
+          // Structural extraction — model thinks as analyst, not writer.
+          // No wiki formatting pressure here; just extract what's in the doc.
 
-          const userPrompt = `You are compiling a raw document into a structured wiki knowledge base.
+          const today = new Date().toISOString().slice(0, 10)
 
-**Existing wiki pages** (for cross-referencing):
-${existingPagesList || '(none yet)'}
+          const analysisPrompt = `You are a knowledge analyst. Extract a structured knowledge graph from the raw document below.
 
-**Raw document to compile** (${relFile}):
+**Raw document** (${relFile}):
 \`\`\`
 ${rawContent.slice(0, 6000)}
 \`\`\`
 
-Your task:
-1. Extract the key knowledge from this document
-2. Decide which wiki page(s) should be created or updated (use paths like concepts/topic-name.md, patterns/pattern-name.md, entities/person-name.md, etc.)
-3. For each page, write the COMPLETE markdown content with frontmatter
+Return ONLY valid JSON matching this exact schema — no prose, no code fences:
+{
+  "entities": [
+    { "name": string, "type": "concept|pattern|framework|person|company|tool|other", "salience": 0.0–1.0, "description": string }
+  ],
+  "relationships": [
+    { "from": string, "to": string, "label": string, "strength": 0.0–1.0, "evidence": string }
+  ],
+  "key_claims": [string],
+  "candidate_pages": [
+    { "path": "concepts/topic.md", "type": "concept|pattern|framework|recipe|summary|synthesis|entity", "primary_entities": [string] }
+  ],
+  "contradictions": [string],
+  "tags": [string]
+}
 
-Respond with a JSON array of page operations:
+Rules:
+- salience 0.8+ = central topic; 0.4–0.8 = supporting concept; below 0.4 = mention only
+- candidate_pages: 1–3 paths maximum; use kebab-case under the right subdirectory
+- contradictions: note any claims that conflict with common knowledge or each other
+- tags: use lowercase, hyphenated; domain tags only (no dates, no source names)`
+
+          let analysis: KnowledgeAnalysis = {
+            entities: [], relationships: [], key_claims: [],
+            candidate_pages: [], contradictions: [], tags: [],
+          }
+
+          try {
+            const analysisResponse = await client.messages.create({
+              model: 'claude-sonnet-4-6',
+              max_tokens: 2048,
+              messages: [{ role: 'user', content: analysisPrompt }],
+            })
+            const analysisText = analysisResponse.content[0].type === 'text'
+              ? analysisResponse.content[0].text : ''
+            const analysisJson = analysisText.match(/\{[\s\S]*\}/)
+            if (analysisJson) {
+              analysis = JSON.parse(analysisJson[0]) as KnowledgeAnalysis
+            }
+          } catch (err) {
+            // Analysis failure is non-fatal — fall through with empty analysis
+            send({ type: 'warn', file: relFile, message: `Analysis step failed: ${String(err)}. Proceeding with generation only.` })
+          }
+
+          send({
+            type: 'analysis',
+            file: relFile,
+            entities: analysis.entities?.length ?? 0,
+            candidates: analysis.candidate_pages?.length ?? 0,
+            contradictions: analysis.contradictions?.length ?? 0,
+            tags: analysis.tags ?? [],
+          })
+
+          // ── Call 2: Generation ──────────────────────────────────────────────
+          // Wiki curator role: takes the analysis JSON + existing page list
+          // and writes complete, formatted page content.
+
+          const systemPrompt = schema
+            ? `You are a wiki curator. Follow this schema when creating/updating pages:\n\n${schema}`
+            : `You are a wiki curator. You maintain a structured markdown wiki. Create clean, well-organized pages with frontmatter.`
+
+          const genPrompt = `You are compiling a raw document into a structured wiki knowledge base.
+
+**Knowledge graph analysis of the source doc**:
+${JSON.stringify(analysis, null, 2)}
+
+**Raw document excerpt** (${relFile}) for additional context:
+\`\`\`
+${rawContent.slice(0, 4000)}
+\`\`\`
+
+**Existing wiki pages** (for cross-referencing):
+${existingPagesList || '(none yet)'}
+
+Using the analysis above, write the wiki pages identified in candidate_pages.
+For each page, produce COMPLETE markdown content with full frontmatter.
+
+Respond with a JSON array of page operations — ONLY the JSON array, no other text:
 [
   {
     "op": "create" | "update",
     "path": "concepts/my-topic.md",
-    "content": "---\\ntitle: My Topic\\ntags: [tag1]\\nupdated: ${new Date().toISOString().slice(0, 10)}\\n---\\n\\n# My Topic\\n..."
+    "content": "---\\ntitle: My Topic\\ntags: [tag1]\\nupdated: ${today}\\n---\\n\\n# My Topic\\n..."
   }
 ]
 
 Rules:
 - Use kebab-case filenames
 - Include YAML frontmatter with title, tags, updated fields
-- Cross-reference related pages with markdown links
-- Be concise but complete
-- Create 1-3 pages per raw doc (don't over-split)
-- Return ONLY the JSON array, no other text`
+- Incorporate the key_claims and relationships from the analysis
+- Cross-reference related existing pages with markdown links
+- If contradictions were found, add a ## ⚠️ Contradictions section noting them
+- Be concise but complete; create 1–3 pages (don't over-split)
+- Return ONLY the JSON array`
 
           let responseText = ''
           try {
-            const response = await client.messages.create({
+            const genResponse = await client.messages.create({
               model: 'claude-sonnet-4-6',
               max_tokens: 4096,
               system: systemPrompt,
-              messages: [{ role: 'user', content: userPrompt }],
+              messages: [{ role: 'user', content: genPrompt }],
             })
-            responseText = response.content[0].type === 'text' ? response.content[0].text : ''
+            responseText = genResponse.content[0].type === 'text' ? genResponse.content[0].text : ''
           } catch (err) {
             send({ type: 'error', file: relFile, message: String(err) }); continue
           }
@@ -224,6 +367,14 @@ Rules:
             fs.writeFileSync(wikiLogPath, '# Wiki Compilation Log\n\nChronological record of all compile operations.\n')
           }
           fs.appendFileSync(wikiLogPath, logEntry)
+        }
+
+        // Auto-reindex: update section counts in index.md after all docs compiled
+        try {
+          reindexWiki(wikiRoot)
+          send({ type: 'reindex', message: 'index.md section counts updated' })
+        } catch (err) {
+          send({ type: 'warn', message: `Reindex failed (non-fatal): ${String(err)}` })
         }
 
         appendAuditLog({

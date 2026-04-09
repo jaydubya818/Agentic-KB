@@ -1,19 +1,40 @@
 import { NextRequest } from 'next/server'
 import fs from 'fs'
+import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 
 export const dynamic = 'force-dynamic'
 
-// SSE endpoint: streams a 'change' event whenever any .md file in the
-// active vault directory is created, modified, or renamed.
-// Client connects once; server sends keep-alive pings every 15s and
-// a 'change' event whenever fs.watch fires on a .md file.
+// SSE endpoint: streams change events for both the wiki/ and raw/ directories.
+//
+// Wiki changes → { type: 'change', event, filename } — triggers live reload
+// Raw changes  → { type: 'raw_change', filename } — signals new source material
+//               When a new .md file lands in raw/ the client receives a
+//               'raw_pending' event prompting the user to run kb compile.
+//
+// Client connects once; server sends keep-alive pings every 15s.
+
+// Track which raw files we've already seen to detect truly new additions
+const _seenRawFiles = new Set<string>()
+function initSeenRaw(rawRoot: string) {
+  if (!fs.existsSync(rawRoot)) return
+  const walk = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) walk(full)
+      else if (entry.name.endsWith('.md') && !entry.name.startsWith('.')) _seenRawFiles.add(full)
+    }
+  }
+  walk(rawRoot)
+}
 
 export async function GET(request: NextRequest): Promise<Response> {
   const vaultRoot = request.cookies.get('active_vault_path')?.value || DEFAULT_KB_ROOT
+  const rawRoot = path.join(vaultRoot, 'raw')
 
   const encoder = new TextEncoder()
-  let watcher: fs.FSWatcher | null = null
+  let wikiWatcher: fs.FSWatcher | null = null
+  let rawWatcher: fs.FSWatcher | null = null
   let closed = false
 
   const stream = new ReadableStream({
@@ -25,34 +46,48 @@ export async function GET(request: NextRequest): Promise<Response> {
         } catch { /* stream already closed */ }
       }
 
-      // Send initial connected event
+      // Seed the seen-set with files already present at connect time
+      initSeenRaw(rawRoot)
+
       send({ type: 'connected', vault: vaultRoot })
 
       // Keep-alive ping every 15 seconds
       const pingInterval = setInterval(() => send({ type: 'ping' }), 15_000)
 
-      // Watch vault directory recursively for .md file changes
+      // Watch wiki/ for .md changes → live reload
       try {
-        watcher = fs.watch(vaultRoot, { recursive: true }, (event, filename) => {
-          if (filename && filename.endsWith('.md')) {
-            send({ type: 'change', event, filename })
-          }
+        wikiWatcher = fs.watch(vaultRoot, { recursive: true }, (event, filename) => {
+          if (!filename) return
+          // Ignore raw/ changes here — handled by rawWatcher below
+          if (filename.startsWith('raw/') || filename.startsWith('raw\\')) return
+          if (filename.endsWith('.md')) send({ type: 'change', event, filename })
         })
-
-        watcher.on('error', () => {
-          // Vault might have been moved/deleted — just close gracefully
-          if (!closed) controller.close()
-        })
+        wikiWatcher.on('error', () => { if (!closed) controller.close() })
       } catch {
-        // fs.watch not supported or vault not accessible
         send({ type: 'error', message: 'Could not watch vault directory' })
+      }
+
+      // Watch raw/ for new .md files → signal pending compile
+      if (fs.existsSync(rawRoot)) {
+        try {
+          rawWatcher = fs.watch(rawRoot, { recursive: true }, (event, filename) => {
+            if (!filename || !filename.endsWith('.md') || filename.startsWith('.')) return
+            const absPath = path.join(rawRoot, filename)
+            if (!_seenRawFiles.has(absPath)) {
+              _seenRawFiles.add(absPath)
+              send({ type: 'raw_pending', filename, message: `New raw file detected: ${filename}. Run kb compile to ingest.` })
+            }
+          })
+          rawWatcher.on('error', () => { /* raw/ watch failure is non-fatal */ })
+        } catch { /* raw/ watch not supported */ }
       }
 
       // Cleanup when client disconnects
       request.signal.addEventListener('abort', () => {
         closed = true
         clearInterval(pingInterval)
-        watcher?.close()
+        wikiWatcher?.close()
+        rawWatcher?.close()
         try { controller.close() } catch { /* already closed */ }
       })
     },

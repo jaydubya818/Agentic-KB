@@ -62,6 +62,52 @@ export interface GraphSearchResult {
   matchReason: string   // human-readable explanation
   nodeLabel: string     // the graph node label that matched
   relation?: string     // edge relation if arrived via traversal
+  bucket?: 'direct' | 'graph' | 'hot' | 'citation'  // which budget bucket this result came from
+}
+
+// ── Proportional budget allocation (60/20/5/15) ──────────────────────────────
+// Prevents graph expansion from drowning out direct keyword matches.
+// Each bucket is filled independently then concatenated in priority order.
+
+const BUDGET_ALLOC = {
+  direct: 0.60,    // direct label matches (highest precision)
+  graph: 0.20,     // 1-hop traversal neighbours
+  hot: 0.05,       // pages in hot.md / recently accessed
+  citation: 0.15,  // hyperedge cluster members
+} as const
+
+export function applyBudgetAllocation(
+  results: GraphSearchResult[],
+  limit: number
+): GraphSearchResult[] {
+  const buckets: Record<string, GraphSearchResult[]> = { direct: [], graph: [], hot: [], citation: [] }
+
+  for (const r of results) {
+    const b = r.bucket || 'graph'
+    buckets[b].push(r)
+  }
+
+  const slots = {
+    direct: Math.max(1, Math.round(limit * BUDGET_ALLOC.direct)),
+    graph:  Math.max(1, Math.round(limit * BUDGET_ALLOC.graph)),
+    hot:    Math.max(0, Math.round(limit * BUDGET_ALLOC.hot)),
+    citation: Math.max(1, Math.round(limit * BUDGET_ALLOC.citation)),
+  }
+
+  const picked: GraphSearchResult[] = [
+    ...buckets.direct.slice(0, slots.direct),
+    ...buckets.graph.slice(0, slots.graph),
+    ...buckets.hot.slice(0, slots.hot),
+    ...buckets.citation.slice(0, slots.citation),
+  ]
+
+  // Deduplicate by filePath, preserving order
+  const seen = new Set<string>()
+  return picked.filter(r => {
+    if (seen.has(r.filePath)) return false
+    seen.add(r.filePath)
+    return true
+  })
 }
 
 // ── Graph loader (cached per process) ────────────────────────────────────────
@@ -211,16 +257,29 @@ export function searchGraph(
     }
   }
 
-  // Sort by score desc, deduplicate by filePath, trim to limit
+  // Tag each result with its budget bucket before allocation
+  for (const [nodeId, result] of results) {
+    if (directHits.has(nodeId)) {
+      result.bucket = 'direct'
+    } else if (result.matchReason.startsWith('part of cluster')) {
+      result.bucket = 'citation'
+    } else {
+      result.bucket = 'graph'
+    }
+  }
+
+  // Sort by score desc, deduplicate by filePath
   const seen = new Set<string>()
-  return [...results.values()]
+  const ranked = [...results.values()]
     .sort((a, b) => b.score - a.score)
     .filter(r => {
       if (seen.has(r.filePath)) return false
       seen.add(r.filePath)
       return true
     })
-    .slice(0, limit)
+
+  // Apply proportional budget allocation (60/20/5/15)
+  return applyBudgetAllocation(ranked, limit)
 }
 
 /** Check whether a graph.json exists and is readable */

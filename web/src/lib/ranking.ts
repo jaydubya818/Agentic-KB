@@ -122,9 +122,46 @@ export function verifiedBoost(absPath: string): number {
   }
 }
 
-/** Combined decay + hotness + verified multiplier */
+// ── Confidence weighting (RLM stage 6) ──────────────────────────────────────
+// Reads the frontmatter `confidence` field and applies a score multiplier.
+// high → 1.10 (validated by Jay or multiple sources)
+// medium → 1.00 (baseline, single source or unverified)
+// low → 0.85 (speculative; penalised to avoid leading with weak claims)
+
+const CONFIDENCE_MULTIPLIERS: Record<string, number> = {
+  high: 1.10,
+  medium: 1.00,
+  low: 0.85,
+}
+
+interface ConfidenceCacheEntry { confidence: string; mtimeMs: number }
+const _confidenceCache = new Map<string, ConfidenceCacheEntry>()
+
+export function confidenceBoost(absPath: string): number {
+  try {
+    const stat = fs.statSync(absPath)
+    const cached = _confidenceCache.get(absPath)
+    if (cached && cached.mtimeMs === stat.mtimeMs) {
+      return CONFIDENCE_MULTIPLIERS[cached.confidence] ?? 1.0
+    }
+    const fd = fs.openSync(absPath, 'r')
+    const buf = Buffer.alloc(512)
+    fs.readSync(fd, buf, 0, 512, 0)
+    fs.closeSync(fd)
+    const head = buf.toString('utf8')
+    const fmMatch = head.match(/^---\n([\s\S]*?)\n---/)
+    const confidenceMatch = fmMatch ? fmMatch[1].match(/^confidence:\s*(\w+)\s*$/m) : null
+    const confidence = confidenceMatch ? confidenceMatch[1].toLowerCase() : 'medium'
+    _confidenceCache.set(absPath, { confidence, mtimeMs: stat.mtimeMs })
+    return CONFIDENCE_MULTIPLIERS[confidence] ?? 1.0
+  } catch {
+    return 1.0
+  }
+}
+
+/** Combined decay + hotness + verified + confidence multiplier */
 export function rankMultiplier(absPath: string, relPath: string): number {
-  return decayForFile(absPath) * hotnessBoost(relPath) * verifiedBoost(absPath)
+  return decayForFile(absPath) * hotnessBoost(relPath) * verifiedBoost(absPath) * confidenceBoost(absPath)
 }
 
 /** Explain the components for debugging/UI */
@@ -132,5 +169,6 @@ export function rankBreakdown(absPath: string, relPath: string) {
   const decay = decayForFile(absPath)
   const hotness = hotnessBoost(relPath)
   const verified = verifiedBoost(absPath)
-  return { decay, hotness, verified, multiplier: decay * hotness * verified }
+  const confidence = confidenceBoost(absPath)
+  return { decay, hotness, verified, confidence, multiplier: decay * hotness * verified * confidence }
 }

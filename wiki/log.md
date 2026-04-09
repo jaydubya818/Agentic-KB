@@ -29,3 +29,30 @@ Pages affected: `entities/mcp-ecosystem.md`, `log.md`
 
 [2026-04-08 05:47] INGEST | raw/qa/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl.md | Created summary page for multi-agent orchestration Q&A; created new pattern page wiki/patterns/pattern-pipeline.md (pipeline pattern was not in index); no new concept pages needed as multi-agent-systems, task-decomposition, and [[pattern-fan-out-worker]]-worker already exist
 [2026-04-09 06:16] INGEST | raw/framework-docs/vault-3tier-architecture.md | Created summary page (vault-3tier-architecture.md) covering the full 3-tier vault design, inter-tier message bus, and vault context block structure. Created new pattern page (pattern-tiered-agent-memory.md) capturing the generalizable pattern of tier-scoped memory lifetime and load budgets. No duplicate concepts created — existing memory-systems, multi-agent-systems, and context-management concept pages cover adjacent ground.
+## 2026-04-09 — Feature Implementation Batch
+
+[2026-04-09] FEATURE | confidence-weighting | Added `confidenceBoost(absPath)` to `web/src/lib/ranking.ts`. Reads frontmatter `confidence` field via 512-byte head read. Multipliers: high→1.10, medium→1.00, low→0.85. Added `_confidenceCache` Map (mtime-keyed). Updated `rankMultiplier()` and `rankBreakdown()` to include confidence factor. RLM stage 6 now live.
+
+[2026-04-09] FEATURE | contradiction-filter | Added `loadContradictedPaths(vaultRoot)` to `web/src/app/api/query/route.ts`. Parses `wiki/lint-report.md` Contradictions section, returns Set of flagged paths. Contradicted pages separated from clean articles and appended last in synthesis order. `sources` SSE response now includes `contradicted[]` array for UI display. RLM stage 7 now live.
+
+[2026-04-09] FEATURE | token-budget-packing | Added `MAX_CONTEXT_CHARS = 24_000`, `extractArticleSummary()`, and `packArticles()` to `web/src/app/api/query/route.ts`. Keeps frontmatter + first 3 paragraphs when article exceeds per-article budget. Distributes budget proportionally across all articles. RLM stage 9 now live.
+
+[2026-04-09] FEATURE | proportional-budget-allocation | Added `BUDGET_ALLOC = {direct:0.60, graph:0.20, hot:0.05, citation:0.15}` and `applyBudgetAllocation()` to `web/src/lib/graph-search.ts`. Tagged all search results with bucket (direct/graph/hot/citation) during passes. Applied allocation as final step in `searchGraph()`. Prevents graph traversal from drowning direct keyword matches.
+
+[2026-04-09] FEATURE | raw-file-watcher | Upgraded `web/src/app/api/vault-watch/route.ts`. Added `_seenRawFiles` Set seeded at connect time. Separate `rawWatcher` on raw/ directory detects new .md files and emits `{type:'raw_pending', filename, message}` SSE event. Main wiki watcher now filters raw/ changes. Both watchers cleaned up on disconnect.
+
+[2026-04-09] FEATURE | two-step-compile | Upgraded `web/src/app/api/compile/route.ts` to two-step ingest pipeline. Call 1 (Analysis): model-as-analyst extracts KnowledgeAnalysis JSON — entities, relationships, key_claims, candidate_pages, contradictions, tags. Analysis failure is non-fatal (falls through with empty analysis). Call 2 (Generation): model-as-curator uses analysis JSON + existing pages list to write complete wiki page ops. Contradictions from analysis surfaced as `⚠️ Contradictions` sections in generated pages. SSE now emits `{type:'analysis', entities, candidates, contradictions, tags}` progress event per doc.
+
+[2026-04-09] FEATURE | auto-reindex | Added `reindexWiki(wikiRoot)` to `web/src/app/api/compile/route.ts`. Walks 9 wiki sections (concepts/patterns/frameworks/entities/recipes/evaluations/summaries/syntheses/personal), counts .md files, updates `## Section (N)` headers in index.md. Called automatically after each compile run completes. Emits `{type:'reindex'}` SSE event. Also added `reindexLocal()` and `ingestFile()` to `cli/kb.js` with `ingest-file` and `reindex` commands.
+
+[2026-04-09] NEW PAGE | wiki/recipes/recipe-codebase-memory.md — Recipe for using KB as persistent codebase memory for coding projects.
+
+[2026-04-09] NEW PAGE | wiki/patterns/pattern-episodic-judgment-log.md — Pattern for storing human judgment as append-only JSONL logs (experiences/decisions/failures).
+
+[2026-04-09] NEW PAGE | wiki/patterns/pattern-two-step-ingest.md — Pattern documenting the analyze→generate split and 60/20/5/15 proportional context budget allocation.
+
+[2026-04-09] NEW PAGE | wiki/frameworks/framework-markitdown.md — Microsoft markitdown library reference (PDF/DOCX/PPTX/XLSX/audio/YouTube→markdown).
+
+[2026-04-09] UPDATED | wiki/frameworks/framework-rowboat.md — Corrected metadata, confirmed architecture, added flat-wiki vs knowledge-graph comparison table.
+
+[2026-04-09] UPDATED | wiki/concepts/context-management.md — Added primacy-recency U-shaped attention curve section with front-loading guidance.
