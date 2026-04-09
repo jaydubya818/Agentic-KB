@@ -20,6 +20,7 @@ import {
 import fs from 'fs'
 import path from 'path'
 import * as agentRuntime from '../lib/agent-runtime/index.mjs'
+import * as repoRuntime from '../lib/repo-runtime/index.mjs'
 
 const KB_ROOT = path.resolve(new URL('.', import.meta.url).pathname, '..')
 const WIKI_ROOT = path.join(KB_ROOT, 'wiki')

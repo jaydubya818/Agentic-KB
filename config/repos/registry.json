@@ -1,0 +1,162 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-04-09T00:00:00.000Z",
+  "repos": [
+    {
+      "repo_name": "Agentic-KB",
+      "owner": "jaywest",
+      "visibility": "public",
+      "default_branch": "main",
+      "source_type": "github",
+      "auth_mode": "public",
+      "sync_enabled": true,
+      "last_sync_at": "2026-04-09T00:00:00.000Z",
+      "last_synced_commit": "abc123def456",
+      "markdown_file_count": 5,
+      "status": "active",
+      "description": "Personal knowledge base and organizational brain for agentic AI engineering",
+      "topics": [
+        "agentic-ai",
+        "knowledge-management",
+        "claude",
+        "agent-engineering",
+        "multi-agent",
+        "llm"
+      ],
+      "repo_type": "kb",
+      "wiki_path": "wiki/repos/agentic-kb",
+      "canonical_docs": [
+        "CLAUDE.md",
+        "README.md"
+      ],
+      "created_at": "2025-06-01T00:00:00.000Z",
+      "updated_at": "2026-04-09T00:00:00.000Z"
+    },
+    {
+      "repo_name": "Agentic-Pi-Harness",
+      "owner": "jaywest",
+      "visibility": "private",
+      "default_branch": "main",
+      "source_type": "github",
+      "auth_mode": "pat",
+      "sync_enabled": false,
+      "last_sync_at": null,
+      "last_synced_commit": null,
+      "markdown_file_count": 0,
+      "status": "pending",
+      "description": "Agentic Claude Code harness running on Raspberry Pi for local AI execution",
+      "topics": [
+        "claude-code",
+        "raspberry-pi",
+        "agent-harness",
+        "local-execution",
+        "edge-ai"
+      ],
+      "repo_type": "platform",
+      "wiki_path": "wiki/repos/agentic-pi-harness",
+      "canonical_docs": [
+        "README.md",
+        "SETUP.md",
+        "ARCHITECTURE.md",
+        "API.md"
+      ],
+      "created_at": "2025-09-15T00:00:00.000Z",
+      "updated_at": "2025-09-15T00:00:00.000Z"
+    },
+    {
+      "repo_name": "Pi",
+      "owner": "jaywest",
+      "visibility": "private",
+      "default_branch": "main",
+      "source_type": "github",
+      "auth_mode": "pat",
+      "sync_enabled": false,
+      "last_sync_at": null,
+      "last_synced_commit": null,
+      "markdown_file_count": 0,
+      "status": "pending",
+      "description": "Raspberry Pi system management, OS configuration, and infrastructure scripts",
+      "topics": [
+        "raspberry-pi",
+        "infrastructure",
+        "devops",
+        "system-administration",
+        "bash"
+      ],
+      "repo_type": "infra",
+      "wiki_path": "wiki/repos/pi",
+      "canonical_docs": [
+        "README.md",
+        "DEPLOYMENT.md",
+        "MAINTENANCE.md",
+        "TROUBLESHOOTING.md"
+      ],
+      "created_at": "2025-03-20T00:00:00.000Z",
+      "updated_at": "2025-03-20T00:00:00.000Z"
+    },
+    {
+      "repo_name": "MissionControl",
+      "owner": "jaywest",
+      "visibility": "private",
+      "default_branch": "main",
+      "source_type": "github",
+      "auth_mode": "pat",
+      "sync_enabled": false,
+      "last_sync_at": null,
+      "last_synced_commit": null,
+      "markdown_file_count": 0,
+      "status": "pending",
+      "description": "Multi-agent orchestration and mission planning interface",
+      "topics": [
+        "multi-agent",
+        "orchestration",
+        "claude-code",
+        "agent-platform",
+        "planning",
+        "ui"
+      ],
+      "repo_type": "agent",
+      "wiki_path": "wiki/repos/missioncontrol",
+      "canonical_docs": [
+        "README.md",
+        "ARCHITECTURE.md",
+        "API_SPEC.md",
+        "AGENT_DESIGN.md"
+      ],
+      "created_at": "2025-11-10T00:00:00.000Z",
+      "updated_at": "2025-11-10T00:00:00.000Z"
+    },
+    {
+      "repo_name": "LLMwiki",
+      "owner": "jaywest",
+      "visibility": "public",
+      "default_branch": "main",
+      "source_type": "github",
+      "auth_mode": "public",
+      "sync_enabled": false,
+      "last_sync_at": null,
+      "last_synced_commit": null,
+      "markdown_file_count": 0,
+      "status": "pending",
+      "description": "LLM-powered wiki compilation system and knowledge management tooling",
+      "topics": [
+        "llm",
+        "wiki",
+        "knowledge-management",
+        "documentation",
+        "automation",
+        "agent"
+      ],
+      "repo_type": "kb",
+      "wiki_path": "wiki/repos/llmwiki",
+      "canonical_docs": [
+        "README.md",
+        "INSTALLATION.md",
+        "USER_GUIDE.md",
+        "API_REFERENCE.md"
+      ],
+      "created_at": "2025-07-22T00:00:00.000Z",
+      "updated_at": "2025-07-22T00:00:00.000Z"
+    }
+  ]
+}

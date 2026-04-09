@@ -1,0 +1,38 @@
+{
+  "_comment": "Copy to auth.json and fill in tokens. NEVER commit auth.json to version control.",
+  "_instructions": "Each private repo requires a GitHub Personal Access Token (PAT). Set the PAT value in the corresponding environment variable listed below. Scopes required: 'repo' for full private repo access.",
+  "tokens": {
+    "Agentic-Pi-Harness": {
+      "type": "pat",
+      "env": "GITHUB_PAT_PRIVATE",
+      "scopes": [
+        "repo"
+      ],
+      "description": "Private repo for Pi harness platform code"
+    },
+    "Pi": {
+      "type": "pat",
+      "env": "GITHUB_PAT_PRIVATE",
+      "scopes": [
+        "repo"
+      ],
+      "description": "Private repo for Pi infrastructure and system scripts"
+    },
+    "MissionControl": {
+      "type": "pat",
+      "env": "GITHUB_PAT_MISSION",
+      "scopes": [
+        "repo"
+      ],
+      "description": "Private repo for multi-agent orchestration platform"
+    }
+  },
+  "_setup_instructions": {
+    "1_generate_tokens": "Go to https://github.com/settings/tokens and create Personal Access Tokens with 'repo' scope",
+    "2_set_env_vars": "Export the tokens as environment variables: export GITHUB_PAT_PRIVATE=ghp_xxx... && export GITHUB_PAT_MISSION=ghp_yyy...",
+    "3_copy_file": "cp auth.example.json auth.json",
+    "4_fill_tokens": "Edit auth.json and set token values from environment variables (optional; env var lookup preferred)",
+    "5_protect": "Add auth.json to .gitignore — never commit this file",
+    "6_test": "Run sync with: npm run sync:repos -- --test"
+  }
+}

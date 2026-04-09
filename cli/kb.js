@@ -24,6 +24,7 @@ import pathMod from 'path'
 import { fileURLToPath } from 'url'
 const AGENT_KB_ROOT = pathMod.resolve(pathMod.dirname(fileURLToPath(import.meta.url)), '..')
 const AGENT_RUNTIME_PATH = pathMod.join(AGENT_KB_ROOT, 'lib/agent-runtime/index.mjs')
+const REPO_RUNTIME_PATH = pathMod.join(AGENT_KB_ROOT, 'lib/repo-runtime/index.mjs')
 
 const args = process.argv.slice(2)
 const command = args[0]
@@ -45,6 +46,25 @@ Commands:
   kb ingest-youtube <url>
   kb ingest-twitter <archive.zip>
 
+Repo commands:
+  kb repo list                               List all tracked repos with status
+  kb repo show <name>                        Show full repo details
+  kb repo sync <name> [--token <pat>]        Sync a repo from GitHub
+  kb repo sync-all [--token <pat>]           Sync all active repos
+  kb repo search <name> <query>              Search within a specific repo's docs
+  kb repo status <name>                      Show sync status, last SHA, doc count
+  kb repo docs <name> [--section <s>]        List imported docs for a repo
+  kb repo progress <name>                    Show progress.md for a repo
+  kb repo close-task <name> <agent> <entry>  Append a task log entry
+
+Bus & Rewrite commands:
+  kb bus list <name> <channel>               List bus items for a repo channel
+  kb bus publish <name> <channel> --from <id> --body <text>  Publish bus item
+  kb bus transition <name> <channel> <id> <status>           Change item status
+  kb rewrite list <name>                     List rewrite artifacts for a repo
+  kb canonical list <name>                   List canonical docs for a repo
+  kb canonical show <name> <doc>             Show a canonical doc (e.g., PRD, TECH_STACK)
+
 Examples:
   kb search "multi-agent orchestration"
   kb query "What is the best pattern for supervisor-worker agents?"
@@ -53,6 +73,9 @@ Examples:
   kb reindex
   kb ingest-file ~/Downloads/paper.pdf
   kb ingest-file ~/Documents/spec.docx --dir framework-docs
+  kb repo list
+  kb repo sync my-project --token ghp_xxxxx
+  kb repo search my-project "authentication"
 `)
 }
 
@@ -764,6 +787,219 @@ async function promoteCmd(rest) {
   console.log(`   target: ${r.target}`)
 }
 
+// ─── Repo Runtime Commands ─────────────────────────────────────────────────
+
+async function repoCmd(sub, rest) {
+  const rt = await import(REPO_RUNTIME_PATH)
+  const fs = await import('fs')
+
+  if (sub === 'list') {
+    const repos = rt.listRepos(AGENT_KB_ROOT)
+    if (repos.length === 0) { console.log('No repos tracked.'); return }
+    console.log('\nTracked Repositories:\n')
+    for (const r of repos) {
+      const status = r.status || 'unknown'
+      const docs = r.docCount || 0
+      console.log(`  ${r.name} [${status}]`)
+      console.log(`    docs: ${docs}, last-sync: ${r.lastSync || 'never'}`)
+    }
+    console.log()
+    return
+  }
+
+  if (sub === 'show') {
+    const name = rest[0]
+    if (!name) throw new Error('Usage: kb repo show <name>')
+    const repo = rt.loadRepoMetadata(AGENT_KB_ROOT, name)
+    if (!repo) throw new Error(`Repo not found: ${name}`)
+    console.log(JSON.stringify(repo, null, 2))
+    return
+  }
+
+  if (sub === 'sync') {
+    const name = rest[0]
+    if (!name) throw new Error('Usage: kb repo sync <name> [--token <pat>]')
+    const tokenIdx = rest.indexOf('--token')
+    const token = tokenIdx >= 0 ? rest[tokenIdx + 1] : process.env.GITHUB_PAT
+    console.log(`\n📦 Syncing repo: ${name}...`)
+    const result = await rt.syncRepo(AGENT_KB_ROOT, name, { token })
+    console.log(`✅ Sync complete`)
+    console.log(`   Files: ${result.filesWritten || 0}`)
+    console.log(`   Size: ${(result.bytesWritten || 0) / 1024}KB`)
+    console.log(`   Last SHA: ${result.lastSHA || 'unknown'}`)
+    return
+  }
+
+  if (sub === 'sync-all') {
+    const tokenIdx = rest.indexOf('--token')
+    const token = tokenIdx >= 0 ? rest[tokenIdx + 1] : process.env.GITHUB_PAT
+    console.log('\n📦 Syncing all active repos...')
+    const repos = rt.listRepos(AGENT_KB_ROOT)
+    const active = repos.filter(r => r.status === 'active')
+    for (const r of active) {
+      console.log(`  syncing ${r.name}...`)
+      await rt.syncRepo(AGENT_KB_ROOT, r.name, { token })
+    }
+    console.log(`✅ All ${active.length} repos synced`)
+    return
+  }
+
+  if (sub === 'search') {
+    const name = rest[0]
+    const query = rest.slice(1).join(' ')
+    if (!name || !query) throw new Error('Usage: kb repo search <name> <query>')
+    const results = await rt.searchRepoDocs(AGENT_KB_ROOT, name, query)
+    if (results.length === 0) { console.log(`No results for "${query}" in ${name}`); return }
+    console.log(`\n🔍 ${results.length} results in ${name}:\n`)
+    for (const r of results) {
+      console.log(`  ${r.path}`)
+      console.log(`    ${(r.snippet || '').slice(0, 120)}...`)
+    }
+    console.log()
+    return
+  }
+
+  if (sub === 'status') {
+    const name = rest[0]
+    if (!name) throw new Error('Usage: kb repo status <name>')
+    const repo = rt.loadRepoMetadata(AGENT_KB_ROOT, name)
+    if (!repo) throw new Error(`Repo not found: ${name}`)
+    console.log(`\nRepo: ${name}`)
+    console.log(`  Status: ${repo.status || 'unknown'}`)
+    console.log(`  Last SHA: ${repo.lastSHA || 'never synced'}`)
+    console.log(`  Doc Count: ${repo.docCount || 0}`)
+    console.log(`  Last Sync: ${repo.lastSync || 'never'}`)
+    console.log()
+    return
+  }
+
+  if (sub === 'docs') {
+    const name = rest[0]
+    const sectionIdx = rest.indexOf('--section')
+    const section = sectionIdx >= 0 ? rest[sectionIdx + 1] : null
+    if (!name) throw new Error('Usage: kb repo docs <name> [--section <s>]')
+    const docs = rt.listRepoDocs(AGENT_KB_ROOT, name, section)
+    if (docs.length === 0) { console.log(`No docs for ${name}`); return }
+    console.log(`\n📄 Docs in ${name}${section ? ' (' + section + ')' : ''}:\n`)
+    for (const d of docs) {
+      console.log(`  ${d.path} (${d.bytes}B)`)
+    }
+    console.log()
+    return
+  }
+
+  if (sub === 'progress') {
+    const name = rest[0]
+    if (!name) throw new Error('Usage: kb repo progress <name>')
+    const progPath = pathMod.join(AGENT_KB_ROOT, 'wiki', 'repos', name, 'progress.md')
+    if (!fs.existsSync(progPath)) { console.log(`No progress file for ${name}`); return }
+    const content = fs.readFileSync(progPath, 'utf8')
+    console.log(content)
+    return
+  }
+
+  if (sub === 'close-task') {
+    const [name, agent, ...entry] = rest
+    if (!name || !agent || !entry.length) throw new Error('Usage: kb repo close-task <name> <agent> <entry>')
+    const entryText = entry.join(' ')
+    rt.appendRepoTaskLog(AGENT_KB_ROOT, name, agent, entryText)
+    console.log(`✅ Task log entry appended for ${agent} in ${name}`)
+    return
+  }
+
+  throw new Error(`Unknown repo subcommand: ${sub}`)
+}
+
+async function busCmd(sub, rest) {
+  const rt = await import(REPO_RUNTIME_PATH)
+
+  if (sub === 'list') {
+    const [name, channel] = rest
+    if (!name || !channel) throw new Error('Usage: kb bus list <name> <channel>')
+    const items = rt.listRepoBusItems(AGENT_KB_ROOT, name, channel)
+    if (items.length === 0) { console.log(`No items in ${name}/${channel}`); return }
+    console.log(`\n📨 Bus items in ${name}/${channel}:\n`)
+    for (const it of items) {
+      console.log(`  ${it.id} [${it.status}] from=${it.from}`)
+      console.log(`    ${(it.body || '').trim().split('\n')[0].slice(0, 100)}`)
+    }
+    console.log()
+    return
+  }
+
+  if (sub === 'publish') {
+    const [name, channel] = rest
+    const fromIdx = rest.indexOf('--from')
+    const bodyIdx = rest.indexOf('--body')
+    const from = fromIdx >= 0 ? rest[fromIdx + 1] : null
+    const body = bodyIdx >= 0 ? rest.slice(bodyIdx + 1).join(' ') : null
+    if (!name || !channel || !from || !body) throw new Error('Usage: kb bus publish <name> <channel> --from <id> --body <text>')
+    const id = rt.publishRepoBusItem(AGENT_KB_ROOT, name, { channel, from, body })
+    console.log(`✅ Published to ${name}/${channel}`)
+    console.log(`   ID: ${id}`)
+    return
+  }
+
+  if (sub === 'transition') {
+    const [name, channel, id, status] = rest
+    if (!name || !channel || !id || !status) throw new Error('Usage: kb bus transition <name> <channel> <id> <status>')
+    rt.transitionRepoBusItem(AGENT_KB_ROOT, name, channel, id, status)
+    console.log(`✅ Transitioned ${id} to ${status}`)
+    return
+  }
+
+  throw new Error(`Unknown bus subcommand: ${sub}`)
+}
+
+async function rewriteCmd(sub, rest) {
+  const rt = await import(REPO_RUNTIME_PATH)
+
+  if (sub === 'list') {
+    const name = rest[0]
+    if (!name) throw new Error('Usage: kb rewrite list <name>')
+    const rewrites = rt.listRepoRewrites(AGENT_KB_ROOT, name)
+    if (rewrites.length === 0) { console.log(`No rewrites for ${name}`); return }
+    console.log(`\n✏️  Rewrites for ${name}:\n`)
+    for (const r of rewrites) {
+      console.log(`  ${r.path} [${r.status}]`)
+      console.log(`    type: ${r.type}, project: ${r.project}`)
+    }
+    console.log()
+    return
+  }
+
+  throw new Error(`Unknown rewrite subcommand: ${sub}`)
+}
+
+async function canonicalCmd(sub, rest) {
+  const rt = await import(REPO_RUNTIME_PATH)
+
+  if (sub === 'list') {
+    const name = rest[0]
+    if (!name) throw new Error('Usage: kb canonical list <name>')
+    const docs = rt.listRepoCanonical(AGENT_KB_ROOT, name)
+    if (docs.length === 0) { console.log(`No canonical docs for ${name}`); return }
+    console.log(`\n📋 Canonical docs for ${name}:\n`)
+    for (const d of docs) {
+      console.log(`  ${d.name}`)
+      console.log(`    ${d.title || d.name}`)
+    }
+    console.log()
+    return
+  }
+
+  if (sub === 'show') {
+    const [name, doc] = rest
+    if (!name || !doc) throw new Error('Usage: kb canonical show <name> <doc>')
+    const content = rt.readRepoCanonical(AGENT_KB_ROOT, name, doc)
+    if (!content) { console.log(`Not found: ${name}/${doc}`); return }
+    console.log(content)
+    return
+  }
+
+  throw new Error(`Unknown canonical subcommand: ${sub}`)
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -805,9 +1041,22 @@ try {
   } else if (command === 'agent') {
     await agentCmd(args[1], args.slice(2))
   } else if (command === 'bus') {
-    await busCmd(args[1], args.slice(2))
+    if (args[1] === 'list' || args[1] === 'publish' || args[1] === 'transition') {
+      // New repo-aware bus commands
+      await busCmd(args[1], args.slice(2))
+    } else {
+      // Legacy agent bus commands
+      await (await import(AGENT_RUNTIME_PATH)).busCmd?.(args[1], args.slice(2)) ||
+        console.error('Unknown bus subcommand')
+    }
   } else if (command === 'promote') {
     await promoteCmd(args.slice(1))
+  } else if (command === 'repo') {
+    await repoCmd(args[1], args.slice(2))
+  } else if (command === 'rewrite') {
+    await rewriteCmd(args[1], args.slice(2))
+  } else if (command === 'canonical') {
+    await canonicalCmd(args[1], args.slice(2))
   } else {
     console.error(`Unknown command: ${command}`)
     usage()
