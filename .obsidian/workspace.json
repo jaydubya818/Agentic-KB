@@ -187,6 +187,7 @@
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "wiki/recipes/recipe-codebase-memory.md",
     "raw/note/agent-memory-runtime-plan.md",
     "scripts/agents-demo.sh",
     "web/src/app/api/agents/promote/route.ts",
@@ -222,7 +223,6 @@
     "wiki/patterns/pattern-task-validation-agent.md",
     "wiki/patterns/pattern-code-generation-agent.md",
     "wiki/patterns/pattern-clarification-task.md",
-    "wiki/patterns/pattern-context-manager-agent.md",
     "Untitled.canvas"
   ]
 }

@@ -77,13 +77,14 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Recipes (8)
+## Recipes (9)
 
 | Page | Difficulty | Time | Description |
 |------|-----------|------|-------------|
 | [[recipes/recipe-agent-evaluation]] | advanced | 2-4h | Build an [[llm-as-judge]] evaluation harness for agents |
 | [[recipes/recipe-build-tool-agent]] | intermediate | 45-90m | Build a single Claude agent with custom tools from scratch |
 | [[recipes/recipe-claude-code-hooks]] | intermediate | 1-2h | Write Claude Code hooks for custom automation |
+| [[recipes/recipe-codebase-memory]] | intermediate | 30-60m | Wire the KB as persistent codebase memory for multi-session coding projects |
 | [[recipes/recipe-context-compression]] | intermediate | 1-2h | [[pattern-rolling-summary]] compression for long agentic sessions |
 | [[recipes/recipe-llm-wiki-setup]] | beginner | 60-90m | Set up a Karpathy-style LLM knowledge base |
 | [[recipes/recipe-mcp-server]] | intermediate | 45-60m | Write and register a custom MCP server in TypeScript |
