@@ -603,3 +603,105 @@ Scheduled task (kb-daily-lint)
 | 🔴 Red | Entities |
 | 🟤 Brown | Recipes |
 | 🟣 Purple | Evaluations |
+
+---
+
+## 🤖 Agent Memory Runtime
+
+Agentic-KB ships a zero-dep operational agent memory runtime at `lib/agent-runtime/` (plain `.mjs`, importable by the web app, CLI, and MCP server). It turns the vault into a layered brain for orchestrator / lead / worker agents with bounded context, transactional writeback, a discovery/escalation/standards/handoff bus, and canonical promotion/merge paths.
+
+### Architecture
+
+```
+config/agents/*.yaml           machine-readable agent contracts (tier + context_policy + allowed_writes + forbidden_paths)
+wiki/agents/{tier}/{id}/       profile · hot · task-log · gotchas · rewrites
+wiki/system/bus/{channel}/     discovery · escalation · standards · handoffs (markdown + frontmatter)
+wiki/system/policies|routing|schemas|templates
+wiki/archive/                  bus-TTL archive, hot snapshots, merge snapshots (archive-never-delete)
+logs/agent-runtime.log         JSONL traces: ContextLoadTrace + GuardDecisionTrace
+logs/audit.log                 unified audit (humans + agents, same schema)
+lib/agent-runtime/
+  contracts.mjs       load/validate YAML contracts
+  identity.mjs        unified human|agent|service|team identity
+  paths.mjs           glob matching, path traversal defense, write guards
+  memory-classes.mjs  profile|hot|working|learned|rewrite|bus metadata
+  state-machines.mjs  bus/standards/rewrite legal transitions
+  context-loader.mjs  tier+domain+project+subscription bundle builder + trace
+  writeback.mjs       transactional closeTask (plan→guard all→commit all or reject all)
+  bus.mjs             publish/list/read/transition bus items
+  promotion.mjs       promoteLearning + canonical mergeRewrite with provenance
+  retention.mjs       hot compaction, bus TTL, task-log rotation, archiveMove
+  observability.mjs   JSONL trace writer + reader
+  audit.mjs           shared audit log appender
+  frontmatter.mjs     zero-dep YAML frontmatter
+```
+
+### Design pillars
+
+1. **Single master vault, namespaces enforce isolation.** Every write goes through `assertWriteAllowed` which hard-rejects `..` / absolute / `//` paths before any glob match, then checks `forbidden_paths`, then `allowed_writes`.
+2. **Memory classes route writes.** `profile | hot | working | learned | rewrite | bus` — `working` is append-only, `hot` is replace-and-compact, `bus` has a state machine.
+3. **context_policy drives loading, not raw globs.** Contracts declare include rules by class+scope (`self`, `lead:planning-agent`) or by path, plus subscriptions to bus channels, a byte budget, and priority order. The loader sorts, applies the budget, and emits a `ContextLoadTrace` with `included[]`, `excluded[]`, reasons, and `truncated`.
+4. **Transactional writeback.** `closeTask` plans all intended writes, runs the full set through the guard, and commits atomically — any single rejection aborts the whole close. Discoveries/escalations publish as bus items in the same transaction.
+5. **Promotion is rewrite + backlink, never a move.** `promoteLearning` writes the target with `promoted_from` + provenance footer and transitions the source to `promoted`. `mergeRewrite` requires `approved` state, snapshots canonical to `wiki/archive/merges/`, writes new canonical with `merged_from` + provenance, and transitions the rewrite to `merged` with before/after hashes in the audit.
+6. **First-class observability.** Every context load and guard decision is traceable from `logs/agent-runtime.log` and inline in API/CLI responses.
+
+### Quickstart
+
+```bash
+# List agent contracts
+node cli/kb.js agent list
+
+# Show a scoped context bundle for a worker (respects budget + tier scoping)
+node cli/kb.js agent context gsd-executor --project example-project
+
+# Transactional end-of-task writeback
+cat > /tmp/task.json <<'JSON'
+{
+  "project": "example-project",
+  "taskLogEntry": "Implemented X",
+  "hotUpdate": "Refreshed hot cache",
+  "gotcha": "Watch out for Y",
+  "discoveries": [{ "body": "Worth promoting later" }]
+}
+JSON
+node cli/kb.js agent close-task gsd-executor --payload /tmp/task.json
+
+# Bus + promotion
+node cli/kb.js bus list discovery
+node cli/kb.js promote discovery <id> --approver planning-agent
+
+# Recent runtime traces
+node cli/kb.js agent trace gsd-executor --last 20
+
+# Full end-to-end smoke test (includes a forbidden-write rejection)
+./scripts/agents-demo.sh
+```
+
+### Web API
+
+| Route | Purpose |
+|-------|---------|
+| `GET /api/agents/list` | List all contracts |
+| `GET /api/agents/[id]/context?project=…` | Scoped context bundle + trace |
+| `POST /api/agents/[id]/close-task` | Transactional writeback |
+| `GET/POST /api/agents/bus/[channel]` | List / publish bus items |
+| `POST /api/agents/promote` | Promote a bus item |
+
+### MCP tools
+
+Added to `mcp/server.js`: `list_agents`, `load_agent_context`, `close_agent_task`, `publish_bus_item`, `list_agent_bus_items`, `promote_learning`. Worker-tier MCP sessions literally cannot write outside their sandbox — contracts gate every write.
+
+### Tests
+
+```bash
+node --test tests/agents/
+```
+
+12 tests cover contract loading, path traversal rejection, tier/budget scoping, atomic close-task commit + atomic rejection, bus publish/list/read, state-machine illegal-transition rejection, and promotion with provenance.
+
+### Retention & compaction (v1)
+
+- Hot memory compaction triggers on task close when `hot.md` exceeds the compaction threshold; old hot is snapshotted to `wiki/archive/hot-snapshots/{agent}/{timestamp}.md`.
+- Bus TTL archives discovery items after 30 days unless `promoted`, `in_progress`, or pinned. Archived items move to `wiki/archive/bus/{channel}/{year}/` and transition to `archived`.
+- Task logs are append-only (enforced by memory-class) and rotate at 10k lines via snapshot + fresh log.
+- All retention is archive-never-delete: every move is audited and reversible.

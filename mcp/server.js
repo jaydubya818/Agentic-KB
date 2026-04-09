@@ -19,6 +19,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js'
 import fs from 'fs'
 import path from 'path'
+import * as agentRuntime from '../lib/agent-runtime/index.mjs'
 
 const KB_ROOT = path.resolve(new URL('.', import.meta.url).pathname, '..')
 const WIKI_ROOT = path.join(KB_ROOT, 'wiki')
@@ -200,6 +201,83 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           pin: { type: 'string', description: 'PIN required if PRIVATE_PIN is set.' },
         },
       },
+    },
+    {
+      name: 'load_agent_context',
+      description: 'Load a scoped context bundle for an agent, respecting its contract (tier, budget, allowed reads).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+          project: { type: 'string' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
+      name: 'close_agent_task',
+      description: 'Transactional end-of-task writeback for an agent: appends task log, updates hot, writes gotchas, publishes discoveries/escalations, creates rewrites. Atomic — any forbidden write aborts the whole commit.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+          project: { type: 'string' },
+          taskLogEntry: { type: 'string' },
+          hotUpdate: { type: 'string' },
+          gotcha: { type: 'string' },
+          discoveries: { type: 'array' },
+          escalations: { type: 'array' },
+          rewrites: { type: 'array' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
+      name: 'publish_bus_item',
+      description: 'Publish an item to a bus channel (discovery, escalation, standards, handoffs).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          channel: { type: 'string' },
+          from: { type: 'string' },
+          from_tier: { type: 'string' },
+          project: { type: 'string' },
+          body: { type: 'string' },
+          to: { type: 'string' },
+        },
+        required: ['channel', 'from', 'body'],
+      },
+    },
+    {
+      name: 'list_agent_bus_items',
+      description: 'List items in a bus channel, optionally filtered by status.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          channel: { type: 'string' },
+          status: { type: 'string' },
+        },
+        required: ['channel'],
+      },
+    },
+    {
+      name: 'promote_learning',
+      description: 'Promote a bus item to a target knowledge location with provenance; marks source as promoted.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          channel: { type: 'string' },
+          id: { type: 'string' },
+          approver: { type: 'string' },
+          target: { type: 'string' },
+        },
+        required: ['channel', 'id', 'approver'],
+      },
+    },
+    {
+      name: 'list_agents',
+      description: 'List all agent contracts in the vault.',
+      inputSchema: { type: 'object', properties: {} },
     },
     {
       name: 'lint_wiki',
@@ -394,6 +472,44 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
       return { content: [{ type: 'text', text: 'Lint error: ' + (data.error || 'unknown') }], isError: true }
     }
+    if (name === 'load_agent_context') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const bundle = agentRuntime.loadAgentContext(KB_ROOT, contract, {
+        project: args.project || null,
+        domain: contract.domain,
+        agent: args.agent_id,
+      })
+      return { content: [{ type: 'text', text: JSON.stringify({ trace: bundle.trace, files: bundle.files.map(f => ({ path: f.path, class: f.class, bytes: f.bytes })) }, null, 2) }] }
+    }
+
+    if (name === 'close_agent_task') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const result = agentRuntime.closeTask(KB_ROOT, contract, args)
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }], isError: !result.ok }
+    }
+
+    if (name === 'publish_bus_item') {
+      const result = agentRuntime.publishBusItem(KB_ROOT, args)
+      return { content: [{ type: 'text', text: JSON.stringify(result) }] }
+    }
+
+    if (name === 'list_agent_bus_items') {
+      const items = agentRuntime.listBusItems(KB_ROOT, String(args.channel), args.status ? { status: String(args.status) } : {})
+      return { content: [{ type: 'text', text: JSON.stringify(items, null, 2) }] }
+    }
+
+    if (name === 'promote_learning') {
+      const result = agentRuntime.promoteLearning(KB_ROOT, args)
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'list_agents') {
+      const contracts = agentRuntime.listContracts(KB_ROOT)
+      return { content: [{ type: 'text', text: JSON.stringify(contracts.map(c => ({ agent_id: c.agent_id, tier: c.tier, domain: c.domain })), null, 2) }] }
+    }
+
         return { content: [{ type: 'text', text: `Unknown tool: ${name}` }], isError: true }
   } catch (err) {
     return { content: [{ type: 'text', text: `Error: ${String(err)}` }], isError: true }

@@ -11,10 +11,14 @@
             "id": "1484b4be2a387ad9",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "wiki/patterns/pattern-architecture-decision-record.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "pattern-architecture-decision-record"
             }
           }
         ]
@@ -49,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#workflow",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -70,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -182,13 +187,21 @@
   },
   "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "raw/note/agent-memory-runtime-plan.md",
+    "scripts/agents-demo.sh",
+    "web/src/app/api/agents/promote/route.ts",
+    "web/src/app/api/agents/promote",
+    "web/src/app/api/agents/bus/[channel]/route.ts",
+    "web/src/app/api/agents/bus/[channel]",
+    "web/src/app/api/agents/bus",
+    "web/src/app/api/agents/[id]/close-task/route.ts",
+    "web/src/app/api/agents/[id]/close-task",
+    "lib/agent-runtime/index.d.ts",
     "wiki/concepts/multi-agent-systems.md",
     "wiki/entities/jay-west-agent-stack.md",
     "wiki/personal/private-test-note.md",
     "logs/audit.log",
-    "logs",
     "outputs/README.md",
-    "outputs",
     "wiki/patterns/pattern-deviation-rules.md",
     "wiki/patterns/pattern-scientific-debugging.md",
     "wiki/patterns/pattern-write-to-disk-worker.md",
@@ -210,14 +223,6 @@
     "wiki/patterns/pattern-code-generation-agent.md",
     "wiki/patterns/pattern-clarification-task.md",
     "wiki/patterns/pattern-context-manager-agent.md",
-    "wiki/patterns/pattern-milestone-task-breakdown.md",
-    "web/src/lib/graph-search.ts",
-    "web/src/components/CompilePanel.tsx",
-    "web/src/app/api/ingest/webhook/route.ts",
-    "web/src/app/api/lint/route.ts",
-    "web/src/app/api/compile/route.ts",
-    "web/src/lib/audit.ts",
-    "web/src/app/api/ingest/webhook",
     "Untitled.canvas"
   ]
 }
