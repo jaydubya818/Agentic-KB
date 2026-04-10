@@ -3,7 +3,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 ---
 
 # Agentic Engineering KB — Master Index
-> Last updated: 2026-04-04 | Maintained by LLM | Never edit manually
+> Last updated: 2026-04-10 | Maintained by LLM | Never edit manually
 
 ## Quick Navigation
 - [[wiki/hot|Hot Cache]] — Start here for common queries
@@ -158,3 +158,9 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | Page | Question | Created |
 |------|----------|---------|
 | [[syntheses/lint-2026-04-06]] | What structural issues, gaps, and maintenance needs exist in the wiki as of 2026-04-06? | 2026-04-06 |
+
+---
+
+## Repo Plans
+
+- [[repos/agentic-kb/rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|Operational Runtime Memory Layer Plan]] — phased repo plan to add first-class task-local state, tighter scoped loading, contract-driven promotions, and truly atomic writeback for active agents

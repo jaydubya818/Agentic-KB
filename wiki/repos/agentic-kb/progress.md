@@ -5,12 +5,25 @@ repo_name: agentic-kb
 memory_class: working
 tags: [progress, agentic-kb]
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-10
 ---
 
 # Agentic-KB — Progress Tracker
 
 ## Active Workstreams
+
+### 0. Operational Runtime Memory Layer
+**Status**: Planning | **Owner**: planning-agent | **Due**: 2026-04-24
+
+Repo plan: [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|Operational Runtime Memory Layer Plan]]
+
+- [ ] Introduce first-class task-local working memory for active agents
+- [ ] Tighten scoped context loading with required/optional and freshness rules
+- [ ] Make close-task fully atomic across files and bus publications
+- [ ] Formalize promotion and rewrite governance in agent contracts
+- [ ] Expose the same lifecycle through CLI, MCP, and web
+
+**Progress**: Plan created. Implementation not started.
 
 ### 1. Framework Documentation Sync
 **Status**: In Progress | **Owner**: Jay West | **Due**: 2026-04-16
@@ -94,5 +107,6 @@ Consider: Should memory-architectures push something else out?
 ## Notes
 
 - Memory-based patterns (caching, recall, state) emerging as hot topic. Consider expanding memory architecture section.
+- Operational runtime memory is now planned as a dedicated workstream instead of being folded into general repo cleanup.
 - Tool use patterns increasingly important for new Claude models. Good opportunity to deepen this section.
 - Safety is critical gap. Must prioritize before growth accelerates.

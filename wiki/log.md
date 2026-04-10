@@ -56,3 +56,7 @@ Pages affected: `entities/mcp-ecosystem.md`, `log.md`
 [2026-04-09] UPDATED | wiki/frameworks/framework-rowboat.md — Corrected metadata, confirmed architecture, added flat-wiki vs knowledge-graph comparison table.
 
 [2026-04-09] UPDATED | wiki/concepts/context-management.md — Added primacy-recency U-shaped attention curve section with front-loading guidance.
+
+## 2026-04-10
+
+[2026-04-10] PLAN | operational-runtime-memory-layer | Created `wiki/repos/agentic-kb/rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan.md` to scope the next hardening pass for the shared agent runtime. Plan focuses on first-class task-local state for active agents, stronger scoped context loading semantics, truly atomic close-task behavior across file writes and bus publications, contract-driven promotion rules, and lifecycle parity across CLI, MCP, and web. Added inbound links from `wiki/repos/agentic-kb/progress.md` and `wiki/repos/agentic-kb/home.md`. Updated `wiki/index.md` to include the new repo plan entry. No contradictions recorded; plan is aligned with the existing runtime direction documented in README and repo-docs.

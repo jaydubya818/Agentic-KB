@@ -184,8 +184,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1484b4be2a387ad9",
+  "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "wiki/repos/agentic-kb/rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan.md",
+    "AGENTS.md",
     "wiki/projects/example-project/specs.md",
     "wiki/projects/example-project/prd.md",
     "wiki/projects/example-project/implementation-plan.md",
@@ -220,8 +222,6 @@
     "wiki/repos/llmwiki/CLAUDE.md",
     "wiki/repos/llmwiki/progress.md",
     "wiki/repos/llmwiki/home.md",
-    "wiki/repos/mission-control/canonical/IMPLEMENTATION_PLAN.md",
-    "wiki/repos/mission-control/canonical/TECH_STACK.md",
     "Untitled.canvas"
   ]
 }

@@ -4,7 +4,7 @@ type: repo-home
 repo_name: agentic-kb
 tags: [repo, agentic-kb]
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-10
 status: active
 ---
 
@@ -33,6 +33,10 @@ The system implements agentic patterns within itself—parallel agents for seedi
 | [[canonical/TECH_STACK|Tech Stack]] | current | 2026-04-09 |
 | [[canonical/IMPLEMENTATION_PLAN|Implementation Plan]] | active | 2026-04-09 |
 
+## Active Rewrite Plans
+
+- [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|Operational Runtime Memory Layer Plan]] — phased hardening plan for active-agent working state, scoped context loading, promotions, and transactional writeback.
+
 ## Imported Docs
 
 ### Raw Sources
@@ -50,10 +54,11 @@ The system implements agentic patterns within itself—parallel agents for seedi
 
 ## Recent Tasks
 
-1. **Lint pass** (2026-04-08): Identified 3 orphan pages, flagged 2 framework docs for update (>60 days)
-2. **Hot cache refresh** (2026-04-07): Promoted supervisor-worker pattern, reflection loops, memory architectures
-3. **Cross-linking** (2026-04-06): Ensured all concept pages link to relevant patterns and recipes
-4. **Framework sync** (2026-04-05): Updated LangGraph and AutoGen pages with latest version notes
+1. **Runtime memory planning** (2026-04-10): Created [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|operational runtime memory layer plan]] to harden task-local state, promotions, context loading, and writeback guarantees.
+2. **Lint pass** (2026-04-08): Identified 3 orphan pages, flagged 2 framework docs for update (>60 days)
+3. **Hot cache refresh** (2026-04-07): Promoted supervisor-worker pattern, reflection loops, memory architectures
+4. **Cross-linking** (2026-04-06): Ensured all concept pages link to relevant patterns and recipes
+5. **Framework sync** (2026-04-05): Updated LangGraph and AutoGen pages with latest version notes
 
 ## Recent Discoveries
 
