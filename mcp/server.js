@@ -277,13 +277,17 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: 'merge_rewrite',
-      description: 'Merge an approved rewrite artifact into the canonical project document. Snapshots previous canonical, writes new with provenance, transitions rewrite to merged. Requires rewrite to be in approved state.',
+      description: 'Merge an approved rewrite artifact into the canonical project document. Snapshots previous canonical, writes new with provenance, transitions rewrite to merged. Requires rewrite to be in approved state and approver to meet minimum tier.',
       inputSchema: {
         type: 'object',
         properties: {
           rewrite_path: { type: 'string', description: 'Relative path to the rewrite artifact (must have status: approved)' },
           canonical_path: { type: 'string', description: 'Relative path to the target canonical document' },
-          approver: { type: 'string', description: 'Identity of the approver (agent_id or human name)' },
+          approver: { type: 'string', description: 'Identity of the approver (agent_id or human name); must meet min tier' },
+          promotion_reason: { type: 'string', description: 'Why this rewrite is being merged (optional)' },
+          source_task_id: { type: 'string', description: 'Task that produced this rewrite (optional)' },
+          supersedes: { type: 'string', description: 'Path being superseded — required if canonical already exists' },
+          force: { type: 'boolean', description: 'Skip supersedes check when overwriting an existing canonical (default false)' },
         },
         required: ['rewrite_path', 'canonical_path', 'approver'],
       },
@@ -470,6 +474,76 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           approver: { type: 'string' },
         },
         required: ['repo', 'channel', 'id', 'approver'],
+      },
+    },
+    // ─── Task Lifecycle Tools ───────────────────────────────────────────────────
+    {
+      name: 'agent_start_task',
+      description: 'Start a new task for an agent. Creates a working-memory file and sets active-task.md pointer. Returns taskId and paths.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string', description: 'Agent contract ID' },
+          project: { type: 'string', description: 'Project namespace (optional)' },
+          description: { type: 'string', description: 'Human-readable task description (optional)' },
+          task_id: { type: 'string', description: 'Override task ID (auto-generated if omitted)' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
+      name: 'agent_active_task',
+      description: 'Return the current active task metadata for an agent, or null if no task is active.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
+      name: 'agent_append_task_state',
+      description: 'Append a timestamped state entry to the active working-memory file. Requires an active task.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+          task_id: { type: 'string', description: 'Task ID to append to' },
+          entry: { type: 'string', description: 'State entry text to append' },
+        },
+        required: ['agent_id', 'task_id', 'entry'],
+      },
+    },
+    {
+      name: 'agent_abandon_task',
+      description: 'Mark an active task as abandoned. Sets status in working-memory and clears the active-task pointer.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+          task_id: { type: 'string' },
+          reason: { type: 'string', description: 'Reason for abandonment (optional)' },
+        },
+        required: ['agent_id', 'task_id'],
+      },
+    },
+    {
+      name: 'agent_dry_run_close_task',
+      description: 'Dry-run a close-task operation — returns the full write plan (allowed/rejected ops, bus publications, file writes) without executing anything. Useful for validating a payload before committing.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+          project: { type: 'string' },
+          taskLogEntry: { type: 'string' },
+          hotUpdate: { type: 'string' },
+          gotcha: { type: 'string' },
+          discoveries: { type: 'array' },
+          escalations: { type: 'array' },
+          rewrites: { type: 'array' },
+        },
+        required: ['agent_id'],
       },
     },
   ],
@@ -693,6 +767,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         rewritePath: String(args.rewrite_path),
         canonicalPath: String(args.canonical_path),
         approver: String(args.approver),
+        promotionReason: args.promotion_reason ? String(args.promotion_reason) : '',
+        sourceTaskId: args.source_task_id ? String(args.source_task_id) : null,
+        supersedes: args.supersedes ? String(args.supersedes) : null,
+        force: Boolean(args.force),
       })
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
     }
@@ -837,6 +915,48 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const approver = String(args.approver)
       const result = repoRuntime.transitionRepoBusItem(KB_ROOT, repo, channel, id, 'promoted', { targetPath, approver })
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    // ─── Task Lifecycle Handlers ────────────────────────────────────────────────
+
+    if (name === 'agent_start_task') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const result = agentRuntime.startTask(KB_ROOT, contract, {
+        project: args.project ? String(args.project) : null,
+        description: args.description ? String(args.description) : null,
+        taskId: args.task_id ? String(args.task_id) : undefined,
+      })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'agent_active_task') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const active = agentRuntime.getActiveTask(KB_ROOT, contract)
+      if (!active) return { content: [{ type: 'text', text: 'No active task.' }] }
+      return { content: [{ type: 'text', text: JSON.stringify(active, null, 2) }] }
+    }
+
+    if (name === 'agent_append_task_state') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const result = agentRuntime.appendTaskState(KB_ROOT, contract, String(args.task_id), String(args.entry))
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'agent_abandon_task') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const result = agentRuntime.abandonTask(KB_ROOT, contract, String(args.task_id), args.reason ? String(args.reason) : '')
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+
+    if (name === 'agent_dry_run_close_task') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const plan = agentRuntime.dryRunCloseTask(KB_ROOT, contract, args)
+      return { content: [{ type: 'text', text: JSON.stringify(plan, null, 2) }] }
     }
 
         return { content: [{ type: 'text', text: `Unknown tool: ${name}` }], isError: true }

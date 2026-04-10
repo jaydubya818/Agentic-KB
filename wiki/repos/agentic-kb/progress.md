@@ -13,19 +13,23 @@ updated: 2026-04-10
 ## Active Workstreams
 
 ### 0. Operational Runtime Memory Layer
-**Status**: In Progress (Phases 1–3 complete) | **Owner**: Jay West | **Due**: 2026-04-24
+**Status**: Complete (all 5 phases) | **Owner**: Jay West | **Due**: 2026-04-24
 
 Repo plan: [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|Operational Runtime Memory Layer Plan]]
 
 - [x] Introduce first-class task-local working memory for active agents
 - [x] Tighten scoped context loading with required/optional and freshness rules
 - [x] Make close-task fully atomic across files and bus publications
-- [ ] Formalize promotion and rewrite governance in agent contracts
-- [ ] Expose the same lifecycle through CLI, MCP, and web
+- [x] Formalize promotion and rewrite governance in agent contracts
+- [x] Expose the same lifecycle through CLI, MCP, and web
 
-**Progress**: Phases 1–3 implemented and tested (40/40 tests passing). New module `lib/agent-runtime/task-lifecycle.mjs` added with `startTask`, `appendTaskState`, `getActiveTask`, `abandonTask`. `writeback.mjs` refactored to include bus publications in the atomic guard cycle and seal active tasks post-commit. `context-loader.mjs` upgraded with `include_task_local`, `required`, `freshness_days`, `max_items`, and canonical load order. 14 new tests added.
+**Progress**: All 5 phases implemented and tested (52/52 tests passing).
 
-Phases 4–5 (promotion governance, CLI/MCP surface) are follow-on.
+- **Phase 1** — `task-lifecycle.mjs`: `startTask`, `appendTaskState`, `getActiveTask`, `abandonTask`
+- **Phase 2** — `context-loader.mjs`: `include_task_local`, `required`, `freshness_days`, `max_items`, canonical load order
+- **Phase 3** — `writeback.mjs`: bus publications in atomic guard cycle, post-commit task seal
+- **Phase 4** — `promotion.mjs`: approver tier validation (`TIER_RANK`), duplicate-title detection (with self-exclusion), target-path collision guard, `assertPromotable` state gate, `promoteDiscovery` + `mergeRewrite` with full provenance
+- **Phase 5** — CLI (`cli/kb.js`): `start-task`, `active-task`, `append-state`, `abandon-task`, `close-task --dry-run`; MCP (`mcp/server.js`): `agent_start_task`, `agent_active_task`, `agent_append_task_state`, `agent_abandon_task`, `agent_dry_run_close_task`; retention (`retention.mjs`): `archiveCompletedTaskMemory`, `archiveAbandonedTaskMemory`
 
 ### 1. Framework Documentation Sync
 **Status**: In Progress | **Owner**: Jay West | **Due**: 2026-04-16

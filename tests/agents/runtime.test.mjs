@@ -750,3 +750,207 @@ forbidden_paths:
   const bundle = rt.loadAgentContext(root, c2, {})
   assert.ok(bundle.files.length <= 2, `max_items: 2 should cap bus files, got ${bundle.files.length}`)
 })
+
+// ─── 14. Phase 4 — Promotion governance ──────────────────────────────────────
+
+// Helper: create lead contract yaml in the fixture
+function addLeadContract(root, agentId = 'l1') {
+  fs.writeFileSync(path.join(root, `config/agents/${agentId}.yaml`), `
+agent_id: ${agentId}
+tier: lead
+domain: eng
+context_policy:
+  budget_bytes: 40960
+  include: []
+allowed_writes:
+  - wiki/agents/leads/${agentId}/**
+  - wiki/system/bus/**
+  - wiki/system/bus/standards/**
+forbidden_paths: []
+`.trim())
+}
+
+test('promoteDiscovery promotes open bus item to standards with provenance', () => {
+  const root = makeFixture()
+  addLeadContract(root)
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'a useful finding' })
+  // Human approver (not in contracts dir) — bypasses tier check
+  const r = rt.promoteDiscovery(root, { channel: 'discovery', id, approver: 'jay' })
+  assert.ok(fs.existsSync(path.join(root, r.target)), 'promoted artifact should exist')
+  const content = fs.readFileSync(path.join(root, r.target), 'utf8')
+  assert.match(content, /promoted_from/)
+  assert.match(content, /promoted_by: jay/)
+  const src = fs.readFileSync(path.join(root, r.source), 'utf8')
+  assert.match(src, /status: promoted/)
+})
+
+test('promoteDiscovery passes when approver is a lead agent', () => {
+  const root = makeFixture()
+  addLeadContract(root)
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'lead-approved finding' })
+  // l1 is a lead — meets min tier requirement
+  const r = rt.promoteDiscovery(root, { channel: 'discovery', id, approver: 'l1' })
+  assert.ok(fs.existsSync(path.join(root, r.target)))
+})
+
+test('promoteDiscovery throws when worker agent tries to approve', () => {
+  const root = makeFixture()
+  // w1 is a worker — below the required lead tier
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'worker cannot promote' })
+  assert.throws(
+    () => rt.promoteDiscovery(root, { channel: 'discovery', id, approver: 'w1' }),
+    /does not meet minimum tier/
+  )
+})
+
+test('promoteDiscovery throws on duplicate title and resolves when duplicateOf is supplied', () => {
+  const root = makeFixture()
+  // Seed a standards item with a specific title
+  fs.mkdirSync(path.join(root, 'wiki/system/bus/standards'), { recursive: true })
+  fs.writeFileSync(path.join(root, 'wiki/system/bus/standards/existing.md'),
+    '---\ntitle: Hot Pattern\nstatus: active\nmemory_class: learned\n---\nExisting\n')
+
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'same title', title: 'Hot Pattern' })
+  // Update the bus item's title in the file
+  const itemPath = path.join(root, `wiki/system/bus/discovery/${id}.md`)
+  const content = fs.readFileSync(itemPath, 'utf8')
+  fs.writeFileSync(itemPath, content.replace(/^---/, '---').replace(/title:.*\n/, '') .replace('---\n', '---\ntitle: Hot Pattern\n'))
+
+  // Without duplicateOf → should throw
+  assert.throws(
+    () => rt.promoteDiscovery(root, { channel: 'discovery', id, approver: 'jay' }),
+    /Duplicate title/
+  )
+
+  // With duplicateOf acknowledged → should succeed
+  const r = rt.promoteDiscovery(root, { channel: 'discovery', id, approver: 'jay', duplicateOf: 'wiki/system/bus/standards/existing.md' })
+  assert.ok(fs.existsSync(path.join(root, r.target)))
+})
+
+test('promoteDiscovery throws on target collision without supersedes', () => {
+  const root = makeFixture()
+  const target = 'wiki/system/bus/standards/already-there.md'
+  fs.mkdirSync(path.join(root, path.dirname(target)), { recursive: true })
+  fs.writeFileSync(path.join(root, target), '---\ntitle: Existing\n---\nOld content\n')
+
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'collision test' })
+  assert.throws(
+    () => rt.promoteDiscovery(root, { channel: 'discovery', id, approver: 'jay', targetPath: target }),
+    /already exists/
+  )
+})
+
+test('promoteDiscovery archives existing when supersedes is set', () => {
+  const root = makeFixture()
+  const target = 'wiki/system/bus/standards/will-be-superseded.md'
+  fs.mkdirSync(path.join(root, path.dirname(target)), { recursive: true })
+  fs.writeFileSync(path.join(root, target), '---\ntitle: Old Version\n---\nOld\n')
+
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'new version' })
+  const r = rt.promoteDiscovery(root, {
+    channel: 'discovery', id, approver: 'jay',
+    targetPath: target,
+    supersedes: target,
+  })
+  assert.ok(fs.existsSync(path.join(root, r.target)), 'new target should exist')
+  // Archive of the old version should exist
+  const archiveDir = path.join(root, 'wiki/archive/superseded')
+  const archives = fs.existsSync(archiveDir) ? fs.readdirSync(archiveDir) : []
+  assert.ok(archives.length > 0, 'archive should contain the superseded file')
+})
+
+test('promoteDiscovery throws when item is in non-promotable state', () => {
+  const root = makeFixture()
+  const { id } = rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: 'test' })
+  // Transition to archived (non-promotable)
+  rt.transitionBusItem(root, 'discovery', id, 'archived', 'test')
+  assert.throws(
+    () => rt.promoteDiscovery(root, { channel: 'discovery', id, approver: 'jay' }),
+    /Cannot promote item.*archived/
+  )
+})
+
+test('mergeRewrite requires supersedes when canonical already exists', () => {
+  const root = makeFixture()
+  const rwRel = 'wiki/agents/workers/w1/rewrites/specs/p1-dup.md'
+  fs.mkdirSync(path.join(root, path.dirname(rwRel)), { recursive: true })
+  fs.writeFileSync(path.join(root, rwRel), '---\nmemory_class: rewrite\nstatus: approved\nauthor: w1\n---\nNew content\n')
+
+  const canRel = 'wiki/projects/p1/existing-canonical.md'
+  fs.mkdirSync(path.join(root, path.dirname(canRel)), { recursive: true })
+  fs.writeFileSync(path.join(root, canRel), '---\ntitle: Existing\n---\nOld content\n')
+
+  // Without supersedes → should throw
+  assert.throws(
+    () => rt.mergeRewrite(root, { rewritePath: rwRel, canonicalPath: canRel, approver: 'jay' }),
+    /supersedes/
+  )
+
+  // With supersedes → should succeed
+  const r = rt.mergeRewrite(root, { rewritePath: rwRel, canonicalPath: canRel, approver: 'jay', supersedes: canRel })
+  assert.ok(fs.existsSync(path.join(root, r.canonical)))
+  const merged = fs.readFileSync(path.join(root, r.canonical), 'utf8')
+  assert.match(merged, /New content/)
+})
+
+// ─── 15. Phase 5 — Task-local retention ──────────────────────────────────────
+
+test('archiveCompletedTaskMemory archives completed files older than olderThanDays', () => {
+  const root = makeFixture()
+  const wmDir = path.join(root, 'wiki/agents/workers/w1/working-memory')
+  fs.mkdirSync(wmDir, { recursive: true })
+
+  const oldDate = new Date(Date.now() - 10 * 86400000).toISOString() // 10 days ago
+  // Write a completed working-memory file with old completed_at
+  fs.writeFileSync(path.join(wmDir, 'old-task.md'),
+    `---\nmemory_class: working\nstatus: completed\ncompleted_at: ${oldDate}\n---\nDone.\n`)
+  // Write an active file — should not be archived
+  fs.writeFileSync(path.join(wmDir, 'active-task.md'),
+    '---\nmemory_class: working\nstatus: active\n---\nIn progress.\n')
+
+  const result = rt.archiveCompletedTaskMemory(root, 'w1', 'worker', { olderThanDays: 7 })
+  assert.ok(result.archived.length >= 1, 'should have archived the completed file')
+  assert.ok(!fs.existsSync(path.join(wmDir, 'old-task.md')), 'completed file should be moved')
+  assert.ok(fs.existsSync(path.join(wmDir, 'active-task.md')), 'active file must NOT be archived')
+})
+
+test('archiveCompletedTaskMemory skips files completed within olderThanDays window', () => {
+  const root = makeFixture()
+  const wmDir = path.join(root, 'wiki/agents/workers/w1/working-memory')
+  fs.mkdirSync(wmDir, { recursive: true })
+
+  const recent = new Date(Date.now() - 2 * 86400000).toISOString() // 2 days ago (within 7-day window)
+  fs.writeFileSync(path.join(wmDir, 'recent-task.md'),
+    `---\nmemory_class: working\nstatus: completed\ncompleted_at: ${recent}\n---\nRecently done.\n`)
+
+  const result = rt.archiveCompletedTaskMemory(root, 'w1', 'worker', { olderThanDays: 7 })
+  assert.equal(result.archived.length, 0, 'recently completed file should not be archived')
+  assert.ok(fs.existsSync(path.join(wmDir, 'recent-task.md')), 'file should still be present')
+})
+
+test('archiveAbandonedTaskMemory archives abandoned files older than olderThanDays', () => {
+  const root = makeFixture()
+  const wmDir = path.join(root, 'wiki/agents/workers/w1/working-memory')
+  fs.mkdirSync(wmDir, { recursive: true })
+
+  const oldDate = new Date(Date.now() - 5 * 86400000).toISOString() // 5 days ago (> 3-day default)
+  fs.writeFileSync(path.join(wmDir, 'old-abandoned.md'),
+    `---\nmemory_class: working\nstatus: abandoned\nabandoned_at: ${oldDate}\n---\nAbandoned.\n`)
+  // Write a recently abandoned file — should stay
+  const recent = new Date(Date.now() - 1 * 86400000).toISOString()
+  fs.writeFileSync(path.join(wmDir, 'recent-abandoned.md'),
+    `---\nmemory_class: working\nstatus: abandoned\nabandoned_at: ${recent}\n---\nJust abandoned.\n`)
+
+  const result = rt.archiveAbandonedTaskMemory(root, 'w1', 'worker', { olderThanDays: 3 })
+  assert.ok(result.archived.length >= 1, 'old abandoned file should be archived')
+  assert.ok(!fs.existsSync(path.join(wmDir, 'old-abandoned.md')), 'old abandoned file should be moved')
+  assert.ok(fs.existsSync(path.join(wmDir, 'recent-abandoned.md')), 'recently abandoned file should stay')
+})
+
+test('archiveCompletedTaskMemory returns empty when working-memory dir does not exist', () => {
+  const root = makeFixture()
+  // No working-memory dir created
+  const result = rt.archiveCompletedTaskMemory(root, 'w1', 'worker', { olderThanDays: 7 })
+  assert.deepEqual(result.archived, [])
+  assert.equal(result.skipped, 0)
+})

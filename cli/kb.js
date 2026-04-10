@@ -713,15 +713,94 @@ async function agentCmd(sub, rest) {
     }
     return
   }
+  // ── start-task ─────────────────────────────────────────────────────────────
+  if (sub === 'start-task') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent start-task <agent-id> [--project <p>] [--description <d>] [--task-id <tid>]')
+    const projectIdx = rest.indexOf('--project')
+    const descIdx = rest.indexOf('--description')
+    const taskIdIdx = rest.indexOf('--task-id')
+    const project = projectIdx >= 0 ? rest[projectIdx + 1] : null
+    const description = descIdx >= 0 ? rest[descIdx + 1] : ''
+    const taskId = taskIdIdx >= 0 ? rest[taskIdIdx + 1] : undefined
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    const result = rt.startTask(AGENT_KB_ROOT, c, { project, description, taskId })
+    console.log(`✅ Task started: ${result.taskId}`)
+    console.log(`   working-memory: ${result.workingMemoryPath}`)
+    console.log(`   active-task:    ${result.activeTaskPath}`)
+    return
+  }
+
+  // ── active-task ────────────────────────────────────────────────────────────
+  if (sub === 'active-task') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent active-task <agent-id>')
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    const active = rt.getActiveTask(AGENT_KB_ROOT, c)
+    if (!active) {
+      console.log(`No active task for ${id}`)
+    } else {
+      console.log(`\nActive task: ${active.taskId}`)
+      console.log(`  project:     ${active.project || '—'}`)
+      console.log(`  description: ${active.description || '—'}`)
+      console.log(`  started:     ${active.started}`)
+      console.log(`  state file:  ${active.workingMemoryPath}`)
+    }
+    return
+  }
+
+  // ── append-state ───────────────────────────────────────────────────────────
+  if (sub === 'append-state') {
+    const id = rest[0]
+    const taskId = rest[1]
+    const entry = rest[2]
+    if (!id || !taskId || !entry) throw new Error('Usage: kb agent append-state <agent-id> <task-id> "<entry>"')
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    const result = rt.appendTaskState(AGENT_KB_ROOT, c, taskId, entry)
+    console.log(`✅ State appended to ${result.path}`)
+    return
+  }
+
+  // ── abandon-task ───────────────────────────────────────────────────────────
+  if (sub === 'abandon-task') {
+    const id = rest[0]
+    const taskId = rest[1]
+    const reasonIdx = rest.indexOf('--reason')
+    const reason = reasonIdx >= 0 ? rest[reasonIdx + 1] : ''
+    if (!id || !taskId) throw new Error('Usage: kb agent abandon-task <agent-id> <task-id> [--reason <r>]')
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    const result = rt.abandonTask(AGENT_KB_ROOT, c, taskId, reason)
+    console.log(`✅ Task abandoned: ${result.workingMemoryPath}`)
+    return
+  }
+
+  // ── close-task (with --dry-run support) ────────────────────────────────────
   if (sub === 'close-task') {
     const id = rest[0]
-    if (!id) throw new Error('Usage: kb agent close-task <agent-id> --payload <file.json>')
+    if (!id) throw new Error('Usage: kb agent close-task <agent-id> --payload <file.json> [--dry-run]')
     const payloadIdx = rest.indexOf('--payload')
-    if (payloadIdx < 0) throw new Error('Missing --payload <file.json>')
+    const dryRun = rest.includes('--dry-run')
     const fs = await import('fs')
-    const payload = JSON.parse(fs.readFileSync(rest[payloadIdx + 1], 'utf8'))
+    const payload = payloadIdx >= 0
+      ? JSON.parse(fs.readFileSync(rest[payloadIdx + 1], 'utf8'))
+      : {}
     const c = rt.loadContract(AGENT_KB_ROOT, id)
-    if (!c) throw new Error(`Agent not found: ${id}`)
+    if (dryRun) {
+      const plan = rt.dryRunCloseTask(AGENT_KB_ROOT, c, payload)
+      console.log(`\n--- Dry run for ${id} close-task ---`)
+      console.log(`Would succeed: ${plan.wouldSucceed}`)
+      console.log(`Total ops: ${plan.summary.total} (${plan.summary.file_writes} file, ${plan.summary.bus_publishes} bus)`)
+      if (plan.rejected.length) {
+        console.log(`\nREJECTED (${plan.rejected.length}):`)
+        for (const r of plan.rejected) console.log(`  ✗ [${r.op}] ${r.path} — ${r.reason}`)
+      }
+      console.log(`\nPLAN:`)
+      for (const p of plan.planned) {
+        const ok = p.allowed ? '✓' : '✗'
+        console.log(`  ${ok} [${p.op}] ${p.path}`)
+      }
+      return
+    }
     const result = rt.closeTask(AGENT_KB_ROOT, c, payload)
     if (!result.ok) {
       console.error(`❌ Close rejected (${result.rejected.length} rejections):`)
@@ -735,6 +814,7 @@ async function agentCmd(sub, rest) {
     for (const b of result.trace.bus_items) console.log(`   [bus:${b.channel}] ${b.id}`)
     return
   }
+
   if (sub === 'trace') {
     const id = rest[0]
     const limitIdx = rest.indexOf('--last')
