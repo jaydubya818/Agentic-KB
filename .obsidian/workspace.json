@@ -186,6 +186,7 @@
   },
   "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "wiki/repos/agentic-kb/repo-docs/AGENTS.md",
     "lib/agent-runtime/task-lifecycle.mjs",
     "wiki/repos/agentic-kb/rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan.md",
     "AGENTS.md",
@@ -215,7 +216,6 @@
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu/package.json",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu",
-    "web/node_modules/next/next-swc-fallback/@next",
     "wiki/repos/llmwiki/canonical/IMPLEMENTATION_PLAN.md",
     "wiki/repos/llmwiki/canonical/TECH_STACK.md",
     "wiki/repos/llmwiki/canonical/APP_FLOW.md",

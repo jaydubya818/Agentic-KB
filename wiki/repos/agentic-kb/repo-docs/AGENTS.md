@@ -4,9 +4,9 @@ repo_visibility: public
 source_type: github
 branch: main
 commit_sha: 844c471f3d48aedc6dd2ad7d79c864b797176b33
-source_path: CLAUDE.md
-imported_at: "2026-04-10T21:41:56.326Z"
-source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/CLAUDE.md"
+source_path: AGENTS.md
+imported_at: "2026-04-10T21:41:56.324Z"
+source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/AGENTS.md"
 ---
 
 # Agentic Engineering Knowledge Base — Schema v1.0
@@ -27,11 +27,11 @@ Agentic-KB/
 │   ├── papers/             # Academic papers (PDF → md)
 │   ├── transcripts/        # Video/podcast transcripts
 │   ├── framework-docs/     # Framework documentation snippets
-│   ├── my-agents/          # Jay's ~/.claude/agents/*.md definitions
-│   ├── my-skills/          # Jay's ~/.claude/skills/*/SKILL.md files
-│   ├── my-hooks/           # Jay's Claude Code hook configs
+│   ├── my-agents/          # Jay's ~/.Codex/agents/*.md definitions
+│   ├── my-skills/          # Jay's ~/.Codex/skills/*/SKILL.md files
+│   ├── my-hooks/           # Jay's Codex hook configs
 │   ├── code-examples/      # Annotated code patterns
-│   ├── conversations/      # Notable Claude Code sessions (exported)
+│   ├── conversations/      # Notable Codex sessions (exported)
 │   └── changelogs/         # Framework version notes
 ├── wiki/                   # LLM-OWNED — never edit manually
 │   ├── concepts/           # Universal agentic concepts
@@ -46,7 +46,7 @@ Agentic-KB/
 │   ├── hot.md              # Hot cache — ≤500 words of most-used context
 │   ├── index.md            # Master catalog (LLM-maintained, always current)
 │   └── log.md              # Append-only operation log
-└── CLAUDE.md               # This file — schema and workflows
+└── AGENTS.md               # This file — schema and workflows
 ```
 
 ---
@@ -243,7 +243,7 @@ tags: []
 `state-management` `parallelization` `error-handling` `reflection`
 
 ### Framework Tags
-`claude-code` `claude-api` `langgraph` `autogen` `crewai` `openai`
+`Codex` `Codex-api` `langgraph` `autogen` `crewai` `openai`
 `mcp` `anthropic` `openclaw` `rowboat` `gsd` `superpowers` `bmad`
 `langchain` `llamaindex` `dspy`
 
@@ -341,9 +341,9 @@ Harness: `/Users/jaywest/My LLM Wiki/`
 - `packages/core` — Core ingestion/query logic
 - Run queries via: `cd /Users/jaywest/My\ LLM\ Wiki && npm run query "your question"`
 
-### Claude Code Infrastructure
-- Agent definitions in: `/Users/jaywest/.claude/agents/`
-- Skill definitions in: `/Users/jaywest/.claude/skills/`
+### Codex Infrastructure
+- Agent definitions in: `/Users/jaywest/.Codex/agents/`
+- Skill definitions in: `/Users/jaywest/.Codex/skills/`
 - Use `gsd-executor` for complex wiki builds
 - Use parallel Agent tool calls for fan-out ingestion
 
@@ -357,7 +357,7 @@ Harness: `/Users/jaywest/My LLM Wiki/`
 ## Query Examples
 
 ```
-"What's the best pattern for a supervisor-worker multi-agent system in Claude Code?"
+"What's the best pattern for a supervisor-worker multi-agent system in Codex?"
 "How do I manage context across a long agentic session without losing state?"
 "Compare LangGraph and GSD for orchestrating a 5-step research pipeline"
 "What are Jay's validated patterns for tool design?"

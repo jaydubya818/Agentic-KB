@@ -55,3 +55,14 @@
 {"ts":"2026-04-09T18:58:37.369Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/RLM_PIPELINE.md","action":"write"}
 {"ts":"2026-04-09T18:58:37.370Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-dry-wiki.md","action":"write"}
 {"ts":"2026-04-09T18:58:37.372Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-write-wiki.md","action":"write"}
+{"ts":"2026-04-10T21:41:54.237Z","op":"repo-sync-fetch-error","repo":"LLMwiki","error":"Failed to fetch tree from GitHub: GitHub tree fetch failed: 404 Not Found"}
+{"ts":"2026-04-10T21:41:56.325Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/AGENTS.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.327Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/CLAUDE.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.329Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/ENTERPRISE_PLAN.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.332Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/README.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.333Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/Untitled.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.334Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OBSIDIAN_GRAPH.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.335Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/OH_MY_MERMAID.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.336Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/RLM_PIPELINE.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.338Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-dry-wiki.md","action":"write"}
+{"ts":"2026-04-10T21:41:56.340Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-write-wiki.md","action":"write"}
