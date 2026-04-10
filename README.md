@@ -2,7 +2,7 @@
 
 > Jay West | Built: 2026-04-04 | Last major update: 2026-04-10 | Maintained by LLM + Human
 
-A personal knowledge base for agentic AI engineering — 140+ articles covering concepts, patterns, frameworks, entities, recipes, evaluations, summaries, and agent memory. Queryable via a Wikipedia-style web UI, CLI, and MCP server. Fully agentified with a live Operational Runtime Memory Layer and Sofie integration.
+A personal knowledge base for agentic AI engineering — 1000+ articles covering concepts, patterns, frameworks, entities, recipes, evaluations, summaries, and agent memory. Queryable via a Wikipedia-style web UI, CLI, and MCP server. Fully agentified with a live Operational Runtime Memory Layer and Sofie integration.
 
 Inspired by [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy) — raw sources are **compiled** by Claude into a persistent, cross-referenced wiki. Not RAG: the compile step is deliberate, auditable, and runs incrementally over a logged state.
 
