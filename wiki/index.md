@@ -11,7 +11,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Concepts (16)
+## Concepts (17)
 
 | Page | Type | Tags | Confidence | Description |
 |------|------|------|------------|-------------|
@@ -30,14 +30,16 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[concepts/system-prompt-design]] | concept | prompt-engineering | — | Designing effective system prompts for agents |
 | [[concepts/task-decomposition]] | concept | orchestration, agentic | — | Breaking complex tasks into agent-executable steps |
 | [[concepts/tool-use]] | concept | tool-use, agentic | — | How agents select and call tools |
+| [[concepts/rlm-pipeline]] | concept | context-management, memory, observability | high | 10-stage Recursive Layered Memory retrieval pipeline |
 | [[concepts/trajectory-evaluation]] | concept | evaluation | — | Evaluating the full sequence of agent decisions |
 
 ---
 
-## Patterns (2)
+## Patterns (3)
 
 | Page | Category | Problem | Confidence |
 |------|----------|---------|------------|
+| [[patterns/pattern-compounding-loop]] | memory | LLM answers are ephemeral — each query rediscovers knowledge with no memory of past answers | high |
 | [[patterns/pattern-episodic-judgment-log]] | memory | Agents have your files but not your judgment — they give generic advice on decisions you've already thought through | medium |
 | [[patterns/pattern-two-step-ingest]] | prompt-engineering | Single-call compilation conflates analysis with generation, producing lower-quality wiki pages with weak cross-links | medium |
 

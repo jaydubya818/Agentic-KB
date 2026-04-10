@@ -186,6 +186,13 @@
   },
   "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "wiki/patterns/pattern-compounding-loop.md",
+    "wiki/concepts/rlm-pipeline.md",
+    "wiki/summaries/agentic-kb-oh-my-mermaid.md",
+    "wiki/summaries/agentic-kb-obsidian-graph.md",
+    "wiki/summaries/agentic-kb-rlm-pipeline.md",
+    "wiki/summaries/agentic-kb-enterprise-plan.md",
+    "wiki/summaries/agentic-kb-readme.md",
     "wiki/repos/agentic-kb/repo-docs/AGENTS.md",
     "lib/agent-runtime/task-lifecycle.mjs",
     "wiki/repos/agentic-kb/rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan.md",
@@ -212,16 +219,9 @@
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl/README.md",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl/package.json",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl",
-    "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu/README.md",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu/package.json",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu",
-    "wiki/repos/llmwiki/canonical/IMPLEMENTATION_PLAN.md",
-    "wiki/repos/llmwiki/canonical/TECH_STACK.md",
-    "wiki/repos/llmwiki/canonical/APP_FLOW.md",
-    "wiki/repos/llmwiki/canonical/PRD.md",
-    "wiki/repos/llmwiki/CLAUDE.md",
-    "wiki/repos/llmwiki/progress.md",
     "Untitled.canvas"
   ]
 }
