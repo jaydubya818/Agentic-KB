@@ -186,6 +186,14 @@
   },
   "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "scripts/sofie-kb-digest.mjs",
+    "scripts/sofie-watch-obsidian.mjs",
+    "scripts/sofie-ingest-session.mjs",
+    "wiki/agents/leads/sofie/task-log.md",
+    "wiki/agents/leads/sofie/hot.md",
+    "wiki/agents/leads/sofie/profile.md",
+    "wiki/agents/leads/sofie",
+    "config/agents/sofie.yaml",
     "wiki/patterns/pattern-compounding-loop.md",
     "wiki/concepts/rlm-pipeline.md",
     "wiki/summaries/agentic-kb-oh-my-mermaid.md",
@@ -211,17 +219,9 @@
     "wiki/repos/agentic-kb/repo-docs/docs",
     "wiki/repos/agentic-kb/repo-docs/Untitled.md",
     "wiki/repos/agentic-kb/repo-docs/README.md",
-    "wiki/repos/agentic-kb/repo-docs/ENTERPRISE_PLAN.md",
-    "wiki/repos/agentic-kb/repo-docs/CLAUDE.md",
-    "wiki/syntheses/synthesis-repo-aware-system-implementation.md",
     "lib/repo-runtime/index.d.ts",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl/next-swc.linux-arm64-musl.node",
-    "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl/README.md",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl/package.json",
-    "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl",
-    "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node",
-    "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu/package.json",
-    "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-gnu",
     "Untitled.canvas"
   ]
 }

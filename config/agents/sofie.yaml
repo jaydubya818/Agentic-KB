@@ -1,0 +1,43 @@
+agent_id: sofie
+tier: lead
+domain: business
+description: "AI Chief of Staff — bridges business strategy (Obsidian Vault) with engineering knowledge (Agentic-KB). Triages bus items, promotes discoveries to standards, surfaces KB insights to Jay's leadership layer."
+
+context_policy:
+  budget_bytes: 65536
+  include_task_local: true
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+      required: true
+    - class: hot
+      scope: self
+      priority: 20
+    - class: learned
+      scope: all
+      priority: 30
+      max_items: 10
+    - path: wiki/personal/**
+      priority: 40
+    - path: wiki/concepts/**
+      priority: 50
+      max_items: 5
+    - path: wiki/patterns/**
+      priority: 60
+      max_items: 5
+
+allowed_writes:
+  - wiki/agents/leads/sofie/**
+  - wiki/system/bus/discovery/**
+  - wiki/system/bus/standards/**
+  - wiki/system/bus/escalation/**
+  - wiki/personal/**
+  - raw/qa/**
+  - raw/transcripts/**
+
+forbidden_paths:
+  - wiki/agents/workers/**
+  - wiki/agents/orchestrators/**
+  - config/**
+  - raw/papers/**
