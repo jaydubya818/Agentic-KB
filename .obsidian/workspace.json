@@ -186,6 +186,8 @@
   },
   "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "wiki/agents/leads/sofie/weekly-digest.md",
+    "raw/qa/sofie-session-2026-04-10-multi-agent-patterns-q-a.md",
     "scripts/sofie-kb-digest.mjs",
     "scripts/sofie-watch-obsidian.mjs",
     "scripts/sofie-ingest-session.mjs",
@@ -218,10 +220,8 @@
     "wiki/repos/agentic-kb/repo-docs/docs/OBSIDIAN_GRAPH.md",
     "wiki/repos/agentic-kb/repo-docs/docs",
     "wiki/repos/agentic-kb/repo-docs/Untitled.md",
-    "wiki/repos/agentic-kb/repo-docs/README.md",
     "lib/repo-runtime/index.d.ts",
     "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl/next-swc.linux-arm64-musl.node",
-    "web/node_modules/next/next-swc-fallback/@next/swc-linux-arm64-musl/package.json",
     "Untitled.canvas"
   ]
 }

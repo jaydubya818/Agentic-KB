@@ -1,10 +1,25 @@
 # Agentic Engineering Knowledge Base
 
-> Jay West | Built: 2026-04-04 | Last major update: 2026-04-09 | Maintained by LLM + Human
+> Jay West | Built: 2026-04-04 | Last major update: 2026-04-10 | Maintained by LLM + Human
 
-A personal knowledge base for agentic AI engineering — 87+ articles covering concepts, patterns, frameworks, entities, recipes, and evaluations. Queryable via a Wikipedia-style web UI, CLI, and MCP server.
+A personal knowledge base for agentic AI engineering — 140+ articles covering concepts, patterns, frameworks, entities, recipes, evaluations, summaries, and agent memory. Queryable via a Wikipedia-style web UI, CLI, and MCP server. Fully agentified with a live Operational Runtime Memory Layer and Sofie integration.
 
 Inspired by [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy) — raw sources are **compiled** by Claude into a persistent, cross-referenced wiki. Not RAG: the compile step is deliberate, auditable, and runs incrementally over a logged state.
+
+---
+
+## What's New — April 10, 2026
+
+Operational Runtime Memory Layer (all 5 phases) + Sofie AI Chief of Staff integration + GitHub repo sync:
+
+- 🧠 **Operational Runtime Memory Layer — 52/52 tests passing** — Full agent memory lifecycle now implemented across 5 phases. Agents have identity (YAML contracts), structured memory classes (profile/hot/working/learned/rewrite/bus), task lifecycle (startTask → appendState → closeTask with atomic commit), and governance-grade promotion. Built as zero-dependency Node.js ES modules in `lib/agent-runtime/`.
+- 🔐 **Phase 4: Promotion governance** — `promotion.mjs` enforces contract-driven tier validation (`TIER_RANK: worker=1 lead=2 orchestrator=3`) before any bus promotion. Duplicate-title detection with self-exclusion, target-path collision guard requiring explicit `supersedes`, `assertPromotable` state gate. `mergeRewrite` upgrades also validated with approver tier.
+- 📋 **Phase 5: CLI + MCP surface** — 5 new `kb agent` subcommands (`start-task`, `active-task`, `append-state`, `abandon-task`, `close-task --dry-run`). 5 new MCP tools (`agent_start_task`, `agent_active_task`, `agent_append_task_state`, `agent_abandon_task`, `agent_dry_run_close_task`). MCP `merge_rewrite` updated with governance params.
+- 🗂️ **Task retention** — `retention.mjs` implements `archiveCompletedTaskMemory` and `archiveAbandonedTaskMemory`. Task-local working memory is archived on close/abandon, preventing context bleed across sessions.
+- 🤝 **Sofie integration — AI Chief of Staff ↔ Agentic-KB** — Sofie (lead-tier agent, `config/agents/sofie.yaml`) is the business-strategy bridge between the Obsidian Vault and this KB. Her context policy loads: profile + hot cache (priority 10/20), learned context from all agents (30), wiki/personal/** (40), wiki/concepts/** and wiki/patterns/** (50/60). Budget: 65KB. Context load in production: 19 files, ~62KB.
+- 📥 **Sofie pipeline scripts** — Three scripts connect Sofie to the KB: `scripts/sofie-ingest-session.mjs` (ingest Q&A conversations into `raw/qa/` with `--content/--file/--obsidian-session/--verified/--dry-run`), `scripts/sofie-watch-obsidian.mjs` (30s poll watcher for Obsidian meeting/session/daily-note dirs, mtime-tracked), `scripts/sofie-kb-digest.mjs` (weekly digest of KB health + open bus items + recent pages, writes to both KB and Obsidian `07 - Tasks/`).
+- 🔄 **GitHub repo sync** — `kb repo sync <name>` pulls markdown from GitHub repos into `raw/repos/<name>/repo-docs/`. Agentic-KB repo synced and fully ingested (5 source files → 5 summaries + 2 new concept/pattern pages). Private repos (Agentic-Pi-Harness, Pi, MissionControl) pending public access.
+- 📚 **5 new repo summaries ingested** — README, ENTERPRISE_PLAN, RLM_PIPELINE, OBSIDIAN_GRAPH, OH_MY_MERMAID → `wiki/summaries/agentic-kb-*.md`. New concept: `concepts/rlm-pipeline.md` (10-stage retrieval, stages 4–9 live). New pattern: `patterns/pattern-compounding-loop.md` (raw/qa/ → compile → wiki → query → save with ×1.25 verified boost).
 
 ---
 
@@ -49,6 +64,12 @@ See [`ENTERPRISE_PLAN.md`](ENTERPRISE_PLAN.md) for the full P0–P3 roadmap.
 - [Web UI](#web-ui)
 - [CLI](#cli)
 - [MCP Server](#mcp-server)
+- [Agent Runtime Memory Layer](#agent-runtime-memory-layer)
+  - [Agent Contracts](#agent-contracts)
+  - [Memory Classes](#memory-classes)
+  - [Task Lifecycle](#task-lifecycle)
+  - [Promotion Governance](#promotion-governance)
+- [Sofie Integration (AI Chief of Staff)](#sofie-integration-ai-chief-of-staff)
 - [Compile Pipeline (Karpathy LLM Wiki)](#compile-pipeline-karpathy-llm-wiki)
 - [Enterprise Features](#enterprise-features)
   - [Namespace RBAC](#namespace-rbac)
@@ -207,7 +228,9 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
 
 > **Note:** Restart Claude Desktop after changing this config for env vars to take effect.
 
-### Tools (7 total)
+### Tools (20 total)
+
+**Wiki tools (7):**
 
 | Tool | Description |
 |------|-------------|
@@ -218,6 +241,24 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
 | `query_wiki` | Natural language Q&A — Claude synthesizes an answer from ranked wiki pages |
 | `compile_wiki` | Run the Karpathy compile pipeline — batches new/changed raw docs to Claude and writes wiki pages |
 | `lint_wiki` | Health check — returns contradictions, orphans, stale pages, and knowledge gaps |
+
+**Agent runtime tools (13):**
+
+| Tool | Description |
+|------|-------------|
+| `agent_start_task` | Start a new task for an agent — creates working-memory file and opens task-local context |
+| `agent_active_task` | Get the active task state for an agent |
+| `agent_append_task_state` | Append a state snapshot to the active task's working memory |
+| `agent_abandon_task` | Abandon the active task — archives working memory, clears active pointer |
+| `agent_dry_run_close_task` | Dry-run close — returns the planned bus publications and file writes without committing |
+| `publish_bus_item` | Publish a discovery, escalation, or standards item to the bus |
+| `list_agent_bus_items` | List pending bus items filtered by channel and/or agent |
+| `list_repo_bus_items` | List pending bus items from a specific repo |
+| `promote_learning` | Promote a bus item from discovery to a wiki page (with tier validation) |
+| `merge_rewrite` | Merge a rewrite artifact into a canonical wiki page (with supersedes guard) |
+| `agent_trace` | Trace the context load for an agent — shows which files were included and bytes used |
+| `load_agent_context` | Load the context bundle for an agent (respects RBAC, budget, priority) |
+| `close_agent_task` | Commit a task close — writes bus publications, archives working memory, seals task |
 
 > **Note on long-running tools:** `compile_wiki` is a synchronous wrapper around an SSE endpoint and can time out on large batches. For full recompiles, use the web UI's `CompilePanel` (streams via `EventSource`, no timeout) or `kb compile --mode full`.
 
@@ -230,6 +271,168 @@ read_article(slug: "concepts/tool-use")
 read_article(slug: "personal/my-notes", pin: "1124")
 query_wiki(question: "What is the best pattern for parallel tool execution?")
 query_wiki(question: "What frameworks do I prefer?", scope: "all", pin: "1124")
+```
+
+---
+
+## Agent Runtime Memory Layer
+
+Added 2026-04-10. Zero-dependency Node.js ES modules in `lib/agent-runtime/`. 52/52 tests passing (`npm test`).
+
+The runtime gives every agent a structured memory lifecycle: identity → context load → task → promote → archive. Each phase is governed by the agent's YAML contract.
+
+### Agent Contracts
+
+Each agent is defined by a YAML file at `config/agents/<agent-id>.yaml`:
+
+```yaml
+agent_id: sofie
+tier: lead          # worker | lead | orchestrator
+domain: business
+context_policy:
+  budget_bytes: 65536
+  include_task_local: true
+  include:
+    - class: profile   # identity and role
+      scope: self
+      priority: 10
+      required: true
+    - class: hot       # hot cache — most-used context
+      scope: self
+      priority: 20
+    - class: learned   # cross-agent learned memory
+      scope: all
+      priority: 30
+      max_items: 10
+allowed_writes:
+  - wiki/agents/leads/sofie/**
+  - wiki/system/bus/discovery/**
+  - raw/qa/**
+```
+
+**Tier hierarchy:** `worker=1 < lead=2 < orchestrator=3`. Tier is enforced at promotion — agents cannot promote items if the approver's tier is below `min_approver_tier`.
+
+### Memory Classes
+
+| Class | Path pattern | Description |
+|-------|-------------|-------------|
+| `profile` | `wiki/agents/<tier>/<id>/profile.md` | Identity, role, MCP tools, interaction style |
+| `hot` | `wiki/agents/<tier>/<id>/hot.md` | Hot cache — most-used patterns, current focus |
+| `working` | `wiki/agents/<tier>/<id>/working-memory/<task-id>.md` | Task-local state, per-task |
+| `learned` | `wiki/agents/<tier>/<id>/learned/*.md` | Durable lessons, gotchas, domain standards |
+| `bus` | `wiki/system/bus/<channel>/<id>.md` | Inter-agent communication (discovery/escalation/standards) |
+| `rewrite` | `wiki/agents/<tier>/<id>/rewrite-artifacts/*.md` | Staged rewrites pending canonical merge |
+
+### Task Lifecycle
+
+```
+startTask(kbRoot, contract, {title, goal})
+  → creates working-memory/<task-id>.md
+  → sets wiki/agents/.../active-task.md pointer
+
+appendTaskState(kbRoot, contract, {state})
+  → appends timestamped snapshot to working memory
+
+dryRunCloseTask(kbRoot, contract)
+  → returns planned bus pubs + file writes without committing
+
+closeTask(kbRoot, contract, {discoveries, standards, rewrite})
+  → atomic: publishes bus items + archives working memory in one commit
+  → seals active-task.md → closed
+
+abandonTask(kbRoot, contract)
+  → archives working memory to abandoned/
+  → clears active-task.md
+```
+
+### Promotion Governance
+
+`promoteDiscovery(kbRoot, contract, id, {approver, targetPath, promotionReason})`
+
+Rules enforced before any wiki write:
+1. **Approver tier** — approver's contract tier must be ≥ item's `min_approver_tier`
+2. **Duplicate title** — title scan across channel (self-excluded to prevent self-match)
+3. **Target collision** — if `targetPath` already exists, `supersedes` must name the old file
+4. **State gate** — item must be in a promotable state (not archived/promoted already)
+
+`mergeRewrite(kbRoot, contract, artifactId, {supersedes})` — same governance applied to canonical wiki page merges.
+
+---
+
+## Sofie Integration (AI Chief of Staff)
+
+Added 2026-04-10. Sofie is a lead-tier agent that bridges business strategy (Obsidian Vault) with the engineering KB (Agentic-KB).
+
+**Contract:** `config/agents/sofie.yaml` | **Memory:** `wiki/agents/leads/sofie/`
+
+### Context Load (Production)
+
+```
+19 files loaded | 61,779 / 65,536 bytes used
+  priority 10: wiki/agents/leads/sofie/profile.md
+  priority 20: wiki/agents/leads/sofie/hot.md
+  priority 30: learned context from all agent tiers (max 10)
+  priority 40: wiki/personal/** (Jay's validated patterns)
+  priority 50: wiki/concepts/** (max 5)
+  priority 60: wiki/patterns/** (max 5)
+```
+
+### Pipeline Scripts
+
+| Script | Command | Description |
+|--------|---------|-------------|
+| `sofie-ingest-session.mjs` | `node scripts/sofie-ingest-session.mjs` | Ingest a Sofie Q&A session into `raw/qa/` |
+| `sofie-watch-obsidian.mjs` | `node scripts/sofie-watch-obsidian.mjs` | Poll Obsidian dirs every 30s for new meeting/session/daily notes |
+| `sofie-kb-digest.mjs` | `node scripts/sofie-kb-digest.mjs` | Generate weekly KB digest → writes to KB + Obsidian `07 - Tasks/` |
+
+#### sofie-ingest-session
+
+```bash
+# Ingest a conversation inline
+node scripts/sofie-ingest-session.mjs \
+  --title "Multi-agent patterns Q&A" \
+  --content "Q: ... A: ..." \
+  --tags "agentic,multi-agent" \
+  --verified
+
+# Ingest from a file
+node scripts/sofie-ingest-session.mjs --file ~/notes/session.md --verified
+
+# Dry run (preview only, no write)
+node scripts/sofie-ingest-session.mjs --title "Test" --content "..." --dry-run
+```
+
+Writes to `raw/qa/sofie-session-{date}-{slug}.md` with frontmatter: `type: qa`, `source: sofie-chief-of-staff`, `verified: true/false`. Run `kb compile` afterward to fold into wiki.
+
+#### sofie-watch-obsidian
+
+```bash
+node scripts/sofie-watch-obsidian.mjs          # continuous 30s poll
+node scripts/sofie-watch-obsidian.mjs --once   # one-shot scan
+```
+
+Watches: `05 - Meetings/`, `Sessions/`, `daily-notes/`, `09 - Daily Notes/` in the Obsidian vault. Tracks ingested files by mtime in `raw/.obsidian-ingest-log.json`. Writes to `raw/transcripts/obsidian-{date}-{slug}.md`.
+
+#### sofie-kb-digest
+
+```bash
+node scripts/sofie-kb-digest.mjs               # generate and write
+node scripts/sofie-kb-digest.mjs --dry-run     # preview only
+```
+
+Outputs:
+- `wiki/agents/leads/sofie/weekly-digest.md` — always written
+- `Obsidian Vault/07 - Tasks/KB Digest {date}.md` — written when run locally (not from sandbox)
+
+### Obsidian Vault → KB Flow
+
+```
+Obsidian session/meeting note
+  → sofie-watch-obsidian (auto) or sofie-ingest-session (manual)
+  → raw/qa/ or raw/transcripts/
+  → kb compile
+  → wiki/summaries/ or wiki/personal/
+  → surfaced in Sofie's context on next load
 ```
 
 ---
@@ -494,7 +697,7 @@ Edit a markdown file in Obsidian → wiki updates in the browser automatically (
 | Directory | Contents |
 |-----------|----------|
 | `raw/papers/` | PDFs and papers |
-| `raw/transcripts/` | Video/podcast transcripts |
+| `raw/transcripts/` | Video/podcast transcripts + Obsidian session imports (via sofie-watch-obsidian) |
 | `raw/framework-docs/` | Framework documentation |
 | `raw/note/` | Quick notes and thoughts |
 | `raw/code-examples/` | Annotated code patterns |
@@ -502,6 +705,8 @@ Edit a markdown file in Obsidian → wiki updates in the browser automatically (
 | `raw/changelogs/` | Framework version notes |
 | `raw/my-agents/` | Agent definitions |
 | `raw/my-skills/` | Skill files |
+| `raw/qa/` | Sofie Q&A sessions (ingested via `sofie-ingest-session.mjs`) |
+| `raw/repos/<name>/repo-docs/` | Synced GitHub repo markdown (via `kb repo sync <name>`) |
 
 ---
 
