@@ -718,22 +718,55 @@ Agentic-KB/
 │   ├── index.md          # Master catalog
 │   ├── hot.md            # Hot cache (read first for common queries)
 │   ├── log.md            # Operation audit log
-│   ├── concepts/         # Universal agentic concepts (20)
-│   ├── patterns/         # Reusable design patterns (15)
-│   ├── frameworks/       # Tool/framework reference (11)
+│   ├── concepts/         # Universal agentic concepts (21)
+│   ├── patterns/         # Reusable design patterns (5+)
+│   ├── frameworks/       # Tool/framework reference (12)
 │   ├── entities/         # People, companies, models (8)
-│   ├── recipes/          # Copy-paste how-to guides (8)
+│   ├── recipes/          # Copy-paste how-to guides (9)
 │   ├── evaluations/      # Framework comparisons (2)
-│   ├── summaries/        # Per-source summaries (16)
-│   ├── syntheses/        # Cross-source synthesis articles (1)
-│   └── personal/         # Jay's patterns & philosophy (private)
+│   ├── summaries/        # Per-source summaries (21+)
+│   ├── syntheses/        # Cross-source synthesis articles
+│   ├── personal/         # Jay's patterns & philosophy (private)
+│   ├── agents/           # Agent memory namespace (NEW)
+│   │   ├── workers/      # Worker-tier agent memory
+│   │   ├── leads/        # Lead-tier agent memory
+│   │   │   └── sofie/    # Sofie (Chief of Staff) memory
+│   │   │       ├── profile.md
+│   │   │       ├── hot.md
+│   │   │       ├── task-log.md
+│   │   │       └── weekly-digest.md
+│   │   └── orchestrators/ # Orchestrator-tier agent memory
+│   └── system/           # System-level KB state
+│       └── bus/          # Inter-agent bus (discovery/escalation/standards)
 ├── raw/                  # Unprocessed source material
+│   ├── qa/               # Sofie Q&A sessions (NEW)
+│   └── repos/            # Synced GitHub repo docs (NEW)
+├── config/
+│   └── agents/           # Agent YAML contracts (NEW)
+│       └── sofie.yaml
+├── lib/
+│   └── agent-runtime/    # Operational Runtime Memory Layer (NEW)
+│       ├── index.mjs     # Barrel export
+│       ├── contracts.mjs # YAML contract loader + validator
+│       ├── context-loader.mjs # Context assembly (budget, RBAC, priority)
+│       ├── task-lifecycle.mjs # start/append/close/abandon task
+│       ├── promotion.mjs # Bus promotion with tier governance
+│       ├── retention.mjs # Task memory archival
+│       ├── bus.mjs       # Inter-agent bus publish/list
+│       └── ...           # 9 more modules
+├── scripts/              # Sofie pipeline scripts (NEW)
+│   ├── sofie-ingest-session.mjs
+│   ├── sofie-watch-obsidian.mjs
+│   └── sofie-kb-digest.mjs
+├── tests/
+│   └── agents/
+│       └── runtime.test.mjs  # 52 tests, 100% passing
 ├── web/                  # Next.js 16 web application
 │   ├── src/app/          # App Router pages + API routes
 │   ├── src/components/   # React components
 │   └── src/lib/          # Shared utilities (articles.ts)
 ├── mcp/
-│   └── server.js         # MCP server (Node.js stdio)
+│   └── server.js         # MCP server — 20 tools (7 wiki + 13 agent runtime)
 ├── cli/
 │   └── kb.js             # CLI tool
 └── CLAUDE.md             # Schema, workflows, agent instructions
