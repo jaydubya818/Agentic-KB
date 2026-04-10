@@ -13,17 +13,19 @@ updated: 2026-04-10
 ## Active Workstreams
 
 ### 0. Operational Runtime Memory Layer
-**Status**: Planning | **Owner**: planning-agent | **Due**: 2026-04-24
+**Status**: In Progress (Phases 1–3 complete) | **Owner**: Jay West | **Due**: 2026-04-24
 
 Repo plan: [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|Operational Runtime Memory Layer Plan]]
 
-- [ ] Introduce first-class task-local working memory for active agents
-- [ ] Tighten scoped context loading with required/optional and freshness rules
-- [ ] Make close-task fully atomic across files and bus publications
+- [x] Introduce first-class task-local working memory for active agents
+- [x] Tighten scoped context loading with required/optional and freshness rules
+- [x] Make close-task fully atomic across files and bus publications
 - [ ] Formalize promotion and rewrite governance in agent contracts
 - [ ] Expose the same lifecycle through CLI, MCP, and web
 
-**Progress**: Plan created. Implementation not started.
+**Progress**: Phases 1–3 implemented and tested (40/40 tests passing). New module `lib/agent-runtime/task-lifecycle.mjs` added with `startTask`, `appendTaskState`, `getActiveTask`, `abandonTask`. `writeback.mjs` refactored to include bus publications in the atomic guard cycle and seal active tasks post-commit. `context-loader.mjs` upgraded with `include_task_local`, `required`, `freshness_days`, `max_items`, and canonical load order. 14 new tests added.
+
+Phases 4–5 (promotion governance, CLI/MCP surface) are follow-on.
 
 ### 1. Framework Documentation Sync
 **Status**: In Progress | **Owner**: Jay West | **Due**: 2026-04-16

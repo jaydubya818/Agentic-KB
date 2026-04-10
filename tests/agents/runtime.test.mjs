@@ -402,3 +402,351 @@ test('generateTemplate produces valid frontmatter for all memory classes', () =>
     assert.match(tmpl, /memory_class:/, `${cls} template should include memory_class`)
   }
 })
+
+// ─── 12. Task lifecycle ────────────────────────────────────────────────────────
+
+test('startTask creates working-memory file and active-task pointer', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  // Extend allowed_writes to include working-memory and active-task paths
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const { taskId, workingMemoryPath, activeTaskPath } = rt.startTask(root, c, {
+    project: 'p1',
+    description: 'Implement feature X',
+  })
+
+  assert.ok(taskId.startsWith('task-'), `taskId should start with 'task-'`)
+  assert.ok(fs.existsSync(path.join(root, workingMemoryPath)), 'working-memory file should exist')
+  assert.ok(fs.existsSync(path.join(root, activeTaskPath)), 'active-task.md should exist')
+
+  const wmContent = fs.readFileSync(path.join(root, workingMemoryPath), 'utf8')
+  assert.match(wmContent, /memory_class: working/)
+  assert.match(wmContent, /status: active/)
+  assert.match(wmContent, /task_id:/)
+
+  const atContent = fs.readFileSync(path.join(root, activeTaskPath), 'utf8')
+  assert.match(atContent, /status: active/)
+  // task_id value may be quoted by the serializer (hyphens trigger quoting)
+  assert.match(atContent, /task_id:/)
+})
+
+test('getActiveTask returns null when no active task exists', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  const active = rt.getActiveTask(root, c)
+  assert.equal(active, null)
+})
+
+test('getActiveTask returns task metadata after startTask', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const { taskId } = rt.startTask(root, c, { project: 'p1', description: 'My task' })
+  const active = rt.getActiveTask(root, c)
+
+  assert.ok(active !== null)
+  assert.equal(active.taskId, taskId)
+  assert.equal(active.project, 'p1')
+  assert.equal(active.description, 'My task')
+  assert.ok(active.workingMemoryPath)
+})
+
+test('appendTaskState appends timestamped entry to working-memory file', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const { taskId, workingMemoryPath } = rt.startTask(root, c, { project: 'p1', description: 'Test task' })
+  rt.appendTaskState(root, c, taskId, 'Step 1 complete: scaffold done')
+  rt.appendTaskState(root, c, taskId, 'Step 2 complete: tests written')
+
+  const content = fs.readFileSync(path.join(root, workingMemoryPath), 'utf8')
+  assert.match(content, /Step 1 complete/)
+  assert.match(content, /Step 2 complete/)
+  // Both entries should be separated by timestamped headers
+  assert.ok((content.match(/## \d{4}/g) || []).length >= 2)
+})
+
+test('appendTaskState throws when task is not active', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const { taskId } = rt.startTask(root, c, { project: 'p1' })
+  rt.abandonTask(root, c, taskId, 'test abandonment')
+
+  assert.throws(
+    () => rt.appendTaskState(root, c, taskId, 'should not land'),
+    /not active/,
+  )
+})
+
+test('abandonTask marks working-memory as abandoned and clears active-task pointer', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const { taskId, workingMemoryPath, activeTaskPath } = rt.startTask(root, c, { project: 'p1' })
+  const result = rt.abandonTask(root, c, taskId, 'scope changed')
+
+  assert.equal(result.abandoned, true)
+
+  const wm = fs.readFileSync(path.join(root, workingMemoryPath), 'utf8')
+  assert.match(wm, /status: abandoned/)
+  assert.match(wm, /abandon_reason: scope changed/)
+
+  const at = fs.readFileSync(path.join(root, activeTaskPath), 'utf8')
+  assert.match(at, /status: cleared/)
+
+  // getActiveTask should return null after abandonment
+  assert.equal(rt.getActiveTask(root, c), null)
+})
+
+test('dryRunCloseTask returns write plan without executing anything', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+
+  const dry = rt.dryRunCloseTask(root, c, {
+    project: 'p1',
+    taskLogEntry: 'completed feature',
+    discoveries: [{ body: 'found a bug' }],
+  })
+
+  assert.equal(dry.wouldSucceed, true)
+  assert.ok(dry.planned.length >= 2)
+  assert.ok(dry.summary.bus_publishes >= 1)
+  assert.ok(dry.summary.file_writes >= 1)
+
+  // Nothing should actually be written
+  const logPath = path.join(root, 'wiki/agents/workers/w1/task-log.md')
+  const logExists = fs.existsSync(logPath)
+  if (logExists) {
+    const content = fs.readFileSync(logPath, 'utf8')
+    assert.ok(!content.includes('completed feature'), 'dry run must not write to disk')
+  }
+})
+
+test('dryRunCloseTask reports rejected ops when write would be forbidden', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+
+  const dry = rt.dryRunCloseTask(root, c, {
+    project: 'p1',
+    rewrites: [{ type: '../../../leads/l1/evil', project: 'p1', body: 'evil rewrite' }],
+  })
+
+  assert.equal(dry.wouldSucceed, false)
+  assert.ok(dry.rejected.length > 0)
+})
+
+test('closeTask atomically seals active task working-memory on success', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const { taskId, workingMemoryPath, activeTaskPath } = rt.startTask(root, c, { project: 'p1', description: 'Feature work' })
+
+  const result = rt.closeTask(root, c, {
+    project: 'p1',
+    taskLogEntry: 'all done',
+  })
+
+  assert.equal(result.ok, true)
+
+  // Working-memory should be sealed as completed
+  const wm = fs.readFileSync(path.join(root, workingMemoryPath), 'utf8')
+  assert.match(wm, /status: completed/)
+
+  // active-task.md pointer should be cleared
+  const at = fs.readFileSync(path.join(root, activeTaskPath), 'utf8')
+  assert.match(at, /status: cleared/)
+
+  // getActiveTask should return null
+  assert.equal(rt.getActiveTask(root, c), null)
+})
+
+test('closeTask rejects all writes including bus items when any op is forbidden', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  // w1 is NOT allowed to write to escalation (only discovery)
+  c.allowed_writes = ['wiki/agents/workers/w1/**', 'wiki/system/bus/discovery/**']
+  c.forbidden_paths = ['wiki/agents/orchestrators/**', 'wiki/agents/leads/**', 'wiki/system/bus/escalation/**']
+
+  const result = rt.closeTask(root, c, {
+    project: 'p1',
+    taskLogEntry: 'should not land',
+    escalations: [{ body: 'this escalation is forbidden' }],
+  })
+
+  assert.equal(result.ok, false)
+  assert.ok(result.rejected.length > 0)
+
+  // task-log must NOT be written (full atomic rollback)
+  const logPath = path.join(root, 'wiki/agents/workers/w1/task-log.md')
+  const log = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : ''
+  assert.ok(!log.includes('should not land'), 'task-log must not be written when close is rejected')
+})
+
+// ─── 13. Context loader — Phase 2 upgrades ────────────────────────────────────
+
+test('context loader with include_task_local loads active working-memory first', () => {
+  const root = makeFixture()
+  // Write a contract with include_task_local: true
+  fs.writeFileSync(path.join(root, 'config/agents/w1.yaml'), `
+agent_id: w1
+tier: worker
+domain: eng
+context_policy:
+  budget_bytes: 20480
+  include_task_local: true
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+    - class: hot
+      scope: self
+      priority: 20
+allowed_writes:
+  - wiki/agents/workers/w1/**
+  - wiki/system/bus/discovery/**
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/leads/**
+`.trim())
+  const c = rt.loadContract(root, 'w1')
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const { workingMemoryPath } = rt.startTask(root, c, { project: 'p1', description: 'active task' })
+
+  const bundle = rt.loadAgentContext(root, c, { project: 'p1' })
+  const paths = bundle.files.map(f => f.path)
+
+  assert.ok(paths.includes(workingMemoryPath), 'working-memory should be included')
+  // working-memory should be first
+  assert.equal(paths[0], workingMemoryPath, 'working-memory should be the first file loaded')
+  assert.ok(bundle.trace.include_task_local === true)
+})
+
+test('context loader required rule adds warning when file is missing', () => {
+  const root = makeFixture()
+  fs.writeFileSync(path.join(root, 'config/agents/w1.yaml'), `
+agent_id: w1
+tier: worker
+domain: eng
+context_policy:
+  budget_bytes: 20480
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+      required: true
+    - path: wiki/projects/p1/does-not-exist.md
+      priority: 30
+      required: true
+allowed_writes:
+  - wiki/agents/workers/w1/**
+  - wiki/system/bus/discovery/**
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/leads/**
+`.trim())
+  const c = rt.loadContract(root, 'w1')
+  const bundle = rt.loadAgentContext(root, c, { project: 'p1' })
+
+  // Should still succeed (required is a warning, not a crash)
+  assert.ok(Array.isArray(bundle.files))
+  // Warning should appear in trace
+  assert.ok(bundle.trace.warnings && bundle.trace.warnings.length >= 1, 'should have at least one warning for missing required file')
+})
+
+test('context loader freshness_days excludes stale files', () => {
+  const root = makeFixture()
+  // Make hot.md stale by backdating its frontmatter
+  const hotPath = path.join(root, 'wiki/agents/workers/w1/hot.md')
+  const oldDate = new Date(Date.now() - 10 * 86400000).toISOString().slice(0, 10) // 10 days ago
+  fs.writeFileSync(hotPath, `---\nmemory_class: hot\nupdated: ${oldDate}\n---\nhot stuff\n`)
+
+  fs.writeFileSync(path.join(root, 'config/agents/w1.yaml'), `
+agent_id: w1
+tier: worker
+domain: eng
+context_policy:
+  budget_bytes: 20480
+  include:
+    - class: profile
+      scope: self
+      priority: 10
+    - class: hot
+      scope: self
+      priority: 20
+      freshness_days: 7
+allowed_writes:
+  - wiki/agents/workers/w1/**
+  - wiki/system/bus/discovery/**
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/leads/**
+`.trim())
+  const c = rt.loadContract(root, 'w1')
+  const bundle = rt.loadAgentContext(root, c, { project: 'p1' })
+  const paths = bundle.files.map(f => f.path)
+
+  assert.ok(!paths.includes('wiki/agents/workers/w1/hot.md'), 'stale hot.md should be excluded')
+  const excluded = bundle.trace.excluded.find(e => e.path === 'wiki/agents/workers/w1/hot.md')
+  assert.ok(excluded, 'stale file should appear in excluded list')
+  assert.match(excluded.reason, /stale/)
+})
+
+test('context loader max_items caps files resolved from a single rule', () => {
+  const root = makeFixture()
+  // Add a few discovery bus items
+  for (let i = 0; i < 5; i++) {
+    rt.publishBusItem(root, { channel: 'discovery', from: 'w1', body: `item ${i}` })
+  }
+  fs.writeFileSync(path.join(root, 'config/agents/w1.yaml'), `
+agent_id: w1
+tier: worker
+domain: eng
+context_policy:
+  budget_bytes: 200000
+  include:
+    - class: bus
+      scope: self
+      priority: 10
+      max_items: 2
+allowed_writes:
+  - wiki/agents/workers/w1/**
+  - wiki/system/bus/discovery/**
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/leads/**
+`.trim())
+  const c = rt.loadContract(root, 'w1')
+  // Give the agent a bus class path match (bus items are in wiki/system/bus/discovery)
+  // max_items: 2 should cap the class=bus rule to 2 items
+  // Note: classFor returns 'bus' for wiki/system/bus/** paths
+  // but the include rule here resolves files under the agent's own scope
+  // Let's test via a glob path rule with max_items instead
+  fs.writeFileSync(path.join(root, 'config/agents/w1.yaml'), `
+agent_id: w1
+tier: worker
+domain: eng
+context_policy:
+  budget_bytes: 200000
+  include:
+    - path: wiki/system/bus/discovery/**
+      priority: 10
+      max_items: 2
+allowed_writes:
+  - wiki/agents/workers/w1/**
+  - wiki/system/bus/discovery/**
+forbidden_paths:
+  - wiki/agents/orchestrators/**
+  - wiki/agents/leads/**
+`.trim())
+  const c2 = rt.loadContract(root, 'w1')
+  const bundle = rt.loadAgentContext(root, c2, {})
+  assert.ok(bundle.files.length <= 2, `max_items: 2 should cap bus files, got ${bundle.files.length}`)
+})

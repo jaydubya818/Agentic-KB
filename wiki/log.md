@@ -4,6 +4,10 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-04-10
+
+[2026-04-10] IMPLEMENTATION | Operational Runtime Memory Layer — Phases 1–3 | New module `lib/agent-runtime/task-lifecycle.mjs` (startTask, appendTaskState, getActiveTask, abandonTask, planActiveTaskClose). Refactored `lib/agent-runtime/writeback.mjs`: bus publications now planned and guarded upfront alongside file writes (Phase 3 atomic fix); active task sealed post-commit on successful closeTask; new `dryRunCloseTask` API. Refactored `lib/agent-runtime/context-loader.mjs`: added `include_task_local` flag, `required`/`freshness_days`/`max_items` per-rule fields, canonical load order (task-local → profile → hot → project → subscriptions → learned), namespace RBAC guard. Updated `lib/agent-runtime/memory-classes.mjs` classFor to handle working-memory/ and active-task.md paths. Exported all new APIs from index.mjs. Added 14 new tests covering the full task lifecycle (start, append, abandon, dry-run, atomic rollback, context loader upgrades). 40/40 tests passing. Phases 4–5 (promotion governance, CLI/MCP surface) are follow-on. Updated progress.md.
+
 ## 2026-04-09
 
 [2026-04-09] INGEST | rowboatlabs/rowboat GitHub + Karpathy endorsement post | Updated `wiki/frameworks/framework-rowboat.md` — corrected vendor (Unknown → Rowboat Labs), license (proprietary → open-source), github (empty → confirmed URL), language (any → TypeScript). Added confirmed architecture (Qdrant, model-agnostic, MCP layer, live notes). Added "Flat Wiki vs Knowledge Graph" comparison table capturing the core design distinction: explicit typed relationships vs prose links, decision/commitment tracking as first-class entities, mutable live notes vs immutable raw/. Removed [INFERRED] labels on now-confirmed details. Updated index (last_checked: 2026-04-04 → 2026-04-09). No new pages needed — existing page upgraded in place.
