@@ -19,6 +19,14 @@
         "priority_order": { "type": "array", "items": { "type": "string" } }
       }
     },
+    "close_policy": {
+      "type": "object",
+      "properties": {
+        "required_fields": { "type": "array", "items": { "type": "string" } },
+        "at_least_one_of": { "type": "array", "items": { "type": "string" } },
+        "require_active_task": { "type": "boolean" }
+      }
+    },
     "allowed_writes": { "type": "array", "items": { "type": "string" } },
     "forbidden_paths": { "type": "array", "items": { "type": "string" } },
     "task_end_actions": { "type": "array", "items": { "type": "string" } },

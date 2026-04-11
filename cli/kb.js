@@ -65,6 +65,18 @@ Bus & Rewrite commands:
   kb canonical list <name>                   List canonical docs for a repo
   kb canonical show <name> <doc>             Show a canonical doc (e.g., PRD, TECH_STACK)
 
+Agent runtime commands:
+  kb agent context <agent-id> [--project <p>]
+  kb agent start-task <agent-id> [--project <p>] [--description <d>] [--task-id <tid>]
+  kb agent active-task <agent-id>
+  kb agent status <agent-id> [--last <n>]
+  kb agent append-state <agent-id> <task-id> "<entry>"
+  kb agent verify-state <agent-id>
+  kb agent repair-state <agent-id>
+  kb agent abandon-task <agent-id> <task-id> [--reason <r>]
+  kb agent close-task <agent-id> --payload <file.json> [--dry-run]
+  kb agent trace <agent-id> [--last <n>]
+
 Examples:
   kb search "multi-agent orchestration"
   kb query "What is the best pattern for supervisor-worker agents?"
@@ -749,6 +761,39 @@ async function agentCmd(sub, rest) {
     return
   }
 
+  if (sub === 'status') {
+    const id = rest[0]
+    const limitIdx = rest.indexOf('--last')
+    const traceLimit = limitIdx >= 0 ? parseInt(rest[limitIdx + 1], 10) : 5
+    if (!id) throw new Error('Usage: kb agent status <agent-id> [--last <n>]')
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    const status = rt.getAgentStatus(AGENT_KB_ROOT, c, { traceLimit })
+    console.log(`\n=== Agent Status: ${id} (${status.tier}) ===`)
+    console.log(`Domain: ${status.domain || '—'}`)
+    console.log(`Active task: ${status.active_task ? status.active_task.taskId : 'none'}`)
+    if (status.active_task) {
+      console.log(`  project: ${status.active_task.project || '—'}`)
+      console.log(`  state:   ${status.active_task.workingMemoryPath}`)
+    }
+    console.log(`Close policy:`)
+    console.log(`  required_fields: ${(status.close_policy.required_fields || []).join(', ') || 'none'}`)
+    console.log(`  at_least_one_of: ${(status.close_policy.at_least_one_of || []).join(', ') || 'none'}`)
+    console.log(`  require_active_task: ${status.close_policy.require_active_task === true}`)
+    console.log(`Verification: ${status.verification.ok ? 'OK' : 'ISSUES'}`)
+    if (status.verification.issues.length) {
+      for (const issue of status.verification.issues) {
+        console.log(`  [${issue.severity}] ${issue.code}${issue.repairable ? ' (repairable)' : ''}`)
+      }
+    }
+    if (status.recent_traces.length) {
+      console.log(`Recent traces:`)
+      for (const trace of status.recent_traces) {
+        console.log(`  [${trace.ts}] ${trace.type}`)
+      }
+    }
+    return
+  }
+
   // ── append-state ───────────────────────────────────────────────────────────
   if (sub === 'append-state') {
     const id = rest[0]
@@ -771,6 +816,26 @@ async function agentCmd(sub, rest) {
     const c = rt.loadContract(AGENT_KB_ROOT, id)
     const result = rt.abandonTask(AGENT_KB_ROOT, c, taskId, reason)
     console.log(`✅ Task abandoned: ${result.workingMemoryPath}`)
+    return
+  }
+
+  if (sub === 'verify-state') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent verify-state <agent-id>')
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    const verification = rt.verifyTaskState(AGENT_KB_ROOT, c)
+    console.log(JSON.stringify(verification, null, 2))
+    if (!verification.ok) process.exitCode = 2
+    return
+  }
+
+  if (sub === 'repair-state') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent repair-state <agent-id>')
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    const result = rt.repairTaskState(AGENT_KB_ROOT, c)
+    console.log(JSON.stringify(result, null, 2))
+    if (!result.ok) process.exitCode = 2
     return
   }
 
@@ -803,8 +868,12 @@ async function agentCmd(sub, rest) {
     }
     const result = rt.closeTask(AGENT_KB_ROOT, c, payload)
     if (!result.ok) {
-      console.error(`❌ Close rejected (${result.rejected.length} rejections):`)
-      for (const r of result.rejected) console.error(`  ${r.path} — ${r.reason}`)
+      const rejected = result.rejected || result.trace?.writes_rejected || []
+      console.error(`❌ Close rejected (${rejected.length} rejections):`)
+      for (const r of rejected) console.error(`  ${r.path || 'policy'} — ${r.reason}`)
+      if (result.trace?.rollback) {
+        console.error(`  rollback: ${result.trace.rollback.rolledBack} actions, ${result.trace.rollback.errors.length} errors`)
+      }
       process.exit(2)
     }
     console.log(`✅ Task closed.`)

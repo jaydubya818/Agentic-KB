@@ -386,6 +386,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         type: 'object',
         properties: {
           repo: { type: 'string' },
+          agent_id: { type: 'string', description: 'Optional agent id recorded as the writer' },
           entry: { type: 'string' },
         },
         required: ['repo', 'entry'],
@@ -399,6 +400,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         properties: {
           repo: { type: 'string' },
           agent_id: { type: 'string' },
+          task_id: { type: 'string', description: 'Optional task id; generated if omitted' },
           entry: { type: 'string' },
         },
         required: ['repo', 'agent_id', 'entry'],
@@ -494,6 +496,40 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'agent_active_task',
       description: 'Return the current active task metadata for an agent, or null if no task is active.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
+      name: 'agent_status',
+      description: 'Return agent lifecycle status: active task, verification issues, close policy, and recent runtime traces.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+          limit: { type: 'number', description: 'Recent trace count (default 5)' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
+      name: 'agent_verify_state',
+      description: 'Verify task lifecycle consistency for an agent. Detects broken active-task pointers and orphan active working-memory files.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          agent_id: { type: 'string' },
+        },
+        required: ['agent_id'],
+      },
+    },
+    {
+      name: 'agent_repair_state',
+      description: 'Attempt safe repair of an agent task lifecycle state. Rebuilds or clears the active-task pointer when it can do so safely.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -845,16 +881,17 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     if (name === 'load_repo_context') {
       const repo = String(args.repo)
-      const agentId = args.agent_id ? String(args.agent_id) : null
-      const budget = Number(args.budget_bytes || 50000)
-      const result = repoRuntime.loadRepoContext(KB_ROOT, repo, { agentId, budgetBytes: budget })
+      const result = repoRuntime.loadRepoContext(KB_ROOT, repo, {
+        agent_id: args.agent_id ? String(args.agent_id) : null,
+        budget_bytes: Number(args.budget_bytes || 50000),
+      })
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
     }
 
     if (name === 'append_repo_progress') {
       const repo = String(args.repo)
       const entry = String(args.entry)
-      const result = repoRuntime.appendRepoProgress(KB_ROOT, repo, entry)
+      const result = repoRuntime.appendRepoProgress(KB_ROOT, repo, entry, args.agent_id ? String(args.agent_id) : 'mcp')
       return { content: [{ type: 'text', text: JSON.stringify({ written: result }, null, 2) }] }
     }
 
@@ -862,7 +899,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const repo = String(args.repo)
       const agentId = String(args.agent_id)
       const entry = String(args.entry)
-      const result = repoRuntime.writeRepoTaskLog(KB_ROOT, repo, agentId, entry)
+      const taskId = args.task_id ? String(args.task_id) : `mcp-${Date.now()}`
+      const result = repoRuntime.writeRepoTaskLog(KB_ROOT, repo, taskId, agentId, entry)
       return { content: [{ type: 'text', text: JSON.stringify({ written: result }, null, 2) }] }
     }
 
@@ -936,6 +974,27 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const active = agentRuntime.getActiveTask(KB_ROOT, contract)
       if (!active) return { content: [{ type: 'text', text: 'No active task.' }] }
       return { content: [{ type: 'text', text: JSON.stringify(active, null, 2) }] }
+    }
+
+    if (name === 'agent_status') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const status = agentRuntime.getAgentStatus(KB_ROOT, contract, { traceLimit: Number(args.limit || 5) })
+      return { content: [{ type: 'text', text: JSON.stringify(status, null, 2) }] }
+    }
+
+    if (name === 'agent_verify_state') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const verification = agentRuntime.verifyTaskState(KB_ROOT, contract)
+      return { content: [{ type: 'text', text: JSON.stringify(verification, null, 2) }], isError: !verification.ok }
+    }
+
+    if (name === 'agent_repair_state') {
+      const contract = agentRuntime.loadContract(KB_ROOT, String(args.agent_id))
+      if (!contract) return { content: [{ type: 'text', text: `Agent not found: ${args.agent_id}` }], isError: true }
+      const repair = agentRuntime.repairTaskState(KB_ROOT, contract)
+      return { content: [{ type: 'text', text: JSON.stringify(repair, null, 2) }], isError: !repair.ok }
     }
 
     if (name === 'agent_append_task_state') {

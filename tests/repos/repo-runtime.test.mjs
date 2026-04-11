@@ -15,6 +15,7 @@ function makeFixture() {
   // Create minimal directory structure
   const dirs = [
     'config/repos',
+    'config/agents',
     'wiki/repos/test-repo/canonical',
     'wiki/repos/test-repo/repo-docs',
     'wiki/repos/test-repo/agent-memory/worker/w1',
@@ -25,6 +26,18 @@ function makeFixture() {
     'wiki/repos/test-repo/bus/escalation',
   ]
   for (const d of dirs) fs.mkdirSync(path.join(root, d), { recursive: true })
+
+  fs.writeFileSync(path.join(root, 'config/agents/w1.yaml'), `
+agent_id: w1
+tier: worker
+domain: eng
+context_policy:
+  budget_bytes: 20480
+  include: []
+allowed_writes:
+  - wiki/repos/test-repo/**
+forbidden_paths: []
+`.trim())
 
   return root
 }
@@ -300,4 +313,24 @@ test('loadRepoContext does not throw on missing directories', () => {
   assert.doesNotThrow(() => {
     repoRt.loadRepoContext(root, 'nonexistent-repo', mockContract)
   })
+})
+
+test('loadRepoContext accepts MCP-style opts and includes targeted repo bus items', () => {
+  const root = makeFixture()
+  fs.writeFileSync(path.join(root, 'wiki/repos/test-repo/canonical/PRD.md'), '---\ntitle: PRD\n---\nCanonical\n')
+  fs.writeFileSync(path.join(root, 'wiki/repos/test-repo/progress.md'), '---\nmemory_class: working\n---\nProgress\n')
+  repoRt.publishRepoBusItem(root, 'test-repo', {
+    channel: 'escalation',
+    from: 'l1',
+    to: 'w1',
+    body: 'Handle this issue',
+  })
+
+  const result = repoRt.loadRepoContext(root, 'test-repo', { agent_id: 'w1', budget_bytes: 50000 })
+  const paths = result.files.map(file => file.path)
+
+  assert.ok(paths.includes('wiki/repos/test-repo/canonical/PRD.md'))
+  assert.ok(paths.includes('wiki/repos/test-repo/progress.md'))
+  assert.ok(paths.some(p => p.includes('/bus/escalation/') && p.endsWith('.md')))
+  assert.equal(result.trace.budget_bytes, 50000)
 })

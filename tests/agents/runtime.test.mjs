@@ -589,6 +589,25 @@ test('dryRunCloseTask reports rejected ops when write would be forbidden', () =>
   assert.ok(dry.rejected.length > 0)
 })
 
+test('closeTask enforces close_policy required_fields and at_least_one_of', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  c.close_policy = {
+    required_fields: ['taskLogEntry'],
+    at_least_one_of: ['gotcha', 'discoveries', 'escalations', 'rewrites'],
+    require_active_task: false,
+  }
+
+  const result = rt.closeTask(root, c, { project: 'p1' })
+  assert.equal(result.ok, false)
+  assert.match(result.error, /close-policy/)
+  assert.ok(result.trace.close_policy_errors.length >= 2)
+
+  const dry = rt.dryRunCloseTask(root, c, { project: 'p1' })
+  assert.equal(dry.wouldSucceed, false)
+  assert.ok(dry.close_policy_errors.length >= 2)
+})
+
 test('closeTask atomically seals active task working-memory on success', () => {
   const root = makeFixture()
   const c = rt.loadContract(root, 'w1')
@@ -1001,6 +1020,23 @@ test('archiveCompletedTaskMemory returns empty when working-memory dir does not 
   const result = rt.archiveCompletedTaskMemory(root, 'w1', 'worker', { olderThanDays: 7 })
   assert.deepEqual(result.archived, [])
   assert.equal(result.skipped, 0)
+})
+
+test('verifyTaskState detects orphan active working memory and repairTaskState rebuilds pointer', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  c.allowed_writes = [...c.allowed_writes, 'wiki/agents/workers/w1/working-memory/**', 'wiki/agents/workers/w1/active-task.md']
+
+  const started = rt.startTask(root, c, { project: 'p1', description: 'repair me' })
+  fs.unlinkSync(path.join(root, started.activeTaskPath))
+
+  const verification = rt.verifyTaskState(root, c)
+  assert.equal(verification.ok, false)
+  assert.ok(verification.issues.some(issue => issue.code === 'orphan-active-working-memory'))
+
+  const repair = rt.repairTaskState(root, c)
+  assert.equal(repair.ok, true)
+  assert.equal(rt.getActiveTask(root, c)?.taskId, started.taskId)
 })
 
 // ═══════════════════════════════════════════════════════════════════════════════

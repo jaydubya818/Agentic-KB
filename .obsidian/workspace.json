@@ -186,6 +186,8 @@
   },
   "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "wiki/mocs",
+    "scripts/generate-stats.mjs",
     "lib/agent-runtime/correction-capture.mjs",
     "lib/agent-runtime/promotion-scorer.mjs",
     "lib/agent-runtime/source-trust.mjs",
@@ -201,8 +203,6 @@
     "wiki/agents/leads/sofie/weekly-digest.md",
     "raw/qa/sofie-session-2026-04-10-multi-agent-patterns-q-a.md",
     "scripts/sofie-kb-digest.mjs",
-    "scripts/sofie-watch-obsidian.mjs",
-    "scripts/sofie-ingest-session.mjs",
     "wiki/agents/leads/sofie/task-log.md",
     "wiki/agents/leads/sofie/hot.md",
     "wiki/agents/leads/sofie/profile.md",

@@ -49,5 +49,9 @@ task_end_actions:
   - append_decisions
   - publish_standards
   - acknowledge_escalations
+close_policy:
+  required_fields: [taskLogEntry]
+  at_least_one_of: []
+  require_active_task: true
 promotion_targets: []
 escalation_targets: []

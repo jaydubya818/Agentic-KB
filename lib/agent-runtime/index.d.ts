@@ -12,6 +12,8 @@ export function loadAgentContext(
 ): { files: any[]; trace: any }
 
 export function closeTask(kbRoot: string, contract: any, payload: any): any
+export function dryRunCloseTask(kbRoot: string, contract: any, payload: any): any
+export function validateCloseTaskPayload(kbRoot: string, contract: any, payload: any): any
 
 export function publishBusItem(kbRoot: string, opts: any): { id: string; path: string }
 export function readBusItem(kbRoot: string, channel: string, id: string): any
@@ -20,6 +22,13 @@ export function transitionBusItem(kbRoot: string, channel: string, id: string, t
 
 export function promoteLearning(kbRoot: string, opts: any): { source: string; target: string; id: string }
 export function mergeRewrite(kbRoot: string, opts: any): any
+export function startTask(kbRoot: string, contract: any, opts?: any): any
+export function appendTaskState(kbRoot: string, contract: any, taskId: string, entry: string): any
+export function getActiveTask(kbRoot: string, contract: any): any
+export function abandonTask(kbRoot: string, contract: any, taskId: string, reason?: string): any
+export function verifyTaskState(kbRoot: string, contract: any): any
+export function repairTaskState(kbRoot: string, contract: any): any
+export function getAgentStatus(kbRoot: string, contract: any, opts?: any): any
 
 export function compactHotMemory(kbRoot: string, agentId: string, tier: string): any
 export function runBusTTL(kbRoot: string, opts?: any): any

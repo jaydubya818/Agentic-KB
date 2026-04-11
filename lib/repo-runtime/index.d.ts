@@ -26,15 +26,15 @@ export function isImportedContent(content: string): boolean
 
 export function syncRepo(kbRoot: string, name: string, opts?: any): Promise<any>
 
-export function appendRepoProgress(kbRoot: string, repo: string, entry: string): void
-export function writeRepoTaskLog(kbRoot: string, repo: string, agentId: string, entry: string): void
+export function appendRepoProgress(kbRoot: string, repo: string, entry: string, agentId?: string): void
+export function writeRepoTaskLog(kbRoot: string, repo: string, taskId: string, agentId: string, entry: string): void
 
 export function publishRepoBusItem(kbRoot: string, repo: string, opts: any): { id: string; path: string }
 export function readRepoBusItem(kbRoot: string, repo: string, channel: string, id: string): any
 export function listRepoBusItems(kbRoot: string, repo: string, channel: string, opts?: any): any[]
 export function transitionRepoBusItem(kbRoot: string, repo: string, channel: string, id: string, newStatus: string): any
 
-export function loadRepoContext(kbRoot: string, repo: string, opts?: any): { files: any[]; totalBytes: number }
+export function loadRepoContext(kbRoot: string, repo: string, contractOrOpts?: any, vars?: any): { files: any[]; trace: any }
 
 export function generateCanonicalTemplate(docType: string, repo: string, vars?: any): string
 export function generateHomePage(repo: string, vars?: any): string
