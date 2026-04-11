@@ -162,6 +162,43 @@ test('closeTask rejects all writes if any is forbidden', () => {
   assert.ok(!log.includes('should not land'))
 })
 
+test('closeTask rolls back earlier writes when a later commit fails', () => {
+  const root = makeFixture()
+  const c = rt.loadContract(root, 'w1')
+  const originalWriteFileSync = fs.writeFileSync
+
+  fs.writeFileSync = function patchedWriteFileSync(target, ...args) {
+    if (String(target).includes('/wiki/system/bus/discovery/')) {
+      throw new Error('simulated bus write failure')
+    }
+    return originalWriteFileSync.call(this, target, ...args)
+  }
+
+  try {
+    const result = rt.closeTask(root, c, {
+      project: 'p1',
+      taskLogEntry: 'must roll back',
+      hotUpdate: 'transient hot update',
+      discoveries: [{ body: 'will fail to publish' }],
+    })
+
+    assert.equal(result.ok, false)
+    assert.match(result.error, /simulated bus write failure/)
+    assert.ok(result.trace.rollback)
+
+    const logPath = path.join(root, 'wiki/agents/workers/w1/task-log.md')
+    const hotPath = path.join(root, 'wiki/agents/workers/w1/hot.md')
+    const log = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : ''
+    const hot = fs.readFileSync(hotPath, 'utf8')
+
+    assert.ok(!log.includes('must roll back'), 'task-log append should be rolled back')
+    assert.ok(!hot.includes('transient hot update'), 'hot update should be rolled back')
+    assert.equal(rt.listBusItems(root, 'discovery').length, 0, 'bus item should not survive rollback')
+  } finally {
+    fs.writeFileSync = originalWriteFileSync
+  }
+})
+
 // ─── 5. Bus + promotion ───────────────────────────────────────────────────
 
 test('bus publish + list + read', () => {
@@ -178,6 +215,17 @@ test('bus publish + list + read', () => {
   assert.equal(items[0].meta.id, id)
   const read = rt.readBusItem(root, 'discovery', id)
   assert.match(read.body, /hello bus/)
+})
+
+test('frontmatter round-trips inline arrays of objects used by bus status history', () => {
+  const raw = rt.serializeFrontmatter({
+    status_history: [{ from: 'draft', to: 'open', actor: 'w1', at: '2026-04-10T00:00:00Z' }],
+  }, 'body')
+
+  const parsed = rt.parseFrontmatter(raw)
+  assert.deepEqual(parsed.data.status_history, [
+    { from: 'draft', to: 'open', actor: 'w1', at: '2026-04-10T00:00:00Z' },
+  ])
 })
 
 test('bus state machine rejects illegal transitions', () => {
@@ -1248,6 +1296,7 @@ test('startTask with structured schema creates v2-structured working memory', ()
 
 test('promoteDiscovery routes to review when scorer blocks with contract', () => {
   const root = makeFixture()
+  addLeadContract(root)
   fs.mkdirSync(path.join(root, 'wiki/system/bus/review'), { recursive: true })
   fs.mkdirSync(path.join(root, 'wiki'), { recursive: true })
   fs.writeFileSync(path.join(root, 'wiki/hot.md'), '---\n---\n')
