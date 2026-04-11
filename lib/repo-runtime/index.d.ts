@@ -8,14 +8,14 @@ export function upsertRepo(kbRoot: string, record: any): any
 export function listRepos(kbRoot: string, opts?: Record<string, any>): any[]
 export function markSynced(kbRoot: string, name: string, sha?: string): any
 
-export function repoWikiRoot(kbRoot: string, repo: string): string
-export function repoDocsRoot(kbRoot: string, repo: string): string
-export function repoCanonicalRoot(kbRoot: string, repo: string): string
-export function repoAgentMemoryRoot(kbRoot: string, repo: string): string
-export function repoBusRoot(kbRoot: string, repo: string): string
-export function repoTasksRoot(kbRoot: string, repo: string): string
-export function repoRewritesRoot(kbRoot: string, repo: string): string
-export function importedDocPath(kbRoot: string, repo: string, sourceRelPath: string): string
+export function repoWikiRoot(repo: string): string
+export function repoDocsRoot(repo: string): string
+export function repoCanonicalRoot(repo: string): string
+export function repoAgentMemoryRoot(repo: string, tier: string, agentId: string): string
+export function repoBusRoot(repo: string, channel: string): string
+export function repoTasksRoot(repo: string): string
+export function repoRewritesRoot(repo: string, type: string): string
+export function importedDocPath(repo: string, sourceRelPath: string): string
 export function isImportedDoc(relPath: string): boolean
 export function isOperationalDoc(relPath: string): boolean
 export function assertNotImportedDoc(relPath: string): void

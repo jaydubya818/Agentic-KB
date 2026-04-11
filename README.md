@@ -8,11 +8,25 @@ Raw sources are **compiled** by Claude into a persistent, cross-referenced wiki.
 
 ---
 
-## What's New — April 10, 2026
+## What's New — April 10, 2026 (Latest)
+
+Task lifecycle hardening + repo runtime parity + codebase quality pass — **112/112 tests passing** (78 agent + 34 repo):
+
+- 🔍 **Task state verification & repair** — `verifyTaskState(kbRoot, contract)` detects broken active-task pointers, orphan working-memory files, task_id mismatches, and multiple simultaneous active files. `repairTaskState(kbRoot, contract)` safely rebuilds the pointer when only one active file exists. `getAgentStatus(kbRoot, contract)` returns active task + verification issues + close policy + recent runtime traces in a single call.
+- 🛠️ **3 new CLI subcommands** — `kb agent status <id>` (full lifecycle snapshot), `kb agent verify-state <id>` (consistency check with issue codes and severity), `kb agent repair-state <id>` (safe pointer repair with action log).
+- 📡 **3 new MCP tools** — `agent_status` (agent snapshot for dashboard integration), `agent_verify_state` (pre-task check for orchestrators), `agent_repair_state` (recovery tool for broken task state).
+- 🔄 **Repo close-task parity** — `closeRepoTask` and `dryRunCloseRepoTask` in `lib/repo-runtime/writeback.mjs` now have full parity with agent close-task: payload validation against `close_policy`, atomic commit/rollback, bus publication as first-class write ops, and repo-scoped write guard via `assertRepoScopedWriteAllowed`. New MCP tools: `close_repo_task`, `dry_run_close_repo_task`.
+- 🔧 **Frontmatter round-trip fix** — `frontmatter.mjs` now correctly parses and re-serializes inline arrays of JSON objects (e.g. bus `status_history` fields). Previously a read/rewrite cycle would corrupt object arrays into quoted strings.
+- 🧹 **Path helper API cleanup** — `lib/repo-runtime/paths.mjs` had a misleading `kbRoot` first parameter on all functions that was silently ignored; `writeback.mjs` was passing `contract.agent_id` in that slot. Fixed: all path helpers now take `(repoName, ...)` only, callers updated, type declarations corrected.
+- 📋 **Close policy derivation** — `contracts.mjs` derives `close_policy` automatically from `task_end_actions` (e.g. `append_task_log` → `required_fields: [taskLogEntry]`). Explicit `close_policy` in YAML overrides the derived defaults.
+
+---
+
+### Previous: April 10, 2026
 
 Operational Runtime Memory Layer (all 5 phases) + Sofie AI Chief of Staff integration + GitHub repo sync:
 
-- 🧠 **Operational Runtime Memory Layer — 52/52 tests passing** — Full agent memory lifecycle now implemented across 5 phases. Agents have identity (YAML contracts), structured memory classes (profile/hot/working/learned/rewrite/bus), task lifecycle (startTask → appendState → closeTask with atomic commit), and governance-grade promotion. Built as zero-dependency Node.js ES modules in `lib/agent-runtime/`.
+- 🧠 **Operational Runtime Memory Layer — Phases 1–5** — Full agent memory lifecycle implemented. Agents have identity (YAML contracts), structured memory classes (profile/hot/working/learned/rewrite/bus), task lifecycle (startTask → appendState → closeTask with atomic commit), and governance-grade promotion. Built as zero-dependency Node.js ES modules in `lib/agent-runtime/`.
 - 🔐 **Phase 4: Promotion governance** — `promotion.mjs` enforces contract-driven tier validation (`TIER_RANK: worker=1 lead=2 orchestrator=3`) before any bus promotion. Duplicate-title detection with self-exclusion, target-path collision guard requiring explicit `supersedes`, `assertPromotable` state gate. `mergeRewrite` upgrades also validated with approver tier.
 - 📋 **Phase 5: CLI + MCP surface** — 5 new `kb agent` subcommands (`start-task`, `active-task`, `append-state`, `abandon-task`, `close-task --dry-run`). 5 new MCP tools (`agent_start_task`, `agent_active_task`, `agent_append_task_state`, `agent_abandon_task`, `agent_dry_run_close_task`). MCP `merge_rewrite` updated with governance params.
 - 🗂️ **Task retention** — `retention.mjs` implements `archiveCompletedTaskMemory` and `archiveAbandonedTaskMemory`. Task-local working memory is archived on close/abandon, preventing context bleed across sessions.
@@ -188,6 +202,26 @@ kb ingest-twitter <x.zip>    # parses Twitter/X archive → raw/twitter/
 
 # Check pending ingestion queue
 kb pending
+
+# ─── Agent lifecycle ──────────────────────────────────────────────────────────
+# Task management
+kb agent start-task <agent-id> [--project <name>] [--description <desc>]
+kb agent active-task <agent-id>          # show current active task
+kb agent append-state <agent-id> <task-id> "<entry>"
+
+# Diagnostics & repair (new)
+kb agent status <agent-id>               # full snapshot: task + issues + traces
+kb agent verify-state <agent-id>         # consistency check with issue codes
+kb agent repair-state <agent-id>         # safe pointer rebuild
+
+# Close a task (dry-run first!)
+kb agent close-task <agent-id> --dry-run --payload payload.json
+kb agent close-task <agent-id> --payload payload.json
+
+kb agent abandon-task <agent-id> <task-id> ["reason"]
+
+# ─── Repo runtime ─────────────────────────────────────────────────────────────
+kb repo close-task <name> <agent-id> --payload payload.json [--dry-run]
 ```
 
 ### Environment Variables
@@ -228,7 +262,7 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
 
 > **Note:** Restart Claude Desktop after changing this config for env vars to take effect.
 
-### Tools (20 total)
+### Tools (25 total)
 
 **Wiki tools (7):**
 
@@ -242,15 +276,21 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
 | `compile_wiki` | Run the Karpathy compile pipeline — batches new/changed raw docs to Claude and writes wiki pages |
 | `lint_wiki` | Health check — returns contradictions, orphans, stale pages, and knowledge gaps |
 
-**Agent runtime tools (13):**
+**Agent runtime tools (18):**
 
 | Tool | Description |
 |------|-------------|
 | `agent_start_task` | Start a new task for an agent — creates working-memory file and opens task-local context |
 | `agent_active_task` | Get the active task state for an agent |
+| `agent_status` | Full agent lifecycle snapshot: active task, verification issues, close policy, recent traces |
+| `agent_verify_state` | Verify task lifecycle consistency — detects broken pointers, orphan working-memory files |
+| `agent_repair_state` | Safely repair broken active-task pointer when repair is possible without data loss |
 | `agent_append_task_state` | Append a state snapshot to the active task's working memory |
 | `agent_abandon_task` | Abandon the active task — archives working memory, clears active pointer |
 | `agent_dry_run_close_task` | Dry-run close — returns the planned bus publications and file writes without committing |
+| `close_agent_task` | Commit a task close — writes bus publications, archives working memory, seals task |
+| `close_repo_task` | Atomic end-of-task writeback for a repo-scoped workflow (progress, hot, gotchas, bus, rewrites) |
+| `dry_run_close_repo_task` | Dry-run repo close — returns full write plan without executing |
 | `publish_bus_item` | Publish a discovery, escalation, or standards item to the bus |
 | `list_agent_bus_items` | List pending bus items filtered by channel and/or agent |
 | `list_repo_bus_items` | List pending bus items from a specific repo |
@@ -258,7 +298,6 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
 | `merge_rewrite` | Merge a rewrite artifact into a canonical wiki page (with supersedes guard) |
 | `agent_trace` | Trace the context load for an agent — shows which files were included and bytes used |
 | `load_agent_context` | Load the context bundle for an agent (respects RBAC, budget, priority) |
-| `close_agent_task` | Commit a task close — writes bus publications, archives working memory, seals task |
 
 > **Note on long-running tools:** `compile_wiki` is a synchronous wrapper around an SSE endpoint and can time out on large batches. For full recompiles, use the web UI's `CompilePanel` (streams via `EventSource`, no timeout) or `kb compile --mode full`.
 
@@ -277,7 +316,7 @@ query_wiki(question: "What frameworks do I prefer?", scope: "all", pin: "1124")
 
 ## Agent Runtime Memory Layer
 
-Added 2026-04-10. Zero-dependency Node.js ES modules in `lib/agent-runtime/`. 52/52 tests passing (`npm test`).
+Added 2026-04-10. Zero-dependency Node.js ES modules in `lib/agent-runtime/` and `lib/repo-runtime/`. **112/112 tests passing** (78 agent + 34 repo, `npm test`).
 
 The runtime gives every agent a structured memory lifecycle: identity → context load → task → promote → archive. Each phase is governed by the agent's YAML contract.
 
@@ -333,17 +372,41 @@ startTask(kbRoot, contract, {title, goal})
 appendTaskState(kbRoot, contract, {state})
   → appends timestamped snapshot to working memory
 
-dryRunCloseTask(kbRoot, contract)
+dryRunCloseTask(kbRoot, contract, payload)
   → returns planned bus pubs + file writes without committing
 
 closeTask(kbRoot, contract, {discoveries, standards, rewrite})
   → atomic: publishes bus items + archives working memory in one commit
   → seals active-task.md → closed
+  → rollback on any write failure: restores all previously committed files
 
 abandonTask(kbRoot, contract)
   → archives working memory to abandoned/
   → clears active-task.md
+
+verifyTaskState(kbRoot, contract)
+  → checks pointer consistency, orphan files, task_id mismatches
+  → returns { ok, issues[], repairable, active_task, working_memory_files }
+
+repairTaskState(kbRoot, contract)
+  → safely rebuilds active-task pointer if exactly one active working-memory file exists
+  → returns { ok, repaired, actions[], verification }
+
+getAgentStatus(kbRoot, contract, { traceLimit })
+  → combines active_task + verifyTaskState + recent runtime traces + close_policy
 ```
+
+**Issue codes from `verifyTaskState`:**
+
+| Code | Severity | Repairable |
+|------|----------|-----------|
+| `active-pointer-missing-task-id` | error | when 1 active file |
+| `active-pointer-missing-working-memory` | error | when 1 active file |
+| `active-pointer-target-missing` | error | yes |
+| `active-pointer-target-not-active` | error | yes |
+| `active-pointer-task-mismatch` | error | yes |
+| `orphan-active-working-memory` | warn | yes |
+| `multiple-active-working-files` | error | no (manual resolution required) |
 
 ### Promotion Governance
 

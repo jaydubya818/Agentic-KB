@@ -90,17 +90,17 @@ test('markSynced updates last_sync_at and sets status', () => {
 // ─── 2. Paths tests ──────────────────────────────────────────────────────
 
 test('repoWikiRoot returns correct path', () => {
-  const result = repoRt.repoWikiRoot('/kb', 'test-repo')
+  const result = repoRt.repoWikiRoot('test-repo')
   assert.equal(result, 'wiki/repos/test-repo')
 })
 
 test('repoDocsRoot returns correct path', () => {
-  const result = repoRt.repoDocsRoot('/kb', 'test-repo')
+  const result = repoRt.repoDocsRoot('test-repo')
   assert.equal(result, 'wiki/repos/test-repo/repo-docs')
 })
 
 test('importedDocPath maps source to repo-docs', () => {
-  const result = repoRt.importedDocPath('/kb', 'test-repo', 'src/index.ts')
+  const result = repoRt.importedDocPath('test-repo', 'src/index.ts')
   assert.match(result, /wiki\/repos\/test-repo\/repo-docs\/src/)
 })
 
