@@ -4,6 +4,7 @@
 export function loadContract(kbRoot: string, agentId: string): any
 export function listContracts(kbRoot: string): any[]
 export function validateContract(c: any): any
+export function normalizeClosePolicy(c: any): any
 
 export function loadAgentContext(
   kbRoot: string,

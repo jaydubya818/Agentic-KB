@@ -1,0 +1,68 @@
+---
+title: Evaluation MoC
+type: moc
+tags: [evaluation, agentic, benchmarks, moc]
+created: 2026-04-10
+updated: 2026-04-10
+---
+
+# Evaluation — Map of Content
+> Navigation hub for agent evaluation, benchmarking, self-critique, and judge patterns.
+
+---
+
+## Core Concepts
+
+- [[concepts/llm-as-judge]] — Using LLMs to evaluate other LLM outputs; criteria design, bias, calibration
+- [[concepts/trajectory-evaluation]] — Evaluating the full sequence of agent decisions, not just final output
+- [[concepts/self-critique]] — Agents reviewing and improving their own outputs; reflection loops
+- [[concepts/benchmark-design]] — Designing benchmarks for agentic tasks; task suites, success criteria, repeatability
+- [[concepts/agent-failure-modes]] — Failure taxonomy; useful as eval criteria scaffold
+- [[concepts/rag-systems]] — RAG eval metrics: recall@k, precision@k, MRR, nDCG, factuality, citation correctness
+
+---
+
+## Evaluations in This KB
+
+- [[evaluations/eval-memory-approaches]] — In-context vs file-wiki vs vector DB vs knowledge graph; file-wiki wins for Jay's use case
+- [[evaluations/eval-orchestration-frameworks]] — GSD vs LangGraph vs AutoGen vs CrewAI vs raw Claude Code; GSD first, raw Claude Code second
+
+---
+
+## Patterns
+
+- [[patterns/pattern-compounding-loop]] — Verified ingest (×1.25 boost) as a primitive eval signal; quality gate on promotion
+
+---
+
+## Frameworks
+
+- [[frameworks/framework-gsd]] — GSD verifier agent: four-level artifact check, stub detection, data-flow trace
+- [[frameworks/framework-claude-code]] — Claude Code: built-in test running, hook-based verification
+- [[frameworks/framework-langgraph]] — LangSmith evaluation integration for LangGraph agents
+
+---
+
+## Recipes
+
+- [[recipes/recipe-agent-evaluation]] — Build an LLM-as-judge evaluation harness for agents end-to-end
+
+---
+
+## System Policies (V2 — Promotion as Eval)
+
+The V2 runtime uses promotion scoring as an inline evaluation mechanism:
+
+- [[system/policies/promotion-rules]] — Scoring formula: evidence × confidence × freshness × trust × novelty × explicit_approval
+- [[system/policies/source-trust-policy]] — Trust scoring as a dimension of evaluation quality
+- [[system/policies/freshness-policy]] — Freshness as a quality signal for canonical knowledge
+- [[system/policies/contradiction-policy]] — Contradiction detection as an eval gate before promotion
+
+---
+
+## Key Summaries
+
+- [[summaries/siagian-agentic-engineer-roadmap-2026]] — Eval section: RAG metrics (recall@k, MRR, nDCG), agent task suites, error buckets, CI/CD blocking on metric regression
+
+- [[summaries/summary-gsd-verifier]] — GSD Verifier agent: four-level check, stub detection, re-verification protocol
+- [[summaries/summary-code-reviewer-agent]] — Code review as evaluation: severity levels, six dimensions, plan alignment

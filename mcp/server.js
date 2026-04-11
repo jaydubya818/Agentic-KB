@@ -407,6 +407,44 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
+      name: 'close_repo_task',
+      description: 'Transactional end-of-task writeback for a repo-scoped agent workflow. Appends progress, updates hot memory, writes gotchas, publishes discoveries/escalations, and creates rewrites atomically.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          agent_id: { type: 'string' },
+          project: { type: 'string' },
+          taskLogEntry: { type: 'string' },
+          hotUpdate: { type: 'string' },
+          gotcha: { type: 'string' },
+          discoveries: { type: 'array' },
+          escalations: { type: 'array' },
+          rewrites: { type: 'array' },
+        },
+        required: ['repo', 'agent_id'],
+      },
+    },
+    {
+      name: 'dry_run_close_repo_task',
+      description: 'Dry-run a repo close-task operation and return the full write plan without executing any writes.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          repo: { type: 'string' },
+          agent_id: { type: 'string' },
+          project: { type: 'string' },
+          taskLogEntry: { type: 'string' },
+          hotUpdate: { type: 'string' },
+          gotcha: { type: 'string' },
+          discoveries: { type: 'array' },
+          escalations: { type: 'array' },
+          rewrites: { type: 'array' },
+        },
+        required: ['repo', 'agent_id'],
+      },
+    },
+    {
       name: 'write_rewrite_artifact',
       description: 'Create a rewrite artifact in wiki/repos/<repo>/rewrites/<type>/.',
       inputSchema: {
@@ -902,6 +940,46 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const taskId = args.task_id ? String(args.task_id) : `mcp-${Date.now()}`
       const result = repoRuntime.writeRepoTaskLog(KB_ROOT, repo, taskId, agentId, entry)
       return { content: [{ type: 'text', text: JSON.stringify({ written: result }, null, 2) }] }
+    }
+
+    if (name === 'close_repo_task') {
+      const repo = String(args.repo)
+      const agentId = String(args.agent_id)
+      const contract = agentRuntime.loadContract(KB_ROOT, agentId)
+      if (!contract) {
+        return { content: [{ type: 'text', text: `Unknown agent contract: ${agentId}` }], isError: true }
+      }
+      const payload = {
+        project: args.project ? String(args.project) : null,
+        taskLogEntry: args.taskLogEntry ? String(args.taskLogEntry) : undefined,
+        hotUpdate: args.hotUpdate ? String(args.hotUpdate) : undefined,
+        gotcha: args.gotcha ? String(args.gotcha) : undefined,
+        discoveries: Array.isArray(args.discoveries) ? args.discoveries : undefined,
+        escalations: Array.isArray(args.escalations) ? args.escalations : undefined,
+        rewrites: Array.isArray(args.rewrites) ? args.rewrites : undefined,
+      }
+      const result = repoRuntime.closeRepoTask(KB_ROOT, repo, contract, payload)
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }], isError: !result.ok }
+    }
+
+    if (name === 'dry_run_close_repo_task') {
+      const repo = String(args.repo)
+      const agentId = String(args.agent_id)
+      const contract = agentRuntime.loadContract(KB_ROOT, agentId)
+      if (!contract) {
+        return { content: [{ type: 'text', text: `Unknown agent contract: ${agentId}` }], isError: true }
+      }
+      const payload = {
+        project: args.project ? String(args.project) : null,
+        taskLogEntry: args.taskLogEntry ? String(args.taskLogEntry) : undefined,
+        hotUpdate: args.hotUpdate ? String(args.hotUpdate) : undefined,
+        gotcha: args.gotcha ? String(args.gotcha) : undefined,
+        discoveries: Array.isArray(args.discoveries) ? args.discoveries : undefined,
+        escalations: Array.isArray(args.escalations) ? args.escalations : undefined,
+        rewrites: Array.isArray(args.rewrites) ? args.rewrites : undefined,
+      }
+      const result = repoRuntime.dryRunCloseRepoTask(KB_ROOT, repo, contract, payload)
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }], isError: result.wouldSucceed === false }
     }
 
     if (name === 'write_rewrite_artifact') {

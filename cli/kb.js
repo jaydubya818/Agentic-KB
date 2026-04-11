@@ -55,7 +55,7 @@ Repo commands:
   kb repo status <name>                      Show sync status, last SHA, doc count
   kb repo docs <name> [--section <s>]        List imported docs for a repo
   kb repo progress <name>                    Show progress.md for a repo
-  kb repo close-task <name> <agent> <entry>  Append a task log entry
+  kb repo close-task <name> <agent> --payload <file.json> [--dry-run]
 
 Bus & Rewrite commands:
   kb bus list <name> <channel>               List bus items for a repo channel
@@ -924,10 +924,11 @@ async function repoCmd(sub, rest) {
     if (repos.length === 0) { console.log('No repos tracked.'); return }
     console.log('\nTracked Repositories:\n')
     for (const r of repos) {
+      const name = r.repo_name || r.name || 'unknown'
       const status = r.status || 'unknown'
-      const docs = r.docCount || 0
-      console.log(`  ${r.name} [${status}]`)
-      console.log(`    docs: ${docs}, last-sync: ${r.lastSync || 'never'}`)
+      const docs = r.markdown_file_count || r.docCount || 0
+      console.log(`  ${name} [${status}]`)
+      console.log(`    docs: ${docs}, last-sync: ${r.last_sync_at || r.lastSync || 'never'}`)
     }
     console.log()
     return
@@ -968,8 +969,9 @@ async function repoCmd(sub, rest) {
     const repos = rt.listRepos(AGENT_KB_ROOT)
     const active = repos.filter(r => r.status === 'active')
     for (const r of active) {
-      console.log(`  syncing ${r.name}...`)
-      await rt.syncRepo(AGENT_KB_ROOT, r.name, { token })
+      const name = r.repo_name || r.name
+      console.log(`  syncing ${name}...`)
+      await rt.syncRepo(AGENT_KB_ROOT, name, { token })
     }
     console.log(`✅ All ${active.length} repos synced`)
     return
@@ -1030,11 +1032,57 @@ async function repoCmd(sub, rest) {
   }
 
   if (sub === 'close-task') {
-    const [name, agent, ...entry] = rest
-    if (!name || !agent || !entry.length) throw new Error('Usage: kb repo close-task <name> <agent> <entry>')
-    const entryText = entry.join(' ')
-    rt.appendRepoTaskLog(AGENT_KB_ROOT, name, agent, entryText)
-    console.log(`✅ Task log entry appended for ${agent} in ${name}`)
+    const name = rest[0]
+    const agentId = rest[1]
+    const payloadIdx = rest.indexOf('--payload')
+    const dryRun = rest.includes('--dry-run')
+    if (!name || !agentId) throw new Error('Usage: kb repo close-task <name> <agent> --payload <file.json> [--dry-run]')
+
+    const agentRt = await import(AGENT_RUNTIME_PATH)
+    const contract = agentRt.loadContract(AGENT_KB_ROOT, agentId)
+    if (!contract) throw new Error(`Unknown agent contract: ${agentId}`)
+
+    let payload
+    if (payloadIdx >= 0) {
+      payload = JSON.parse(fs.readFileSync(rest[payloadIdx + 1], 'utf8'))
+    } else {
+      const entry = rest.slice(2).filter(arg => arg !== '--dry-run')
+      if (!entry.length) throw new Error('Usage: kb repo close-task <name> <agent> --payload <file.json> [--dry-run]')
+      payload = { taskLogEntry: entry.join(' ') }
+    }
+
+    if (dryRun) {
+      const plan = rt.dryRunCloseRepoTask(AGENT_KB_ROOT, name, contract, payload)
+      console.log(`\n--- Dry run for ${name}/${agentId} repo close-task ---`)
+      console.log(`Would succeed: ${plan.wouldSucceed}`)
+      console.log(`Total ops: ${plan.summary.total} (${plan.summary.file_writes} file, ${plan.summary.bus_publishes} bus)`)
+      if (plan.rejected.length) {
+        console.log(`\nREJECTED (${plan.rejected.length}):`)
+        for (const r of plan.rejected) console.log(`  ✗ [${r.op}] ${r.path} — ${r.reason}`)
+      }
+      console.log(`\nPLAN:`)
+      for (const p of plan.planned) {
+        const ok = p.allowed ? '✓' : '✗'
+        console.log(`  ${ok} [${p.op}] ${p.path}`)
+      }
+      return
+    }
+
+    const result = rt.closeRepoTask(AGENT_KB_ROOT, name, contract, payload)
+    if (!result.ok) {
+      const rejected = result.rejected || result.trace?.writes_rejected || []
+      console.error(`❌ Repo close rejected (${rejected.length} rejections):`)
+      for (const r of rejected) console.error(`  ${r.path || 'policy'} — ${r.reason}`)
+      if (result.trace?.rollback) {
+        console.error(`  rollback: ${result.trace.rollback.rolledBack} actions, ${result.trace.rollback.errors.length} errors`)
+      }
+      process.exit(2)
+    }
+    console.log(`✅ Repo task closed for ${agentId} in ${name}.`)
+    console.log(`   Writes committed: ${result.trace.writes_committed.length}`)
+    console.log(`   Bus items published: ${result.trace.bus_items.length}`)
+    for (const w of result.trace.writes_committed) console.log(`   [${w.op}] ${w.path}`)
+    for (const b of result.trace.bus_items) console.log(`   [bus:${b.channel}] ${b.id}`)
     return
   }
 

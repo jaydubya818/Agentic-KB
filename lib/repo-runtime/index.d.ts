@@ -26,8 +26,11 @@ export function isImportedContent(content: string): boolean
 
 export function syncRepo(kbRoot: string, name: string, opts?: any): Promise<any>
 
-export function appendRepoProgress(kbRoot: string, repo: string, entry: string, agentId?: string): void
-export function writeRepoTaskLog(kbRoot: string, repo: string, taskId: string, agentId: string, entry: string): void
+export function closeRepoTask(kbRoot: string, repo: string, contract: any, payload: any): any
+export function dryRunCloseRepoTask(kbRoot: string, repo: string, contract: any, payload: any): any
+export function validateRepoCloseTaskPayload(contract: any, payload: any): any
+export function appendRepoProgress(kbRoot: string, repo: string, entry: string, agentId?: string): string
+export function writeRepoTaskLog(kbRoot: string, repo: string, taskId: string, agentId: string, entry: string): string
 
 export function publishRepoBusItem(kbRoot: string, repo: string, opts: any): { id: string; path: string }
 export function readRepoBusItem(kbRoot: string, repo: string, channel: string, id: string): any

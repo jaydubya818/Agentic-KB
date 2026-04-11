@@ -7,6 +7,7 @@ import path from 'path'
 import os from 'os'
 
 import * as repoRt from '../../lib/repo-runtime/index.mjs'
+import * as agentRt from '../../lib/agent-runtime/index.mjs'
 
 // ─── Fixture setup ────────────────────────────────────────────────────────
 
@@ -177,6 +178,108 @@ test('second appendRepoProgress does not overwrite', () => {
   const content = fs.readFileSync(progressPath, 'utf8')
   assert.match(content, /First entry/)
   assert.match(content, /Second entry/)
+})
+
+test('closeRepoTask enforces required close-task fields', () => {
+  const root = makeFixture()
+  const contract = agentRt.validateContract({
+    agent_id: 'w1',
+    tier: 'worker',
+    domain: 'eng',
+    allowed_writes: ['wiki/repos/test-repo/**'],
+    forbidden_paths: [],
+    close_policy: {
+      required_fields: ['taskLogEntry'],
+      at_least_one_of: [],
+      require_active_task: true,
+    },
+  })
+
+  const result = repoRt.closeRepoTask(root, 'test-repo', contract, {
+    discoveries: [{ body: 'missing task log' }],
+  })
+
+  assert.equal(result.ok, false)
+  assert.equal(result.error, 'close-policy')
+  assert.match(result.trace.close_policy_errors[0], /taskLogEntry/)
+})
+
+test('closeRepoTask commits repo writes and bus publications atomically', () => {
+  const root = makeFixture()
+  const contract = agentRt.validateContract({
+    agent_id: 'w1',
+    tier: 'worker',
+    domain: 'eng',
+    allowed_writes: ['wiki/repos/test-repo/**'],
+    forbidden_paths: [],
+    close_policy: {
+      required_fields: ['taskLogEntry'],
+      at_least_one_of: [],
+      require_active_task: true,
+    },
+  })
+
+  const result = repoRt.closeRepoTask(root, 'test-repo', contract, {
+    project: 'test-repo',
+    taskLogEntry: 'Closed repo task',
+    hotUpdate: 'Repo hot memory',
+    discoveries: [{ body: 'Repo discovery' }],
+    escalations: [{ to: 'l1', body: 'Repo escalation' }],
+  })
+
+  assert.equal(result.ok, true)
+  assert.equal(result.trace.bus_items.length, 2)
+  assert.match(fs.readFileSync(path.join(root, 'wiki/repos/test-repo/progress.md'), 'utf8'), /Closed repo task/)
+  assert.match(fs.readFileSync(path.join(root, 'wiki/repos/test-repo/agent-memory/worker/w1/hot.md'), 'utf8'), /Repo hot memory/)
+  assert.equal(repoRt.listRepoBusItems(root, 'test-repo', 'discovery').length, 1)
+  assert.equal(repoRt.listRepoBusItems(root, 'test-repo', 'escalation').length, 1)
+})
+
+test('dryRunCloseRepoTask reports rejected writes without committing', () => {
+  const root = makeFixture()
+  const contract = agentRt.validateContract({
+    agent_id: 'w1',
+    tier: 'worker',
+    domain: 'eng',
+    allowed_writes: ['wiki/repos/test-repo/**'],
+    forbidden_paths: ['wiki/repos/test-repo/bus/**'],
+    close_policy: {
+      required_fields: ['taskLogEntry'],
+      at_least_one_of: [],
+      require_active_task: false,
+    },
+  })
+
+  const result = repoRt.dryRunCloseRepoTask(root, 'test-repo', contract, {
+    taskLogEntry: 'Preview only',
+    discoveries: [{ body: 'Should be rejected by guard' }],
+  })
+
+  assert.equal(result.wouldSucceed, false)
+  assert.ok(result.rejected.some(item => item.path?.includes('/bus/discovery/')))
+  assert.equal(repoRt.listRepoBusItems(root, 'test-repo', 'discovery').length, 0)
+})
+
+test('dryRunCloseRepoTask allows repo-scoped writes for live-style contracts without repo allowlists', () => {
+  const root = makeFixture()
+  const contract = agentRt.validateContract({
+    agent_id: 'w1',
+    tier: 'worker',
+    domain: 'eng',
+    task_end_actions: ['append_task_log'],
+    allowed_writes: ['wiki/agents/workers/w1/**'],
+    forbidden_paths: [],
+  })
+
+  const result = repoRt.dryRunCloseRepoTask(root, 'test-repo', contract, {
+    taskLogEntry: 'Repo close payload',
+    discoveries: [{ body: 'Repo bus item' }],
+  })
+
+  assert.equal(result.wouldSucceed, true)
+  assert.equal(result.rejected.length, 0)
+  assert.ok(result.planned.some(item => item.path === 'wiki/repos/test-repo/progress.md'))
+  assert.ok(result.planned.some(item => item.path?.includes('/bus/discovery/')))
 })
 
 // ─── 5. Bus tests ────────────────────────────────────────────────────────

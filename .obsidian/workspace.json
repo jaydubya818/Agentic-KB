@@ -186,6 +186,15 @@
   },
   "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "wiki/concepts/rag-systems.md",
+    "wiki/summaries/siagian-agentic-engineer-roadmap-2026.md",
+    "raw/papers/siagian-agentic-engineer-roadmap-2026.md",
+    "wiki/stats.md",
+    "wiki/mocs/evaluation.md",
+    "wiki/mocs/tool-use.md",
+    "wiki/mocs/memory.md",
+    "wiki/mocs/orchestration.md",
+    "wiki/recently-added.md",
     "wiki/mocs",
     "scripts/generate-stats.mjs",
     "lib/agent-runtime/correction-capture.mjs",
@@ -202,7 +211,6 @@
     "wiki/system/bus/review",
     "wiki/agents/leads/sofie/weekly-digest.md",
     "raw/qa/sofie-session-2026-04-10-multi-agent-patterns-q-a.md",
-    "scripts/sofie-kb-digest.mjs",
     "wiki/agents/leads/sofie/task-log.md",
     "wiki/agents/leads/sofie/hot.md",
     "wiki/agents/leads/sofie/profile.md",
@@ -214,14 +222,6 @@
     "wiki/summaries/agentic-kb-enterprise-plan.md",
     "wiki/summaries/agentic-kb-readme.md",
     "wiki/repos/agentic-kb/repo-docs/AGENTS.md",
-    "wiki/repos/agentic-kb/rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan.md",
-    "AGENTS.md",
-    "wiki/projects/example-project/specs.md",
-    "wiki/projects/example-project/prd.md",
-    "wiki/projects/example-project/implementation-plan.md",
-    "raw/my-agents/01-architecture-agent.md",
-    "wiki/patterns/pattern-architecture-decision-record.md",
-    "wiki/repos/agentic-kb/repo-docs/reports/autolink-write-wiki.md",
     "Untitled.canvas"
   ]
 }

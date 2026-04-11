@@ -54,10 +54,6 @@ task_end_actions:
   - promote_worker_discoveries
   - publish_handoffs
   - review_rewrites
-close_policy:
-  required_fields: [taskLogEntry]
-  at_least_one_of: []
-  require_active_task: true
 promotion_targets:
   - orchestrator:architecture-agent
 escalation_targets:

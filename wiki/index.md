@@ -7,11 +7,19 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ## Quick Navigation
 - [[wiki/hot|Hot Cache]] — Start here for common queries
-- [[wiki/log|Operation Log]] — What's changed and when
+- [[wiki/recently-added|Recently Added]] — Chronological feed of new pages
+- [[wiki/stats|KB Stats]] — Auto-generated: page counts, link density, freshness, orphans
+- [[wiki/log|Operation Log]] — Full operation audit trail
+
+## Maps of Content (Domain Hubs)
+- [[mocs/orchestration|Orchestration MoC]] — Multi-agent, frameworks, fan-out patterns, recipes
+- [[mocs/memory|Memory MoC]] — Memory systems, wiki pattern, RLM pipeline, promotion policies
+- [[mocs/tool-use|Tool Use MoC]] — MCP, permissions, tool design, Claude API
+- [[mocs/evaluation|Evaluation MoC]] — LLM-as-judge, trajectory eval, benchmarks, promotion scoring
 
 ---
 
-## Concepts (17)
+## Concepts (18)
 
 | Page | Type | Tags | Confidence | Description |
 |------|------|------|------------|-------------|
@@ -30,6 +38,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[concepts/system-prompt-design]] | concept | prompt-engineering | — | Designing effective system prompts for agents |
 | [[concepts/task-decomposition]] | concept | orchestration, agentic | — | Breaking complex tasks into agent-executable steps |
 | [[concepts/tool-use]] | concept | tool-use, agentic | — | How agents select and call tools |
+| [[concepts/rag-systems]] | concept | memory, tool-use, context-management, evaluation | high | RAG architecture: chunking, hybrid retrieval, re-ranking, grounded generation, metadata filtering, eval metrics |
 | [[concepts/rlm-pipeline]] | concept | context-management, memory, observability | high | 10-stage Recursive Layered Memory retrieval pipeline |
 | [[concepts/trajectory-evaluation]] | concept | evaluation | — | Evaluating the full sequence of agent decisions |
 
@@ -104,7 +113,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (16 raw sources ingested)
+## Summaries (17 raw sources ingested)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -144,6 +153,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/farzapedia-personal-wiki|Farzapedia Personal Wiki]] — Personal wiki over iMessages/Notes/diary using agentic Librarian navigation (no RAG); inspired by Karpathy LLM wiki pattern
 - [[summaries/karpathy-llm-wiki-video|Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)]] — Transcript explaining the LLM wiki pattern: three-layer architecture (raw/wiki/schema), INGEST/QUERY/LINT operations, and division of labor between human curator and LLM maintainer
 - [[summaries/nate-herk-llm-wiki|Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)]] — Walkthrough of Karpathy's LLM wiki pattern: markdown-only KB, hot cache, lint cycle, and LLM wiki vs RAG tradeoffs; one user cut token usage 95%
+- [[summaries/siagian-agentic-engineer-roadmap-2026|Agentic AI Engineer Roadmap 2026 (Siagian)]] — 10-section interview Q&A guide: Python→LLM→Framework→Memory→Tools→RAG→Agents→Production; strong on RAG system design, hybrid retrieval, grounded generation, CI/CD for agents; surfaces 6 KB gaps
 - [[summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl|Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code]] — Synthesized Q&A recommending the Fan-Out Orchestrator-Worker pattern as the default; covers three sub-patterns, Agent tool parameters, token economics (~15× multiplier for multi-agent), the Telephone Game failure mode, and when to avoid multi-agent altogether
 - [[summaries/vault-3tier-architecture|Agent Vault — 3-Tier Architecture]] — Jay's production vault memory system: scoped context loading and explicit write targets for all 32 agents across orchestrator/lead/worker tiers
 ## Personal (Jay's patterns)

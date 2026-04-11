@@ -46,10 +46,6 @@ task_end_actions:
   - append_task_log
   - publish_discoveries
   - publish_escalations_if_blocked
-close_policy:
-  required_fields: [taskLogEntry]
-  at_least_one_of: []
-  require_active_task: true
 promotion_targets:
   - lead:planning-agent
 escalation_targets:

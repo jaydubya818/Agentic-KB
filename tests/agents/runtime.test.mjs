@@ -78,6 +78,19 @@ test('listContracts returns all contracts', () => {
   assert.equal(all.length, 1)
 })
 
+test('validateContract derives close_policy from task_end_actions when not explicitly configured', () => {
+  const contract = rt.validateContract({
+    agent_id: 'derived-worker',
+    tier: 'worker',
+    domain: 'eng',
+    task_end_actions: ['update_hot_memory', 'append_task_log', 'publish_discoveries'],
+  })
+
+  assert.deepEqual(contract.close_policy.required_fields, ['taskLogEntry'])
+  assert.deepEqual(contract.close_policy.at_least_one_of, [])
+  assert.equal(contract.close_policy.require_active_task, true)
+})
+
 // ─── 2. Path guards ───────────────────────────────────────────────────────
 
 test('assertWriteAllowed rejects path traversal', () => {

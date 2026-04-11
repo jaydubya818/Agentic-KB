@@ -260,6 +260,8 @@ When told to ingest a file from raw/:
 6. Cross-link everything bidirectionally — new page links out, existing pages get backlinks
 7. Update `wiki/index.md` with new/updated entries
 8. Append to `wiki/log.md` with timestamp, source name, pages created/updated, contradictions found
+9. Append new pages to `wiki/recently-added.md` under today's date heading — format: `- [[path/to/page|Title]] — one-line description`
+10. Update relevant MoC pages in `wiki/mocs/` if the new content fits an existing domain (orchestration, memory, tool-use, evaluation)
 
 ### QUERY Workflow
 When asked a question against the KB:
