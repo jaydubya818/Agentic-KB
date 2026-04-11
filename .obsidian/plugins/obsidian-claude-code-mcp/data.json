@@ -2,7 +2,7 @@
   "autoCloseTerminalOnClaudeExit": true,
   "startupCommand": "claude",
   "mcpHttpPort": 22360,
-  "enableWebSocketServer": false,
+  "enableWebSocketServer": true,
   "enableHttpServer": true,
-  "enableEmbeddedTerminal": false
+  "enableEmbeddedTerminal": true
 }

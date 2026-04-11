@@ -11,17 +11,10 @@
             "id": "fd6ffe703848d9dd",
             "type": "leaf",
             "state": {
-              "type": "canvas",
-              "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": 0,
-                  "y": 0,
-                  "zoom": 0
-                }
-              },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -56,11 +49,11 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#workflow",
+                "query": "",
                 "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
+                "explainSearch": true,
+                "collapseAll": true,
+                "extraContext": true,
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-search",
@@ -97,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "mcp/node_modules/@hono/node-server/README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -107,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for README"
+              "title": "Backlinks"
             }
           },
           {
@@ -116,12 +108,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "mcp/node_modules/@hono/node-server/README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from README"
+              "title": "Outgoing links"
             }
           },
           {
@@ -194,12 +185,17 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "claude-code-mcp:Toggle Claude Terminal": false
     }
   },
-  "active": "fd6ffe703848d9dd",
+  "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
+    "Untitled 2.base",
+    "Untitled 1.base",
+    "2026-04-11.md",
     "Untitled.canvas",
+    "Untitled",
     "Untitled.base",
     "Untitled.md",
     "Untitled 1.canvas",
@@ -229,15 +225,12 @@
     "raw/papers/siagian-agentic-engineer-roadmap-2026.md",
     "wiki/stats.md",
     "wiki/mocs/evaluation.md",
-    "wiki/mocs/tool-use.md",
     "wiki/mocs",
     "scripts/generate-stats.mjs",
     "lib/agent-runtime/correction-capture.mjs",
     "lib/agent-runtime/promotion-scorer.mjs",
     "lib/agent-runtime/source-trust.mjs",
     "lib/agent-runtime/freshness.mjs",
-    "wiki/agents/leads/sofie/learned",
-    "wiki/agents/leads/sofie/corrections",
-    "wiki/system/bus/corrections"
+    "wiki/agents/leads/sofie/learned"
   ]
 }
