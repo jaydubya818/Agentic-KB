@@ -11,12 +11,16 @@
             "id": "fd6ffe703848d9dd",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "canvas",
               "state": {
-                "file": "Untitled.base",
-                "viewName": "Table"
+                "file": "Untitled.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
               },
-              "icon": "lucide-table",
+              "icon": "lucide-layout-dashboard",
               "title": "Untitled"
             }
           }
@@ -193,9 +197,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c4c4738c9d0b6597",
+  "active": "fd6ffe703848d9dd",
   "lastOpenFiles": [
     "Untitled.canvas",
+    "Untitled.base",
     "Untitled.md",
     "Untitled 1.canvas",
     "Untitled 2.canvas",
@@ -203,7 +208,6 @@
     "Untitled 4.canvas",
     "wiki/evaluations/eval-orchestration-frameworks.md",
     "2026-04-10.md",
-    "Untitled.base",
     "README.md",
     "ENTERPRISE_PLAN.md",
     "wiki/recipes/recipe-agent-evaluation.md",
