@@ -11,10 +11,24 @@
             "id": "fd6ffe703848d9dd",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "2026-04-10.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "2026-04-10"
             }
           }
         ]
@@ -90,6 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "2026-04-10.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +114,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for 2026-04-10"
             }
           },
           {
@@ -108,11 +123,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "2026-04-10.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from 2026-04-10"
             }
           },
           {
@@ -189,11 +205,12 @@
       "claude-code-mcp:Toggle Claude Terminal": false
     }
   },
-  "active": "c4c4738c9d0b6597",
+  "active": "fd6ffe703848d9dd",
   "lastOpenFiles": [
+    "2026-04-11.md",
+    "2026-04-10.md",
     "Untitled 2.base",
     "Untitled 1.base",
-    "2026-04-11.md",
     "Untitled.canvas",
     "Untitled",
     "Untitled.base",
@@ -203,7 +220,6 @@
     "Untitled 3.canvas",
     "Untitled 4.canvas",
     "wiki/evaluations/eval-orchestration-frameworks.md",
-    "2026-04-10.md",
     "README.md",
     "ENTERPRISE_PLAN.md",
     "wiki/recipes/recipe-agent-evaluation.md",
@@ -230,7 +246,6 @@
     "lib/agent-runtime/correction-capture.mjs",
     "lib/agent-runtime/promotion-scorer.mjs",
     "lib/agent-runtime/source-trust.mjs",
-    "lib/agent-runtime/freshness.mjs",
-    "wiki/agents/leads/sofie/learned"
+    "lib/agent-runtime/freshness.mjs"
   ]
 }
