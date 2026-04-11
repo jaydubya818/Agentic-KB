@@ -11,14 +11,17 @@
             "id": "1484b4be2a387ad9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "wiki/repos/agentic-kb/repo-docs/README.md",
-                "mode": "preview",
-                "source": false
+                "file": "Untitled 3.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
               },
-              "icon": "lucide-file",
-              "title": "README"
+              "icon": "lucide-layout-dashboard",
+              "title": "Untitled 3"
             }
           }
         ]
@@ -164,13 +167,23 @@
               "icon": "lucide-list",
               "title": "Outline of README"
             }
+          },
+          {
+            "id": "c943df8aaef02ffd",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -184,8 +197,31 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c4c4738c9d0b6597",
+  "active": "1484b4be2a387ad9",
   "lastOpenFiles": [
+    "2026-04-10.md",
+    "Untitled 3.canvas",
+    "Untitled 2.canvas",
+    "Untitled 1.canvas",
+    "Untitled.canvas",
+    "Untitled.md",
+    "Untitled.base",
+    "README.md",
+    "ENTERPRISE_PLAN.md",
+    "wiki/recipes/recipe-agent-evaluation.md",
+    "wiki/projects/example-project/prd.md",
+    "raw/my-agents/01-architecture-agent.md",
+    "raw/architecture/2026-04-07-omm-overall-architecture-cli.md",
+    "raw/architecture/2026-04-07-omm-overall-architecture-api-routes.md",
+    "raw/architecture/2026-04-07-omm-overall-architecture.md",
+    "raw/architecture/2026-04-07-omm-ingest-flow.md",
+    "raw/architecture/2026-04-07-omm-compile-pipeline.md",
+    "outputs/README.md",
+    "graphify-out/GRAPH_REPORT.md",
+    "docs/RLM_PIPELINE.md",
+    "docs/OH_MY_MERMAID.md",
+    "docs/OBSIDIAN_GRAPH.md",
+    "wiki/repos/agentic-kb/repo-docs/README.md",
     "wiki/concepts/rag-systems.md",
     "wiki/summaries/siagian-agentic-engineer-roadmap-2026.md",
     "raw/papers/siagian-agentic-engineer-roadmap-2026.md",
@@ -193,35 +229,14 @@
     "wiki/mocs/evaluation.md",
     "wiki/mocs/tool-use.md",
     "wiki/mocs/memory.md",
-    "wiki/mocs/orchestration.md",
-    "wiki/recently-added.md",
     "wiki/mocs",
     "scripts/generate-stats.mjs",
     "lib/agent-runtime/correction-capture.mjs",
     "lib/agent-runtime/promotion-scorer.mjs",
     "lib/agent-runtime/source-trust.mjs",
     "lib/agent-runtime/freshness.mjs",
-    "wiki/system/policies/contradiction-policy.md",
-    "wiki/system/policies/source-trust-policy.md",
-    "wiki/system/policies/freshness-policy.md",
-    "wiki/system/policies/promotion-rules.md",
     "wiki/agents/leads/sofie/learned",
     "wiki/agents/leads/sofie/corrections",
-    "wiki/system/bus/corrections",
-    "wiki/system/bus/review",
-    "wiki/agents/leads/sofie/weekly-digest.md",
-    "raw/qa/sofie-session-2026-04-10-multi-agent-patterns-q-a.md",
-    "wiki/agents/leads/sofie/task-log.md",
-    "wiki/agents/leads/sofie/hot.md",
-    "wiki/agents/leads/sofie/profile.md",
-    "wiki/patterns/pattern-compounding-loop.md",
-    "wiki/concepts/rlm-pipeline.md",
-    "wiki/summaries/agentic-kb-oh-my-mermaid.md",
-    "wiki/summaries/agentic-kb-obsidian-graph.md",
-    "wiki/summaries/agentic-kb-rlm-pipeline.md",
-    "wiki/summaries/agentic-kb-enterprise-plan.md",
-    "wiki/summaries/agentic-kb-readme.md",
-    "wiki/repos/agentic-kb/repo-docs/AGENTS.md",
-    "Untitled.canvas"
+    "wiki/system/bus/corrections"
   ]
 }
