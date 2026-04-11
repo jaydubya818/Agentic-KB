@@ -1,8 +1,14 @@
 agent_id: sofie
 tier: lead
 domain: business
-description: "AI Chief of Staff — bridges business strategy (Obsidian Vault) with engineering knowledge (Agentic-KB). Triages bus items, promotes discoveries to standards, surfaces KB insights to Jay's leadership layer."
+version: "2.0.0"
+description: >
+  AI Chief of Staff — bridges business strategy (Obsidian Vault) with engineering
+  knowledge (Agentic-KB). Triages bus items, promotes discoveries to standards,
+  surfaces KB insights to Jay's leadership layer. V2: trust-aware context loading,
+  structured working memory, correction capture, governed promotion scoring.
 
+# ── Context loading ───────────────────────────────────────────────────────────
 context_policy:
   budget_bytes: 65536
   include_task_local: true
@@ -26,12 +32,82 @@ context_policy:
     - path: wiki/patterns/**
       priority: 60
       max_items: 5
+  # V2: reserve space for challenger sources that may reveal contradictions
+  challenger_budget_bytes: 4096
 
+# ── Reasoning policy (V2) ────────────────────────────────────────────────────
+reasoning_policy:
+  default_mode: synthesize
+  modes: [answer, synthesize, compare, critique, plan, delegate]
+  reflection_enabled: true
+  reflection_checks:
+    - Did I answer the actual question asked?
+    - Am I over-relying on a single weak source?
+    - Are there contradictions in what I retrieved?
+    - Is this grounded in trusted and fresh material?
+    - Am I citing specific wiki pages where I should?
+    - Is the recommendation actually actionable?
+    - What is inference vs confirmed fact?
+
+# ── Memory policy (V2) ───────────────────────────────────────────────────────
+memory_policy:
+  working_memory_schema: structured
+  candidate_learning_on_close: true
+  correction_durability_default: session
+  stale_after_days:
+    personal: 90
+    canonical: 180
+    learned: 60
+    session: 7
+    working: 1
+  learning_classes:
+    - ephemeral
+    - session
+    - working
+    - learned
+    - canonical
+
+# ── Governance policy (V2) ───────────────────────────────────────────────────
+governance_policy:
+  min_confidence_for_bus: 0.50
+  min_confidence_for_learned: 0.60
+  min_confidence_for_canonical: 0.80
+  min_evidence_for_canonical: 2
+  contradiction_behavior: block_and_route_review
+  freshness_required_for_canonical: true
+  review_required_for:
+    - personal
+    - architecture-correction
+    - canonical
+    - preference-correction
+  promotion_score_floor:
+    learned: 0.55
+    review: 0.45
+    canonical: 0.75
+  source_trust_weights:
+    profile: 1.00
+    hot: 0.90
+    canonical: 0.95
+    learned: 0.80
+    session: 0.50
+    working: 0.40
+    bus: 0.35
+    unknown: 0.30
+  confidence_scores:
+    high: 1.00
+    medium: 0.75
+    low: 0.50
+    unverified: 0.30
+
+# ── Write access ─────────────────────────────────────────────────────────────
 allowed_writes:
   - wiki/agents/leads/sofie/**
   - wiki/system/bus/discovery/**
   - wiki/system/bus/standards/**
   - wiki/system/bus/escalation/**
+  - wiki/system/bus/review/**
+  - wiki/system/bus/corrections/**
+  - wiki/system/policies/**
   - wiki/personal/**
   - raw/qa/**
   - raw/transcripts/**

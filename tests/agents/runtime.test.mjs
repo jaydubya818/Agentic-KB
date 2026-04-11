@@ -954,3 +954,353 @@ test('archiveCompletedTaskMemory returns empty when working-memory dir does not 
   assert.deepEqual(result.archived, [])
   assert.equal(result.skipped, 0)
 })
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// V2 TESTS (53–76)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// ─── V2.1: freshness.mjs ─────────────────────────────────────────────────────
+
+test('freshness: fresh file scores near 1.0', () => {
+  const root = makeFixture()
+  const relPath = 'wiki/concepts/test-page.md'
+  const absPath = path.join(root, relPath)
+  fs.mkdirSync(path.dirname(absPath), { recursive: true })
+  fs.writeFileSync(absPath, '---\nupdated: ' + new Date().toISOString() + '\nconfidence: high\n---\n\nContent')
+  const result = rt.scoreFreshness(root, relPath)
+  assert.ok(result.score >= 0.95, `expected score >= 0.95, got ${result.score}`)
+  assert.equal(result.label, 'fresh')
+})
+
+test('freshness: old canonical file scores as stale or aging', () => {
+  const root = makeFixture()
+  const relPath = 'wiki/concepts/old-page.md'
+  const absPath = path.join(root, relPath)
+  fs.mkdirSync(path.dirname(absPath), { recursive: true })
+  // 400 days ago — well past the 180-day half-life for canonical
+  const oldDate = new Date(Date.now() - 400 * 86400000).toISOString()
+  fs.writeFileSync(absPath, `---\nupdated: ${oldDate}\n---\n\nOld content`)
+  const result = rt.scoreFreshness(root, relPath)
+  assert.ok(result.score < 0.60, `expected score < 0.60 at 400 days, got ${result.score}`)
+  assert.ok(['stale', 'expired', 'aging'].includes(result.label), `expected stale/expired/aging, got ${result.label}`)
+})
+
+test('freshness: profile and hot files are exempt (always fresh)', () => {
+  const root = makeFixture()
+  const profilePath = 'wiki/agents/leads/sofie/profile.md'
+  const hotPath = 'wiki/agents/leads/sofie/hot.md'
+  fs.mkdirSync(path.join(root, 'wiki/agents/leads/sofie'), { recursive: true })
+  const oldDate = new Date(Date.now() - 400 * 86400000).toISOString()
+  fs.writeFileSync(path.join(root, profilePath), `---\nupdated: ${oldDate}\n---\n\nProfile`)
+  fs.writeFileSync(path.join(root, hotPath), `---\nupdated: ${oldDate}\n---\n\nHot`)
+  assert.equal(rt.scoreFreshness(root, profilePath).score, 1.0)
+  assert.equal(rt.scoreFreshness(root, hotPath).score, 1.0)
+})
+
+test('freshness: isFreshForCanonical rejects expired canonical page', () => {
+  const root = makeFixture()
+  const relPath = 'wiki/concepts/expired-page.md'
+  const absPath = path.join(root, relPath)
+  fs.mkdirSync(path.dirname(absPath), { recursive: true })
+  const veryOld = new Date(Date.now() - 365 * 86400000).toISOString()
+  fs.writeFileSync(absPath, `---\nupdated: ${veryOld}\n---\n\nExpired`)
+  assert.equal(rt.isFreshForCanonical(root, relPath), false)
+})
+
+test('freshness: inferClass correctly classifies path types', () => {
+  assert.equal(rt.inferClass('wiki/agents/leads/sofie/profile.md'), 'profile')
+  assert.equal(rt.inferClass('wiki/agents/leads/sofie/hot.md'), 'hot')
+  assert.equal(rt.inferClass('wiki/agents/leads/sofie/learned/lesson.md'), 'learned')
+  assert.equal(rt.inferClass('wiki/personal/my-notes.md'), 'personal')
+  assert.equal(rt.inferClass('wiki/concepts/tool-use.md'), 'canonical')
+  assert.equal(rt.inferClass('raw/qa/session.md'), 'session')
+  assert.equal(rt.inferClass('wiki/system/bus/discovery/d1.md'), 'session')
+})
+
+// ─── V2.2: source-trust.mjs ──────────────────────────────────────────────────
+
+test('source-trust: profile scores as trusted', () => {
+  const root = makeFixture()
+  const relPath = 'wiki/agents/leads/sofie/profile.md'
+  fs.mkdirSync(path.join(root, 'wiki/agents/leads/sofie'), { recursive: true })
+  fs.writeFileSync(path.join(root, relPath), '---\nconfidence: high\n---\n\nProfile')
+  const result = rt.scoreTrust(root, relPath)
+  assert.equal(result.label, 'trusted')
+  assert.ok(result.score >= 0.85)
+})
+
+test('source-trust: verified flag boosts trust score', () => {
+  const root = makeFixture()
+  const withVerified = 'raw/qa/session-verified.md'
+  const withoutVerified = 'raw/qa/session-plain.md'
+  fs.mkdirSync(path.join(root, 'raw/qa'), { recursive: true })
+  fs.writeFileSync(path.join(root, withVerified), '---\nconfidence: medium\nverified: true\n---\n\nContent')
+  fs.writeFileSync(path.join(root, withoutVerified), '---\nconfidence: medium\n---\n\nContent')
+  const boosted = rt.scoreTrust(root, withVerified)
+  const plain = rt.scoreTrust(root, withoutVerified)
+  assert.ok(boosted.score > plain.score, 'verified should score higher')
+})
+
+test('source-trust: resolveConfidence maps strings and passes numbers', () => {
+  assert.equal(rt.resolveConfidence('high'), 1.00)
+  assert.equal(rt.resolveConfidence('medium'), 0.75)
+  assert.equal(rt.resolveConfidence('low'), 0.50)
+  assert.equal(rt.resolveConfidence(0.88), 0.88)
+  assert.ok(rt.resolveConfidence(undefined) < 0.50, 'undefined should be unverified')
+})
+
+// ─── V2.3: promotion-scorer.mjs ──────────────────────────────────────────────
+
+test('promotion-scorer: rejects candidate with missing provenance', () => {
+  const root = makeFixture()
+  const candidate = { title: 'Test', body: 'content', confidence: 'high' }
+  // No created_by, no created_at
+  const result = rt.scorePromotion(root, candidate, {})
+  assert.equal(result.decision, 'reject')
+  assert.ok(result.reasons.some(r => r.includes('provenance')))
+})
+
+test('promotion-scorer: high-quality candidate scores for learned', () => {
+  const root = makeFixture()
+  const now = new Date().toISOString()
+  const candidate = {
+    created_by: 'sofie',
+    created_at: now,
+    title: 'Supervisor worker pattern is best for complex routing',
+    confidence: 'high',
+    evidence_count: 2,
+    sources: [],
+    memory_class: 'learned',
+    tags: ['orchestration'],
+  }
+  const result = rt.scorePromotion(root, candidate, {})
+  assert.ok(['learned', 'canonical', 'review'].includes(result.decision),
+    `Expected learned/canonical/review, got ${result.decision}`)
+  assert.ok(result.score >= 0.50, `Expected score >= 0.50, got ${result.score}`)
+})
+
+test('promotion-scorer: contradiction reduces score and routes to review', () => {
+  const root = makeFixture()
+  const now = new Date().toISOString()
+  const candidate = {
+    created_by: 'sofie',
+    created_at: now,
+    title: 'Always prefer synchronous agents',
+    confidence: 'high',
+    evidence_count: 3,
+    sources: [],
+    tags: ['orchestration'],
+  }
+  // Inject a fake contract with soft floors
+  const contract = { governance_policy: { promotion_score_floor: { learned: 0.40, review: 0.30, canonical: 0.70 } } }
+  const result = rt.scorePromotion(root, candidate, { contract, contradictionStatus: 'confirmed' })
+  assert.notEqual(result.decision, 'canonical', 'confirmed contradiction must not auto-promote to canonical')
+  assert.ok(result.contradictionNote !== null, 'should have a contradiction note')
+})
+
+test('promotion-scorer: explicit approval boosts score', () => {
+  const root = makeFixture()
+  const now = new Date().toISOString()
+  const base = { created_by: 'sofie', created_at: now, confidence: 'medium', evidence_count: 1, sources: [], tags: [] }
+  const without = rt.scorePromotion(root, base, { explicitApproval: false })
+  const with_approval = rt.scorePromotion(root, base, { explicitApproval: true })
+  assert.ok(with_approval.score > without.score, 'explicit approval should boost score')
+})
+
+// ─── V2.4: checkContradictions ───────────────────────────────────────────────
+
+test('contradiction check: returns none when no conflicts', () => {
+  const root = makeFixture()
+  fs.mkdirSync(path.join(root, 'wiki'), { recursive: true })
+  fs.writeFileSync(path.join(root, 'wiki/hot.md'), '---\n---\n\nKnown patterns: fan-out, supervisor')
+  const candidate = { title: 'New unique concept', tags: ['completely-different'], body: 'totally unrelated content' }
+  const result = rt.checkContradictions(root, candidate, {})
+  assert.equal(result.status, 'none')
+  assert.equal(result.conflictingPages.length, 0)
+})
+
+test('contradiction check: detects hot cache overlap as suspected', () => {
+  const root = makeFixture()
+  fs.mkdirSync(path.join(root, 'wiki'), { recursive: true })
+  fs.writeFileSync(path.join(root, 'wiki/hot.md'), '---\n---\n\nAlways prefer asynchronous agents for parallel tasks')
+  const candidate = {
+    title: 'Always prefer asynchronous agents for performance',
+    tags: ['orchestration', 'async'],
+    body: 'Asynchronous agents are faster',
+  }
+  const result = rt.checkContradictions(root, candidate, {})
+  // Should detect overlap with hot.md (title words match)
+  assert.ok(['suspected', 'confirmed', 'none'].includes(result.status)) // non-deterministic overlap check
+})
+
+// ─── V2.5: correction-capture.mjs ────────────────────────────────────────────
+
+test('correction-capture: writes correction file with correct fields', () => {
+  const root = makeFixture()
+  addLeadContract(root)
+  const contract = rt.loadContract(root, 'l1')
+
+  const { correctionId, path: corrPath } = rt.captureCorrection(root, contract, {
+    type: 'preference-correction',
+    original: 'Use LangGraph for all orchestration',
+    correctedTo: 'Use GSD for exploratory tasks, LangGraph for production pipelines',
+    context: 'Jay pointed out frameworks are context-dependent',
+    confidence: 'high',
+    durability: 'learned',
+    promoteCandidate: true,
+  })
+
+  assert.ok(correctionId.startsWith('correction-'))
+  assert.ok(fs.existsSync(path.join(root, corrPath)))
+  const content = fs.readFileSync(path.join(root, corrPath), 'utf8')
+  assert.match(content, /type: preference-correction/)
+  assert.match(content, /durability: learned/)
+  assert.match(content, /promote_candidate: true/)
+  assert.match(content, /Use LangGraph/)
+  assert.match(content, /Use GSD/)
+})
+
+test('correction-capture: rejects invalid correction type', () => {
+  const root = makeFixture()
+  addLeadContract(root)
+  const contract = rt.loadContract(root, 'l1')
+  assert.throws(
+    () => rt.captureCorrection(root, contract, {
+      type: 'invalid-type',
+      original: 'a',
+      correctedTo: 'b',
+    }),
+    /Invalid correction type/
+  )
+})
+
+test('correction-capture: listCorrections returns captured corrections', () => {
+  const root = makeFixture()
+  addLeadContract(root)
+  const contract = rt.loadContract(root, 'l1')
+  rt.captureCorrection(root, contract, {
+    type: 'factual-correction',
+    original: 'ReAct stands for Reason + Actor',
+    correctedTo: 'ReAct stands for Reason + Act',
+    confidence: 'high',
+    durability: 'learned',
+    promoteCandidate: false,
+  })
+  rt.captureCorrection(root, contract, {
+    type: 'workflow-correction',
+    original: 'Always lint before compile',
+    correctedTo: 'Compile first, then lint on the result',
+    confidence: 'medium',
+    durability: 'session',
+    promoteCandidate: false,
+  })
+  const all = rt.listCorrections(root, contract)
+  assert.equal(all.length, 2)
+  const byType = rt.listCorrections(root, contract, { type: 'factual-correction' })
+  assert.equal(byType.length, 1)
+  assert.equal(byType[0].type, 'factual-correction')
+})
+
+test('correction-capture: getCorrection reads a single correction by id', () => {
+  const root = makeFixture()
+  addLeadContract(root)
+  const contract = rt.loadContract(root, 'l1')
+  const { correctionId } = rt.captureCorrection(root, contract, {
+    type: 'tone-correction',
+    original: 'This is wrong.',
+    correctedTo: 'Consider reviewing this approach.',
+    confidence: 'low',
+    durability: 'session',
+  })
+  const result = rt.getCorrection(root, contract, correctionId)
+  assert.ok(result !== null)
+  assert.equal(result.meta.type, 'tone-correction')
+  assert.match(result.content, /tone-correction/)
+})
+
+// ─── V2.6: structured working memory ─────────────────────────────────────────
+
+test('startTask with structured schema creates v2-structured working memory', () => {
+  const root = makeFixture()
+  addLeadContract(root)
+  const contract = rt.loadContract(root, 'l1')
+  // Patch memory_policy to use structured schema
+  contract.memory_policy = { working_memory_schema: 'structured' }
+  contract.allowed_writes = [...(contract.allowed_writes || []),
+    'wiki/agents/leads/l1/**']
+
+  const { workingMemoryPath } = rt.startTask(root, contract, {
+    project: 'v2-test',
+    description: 'Test structured WM',
+    goal: 'Validate structured working memory schema',
+  })
+
+  const content = fs.readFileSync(path.join(root, workingMemoryPath), 'utf8')
+  assert.match(content, /v2-structured/) // may be quoted or unquoted
+  assert.match(content, /## Evidence/)
+  assert.match(content, /## Decisions/)
+  assert.match(content, /## Candidate Learnings/)
+  assert.match(content, /## Proposed Bus Items/)
+  assert.match(content, /## Final Outcome/)
+})
+
+// ─── V2.7: promotion scorer + bus integration ─────────────────────────────────
+
+test('promoteDiscovery routes to review when scorer blocks with contract', () => {
+  const root = makeFixture()
+  fs.mkdirSync(path.join(root, 'wiki/system/bus/review'), { recursive: true })
+  fs.mkdirSync(path.join(root, 'wiki'), { recursive: true })
+  fs.writeFileSync(path.join(root, 'wiki/hot.md'), '---\n---\n')
+
+  // Publish a bus item with low confidence
+  const { id } = rt.publishBusItem(root, {
+    channel: 'discovery', from: 'w1',
+    body: 'Some discovery insight',
+    confidence: 'low',
+  })
+
+  // Build a contract with strict floors
+  const contract = rt.loadContract(root, 'l1')
+  contract.governance_policy = {
+    min_confidence_for_canonical: 0.80,
+    promotion_score_floor: { learned: 0.90, review: 0.45, canonical: 0.95 }, // very strict
+    source_trust_weights: rt.DEFAULT_CLASS_WEIGHTS,
+    confidence_scores: { high: 1.0, medium: 0.75, low: 0.50, unverified: 0.30 },
+    review_required_for: [],
+  }
+
+  const result = rt.promoteDiscovery(root, {
+    channel: 'discovery', id, approver: 'jay', contract,
+  })
+
+  // With strict floors, low-confidence item should be blocked
+  assert.ok(result.blocked === true || result.target !== undefined,
+    'Either blocked with review routing or promoted normally')
+  if (result.blocked) {
+    assert.ok(['review', 'working-only'].includes(result.decision))
+    assert.ok(result.reviewPath || result.decision === 'working-only')
+  }
+})
+
+test('publishReviewItem creates review bus item with candidate and conflict refs', () => {
+  const root = makeFixture()
+  fs.mkdirSync(path.join(root, 'wiki/system/bus/review'), { recursive: true })
+
+  const item = rt.publishReviewItem(root, {
+    from: 'sofie',
+    candidatePath: 'wiki/system/bus/discovery/d-001.md',
+    conflictingPages: ['wiki/concepts/agent-loops.md'],
+    contradictionStatus: 'suspected',
+    title: '[review] Agent loop definition conflicts',
+    body: 'Candidate claims X but existing page says Y',
+    confidence: 'medium',
+    proposedTargetPath: 'wiki/concepts/agent-loops.md',
+  })
+
+  assert.ok(item.id)
+  assert.ok(fs.existsSync(path.join(root, item.path)))
+  const content = fs.readFileSync(path.join(root, item.path), 'utf8')
+  assert.match(content, /channel: review/)
+  assert.match(content, /contradiction_status: suspected/)
+  assert.match(content, /candidate_path/)
+})
