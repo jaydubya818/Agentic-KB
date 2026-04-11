@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2026-04-10.md",
+                "file": "wiki/repos/agentic-kb/repo-docs/README.md",
                 "mode": "preview",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "2026-04-10"
+              "title": "README"
             }
           }
         ]
@@ -63,7 +63,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "daily",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": true,
@@ -205,10 +205,10 @@
       "claude-code-mcp:Toggle Claude Terminal": false
     }
   },
-  "active": "fd6ffe703848d9dd",
+  "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
-    "2026-04-11.md",
     "2026-04-10.md",
+    "2026-04-11.md",
     "Untitled 2.base",
     "Untitled 1.base",
     "Untitled.canvas",
