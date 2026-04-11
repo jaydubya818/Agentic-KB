@@ -4,24 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "70de81cf0948f3d7",
+        "id": "02d701dad3a04e96",
         "type": "tabs",
         "children": [
           {
-            "id": "1484b4be2a387ad9",
+            "id": "fd6ffe703848d9dd",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "bases",
               "state": {
-                "file": "Untitled 3.canvas",
-                "viewState": {
-                  "x": 0,
-                  "y": 0,
-                  "zoom": 0
-                }
+                "file": "Untitled.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled 3"
+              "icon": "lucide-table",
+              "title": "Untitled"
             }
           }
         ]
@@ -197,14 +193,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1484b4be2a387ad9",
+  "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
-    "2026-04-10.md",
-    "Untitled 3.canvas",
-    "Untitled 2.canvas",
-    "Untitled 1.canvas",
     "Untitled.canvas",
     "Untitled.md",
+    "Untitled 1.canvas",
+    "Untitled 2.canvas",
+    "Untitled 3.canvas",
+    "Untitled 4.canvas",
+    "wiki/evaluations/eval-orchestration-frameworks.md",
+    "2026-04-10.md",
     "Untitled.base",
     "README.md",
     "ENTERPRISE_PLAN.md",
@@ -228,7 +226,6 @@
     "wiki/stats.md",
     "wiki/mocs/evaluation.md",
     "wiki/mocs/tool-use.md",
-    "wiki/mocs/memory.md",
     "wiki/mocs",
     "scripts/generate-stats.mjs",
     "lib/agent-runtime/correction-capture.mjs",
