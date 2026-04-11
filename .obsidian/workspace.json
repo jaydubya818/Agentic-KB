@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "wiki/repos/agentic-kb/repo-docs/README.md",
+                "file": "2026-04-11.md",
                 "mode": "preview",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "2026-04-11"
             }
           }
         ]
@@ -205,10 +205,11 @@
       "claude-code-mcp:Toggle Claude Terminal": false
     }
   },
-  "active": "c4c4738c9d0b6597",
+  "active": "fd6ffe703848d9dd",
   "lastOpenFiles": [
     "2026-04-10.md",
     "2026-04-11.md",
+    "wiki/repos/agentic-kb/repo-docs/README.md",
     "Untitled 2.base",
     "Untitled 1.base",
     "Untitled.canvas",
@@ -235,7 +236,6 @@
     "docs/RLM_PIPELINE.md",
     "docs/OH_MY_MERMAID.md",
     "docs/OBSIDIAN_GRAPH.md",
-    "wiki/repos/agentic-kb/repo-docs/README.md",
     "wiki/concepts/rag-systems.md",
     "wiki/summaries/siagian-agentic-engineer-roadmap-2026.md",
     "raw/papers/siagian-agentic-engineer-roadmap-2026.md",
