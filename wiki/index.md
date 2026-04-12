@@ -44,13 +44,16 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Patterns (3)
+## Patterns (6)
 
 | Page | Category | Problem | Confidence |
 |------|----------|---------|------------|
 | [[patterns/pattern-compounding-loop]] | memory | LLM answers are ephemeral — each query rediscovers knowledge with no memory of past answers | high |
 | [[patterns/pattern-episodic-judgment-log]] | memory | Agents have your files but not your judgment — they give generic advice on decisions you've already thought through | medium |
 | [[patterns/pattern-two-step-ingest]] | prompt-engineering | Single-call compilation conflates analysis with generation, producing lower-quality wiki pages with weak cross-links | medium |
+| [[patterns/pattern-layered-injection-hierarchy]] | memory | Not all memory should be injected at the same frequency — always-present context inflates every prompt, while on-demand context is forgotten between sessions | medium |
+| [[patterns/pattern-shared-agent-workspace]] | memory | Multiple agents duplicate context, drift out of sync, and can't hand off work without manual re-briefing | medium |
+| [[patterns/pattern-mistake-log]] | memory | Agents repeat the same errors across sessions because corrections live only in the current conversation | medium |
 
 ---
 
@@ -113,7 +116,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (17 raw sources ingested)
+## Summaries (18 raw sources ingested)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -156,6 +159,8 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/siagian-agentic-engineer-roadmap-2026|Agentic AI Engineer Roadmap 2026 (Siagian)]] — 10-section interview Q&A guide: Python→LLM→Framework→Memory→Tools→RAG→Agents→Production; strong on RAG system design, hybrid retrieval, grounded generation, CI/CD for agents; surfaces 6 KB gaps
 - [[summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl|Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code]] — Synthesized Q&A recommending the Fan-Out Orchestrator-Worker pattern as the default; covers three sub-patterns, Agent tool parameters, token economics (~15× multiplier for multi-agent), the Telephone Game failure mode, and when to avoid multi-agent altogether
 - [[summaries/vault-3tier-architecture|Agent Vault — 3-Tier Architecture]] — Jay's production vault memory system: scoped context loading and explicit write targets for all 32 agents across orchestrator/lead/worker tiers
+- [[summaries/summary-layered-agent-memory-obsidian|Layered Agent Memory — Obsidian-Backed 4-Layer System]] — Framework-agnostic 4-layer memory architecture: always-injected sticky notes + rules, on-demand vault (daily logs, working context, mistakes), searchable session archive; compaction recovery and write cadence discipline
+
 ## Personal (Jay's patterns)
 
 | Page | Category | Confidence | Description |

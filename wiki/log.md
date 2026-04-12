@@ -4,6 +4,20 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-04-12
+
+[2026-04-12] INGEST | summaries/summary-layered-agent-memory-obsidian.md — Transcript: Alex Finn's Obsidian-backed 4-layer agent memory system. Framework-agnostic patterns extracted; no OpenClaw-specific implementation applied per Jay's instruction.
+
+[2026-04-12] NEW PAGE | wiki/patterns/pattern-layered-injection-hierarchy.md — Organizes memory by injection frequency (Layer 1: sticky notes always-injected ~2k chars; Layer 2: rules always-injected; Layer 3: vault on-demand at session start; Layer 4: archive query-only). Includes compaction recovery protocol and write cadence discipline (every 3–5 tool calls). Cross-linked to pattern-tiered-agent-memory, pattern-hot-cache, pattern-shared-agent-workspace, pattern-mistake-log.
+
+[2026-04-12] NEW PAGE | wiki/patterns/pattern-shared-agent-workspace.md — Filesystem directory shared across all agents (Agent-Shared/ + per-agent private zones). Enables zero-re-briefing cross-agent handoffs via project-state.md, user-profile.md, decisions-log.md. Lateral sharing complement to pattern-tiered-agent-memory (vertical promotion). Cross-linked to multi-agent-systems, memory-systems.
+
+[2026-04-12] NEW PAGE | wiki/patterns/pattern-mistake-log.md — Append-only mistakes.md per agent; read on every session start; written immediately on user correction. Narrower than pattern-episodic-judgment-log (errors only, not decisions). Cross-linked to episodic-judgment-log, reflection-loop, layered-injection-hierarchy.
+
+[2026-04-12] UPDATED | wiki/index.md — Patterns count 3→6; Summaries count 17→18.
+[2026-04-12] UPDATED | wiki/mocs/memory.md — Added 3 new pattern entries.
+[2026-04-12] NO CONTRADICTIONS — New patterns orthogonal to existing tiered-agent-memory (injection-frequency axis vs agent-tier-hierarchy axis).
+
 ## 2026-04-10
 
 [2026-04-10] NEW PAGE | wiki/concepts/rag-systems.md — Comprehensive RAG concept page: chunking (300–800 tokens, 10–20% overlap, semantic chunking), hybrid retrieval (dense+sparse+re-ranking+HyDE+multi-hop), context budgeting (60/20/5/15 allocation), grounded generation + citation verification, metadata filtering (security requirement), index freshness strategies, evaluation metrics (recall@k, precision@k, MRR, nDCG, factuality, citation correctness), failure modes table (8 modes + fixes), RAG vs LLM wiki comparison table. Cross-linked to memory, tool-use, evaluation MoCs; added to index (Concepts: 17→18) and recently-added.

@@ -29,6 +29,9 @@ updated: 2026-04-10
 - [[patterns/pattern-compounding-loop]] — The core memory flywheel: ingest → wiki → query → save; ×1.25 verified boost
 - [[patterns/pattern-episodic-judgment-log]] — Human judgment as append-only JSONL; distinct from semantic memory
 - [[patterns/pattern-two-step-ingest]] — Two-call ingest pipeline: analysis → generation with intermediate knowledge graph
+- [[patterns/pattern-layered-injection-hierarchy]] — Organize memory by injection frequency (always / on-demand / search-only); compaction recovery via vault re-read
+- [[patterns/pattern-shared-agent-workspace]] — Filesystem directory shared across all agents: user-profile, project-state, decisions-log; enables zero-re-briefing handoffs
+- [[patterns/pattern-mistake-log]] — Append-only error log per agent; read on session start; reduces repeat mistakes across sessions
 
 ---
 
