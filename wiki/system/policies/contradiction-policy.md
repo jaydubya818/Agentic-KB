@@ -1,10 +1,10 @@
 ---
 title: Contradiction Policy
 type: policy
-version: "2.0.0"
+version: "2.1.0"
 owner: sofie
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-04-12
 applies_to: [all-agents]
 ---
 
@@ -84,3 +84,49 @@ resolved_at: null
 resolved_by: null
 ---
 ```
+
+---
+
+## Tier 1: Automated Resolution (v2.1)
+
+For a subset of well-defined contradiction cases, the agent can resolve automatically without human review. Automated resolution applies when **all** of the following hold:
+
+| Condition | Threshold |
+|-----------|-----------|
+| Trust delta between candidate and conflicting page | ≥ 0.20 |
+| Candidate has more independent sources | candidate.sources > conflicting.sources |
+| No unresolved canonical conflicts exist | conflicting page is `learned` or below, not `canonical` |
+| Contradiction type is factual (not architectural) | claim is a version number, date, measurement, or status |
+
+**Resolution actions (Tier 1 — auto):**
+
+- **Candidate wins:** Set `resolution = supersedes`, promote candidate, demote conflicting page to `learned`. Log: `[AUTO-RESOLVED] candidate supersedes {path} — trust_delta={x}, sources {a}>{b}`
+- **Conflicting page wins:** Reject candidate, set `contradiction_status = resolved`, log: `[AUTO-REJECTED] conflicting page {path} has higher trust — trust_delta={x}`
+
+```javascript
+function attemptAutoResolution(candidate, conflictingPage) {
+  const trustDelta = candidate.trust - conflictingPage.trust;
+  const moreIndependentSources = candidate.sources > conflictingPage.sources;
+  const conflictingIsNotCanonical = conflictingPage.memoryClass !== 'canonical';
+  const isFactualClaim = ['version', 'date', 'status', 'measurement']
+    .some(t => candidate.claimType === t);
+
+  if (
+    Math.abs(trustDelta) >= 0.20 &&
+    moreIndependentSources &&
+    conflictingIsNotCanonical &&
+    isFactualClaim
+  ) {
+    return trustDelta > 0
+      ? { action: 'supersede', winner: 'candidate' }
+      : { action: 'reject', winner: 'existing' };
+  }
+  return { action: 'human-review' };
+}
+```
+
+**Tier 2 (human review):** All cases not matching Tier 1 conditions — architectural decisions, conflicting canonical pages, cases where trust delta < 0.20, cases involving `personal/` category content — route to `wiki/system/bus/review/` as before.
+
+**Audit trail:** All Tier 1 auto-resolutions are logged in `wiki/log.md` with `[AUTO-RESOLVED]` prefix. Jay can scan these and override any auto-resolution within 7 days.
+
+> Source: Pattern derived from LLM Wiki v2 contradiction resolution approach. See [[summaries/summary-llm-wiki-v2]].

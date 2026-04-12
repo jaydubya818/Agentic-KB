@@ -19,7 +19,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Concepts (18)
+## Concepts (19)
 
 | Page | Type | Tags | Confidence | Description |
 |------|------|------|------------|-------------|
@@ -41,10 +41,11 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[concepts/rag-systems]] | concept | memory, tool-use, context-management, evaluation | high | RAG architecture: chunking, hybrid retrieval, re-ranking, grounded generation, metadata filtering, eval metrics |
 | [[concepts/rlm-pipeline]] | concept | context-management, memory, observability | high | 10-stage Recursive Layered Memory retrieval pipeline |
 | [[concepts/trajectory-evaluation]] | concept | evaluation | — | Evaluating the full sequence of agent decisions |
+| [[concepts/reciprocal-rank-fusion]] | concept | memory, rag-systems, evaluation | high | Score-free algorithm for merging BM25 + vector + graph ranked lists via 1/(k+rank) |
 
 ---
 
-## Patterns (6)
+## Patterns (8)
 
 | Page | Category | Problem | Confidence |
 |------|----------|---------|------------|
@@ -54,6 +55,8 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[patterns/pattern-layered-injection-hierarchy]] | memory | Not all memory should be injected at the same frequency — always-present context inflates every prompt, while on-demand context is forgotten between sessions | medium |
 | [[patterns/pattern-shared-agent-workspace]] | memory | Multiple agents duplicate context, drift out of sync, and can't hand off work without manual re-briefing | medium |
 | [[patterns/pattern-mistake-log]] | memory | Agents repeat the same errors across sessions because corrections live only in the current conversation | medium |
+| [[patterns/pattern-per-claim-confidence]] | memory | Page-level confidence is too coarse — a page can mix high-confidence decisions with low-confidence speculation, all weighted equally | medium |
+| [[patterns/pattern-typed-knowledge-graph]] | memory | Wiki link graphs track connection existence but not semantics — can't distinguish "A caused B" from "A implements B" | medium |
 
 ---
 
@@ -91,7 +94,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Recipes (9)
+## Recipes (11)
 
 | Page | Difficulty | Time | Description |
 |------|-----------|------|-------------|
@@ -104,6 +107,8 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[recipes/recipe-mcp-server]] | intermediate | 45-60m | Write and register a custom MCP server in TypeScript |
 | [[recipes/recipe-multi-agent-crew]] | advanced | 2-3h | Wire an orchestrator with 3 specialist sub-agents |
 | [[recipes/recipe-parallel-subagents]] | advanced | 2-3h | [[pattern-fan-out-worker]] pattern: spawn N agents in parallel, handle failures |
+| [[recipes/recipe-kb-lifecycle-hooks]] | intermediate | 2-3h | Automate ingest, session-end compression, and scheduled decay/lint hooks |
+| [[recipes/recipe-hybrid-search-llm-wiki]] | advanced | 4-6h | BM25 + vector + typed graph + RRF hybrid search (RLM Stages 1–3 implementation) |
 
 ---
 
@@ -116,7 +121,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (18 raw sources ingested)
+## Summaries (19 raw sources ingested)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -160,6 +165,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl|Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code]] — Synthesized Q&A recommending the Fan-Out Orchestrator-Worker pattern as the default; covers three sub-patterns, Agent tool parameters, token economics (~15× multiplier for multi-agent), the Telephone Game failure mode, and when to avoid multi-agent altogether
 - [[summaries/vault-3tier-architecture|Agent Vault — 3-Tier Architecture]] — Jay's production vault memory system: scoped context loading and explicit write targets for all 32 agents across orchestrator/lead/worker tiers
 - [[summaries/summary-layered-agent-memory-obsidian|Layered Agent Memory — Obsidian-Backed 4-Layer System]] — Framework-agnostic 4-layer memory architecture: always-injected sticky notes + rules, on-demand vault (daily logs, working context, mistakes), searchable session archive; compaction recovery and write cadence discipline
+- [[summaries/summary-llm-wiki-v2|LLM Wiki v2 — Confidence, Graph, Hybrid Search, Automated Hooks]] — Extension of Karpathy's LLM Wiki: per-claim confidence, typed knowledge graph, BM25+vector+RRF hybrid search, automated lifecycle hooks, forgetting curves, AI contradiction resolution. Gap analysis vs. this KB included.
 
 ## Personal (Jay's patterns)
 

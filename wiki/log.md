@@ -4,7 +4,27 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
-## 2026-04-12
+## 2026-04-12 (LLM Wiki v2 Integration — Phases 1–3)
+
+[2026-04-12] INGEST | summaries/summary-llm-wiki-v2.md — Social post describing LLM Wiki v2 (5k stars in 48h). Source is secondary (social post); primary source (agentmemory repo) not yet ingested — marked TODO. Includes full gap analysis: KB already covers memory tiers, forgetting curves, page-level confidence. Genuine gaps: per-claim confidence, typed graph edges, RRF fusion algorithm, AI auto-resolution.
+
+[2026-04-12] NEW PAGE | wiki/concepts/reciprocal-rank-fusion.md — Score-free rank aggregation algorithm for merging incompatible retrieval score spaces (BM25 + cosine + graph). Formula: Σ 1/(k+rank_i), k=60. Includes 20-line JS implementation. Cross-linked to rlm-pipeline, rag-systems, pattern-typed-knowledge-graph.
+
+[2026-04-12] NEW PAGE | wiki/patterns/pattern-per-claim-confidence.md — Claim-level confidence annotation via frontmatter `claims` array (text, confidence, sources, last_verified, contradictions). Selective application: only canonical/high-stakes pages. Extends source-trust-policy from page to claim granularity.
+
+[2026-04-12] NEW PAGE | wiki/patterns/pattern-typed-knowledge-graph.md — Typed directional edge schema (implements|extends|contradicts|supersedes|caused|supports|requires|related) with confidence float and source count. LLM extraction prompt included. Extends Graphify to emit typed-edges.json alongside graph.json. Feeds into RLM Stage 2 (retrieval fanout) and Stage 7 (contradiction filter via contradicts edges).
+
+[2026-04-12] NEW PAGE | wiki/recipes/recipe-kb-lifecycle-hooks.md — Three automation hooks: (1) ingest-watcher.mjs on raw/ new files → bus item; (2) session-end protocol → wiki/system/sessions/; (3) scheduled maintenance (weekly lint, monthly decay). References existing sofie-watch-obsidian.mjs as pattern. tested: false.
+
+[2026-04-12] UPDATED | wiki/system/policies/contradiction-policy.md v2.0.0 → v2.1.0 — Added Tier 1 automated resolution for unambiguous contradictions: auto-resolves when trust_delta ≥ 0.20, candidate has more independent sources, conflicting page is not canonical, and claim is factual (version/date/status/measurement). Tier 2 still routes to human review. All auto-resolutions logged with [AUTO-RESOLVED] prefix for 7-day override window.
+
+[2026-04-12] UPDATED | wiki/concepts/rlm-pipeline.md — Promoted Stages 1–3 from P2 to P1. Added detailed implementation plan for Stage 1 (query normalization: intent detection, entity extraction, query expansion), Stage 2 (parallel fanout: flexsearch BM25 + transformers.js vector + typed graph), Stage 3 (RRF candidate union replacing current "weighted merge"). Cross-linked to reciprocal-rank-fusion.
+
+[2026-04-12] NEW PAGE | wiki/recipes/recipe-hybrid-search-llm-wiki.md — Full BM25+vector+graph+RRF implementation in 5 steps: BM25 index (flexsearch), vector index (Xenova/all-MiniLM-L6-v2), graph traversal, RRF fusion, query entrypoint. Trigger: wiki > 150 pages. tested: false.
+
+[2026-04-12] UPDATED | wiki/index.md — Concepts 18→19, Patterns 6→8, Recipes 9→11, Summaries 18→19.
+[2026-04-12] UPDATED | wiki/mocs/memory.md — Added 2 patterns, 1 concept section, 1 summary.
+[2026-04-12] NO CONTRADICTIONS — All new content is additive. RRF concept and typed graph pattern are net-new. Contradiction-policy v2.1 auto-resolution is explicitly additive (Tier 2 human review unchanged).
 
 [2026-04-12] INGEST | summaries/summary-layered-agent-memory-obsidian.md — Transcript: Alex Finn's Obsidian-backed 4-layer agent memory system. Framework-agnostic patterns extracted; no OpenClaw-specific implementation applied per Jay's instruction.
 

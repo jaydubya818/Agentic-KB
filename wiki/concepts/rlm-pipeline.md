@@ -5,7 +5,7 @@ tags: [agentic, context-management, memory, observability, evaluation, deploymen
 confidence: high
 sources: ["[[summaries/agentic-kb-rlm-pipeline]]", "[[summaries/agentic-kb-readme]]"]
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-04-12
 related: ["[[concepts/ingest-pipeline]]", "[[concepts/context-management]]", "[[concepts/observability]]", "[[patterns/pattern-hot-cache]]"]
 status: evolving
 ---
@@ -33,7 +33,36 @@ The Recursive Layered Memory (RLM) Pipeline is a staged retrieval architecture f
 | 9 | Token-budget packing | Pack highest-score pages up to `MAX_CONTEXT_CHARS = 24,000` |
 | 10 | LLM synthesis | Claude with citations; optional validator model |
 
-Stages 4–9 are live in Agentic-KB as of April 2026. Stage 1 (intent detection) is a P2 target.
+Stages 4–9 are live in Agentic-KB as of April 2026. **Stages 1–3 are P1 targets** (promoted from P2 following LLM Wiki v2 validation — see [[summaries/summary-llm-wiki-v2]]). See implementation plan below.
+
+## Stages 1–3 Implementation Plan (P1)
+
+Validated by LLM Wiki v2 as the core of hybrid search. Full implementation spec in [[recipes/recipe-hybrid-search-llm-wiki]].
+
+### Stage 1 — Query Normalization
+- **Intent detection:** classify query as `lookup | synthesis | comparison | gap-find`
+- **Entity extraction:** identify wiki page slugs and concept names mentioned in query
+- **Query expansion:** synonym mapping for common abbreviations (e.g., "RAG" → "retrieval augmented generation")
+- **Library:** regex + lightweight trie or Claude structured output for intent classification
+
+### Stage 2 — Multi-Retriever Fanout (parallel)
+Three retrievers run in parallel, each returning top-N ranked results:
+
+| Retriever | Implementation | Best For |
+|-----------|---------------|----------|
+| **BM25** | `flexsearch` or `lunr.js` on wiki index | Exact terminology, technical terms |
+| **Vector** | Local embeddings (e.g., `transformers.js`) or Jina API | Semantic similarity, paraphrase matching |
+| **Typed graph** | Traverse `graphify-out/typed-edges.json` | Structural connections, causal chains |
+
+Cap each retriever at top-50 results before fusion.
+
+### Stage 3 — Candidate Union + RRF Dedup
+- Merge three result sets
+- Deduplicate by canonical file path
+- Apply [[concepts/reciprocal-rank-fusion]] with k=60
+- Output: single ranked list of up to 100 candidates → feeds into Stage 4 (temporal decay)
+
+**Note:** Stage 3 replaces the current "weighted merge" with RRF. The current weighted merge is a placeholder — it requires score normalization that RRF avoids entirely.
 
 ## Key Variants
 

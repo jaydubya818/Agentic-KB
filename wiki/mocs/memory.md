@@ -32,6 +32,8 @@ updated: 2026-04-10
 - [[patterns/pattern-layered-injection-hierarchy]] — Organize memory by injection frequency (always / on-demand / search-only); compaction recovery via vault re-read
 - [[patterns/pattern-shared-agent-workspace]] — Filesystem directory shared across all agents: user-profile, project-state, decisions-log; enables zero-re-briefing handoffs
 - [[patterns/pattern-mistake-log]] — Append-only error log per agent; read on session start; reduces repeat mistakes across sessions
+- [[patterns/pattern-per-claim-confidence]] — Claim-level confidence annotation for high-stakes canonical pages; feeds into RLM Stage 6 weighting
+- [[patterns/pattern-typed-knowledge-graph]] — Typed entity-relationship graph (implements/caused/contradicts/supports); enables structural graph traversal in RLM Stage 2
 
 ---
 
@@ -85,9 +87,16 @@ See [[system/policies/freshness-policy]] and [[system/policies/source-trust-poli
 
 ---
 
+## Concepts
+
+- [[concepts/reciprocal-rank-fusion]] — Score-free algorithm for merging BM25 + vector + graph ranked lists; required for RLM Stage 3
+
+---
+
 ## Key Summaries
 
 - [[summaries/siagian-agentic-engineer-roadmap-2026]] — Memory section: summaries vs embeddings vs structured KV; checkpointing; context budgeting; failure modes; user corrections
+- [[summaries/summary-llm-wiki-v2]] — LLM Wiki v2: per-claim confidence, typed graph, hybrid search+RRF, lifecycle hooks, forgetting curves, AI contradiction resolution; gap analysis vs. this KB
 
 - [[summaries/summary-karpathy-llm-wiki-gist]] — Karpathy's minimal pattern: immutable raw, LLM-owned wiki, co-evolving schema
 - [[summaries/summary-karpathy-llm-wiki-video]] — Three-layer architecture; INGEST/QUERY/LINT operations
