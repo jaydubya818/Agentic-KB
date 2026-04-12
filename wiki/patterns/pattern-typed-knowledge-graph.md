@@ -15,6 +15,7 @@ tags: [memory, knowledge-graph, context-management, agentic, evaluation]
 confidence: medium
 sources:
   - [[summaries/summary-llm-wiki-v2]]
+  - [[summaries/summary-knowledge-graphs-explainer]]
 created: 2026-04-12
 updated: 2026-04-12
 related:
@@ -61,7 +62,16 @@ Add typed, directional edges to the knowledge graph. Each edge carries:
 | `requires` | A depends on B | `recipe-hybrid-search requires concepts/reciprocal-rank-fusion` |
 | `related` | General association (fallback) | Use sparingly — prefer specific types |
 
-### Edge Schema (JSON)
+### The Triple Model
+Every edge is an instance of the fundamental triple from knowledge graph theory:
+```
+Subject  →  Predicate  →  Object
+from_page   type          to_page
+```
+Direction is semantic — "A implements B" is a different fact from "B implements A". Never store edges without direction.
+
+### Edge Schema (JSON) — Full with Temporal Context
+Named graph provenance added per [[concepts/knowledge-graphs]] temporal context standard:
 ```json
 {
   "from": "wiki/patterns/pattern-fan-out-worker.md",
@@ -70,8 +80,24 @@ Add typed, directional edges to the knowledge graph. Each edge carries:
   "confidence": 0.95,
   "sources": 3,
   "extracted_by": "llm",
-  "created": "2026-04-12"
+  "created": "2026-04-12",
+  "valid_from": "2026-04-12",
+  "valid_to": null,
+  "asserted_by": "claude-sonnet-4-6"
 }
+```
+`valid_to: null` means "currently valid." Set `valid_to` when a relationship is superseded (e.g., a pattern is deprecated in favor of a newer one).
+
+### Ontology: Class-Level Rules
+Define valid relationship types per entity class to prevent nonsense edges:
+```yaml
+ONTOLOGY:
+  concept    CAN  relate_to   → concept | pattern | framework | recipe
+  pattern    CAN  implements  → concept
+  pattern    CAN  extends     → pattern
+  recipe     CAN  requires    → concept | pattern
+  summary    CAN  supports    → concept | pattern
+  summary    CANNOT implements → concept  # summaries describe, not implement
 ```
 
 ### Storage

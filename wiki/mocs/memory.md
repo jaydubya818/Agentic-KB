@@ -90,6 +90,7 @@ See [[system/policies/freshness-policy]] and [[system/policies/source-trust-poli
 ## Concepts
 
 - [[concepts/reciprocal-rank-fusion]] — Score-free algorithm for merging BM25 + vector + graph ranked lists; required for RLM Stage 3
+- [[concepts/knowledge-graphs]] — Nodes + typed directed edges + triples + ontology + inference; the theory behind why linked knowledge outperforms flat notes and vector search for multi-hop reasoning
 
 ---
 

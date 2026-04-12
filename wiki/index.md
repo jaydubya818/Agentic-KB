@@ -19,7 +19,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Concepts (19)
+## Concepts (20)
 
 | Page | Type | Tags | Confidence | Description |
 |------|------|------|------------|-------------|
@@ -42,6 +42,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[concepts/rlm-pipeline]] | concept | context-management, memory, observability | high | 10-stage Recursive Layered Memory retrieval pipeline |
 | [[concepts/trajectory-evaluation]] | concept | evaluation | — | Evaluating the full sequence of agent decisions |
 | [[concepts/reciprocal-rank-fusion]] | concept | memory, rag-systems, evaluation | high | Score-free algorithm for merging BM25 + vector + graph ranked lists via 1/(k+rank) |
+| [[concepts/knowledge-graphs]] | concept | knowledge-graph, memory, rag-systems, agentic | high | Entities + typed directed edges + triples + ontology + inference; multi-hop reasoning that relational DBs and vector search can't perform |
 
 ---
 
@@ -94,7 +95,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Recipes (11)
+## Recipes (12)
 
 | Page | Difficulty | Time | Description |
 |------|-----------|------|-------------|
@@ -109,6 +110,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[recipes/recipe-parallel-subagents]] | advanced | 2-3h | [[pattern-fan-out-worker]] pattern: spawn N agents in parallel, handle failures |
 | [[recipes/recipe-kb-lifecycle-hooks]] | intermediate | 2-3h | Automate ingest, session-end compression, and scheduled decay/lint hooks |
 | [[recipes/recipe-hybrid-search-llm-wiki]] | advanced | 4-6h | BM25 + vector + typed graph + RRF hybrid search (RLM Stages 1–3 implementation) |
+| [[recipes/recipe-local-research-engine]] | intermediate | 1-2h setup | 6-lens research skill graph (Claude Code + Obsidian): 60% research cost reduction, compound knowledge base |
 
 ---
 
@@ -121,7 +123,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (19 raw sources ingested)
+## Summaries (21 raw sources ingested)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -166,6 +168,8 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/vault-3tier-architecture|Agent Vault — 3-Tier Architecture]] — Jay's production vault memory system: scoped context loading and explicit write targets for all 32 agents across orchestrator/lead/worker tiers
 - [[summaries/summary-layered-agent-memory-obsidian|Layered Agent Memory — Obsidian-Backed 4-Layer System]] — Framework-agnostic 4-layer memory architecture: always-injected sticky notes + rules, on-demand vault (daily logs, working context, mistakes), searchable session archive; compaction recovery and write cadence discipline
 - [[summaries/summary-llm-wiki-v2|LLM Wiki v2 — Confidence, Graph, Hybrid Search, Automated Hooks]] — Extension of Karpathy's LLM Wiki: per-claim confidence, typed knowledge graph, BM25+vector+RRF hybrid search, automated lifecycle hooks, forgetting curves, AI contradiction resolution. Gap analysis vs. this KB included.
+- [[summaries/summary-knowledge-graphs-explainer|Knowledge Graphs — Everything Is Connected]] — Comprehensive explainer: nodes/edges/properties, triple model (S-P-O), ontology (classes + instances), named graphs with temporal context, graph inference (derive unstated facts), SPARQL/Cypher querying, KG vs relational DB decision guide. Application map to this KB included.
+- [[summaries/summary-research-skill-graph|Local Research Engine — The Research Skill Graph System]] — Practitioner system deployed at 4 companies (60% research cost reduction): 6-lens forced-perspective analysis (technical/economic/historical/geopolitical/contrarian/first-principles), 5-tier source evaluation, contradiction-as-feature protocol, compound knowledge base. Scaffolded at research-skill-graph/.
 
 ## Personal (Jay's patterns)
 

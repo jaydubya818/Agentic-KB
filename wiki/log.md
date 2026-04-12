@@ -4,6 +4,24 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-04-12 (Knowledge Graphs + Research Skill Graph Ingests)
+
+[2026-04-12] INGEST | summaries/summary-knowledge-graphs-explainer.md — Long-form explainer on knowledge graph fundamentals. Source: @techwith_ram. Key concepts extracted: triple model (S-P-O), ontology (classes/instances), named graphs with temporal context (valid_from/valid_to/asserted_by), graph inference (derive unstated facts from rules), SPARQL/Cypher querying, KG vs relational DB decision matrix.
+
+[2026-04-12] NEW PAGE | wiki/concepts/knowledge-graphs.md — Comprehensive concept page. Covers: triple model, node/edge/property structure, ontology + class vs instance distinction, named graphs for temporal/provenance context, graph inference mechanism + biomedical example, querying (SQL JOIN vs graph path), key variants (property graph, RDF, hypergraph, LPG), when to use KG vs relational DB vs vector/RAG. Includes application map to this KB showing existing coverage + named-graph temporal context gap. Cross-linked to: rlm-pipeline, rag-systems, pattern-typed-knowledge-graph, contradiction-policy, freshness-policy.
+
+[2026-04-12] UPDATED | wiki/patterns/pattern-typed-knowledge-graph.md — Added triple model section (S-P-O foundation), full edge schema with temporal fields (valid_from, valid_to, asserted_by), ontology class-level rules for valid relationship types. Updated sources to include summary-knowledge-graphs-explainer.
+
+[2026-04-12] INGEST | summaries/summary-research-skill-graph.md — Practitioner article: 6-lens research system deployed at 4 companies, 60% research cost reduction, replaces junior researcher roles. Key concepts: 6-lens forced-perspective analysis, 5-tier source evaluation, contradiction-as-feature protocol, compound knowledge accumulation. Mapped to existing KB policies (source-trust-policy, contradiction-policy).
+
+[2026-04-12] NEW PAGE | wiki/recipes/recipe-local-research-engine.md — Full setup recipe for Claude Code + Obsidian + skill graph research engine. Includes folder structure, CLAUDE.md for research graph, how it feeds into Agentic-KB via INGEST, verification steps, compound effect mechanics.
+
+[2026-04-12] SCAFFOLDED | research-skill-graph/ (21 files) — Actual working folder structure created at /Users/jaywest/Agentic-KB/research-skill-graph/. Files: CLAUDE.md, index.md, research-log.md, methodology/{research-frameworks,source-evaluation,synthesis-rules,contradiction-protocol}.md, lenses/{technical,economic,historical,geopolitical,contrarian,first-principles}.md, sources/source-template.md, knowledge/{concepts,data-points}.md. Ready to use immediately in Obsidian or Claude Code.
+
+[2026-04-12] UPDATED | wiki/index.md — Concepts 19→20, Recipes 11→12, Summaries 19→21.
+[2026-04-12] UPDATED | wiki/mocs/memory.md — Added knowledge-graphs concept entry.
+[2026-04-12] NO CONTRADICTIONS — knowledge-graphs concept is additive; complements and theoretically grounds the existing typed-knowledge-graph pattern and Graphify skill.
+
 ## 2026-04-12 (LLM Wiki v2 Integration — Phases 1–3)
 
 [2026-04-12] INGEST | summaries/summary-llm-wiki-v2.md — Social post describing LLM Wiki v2 (5k stars in 48h). Source is secondary (social post); primary source (agentmemory repo) not yet ingested — marked TODO. Includes full gap analysis: KB already covers memory tiers, forgetting curves, page-level confidence. Genuine gaps: per-claim confidence, typed graph edges, RRF fusion algorithm, AI auto-resolution.
