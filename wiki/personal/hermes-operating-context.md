@@ -30,11 +30,52 @@ tags: [orchestration, agentic, personal, hermes, portfolio]
 
 ## Current Priority Stack
 
-> Update this section at the start of each week or whenever priorities shift.
+> Update this section at the start of each week or whenever priorities shift. Last updated: 2026-04-12.
 
-1. **[UPDATE ME]** — highest-leverage active objective
-2. **[UPDATE ME]** — second priority
-3. **[UPDATE ME]** — third priority
+### 1) Primary focus this week
+- **Objective:** [FILL THIS] Ship or unblock the single highest-leverage business outcome this week
+- **Domain / Repo:** SellerFi or current highest-priority business domain
+- **Why now:** This is the most important active business objective and should outrank background system work
+- **Success this week looks like:** [FILL THIS]
+- **Current status:** [FILL THIS]
+- **Blockers:** [FILL THIS]
+- **Horizon:** This week
+
+### 2) Secondary leverage objective
+- **Objective:** Stabilize and operationalize Hermes / MissionControl / active orchestration layer
+- **Domain / Repo:** MissionControl / Hermes harness / agent infrastructure
+- **Why now:** Hermes has now been formalized at the operating-contract level; execution quality depends on turning this into live operational behavior
+- **Success this week looks like:** current priority stack filled, morning brief working, routing working, context files aligned
+- **Current status:** SOUL and AGENTS upgraded; active operating context still incomplete
+- **Blockers:** missing live priority stack and current-state signals
+- **Horizon:** This week
+
+### 3) Active infrastructure / compounding investment
+- **Objective:** Build the local research engine using Claude Code + Obsidian + skill graph + knowledge graph principles
+- **Domain / Repo:** Agentic-KB / research engine / knowledge systems
+- **Why now:** This compounds across every portfolio area and improves research, synthesis, and long-term memory
+- **Success this month looks like:** working local research workflow, reusable methodology files, source evaluation, synthesis rules, and graph-aware knowledge structure
+- **Current status:** concepts and raw design are strong; needs integration into the actual KB and daily operating setup
+- **Blockers:** needs explicit schema, ontology-lite approach, project templates, and local execution workflow
+- **Horizon:** This month
+
+---
+
+## Current Blockers
+
+- **Blocker:** Priority 1 (SellerFi) still contains [FILL THIS] placeholders
+  - **Impact:** Hermes cannot perform real daily prioritization for primary business
+  - **Waiting on:** Jay to define top weekly objective, success criteria, current status, and blockers
+  - **Domain:** Global operating context
+  - **Next unblock move:** Replace [FILL THIS] stubs with concrete SellerFi objective
+
+---
+
+## Deprioritized / Not This Week
+
+- **Item:** Optional exploration and low-consequence experiments
+- **Why not now:** Should not compete with primary business and active infrastructure objectives
+- **Revisit trigger:** Once weekly top priorities are shipped or blocked
 
 ---
 
