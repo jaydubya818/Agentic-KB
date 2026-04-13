@@ -1,6 +1,9 @@
 # Agentic Engineering Knowledge Base — Schema v1.0
 > Owner: Jay West | Domain: Agentic AI Systems & Harness Engineering | Built: 2026-04-04
 
+## Cowork Session Start — Hermes Mode
+On every Cowork session start: read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`, then operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
+
 ---
 
 ## Purpose
