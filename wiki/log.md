@@ -168,3 +168,9 @@ Pages affected: `entities/mcp-ecosystem.md`, `log.md`
 ## 2026-04-10
 
 [2026-04-10] PLAN | operational-runtime-memory-layer | Created `wiki/repos/agentic-kb/rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan.md` to scope the next hardening pass for the shared agent runtime. Plan focuses on first-class task-local state for active agents, stronger scoped context loading semantics, truly atomic close-task behavior across file writes and bus publications, contract-driven promotion rules, and lifecycle parity across CLI, MCP, and web. Added inbound links from `wiki/repos/agentic-kb/progress.md` and `wiki/repos/agentic-kb/home.md`. Updated `wiki/index.md` to include the new repo plan entry. No contradictions recorded; plan is aligned with the existing runtime direction documented in README and repo-docs.
+
+## 2026-04-12 (Research Engine Gap Analysis + Index Fix)
+
+[2026-04-12] GAP ANALYSIS | research-skill-graph article vs knowledge-systems/research-engine/ — All article content already applied (6 lenses, methodology stack, knowledge accumulators, source template). Module exceeds article with: intake form, deep-dive template, decision-memo template, executive-summary template, ontology-lite, provenance-rules, command-center protocol. One gap found: research-engine module had no inbound links from wiki/index.md.
+
+[2026-04-12] UPDATED | wiki/index.md — Added "Research Engine (KB Module)" section linking all 26 module files: command-center, README, 6 methodology files, 6 lens files, 5 knowledge files, 6 templates. Module now 2-click reachable from home. No contradictions.

@@ -3,7 +3,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 ---
 
 # Agentic Engineering KB — Master Index
-> Last updated: 2026-04-12 | Maintained by LLM | Never edit manually
+> Last updated: 2026-04-12 (session 2) | Maintained by LLM | Never edit manually
 
 ## Quick Navigation
 - [[wiki/home|Home]] — Visual front door: concept map, top 5 pages, KB roadmap
@@ -17,6 +17,14 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[mocs/memory|Memory MoC]] — Memory systems, wiki pattern, RLM pipeline, promotion policies
 - [[mocs/tool-use|Tool Use MoC]] — MCP, permissions, tool design, Claude API
 - [[mocs/evaluation|Evaluation MoC]] — LLM-as-judge, trajectory eval, benchmarks, promotion scoring
+
+## Research Engine (KB Module)
+- [[knowledge-systems/research-engine/command-center|Command Center]] — Active projects, 6-step execution protocol, status tracker
+- [[knowledge-systems/research-engine/README|Module Overview]] — Structure, KB integration points, how to use
+- **Methodology:** [[knowledge-systems/research-engine/methodology/ontology-lite|Ontology-Lite]] · [[knowledge-systems/research-engine/methodology/provenance-rules|Provenance Rules]] · [[knowledge-systems/research-engine/methodology/research-frameworks|Research Frameworks]] · [[knowledge-systems/research-engine/methodology/source-evaluation|Source Evaluation]] · [[knowledge-systems/research-engine/methodology/synthesis-rules|Synthesis Rules]] · [[knowledge-systems/research-engine/methodology/contradiction-protocol|Contradiction Protocol]]
+- **Lenses:** [[knowledge-systems/research-engine/lenses/technical|Technical]] · [[knowledge-systems/research-engine/lenses/economic|Economic]] · [[knowledge-systems/research-engine/lenses/historical|Historical]] · [[knowledge-systems/research-engine/lenses/geopolitical|Geopolitical]] · [[knowledge-systems/research-engine/lenses/contrarian|Contrarian]] · [[knowledge-systems/research-engine/lenses/first-principles|First Principles]]
+- **Knowledge:** [[knowledge-systems/research-engine/knowledge/entities|Entities]] · [[knowledge-systems/research-engine/knowledge/relationships|Relationships]] · [[knowledge-systems/research-engine/knowledge/open-questions|Open Questions]] · [[knowledge-systems/research-engine/knowledge/concepts|Concepts]] · [[knowledge-systems/research-engine/knowledge/data-points|Data Points]]
+- **Templates:** [[knowledge-systems/research-engine/templates/research-question-intake|Intake Form]] · [[knowledge-systems/research-engine/templates/deep-dive-template|Deep Dive]] · [[knowledge-systems/research-engine/templates/decision-memo-template|Decision Memo]] · [[knowledge-systems/research-engine/templates/executive-summary-template|Executive Summary]] · [[knowledge-systems/research-engine/templates/project-template|Project]] · [[knowledge-systems/research-engine/templates/source-template|Source]]
 
 ---
 
