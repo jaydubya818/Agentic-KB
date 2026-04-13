@@ -8,6 +8,32 @@ created: 2026-04-10
 updated: 2026-04-12
 related: ["[[concepts/ingest-pipeline]]", "[[concepts/context-management]]", "[[concepts/observability]]", "[[patterns/pattern-hot-cache]]"]
 status: evolving
+claims:
+  - text: "Stages 4–9 are live in Agentic-KB as of April 2026"
+    confidence: high
+    sources: ["[[summaries/agentic-kb-rlm-pipeline]]"]
+    last_verified: 2026-04-12
+    contradictions: []
+  - text: "Stages 1–3 (BM25 + vector fanout + RRF) are the highest-leverage missing capability"
+    confidence: high
+    sources: ["[[summaries/summary-llm-wiki-v2]]", "[[concepts/reciprocal-rank-fusion]]"]
+    last_verified: 2026-04-12
+    contradictions: []
+  - text: "Temporal decay uses 180-day half-life, floor 0.5"
+    confidence: medium
+    sources: ["[[summaries/agentic-kb-rlm-pipeline]]"]
+    last_verified: 2026-04-12
+    contradictions: ["Half-life is designed, not empirically validated — optimal value is unknown"]
+  - text: "RRF k=60 is the correct default for merging BM25 + vector + graph"
+    confidence: high
+    sources: ["[[concepts/reciprocal-rank-fusion]]", "[[summaries/summary-llm-wiki-v2]]"]
+    last_verified: 2026-04-12
+    contradictions: []
+  - text: "Multi-retriever fanout: flexsearch BM25, @xenova/transformers vector, typed-edges.json graph"
+    confidence: medium
+    sources: ["[[recipes/recipe-hybrid-search-llm-wiki]]"]
+    last_verified: 2026-04-12
+    contradictions: ["Implementation plan only — not yet built. Library choices may change."]
 ---
 
 ## TL;DR

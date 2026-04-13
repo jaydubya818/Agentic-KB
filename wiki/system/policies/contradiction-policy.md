@@ -6,6 +6,27 @@ owner: sofie
 created: 2026-04-10
 updated: 2026-04-12
 applies_to: [all-agents]
+claims:
+  - text: "Confirmed contradictions block auto-canonical promotion until human or agent review"
+    confidence: high
+    sources: ["[[summaries/summary-llm-wiki-v2]]"]
+    last_verified: 2026-04-12
+    contradictions: []
+  - text: "Detection uses title/keyword overlap + related_sources links + slug-in-body matching"
+    confidence: high
+    sources: []
+    last_verified: 2026-04-12
+    contradictions: []
+  - text: "Tier 1 auto-resolution triggers when trust_delta ≥ 0.20, candidate has more sources, conflict is non-canonical, and claim is factual"
+    confidence: medium
+    sources: ["[[summaries/summary-llm-wiki-v2]]"]
+    last_verified: 2026-04-12
+    contradictions: ["trust_delta threshold of 0.20 is designed, not empirically validated. May be too permissive or too conservative."]
+  - text: "Suspected contradictions reduce promotion score by 0.10"
+    confidence: medium
+    sources: []
+    last_verified: 2026-04-12
+    contradictions: ["Penalty value is arbitrary — no empirical basis for 0.10 vs other values."]
 ---
 
 # Contradiction Policy

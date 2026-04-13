@@ -4,6 +4,24 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-04-12 (Lint Pass + Per-Claim Confidence Annotations)
+
+[2026-04-12] LINT | wiki/syntheses/lint-2026-04-12.md — Full lint pass on 251 files. Results: 64 orphans (mostly expected agent profile files + repo docs); 2-click rule PASS; 2 stale framework pages FIXED (last_checked added to framework-gsd, framework-langgraph); untested recipes PASS (all <30 days); 1 inbound-link violation FIXED (summary-wikiwise-skills.md now 2 inbound links); agentmemory primary source NOT FOUND (Twitter-only, no public repo).
+
+[2026-04-12] FIXED | wiki/frameworks/framework-gsd.md, framework-langgraph.md — Added last_checked: 2026-04-12 to both. Next stale check: 2026-06-12.
+
+[2026-04-12] FIXED | wiki/mocs/memory.md — Added second inbound link to summary-wikiwise-skills.md.
+
+[2026-04-12] ANNOTATED | wiki/concepts/rlm-pipeline.md — Added 5-claim per-claim confidence block to frontmatter. High confidence: stages 4-9 live, RRF k=60 default. Medium confidence: temporal decay half-life (designed not validated), flexsearch/transformers.js choice (plan only).
+
+[2026-04-12] ANNOTATED | wiki/evaluations/eval-orchestration-frameworks.md — Added 5-claim per-claim confidence block. High confidence: GSD top, raw Claude Code second, familiarity weight. Medium confidence: LangGraph state management score (docs-only, no Jay experience), AutoGen/CrewAI penalty (familiarity-dominated).
+
+[2026-04-12] ANNOTATED | wiki/system/policies/contradiction-policy.md — Added 4-claim per-claim confidence block. High confidence: confirmed-contradictions block promotion, detection mechanism. Medium confidence: trust_delta 0.20 threshold (designed), 0.10 promotion penalty (arbitrary).
+
+[2026-04-12] UPDATED | wiki/index.md — Syntheses 1→2 (lint-2026-04-12 added).
+
+[2026-04-12] BLOCKED | agentmemory ingest — github.com/agentmemory org has only an academic survey (Huaman-Agent-Memory), not the LLM Wiki v2 library. Source was Twitter-only. summary-llm-wiki-v2.md source_url updated to reflect this.
+
 ## 2026-04-12 (Wikiwise Improvements — home.md, style guide, skill ingest)
 
 [2026-04-12] NEW PAGE | wiki/home.md — Visual narrative front door. Contains: inline SVG concept map (4 domains: Orchestration/Memory/Tool Use/Evaluation with live stats bar), start-here navigation matrix, top 5 most-referenced pages, KB roadmap narrative (RLM Stages 1-3, typed KG, research skill graph, per-claim confidence). Written in opinionated/direct voice per Wikiwise style guidance. Cross-linked from index.md Quick Navigation.

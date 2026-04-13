@@ -98,6 +98,7 @@ See [[system/policies/freshness-policy]] and [[system/policies/source-trust-poli
 
 - [[summaries/siagian-agentic-engineer-roadmap-2026]] — Memory section: summaries vs embeddings vs structured KV; checkpointing; context budgeting; failure modes; user corrections
 - [[summaries/summary-llm-wiki-v2]] — LLM Wiki v2: per-claim confidence, typed graph, hybrid search+RRF, lifecycle hooks, forgetting curves, AI contradiction resolution; gap analysis vs. this KB
+- [[summaries/summary-wikiwise-skills]] — Wikiwise skill library: stream-to-disk rule, parallel subagent dispatch, batch-before-ingest, 2-3 inbound-link density rule
 
 - [[summaries/summary-karpathy-llm-wiki-gist]] — Karpathy's minimal pattern: immutable raw, LLM-owned wiki, co-evolving schema
 - [[summaries/summary-karpathy-llm-wiki-video]] — Three-layer architecture; INGEST/QUERY/LINT operations

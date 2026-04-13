@@ -4,7 +4,33 @@ title: Eval — Orchestration Frameworks Comparison
 type: evaluation
 tags: [evaluation, orchestration, multi-agent, gsd, langgraph, autogen, crewai, claude-code]
 created: 2026-04-04
-updated: 2026-04-04
+updated: 2026-04-12
+claims:
+  - text: "GSD scores highest overall (31/35) for Jay's use case"
+    confidence: high
+    sources: ["[[summaries/summary-gsd-framework-skills]]"]
+    last_verified: 2026-04-04
+    contradictions: []
+  - text: "Raw Claude Code is second-best (29/35) — no framework overhead, maximum flexibility"
+    confidence: high
+    sources: []
+    last_verified: 2026-04-04
+    contradictions: []
+  - text: "LangGraph scores 5/5 for state management — best in group"
+    confidence: medium
+    sources: ["[[summaries/langchain-deepagents-production]]"]
+    last_verified: 2026-04-04
+    contradictions: ["Based on documentation + community reports, not direct Jay experience. LangGraph v0.2.x — may change."]
+  - text: "AutoGen and CrewAI score lowest (17/35 and 18/35) primarily due to Jay's zero familiarity"
+    confidence: high
+    sources: []
+    last_verified: 2026-04-04
+    contradictions: ["Scores heavily penalized by Jay's familiarity weight. Objective capability scores may be higher."]
+  - text: "Jay's familiarity is weighted 'Very High' — highest weight in the scoring model"
+    confidence: high
+    sources: []
+    last_verified: 2026-04-04
+    contradictions: []
 ---
 
 ## What's Being Compared

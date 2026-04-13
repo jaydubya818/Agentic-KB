@@ -8,6 +8,7 @@ updated: 2026-04-05
 visibility: public
 confidence: high
 related: [framework-crewai.md, framework-autogen.md, concepts/state-persistence.md, concepts/multi-tenancy-agents.md]
+last_checked: 2026-04-12
 source: https://docs.langchain.com/oss/python/deepagents/going-to-production
 ---
 

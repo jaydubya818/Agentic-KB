@@ -182,11 +182,12 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Syntheses (1)
+## Syntheses (2)
 
 | Page | Question | Created |
 |------|----------|---------|
 | [[syntheses/lint-2026-04-06]] | What structural issues, gaps, and maintenance needs exist in the wiki as of 2026-04-06? | 2026-04-06 |
+| [[syntheses/lint-2026-04-12]] | What structural issues, gaps, and maintenance needs exist in the wiki as of 2026-04-12? | 2026-04-12 |
 
 ---
 

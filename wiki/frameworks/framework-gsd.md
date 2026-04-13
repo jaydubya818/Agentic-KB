@@ -8,6 +8,7 @@ updated: 2026-04-07
 visibility: public
 confidence: high
 related: [pattern-architecture-first, concepts/task-decomposition, concepts/agent-observability]
+last_checked: 2026-04-12
 ---
 
 # GSD Framework
