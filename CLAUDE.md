@@ -217,6 +217,7 @@ tags: []
 - Always link the **first mention** of any concept on a page
 - No orphan pages — every new page needs ≥1 inbound link from an existing page
 - Summary pages always link to their corresponding raw source
+- **2-click rule:** every concept, pattern, framework, and recipe must be reachable from `wiki/home.md` in ≤2 clicks. Home → MoC → Page is the standard path. If a page isn't reachable this way, add it to the relevant MoC. Run a reachability check after every ingestion session.
 - Pattern pages link to the concept pages they rely on
 - Recipe pages link to the patterns and concepts they implement
 - When creating a new page, immediately add a link from index.md and from ≥1 relevant existing page
@@ -342,6 +343,37 @@ Harness: `/Users/jaywest/My LLM Wiki/`
 - After major ingestion runs, invoke `/graphify` on the wiki index
 - Output goes to `wiki/syntheses/knowledge-graph-{date}.html`
 - Use graph view to identify orphan clusters and under-linked concepts
+
+---
+
+## Writing Style Guide
+
+All wiki pages — concept, pattern, recipe, framework — follow these rules:
+
+**Structure (4-part):**
+1. **TL;DR / Lead** — one declarative sentence stating the verdict or definition, no hedging
+2. **The argument** — 2–4 paragraphs explaining the mechanism, tradeoffs, and evidence
+3. **Specifics** — code sketches, tables, numbered steps — whatever makes the argument concrete
+4. **Connections** — Related concepts, related patterns, sources (wiki links only)
+
+**Voice:**
+- Opinionated and direct. State a position. "X is better than Y for Z" not "X may be preferred in some scenarios."
+- Declarative sentences. Avoid "can be", "might", "could potentially."
+- First mention of any proper noun (framework, pattern name, person) gets a wiki link — never again on the same page.
+- No filler intros. Start with the content.
+
+**Length:**
+- Concept pages: 400–800 words
+- Pattern pages: 500–900 words
+- Recipe pages: as long as the steps require; no length limit, but no padding
+- Framework pages: 600–1000 words
+- Summaries: 300–500 words
+
+**Anti-patterns (never do these):**
+- "This is a complex topic with many facets." → Delete. Start with the facet that matters.
+- Bullet-point lists masquerading as prose. Bullets for 3+ parallel items; prose otherwise.
+- Passive voice in TL;DRs. "X is used to..." → "X does..."
+- Hedged verdicts without evidence. If you're uncertain, say `[UNVERIFIED]` and note what would resolve it.
 
 ---
 

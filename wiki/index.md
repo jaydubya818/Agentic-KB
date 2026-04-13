@@ -3,9 +3,10 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 ---
 
 # Agentic Engineering KB — Master Index
-> Last updated: 2026-04-10 | Maintained by LLM | Never edit manually
+> Last updated: 2026-04-12 | Maintained by LLM | Never edit manually
 
 ## Quick Navigation
+- [[wiki/home|Home]] — Visual front door: concept map, top 5 pages, KB roadmap
 - [[wiki/hot|Hot Cache]] — Start here for common queries
 - [[wiki/recently-added|Recently Added]] — Chronological feed of new pages
 - [[wiki/stats|KB Stats]] — Auto-generated: page counts, link density, freshness, orphans
@@ -123,7 +124,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (21 raw sources ingested)
+## Summaries (22 raw sources ingested)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -170,6 +171,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/summary-llm-wiki-v2|LLM Wiki v2 — Confidence, Graph, Hybrid Search, Automated Hooks]] — Extension of Karpathy's LLM Wiki: per-claim confidence, typed knowledge graph, BM25+vector+RRF hybrid search, automated lifecycle hooks, forgetting curves, AI contradiction resolution. Gap analysis vs. this KB included.
 - [[summaries/summary-knowledge-graphs-explainer|Knowledge Graphs — Everything Is Connected]] — Comprehensive explainer: nodes/edges/properties, triple model (S-P-O), ontology (classes + instances), named graphs with temporal context, graph inference (derive unstated facts), SPARQL/Cypher querying, KG vs relational DB decision guide. Application map to this KB included.
 - [[summaries/summary-research-skill-graph|Local Research Engine — The Research Skill Graph System]] — Practitioner system deployed at 4 companies (60% research cost reduction): 6-lens forced-perspective analysis (technical/economic/historical/geopolitical/contrarian/first-principles), 5-tier source evaluation, contradiction-as-feature protocol, compound knowledge base. Scaffolded at research-skill-graph/.
+- [[summaries/summary-wikiwise-skills|Wikiwise Skill Library — Ingest, Digest, Readwise]] — 6 operational skill files from TristanH/wikiwise: stream-to-disk rule for large documents, parallel subagent dispatch, batch-before-ingest, 2-3 inbound-link density rule, user-confirmed highlight search, single-file tweet collection.
 
 ## Personal (Jay's patterns)
 

@@ -4,6 +4,20 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-04-12 (Wikiwise Improvements — home.md, style guide, skill ingest)
+
+[2026-04-12] NEW PAGE | wiki/home.md — Visual narrative front door. Contains: inline SVG concept map (4 domains: Orchestration/Memory/Tool Use/Evaluation with live stats bar), start-here navigation matrix, top 5 most-referenced pages, KB roadmap narrative (RLM Stages 1-3, typed KG, research skill graph, per-claim confidence). Written in opinionated/direct voice per Wikiwise style guidance. Cross-linked from index.md Quick Navigation.
+
+[2026-04-12] UPDATED | CLAUDE.md — Two additions: (1) 2-click reachability rule in Linking Conventions: every page reachable from home.md in ≤2 clicks via MoC hubs; (2) Writing Style Guide section: 4-part structure (TL;DR → argument → specifics → connections), voice rules (opinionated/declarative/direct), length targets by page type, anti-patterns table. Sourced from Wikiwise skill patterns.
+
+[2026-04-12] INGEST | raw/framework-docs/wikiwise-skills/ (6 files) — Full content of Wikiwise skill library: digest, import-readwise, fetch-readwise-document, fetch-readwise-highlights, ingest, ingest-tweets. Retrieved from TristanH/wikiwise GitHub scaffold.
+
+[2026-04-12] NEW PAGE | wiki/summaries/summary-wikiwise-skills.md — Summary of 6 Wikiwise skill files. Key patterns: stream-to-disk rule (pipe document body via jq, never load into context), parallel subagent dispatch with ≤300-word structured deliverable, batch-before-ingest (3-5 sources), 2-3 inbound-link density rule, user-confirmed highlight queries, single-file tweet collection (Tier 5 source trust). Includes applicability table mapping each skill to KB equivalent + gaps.
+
+[2026-04-12] UPDATED | wiki/index.md — Quick Navigation added home.md entry; Summaries 21→22; Wikiwise skills summary added.
+
+[2026-04-12] NO CONTRADICTIONS — All additions are operational improvements and new raw source content. The tighter inbound-link rule (2-3 vs ≥1) in summary-wikiwise-skills.md is a recommended upgrade, not a contradiction.
+
 ## 2026-04-12 (Knowledge Graphs + Research Skill Graph Ingests)
 
 [2026-04-12] INGEST | summaries/summary-knowledge-graphs-explainer.md — Long-form explainer on knowledge graph fundamentals. Source: @techwith_ram. Key concepts extracted: triple model (S-P-O), ontology (classes/instances), named graphs with temporal context (valid_from/valid_to/asserted_by), graph inference (derive unstated facts from rules), SPARQL/Cypher querying, KG vs relational DB decision matrix.
