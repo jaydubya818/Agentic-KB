@@ -12,11 +12,31 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[wiki/stats|KB Stats]] — Auto-generated: page counts, link density, freshness, orphans
 - [[wiki/log|Operation Log]] — Full operation audit trail
 
-## Maps of Content (Domain Hubs)
+## Maps of Content
+
+### Knowledge Domains
 - [[mocs/orchestration|Orchestration MoC]] — Multi-agent, frameworks, fan-out patterns, recipes
 - [[mocs/memory|Memory MoC]] — Memory systems, wiki pattern, RLM pipeline, promotion policies
 - [[mocs/tool-use|Tool Use MoC]] — MCP, permissions, tool design, Claude API
 - [[mocs/evaluation|Evaluation MoC]] — LLM-as-judge, trajectory eval, benchmarks, promotion scoring
+
+### Vault Infrastructure
+- [[mocs/vault-foundation|Vault Foundation]] — Folder structure (PARA/Zettelkasten), MoCs, templates, metadata, attachments
+- [[mocs/claude-integration|Claude Integration]] — CLAUDE.md config, Hermes SOUL, MCP tools, skills, context loading, session memory
+- [[mocs/core-plugins|Core Plugins]] — Terminal+Claude Code, Dataview, Templater, Periodic Notes, Canvas, Graph View
+- [[mocs/automation|Automation]] — Custom skills, auto-tagging, summary generation, daily review, vault maintenance scripts
+
+### Knowledge Production
+- [[mocs/knowledge-workflows|Knowledge Workflows]] — Capture→Process→Connect, literature notes, evergreen notes, project mgmt, research
+- [[prompt-library/index|Prompt Library]] — Thinking tools, note processing, idea generation, reflection & synthesis, slash commands
+- [[daily-systems/index|Daily Systems]] — Daily notes, weekly/monthly reviews, task & priority management
+
+### Advanced & Operations
+- [[mocs/advanced-techniques|Advanced Techniques]] — Agentic note-taking, multi-step reasoning, cross-note analysis, custom agents, vault-as-context
+- [[mocs/visualization|Visualization]] — Graph view optimization, canvas workspaces, knowledge maps, progress dashboards
+- [[mocs/maintenance|Maintenance & Optimization]] — Health checks, dead link cleanup, performance, backup & git, context optimization
+- [[mocs/resources|Community & Resources]] — Plugin recommendations, best practices, shared vault templates, learning resources
+- [[mocs/evolution|Evolution & Scaling]] — New skill development, multi-vault, team collaboration, long-term evolution, next-level AI
 
 ## Research Engine (KB Module)
 - [[knowledge-systems/research-engine/command-center|Command Center]] — Active projects, 6-step execution protocol, status tracker
@@ -188,6 +208,30 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[personal/personal-agent-design-observations]] | pattern | medium | 10 observed patterns across Jay's 32 agent definitions |
 | [[personal/personal-jays-framework-philosophy]] | decision | high | Three-framework selection system (GSD/[[framework-superpowers]]/[[framework-bmad]]) with decision tree |
 | [[personal/hermes-operating-context]] | pattern | high | Hermes orchestrator session-start memory: portfolio state, active priorities, routing defaults, durable lessons |
+
+---
+
+## Prompt Library (6 pages)
+
+| Page | Purpose |
+|------|---------|
+| [[prompt-library/index|Index]] | Hub — all prompts organized by use case |
+| [[prompt-library/thinking-tools|Thinking Tools]] | /trace, /challenge, /steelman, /assumptions, /decompose, /compare, /debug, /synthesize |
+| [[prompt-library/note-processing|Note Processing]] | Summarize source, extract concepts, update pages, generate cross-links, contradiction check |
+| [[prompt-library/idea-generation|Idea Generation]] | Diverge first, constraint removal, analogical reasoning, pre-mortem, SCAMPER, 10x thinking |
+| [[prompt-library/reflection-synthesis|Reflection & Synthesis]] | Session debrief, war story extraction, cross-note synthesis, pattern extraction, weekly reflection |
+| [[prompt-library/custom-slash-commands|Custom Slash Commands]] | /ingest, /lint, /brief, /explore, /hot-update, /query, /hermes |
+
+---
+
+## Daily Systems (4 pages)
+
+| Page | Purpose |
+|------|---------|
+| [[daily-systems/index|Index]] | Hub — cadence overview, Hermes daily protocol |
+| [[daily-systems/daily-notes|Daily Notes]] | Engineering standup template, session logging, decisions log |
+| [[daily-systems/weekly-monthly-reviews|Weekly/Monthly Reviews]] | Sprint review, KB lint, retrospective templates |
+| [[daily-systems/task-priority-management|Task & Priority Management]] | Priority stack, Daily Focus Rule, blocker escalation |
 
 ---
 

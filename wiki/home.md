@@ -1,7 +1,7 @@
 ---
 title: Agentic KB — Home
 type: home
-updated: 2026-04-12
+updated: 2026-04-13
 ---
 
 # Agentic Engineering KB
@@ -112,12 +112,35 @@ These get referenced across the most other pages:
 
 ---
 
-## Domain hubs
+## Vault Navigation
 
-- [[mocs/orchestration|Orchestration MoC]] — frameworks, fan-out patterns, supervisor-worker, evaluation
-- [[mocs/memory|Memory MoC]] — memory classes, RLM pipeline, hot cache, promotion policies
-- [[mocs/tool-use|Tool Use MoC]] — MCP ecosystem, permissions, tool design
-- [[mocs/evaluation|Evaluation MoC]] — LLM-as-judge, trajectory eval, benchmarks
+### Knowledge Domains
+- [[mocs/orchestration|Orchestration]] — frameworks, fan-out, supervisor-worker, evaluation
+- [[mocs/memory|Memory]] — memory classes, RLM pipeline, hot cache, promotion policies
+- [[mocs/tool-use|Tool Use]] — MCP ecosystem, permissions, tool design
+- [[mocs/evaluation|Evaluation]] — LLM-as-judge, trajectory eval, benchmarks
+
+### Vault Infrastructure
+- [[mocs/vault-foundation|Vault Foundation]] — folder structure, MoCs, templates, metadata, attachments
+- [[mocs/claude-integration|Claude Integration]] — CLAUDE.md, Hermes, MCP tools, skills, context loading, session memory
+- [[mocs/core-plugins|Core Plugins]] — Terminal, Dataview, Templater, Periodic Notes, Canvas, Graph View
+- [[mocs/automation|Automation]] — skills, hooks, auto-tagging, summary generation, vault maintenance
+
+### Knowledge Production
+- [[mocs/knowledge-workflows|Knowledge Workflows]] — capture → process → connect, literature notes, evergreen notes, research
+- [[prompt-library/index|Prompt Library]] — thinking tools, note processing, idea generation, reflection, slash commands
+- [[daily-systems/index|Daily Systems]] — daily notes, weekly/monthly reviews, task & priority management
+
+### Advanced & Operations
+- [[mocs/advanced-techniques|Advanced Techniques]] — agentic note-taking, multi-step reasoning, cross-note analysis, vault-as-context
+- [[mocs/visualization|Visualization]] — graph view, canvas workspaces, knowledge maps, dashboards
+- [[mocs/maintenance|Maintenance & Optimization]] — health checks, dead link cleanup, backup, context optimization
+- [[mocs/resources|Community & Resources]] — plugin recommendations, best practices, learning resources
+- [[mocs/evolution|Evolution & Scaling]] — new skills, multi-vault, team collaboration, next-level AI integration
+
+### Research Engine
+- [[knowledge-systems/research-engine/command-center|Command Center]] — active projects, 6-step execution protocol
+- [[knowledge-systems/research-engine/README|Module Overview]]
 
 ---
 

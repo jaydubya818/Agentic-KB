@@ -174,3 +174,45 @@ Pages affected: `entities/mcp-ecosystem.md`, `log.md`
 [2026-04-12] GAP ANALYSIS | research-skill-graph article vs knowledge-systems/research-engine/ — All article content already applied (6 lenses, methodology stack, knowledge accumulators, source template). Module exceeds article with: intake form, deep-dive template, decision-memo template, executive-summary template, ontology-lite, provenance-rules, command-center protocol. One gap found: research-engine module had no inbound links from wiki/index.md.
 
 [2026-04-12] UPDATED | wiki/index.md — Added "Research Engine (KB Module)" section linking all 26 module files: command-center, README, 6 methodology files, 6 lens files, 5 knowledge files, 6 templates. Module now 2-click reachable from home. No contradictions.
+
+## 2026-04-13 (Vault Restructure — Obsidian Claude Ecosystem)
+
+[2026-04-13] NEW MoC | wiki/mocs/vault-foundation.md — Vault Foundation hub: folder structure (PARA/Zettelkasten hybrid), MOCs & hub notes, templates system, metadata & Dataview, attachment management. Maps full directory schema.
+
+[2026-04-13] NEW MoC | wiki/mocs/claude-integration.md — Claude Integration hub: CLAUDE.md configuration, Claude Code/Desktop setup, MCP tools & skills, .claude/commands folder, context loading strategies (3-tier), session memory system (hot.md, hermes-operating-context, log, recently-added, open-questions).
+
+[2026-04-13] NEW MoC | wiki/mocs/core-plugins.md — Core Plugins hub: Terminal + Claude Code, Dataview & queries (4 example queries), Templater & QuickAdd, Periodic Notes (cadence config), Advanced URI & Canvas, Graph View Enhancers (Graph Analysis, Juggl).
+
+[2026-04-13] NEW MoC | wiki/mocs/knowledge-workflows.md — Knowledge Workflows hub: Capture→Process→Connect pipeline, literature notes conventions, evergreen notes standards, project management, research & synthesis (research engine link).
+
+[2026-04-13] NEW MoC | wiki/mocs/automation.md — Automation hub: Custom Claude skills (full inventory with links to summaries), auto-tagging & linking rules, summary generation, daily review automation cadence, vault maintenance scripts (LINT, Graphify, KB CLI).
+
+[2026-04-13] NEW MoC | wiki/mocs/advanced-techniques.md — Advanced Techniques hub: Agentic note-taking (write-to-disk, task logs, mistake logs, hot cache), multi-step reasoning patterns, cross-note analysis (EXPLORE, BRIEF workflows), custom AI agents, vault-as-context engineering (context budget rules).
+
+[2026-04-13] NEW MoC | wiki/mocs/visualization.md — Visualization hub: Graph view optimization (recommended settings table, reading the graph), Canvas workspaces (research/architecture/priority/session patterns), knowledge maps (home.md, MoC pages, Graphify, Oh My Mermaid), progress dashboards (stats, lint, research command center, agent activity).
+
+[2026-04-13] NEW MoC | wiki/mocs/maintenance.md — Maintenance & Optimization hub: Vault health checks (7-check LINT table), dead link cleanup protocol, performance tuning, backup & git sync (Obsidian Git config), Claude context optimization principles.
+
+[2026-04-13] NEW MoC | wiki/mocs/resources.md — Community & Resources hub: plugin recommendations table (11 plugins with priority ratings, anti-recommendations), best practices (Jay's distilled ops lessons), shared vault templates (which files to share), learning resources (ingested summaries + external links).
+
+[2026-04-13] NEW MoC | wiki/mocs/evolution.md — Evolution & Scaling hub: new skill development lifecycle, multi-vault management (2-vault current state, cross-vault principles, scaling beyond 2), team collaboration (what scales vs needs coordination, git workflow), long-term knowledge evolution (deprecation, confidence decay, annual synthesis, pruning, compounding threshold), next-level AI integration (graph DB migration, semantic search, active maintenance agent, MissionControl integration).
+
+[2026-04-13] NEW DIR | wiki/prompt-library/ — 6 files created:
+  - index.md — hub with usage notes and quality standards
+  - thinking-tools.md — 8 prompts: /trace, /challenge, /steelman, /assumptions, /decompose, /compare, /debug, /synthesize
+  - note-processing.md — 5 prompts: summarize source, extract concepts, update page, generate cross-links, contradiction check, frontmatter generator
+  - idea-generation.md — 6 prompts: diverge first, constraint removal, analogical reasoning, pre-mortem, SCAMPER, 10x thinking, KB gap ideation
+  - reflection-synthesis.md — 5 prompts: session debrief, war story extraction, cross-note synthesis, pattern extraction, belief update, weekly KB reflection
+  - custom-slash-commands.md — 7 commands: /ingest, /lint, /brief, /explore, /hot-update, /query, /hermes (with full markdown content for each)
+
+[2026-04-13] NEW DIR | wiki/daily-systems/ — 4 files created:
+  - index.md — hub with cadence table and Hermes daily protocol
+  - daily-notes.md — full engineering daily note template + usage notes + standup format
+  - weekly-monthly-reviews.md — weekly review template + monthly review template + "making reviews stick" rule
+  - task-priority-management.md — priority stack explanation, Daily Focus Rule (5 levels), Priority Interpretation Rules (5 rules), task tracking conventions, blocker escalation protocol, sprint cadence
+
+[2026-04-13] UPDATED | wiki/home.md — Added "Vault Navigation" section replacing "Domain hubs" — now covers all 14 MoCs across 4 sections (Knowledge Domains, Vault Infrastructure, Knowledge Production, Advanced & Operations) plus Research Engine links. Updated date.
+
+[2026-04-13] UPDATED | wiki/index.md — Restructured MoC section into 4 subsections (14 total MoCs). Added Prompt Library section (6 pages). Added Daily Systems section (4 pages).
+
+TOTAL: 20 new files created, 3 files updated. No contradictions. No orphans introduced (all new pages linked from MoC index and home.md).
