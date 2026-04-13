@@ -179,6 +179,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 |------|----------|------------|-------------|
 | [[personal/personal-agent-design-observations]] | pattern | medium | 10 observed patterns across Jay's 32 agent definitions |
 | [[personal/personal-jays-framework-philosophy]] | decision | high | Three-framework selection system (GSD/[[framework-superpowers]]/[[framework-bmad]]) with decision tree |
+| [[personal/hermes-operating-context]] | pattern | high | Hermes orchestrator session-start memory: portfolio state, active priorities, routing defaults, durable lessons |
 
 ---
 

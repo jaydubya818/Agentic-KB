@@ -4,6 +4,14 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-04-12 (Hermes Agent Formalization)
+
+[2026-04-12] NEW FILE | ~/.claude/agents/hermes.md — Full Hermes orchestrator agent definition. Includes: session-start memory load protocol (reads wiki/hot.md + wiki/personal/hermes-operating-context.md on every start), complete SOUL (identity, mission, scope, responsibilities, delegation contract, decision rights, escalation triggers, priority framework, output contract, memory rules KB-wired, hard constraints), full Repo Awareness appendix (10 work lanes, routing heuristics, multi-lane task handling, repo clustering), Specialist Invocation Contract. Model: claude-sonnet-4-6.
+
+[2026-04-12] NEW PAGE | wiki/personal/hermes-operating-context.md — Hermes session-start memory file. Contains: active portfolio domains + priority levels, current priority stack (template for Jay to fill), agent infrastructure summary (34 agents, 29+ skills, 3 frameworks), routing defaults (validated patterns), recurring rhythms, decision patterns (TypeScript-first, framework selection, KB-as-source-of-truth), open blockers, durable lessons append-only log.
+
+[2026-04-12] UPDATED | wiki/index.md — Personal section: added hermes-operating-context entry.
+
 ## 2026-04-12 (Lint Pass + Per-Claim Confidence Annotations)
 
 [2026-04-12] LINT | wiki/syntheses/lint-2026-04-12.md — Full lint pass on 251 files. Results: 64 orphans (mostly expected agent profile files + repo docs); 2-click rule PASS; 2 stale framework pages FIXED (last_checked added to framework-gsd, framework-langgraph); untested recipes PASS (all <30 days); 1 inbound-link violation FIXED (summary-wikiwise-skills.md now 2 inbound links); agentmemory primary source NOT FOUND (Twitter-only, no public repo).
