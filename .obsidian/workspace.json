@@ -207,6 +207,8 @@
   },
   "active": "fd6ffe703848d9dd",
   "lastOpenFiles": [
+    "TEAM-SETUP.md",
+    "scripts/team-setup.sh",
     "logs/web-server.log",
     "wiki/daily-systems/task-priority-management.md",
     "wiki/daily-systems/weekly-monthly-reviews.md",
@@ -241,8 +243,6 @@
     "knowledge-systems/research-engine/lenses",
     "knowledge-systems/research-engine/knowledge",
     "knowledge-systems/research-engine",
-    "knowledge-systems",
-    "raw/framework-docs/wikiwise-skills",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Untitled 2.canvas",
