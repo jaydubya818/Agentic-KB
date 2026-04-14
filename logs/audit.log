@@ -76,3 +76,4 @@
 {"ts":"2026-04-10T21:58:41.993Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/docs/RLM_PIPELINE.md","action":"write"}
 {"ts":"2026-04-10T21:58:41.995Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-dry-wiki.md","action":"write"}
 {"ts":"2026-04-10T21:58:41.996Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-write-wiki.md","action":"write"}
+{"ts":"2026-04-14T04:58:24.069Z","op":"query","vault":"Agentic-KB","q":"What is Hermes and what are its work lanes?","scope":"public","articlesRead":5}

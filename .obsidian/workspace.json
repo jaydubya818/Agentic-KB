@@ -207,6 +207,7 @@
   },
   "active": "fd6ffe703848d9dd",
   "lastOpenFiles": [
+    "logs/web-server.log",
     "wiki/daily-systems/task-priority-management.md",
     "wiki/daily-systems/weekly-monthly-reviews.md",
     "wiki/daily-systems/daily-notes.md",
@@ -234,7 +235,6 @@
     "knowledge-systems/research-engine/knowledge/data-points.md",
     "knowledge-systems/research-engine/knowledge/concepts.md",
     "knowledge-systems/research-engine/lenses/technical.md",
-    "knowledge-systems/research-engine/lenses/historical.md",
     "knowledge-systems/research-engine/templates",
     "knowledge-systems/research-engine/projects",
     "knowledge-systems/research-engine/methodology",

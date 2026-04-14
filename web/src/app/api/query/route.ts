@@ -106,7 +106,15 @@ Focus on pages that would most directly answer the question. Return only paths t
 
   try {
     const paths = JSON.parse(jsonMatch[0]) as string[]
-    return paths.filter(p => typeof p === 'string' && p.endsWith('.md'))
+    return paths
+      .filter(p => typeof p === 'string' && p.length > 0)
+      .map(p => {
+        // Normalise: ensure wiki/ prefix and .md extension
+        let normalised = p.trim()
+        if (!normalised.startsWith('wiki/')) normalised = 'wiki/' + normalised
+        if (!normalised.endsWith('.md')) normalised = normalised + '.md'
+        return normalised
+      })
   } catch {
     return []
   }
