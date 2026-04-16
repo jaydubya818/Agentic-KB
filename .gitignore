@@ -13,3 +13,6 @@ web/.env.local
 # Build outputs
 web/tsconfig.tsbuildinfo
 graphify-out/cache/
+
+# Claude Code session artifacts (generated per-machine)
+.claude/
