@@ -15,4 +15,7 @@ web/tsconfig.tsbuildinfo
 graphify-out/cache/
 
 # Claude Code session artifacts (generated per-machine)
-.claude/
+.claude/*
+# …but keep project-level skills versioned (SKILL.md definitions live here)
+!.claude/skills/
+!.claude/skills/**

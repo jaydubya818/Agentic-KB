@@ -24,6 +24,7 @@ Agentic-KB/
 │   ├── my-hooks/           # Jay's Claude Code hook configs
 │   ├── code-examples/      # Annotated code patterns
 │   ├── conversations/      # Notable Claude Code sessions (exported)
+│   ├── clippings/          # Obsidian Web Clipper drop zone — INGEST auto-routes to correct raw/ subdir
 │   └── changelogs/         # Framework version notes
 ├── wiki/                   # LLM-OWNED — never edit manually
 │   ├── concepts/           # Universal agentic concepts
@@ -68,6 +69,8 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD
 related: []          # wiki links to related concepts/patterns
 status: stable | evolving | deprecated
+reviewed: false      # true once Jay has human-verified the content
+reviewed_date: ""    # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -85,6 +88,8 @@ confidence: high | medium | low
 sources: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+reviewed: false      # true once Jay has human-verified the content
+reviewed_date: ""    # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -101,6 +106,8 @@ github: string         # URL if open source
 tags: []
 last_checked: YYYY-MM-DD
 jay_experience: none | limited | moderate | extensive
+reviewed: false        # true once Jay has human-verified the content
+reviewed_date: ""      # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -115,6 +122,8 @@ prerequisites: []
 tested: true | false
 tested_date: YYYY-MM-DD    # only if tested: true
 tags: []
+reviewed: false            # true once Jay has human-verified the content
+reviewed_date: ""          # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -131,6 +140,8 @@ date_ingested: YYYY-MM-DD
 tags: []
 key_concepts: []        # list of concepts this source touches
 confidence: high | medium | low
+reviewed: false         # true once Jay has human-verified the content
+reviewed_date: ""       # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -144,6 +155,8 @@ question: string        # the question this synthesis answers
 tags: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+reviewed: false         # true once Jay has human-verified the content
+reviewed_date: ""       # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -156,6 +169,8 @@ category: pattern | lesson | anti-pattern | decision | war-story
 confidence: high | medium | low   # how validated is this
 date: YYYY-MM-DD
 tags: []
+reviewed: false                   # personal pages authored by Jay may start true; LLM-drafted ones start false
+reviewed_date: ""                 # YYYY-MM-DD when reviewed flipped to true
 ---
 ```
 
@@ -170,8 +185,9 @@ tags: []
 4. **Key Variants** — flavors and configurations
 5. **When To Use** — conditions and signals
 6. **Risks & Pitfalls** — failure modes, what goes wrong
-7. **Related Concepts** — `[[wiki links]]`
-8. **Sources** — `[[wiki/summaries/...]]` links
+7. **Counter-arguments & Gaps** — opposing views, what the evidence does NOT show, unresolved questions. Mandatory bias check — never ship a one-sided compilation.
+8. **Related Concepts** — `[[wiki links]]`
+9. **Sources** — `[[wiki/summaries/...]]` links
 
 ### Pattern Pages (required)
 1. **Problem** — the recurring design problem
@@ -212,6 +228,14 @@ tags: []
 5. **Summary Verdict** — one paragraph recommendation
 6. **When to Re-evaluate** — what would change this verdict
 7. **Sources** — `[[wiki links]]`
+
+### Synthesis Pages (required)
+1. **Question** — the question this synthesis answers, stated plainly
+2. **Argument** — the synthesised position, one declarative paragraph
+3. **Evidence** — sources with key quotes or data
+4. **Counter-arguments & Gaps** — opposing views, missing evidence, unresolved questions. Mandatory bias check — never ship a one-sided synthesis.
+5. **Conclusion** — resolved position, remaining uncertainty, or open question for next round
+6. **Sources** — `[[wiki links]]`
 
 ---
 
@@ -256,6 +280,7 @@ tags: []
 
 ### INGEST Workflow
 When told to ingest a file from raw/:
+0. **If the file is in `raw/clippings/`**: inspect the source URL / file type and move it to the correct raw/ subdir first (papers → `papers/`, transcripts → `transcripts/`, docs → `framework-docs/`, tweets/threads → `conversations/` or a new `raw/social/`). Never ingest out of `clippings/` — it is a staging zone only.
 1. Read the full source file
 2. Extract: concepts, patterns, frameworks mentioned, key claims, code examples, Jay-specific insights
 3. Create `wiki/summaries/{source-slug}.md` with full frontmatter and key points
@@ -285,9 +310,12 @@ When asked to lint the wiki:
 4. Check for **stale framework pages** (`last_checked` > 60 days ago)
 5. Check for **low-confidence claims** that could be verified with a web search
 6. Check for **recipe pages** with `tested: false` older than 30 days — flag for testing
-7. Identify **gap candidates** — concepts referenced but no concept page exists
-8. Suggest **new article candidates** based on gap analysis
-9. Output lint report to `wiki/syntheses/lint-{YYYY-MM-DD}.md`
+7. Check for **unreviewed pages** (`reviewed: false`) with file mtime > 30 days — list for Jay's review queue
+8. Check for **review drift** — pages where `reviewed: true` but file mtime > `reviewed_date` (content changed after human review) — flag for re-review
+9. Check for **concept/synthesis pages missing `Counter-arguments & Gaps` section** — bias-check violation
+10. Identify **gap candidates** — concepts referenced but no concept page exists
+11. Suggest **new article candidates** based on gap analysis
+12. Output lint report to `wiki/syntheses/lint-{YYYY-MM-DD}.md`
 
 ### HOT CACHE Rules
 `wiki/hot.md` holds ≤500 words. Update when:
@@ -318,6 +346,8 @@ When a query reveals a gap not in the wiki:
 8. **Confidence levels must be honest** — default to `medium` when uncertain
 9. **Never hallucinate sources** — if a claim has no source, mark it `[UNVERIFIED]`
 10. **Append to log.md, never overwrite** — it is an audit trail
+11. **Counter-arguments are mandatory** — every concept and synthesis page must include a `Counter-arguments & Gaps` section. Never ship a one-sided compilation; if ten sources agree, the page must still name what the evidence does NOT show and what would change the verdict.
+12. **Reviewed flag starts false** — every LLM-authored page is born `reviewed: false`. Only Jay flips to `true` and stamps `reviewed_date`. Automation (INGEST, /autoresearch, BACKFILL) must never set `reviewed: true`.
 
 ---
 
