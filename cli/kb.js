@@ -21,8 +21,18 @@ const PRIVATE_PIN = process.env.PRIVATE_PIN || ''
 
 // Resolve KB root from this script location: cli/kb.js -> repo root
 import pathMod from 'path'
+import os from 'os'
 import { fileURLToPath } from 'url'
+import { safeJoin, validateSlug } from '../lib/agent-runtime/safe-path.mjs'
 const AGENT_KB_ROOT = pathMod.resolve(pathMod.dirname(fileURLToPath(import.meta.url)), '..')
+
+/** Expand a leading ~ using HOME or os.homedir(); throw if neither is set. */
+function expandHome(p) {
+  if (typeof p !== 'string' || !p.startsWith('~')) return p
+  const home = process.env.HOME || os.homedir()
+  if (!home) throw new Error('Cannot expand ~: HOME and os.homedir() are both empty')
+  return p.replace(/^~/, home)
+}
 const AGENT_RUNTIME_PATH = pathMod.join(AGENT_KB_ROOT, 'lib/agent-runtime/index.mjs')
 const REPO_RUNTIME_PATH = pathMod.join(AGENT_KB_ROOT, 'lib/repo-runtime/index.mjs')
 
@@ -173,13 +183,24 @@ async function query(question, scope = 'public', pin = '') {
 }
 
 async function readArticle(slug) {
-  const cleanSlug = slug.replace(/\.md$/, '')
+  let cleanSlug
+  try {
+    cleanSlug = validateSlug(String(slug || '').replace(/\.md$/, ''), 'slug')
+  } catch (e) {
+    console.error(`❌ Invalid slug: ${e.message}`)
+    process.exit(1)
+  }
   const res = await fetch(`${API_URL}/wiki/${cleanSlug}`)
   // Fall back to reading the raw file directly
   const fs = await import('fs')
-  const path = await import('path')
   const KB_ROOT = new URL('..', import.meta.url).pathname
-  const filePath = path.join(KB_ROOT, 'wiki', cleanSlug + '.md')
+  let filePath
+  try {
+    filePath = safeJoin(KB_ROOT, 'wiki', cleanSlug + '.md')
+  } catch (e) {
+    console.error(`❌ Invalid slug path: ${e.message}`)
+    process.exit(1)
+  }
   try {
     const content = fs.readFileSync(filePath, 'utf8')
     console.log(content)
@@ -191,9 +212,15 @@ async function readArticle(slug) {
 
 async function listSection(section) {
   const fs = await import('fs')
-  const path = await import('path')
   const KB_ROOT = new URL('..', import.meta.url).pathname
-  const sectionDir = path.join(KB_ROOT, 'wiki', section)
+  let sectionDir
+  try {
+    const safeSection = validateSlug(String(section || ''), 'section')
+    sectionDir = safeJoin(KB_ROOT, 'wiki', safeSection)
+  } catch (e) {
+    console.error(`❌ Invalid section: ${e.message}`)
+    process.exit(1)
+  }
 
   if (!fs.existsSync(sectionDir)) {
     console.error(`❌ Section not found: ${section}`)
@@ -400,30 +427,40 @@ async function ingestYoutube(url) {
     console.log('   Run: kb compile  to ingest it into the wiki')
 
   } finally {
-    // Cleanup tmp
-    try { execSync('rm -rf ' + tmpDir) } catch(e) {}
+    // Cleanup tmp — fs.rmSync replaces shell `rm -rf`, no injection surface.
+    try { fs.rmSync(tmpDir, { recursive: true, force: true }) } catch(e) {}
   }
 }
 
 async function ingestTwitterArchive(archivePath) {
   const fs = await import('fs')
   const path = await import('path')
-  const { execSync } = await import('child_process')
+  const { spawnSync } = await import('child_process')
 
   if (!archivePath) {
     console.error('Usage: kb ingest-twitter <path-to-archive.zip or archive-folder>')
     process.exit(1)
   }
 
-  const resolvedPath = archivePath.replace(/^~/, process.env.HOME)
+  let resolvedPath
+  try {
+    resolvedPath = expandHome(archivePath)
+  } catch (e) {
+    console.error(`❌ ${e.message}`)
+    process.exit(1)
+  }
 
-  // Unzip if needed
+  // Unzip if needed — use spawnSync with args array (no shell, no injection via filename)
   let archiveDir = resolvedPath
   if (resolvedPath.endsWith('.zip')) {
     console.log('\n🐦 Unzipping Twitter archive...')
-    archiveDir = '/tmp/kb-twitter-' + Date.now()
+    archiveDir = path.join(os.tmpdir(), 'kb-twitter-' + Date.now())
     fs.mkdirSync(archiveDir, { recursive: true })
-    execSync('unzip -q "' + resolvedPath + '" -d "' + archiveDir + '"')
+    const r = spawnSync('unzip', ['-q', resolvedPath, '-d', archiveDir], { stdio: 'inherit' })
+    if (r.status !== 0) {
+      console.error(`❌ unzip failed with status ${r.status}`)
+      process.exit(1)
+    }
   }
 
   // Find data files
@@ -525,9 +562,9 @@ async function ingestTwitterArchive(archivePath) {
     console.log('   Run: kb compile  to compile into the wiki')
   }
 
-  // Cleanup tmp unzip
+  // Cleanup tmp unzip — fs.rmSync replaces shell `rm -rf`, no injection surface.
   if (resolvedPath.endsWith('.zip')) {
-    try { execSync('rm -rf "' + archiveDir + '"') } catch(e) {}
+    try { fs.rmSync(archiveDir, { recursive: true, force: true }) } catch(e) {}
   }
 }
 
@@ -543,7 +580,8 @@ async function ingestFile(filePath, opts) {
     process.exit(1)
   }
 
-  const resolved = filePath.replace(/^~/, process.env.HOME)
+  let resolved
+  try { resolved = expandHome(filePath) } catch (e) { console.error('❌ ' + e.message); process.exit(1) }
   if (!fs.existsSync(resolved)) {
     console.error(`❌ File not found: ${resolved}`)
     process.exit(1)

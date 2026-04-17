@@ -19,12 +19,13 @@
  */
 
 import fs from 'fs'
+import os from 'os'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const KB_ROOT = path.resolve(__dirname, '..')
-const OBSIDIAN_VAULT = '/Users/jaywest/Documents/Obsidian Vault'
+const OBSIDIAN_VAULT = process.env.OBSIDIAN_VAULT_ROOT || path.join(os.homedir(), 'Documents', 'Obsidian Vault')
 const TRANSCRIPTS_DIR = path.join(KB_ROOT, 'raw', 'transcripts')
 const LOG_FILE = path.join(KB_ROOT, 'raw', '.obsidian-ingest-log.json')
 const POLL_INTERVAL_MS = 30_000 // check every 30s

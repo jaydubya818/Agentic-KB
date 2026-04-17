@@ -98,7 +98,8 @@ Focus on pages that would most directly answer the question. Return only paths t
     ],
   })
 
-  const text = response.content[0].type === 'text' ? response.content[0].text : ''
+  const firstBlock = response.content?.[0]
+  const text = firstBlock && firstBlock.type === 'text' ? firstBlock.text : ''
 
   // Extract JSON array from response
   const jsonMatch = text.match(/\[[\s\S]*?\]/)
@@ -203,11 +204,19 @@ export async function POST(request: NextRequest): Promise<Response> {
     queryScope = (scopeData.scope === 'private' || scopeData.scope === 'all') ? scopeData.scope : 'public'
     queryPin = scopeData.pin || request.headers.get('x-private-pin') || ''
   } catch { /* ignore */ }
-  if (queryScope !== 'public' && PRIVATE_PIN && queryPin !== PRIVATE_PIN) {
-    return new Response(
-      encodeSSE({ type: 'error', content: '🔒 Invalid PIN for private content access.' }),
-      { status: 401, headers: { 'Content-Type': 'text/event-stream' } }
-    )
+  if (queryScope !== 'public') {
+    if (!PRIVATE_PIN) {
+      return new Response(
+        encodeSSE({ type: 'error', content: '🔒 Private scope disabled (PRIVATE_PIN unset).' }),
+        { status: 403, headers: { 'Content-Type': 'text/event-stream' } }
+      )
+    }
+    if (queryPin !== PRIVATE_PIN) {
+      return new Response(
+        encodeSSE({ type: 'error', content: '🔒 Invalid PIN for private content access.' }),
+        { status: 403, headers: { 'Content-Type': 'text/event-stream' } }
+      )
+    }
   }
 
   const encoder = new TextEncoder()

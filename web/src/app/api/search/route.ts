@@ -24,13 +24,19 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ results: [], query: '', graphUsed: false })
   }
 
-  // PIN check for private/all scopes
-  if (scope !== 'public' && PRIVATE_PIN) {
+  // PIN check for private/all scopes. Empty PIN = feature disabled, do not silently bypass.
+  if (scope !== 'public') {
+    if (!PRIVATE_PIN) {
+      return NextResponse.json(
+        { error: 'Private scope disabled (PRIVATE_PIN unset)', code: 'FORBIDDEN' },
+        { status: 403 }
+      )
+    }
     const pin = searchParams.get('pin') || request.headers.get('x-private-pin') || ''
     if (pin !== PRIVATE_PIN) {
       return NextResponse.json(
-        { error: 'Invalid PIN', code: 'AUTH_ERROR' },
-        { status: 401 }
+        { error: 'Invalid PIN', code: 'FORBIDDEN' },
+        { status: 403 }
       )
     }
   }

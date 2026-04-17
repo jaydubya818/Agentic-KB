@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { findArticleBySlug, getBacklinks, KB_ROOT } from '@/lib/articles'
+import { safeJoin } from '@/lib/safe-path'
 import fs from 'fs'
-import path from 'path'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,7 +15,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     if (filePath) {
       // Direct path access: e.g. "wiki/concepts/foo.md"
-      const fullPath = path.join(KB_ROOT, filePath)
+      // safeJoin rejects absolute paths, null bytes, and ".." escapes.
+      let fullPath: string
+      try {
+        fullPath = safeJoin(KB_ROOT, filePath)
+      } catch (e) {
+        return NextResponse.json(
+          { error: 'Invalid path', code: 'BAD_REQUEST' },
+          { status: 400 }
+        )
+      }
       if (!fs.existsSync(fullPath)) {
         return NextResponse.json(
           { error: 'Article not found', code: 'NOT_FOUND' },

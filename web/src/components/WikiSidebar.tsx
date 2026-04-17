@@ -27,9 +27,15 @@ export default function WikiSidebar(): React.ReactElement {
     const load = async (): Promise<void> => {
       try {
         const res = await fetch('/api/vault-structure')
+        if (!res.ok) {
+          console.warn('[WikiSidebar] vault-structure non-ok:', res.status)
+          return
+        }
         const data = await res.json() as VaultStructure
         setStructure(data)
-      } catch { /* ignore */ }
+      } catch (err) {
+        console.warn('[WikiSidebar] vault-structure load failed:', err)
+      }
     }
     void load()
   }, [])
@@ -38,9 +44,12 @@ export default function WikiSidebar(): React.ReactElement {
   useEffect(() => {
     const handler = (): void => {
       fetch('/api/vault-structure')
-        .then(r => r.json())
+        .then(r => {
+          if (!r.ok) throw new Error('vault-structure status ' + r.status)
+          return r.json()
+        })
         .then((data: VaultStructure) => setStructure(data))
-        .catch(() => { /* ignore */ })
+        .catch(err => console.warn('[WikiSidebar] vault-structure reload failed:', err))
     }
     window.addEventListener('vault-switched', handler)
     return () => window.removeEventListener('vault-switched', handler)

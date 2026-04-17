@@ -163,7 +163,7 @@ export default async function ArticlePage({ params }: ArticlePageProps): Promise
                 </>
               ) : (
                 breadcrumbFolders.map((folder, i) => (
-                  <React.Fragment key={i}>
+                  <React.Fragment key={folder + ':' + i}>
                     {' → '}
                     <Link
                       href={`/wiki/${breadcrumbFolders.slice(0, i + 1).join('/')}`}

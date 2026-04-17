@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
+import os from 'os'
 import path from 'path'
 
 export const dynamic = 'force-dynamic'
 
 const VAULT_COOKIE = 'active_vault_path'
-const DEFAULT_VAULT = '/Users/jaywest/Agentic-KB'
+const DEFAULT_VAULT = process.env.DEFAULT_KB_ROOT || path.join(os.homedir(), 'Agentic-KB')
 const SKIP_DIRS = new Set(['.obsidian', '.git', 'node_modules', '.next', '.DS_Store'])
 const MAX_LINKS_PER_SECTION = 40  // cap to keep sidebar usable
 

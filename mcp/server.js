@@ -21,11 +21,27 @@ import fs from 'fs'
 import path from 'path'
 import * as agentRuntime from '../lib/agent-runtime/index.mjs'
 import * as repoRuntime from '../lib/repo-runtime/index.mjs'
+import { safeJoin, validateSlug } from '../lib/agent-runtime/safe-path.mjs'
 
 const KB_ROOT = path.resolve(new URL('.', import.meta.url).pathname, '..')
 const WIKI_ROOT = path.join(KB_ROOT, 'wiki')
 const API_URL = process.env.KB_API_URL || 'http://localhost:3002'
 const PRIVATE_PIN = process.env.PRIVATE_PIN || ''
+
+// ─── PIN gating helper ──────────────────────────────────────────────────────
+// Returns an MCP error response when the PIN check fails, or null when the
+// caller is permitted to proceed. An empty PRIVATE_PIN disables private access
+// entirely rather than silently allowing it (previous bug).
+function requirePin(scope, providedPin, opName = 'this operation') {
+  if (scope === 'public') return null
+  if (!PRIVATE_PIN) {
+    return { content: [{ type: 'text', text: `🔒 Private scope disabled: PRIVATE_PIN is not set for ${opName}.` }], isError: true }
+  }
+  if (String(providedPin || '') !== PRIVATE_PIN) {
+    return { content: [{ type: 'text', text: `🔒 Invalid PIN for ${opName}.` }], isError: true }
+  }
+  return null
+}
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -633,12 +649,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const limit = Number(args.limit || 10)
 
       // Validate PIN for private scopes
-      if (scope !== 'public' && PRIVATE_PIN) {
-        const providedPin = String(args.pin || '')
-        if (providedPin !== PRIVATE_PIN) {
-          return { content: [{ type: 'text', text: '🔒 Private content requires a valid PIN. Pass pin: your-pin with scope: ' + scope + '.' }], isError: true }
-        }
-      }
+      const pinErr = requirePin(scope, args.pin, 'search_wiki')
+      if (pinErr) return pinErr
 
       const results = simpleSearch(query, limit, scope)
       if (results.length === 0) {
@@ -653,8 +665,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     if (name === 'read_article') {
-      const slug = String(args.slug || '').replace(/\.md$/, '')
-      const filePath = path.join(WIKI_ROOT, slug + '.md')
+      let slug
+      try {
+        slug = validateSlug(String(args.slug || '').replace(/\.md$/, ''), 'slug')
+      } catch (e) {
+        return { content: [{ type: 'text', text: `Invalid slug: ${e.message}` }], isError: true }
+      }
+      let filePath
+      try {
+        filePath = safeJoin(WIKI_ROOT, slug + '.md')
+      } catch (e) {
+        return { content: [{ type: 'text', text: `Invalid slug path: ${e.message}` }], isError: true }
+      }
       const articleContent = readFile(path.relative(KB_ROOT, filePath))
       if (!articleContent) {
         return { content: [{ type: 'text', text: `Article not found: ${slug}` }] }
@@ -663,11 +685,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const meta = parseFrontmatter(articleContent)
       const isPersonalPath = slug.startsWith('personal/')
       const visibility = isPersonalPath ? 'private' : (meta.visibility || 'public')
-      if (visibility === 'private' && PRIVATE_PIN) {
-        const providedPin = String(args.pin || '')
-        if (providedPin !== PRIVATE_PIN) {
-          return { content: [{ type: 'text', text: '🔒 This article is private. Pass pin: "<your-pin>" to access it.' }], isError: true }
-        }
+      if (visibility === 'private') {
+        const pinErr = requirePin('private', args.pin, 'read_article (private)')
+        if (pinErr) return pinErr
       }
       return { content: [{ type: 'text', text: articleContent }] }
     }
@@ -701,12 +721,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (name === 'query_wiki') {
       const question = String(args.question || '')
       const qscope = (args.scope === 'private' || args.scope === 'all') ? args.scope : 'public'
-      if (qscope !== 'public' && PRIVATE_PIN) {
-        const providedPin = String(args.pin || '')
-        if (providedPin !== PRIVATE_PIN) {
-          return { content: [{ type: 'text', text: '🔒 Private content requires a valid PIN. Pass pin: "<your-pin>" with scope.' }], isError: true }
-        }
-      }
+      const pinErr = requirePin(qscope, args.pin, 'query_wiki')
+      if (pinErr) return pinErr
       const res = await fetch(`${API_URL}/api/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...(PRIVATE_PIN && qscope !== 'public' ? { 'x-private-pin': PRIVATE_PIN } : {}) },
@@ -741,11 +757,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     if (name === 'compile_wiki') {
       const mode = String(args.mode || 'incremental')
+      // compile_wiki is a write-side admin op — always require PIN when PRIVATE_PIN is set.
       if (PRIVATE_PIN) {
-        const providedPin = String(args.pin || '')
-        if (providedPin !== PRIVATE_PIN) {
-          return { content: [{ type: 'text', text: 'Compile requires a valid PIN.' }], isError: true }
-        }
+        const pinErr = requirePin('private', args.pin, 'compile_wiki')
+        if (pinErr) return pinErr
       }
       const res = await fetch(`${API_URL}/api/compile`, {
         method: 'POST',
@@ -777,17 +792,24 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
     if (name === 'lint_wiki') {
       if (PRIVATE_PIN) {
-        const providedPin = String(args.pin || '')
-        if (providedPin !== PRIVATE_PIN) {
-          return { content: [{ type: 'text', text: 'Lint requires a valid PIN.' }], isError: true }
-        }
+        const pinErr = requirePin('private', args.pin, 'lint_wiki')
+        if (pinErr) return pinErr
       }
       const res = await fetch(`${API_URL}/api/lint`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...(PRIVATE_PIN ? { 'x-private-pin': PRIVATE_PIN } : {}) },
         body: JSON.stringify({ pin: String(args.pin || '') }),
       })
-      const data = await res.json()
+      if (!res.ok) {
+        const bodyText = await res.text().catch(() => '<no body>')
+        return { content: [{ type: 'text', text: `Lint API error ${res.status}: ${bodyText.slice(0, 500)}` }], isError: true }
+      }
+      let data
+      try {
+        data = await res.json()
+      } catch (e) {
+        return { content: [{ type: 'text', text: `Lint API returned non-JSON: ${e.message}` }], isError: true }
+      }
       if (data.ok) {
         return { content: [{ type: 'text', text: [
           'Wiki Lint Report',
@@ -872,8 +894,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     if (name === 'get_repo_home') {
-      const repo = String(args.repo)
-      const homePath = path.join(KB_ROOT, 'wiki', 'repos', repo, 'home.md')
+      let repo
+      try { repo = validateSlug(String(args.repo || ''), 'repo') }
+      catch (e) { return { content: [{ type: 'text', text: `Invalid repo: ${e.message}` }], isError: true } }
+      let homePath
+      try { homePath = safeJoin(KB_ROOT, 'wiki', 'repos', repo, 'home.md') }
+      catch (e) { return { content: [{ type: 'text', text: `Invalid repo path: ${e.message}` }], isError: true } }
       const content = readFile(path.relative(KB_ROOT, homePath))
       if (!content) return { content: [{ type: 'text', text: `Repo not found: ${repo}` }], isError: true }
       return { content: [{ type: 'text', text: content }] }
@@ -887,10 +913,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     if (name === 'search_repo_docs') {
-      const repo = String(args.repo)
+      let repo
+      try { repo = validateSlug(String(args.repo || ''), 'repo') }
+      catch (e) { return { content: [{ type: 'text', text: `Invalid repo: ${e.message}` }], isError: true } }
       const query = String(args.query || '')
       const limit = Math.min(Number(args.limit || 20), 100)
-      const repoDocsDir = path.join(KB_ROOT, 'wiki', 'repos', repo)
+      let repoDocsDir
+      try { repoDocsDir = safeJoin(KB_ROOT, 'wiki', 'repos', repo) }
+      catch (e) { return { content: [{ type: 'text', text: `Invalid repo path: ${e.message}` }], isError: true } }
       if (!fs.existsSync(repoDocsDir)) return { content: [{ type: 'text', text: `Repo not found: ${repo}` }], isError: true }
 
       const results = []
@@ -983,16 +1013,28 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     if (name === 'write_rewrite_artifact') {
-      const repo = String(args.repo)
-      const type = String(args.type)
-      const project = String(args.project)
+      let repo, type, project
+      try {
+        repo = validateSlug(String(args.repo || ''), 'repo')
+        type = validateSlug(String(args.type || ''), 'type')
+        project = validateSlug(String(args.project || ''), 'project')
+      } catch (e) {
+        return { content: [{ type: 'text', text: `Invalid input: ${e.message}` }], isError: true }
+      }
       const content = String(args.content)
       const author = String(args.author)
       const now = new Date().toISOString().slice(0, 10)
-      const dir = path.join(KB_ROOT, 'wiki', 'repos', repo, 'rewrites', type)
+      let dir, filePath
+      try {
+        dir = safeJoin(KB_ROOT, 'wiki', 'repos', repo, 'rewrites', type)
+        filePath = safeJoin(dir, `${project}-${now}.md`)
+      } catch (e) {
+        return { content: [{ type: 'text', text: `Invalid path: ${e.message}` }], isError: true }
+      }
       fs.mkdirSync(dir, { recursive: true })
-      const filePath = path.join(dir, `${project}-${now}.md`)
-      const frontmatter = `---\ntitle: "${project} ${type} rewrite"\ntype: rewrite\nrepo: ${repo}\nproject: ${project}\nauthor: ${author}\ndate: ${now}\nstatus: draft\n---\n\n`
+      // Escape quotes in YAML values to avoid breakage on special chars.
+      const esc = s => JSON.stringify(String(s))
+      const frontmatter = `---\ntitle: ${esc(project + ' ' + type + ' rewrite')}\ntype: rewrite\nrepo: ${esc(repo)}\nproject: ${esc(project)}\nauthor: ${esc(author)}\ndate: ${now}\nstatus: draft\n---\n\n`
       fs.writeFileSync(filePath, frontmatter + content, 'utf8')
       return { content: [{ type: 'text', text: JSON.stringify({ path: path.relative(KB_ROOT, filePath) }, null, 2) }] }
     }

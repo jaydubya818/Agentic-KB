@@ -285,7 +285,7 @@ export default function ProcessPage(): React.ReactElement {
                       overflowY: 'auto',
                     }}>
                       {state.log.map((line, i) => (
-                        <div key={i} style={{ marginBottom: '0.2rem', color: line.type === 'error' ? '#c00' : line.type === 'wrote' ? '#006400' : line.type === 'done' ? '#004d00' : '#202122' }}>
+                        <div key={(line.path || line.message || line.type || '') + ':' + i} style={{ marginBottom: '0.2rem', color: line.type === 'error' ? '#c00' : line.type === 'wrote' ? '#006400' : line.type === 'done' ? '#004d00' : '#202122' }}>
                           {line.type === 'wrote' && (
                           <span>✓ Created:{' '}
                             <Link href={pathToWikiHref(line.path!)} style={{ color: '#0645ad', textDecoration: 'underline' }}>{line.path}</Link>
@@ -302,7 +302,7 @@ export default function ProcessPage(): React.ReactElement {
                                 <div style={{ marginTop: '0.25rem' }}>
                                   {'Files created: '}
                                   {line.filesCreated.map((fp, fi) => (
-                                    <span key={fi}>
+                                    <span key={fp + ':' + fi}>
                                       {fi > 0 && ', '}
                                       <Link href={pathToWikiHref(fp)} style={{ color: '#0645ad', textDecoration: 'underline' }}>{fp}</Link>
                                     </span>

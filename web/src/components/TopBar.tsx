@@ -44,10 +44,13 @@ export default function TopBar({ onOpenQuery }: TopBarProps): React.ReactElement
   const [vaults, setVaults] = useState<Vault[]>([])
   const [showVaultDropdown, setShowVaultDropdown] = useState(false)
   const [currentVault, setCurrentVault] = useState('Agentic-KB')
-  const [currentVaultPath, setCurrentVaultPath] = useState('/Users/jaywest/Agentic-KB')
+  // Default path is populated from /api/switch-vault on mount. Empty string avoids
+  // hardcoding a user-specific HOME-prefixed path into the client bundle.
+  const [currentVaultPath, setCurrentVaultPath] = useState('')
+  const [defaultVaultPath, setDefaultVaultPath] = useState('')
   const [switchingVault, setSwitchingVault] = useState(false)
   const vaultRef = useRef<HTMLDivElement>(null)
-  const isAgenticKB = currentVaultPath === '/Users/jaywest/Agentic-KB'
+  const isAgenticKB = defaultVaultPath !== '' && currentVaultPath === defaultVaultPath
   const searchRef = useRef<HTMLDivElement>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const router = useRouter()
@@ -62,12 +65,19 @@ export default function TopBar({ onOpenQuery }: TopBarProps): React.ReactElement
           fetch('/api/vaults'),
           fetch('/api/switch-vault'),
         ])
-        const vaultsData = await vaultsRes.json() as { vaults: Vault[] }
+        if (!vaultsRes.ok || !activeRes.ok) {
+          console.warn('[TopBar] vault fetch non-ok:', vaultsRes.status, activeRes.status)
+          return
+        }
+        const vaultsData = await vaultsRes.json() as { vaults: Vault[]; defaultPath?: string }
         const activeData = await activeRes.json() as { name: string; path: string }
         setVaults(vaultsData.vaults || [])
         setCurrentVault(activeData.name || 'Agentic-KB')
-        setCurrentVaultPath(activeData.path || '/Users/jaywest/Agentic-KB')
-      } catch { /* ignore */ }
+        setCurrentVaultPath(activeData.path || '')
+        if (vaultsData.defaultPath) setDefaultVaultPath(vaultsData.defaultPath)
+      } catch (err) {
+        console.warn('[TopBar] vault fetch failed:', err)
+      }
     }
     void fetchVaults()
   }, [])

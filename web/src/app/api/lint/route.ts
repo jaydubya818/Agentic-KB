@@ -175,7 +175,8 @@ Be specific. Return ONLY the JSON object.`,
   let suggestions: string[] = []
 
   try {
-    const aiText = aiResponse.content[0].type === 'text' ? aiResponse.content[0].text : '{}'
+    const firstBlock = aiResponse.content?.[0]
+    const aiText = firstBlock && firstBlock.type === 'text' ? firstBlock.text : '{}'
     const jsonMatch = aiText.match(/\{[\s\S]*\}/)
     if (jsonMatch) {
       const parsed = JSON.parse(jsonMatch[0]) as {

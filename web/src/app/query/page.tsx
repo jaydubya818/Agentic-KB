@@ -477,7 +477,7 @@ export default function QueryPage(): React.ReactElement {
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                     {state.sources.map((src, i) => (
                       <Link
-                        key={i}
+                        key={src + ':' + i}
                         href={`/wiki/${pathToSlug(src)}`}
                         style={{
                           display: 'inline-block',
@@ -506,7 +506,7 @@ export default function QueryPage(): React.ReactElement {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
                 {EXAMPLE_QUESTIONS.map((q, i) => (
                   <button
-                    key={i}
+                    key={q + ':' + i}
                     onClick={() => handleExampleClick(q)}
                     style={{
                       textAlign: 'left',

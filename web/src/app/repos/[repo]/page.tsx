@@ -469,7 +469,7 @@ export default function RepoDetailPage(): React.ReactElement {
               {searchResults.length > 0 && (
                 <div style={{ display: 'grid', gap: '0.75rem' }}>
                   {searchResults.map((result, idx) => (
-                    <div key={idx} style={{
+                    <div key={(result.path || result.name || '') + ':' + idx} style={{
                       padding: '0.75rem',
                       background: '#f8f9fa',
                       border: '1px solid #eaecf0',

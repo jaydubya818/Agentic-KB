@@ -66,12 +66,9 @@ export async function POST(request: NextRequest): Promise<Response> {
     return NextResponse.json({ error: `mkdir failed: ${(err as Error).message}` }, { status: 500 })
   }
 
+  // Exclusive-create loop: use `wx` to avoid TOCTOU between existsSync and writeFileSync.
   let target = path.join(qaDir, `${dateStr}-${slug}.md`)
   let i = 2
-  while (fs.existsSync(target)) {
-    target = path.join(qaDir, `${dateStr}-${slug}-${i}.md`)
-    i++
-  }
 
   const fm = [
     '---',
@@ -103,12 +100,26 @@ export async function POST(request: NextRequest): Promise<Response> {
     `## Answer\n\n${answer}\n` +
     sourcesMd
 
-  try {
-    fs.writeFileSync(target, doc, 'utf8')
-    invalidateIdIndex()
-  } catch (err) {
-    return NextResponse.json({ error: `write failed: ${(err as Error).message}` }, { status: 500 })
+  // Retry on EEXIST (file created between checks) with a numeric suffix.
+  let wrote = false
+  while (!wrote && i < 1000) {
+    try {
+      fs.writeFileSync(target, doc, { encoding: 'utf8', flag: 'wx' })
+      wrote = true
+    } catch (err) {
+      const code = (err as NodeJS.ErrnoException).code
+      if (code === 'EEXIST') {
+        target = path.join(qaDir, `${dateStr}-${slug}-${i}.md`)
+        i++
+        continue
+      }
+      return NextResponse.json({ error: `write failed: ${(err as Error).message}` }, { status: 500 })
+    }
   }
+  if (!wrote) {
+    return NextResponse.json({ error: 'could not allocate filename after 1000 attempts' }, { status: 500 })
+  }
+  invalidateIdIndex()
 
   const rel = path.relative(vaultRoot, target)
   appendAuditLog({

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
+import { validateSlug } from '@/lib/safe-path'
 import { getRepo, repoDocsRoot } from '../../../../../../../lib/repo-runtime/index.mjs'
 
 export const dynamic = 'force-dynamic'
@@ -50,6 +51,9 @@ export async function GET(
   { params }: { params: Promise<{ repo: string }> }
 ): Promise<NextResponse> {
   const { repo } = await params
+  try { validateSlug(repo, 'repo') } catch (e) {
+    return NextResponse.json({ error: 'Invalid repo', code: 'BAD_REQUEST' }, { status: 400 })
+  }
   const { searchParams } = new URL(request.url)
   const section = searchParams.get('section') || undefined
 
@@ -58,7 +62,8 @@ export async function GET(
     return NextResponse.json({ error: 'Repo not found' }, { status: 404 })
   }
 
-  const docsRoot = repoDocsRoot(DEFAULT_KB_ROOT, repo)
+  // repoDocsRoot(repo) returns a path relative to kbRoot.
+  const docsRoot = repoDocsRoot(repo)
   const fullPath = path.join(DEFAULT_KB_ROOT, docsRoot)
 
   const docs = walkDocs(fullPath, section)

@@ -391,7 +391,9 @@ export default function QueryPanel({ isOpen, onClose }: QueryPanelProps): React.
                   remarkPlugins={[remarkGfm]}
                   components={{
                     a({ href, children }) {
-                      if (href?.startsWith('/')) {
+                      // Guard against undefined href so React doesn't render href="undefined".
+                      if (!href) return <span style={{ color: '#0645ad' }}>{children}</span>
+                      if (href.startsWith('/')) {
                         return <a href={href} style={{ color: '#0645ad' }}>{children}</a>
                       }
                       return <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: '#0645ad' }}>{children}</a>
@@ -493,7 +495,7 @@ export default function QueryPanel({ isOpen, onClose }: QueryPanelProps): React.
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                 {state.sources.map((src, i) => (
                   <Link
-                    key={i}
+                    key={src + ':' + i}
                     href={`/wiki/${pathToSlug(src)}`}
                     onClick={onClose}
                     style={{

@@ -86,7 +86,8 @@ export async function GET(
   }
 
   const limit = Math.min(parseInt(limitStr, 10) || 20, 100)
-  const wikiRoot = repoWikiRoot(DEFAULT_KB_ROOT, repo)
+  // repoWikiRoot(repo) returns a path relative to kbRoot.
+  const wikiRoot = repoWikiRoot(repo)
   const searchBase = path.join(DEFAULT_KB_ROOT, wikiRoot)
 
   let scanDirs: string[] = []
