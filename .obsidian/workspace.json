@@ -207,6 +207,7 @@
   },
   "active": "fd6ffe703848d9dd",
   "lastOpenFiles": [
+    "outputs/pilot-xpresso-rollout-2026-04-18.md",
     "outputs/autoresearch-agent-eval-harnesses-2026-04-18.md",
     "wiki/frameworks/framework-langsmith.md",
     "wiki/frameworks/framework-deepeval.md",
@@ -238,7 +239,6 @@
     "wiki/prompt-library/custom-slash-commands.md",
     "wiki/prompt-library/reflection-synthesis.md",
     "wiki/prompt-library/idea-generation.md",
-    "wiki/prompt-library/note-processing.md",
     "wiki/daily-systems",
     "wiki/prompt-library",
     "knowledge-systems/research-engine/templates",
