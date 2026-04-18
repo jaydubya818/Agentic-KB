@@ -215,6 +215,20 @@ Optional (calibrate to risk tolerance):
 
 ---
 
+## Counter-arguments & Gaps
+
+HITL is often assumed to add safety monotonically — but automation-bias research (Skitka et al. 1999, Goddard et al. 2012, more recently in radiology and aviation) shows humans review machine recommendations with reduced scrutiny relative to equivalent decisions without a machine suggestion. An unsafe recommendation passes review more easily than the same decision proposed by a peer. The HITL gate can reduce quality while appearing to add it.
+
+Approval-at-scale collapses to rubber-stamping regardless of gate design. Once approval volume exceeds a few per hour per reviewer, decision quality drops toward the default (usually "approve"). The right question is not "should we gate this action" but "can the human actually engage with this decision," and the answer is usually "no" for anything that fires more than a few times a day.
+
+Context collapse is more insidious than the Risks section suggests. Human reviewers often cannot reconstruct the agent's reasoning from logs alone, especially when the agent's chain-of-thought is lengthy or partially redacted. The human signs off on the *outcome*, not the *reasoning*, which means HITL catches certain surface failures but misses reasoning-level ones — exactly the failures that matter most for capable agents.
+
+Open questions: (a) does HITL improve or degrade outcomes at the margin? There's surprisingly little production data, and most "HITL success" stories are unscientific case studies. (b) How should gating thresholds adapt as model capability rises — at what capability level does HITL cost more than it returns?
+
+What would change the verdict: controlled studies where HITL-gated agents produce measurably better outcomes than well-calibrated automated systems over a representative task mix. Published evidence is thin and mixed.
+
+---
+
 ## Related Concepts
 
 - [[concepts/guardrails]] — automated guardrails as HITL complement

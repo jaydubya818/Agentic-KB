@@ -140,6 +140,20 @@ The key advantage of multi-agent over single-agent: **blast radius containment**
 
 ---
 
+## Counter-arguments & Gaps
+
+Cognition AI's "Don't Build Multi-Agents" (2024) is the most-cited contrarian case: they argue that for most production tasks, a single well-designed agent with careful context engineering beats multi-agent architectures on reliability, cost, and debuggability. Their core claim — that context sharing across agents is the structural weak point and usually dominates any parallelism gain — is hard to refute without committing to a specific benchmark. Much of the multi-agent enthusiasm comes from papers on narrow, parallelisable tasks that don't represent production workloads.
+
+Coordination overhead is systematically underestimated. The token cost of inter-agent messages, the latency of orchestrator round-trips, and the debugging cost of cross-agent causality often exceed the capability gain from specialisation. Published multi-agent wins rarely control for equivalent single-agent token budgets; when they do, the gap shrinks dramatically.
+
+The specialisation argument assumes prompt/context specialisation genuinely improves model behaviour — but modern frontier models handle role-based prompts within a single agent nearly as well as dedicated agents. The question "why can't one agent play two roles in sequence?" rarely has a principled answer beyond "we want fan-out parallelism," which has its own costs.
+
+Open questions: (a) at what task complexity does multi-agent start to pay back its coordination tax? No clean empirical threshold exists. (b) Is the right architectural unit the *agent* or the *task graph*? Framing the same decomposition as a workflow with tool calls, rather than as agents, often works better.
+
+What would change the verdict in favor of multi-agent: controlled evaluations on production-representative tasks where multi-agent beats an equally budgeted single-agent system on both quality and latency. Most published evidence cherry-picks either axis.
+
+---
+
 ## Related Concepts
 
 - [[concepts/task-decomposition]] — how to break tasks before distributing them

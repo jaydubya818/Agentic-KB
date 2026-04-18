@@ -158,6 +158,20 @@ For production systems, published benchmarks are insufficient. Build task-specif
 
 ---
 
+## Counter-arguments & Gaps
+
+Training-data contamination makes most public benchmarks unreliable in ways that are hard to detect. Oren et al. (2023) show that even "held-out" splits leak into frontier model pretraining. Score improvements on MMLU, HumanEval, and GSM8K between consecutive model releases are ambiguous evidence of capability gain; some of the lift is contamination, not learning. Treating public benchmark deltas as clean capability evidence is the common failure mode.
+
+Goodhart's law bites hard for agentic benchmarks. SWE-bench scores correlate with "how good is the prompt scaffolding around the model" nearly as much as model capability. AgentBench similarly rewards harness engineering. The metric has become a target and the signal-to-noise ratio on within-model-family comparisons is low.
+
+Private, rolling benchmarks solve contamination but introduce new problems: they're unreproducible, unauditable, and concentrate evaluation power in whoever holds the benchmark. Anthropic, OpenAI, and labs each have private evals that nobody else can validate. This is a governance gap, not just a methodological one.
+
+Open questions: (a) how do you measure capability growth when every static benchmark is contaminated and every rolling one is opaque? (b) Do agentic benchmarks measure the agent or the harness, and is that distinction even meaningful for production use?
+
+What would change the verdict: reproducible, contamination-audited benchmarks with public methodology that still discriminate across frontier models. None of the popular public benchmarks currently qualify.
+
+---
+
 ## Related Concepts
 
 - [[concepts/llm-as-judge]] — judge-based grading within benchmarks

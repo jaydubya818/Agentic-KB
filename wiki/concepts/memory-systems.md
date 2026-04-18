@@ -187,6 +187,20 @@ Apply whenever the task involves creating or modifying a Prisma migration.
 
 ---
 
+## Counter-arguments & Gaps
+
+The "agents need persistent memory" assumption is weaker than it appears. Long-context models (200k+ tokens) obviate many memory use-cases — what used to require vector DBs and retrieval pipelines now fits in a single request. A substantial fraction of agentic "memory systems" are solutions to a problem that 2025-era context windows already solve, and the ongoing token-cost decline is rapidly moving the threshold.
+
+Memory poisoning is under-appreciated relative to retrieval failures. Once an agent writes a wrong fact to semantic memory, every subsequent agent that reads it treats it as authority. There's no published production study showing how long bad memories persist or how often they cascade — this is a governance blind spot, not just a technical pitfall. "Validate before writing" is the standing advice but is rarely implemented with teeth.
+
+Vector retrieval quality is dominated by embedding model choice. Teams often attribute retrieval improvements to RAG-architecture changes when the actual driver was a newer embedding model. Without controlled ablations, most memory-system wins are uncontrolled.
+
+Open questions: (a) at what context size does explicit memory architecture become a net negative? (b) Should agents have permission to modify their own memory, or should writes always be gated by a review step? The field has defaulted to self-modification without clear evidence it's safe. (c) How do you audit cross-session memory for drift, contamination, and contradiction at scale?
+
+What would change the verdict on explicit memory architecture: controlled studies showing memory-augmented agents beat equally budgeted long-context agents on realistic tasks. Current comparisons are usually against straw-man baselines.
+
+---
+
 ## Related Concepts
 
 - [[concepts/context-management]] — managing working memory during sessions

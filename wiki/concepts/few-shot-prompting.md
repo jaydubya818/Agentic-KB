@@ -171,6 +171,20 @@ Few-shot is the right default for most agentic tasks. Fine-tuning pays off when:
 
 ---
 
+## Counter-arguments & Gaps
+
+Min et al. (2022) produced the most counter-intuitive result in few-shot research: for many tasks, *randomising the labels* in few-shot examples barely hurt performance. Models appear to use few-shot examples primarily to infer *format and distribution*, not to learn input-output mappings. This contradicts the folk model of "the model learns the task from the examples" and reframes few-shot as mostly a format-setting trick.
+
+Lu et al. (2022) show that example ordering alone can swing performance by 20+ points on classification tasks — which means published few-shot numbers are often not reproducible without the exact example order. The technique is far less robust than academic reporting suggests.
+
+Frontier instruction-tuned models have largely absorbed the behaviours that few-shot was compensating for in the GPT-3 era. On Claude 3+ and GPT-4+, zero-shot with a clear task description frequently matches or beats few-shot on classification and extraction tasks at a fraction of the token cost. The Karpathy-era intuition that "more examples are always better" is domain-specific.
+
+Open questions: (a) does the Min et al. "labels don't matter" finding hold for reasoning-trained models, or does it dissolve once the model actually reasons over demonstrations? (b) At what instruction-following capability does few-shot start costing more than it returns?
+
+What would change the verdict: controlled evaluations on current-generation instruction-tuned models showing few-shot consistently beats careful zero-shot with equivalent effort on the task description. Published evidence is mixed and task-dependent.
+
+---
+
 ## Related Concepts
 
 - [[concepts/chain-of-thought]] — extending demonstrations with reasoning traces

@@ -66,6 +66,18 @@ Applied to skill files and CLAUDE.md: the routing/priority rules and the hardest
 - **Context creep across milestones** — files from earlier project phases stay in context long after they stop being relevant
 - **Critical rules buried in the middle** — the primacy-recency curve means anything important in lines 200-800 of a 1,000-line prompt is at highest risk of being underweighted
 
+## Counter-arguments & Gaps
+
+The U-shaped attention curve (Liu et al. "Lost in the Middle" 2023) is the canonical evidence for aggressive context curation — but subsequent work shows the effect is partially an artifact of position-embedding choices in older models. Frontier long-context models (Claude 3+, Gemini 1.5+) exhibit substantially flatter attention curves across 100k+ tokens; the "middle" failure mode may be smaller than the folk advice suggests for current-generation models.
+
+Summarisation as a context-management strategy is lossy in ways that are hard to audit. The summary is a model-written artefact that the next model step treats as authoritative; errors compound silently. Anthropic's own research on context compression shows that preserving raw references with targeted retrieval beats summary-based compression on recall tasks.
+
+Tight context budgets can induce sycophantic shortcutting. When the model's scratchpad is aggressively pruned, it can lose the intermediate reasoning needed to catch errors — the cost-optimization win becomes a quality loss that doesn't show up until production. The right budget is task-dependent and experimental, not a universal rule.
+
+Open questions: (a) at what context length does primacy-recency stop mattering enough to shape prompt design? (b) Is there a principled way to quantify summarisation information loss before running the pipeline, rather than after the quality regression?
+
+What would change the verdict on aggressive summarisation: an ablation showing summary-compressed context matches raw-reference context on reasoning-heavy tasks. Current evidence shows a consistent gap in favor of raw references.
+
 ## See Also
 
 - [Context Manager Agent Pattern](../patterns/pattern-context-manager-agent.md)

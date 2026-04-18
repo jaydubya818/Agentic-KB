@@ -174,6 +174,20 @@ for iteration in range(MAX_ITERATIONS):
 
 ---
 
+## Counter-arguments & Gaps
+
+ReAct is not the only viable loop, and may not be the best one for many tasks. Tree-of-Thoughts (Yao 2023) and graph-structured deliberation outperform linear ReAct on planning-heavy problems, at the cost of token volume. Treating ReAct as the default without benchmarking the task is a common over-commitment.
+
+The "infinite loop" concern is mostly solved for production. Hard iteration caps, termination-timeout budgets, and judge-checked "did this iteration make progress" checks are standard in [[claude-code]], [[framework-langgraph]], and OpenAI's Assistants. The interesting failure mode is not runaway loops but *short* loops that terminate prematurely because the model mistakes partial output for completion — sycophantic stopping, not infinite reasoning.
+
+Long-context models weaken the rationale for tight loops. When a model can hold 200k+ tokens in context, aggressive tool-output compression and loop summarisation may hurt more than they help by discarding signal. The primacy-recency curve is real but the mitigation (summarise-and-restart) trades one failure mode for another.
+
+Open questions: (a) does reasoning-trained model architecture (extended thinking, o-series) make explicit loops redundant, or just move the loop inside the model's black box? (b) How should loop termination criteria adapt to confidence estimates from the model itself — and how reliable are those estimates?
+
+What would change the verdict: controlled evaluations showing linear ReAct loops match or beat deliberation-heavy alternatives on multi-step planning tasks at comparable token budget. Current evidence tilts the other way.
+
+---
+
 ## Related Concepts
 
 - [[concepts/chain-of-thought]] — reasoning style within each loop iteration

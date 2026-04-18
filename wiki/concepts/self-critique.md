@@ -166,6 +166,20 @@ Good termination:
 
 ---
 
+## Counter-arguments & Gaps
+
+The strongest evidence against self-critique comes from Valmeekam et al. ("On the Self-Verification Limitations of Large Language Models" 2023) and Huang et al. ("Large Language Models Cannot Self-Correct Reasoning Yet" 2024), who show that models frequently *worsen* correct answers when asked to reflect on them. Self-critique without external signal can introduce errors at rates comparable to the errors it catches. The net improvement is task-specific and often near zero.
+
+Shinn et al.'s Reflexion shows gains, but primarily on tasks where external signal is available (test outcomes, environment feedback). "Pure" self-critique — where the model critiques its own output with no grounding — is a much weaker technique than Reflexion-style presentations imply. Conflating the two is a common mistake.
+
+Using a separate model instance as critic doesn't fully solve the problem when both models share a pretraining corpus. Shared biases, shared failure modes, and shared blind spots make "cross-model" critique less independent than it appears. A frontier model critiquing a smaller model does better than peer-to-peer critique, but the capability-gap requirement is not in the standard self-critique framing.
+
+Open questions: (a) does self-critique produce net-positive results on tasks lacking an external oracle, or is it mostly theatre dressed up as reliability engineering? (b) How much of observed self-critique benefit is actually the model benefiting from a second chance at the problem with more compute, rather than from critique content?
+
+What would change the verdict in favor of pure self-critique: ablation studies showing self-critique beats equally budgeted single-pass generation on tasks without external feedback. Current evidence clusters against this claim.
+
+---
+
 ## Related Concepts
 
 - [[concepts/llm-as-judge]] — using a separate model as the critic

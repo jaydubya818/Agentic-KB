@@ -215,6 +215,20 @@ No layer is sufficient alone. A prompt injection that bypasses layer 2 should st
 
 ---
 
+## Counter-arguments & Gaps
+
+Published jailbreak research (Zou et al. "Universal and Transferable Adversarial Attacks" 2023, Wei et al. "Jailbroken: How Does LLM Safety Training Fail" 2023) shows that LLM-based guardrails are systematically bypassable with adversarial prefixes and multi-turn setups. The layered-defense argument still holds — each layer forces more adversarial effort — but claiming guardrails "work" without specifying the threat model overstates the protection. Against a determined adversary, they mostly buy time.
+
+Over-blocking is rarely measured with the rigor under-blocking gets. Teams publish false-positive rates on benign benchmarks but not false-*negative* measurements from production telemetry. The result is that guardrail quality is evaluated asymmetrically: we know how often they block legitimate requests, not how often they miss malicious ones.
+
+Semantic guardrails (Llama Guard, NeMo Guardrails) inherit the biases and refusal patterns of their underlying models. Using a guardrail model trained by vendor A to protect a primary model from vendor B means importing vendor A's safety policy — which may not match the product's requirements. This is a governance choice disguised as a technical one.
+
+Open questions: (a) how do guardrails compose with agentic tool use? An agent with a blocked output can often route around the block by calling a tool whose output isn't checked. (b) At what adversarial sophistication does the layered-defense equation flip from "worth the latency" to "security theater"?
+
+What would change the verdict on pure semantic guardrails: adversarial evaluations where success rates stay below 5% over a red-team cycle longer than a quarter. Current published results cluster at 20-60% bypass rates within days.
+
+---
+
 ## Related Concepts
 
 - [[concepts/human-in-the-loop]] — the HITL gate as a special case of action guardrail
