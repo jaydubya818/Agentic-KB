@@ -176,4 +176,4 @@ This KB already implements several knowledge graph principles:
 
 ## Sources
 - [[summaries/summary-knowledge-graphs-explainer]] — Primary explainer source
-- [[summaries/summary-llm-wiki-v2]] — LLM Wiki v2: knowledge graphs as memory substrate
+- [[summaries/summary-llm-wiki-v2]] — [[llm-wiki]] v2: knowledge graphs as memory substrate

@@ -47,7 +47,7 @@ This means the daily system is largely automatic — the KB tells Hermes what ma
 ## Related
 
 - [[personal/hermes-operating-context]] — Full priority stack and operating context
-- [[hot]] — Hot cache (read every session)
+- [[hot]] — [[pattern-hot-cache]] (read every session)
 - [[mocs/automation|Automation]] — Automated review triggers
 - [[mocs/maintenance|Maintenance & Optimization]] — Monthly LINT protocol
 - [[prompt-library/reflection-synthesis|Reflection & Synthesis]] — Session debrief prompts

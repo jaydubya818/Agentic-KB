@@ -15,7 +15,7 @@ Master index of all tracked repositories in the Agentic-KB ecosystem.
 | Name | Status | Last Synced | Doc Count | Purpose |
 |------|--------|-------------|-----------|---------|
 | [[agentic-kb/home\|Agentic-KB]] | active | 2026-04-09 | 47 | Personal knowledge base and organizational brain for agentic AI engineering |
-| [[agentic-pi-harness/home\|Agentic-Pi-Harness]] | active | 2026-04-09 | 0 | Agentic Claude Code harness running on Raspberry Pi infrastructure |
+| [[agentic-pi-harness/home\|Agentic-Pi-Harness]] | active | 2026-04-09 | 0 | Agentic [[framework-claude-code]] harness running on Raspberry Pi infrastructure |
 | [[pi/home\|Pi]] | active | 2026-04-09 | 0 | Raspberry Pi system management and infrastructure scripts |
 | [[mission-control/home\|MissionControl]] | active | 2026-04-09 | 0 | Multi-agent orchestration and mission planning interface |
 | [[llmwiki/home\|LLMwiki]] | active | 2026-04-09 | 0 | LLM-powered wiki compilation system and knowledge management tooling |

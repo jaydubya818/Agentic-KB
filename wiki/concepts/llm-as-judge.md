@@ -27,7 +27,7 @@ status: stable
 
 ## Definition
 
-LLM-as-judge is an evaluation methodology where a language model is used as an automated evaluator of other LLM outputs. The judge LLM receives a rubric, the output to evaluate, and optionally a reference answer, and returns a structured assessment (score, pass/fail, or critique).
+[[llm-as-judge]] is an evaluation methodology where a language model is used as an automated evaluator of other LLM outputs. The judge LLM receives a rubric, the output to evaluate, and optionally a reference answer, and returns a structured assessment (score, pass/fail, or critique).
 
 ---
 
@@ -82,7 +82,7 @@ Key implementation choices:
 
 ## Rubric Design
 
-A rubric is the most important element of LLM-as-judge. Generic rubrics ("is this good?") produce biased, uncalibrated results. Task-specific rubrics produce useful signal.
+A rubric is the most important element of [[llm-as-judge]]. Generic rubrics ("is this good?") produce biased, uncalibrated results. Task-specific rubrics produce useful signal.
 
 **Rubric structure**:
 ```
@@ -159,7 +159,7 @@ If calibration is below threshold, either: refine the rubric, switch judge model
 
 ---
 
-## When LLM-as-Judge Beats Human Eval
+## When [[llm-as-judge]] Beats Human Eval
 
 - **Scale**: 10,000 outputs per day — human eval is infeasible; LLM judge runs in minutes
 - **Consistency**: Human raters have 15-20% disagreement on most tasks. LLM judge at temperature=0 is deterministic.

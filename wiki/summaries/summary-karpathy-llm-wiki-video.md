@@ -14,13 +14,13 @@ confidence: medium
 
 ## Key Purpose
 
-Video transcript explaining Karpathy's [[llm-wiki]] pattern and demonstrating a live build in [[framework-claude-code]]. Covers the core architecture, why it beats RAG, and the three core operations.
+Video transcript explaining [[andrej-karpathy]]'s [[llm-wiki]] pattern and demonstrating a live build in [[framework-claude-code]]. Covers the core architecture, why it beats RAG, and the three core operations.
 
 ## Core Thesis: Knowledge That Compounds
 
 Traditional RAG: LLM retrieves chunks and generates an answer. Nothing accumulates. Every query rediscovers knowledge from scratch.
 
-LLM Wiki pattern: LLM builds and maintains a persistent interlinked wiki. Cross-references are pre-built. Contradictions are pre-flagged. Synthesis already reflects everything fed to it. Knowledge compounds instead of being thrown away after each conversation.
+[[llm-wiki]] pattern: LLM builds and maintains a persistent interlinked wiki. Cross-references are pre-built. Contradictions are pre-flagged. Synthesis already reflects everything fed to it. Knowledge compounds instead of being thrown away after each conversation.
 
 ## Three-Layer Architecture
 

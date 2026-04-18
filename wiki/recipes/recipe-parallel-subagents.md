@@ -26,7 +26,7 @@ Two paths:
 
 ## Prerequisites
 
-For the Claude Code path: just Claude Code with proper permissions. No setup needed.
+For the [[framework-claude-code]] path: just [[framework-claude-code]] with proper permissions. No setup needed.
 
 For the TypeScript path:
 ```bash
@@ -36,11 +36,11 @@ cd your-agent-project
 
 ---
 
-## Path 1: Claude Code Agent Tool (Native Fan-Out)
+## Path 1: [[framework-claude-code]] Agent Tool (Native [[pattern-fan-out-worker]])
 
 ### Step 1 — Understand the Agent Tool
 
-The key insight: **multiple Agent tool calls in a single Claude Code response execute in parallel**. This is not a sequential loop — they run concurrently.
+The key insight: **multiple Agent tool calls in a single [[framework-claude-code]] response execute in parallel**. This is not a sequential loop — they run concurrently.
 
 ```
 # Sequential (wrong — slower):
@@ -52,9 +52,9 @@ Turn 3: Agent call #3 → wait → result #3
 Turn 1: Agent calls #1, #2, #3 simultaneously → wait → results #1, #2, #3
 ```
 
-The orchestrator prompt must explicitly instruct Claude Code to make all Agent calls in a single response.
+The orchestrator prompt must explicitly instruct [[framework-claude-code]] to make all Agent calls in a single response.
 
-### Step 2 — Orchestrator Prompt for Fan-Out
+### Step 2 — Orchestrator Prompt for [[pattern-fan-out-worker]]
 
 ```
 You are an orchestrator. Your task: [TASK DESCRIPTION]
@@ -117,7 +117,7 @@ In the Agent tool call, add: `timeout: 120` for long-running tasks.
 
 ---
 
-## Path 2: TypeScript SDK (Programmatic Fan-Out)
+## Path 2: TypeScript SDK (Programmatic [[pattern-fan-out-worker]])
 
 ### Step 1 — Define Sub-Agent Configs
 
@@ -252,7 +252,7 @@ async function executeAgent(config: SubAgentConfig): Promise<Omit<SubAgentResult
 }
 ```
 
-### Step 3 — Fan-Out Orchestrator
+### Step 3 — [[pattern-fan-out-worker]] Orchestrator
 
 ```typescript
 // src/parallel/fan-out.ts
@@ -400,7 +400,7 @@ console.log(finalText)
 
 1. **Confirm parallelism**: run the TypeScript example. Total wall-clock time should be close to the slowest agent (not the sum). Log each agent's start and end time to verify overlap.
 
-2. **Confirm partial failure handling**: set one agent's task to something impossible (`task: "read /nonexistent/file/path.txt"`). The fan-out should succeed with 2/3 agents; the failure should appear in the merged output with a helpful message.
+2. **Confirm partial failure handling**: set one agent's task to something impossible (`task: "read /nonexistent/file/path.txt"`). The [[pattern-fan-out-worker]] should succeed with 2/3 agents; the failure should appear in the merged output with a helpful message.
 
 3. **Confirm timeout**: set one agent's `timeoutMs: 1000` (1 second) on a task that takes 5 seconds. It should time out and return an error — not hang.
 
@@ -413,10 +413,10 @@ console.log(finalText)
 ### Failure: All agents run sequentially despite Promise.all
 Cause: you're awaiting each agent inside a loop before starting the next. Fix: collect all Promises first, then `Promise.all([p1, p2, p3])` — not `await p1; await p2; await p3`.
 
-### Failure: Fan-out uses too many API rate limit tokens
+### Failure: [[pattern-fan-out-worker]] uses too many API rate limit tokens
 Cause: N agents × large context = N × token cost, all at once. Fix: (1) use Haiku for leaf agents, (2) `maxConcurrency: 3` to batch and rate-limit, (3) reduce context per agent by scoping tasks more tightly.
 
-### Failure: One slow agent blocks the entire fan-out
+### Failure: One slow agent blocks the entire [[pattern-fan-out-worker]]
 Cause: `Promise.all` waits for the slowest. Fix: use `Promise.allSettled` instead of `Promise.all` to never block on a single failure, combined with per-agent timeouts. Or use `Promise.race` if you want the first N results and don't need all of them.
 
 ### Failure: Merged results are too long for synthesis
@@ -426,16 +426,16 @@ Cause: each agent returns 2,000+ words, and 5 agents × 2,000 words = 10,000+ wo
 
 ## Next Steps
 
-1. **Add result validation**: after fan-out, run a lightweight validator agent on each result before merging — catch low-quality outputs before they pollute the synthesis
-2. **Add streaming fan-out**: report each agent's result as it completes rather than waiting for all
+1. **Add result validation**: after [[pattern-fan-out-worker]], run a lightweight validator agent on each result before merging — catch low-quality outputs before they pollute the synthesis
+2. **Add streaming [[pattern-fan-out-worker]]**: report each agent's result as it completes rather than waiting for all
 3. **Add retry logic**: on agent failure, retry with a modified prompt up to 2 times before marking as failure
-4. **Extend to dynamic fan-out**: the orchestrator decides how many agents to spawn based on the task complexity, not a fixed N
+4. **Extend to dynamic [[pattern-fan-out-worker]]**: the orchestrator decides how many agents to spawn based on the task complexity, not a fixed N
 
 ---
 
 ## Related Recipes
 
-- [[recipes/recipe-multi-agent-crew]] — orchestrator with 3 specialists using fan-out
+- [[recipes/recipe-multi-agent-crew]] — orchestrator with 3 specialists using [[pattern-fan-out-worker]]
 - [[recipes/recipe-build-tool-agent]] — prerequisite: single tool-using agent
-- [[recipes/recipe-agent-evaluation]] — evaluate the quality of fan-out results
+- [[recipes/recipe-agent-evaluation]] — evaluate the quality of [[pattern-fan-out-worker]] results
 - [[frameworks/framework-claude-code]] — Agent tool documentation

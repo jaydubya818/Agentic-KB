@@ -14,9 +14,9 @@ jay_experience: none
 
 ## Overview
 
-[[framework-autogen]] is Microsoft Research's multi-agent framework built around a conversational paradigm — agents coordinate by talking to each other in structured conversations, rather than through a graph or explicit orchestration layer. The fundamental primitive is the agent-to-agent conversation: you define agents with roles and capabilities, and AutoGen manages the message passing, termination conditions, and tool execution between them.
+[[framework-autogen]] is Microsoft Research's multi-agent framework built around a conversational paradigm — agents coordinate by talking to each other in structured conversations, rather than through a graph or explicit orchestration layer. The fundamental primitive is the agent-to-agent conversation: you define agents with roles and capabilities, and [[framework-autogen]] manages the message passing, termination conditions, and tool execution between them.
 
-AutoGen underwent a major architectural revision in 0.4.x (renamed the core runtime, introduced async-first design). The 0.2.x API is widely documented in tutorials but is legacy. This page covers the current 0.4.x design.
+[[framework-autogen]] underwent a major architectural revision in 0.4.x (renamed the core runtime, introduced async-first design). The 0.2.x API is widely documented in tutorials but is legacy. This page covers the current 0.4.x design.
 
 ---
 
@@ -46,7 +46,7 @@ Multiple agents in a shared conversation. A `GroupChatManager` (also an LLM agen
 **Swarm**: peer-to-peer handoffs without a central manager. Agent A decides to hand off to Agent B by calling a handoff tool. Most flexible, least predictable.
 
 ### Code Execution Agents
-AutoGen's killer feature (2023-2024): the UserProxyAgent can automatically extract Python code blocks from assistant messages and execute them in a sandboxed environment. This enables:
+[[framework-autogen]]'s killer feature (2023-2024): the UserProxyAgent can automatically extract Python code blocks from assistant messages and execute them in a sandboxed environment. This enables:
 - Self-correcting code generation (run → error → fix → run)
 - Data analysis pipelines
 - Test-driven code generation
@@ -59,10 +59,10 @@ The code executor is pluggable: local subprocess, Docker container, or Jupyter k
 - `TERMINATE`: human reviews before conversation ends
 - `ALWAYS`: human reviews every message
 
-This is AutoGen's built-in human-in-the-loop mechanism — cleaner than [[framework-langgraph]]'s interrupt model for conversational use cases, but less flexible for graph-based flows.
+This is [[framework-autogen]]'s built-in human-in-the-loop mechanism — cleaner than [[framework-langgraph]]'s interrupt model for conversational use cases, but less flexible for graph-based flows.
 
-### AutoGen Studio
-Low-code browser-based UI for building and testing AutoGen agent systems. Define agents, connect them in conversations, test with inputs. Good for prototyping and non-technical collaborators. Not production-ready for complex systems.
+### [[framework-autogen]] Studio
+Low-code browser-based UI for building and testing [[framework-autogen]] agent systems. Define agents, connect them in conversations, test with inputs. Good for prototyping and non-technical collaborators. Not production-ready for complex systems.
 
 ---
 
@@ -83,7 +83,7 @@ Execution flow:
     → loop until max_turns or termination_msg detected
 ```
 
-AutoGen 0.4.x introduced a runtime layer:
+[[framework-autogen]] 0.4.x introduced a runtime layer:
 - **SingleThreadedAgentRuntime**: sequential message processing
 - **DistributedAgentRuntime**: agents run as separate processes, communicate via message broker
 - Message types are strongly typed (Pydantic models)
@@ -93,10 +93,10 @@ AutoGen 0.4.x introduced a runtime layer:
 
 ## Strengths
 
-- **Code execution is first-class**: the UserProxy+code executor combo is uniquely powerful for data science and coding tasks; no equivalent in LangGraph or [[framework-crewai]]
-- **Conversational flexibility**: when the task genuinely benefits from agents debating a solution, AutoGen's group chat captures this naturally
-- **Human-in-the-loop simplicity**: `human_input_mode` is one parameter; easier to configure than LangGraph interrupts
-- **AutoGen Studio**: lowers barrier for non-engineers to prototype agent systems
+- **Code execution is first-class**: the UserProxy+code executor combo is uniquely powerful for data science and coding tasks; no equivalent in [[framework-langgraph]] or [[framework-crewai]]
+- **Conversational flexibility**: when the task genuinely benefits from agents debating a solution, [[framework-autogen]]'s group chat captures this naturally
+- **Human-in-the-loop simplicity**: `human_input_mode` is one parameter; easier to configure than [[framework-langgraph]] interrupts
+- **[[framework-autogen]] Studio**: lowers barrier for non-engineers to prototype agent systems
 - **Distributed runtime**: 0.4.x supports genuine multi-process agent systems
 - **Microsoft backing**: strong research team, active development, enterprise interest
 
@@ -106,7 +106,7 @@ AutoGen 0.4.x introduced a runtime layer:
 
 - **Conversation verbosity**: multi-agent group chats burn tokens fast; every message is visible to all agents
 - **GroupChatManager flakiness**: the LLM-based speaker selection is non-deterministic; conversations can go off-rails
-- **No built-in graph control flow**: loops, conditionals, and complex routing are harder to express than in LangGraph
+- **No built-in graph control flow**: loops, conditionals, and complex routing are harder to express than in [[framework-langgraph]]
 - **Debugging is hard**: conversations are text — hard to trace which agent caused which behavior
 - **Python-only**: no TypeScript SDK
 - **0.2 → 0.4 breaking changes**: most tutorials and blog posts describe the old API; documentation lag is a real problem
@@ -171,16 +171,16 @@ proxy.initiate_chat(manager, message="Write a report on the fan-out agent patter
 
 ---
 
-## AutoGen vs LangGraph
+## [[framework-autogen]] vs [[framework-langgraph]]
 
-| Dimension | AutoGen | LangGraph |
+| Dimension | [[framework-autogen]] | [[framework-langgraph]] |
 |-----------|---------|-----------|
 | Primary metaphor | Conversation | State machine |
 | Code execution | First-class built-in | Manual tool setup |
 | Control flow | Conversation turns | Graph edges |
 | Checkpointing | Not built-in | First-class |
 | Human-in-loop | `human_input_mode` param | Interrupt nodes |
-| Observability | AutoGen logging | LangSmith |
+| Observability | [[framework-autogen]] logging | LangSmith |
 | Best for | Self-correcting code, debates | Complex conditional flows |
 | TypeScript | No | Limited |
 
@@ -188,16 +188,16 @@ proxy.initiate_chat(manager, message="Write a report on the fan-out agent patter
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-api]]**: AutoGen supports [[anthropic]] as an LLM provider (Claude as the model backing AssistantAgents)
-- **[[entities/langchain-ecosystem]]**: AutoGen is a separate ecosystem from LangChain; not compatible without wrappers
-- **[[evaluations/eval-orchestration-frameworks]]**: AutoGen scored against GSD, LangGraph, CrewAI
-- **[[entities/model-landscape]]**: AutoGen is model-agnostic; supports [[openai]], Anthropic, local models
+- **[[frameworks/framework-claude-api]]**: [[framework-autogen]] supports [[anthropic]] as an LLM provider (Claude as the model backing AssistantAgents)
+- **[[entities/langchain-ecosystem]]**: [[framework-autogen]] is a separate ecosystem from LangChain; not compatible without wrappers
+- **[[evaluations/eval-orchestration-frameworks]]**: [[framework-autogen]] scored against GSD, [[framework-langgraph]], [[framework-crewai]]
+- **[[entities/model-landscape]]**: [[framework-autogen]] is model-agnostic; supports [[openai]], [[anthropic]], local models
 
 ---
 
 ## Jay's Experience
 
-None. Jay has not used AutoGen in production. Assessment is based on documentation and public research. Key reason for non-adoption: Jay's stack is TypeScript-native and [[framework-claude-code]]-first; AutoGen is Python-only and conversational in a way that doesn't map to the GSD/[[framework-superpowers]] workflow. Would evaluate if needing a Python-native self-correcting code execution loop.
+None. Jay has not used [[framework-autogen]] in production. Assessment is based on documentation and public research. Key reason for non-adoption: Jay's stack is TypeScript-native and [[framework-claude-code]]-first; [[framework-autogen]] is Python-only and conversational in a way that doesn't map to the GSD/[[framework-superpowers]] workflow. Would evaluate if needing a Python-native self-correcting code execution loop.
 
 ---
 
@@ -205,13 +205,13 @@ None. Jay has not used AutoGen in production. Assessment is based on documentati
 
 - 0.2.x: legacy API, still widely documented; `ConversableAgent`, `UserProxyAgent`, `GroupChat` all exist
 - 0.4.x: major rewrite; typed message passing, distributed runtime, async-first; breaking changes from 0.2
-- AutoGen Studio: separate install (`pip install autogenstudio`)
+- [[framework-autogen]] Studio: separate install (`pip install autogenstudio`)
 - `pyautogen` is the pip package name
 
 ---
 
 ## Sources
 
-- Microsoft AutoGen GitHub repository (knowledge cutoff — verify current API)
+- Microsoft [[framework-autogen]] GitHub repository (knowledge cutoff — verify current API)
 - [[evaluations/eval-orchestration-frameworks]]
 - [[entities/model-landscape]]

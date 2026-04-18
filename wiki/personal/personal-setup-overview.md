@@ -36,7 +36,7 @@ Three frameworks installed. Selection is task-driven, not habitual.
 | Auth, payments, agentic systems — edge cases costly | **[[framework-superpowers]]** |
 | Refactor or simple feature (< 3 files) | **Direct Claude** |
 
-**Hybrid pattern for large apps**: GSD for working MVP → Superpowers for stability layer → BMAD for future spec-locked modules.
+**Hybrid pattern for large apps**: GSD for working MVP → [[framework-superpowers]] for stability layer → [[framework-bmad]] for future spec-locked modules.
 
 ---
 
@@ -58,7 +58,7 @@ Three frameworks installed. Selection is task-driven, not habitual.
 
 ---
 
-## Superpowers v5.0.6
+## [[framework-superpowers]] v5.0.6
 
 **Location**: `~/.claude/skills/superpowers/`
 
@@ -74,7 +74,7 @@ Three frameworks installed. Selection is task-driven, not habitual.
 
 ---
 
-## BMAD Method
+## [[framework-bmad]] Method
 
 **Location**: `~/.claude/skills/bmad/`
 
@@ -82,7 +82,7 @@ Three frameworks installed. Selection is task-driven, not habitual.
 
 **12+ agent personas**: PM, Architect, UX, Dev, Analyst, Security, DB, Performance, and more
 
-**Party mode**: When multiple BMAD personas should debate a decision simultaneously (architecture choices, PRD reviews)
+**Party mode**: When multiple [[framework-bmad]] personas should debate a decision simultaneously (architecture choices, PRD reviews)
 
 ---
 
@@ -97,7 +97,7 @@ Three frameworks installed. Selection is task-driven, not habitual.
 | `security-reviewer` | Vulnerability assessment |
 | `db-reviewer` | Query optimization, schema |
 | `perf-analyzer` | Profiling, bottlenecks |
-| `superpowers-code-reviewer` | Superpowers-aware review |
+| `superpowers-code-reviewer` | [[framework-superpowers]]-aware review |
 | `gsd-planner` | GSD planning |
 | `gsd-executor` | GSD execution |
 | `gsd-verifier` | GSD verification |
@@ -117,8 +117,8 @@ Three frameworks installed. Selection is task-driven, not habitual.
 
 Organized by framework:
 - `skills/gsd/` — GSD workflow skills
-- `skills/superpowers/` — Superpowers skills (listed above)
-- `skills/bmad/` — BMAD method skills (listed above)
+- `skills/superpowers/` — [[framework-superpowers]] skills (listed above)
+- `skills/bmad/` — [[framework-bmad]] method skills (listed above)
 
 ---
 

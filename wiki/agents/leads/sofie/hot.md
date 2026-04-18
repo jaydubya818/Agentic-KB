@@ -4,7 +4,7 @@ agent_id: sofie
 updated: 2026-04-10
 ---
 
-# Sofie Hot Cache
+# Sofie [[pattern-hot-cache]]
 
 ## Jay's Current Focus
 - Agentic-KB setup and agent runtime (operational memory layer complete, 52/52 tests passing)
@@ -17,8 +17,8 @@ updated: 2026-04-10
 - [[patterns/pattern-supervisor-worker]] — orchestrator delegates to workers
 
 ## Active Projects
-- **Agentic-KB** — personal engineering KB, 87+ articles, MCP + CLI + web UI
-- **Agentic-Pi-Harness** — Claude Code harness on Raspberry Pi (private, pending sync)
+- **Agentic-KB** — personal engineering KB, 87+ articles, [[mcp-ecosystem]] + CLI + web UI
+- **Agentic-Pi-Harness** — [[framework-claude-code]] harness on Raspberry Pi (private, pending sync)
 - **MissionControl** — multi-agent orchestration platform (private, pending sync)
 
 ## Governance Rules (Sofie's tier)

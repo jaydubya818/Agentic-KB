@@ -358,7 +358,7 @@ Cause: the summarizer model invented information. Fix: (1) use a more capable mo
 ## Next Steps
 
 1. **Add checkpoint markers**: before triggering compression, have the agent write an explicit `## CHECKPOINT:` marker summarizing its current state — more reliable than post-hoc summary
-2. **Add compression to Claude Code sessions**: Claude Code's `autoCompactThreshold` does this automatically; for custom harnesses, this recipe is the manual equivalent
+2. **Add compression to [[framework-claude-code]] sessions**: [[framework-claude-code]]'s `autoCompactThreshold` does this automatically; for custom harnesses, this recipe is the manual equivalent
 3. **Persist summaries**: save each compression summary to disk — creates an audit trail of long sessions
 
 ---

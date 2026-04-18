@@ -156,9 +156,9 @@ All commands import `lib/repo-runtime/index.mjs` directly for read operations. S
 
 ---
 
-## MCP Tools: `mcp/server.js`
+## [[mcp-ecosystem]] Tools: `mcp/server.js`
 
-Twelve new tools added to the existing MCP server (now 23 total tools):
+Twelve new tools added to the existing [[mcp-ecosystem]] server (now 23 total tools):
 
 | Tool | Purpose |
 |------|---------|
@@ -202,7 +202,7 @@ Uses Node's built-in `node:test` runner. Isolated temp directories per run.
 Mirrored GitHub files land in `wiki/repos/<repo>/repo-docs/raw-imports/` and are stamped `imported: true` in frontmatter. `assertNotImportedDoc` throws at runtime if an agent tries to write to one. This keeps the GitHub mirror read-only without any filesystem permission magic.
 
 ### Single vault, namespaced
-Rejecting the "separate vault per repo" anti-pattern. All repos live under `wiki/repos/<repo>/` inside the one Agentic-KB vault. This means cross-repo searches, shared index, shared MCP server, and unified CLI — with no symlinks or mounted volumes.
+Rejecting the "separate vault per repo" anti-pattern. All repos live under `wiki/repos/<repo>/` inside the one Agentic-KB vault. This means cross-repo searches, shared index, shared [[mcp-ecosystem]] server, and unified CLI — with no symlinks or mounted volumes.
 
 ### Repo-scoped bus channels
 Each repo has its own `bus/` directory with four channels (`discovery`, `escalation`, `standards`, `handoffs`). This prevents cross-repo bus pollution while keeping the same state machine semantics as the global agent bus.
@@ -211,7 +211,7 @@ Each repo has its own `bus/` directory with four channels (`discovery`, `escalat
 `loadRepoContext` implements the same proportional bucket allocation as the agent context loader, with a repo-specific priority order: canonical docs first (agents need the PRD/TECH_STACK), then progress, then memory, then imported docs, then bus items. Budget defaults to 50k bytes.
 
 ### Auth handled outside the runtime
-GitHub PATs are not stored in `registry.json`. The sync function accepts a `token` param; the auth.example.json shows the intended pattern of reading from environment variables. The MCP tool checks `process.env.GITHUB_PAT` as a fallback. Secrets never land in the wiki.
+GitHub PATs are not stored in `registry.json`. The sync function accepts a `token` param; the auth.example.json shows the intended pattern of reading from environment variables. The [[mcp-ecosystem]] tool checks `process.env.GITHUB_PAT` as a fallback. Secrets never land in the wiki.
 
 ---
 
@@ -219,7 +219,7 @@ GitHub PATs are not stored in `registry.json`. The sync function accepts a `toke
 
 An agent working on the `Pi` repo can:
 
-1. Call `load_repo_context` → get PRD, TECH_STACK, progress, hot cache in one call
+1. Call `load_repo_context` → get PRD, TECH_STACK, progress, [[pattern-hot-cache]] in one call
 2. Call `write_repo_task_log` → append its work log to `wiki/repos/Pi/tasks/<agent>.md`
 3. Call `publish_repo_discovery` → drop a finding in `wiki/repos/Pi/bus/discovery/`
 4. Call `write_rewrite_artifact` → create a spec rewrite in `wiki/repos/Pi/rewrites/specs/`
@@ -245,7 +245,7 @@ All without touching the core wiki, without scribbling over imported mirror file
 
 **Modified files:**
 - `cli/kb.js` — +15 commands (~320 lines added)
-- `mcp/server.js` — +12 MCP tools (~380 lines added)
+- `mcp/server.js` — +12 [[mcp-ecosystem]] tools (~380 lines added)
 - `wiki/log.md` — appended
 - `wiki/index.md` — updated (via auto-reindex)
 

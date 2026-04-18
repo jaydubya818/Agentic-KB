@@ -16,9 +16,9 @@ updated: 2026-04-09
 | Phase | Duration | Status | Goal |
 |-------|----------|--------|------|
 | Phase 1: Core Wiki | Complete | ✅ Done | 47 pages, core workflows operational |
-| Phase 2: Query Interfaces | In Progress | 🟡 60% | CLI, Web, MCP all working |
+| Phase 2: Query Interfaces | In Progress | 🟡 60% | CLI, Web, [[mcp-ecosystem]] all working |
 | Phase 3: Ingestion Agents | In Progress | 🟡 50% | Parallel source ingestion, INGEST workflow |
-| Phase 4: Linting & Maintenance | In Progress | 🟡 75% | Monthly LINT, hot cache management |
+| Phase 4: Linting & Maintenance | In Progress | 🟡 75% | Monthly LINT, [[pattern-hot-cache]] management |
 | Phase 5: Integration & Scaling | Pending | ⏳ Q2 | Graphify, full-text search, team onboarding |
 
 ---
@@ -37,10 +37,10 @@ updated: 2026-04-09
 **Status**: ✅ Complete (2026-04-09)
 
 - [x] Create 35 concept pages (agent loop, context windows, tool use, orchestration, memory, state)
-- [x] Create 12 pattern pages (supervisor-worker, fan-out, reflection, etc.)
-- [x] Create 11 framework pages (LangGraph, AutoGen, CrewAI, MCP, Claude Code, etc.)
-- [x] Create 8 recipe pages (build supervisor-worker, implement reflection loops, etc.)
-- [x] Create 5 entity pages (Anthropic, OpenAI, key researchers)
+- [x] Create 12 pattern pages ([[pattern-supervisor-worker]], [[pattern-fan-out-worker]], reflection, etc.)
+- [x] Create 11 framework pages ([[framework-langgraph]], [[framework-autogen]], [[framework-crewai]], [[mcp-ecosystem]], [[framework-claude-code]], etc.)
+- [x] Create 8 recipe pages (build [[pattern-supervisor-worker]], implement reflection loops, etc.)
+- [x] Create 5 entity pages ([[anthropic]], [[openai]], key researchers)
 - [x] Ingest 5 raw sources into summaries/
 
 ### Milestone 1.3: Cross-Linking & Index
@@ -73,7 +73,7 @@ updated: 2026-04-09
 - [x] Index reader (parse wiki/index.md)
 - [x] Page finder (keyword search)
 - [x] Answer synthesizer (read pages, cite sources)
-- [ ] Hot cache optimization (serve cached answers first)
+- [ ] [[pattern-hot-cache]] optimization (serve cached answers first)
 - [ ] Backfill workflow (web search for gap discovery)
 
 **Estimated completion**: 2026-04-15
@@ -92,10 +92,10 @@ updated: 2026-04-09
 
 **Estimated completion**: 2026-04-20
 
-### Milestone 2.3: MCP Server
+### Milestone 2.3: [[mcp-ecosystem]] Server
 **Status**: 🟡 In Progress
 
-- [x] MCP server scaffold (port 9001)
+- [x] [[mcp-ecosystem]] server scaffold (port 9001)
 - [x] `query_kb(question)` tool
 - [x] `list_topics()` tool
 - [ ] `get_page(slug)` tool
@@ -130,7 +130,7 @@ updated: 2026-04-09
 - [x] Ingest transcripts (3 transcripts → summaries/)
 - [x] Ingest framework docs (snapshot imports)
 - [ ] Ingest code examples (annotated patterns)
-- [ ] Ingest conversations (Claude Code sessions)
+- [ ] Ingest conversations ([[framework-claude-code]] sessions)
 - [ ] Set up auto-detection of new sources (watch raw/)
 
 **Progress**: 60% of raw sources imported
@@ -157,10 +157,10 @@ updated: 2026-04-09
 
 **Estimated completion**: 2026-04-22
 
-### Milestone 4.2: Hot Cache Management
+### Milestone 4.2: [[pattern-hot-cache]] Management
 **Status**: 🟡 In Progress
 
-- [x] Hot cache file (wiki/hot.md)
+- [x] [[pattern-hot-cache]] file (wiki/hot.md)
 - [x] Manual refresh (weekly updates)
 - [ ] Query pattern analyzer (track queries)
 - [ ] Auto-promotion (patterns >3 queries/week)
@@ -223,7 +223,7 @@ updated: 2026-04-09
 ### Milestone 5.4: Production Scaling
 **Goal**: Handle 1000+ daily queries, 100+ pages
 
-- [ ] Implement caching layer (Redis for hot cache)
+- [ ] Implement caching layer (Redis for [[pattern-hot-cache]])
 - [ ] Database migration (SQLite or Postgres for fast indexing)
 - [ ] API rate limiting (per-client quotas)
 - [ ] Monitoring & alerting (query latency, error rates)
@@ -239,7 +239,7 @@ updated: 2026-04-09
 ### Required
 - Node.js 18+ (CLI, Web UI)
 - Git (version control)
-- Claude Code (agents)
+- [[framework-claude-code]] (agents)
 
 ### Optional (Future)
 - Elasticsearch or Meilisearch (full-text search, Phase 5.2)
@@ -260,7 +260,7 @@ updated: 2026-04-09
 ### Phase 2 (target 2026-04-20)
 - [ ] CLI tool queries KB and returns answer <2s
 - [ ] Web UI loads pages and lists related content
-- [ ] MCP server responds to queries from agents
+- [ ] [[mcp-ecosystem]] server responds to queries from agents
 - [ ] All three interfaces consistent (same data)
 
 ### Phase 3 (target 2026-04-30)
@@ -272,7 +272,7 @@ updated: 2026-04-09
 ### Phase 4 (target 2026-04-29)
 - [ ] Monthly LINT pass finds all issues
 - [ ] Zero orphan pages after LINT
-- [ ] 50%+ queries answered from hot cache
+- [ ] 50%+ queries answered from [[pattern-hot-cache]]
 - [ ] Recipes validated on real projects
 
 ### Phase 5 (target 2026-09-30)
@@ -300,7 +300,7 @@ updated: 2026-04-09
 If a phase is blocked or fails:
 
 1. **Phase 2 blocked** (Web UI fails):
-   - Fallback: CLI + MCP are sufficient for queries
+   - Fallback: CLI + [[mcp-ecosystem]] are sufficient for queries
    - Web UI can be rebuilt later (not critical path)
 
 2. **Phase 3 blocked** (INGEST agents):
@@ -338,4 +338,4 @@ Jul–Sep 2026:
 ```
 
 **Current milestone**: Phase 2.2 (Web UI) and Phase 3.1 (INGEST agents)  
-**Next focus**: Complete CLI (2026-04-15) → Web UI (2026-04-20) → MCP (2026-04-18)
+**Next focus**: Complete CLI (2026-04-15) → Web UI (2026-04-20) → [[mcp-ecosystem]] (2026-04-18)

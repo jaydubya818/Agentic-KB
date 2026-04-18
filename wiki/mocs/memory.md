@@ -15,8 +15,8 @@ updated: 2026-04-10
 
 - [[concepts/memory-systems]] — Persistence and retrieval across sessions; in-context, file-wiki, vector DB, knowledge graph
 - [[concepts/context-management]] — Managing the finite context window; tiered loading, primacy-recency curve, budget packing
-- [[concepts/llm-wiki-pattern]] — Karpathy-style LLM-maintained wiki as the memory substrate
-- [[concepts/llm-wiki]] — The LLM wiki as compounding knowledge base vs stateless RAG
+- [[concepts/llm-wiki-pattern]] — [[andrej-karpathy]]-style LLM-maintained wiki as the memory substrate
+- [[concepts/llm-wiki]] — The [[llm-wiki]] as compounding knowledge base vs stateless RAG
 - [[concepts/rlm-pipeline]] — 10-stage Recursive Layered Memory retrieval (stages 4–9 live as of Apr 2026)
 - [[concepts/vault-architecture]] — Jay's 3-tier vault: raw (immutable) / wiki (LLM-owned) / schema (co-evolving)
 - [[concepts/rag-systems]] — RAG architecture: chunking, hybrid retrieval, re-ranking, grounded generation, metadata filtering, evaluation metrics
@@ -58,17 +58,17 @@ See [[system/policies/freshness-policy]] and [[system/policies/source-trust-poli
 
 ## Frameworks & Tools
 
-- [[frameworks/framework-claude-code]] — Claude Code memory: CLAUDE.md, project files, agent profiles
-- [[frameworks/framework-mcp]] — MCP server exposing KB as queryable agent memory
+- [[frameworks/framework-claude-code]] — [[framework-claude-code]] memory: CLAUDE.md, project files, agent profiles
+- [[frameworks/framework-mcp]] — [[mcp-ecosystem]] server exposing KB as queryable agent memory
 - [[frameworks/framework-markitdown]] — File-to-markdown conversion for raw/ ingest pipeline
 
 ---
 
 ## Recipes
 
-- [[recipes/recipe-llm-wiki-setup]] — Set up a Karpathy-style LLM knowledge base from scratch
-- [[recipes/recipe-codebase-memory]] — Wire KB as persistent codebase memory for Claude Code sessions
-- [[recipes/recipe-context-compression]] — Rolling summary compression for long agentic sessions
+- [[recipes/recipe-llm-wiki-setup]] — Set up a [[andrej-karpathy]]-style LLM knowledge base from scratch
+- [[recipes/recipe-codebase-memory]] — Wire KB as persistent codebase memory for [[framework-claude-code]] sessions
+- [[recipes/recipe-context-compression]] — [[pattern-rolling-summary]] compression for long agentic sessions
 
 ---
 
@@ -97,11 +97,11 @@ See [[system/policies/freshness-policy]] and [[system/policies/source-trust-poli
 ## Key Summaries
 
 - [[summaries/siagian-agentic-engineer-roadmap-2026]] — Memory section: summaries vs embeddings vs structured KV; checkpointing; context budgeting; failure modes; user corrections
-- [[summaries/summary-llm-wiki-v2]] — LLM Wiki v2: per-claim confidence, typed graph, hybrid search+RRF, lifecycle hooks, forgetting curves, AI contradiction resolution; gap analysis vs. this KB
+- [[summaries/summary-llm-wiki-v2]] — [[llm-wiki]] v2: per-claim confidence, typed graph, hybrid search+RRF, lifecycle hooks, forgetting curves, AI contradiction resolution; gap analysis vs. this KB
 - [[summaries/summary-wikiwise-skills]] — Wikiwise skill library: stream-to-disk rule, parallel subagent dispatch, batch-before-ingest, 2-3 inbound-link density rule
 
-- [[summaries/summary-karpathy-llm-wiki-gist]] — Karpathy's minimal pattern: immutable raw, LLM-owned wiki, co-evolving schema
+- [[summaries/summary-karpathy-llm-wiki-gist]] — [[andrej-karpathy]]'s minimal pattern: immutable raw, LLM-owned wiki, co-evolving schema
 - [[summaries/summary-karpathy-llm-wiki-video]] — Three-layer architecture; INGEST/QUERY/LINT operations
-- [[summaries/summary-nate-herk-llm-wiki]] — 95% token reduction vs RAG; hot cache pattern
+- [[summaries/summary-nate-herk-llm-wiki]] — 95% token reduction vs RAG; [[pattern-hot-cache]] pattern
 - [[summaries/agentic-kb-rlm-pipeline]] — RLM pipeline stages and implementation status
 - [[summaries/vault-3tier-architecture]] — Jay's production vault: tier-scoped memory and inter-tier bus

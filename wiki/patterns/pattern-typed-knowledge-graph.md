@@ -38,7 +38,7 @@ This means graph traversal can find connected pages, but can't answer:
 - "What pages *contradict* this claim?"
 - "What is the *causal chain* from this decision to that failure mode?"
 
-The original LLM Wiki had the same flat-link problem. LLM Wiki v2 identifies typed relationships as the fix: **"A caused B, confirmed by 3 sources, confidence 0.9."**
+The original [[llm-wiki]] had the same flat-link problem. [[llm-wiki]] v2 identifies typed relationships as the fix: **"A caused B, confirmed by 3 sources, confidence 0.9."**
 
 ## Solution
 Add typed, directional edges to the knowledge graph. Each edge carries:

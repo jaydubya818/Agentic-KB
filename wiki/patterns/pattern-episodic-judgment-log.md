@@ -162,7 +162,7 @@ The failures log is described as the most valuable: "It encodes pattern recognit
 ## Related Patterns
 
 - [[patterns/pattern-external-memory]] — broader pattern family; judgment logs are a specific instance
-- [[patterns/pattern-hot-cache]] — frequently-referenced judgment patterns can be promoted to hot cache for zero-latency access
+- [[patterns/pattern-hot-cache]] — frequently-referenced judgment patterns can be promoted to [[pattern-hot-cache]] for zero-latency access
 - [[patterns/pattern-tiered-agent-memory]] — tier-scoped memory lifetime; judgment logs are personal-tier, long-lived
 - [[concepts/memory-systems]] — the four-type taxonomy; judgment logs extend the episodic memory type
 - [[concepts/context-management]] — primacy-recency attention curve affects how judgment log entries should be structured (lead with the lesson, reasoning in the middle)

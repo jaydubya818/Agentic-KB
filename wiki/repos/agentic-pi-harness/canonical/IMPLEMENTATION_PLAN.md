@@ -15,7 +15,7 @@ updated: 2026-04-09
 
 | Phase | Duration | Status | Goal |
 |-------|----------|--------|------|
-| Phase 1: Core Patterns | Complete | ✅ Done | Supervisor-worker, tool integration working |
+| Phase 1: Core Patterns | Complete | ✅ Done | [[pattern-supervisor-worker]], tool integration working |
 | Phase 2: Optimization | In Progress | 🟡 70% | Memory, latency targets hit |
 | Phase 3: Resilience | In Progress | 🟡 60% | Network recovery, offline queueing |
 | Phase 4: Hardware Validation | In Progress | 🟡 50% | Pi 3B+ through Pi 5 tested |
@@ -25,10 +25,10 @@ updated: 2026-04-09
 
 ## Phase 1: Core Patterns (COMPLETE)
 
-### Milestone 1.1: Supervisor-Worker Architecture
+### Milestone 1.1: [[pattern-supervisor-worker]] Architecture
 **Status**: ✅ Complete (2026-04-03)
 
-- [x] Adapt supervisor-worker pattern for Pi edge
+- [x] Adapt [[pattern-supervisor-worker]] pattern for Pi edge
 - [x] Implement task assignment (supervisor → Pi workers)
 - [x] Implement result collection (Pi → supervisor)
 - [x] Test multi-worker (2–4 concurrent workers per Pi)

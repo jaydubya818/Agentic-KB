@@ -283,7 +283,7 @@ def audit_log(decision: str, tool_name: str, args: dict, outcome: Optional[str])
 - [[concepts/human-in-the-loop]] — the broader HITL pattern
 - [[concepts/guardrails]] — complementary automated safety measures
 - [[patterns/pattern-minimal-permissions]] — reducing blast radius so gates matter less
-- [[concepts/permission-modes]] — Claude Code's built-in confirmation system
+- [[concepts/permission-modes]] — [[framework-claude-code]]'s built-in confirmation system
 
 ---
 

@@ -63,7 +63,7 @@ Literature note conventions:
 - Voice: descriptive, not yet opinionated — save synthesis for synthesis pages
 
 High-signal recent summaries:
-- [[summaries/karpathy-llm-wiki-video]] — foundational LLM wiki pattern
+- [[summaries/karpathy-llm-wiki-video]] — foundational [[llm-wiki]] pattern
 - [[summaries/summary-research-skill-graph]] — 6-lens research methodology
 - [[summaries/summary-layered-agent-memory-obsidian]] — 3-tier vault architecture
 - [[summaries/nvidia-gtc-2026-agentic-enterprise]] — enterprise agentic patterns

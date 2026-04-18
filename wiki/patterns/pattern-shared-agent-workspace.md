@@ -26,7 +26,7 @@ related:
 # Pattern: Shared Agent Workspace
 
 ## Problem
-In a multi-agent system, each agent typically maintains its own context — its working state, session history, and understanding of the user. When tasks span agents (e.g., Agent A drafts a script, Agent B needs to continue it), the receiving agent has no context, forcing the user to re-brief or agents to re-read long session histories.
+In a [[multi-agent-systems]], each agent typically maintains its own context — its working state, session history, and understanding of the user. When tasks span agents (e.g., Agent A drafts a script, Agent B needs to continue it), the receiving agent has no context, forcing the user to re-brief or agents to re-read long session histories.
 
 The deeper problem: agents also can't *correct* each other or build on each other's work without a shared substrate.
 

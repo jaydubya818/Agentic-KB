@@ -19,5 +19,5 @@ If you can read this, PIN `1124` is working correctly across web, CLI, and [[mcp
 
 - Web UI: 🔒 button → enter PIN → private articles searchable and readable
 - CLI: `kb search "private" --scope private` returns this article
-- MCP: `search_wiki` with `scope: "private", pin: "1124"` returns this article
+- [[mcp-ecosystem]]: `search_wiki` with `scope: "private", pin: "1124"` returns this article
 - `read_article` with `slug: "personal/private-test-note", pin: "1124"` returns full content

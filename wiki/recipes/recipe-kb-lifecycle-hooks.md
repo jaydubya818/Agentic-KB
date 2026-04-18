@@ -20,7 +20,7 @@ Fully automate the bookkeeping that kills manually-maintained wikis. Three hooks
 2. **Session-end hook** — session close compresses working memory and files it
 3. **Scheduled hooks** — cron runs lint weekly, freshness decay monthly, consolidation on threshold
 
-LLM Wiki v2 identified this automation as the feature that separates wikis that compound from wikis that rot. The raw-file-watcher already covers the ingest hook partially — this recipe formalizes and completes all three.
+[[llm-wiki]] v2 identified this automation as the feature that separates wikis that compound from wikis that rot. The raw-file-watcher already covers the ingest hook partially — this recipe formalizes and completes all three.
 
 ---
 

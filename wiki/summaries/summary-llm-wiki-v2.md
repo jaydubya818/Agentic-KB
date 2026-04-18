@@ -17,18 +17,18 @@ key_concepts:
 confidence: medium
 ---
 
-# Summary: LLM Wiki v2
+# Summary: [[llm-wiki]] v2
 
 ## Source
-Social post describing an extension of Karpathy's LLM Wiki pattern, attributed to lessons from the `agentmemory` library (persistent memory engine for AI agents). 5,000 GitHub stars in 48 hours. Primary source not yet ingested — this summary is from the social post only.
+Social post describing an extension of [[andrej-karpathy]]'s [[llm-wiki]] pattern, attributed to lessons from the `agentmemory` library (persistent memory engine for AI agents). 5,000 GitHub stars in 48 hours. Primary source not yet ingested — this summary is from the social post only.
 
 > **Note:** Several v2 features are already implemented in this KB at equal or greater sophistication. See Gap Analysis below.
 
 ---
 
-## What v2 Adds (vs. Original Karpathy LLM Wiki)
+## What v2 Adds (vs. Original [[andrej-karpathy]] [[llm-wiki]])
 
-The original LLM Wiki treated all knowledge as equally valid forever — flat pages, no decay, no confidence scoring, no automation. v2 turns it into a living system.
+The original [[llm-wiki]] treated all knowledge as equally valid forever — flat pages, no decay, no confidence scoring, no automation. v2 turns it into a living system.
 
 ### Confidence Scoring
 Every fact carries a score based on: number of supporting sources, recency of last confirmation, and whether anything contradicts it. Knowledge that decays over time. Not everything is equally true forever.
@@ -86,7 +86,7 @@ AI doesn't just flag contradictions — it resolves them based on source recency
 ## Related
 - [[summaries/summary-karpathy-llm-wiki-gist]] — Original pattern this extends
 - [[summaries/summary-karpathy-llm-wiki-video]] — Three-layer architecture
-- [[summaries/summary-nate-herk-llm-wiki]] — Hot cache, token efficiency
+- [[summaries/summary-nate-herk-llm-wiki]] — [[pattern-hot-cache]], token efficiency
 - [[concepts/rlm-pipeline]] — This KB's implementation of hybrid retrieval
 - [[system/policies/freshness-policy]] — Forgetting curves implementation
 - [[system/policies/contradiction-policy]] — Contradiction detection and resolution

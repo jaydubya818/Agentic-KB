@@ -13,7 +13,7 @@ updated: 2026-04-09
 
 ## Overview
 
-Agentic-KB is a knowledge base system designed for ingestion (async, parallel), querying (multi-interface), and maintenance (linting, synthesis). The tech stack prioritizes reliability, extensibility, and integration with Claude Code and MCP ecosystem.
+Agentic-KB is a knowledge base system designed for ingestion (async, parallel), querying (multi-interface), and maintenance (linting, synthesis). The tech stack prioritizes reliability, extensibility, and integration with [[framework-claude-code]] and [[mcp-ecosystem]] ecosystem.
 
 ## Core Components
 
@@ -47,9 +47,9 @@ wiki/
 ```
 
 ### 2. Ingestion Pipeline
-**Technology**: Claude Code agents (parallel, fan-out)  
+**Technology**: [[framework-claude-code]] agents (parallel, [[pattern-fan-out-worker]])  
 **Language**: Prompt-driven (no code binaries)  
-**Scalability**: Fan-out supports 5-10 simultaneous source ingestions
+**Scalability**: [[pattern-fan-out-worker]] supports 5-10 simultaneous source ingestions
 
 **Flow**:
 1. New source lands in `raw/{category}/`
@@ -67,7 +67,7 @@ wiki/
 
 ### 3. Query Engine
 **Technology**: Multi-interface pattern  
-**Interfaces**: CLI (npm), Web (React), MCP Server (protocol)
+**Interfaces**: CLI (npm), Web (React), [[mcp-ecosystem]] Server (protocol)
 
 #### CLI Tool
 **Location**: `/Users/jaywest/My LLM\ Wiki/`  
@@ -91,9 +91,9 @@ with [[wiki link]] citations
 **Framework**: React 18+ with Vite  
 **Features**: Search, filter by type/tag, full-text search, related pages sidebar
 
-#### MCP Server
+#### [[mcp-ecosystem]] Server
 **Port**: 9001  
-**Protocol**: Model Context Protocol  
+**Protocol**: [[mcp-ecosystem]]  
 **Clients**: MissionControl agents, Pi harness agents  
 **Tools exposed**:
 - `query_kb(question: string)` → returns structured answer with citations
@@ -115,7 +115,7 @@ with [[wiki link]] citations
 ```
 
 ### 5. Linting & Maintenance
-**Technology**: Claude Code agents (reflection)  
+**Technology**: [[framework-claude-code]] agents (reflection)  
 **Frequency**: Monthly or post-growth  
 **Tools**:
 - Orphan detection (pages with 0 inbound links)
@@ -126,7 +126,7 @@ with [[wiki link]] citations
 
 **Output**: `wiki/syntheses/lint-{YYYY-MM-DD}.md`
 
-### 6. Hot Cache
+### 6. [[pattern-hot-cache]]
 **File**: `wiki/hot.md`  
 **Size**: ≤500 words  
 **Content**: Most-accessed patterns (8-12 entries)  
@@ -140,13 +140,13 @@ If pattern >3 queries/week: add to hot cache
 If hot cache >600 words: remove least-accessed entry
 ```
 
-### 7. Integration with Claude Code
+### 7. Integration with [[framework-claude-code]]
 **Agents Location**: `~/.claude/agents/`  
 **Skills Location**: `~/.claude/skills/`  
 **Hooks Location**: `~/.claude/hooks/`  
 
 Agents can:
-- Query KB via MCP server
+- Query KB via [[mcp-ecosystem]] server
 - Read wiki pages directly (file I/O)
 - Ingest new raw sources (append to raw/)
 - Run lint workflows
@@ -167,11 +167,11 @@ Agents can:
 **LLMwiki** (`/Users/jaywest/My\ LLM\ Wiki/`):
 - CLI frontend (npm run query)
 - Web UI backend (React + Node)
-- MCP server implementation
+- [[mcp-ecosystem]] server implementation
 - Database connector (optional; currently file-based)
 
 **MissionControl**:
-- Consumer of KB patterns via MCP
+- Consumer of KB patterns via [[mcp-ecosystem]]
 - Requests "what orchestration pattern for X?"
 - Queries recipes for implementation
 
@@ -231,7 +231,7 @@ related: []
 
 ### Production
 - Markdown files served by LLMwiki web UI
-- MCP server instance running on port 9001
+- [[mcp-ecosystem]] server instance running on port 9001
 - CLI tool available via npm
 
 ### Backup & Recovery
@@ -261,7 +261,7 @@ related: []
 | Query (full wiki) | 500ms–2s | ~1.2s |
 | Ingest 1 source | 30–60s | ~45s |
 | Monthly LINT | 2–5 min | ~3 min |
-| Hot cache refresh | <30s | ~15s |
+| [[pattern-hot-cache]] refresh | <30s | ~15s |
 | Index update | <100ms | ~80ms |
 
 ## Scalability
@@ -270,9 +270,9 @@ related: []
 |--------|---------|----------|
 | Pages | 47 | 200+ (no DB bottleneck) |
 | Total size | ~400KB | 50MB+ (still reasonable) |
-| Queries/day | ~20 | 1000+ (MCP server can handle) |
-| Concurrent ingestions | 1–2 | 5–10 (fan-out agents) |
-| Hot cache size | 480 words | 600 words (configurable) |
+| Queries/day | ~20 | 1000+ ([[mcp-ecosystem]] server can handle) |
+| Concurrent ingestions | 1–2 | 5–10 ([[pattern-fan-out-worker]] agents) |
+| [[pattern-hot-cache]] size | 480 words | 600 words (configurable) |
 
 ## Known Limitations
 
@@ -282,7 +282,7 @@ related: []
 2. **No version branching** (single master wiki)
    - Acceptable: Jay is sole author; git history sufficient
 
-3. **Manual hot cache updates** (not yet automated)
+3. **Manual [[pattern-hot-cache]] updates** (not yet automated)
    - Planned: Query pattern analysis agent
 
 4. **No access control** (no auth)

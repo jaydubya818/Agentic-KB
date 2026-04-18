@@ -155,7 +155,7 @@ async def request_additional_permission(
 
 ### [[framework-claude-code]] Permission Modes Integration
 
-In Claude Code, permission modes map to tool permission tiers:
+In [[framework-claude-code]], permission modes map to tool permission tiers:
 
 ```
 Code analysis task:
@@ -251,7 +251,7 @@ Document the blast radius for each agent deployment. Alert when an agent's blast
 ## When To Use
 
 - Any agent deployed in production (non-negotiable)
-- Multi-agent systems where sub-agents should have restricted access
+- [[multi-agent-systems]] where sub-agents should have restricted access
 - Any agent that handles sensitive data or can take external actions
 - bypassPermissions sessions — the lack of confirmation gates makes tool scoping more critical
 
@@ -264,7 +264,7 @@ Document the blast radius for each agent deployment. Alert when an agent's blast
 
 ## Real Examples
 
-- Claude Code bypassPermissions CI agent: only read + write file tools; no bash
+- [[framework-claude-code]] bypassPermissions CI agent: only read + write file tools; no bash
 - Research sub-agent: only web_search + read_url; no file writes
 - Deployment agent: staging tools only; production requires explicit escalation
 - Security audit agent: read-only file access; no writes that could interfere with the audit subject
@@ -273,7 +273,7 @@ Document the blast radius for each agent deployment. Alert when an agent's blast
 
 ## Related Patterns
 
-- [[concepts/permission-modes]] — Claude Code's session-level permission system
+- [[concepts/permission-modes]] — [[framework-claude-code]]'s session-level permission system
 - [[patterns/pattern-confirm-before-destructive]] — gate on actions that do reach destructive tools
 - [[patterns/pattern-worktree-isolation]] — sandbox complement to minimal permissions
 - [[concepts/guardrails]] — additional safety layers
@@ -283,5 +283,5 @@ Document the blast radius for each agent deployment. Alert when an agent's blast
 ## Sources
 
 - Saltzer & Schroeder "Protection of Information in Computer Systems" (1975) — Principle of Least Privilege
-- [[anthropic]] Claude Code permission documentation (2025)
+- [[anthropic]] [[framework-claude-code]] permission documentation (2025)
 - OWASP "Security by Design Principles"

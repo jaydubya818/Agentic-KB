@@ -14,9 +14,9 @@ jay_experience: extensive
 
 ## Overview
 
-The [[anthropic]] Claude API is the direct REST + SDK interface to Claude models — distinct from [[framework-claude-code]] CLI, which wraps the API with an agentic runtime. Using the API directly gives you full control over the request/response cycle, streaming, tool schemas, system prompts, context construction, and model selection. It is the foundation layer on which Claude Code, [[framework-openclaw]], and any custom agent harness are built.
+The [[anthropic]] Claude API is the direct REST + SDK interface to Claude models — distinct from [[framework-claude-code]] CLI, which wraps the API with an agentic runtime. Using the API directly gives you full control over the request/response cycle, streaming, tool schemas, system prompts, context construction, and model selection. It is the foundation layer on which [[framework-claude-code]], [[framework-openclaw]], and any custom agent harness are built.
 
-Primary SDKs: `@anthropic-ai/sdk` (TypeScript/Node), `anthropic` (Python). Both are official and maintained by Anthropic. REST API is also directly accessible.
+Primary SDKs: `@anthropic-ai/sdk` (TypeScript/Node), `anthropic` (Python). Both are official and maintained by [[anthropic]]. REST API is also directly accessible.
 
 ---
 
@@ -270,19 +270,19 @@ console.log(answer)
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-code]]**: Claude Code wraps this API; understanding the API directly helps debug unexpected model behavior
-- **[[frameworks/framework-mcp]]**: [[mcp-ecosystem]] servers provide tools that can be registered in Claude Code; same tool-use format applies
+- **[[frameworks/framework-claude-code]]**: [[framework-claude-code]] wraps this API; understanding the API directly helps debug unexpected model behavior
+- **[[frameworks/framework-mcp]]**: [[mcp-ecosystem]] servers provide tools that can be registered in [[framework-claude-code]]; same tool-use format applies
 - **[[entities/anthropic]]**: Model selection, pricing, and rate limits documented at console.anthropic.com
 - **[[entities/model-landscape]]**: Comparative model selection guide
 - **Prompt caching**: use `cache_control` on system prompts longer than ~1,000 tokens to reduce costs in production agents
-- **[[framework-langgraph]]**: LangGraph's `ChatAnthropic` node wraps this API; understanding the raw format helps debug chain behavior
+- **[[framework-langgraph]]**: [[framework-langgraph]]'s `ChatAnthropic` node wraps this API; understanding the raw format helps debug chain behavior
 
 ---
 
 ## Jay's Experience
 
 Jay uses the raw API for:
-1. **Custom agent harnesses** where Claude Code's runtime is too opinionated (e.g., OpenClaw uses the API directly)
+1. **Custom agent harnesses** where [[framework-claude-code]]'s runtime is too opinionated (e.g., [[framework-openclaw]] uses the API directly)
 2. **Batch evaluation runs** — Batch API for testing 100+ prompt variations overnight
 3. **Cost optimization** — routing tasks by complexity to the right model tier; Haiku for classification, Sonnet for reasoning, Opus for architecture review
 4. **Tool design** — writing precise tool descriptions is an art; Jay's rule is to write descriptions as if briefing a smart junior engineer who has never seen your codebase
@@ -308,4 +308,4 @@ Prompt caching insight: for agents with long system prompts (>2,000 tokens), add
 - Jay's `~/.claude/CLAUDE.md` (model selection heuristics)
 - [[entities/anthropic]]
 - [[entities/model-landscape]]
-- Anthropic API documentation [UNVERIFIED — knowledge cutoff]
+- [[anthropic]] API documentation [UNVERIFIED — knowledge cutoff]

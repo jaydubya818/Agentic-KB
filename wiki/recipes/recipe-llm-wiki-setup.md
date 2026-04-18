@@ -288,7 +288,7 @@ Follow the INGEST workflow from CLAUDE.md:
 5. Update wiki/index.md
 ```
 
-### Step 7 — Set Up Claude Code Integration
+### Step 7 — Set Up [[framework-claude-code]] Integration
 
 Add to your project's `.claude/settings.json` or `~/.claude/settings.json`:
 ```json
@@ -321,7 +321,7 @@ cd packages/cli && npm run query "what is tool use"
 # Should cite [[concepts/tool-use]] in the response
 ```
 
-2. Test ingest workflow: paste a paragraph from any tech article and ask Claude Code to ingest it. Verify it creates a `wiki/summaries/` file.
+2. Test ingest workflow: paste a paragraph from any tech article and ask [[framework-claude-code]] to ingest it. Verify it creates a `wiki/summaries/` file.
 
 3. Verify linking: after creating 3 pages, run `grep -r "\[\[" wiki/ | head -20` to confirm cross-links exist.
 
@@ -344,14 +344,14 @@ for page in wiki/**/*.md; do
 done
 ```
 
-### Failure: Hot cache grows too large (>600 words)
+### Failure: [[pattern-hot-cache]] grows too large (>600 words)
 Fix: enforce the 500-word limit in your lint script; prune least-recently-queried entries.
 
 ---
 
 ## Next Steps
 
-1. **Add MCP server**: expose the wiki as tools for other agents — [[recipes/recipe-mcp-server]]
+1. **Add [[mcp-ecosystem]] server**: expose the wiki as tools for other agents — [[recipes/recipe-mcp-server]]
 2. **Add the full harness**: implement the full Ingest/Query/Lint workflows from CLAUDE.md
 3. **Set up graphify**: after 20+ pages, run a knowledge graph visualization to find orphan clusters
 4. **Add evaluation pages**: start scoring frameworks and tools you use — these become your most-queried pages
@@ -360,7 +360,7 @@ Fix: enforce the 500-word limit in your lint script; prune least-recently-querie
 
 ## Related Recipes
 
-- [[recipes/recipe-mcp-server]] — expose this KB as MCP tools
+- [[recipes/recipe-mcp-server]] — expose this KB as [[mcp-ecosystem]] tools
 - [[recipes/recipe-context-compression]] — handle long sessions that reference many KB pages
 - [[evaluations/eval-memory-approaches]] — why this approach was chosen over vector DB
 - [[entities/andrej-karpathy]] — origin of this pattern

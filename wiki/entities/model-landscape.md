@@ -19,12 +19,12 @@ The LLM model landscape as of April 2026. Frontier models change rapidly — tre
 | Model | Vendor | Context | Cost Tier | Extended Reasoning | Best For |
 |-------|--------|---------|-----------|-------------------|---------|
 | `claude-opus-4-6` | [[anthropic]] | 200K | High | Extended thinking (explicit) | Architecture, security audits, complex reasoning |
-| `claude-sonnet-4-6` | Anthropic | 200K | Medium | No | Production default, orchestration, balanced |
-| `claude-haiku-4-5-20251001` | Anthropic | 200K | Low | No | Leaf tasks, classification, boilerplate |
+| `claude-sonnet-4-6` | [[anthropic]] | 200K | Medium | No | Production default, orchestration, balanced |
+| `claude-haiku-4-5-20251001` | [[anthropic]] | 200K | Low | No | Leaf tasks, classification, boilerplate |
 | `gpt-4o` | [[openai]] | 128K | Medium-high | No | Multimodal, vision, broad ecosystem |
-| `o4` | OpenAI | 128K | Very High | Yes (o-series) | Math, programming competition, hard reasoning |
-| `o4-mini` | OpenAI | 128K | Medium | Yes (o-series) | Fast reasoning, code, cost-effective reasoning |
-| `o3` | OpenAI | 128K | High | Yes (o-series) | Complex reasoning, previous gen |
+| `o4` | [[openai]] | 128K | Very High | Yes (o-series) | Math, programming competition, hard reasoning |
+| `o4-mini` | [[openai]] | 128K | Medium | Yes (o-series) | Fast reasoning, code, cost-effective reasoning |
+| `o3` | [[openai]] | 128K | High | Yes (o-series) | Complex reasoning, previous gen |
 | `gemini-2.5-pro` | Google | 1M+ | Medium-high | Yes (thinking) | Long context, multimodal, Google ecosystem |
 | `gemini-2.0-flash` | Google | 1M | Low | Limited | Fast, cheap, long context |
 | `llama-3.3-70b` | Meta (open) | 128K | Self-hosted | No | Self-hosted, fine-tunable, cost control |
@@ -34,7 +34,7 @@ The LLM model landscape as of April 2026. Frontier models change rapidly — tre
 
 ---
 
-## Anthropic Models (Jay's Primary)
+## [[anthropic]] Models (Jay's Primary)
 
 ### claude-opus-4-6
 **Use for**: Complex architecture decisions, security audits, extended thinking tasks, code that must be correct on first pass, analysis requiring deep reasoning chains.
@@ -53,10 +53,10 @@ The LLM model landscape as of April 2026. Frontier models change rapidly — tre
 
 ---
 
-## OpenAI Models
+## [[openai]] Models
 
 ### gpt-4o
-OpenAI's current production model. Key advantages over Claude:
+[[openai]]'s current production model. Key advantages over Claude:
 - **Native audio I/O** (Realtime API) — Claude has no voice-to-voice equivalent
 - **Image generation** (DALL-E integration) — Claude cannot generate images
 - **Vision** (competitive with Claude Sonnet on most image tasks)
@@ -65,7 +65,7 @@ OpenAI's current production model. Key advantages over Claude:
 Key disadvantage: 128K context vs. Claude's 200K. At 128K you lose the ability to fit large codebases or long research sessions in a single context.
 
 ### o3 / o4 Series
-OpenAI's "reasoning model" family. Separate from GPT-4o — these are slower, more expensive models that explicitly show chain-of-thought reasoning. The model spends additional compute on reasoning before returning a final answer.
+[[openai]]'s "reasoning model" family. Separate from GPT-4o — these are slower, more expensive models that explicitly show chain-of-thought reasoning. The model spends additional compute on reasoning before returning a final answer.
 
 **o4**: best performance on hard problems; competition-level math and code; very slow.
 **o4-mini**: balances reasoning quality with cost and speed; recommended for most "reasoning model" use cases.
@@ -91,7 +91,7 @@ Fast and cheap with long context. Good for: high-throughput pipelines where 128K
 ## Open Source / Self-Hosted Models
 
 ### llama-3.3-70b (Meta)
-State-of-the-art open model as of early 2026. Fine-tunable on custom data. Run via: Ollama (local), vLLM (production server), Together AI, Groq (fast inference). Key use case: tasks requiring data privacy (can't send to Anthropic/OpenAI APIs), fine-tuned domain experts, cost control at scale.
+State-of-the-art open model as of early 2026. Fine-tunable on custom data. Run via: Ollama (local), vLLM (production server), Together AI, Groq (fast inference). Key use case: tasks requiring data privacy (can't send to [[anthropic]]/[[openai]] APIs), fine-tuned domain experts, cost control at scale.
 
 ### mistral-large-2 (Mistral AI)
 Strong European model with open weights. Key advantage: EU data residency compliance. Competitive with GPT-4o on most benchmarks. Mistral is known for efficient inference.
@@ -141,7 +141,7 @@ For [[multi-agent-systems]]: sub-agents each get their own full context window. 
 
 - Pricing is per million tokens (input + output separately)
 - Prompt caching can reduce effective cost by 80-90% on repeated system prompts
-- Batch API (Anthropic): 50% reduction for async workloads
+- Batch API ([[anthropic]]): 50% reduction for async workloads
 - Output tokens cost 3-5x more than input tokens across all providers
 - Extended thinking / reasoning burns additional "thinking" tokens at input token price
 

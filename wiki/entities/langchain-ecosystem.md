@@ -14,7 +14,7 @@ LangChain is a family of products built around LLM application development. The 
 
 The four products:
 1. **LangChain** — chains, LCEL, prompt templates, document loaders
-2. **LangGraph** — graph-based agent orchestration (the crown jewel)
+2. **[[framework-langgraph]]** — graph-based agent orchestration (the crown jewel)
 3. **LangSmith** — observability, tracing, evaluation
 4. **LangServe** — FastAPI-based deployment for LangChain runnables
 
@@ -56,13 +56,13 @@ The LangChain 0.1.x and 0.2.x eras had significant criticism:
 - **Over-engineering simple tasks**: a 5-line direct API call became 50 lines of LangChain boilerplate
 - **Debugging hell**: errors deep in the abstraction stack were hard to trace
 
-0.3.x stabilized substantially, and LangGraph emerged as the framework's genuine value-add. Today: use LangChain as a thin model provider abstraction + RAG pipeline builder; use LangGraph for orchestration; avoid heavy LCEL chains for complex logic.
+0.3.x stabilized substantially, and [[framework-langgraph]] emerged as the framework's genuine value-add. Today: use LangChain as a thin model provider abstraction + RAG pipeline builder; use [[framework-langgraph]] for orchestration; avoid heavy LCEL chains for complex logic.
 
 ---
 
-## LangGraph
+## [[framework-langgraph]]
 
-LangGraph is the graph-based agent orchestration framework. It is a separate package (`langgraph`) and the most valuable component of the ecosystem for multi-agent work. See [[frameworks/framework-langgraph]] for full coverage.
+[[framework-langgraph]] is the graph-based agent orchestration framework. It is a separate package (`langgraph`) and the most valuable component of the ecosystem for multi-agent work. See [[frameworks/framework-langgraph]] for full coverage.
 
 Key capabilities not in LangChain core:
 - Stateful multi-agent graphs with typed state
@@ -85,9 +85,9 @@ export LANGCHAIN_API_KEY="ls__..."
 export LANGCHAIN_TRACING_V2="true"
 ```
 
-Every LangChain/LangGraph call is automatically traced — LLM calls, tool executions, node transitions, token counts, latencies. Traces appear in the LangSmith UI as a timeline with nested spans.
+Every LangChain/[[framework-langgraph]] call is automatically traced — LLM calls, tool executions, node transitions, token counts, latencies. Traces appear in the LangSmith UI as a timeline with nested spans.
 
-**Why this matters for multi-agent work**: tracing a multi-agent LangGraph execution shows exactly which node called which LLM with what prompt, what the response was, and what tool was called — invaluable for debugging unexpected agent behavior.
+**Why this matters for multi-agent work**: tracing a multi-agent [[framework-langgraph]] execution shows exactly which node called which LLM with what prompt, what the response was, and what tool was called — invaluable for debugging unexpected agent behavior.
 
 ### Evaluation
 LangSmith supports [[llm-as-judge]] evaluation:
@@ -106,13 +106,13 @@ prompt = hub.pull("my-org/my-prompt:v3")
 ### Cost
 - Free tier: 5K traces/month
 - Developer tier: $X/month for higher volume
-- For Jay's stack: LangSmith is valuable for debugging LangGraph pipelines but adds external dependency; Jay's own Multi-Agent-Observability hooks provide similar visibility for [[framework-claude-code]] sessions
+- For Jay's stack: LangSmith is valuable for debugging [[framework-langgraph]] pipelines but adds external dependency; Jay's own Multi-Agent-Observability hooks provide similar visibility for [[framework-claude-code]] sessions
 
 ---
 
 ## LangServe
 
-FastAPI-based deployment layer for LangChain runnables. Exposes any chain or LangGraph app as a REST API with:
+FastAPI-based deployment layer for LangChain runnables. Exposes any chain or [[framework-langgraph]] app as a REST API with:
 - `/invoke` — synchronous request/response
 - `/batch` — parallel invocations
 - `/stream` — SSE streaming
@@ -127,7 +127,7 @@ add_routes(app, chain, path="/my-chain")
 # uvicorn main:app
 ```
 
-**In practice**: LangServe is useful for quickly prototyping a service around a LangGraph app. For production, most teams replace it with custom FastAPI + direct API calls for more control.
+**In practice**: LangServe is useful for quickly prototyping a service around a [[framework-langgraph]] app. For production, most teams replace it with custom FastAPI + direct API calls for more control.
 
 ---
 
@@ -160,15 +160,15 @@ LangChain Ecosystem
 
 ## Honest Assessment (Jay's Perspective)
 
-**LangGraph is genuinely excellent** for Python-native multi-agent orchestration with resumable state. No other framework offers first-class checkpointing + graph control flow + human-in-the-loop in one package.
+**[[framework-langgraph]] is genuinely excellent** for Python-native multi-agent orchestration with resumable state. No other framework offers first-class checkpointing + graph control flow + human-in-the-loop in one package.
 
 **LangChain core is optional**: for simple pipelines, the direct [[anthropic]] SDK (`@anthropic-ai/sdk` or `anthropic`) is simpler and produces less debugging overhead. LangChain's value is in the integrations (vector stores, document loaders, 50+ model providers) — if you need those, it earns its place.
 
-**LangSmith is underrated**: the trace visualization is the best debugging interface for multi-agent Python systems. If you're building in Python + LangGraph, use LangSmith; the free tier is enough for development.
+**LangSmith is underrated**: the trace visualization is the best debugging interface for multi-agent Python systems. If you're building in Python + [[framework-langgraph]], use LangSmith; the free tier is enough for development.
 
 **LangServe is thin**: useful for demos and quick prototypes; for production, use FastAPI directly.
 
-**Jay's current use**: limited. Jay's stack is TypeScript-first and Claude Code-native. LangGraph would be the entry point if Jay needs a Python-native orchestration layer with checkpointing requirements.
+**Jay's current use**: limited. Jay's stack is TypeScript-first and [[framework-claude-code]]-native. [[framework-langgraph]] would be the entry point if Jay needs a Python-native orchestration layer with checkpointing requirements.
 
 ---
 
@@ -176,9 +176,9 @@ LangChain Ecosystem
 
 - **[[frameworks/framework-langgraph]]**: Full coverage of the graph orchestration layer
 - **[[entities/openai]]**: LangChain's `ChatOpenAI` is one of the primary model providers
-- **[[entities/anthropic]]**: `langchain-anthropic` wraps the Anthropic API
+- **[[entities/anthropic]]**: `langchain-anthropic` wraps the [[anthropic]] API
 - **[[entities/model-landscape]]**: LangChain supports 50+ models via provider packages
-- **[[evaluations/eval-orchestration-frameworks]]**: LangGraph scored against GSD, [[framework-autogen]], [[framework-crewai]]
+- **[[evaluations/eval-orchestration-frameworks]]**: [[framework-langgraph]] scored against GSD, [[framework-autogen]], [[framework-crewai]]
 
 ---
 

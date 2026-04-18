@@ -59,7 +59,7 @@ The `matcher` field is a regex matched against the tool name. Examples:
 - Any other exit code: treat as error; tool call continues
 
 ### Environment Variables
-Claude Code sets these env vars for hook processes:
+[[framework-claude-code]] sets these env vars for hook processes:
 - `CLAUDE_TOOL_NAME` — name of the tool being called
 - `CLAUDE_TOOL_INPUT` — JSON string of tool arguments
 - `CLAUDE_TOOL_OUTPUT` — tool's output (PostToolUse only)
@@ -165,7 +165,7 @@ chmod +x ~/.claude/hooks/lint-on-edit.sh
 
 ### Step 3 — Bash Command Logger (PostToolUse/Bash)
 
-Logs all Bash commands executed by Claude Code for audit and debugging:
+Logs all Bash commands executed by [[framework-claude-code]] for audit and debugging:
 
 ```javascript
 // ~/.claude/hooks/log-bash.js
@@ -313,13 +313,13 @@ seq 1 2500 > /tmp/test-large-file.txt
 
 ## Verification
 
-1. **large-file-guard**: `wc -l /tmp/test-large-file.txt` → 2500 lines. Ask Claude Code to read it. Should see the exit 2 warning in the session.
+1. **large-file-guard**: `wc -l /tmp/test-large-file.txt` → 2500 lines. Ask [[framework-claude-code]] to read it. Should see the exit 2 warning in the session.
 
 2. **lint-on-edit**: Edit a `.ts` file that has an ESLint error. The error should appear in the session output immediately after the edit.
 
 3. **bash-logger**: After running any bash command, check `ls ~/.claude/bash-logs/`. Should see a file. `cat` it to verify JSON entries.
 
-4. **stop-validation**: With unstaged changes, end a Claude Code session. Warning should appear.
+4. **stop-validation**: With unstaged changes, end a [[framework-claude-code]] session. Warning should appear.
 
 ---
 
@@ -329,7 +329,7 @@ seq 1 2500 > /tmp/test-large-file.txt
 Causes: (1) settings.json has JSON syntax error — validate with `python3 -m json.tool ~/.claude/settings.json`, (2) matcher regex doesn't match tool name — test with `echo "Bash" | grep -E "your_pattern"`, (3) hook file isn't executable — run `chmod +x hookfile.sh`.
 
 ### Failure: Hook exit 2 blocks but shows no message
-Fix: ensure the hook script outputs text to stdout before exiting. `echo "message"` then `exit 2`. Claude Code displays stdout from a blocking hook.
+Fix: ensure the hook script outputs text to stdout before exiting. `echo "message"` then `exit 2`. [[framework-claude-code]] displays stdout from a blocking hook.
 
 ### Failure: lint-on-edit slows down every edit significantly
 Cause: ESLint startup cost (~500ms). Fix: (1) use `--cache` flag in ESLint call, (2) only lint if the file is in an ESLint-configured project (`[ -f "$PROJECT_DIR/.eslintrc*" ] || exit 0`), (3) run lint async by backgrounding and only report errors in the next turn.

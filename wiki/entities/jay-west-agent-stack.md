@@ -16,11 +16,11 @@ Jay West is an expert AI builder and multi-agent architect. This page documents 
 
 ## Primary Runtime: [[framework-claude-code]]
 
-**Primary tool**: Claude Code CLI ([[anthropic]])
+**Primary tool**: [[framework-claude-code]] CLI ([[anthropic]])
 **Default model**: `claude-sonnet-4-6` (Sonnet-class)
 **Model in settings**: `"model": "opusplan"` — likely a model plan alias; effective tier is Sonnet for most work, Opus for heavy reasoning
 
-Claude Code is Jay's primary development environment — not just an assistant but an autonomous agent runtime with hooks, sub-agents, [[mcp-ecosystem]] servers, and skills. See [[frameworks/framework-claude-code]].
+[[framework-claude-code]] is Jay's primary development environment — not just an assistant but an autonomous agent runtime with hooks, sub-agents, [[mcp-ecosystem]] servers, and skills. See [[frameworks/framework-claude-code]].
 
 ---
 
@@ -59,7 +59,7 @@ Hybrid (recommended for large apps):
 **Source**: https://github.com/garrytan/gstack
 **Install**: `git clone --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup`
 
-gstack transforms Claude Code into a **virtual engineering team** of 23 specialized AI agents, each playing a distinct professional role. Jay's existing gstack skill entry previously described it only as "headless browser QA" — that significantly understates it.
+gstack transforms [[framework-claude-code]] into a **virtual engineering team** of 23 specialized AI agents, each playing a distinct professional role. Jay's existing gstack skill entry previously described it only as "headless browser QA" — that significantly understates it.
 
 ### Core Philosophy
 
@@ -94,11 +94,11 @@ gstack implements a deterministic sprint structure: **Think → Plan → Build �
 
 ### Key Differentiators vs. Jay's Other Frameworks
 
-| Dimension | GSD | Superpowers | BMAD | gstack |
+| Dimension | GSD | [[framework-superpowers]] | [[framework-bmad]] | gstack |
 |-----------|-----|-------------|------|--------|
 | Design-first pipeline | ✗ | ✗ | ✗ | ✓ (`/design-shotgun → /design-html`) |
 | Real browser QA | ✗ | ✗ | ✗ | ✓ (Chromium, real screenshots) |
-| Cross-model review | ✗ | ✗ | ✗ | ✓ (Claude + OpenAI Codex `/codex`) |
+| Cross-model review | ✗ | ✗ | ✗ | ✓ (Claude + [[openai]] Codex `/codex`) |
 | Multi-role challenge | ✗ | ✗ | ✓ (Party Mode) | ✓ (CEO/Eng/Design/DevEx) |
 | Process artifacts | ✓ | ✓ | ✓ | ✓ (all Markdown, feeds downstream) |
 | Safety model | Hooks/gates | Iron laws | Spec-lock | `/careful`, `/freeze`, `/guard` |
@@ -122,7 +122,7 @@ The `/design-shotgun → /design-html` pipeline is unique to gstack:
 
 ### Multi-Agent & Multi-Runtime Support
 
-gstack works across 8 AI coding agents (Claude Code, OpenAI Codex CLI, Cursor, Factory Droid, Slate, Kiro, OpenCode). Setup auto-detects installed agents. Jay's stack already uses gstack with **[[framework-openclaw]]** via four conversational skills in ClawHub: `gstack-openclaw-office-hours`, `gstack-openclaw-ceo-review`, `gstack-openclaw-investigate`, `gstack-openclaw-retro`.
+gstack works across 8 AI coding agents ([[framework-claude-code]], [[openai]] Codex CLI, Cursor, Factory Droid, Slate, Kiro, OpenCode). Setup auto-detects installed agents. Jay's stack already uses gstack with **[[framework-openclaw]]** via four conversational skills in ClawHub: `gstack-openclaw-office-hours`, `gstack-openclaw-ceo-review`, `gstack-openclaw-investigate`, `gstack-openclaw-retro`.
 
 Parallel execution via Conductor: 10–15 simultaneous sprints, each in its own isolated workspace, coordinated through shared repositories.
 
@@ -175,7 +175,7 @@ All defined as `.md` files in `~/.claude/agents/`:
 | `security-reviewer` | Vulnerability and threat assessment |
 | `db-reviewer` | Database query and schema optimization |
 | `perf-analyzer` | Performance profiling and bottleneck identification |
-| `superpowers-code-reviewer` | Superpowers iron-law-aware code review |
+| `superpowers-code-reviewer` | [[framework-superpowers]] iron-law-aware code review |
 
 ---
 
@@ -186,7 +186,7 @@ All in `~/.claude/skills/`:
 ### GSD Skills
 GSD commands are embedded in CLAUDE.md and agents, not as separate SKILL.md directories (the `/gsd:*` namespace). See [[frameworks/framework-gsd]] for full command reference.
 
-### Superpowers Skills (`~/.claude/skills/superpowers/`)
+### [[framework-superpowers]] Skills (`~/.claude/skills/superpowers/`)
 | Skill | Purpose |
 |-------|---------|
 | `brainstorming` | Structured ideation before any feature work |
@@ -202,7 +202,7 @@ GSD commands are embedded in CLAUDE.md and agents, not as separate SKILL.md dire
 | `receiving-code-review` | Structured review response |
 | `using-superpowers` | Meta-skill: when to invoke others |
 
-### BMAD Skills (`~/.claude/skills/bmad/`)
+### [[framework-bmad]] Skills (`~/.claude/skills/bmad/`)
 See [[frameworks/framework-bmad]] for full catalog. Organized into core, analysis, planning, solutioning.
 
 
@@ -219,7 +219,7 @@ See [[frameworks/framework-bmad]] for full catalog. Organized into core, analysi
 | `/design-shotgun` | 4–6 AI mockup variants via GPT Image; comparison board; taste memory iteration |
 | `/design-html` | Converts approved mockup to production HTML; detects React/Svelte/Vue |
 | `/review` | Staff-engineer-level code analysis; auto-fixes obvious issues |
-| `/codex` | Independent code review via OpenAI Codex CLI (cross-model analysis) |
+| `/codex` | Independent code review via [[openai]] Codex CLI (cross-model analysis) |
 | `/qa` | Real Chromium browser; clicks flows; finds bugs; generates regression tests |
 | `/qa-only` | QA pass without auto-fix |
 | `/browse` | ~100ms latency Chromium browsing with real screenshots |
@@ -243,7 +243,7 @@ See [[frameworks/framework-bmad]] for full catalog. Organized into core, analysi
 |-------|---------|
 | `graphify` | Generate knowledge graph visualization from wiki index |
 | `ralph` | Personal skill |
-| `prd` / `prd-creator` | PRD creation (standalone, non-BMAD) |
+| `prd` / `prd-creator` | PRD creation (standalone, non-[[framework-bmad]]) |
 | `react-best-practices` | React component patterns |
 | `web-design-guidelines` | UI design system conventions |
 | `vitest-best-practices` | Testing with Vitest |
@@ -288,13 +288,13 @@ All in `~/.claude/hooks/`:
 | `prompt-injection-defender/` | PostToolUse/Read\|Bash\|WebFetch\|Grep\|Task | Scan outputs for prompt injection patterns |
 | Multi-Agent-Observability hooks | All events | Forward all events to observability stack |
 
-The `send_event.py` from Multi-Agent-Observability fires on PreToolUse, PostToolUse, Notification, Stop, and SubagentStop — providing full telemetry for all Claude Code sessions.
+The `send_event.py` from Multi-Agent-Observability fires on PreToolUse, PostToolUse, Notification, Stop, and SubagentStop — providing full telemetry for all [[framework-claude-code]] sessions.
 
 ---
 
 ## Parallel Runtimes
 
-Beyond Claude Code, Jay runs:
+Beyond [[framework-claude-code]], Jay runs:
 
 | Runtime | Location | Purpose |
 |---------|----------|---------|
@@ -317,11 +317,11 @@ Beyond Claude Code, Jay runs:
 **Role**: LLM-maintained (agents write and maintain it), optimized for agent context injection
 **Schema**: CLAUDE.md defines the full schema, workflows, and linking conventions
 
-### My LLM Wiki Harness
+### My [[llm-wiki]] Harness
 **Location**: `/Users/jaywest/My LLM Wiki/`
 **Structure**:
 - `packages/cli` — Terminal CLI for querying the KB
-- `packages/mcp` — MCP server exposing the KB as tools (`search_wiki`, `read_wiki_page`)
+- `packages/mcp` — [[mcp-ecosystem]] server exposing the KB as tools (`search_wiki`, `read_wiki_page`)
 - `packages/core` — Shared ingestion/query logic
 **Runtime**: TypeScript (check for `bun.lockb` or `package-lock.json`)
 **Query**: `cd /Users/jaywest/My\ LLM\ Wiki && npm run query "your question"`
@@ -333,11 +333,11 @@ Beyond Claude Code, Jay runs:
 
 | Project | Domain | Framework |
 |---------|--------|-----------|
-| SellerFi | Fintech (seller financing) | BMAD (client) |
+| SellerFi | Fintech (seller financing) | [[framework-bmad]] (client) |
 | MissionControl | Internal ops platform | GSD |
 | Twinz | Unknown (possibly digital twin) | Unknown |
-| AMS/ARM | Asset management system | BMAD |
-| clawd | Claude-based tool/assistant (possibly OpenClaw parent) | Unknown |
+| AMS/ARM | Asset management system | [[framework-bmad]] |
+| clawd | Claude-based tool/assistant (possibly [[framework-openclaw]] parent) | Unknown |
 | conductor | Orchestration layer or API gateway | Unknown |
 
 ---
@@ -345,9 +345,9 @@ Beyond Claude Code, Jay runs:
 ## Key Architectural Decisions
 
 1. **TypeScript-first**: Jay's stack is TypeScript everywhere; Python frameworks ([[framework-langgraph]], [[framework-autogen]], [[framework-crewai]]) are non-primary
-2. **Claude Code as primary runtime**: the CLI + filesystem model beats IDE integrations for complex agentic work
+2. **[[framework-claude-code]] as primary runtime**: the CLI + filesystem model beats IDE integrations for complex agentic work
 3. **File-based wiki over vector DB**: transparent, version-controllable, no retrieval errors ([[andrej-karpathy]] pattern)
-4. **Four-framework decision tree**: GSD/Superpowers/BMAD/gstack for different contexts prevents framework lock-in
+4. **Four-framework decision tree**: GSD/[[framework-superpowers]]/[[framework-bmad]]/gstack for different contexts prevents framework lock-in
 5. **Hooks over prompt instructions**: `exit 2` hooks enforce invariants more reliably than prompt discipline alone
 6. **Model tiering**: Opus for architecture, Sonnet for orchestration, Haiku for leaf tasks — cost control without quality sacrifice
 7. **Written artifacts as institutional memory**: all frameworks produce Markdown that feeds downstream roles; gstack enforces this most strictly
@@ -365,7 +365,7 @@ Beyond Claude Code, Jay runs:
 - **[[frameworks/framework-rowboat]]**: Meeting automation runtime
 - **[[entities/anthropic]]**: Primary model vendor
 - **[[entities/andrej-karpathy]]**: Inspiration for KB architecture pattern
-- **[[entities/mcp-ecosystem]]**: MCP servers integrated into Claude Code
+- **[[entities/mcp-ecosystem]]**: [[mcp-ecosystem]] servers integrated into [[framework-claude-code]]
 - **[[entities/garry-tan]]**: gstack author (YC President & CEO)
 
 ---
@@ -377,6 +377,6 @@ Beyond Claude Code, Jay runs:
 - `~/.claude/agents/` (34 agent definitions)
 - `~/.claude/skills/` (skill directory)
 - `~/.claude/hooks/` (hook implementations)
-- `~/.openclaw/` (OpenClaw structure)
+- `~/.openclaw/` ([[framework-openclaw]] structure)
 - `~/.rowboat/` ([[framework-rowboat]] structure)
 - https://github.com/garrytan/gstack (gstack framework, inspected 2026-04-07)

@@ -102,9 +102,9 @@ Each lens file has: core questions, how to research through that angle, output f
 
 ---
 
-### Step 4 — Wire Claude Code to the Research Graph
+### Step 4 — Wire [[framework-claude-code]] to the Research Graph
 
-**Method A: Claude Code direct (most powerful)**
+**Method A: [[framework-claude-code]] direct (most powerful)**
 
 Create a CLAUDE.md inside `research-skill-graph/` that tells Claude how to operate:
 
@@ -133,13 +133,13 @@ You are a research engine. When given a research question, execute the full
 
 Then run: `claude --project-path research-skill-graph/ "Research: [your question]"`
 
-**Method B: Obsidian + Claude Code (recommended for Jay's setup)**
+**Method B: Obsidian + [[framework-claude-code]] (recommended for Jay's setup)**
 
 Open `research-skill-graph/` as an Obsidian vault. You get:
 - Graph view showing how all nodes connect (index.md at center, 6 lenses radiating out)
 - Click into any project to see lens findings visually
 - Spot disconnected nodes (research gaps) and unexpected cross-project connections
-- Open Claude Code in the same directory for direct file access
+- Open [[framework-claude-code]] in the same directory for direct file access
 
 **Method C: Claude Project upload**
 Zip the `methodology/` and `lenses/` folders, upload to a Claude project. Less powerful (no file writes) but works for one-off research.
@@ -150,7 +150,7 @@ Zip the `methodology/` and `lenses/` folders, upload to a Claude project. Less p
 
 1. Open `research-skill-graph/index.md`
 2. Paste your question, define scope and goal
-3. Run via Claude Code: `claude "Follow the execution instructions in index.md. Research question is already set."`
+3. Run via [[framework-claude-code]]: `claude "Follow the execution instructions in index.md. Research question is already set."`
 4. Claude will create `projects/{your-topic}/` with output files:
    - `executive-summary.md` — 500 words, key findings
    - `deep-dive.md` — full lens-by-lens analysis
@@ -175,7 +175,7 @@ Open questions from one project automatically become candidates for the next `in
 
 ## Verification
 
-1. Run a test query: paste "Why did remote work adoption stall in 2024-2025?" into `index.md`. Execute via Claude Code. Confirm 6 separate lens files appear in `projects/remote-work-2024/`.
+1. Run a test query: paste "Why did remote work adoption stall in 2024-2025?" into `index.md`. Execute via [[framework-claude-code]]. Confirm 6 separate lens files appear in `projects/remote-work-2024/`.
 
 2. Check that `technical.md` findings use only Tier 1/2 sources and contain no emotional language.
 

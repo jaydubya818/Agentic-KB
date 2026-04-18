@@ -138,7 +138,7 @@ The proportional model is more predictable than pure score-based cutoff: you kno
 
 ## Real Examples
 
-From nashsu/llm_wiki (2025): the two-step chain-of-thought ingest was the primary architectural improvement over the base Karpathy pattern. Files saved to the knowledge base undergo in-depth analysis via LLM to break down content and generate a knowledge graph; the second call writes structured wiki pages using that graph as context.
+From nashsu/llm_wiki (2025): the two-step chain-of-thought ingest was the primary architectural improvement over the base [[andrej-karpathy]] pattern. Files saved to the knowledge base undergo in-depth analysis via LLM to break down content and generate a knowledge graph; the second call writes structured wiki pages using that graph as context.
 
 ---
 
@@ -146,5 +146,5 @@ From nashsu/llm_wiki (2025): the two-step chain-of-thought ingest was the primar
 
 - [[concepts/llm-wiki-compile-pipeline]] — the single-call baseline this pattern improves on
 - [[patterns/pattern-reflection-loop]] — adjacent pattern: one call generates, another critiques; here both calls are generative but different tasks
-- [[patterns/pattern-hot-cache]] — the hot cache feeds the 5% budget slice in the four-stage query allocation
+- [[patterns/pattern-hot-cache]] — the [[pattern-hot-cache]] feeds the 5% budget slice in the four-stage query allocation
 - [[concepts/context-management]] — the 60/20/5/15 proportional budget allocation is an application of principled context budgeting

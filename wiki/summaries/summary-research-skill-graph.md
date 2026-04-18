@@ -117,5 +117,5 @@ The 6-lens methodology is the most novel contribution. This KB currently lacks a
 ---
 
 ## New Pages Identified
-- [[recipes/recipe-local-research-engine]] — Full setup guide + Claude Code integration
+- [[recipes/recipe-local-research-engine]] — Full setup guide + [[framework-claude-code]] integration
 - The actual folder structure is scaffolded at `/Users/jaywest/Agentic-KB/research-skill-graph/`

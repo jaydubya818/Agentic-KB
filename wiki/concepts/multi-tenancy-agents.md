@@ -51,7 +51,7 @@ Memory must be scoped appropriately to enforce user isolation:
 
 ## Example ([[framework-langgraph]])
 
-LangGraph's production deployment model illustrates these patterns concretely:
+[[framework-langgraph]]'s production deployment model illustrates these patterns concretely:
 - **Threads** are user-scoped conversations with isolated message history
 - **Authorization handlers** filter resource access per user
 - **Agent Auth** manages OAuth flows with interrupts and token refresh

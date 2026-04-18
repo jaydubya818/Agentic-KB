@@ -47,8 +47,8 @@ updated: 2026-04-09
 
 - ✅ CLI tool basic functionality
 - ✅ Web UI MVP
-- ✅ MCP server integration
-- ✅ Hot cache synchronization
+- ✅ [[mcp-ecosystem]] server integration
+- ✅ [[pattern-hot-cache]] synchronization
 
 ## Metrics
 
@@ -57,6 +57,6 @@ updated: 2026-04-09
 | CLI query latency (cached) | 100–200ms | <100ms |
 | CLI query latency (full wiki) | 500–1000ms | <2s |
 | Web UI page load | 200–500ms | <300ms |
-| MCP server response | 50–100ms | <100ms |
+| [[mcp-ecosystem]] server response | 50–100ms | <100ms |
 
 **Next**: Complete CLI reliability testing by 2026-04-20.

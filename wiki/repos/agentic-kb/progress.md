@@ -21,7 +21,7 @@ Repo plan: [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|Ope
 - [x] Tighten scoped context loading with required/optional and freshness rules
 - [x] Make close-task fully atomic across files and bus publications
 - [x] Formalize promotion and rewrite governance in agent contracts
-- [x] Expose the same lifecycle through CLI, MCP, and web
+- [x] Expose the same lifecycle through CLI, [[mcp-ecosystem]], and web
 
 **Progress**: All 5 phases implemented and tested (52/52 tests passing).
 
@@ -29,24 +29,24 @@ Repo plan: [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|Ope
 - **Phase 2** — `context-loader.mjs`: `include_task_local`, `required`, `freshness_days`, `max_items`, canonical load order
 - **Phase 3** — `writeback.mjs`: bus publications in atomic guard cycle, post-commit task seal
 - **Phase 4** — `promotion.mjs`: approver tier validation (`TIER_RANK`), duplicate-title detection (with self-exclusion), target-path collision guard, `assertPromotable` state gate, `promoteDiscovery` + `mergeRewrite` with full provenance
-- **Phase 5** — CLI (`cli/kb.js`): `start-task`, `active-task`, `append-state`, `abandon-task`, `close-task --dry-run`; MCP (`mcp/server.js`): `agent_start_task`, `agent_active_task`, `agent_append_task_state`, `agent_abandon_task`, `agent_dry_run_close_task`; retention (`retention.mjs`): `archiveCompletedTaskMemory`, `archiveAbandonedTaskMemory`
+- **Phase 5** — CLI (`cli/kb.js`): `start-task`, `active-task`, `append-state`, `abandon-task`, `close-task --dry-run`; [[mcp-ecosystem]] (`mcp/server.js`): `agent_start_task`, `agent_active_task`, `agent_append_task_state`, `agent_abandon_task`, `agent_dry_run_close_task`; retention (`retention.mjs`): `archiveCompletedTaskMemory`, `archiveAbandonedTaskMemory`
 
 ### 1. Framework Documentation Sync
 **Status**: In Progress | **Owner**: Jay West | **Due**: 2026-04-16
 
-- [ ] Update LangGraph page with v0.2.0 changes
-- [ ] Add CrewAI async execution patterns
-- [ ] Document OpenClaw integration patterns (new framework)
-- [ ] Create comparison page: LangGraph vs AutoGen vs CrewAI
+- [ ] Update [[framework-langgraph]] page with v0.2.0 changes
+- [ ] Add [[framework-crewai]] async execution patterns
+- [ ] Document [[framework-openclaw]] integration patterns (new framework)
+- [ ] Create comparison page: [[framework-langgraph]] vs [[framework-autogen]] vs [[framework-crewai]]
 
-**Progress**: 2/4 complete. LangGraph updated. CrewAI page created but needs async pattern additions.
+**Progress**: 2/4 complete. [[framework-langgraph]] updated. [[framework-crewai]] page created but needs async pattern additions.
 
 ### 2. Recipe Testing Campaign
 **Status**: In Progress | **Owner**: Jay West | **Due**: 2026-04-30
 
 Identify all `tested: false` recipes and validate on real projects:
 
-- [ ] recipe-build-supervisor-worker — tested in Mission Control project
+- [ ] recipe-build-[[pattern-supervisor-worker]] — tested in Mission Control project
 - [ ] recipe-implement-reflection-loop — tested in document analysis agent
 - [ ] recipe-streaming-tokens-over-sockets — tested in Pi harness
 - [ ] recipe-multi-modal-tool-use — needs test
@@ -65,12 +65,12 @@ Agentic safety is underdocumented. Need:
 
 **Progress**: 0/4 started. Planning phase.
 
-### 4. Hot Cache Optimization
+### 4. [[pattern-hot-cache]] Optimization
 **Status**: Backlog | **Owner**: Jay West | **Due**: 2026-04-23
 
-Current hot cache is 480 words. Most accessed patterns:
+Current [[pattern-hot-cache]] is 480 words. Most accessed patterns:
 
-- supervisor-worker (8 queries/week)
+- [[pattern-supervisor-worker]] (8 queries/week)
 - reflection-loops (6 queries/week)
 - context-window-management (4 queries/week)
 - tool-use-patterns (3 queries/week)
@@ -82,23 +82,23 @@ Consider: Should memory-architectures push something else out?
 ## Completed (Last 30 days)
 
 - ✅ Lint pass and health check (2026-04-08)
-- ✅ Framework page for new OpenClaw framework (2026-04-05)
+- ✅ Framework page for new [[framework-openclaw]] framework (2026-04-05)
 - ✅ Synthesis: memory architecture trade-offs (2026-04-03)
 - ✅ Updated entity pages for new researchers (2026-03-29)
 - ✅ Bidirectional link validation across all 47 pages (2026-03-26)
 
 ## Blocked / At Risk
 
-1. **Safety patterns**: Awaiting feedback from Claude Code safety team. Draft synthesis in [[personal|personal]] vault pending review.
-2. **Framework versions**: OpenAI API docs moving to git-based releases. CI pipeline needed for auto-detection.
-3. **Recipe testing**: Time-intensive. May need to prioritize only critical recipes (supervisor-worker, reflection-loops).
+1. **Safety patterns**: Awaiting feedback from [[framework-claude-code]] safety team. Draft synthesis in [[personal|personal]] vault pending review.
+2. **Framework versions**: [[openai]] API docs moving to git-based releases. CI pipeline needed for auto-detection.
+3. **Recipe testing**: Time-intensive. May need to prioritize only critical recipes ([[pattern-supervisor-worker]], reflection-loops).
 
 ## Next Week Goals
 
-1. Complete LangGraph and CrewAI async pattern documentation
-2. Validate first 2 recipes (supervisor-worker, reflection-loops)
+1. Complete [[framework-langgraph]] and [[framework-crewai]] async pattern documentation
+2. Validate first 2 recipes ([[pattern-supervisor-worker]], reflection-loops)
 3. Create initial human-in-the-loop safety pattern page
-4. Refresh hot cache with latest access patterns
+4. Refresh [[pattern-hot-cache]] with latest access patterns
 
 ## Metrics
 

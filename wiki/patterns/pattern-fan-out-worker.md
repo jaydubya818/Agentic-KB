@@ -112,9 +112,9 @@ def aggregate_results(goal: str, results: list[WorkerResult]) -> dict:
     )
 ```
 
-### Claude Code Native (using parallel Agent tool calls)
+### [[framework-claude-code]] Native (using parallel Agent tool calls)
 
-In Claude Code, the model itself can fan out via parallel tool calls in a single response:
+In [[framework-claude-code]], the model itself can fan out via parallel tool calls in a single response:
 
 ```
 [Model emits simultaneously]
@@ -123,7 +123,7 @@ tool_call: Agent(task="Analyze module B's dependencies", ...)
 tool_call: Agent(task="Analyze module C's dependencies", ...)
 ```
 
-The host executes all three Agent calls in parallel and returns all three results before the model continues. This is the natural Claude Code fan-out mechanism.
+The host executes all three Agent calls in parallel and returns all three results before the model continues. This is the natural [[framework-claude-code]] [[pattern-fan-out-worker]] mechanism.
 
 ---
 
@@ -196,7 +196,7 @@ async def retry_failed_workers(
 ## When NOT To Use
 
 - Subtasks depend on each other's outputs — use [[patterns/pattern-pipeline]] instead
-- N = 2 or 3 with short tasks (< 5 seconds each) — serial execution is fine, fan-out overhead not worth it
+- N = 2 or 3 with short tasks (< 5 seconds each) — serial execution is fine, [[pattern-fan-out-worker]] overhead not worth it
 - Subtasks all write to the same shared mutable resource — coordinate or serialize
 - Rate limits make parallel API calls infeasible at this scale
 
@@ -215,11 +215,11 @@ async def retry_failed_workers(
 
 - [[patterns/pattern-supervisor-worker]] — when workers need different specializations
 - [[patterns/pattern-pipeline]] — when subtasks have sequential dependencies
-- [[patterns/pattern-plan-execute-verify]] — when you need a formal planning step before fan-out
+- [[patterns/pattern-plan-execute-verify]] — when you need a formal planning step before [[pattern-fan-out-worker]]
 
 ---
 
 ## Sources
 
 - [[anthropic]] "Building Effective Agents" (2024)
-- Claude Code Agent tool documentation
+- [[framework-claude-code]] Agent tool documentation

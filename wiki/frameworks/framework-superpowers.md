@@ -14,11 +14,11 @@ jay_experience: extensive
 
 ## Overview
 
-[[framework-superpowers]] is Jay West's TDD-first, verification-driven agentic framework for high-stakes features where mistakes are costly. Where GSD optimizes for speed and iteration, Superpowers optimizes for correctness and auditability. It applies to any feature where an edge case is expensive: authentication systems, payment processing, agentic systems with real-world side effects, security-sensitive code.
+[[framework-superpowers]] is Jay West's TDD-first, verification-driven agentic framework for high-stakes features where mistakes are costly. Where GSD optimizes for speed and iteration, [[framework-superpowers]] optimizes for correctness and auditability. It applies to any feature where an edge case is expensive: authentication systems, payment processing, agentic systems with real-world side effects, security-sensitive code.
 
-Superpowers is implemented as a set of skills (slash commands) in `~/.claude/skills/superpowers/` plus a specialized code reviewer agent (`superpowers-code-reviewer`). It is a workflow framework — the discipline is in the process, not in a library.
+[[framework-superpowers]] is implemented as a set of skills (slash commands) in `~/.claude/skills/superpowers/` plus a specialized code reviewer agent (`superpowers-code-reviewer`). It is a workflow framework — the discipline is in the process, not in a library.
 
-Version 5.0.6. Jay uses it alongside GSD (GSD for MVP, Superpowers for hardening) and alongside [[framework-bmad]] (BMAD for planning, Superpowers for implementation of risky modules).
+Version 5.0.6. Jay uses it alongside GSD (GSD for MVP, [[framework-superpowers]] for hardening) and alongside [[framework-bmad]] ([[framework-bmad]] for planning, [[framework-superpowers]] for implementation of risky modules).
 
 ---
 
@@ -99,7 +99,7 @@ All skills live in `~/.claude/skills/superpowers/`:
 ---
 
 ## Two-Stage Review per Task
-Superpowers mandates a two-stage review for every task in `subagent-driven-development`:
+[[framework-superpowers]] mandates a two-stage review for every task in `subagent-driven-development`:
 
 **Stage 1 — Spec Review**: Does the implementation match what the design doc specified?
 - Mechanical comparison: spec says X, does the code do X?
@@ -168,7 +168,7 @@ Superpowers Framework
 - **Two-stage review catches different bugs**: spec review catches "wrong behavior", quality review catches "right behavior, bad code"
 - **Systematic debugging prevents symptom-fixing**: root cause discipline reduces recurrence rates dramatically
 - **Verification-before-completion is a circuit breaker**: prevents the "I think it works" claim that causes production incidents
-- **Composable with GSD**: use GSD for the MVP, Superpowers for the auth layer — they don't conflict
+- **Composable with GSD**: use GSD for the MVP, [[framework-superpowers]] for the auth layer — they don't conflict
 - **Worktree isolation for risky work**: `using-git-worktrees` means dangerous refactors can't corrupt main
 
 ---
@@ -223,33 +223,33 @@ Sequence of skill invocations for adding a new payment webhook handler:
 
 ---
 
-## When to Use Superpowers vs GSD vs BMAD
+## When to Use [[framework-superpowers]] vs GSD vs [[framework-bmad]]
 
 | Scenario | Framework |
 |----------|-----------|
-| Building an auth system | Superpowers (iron laws for security) |
-| Integrating Stripe payments | Superpowers (financial correctness) |
-| Building an agentic pipeline that takes real-world actions | Superpowers (side effects are expensive) |
+| Building an auth system | [[framework-superpowers]] (iron laws for security) |
+| Integrating Stripe payments | [[framework-superpowers]] (financial correctness) |
+| Building an agentic pipeline that takes real-world actions | [[framework-superpowers]] (side effects are expensive) |
 | MVP feature that may be thrown away | GSD |
 | Experimental UI exploration | GSD |
-| Client deliverable with locked spec | BMAD |
-| Hardening a GSD MVP | Superpowers on top of GSD |
+| Client deliverable with locked spec | [[framework-bmad]] |
+| Hardening a GSD MVP | [[framework-superpowers]] on top of GSD |
 
 ---
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-code]]**: Superpowers skills are invoked within [[framework-claude-code]]; two-stage review uses the Agent tool to spawn the code-reviewer agent
-- **[[frameworks/framework-gsd]]**: Hybrid pattern: GSD for MVP, Superpowers for hardening; frameworks are composable
-- **[[frameworks/framework-bmad]]**: BMAD plans the spec-locked module; Superpowers implements it with TDD
-- **[[entities/jay-west-agent-stack]]**: Superpowers is the stability layer of Jay's stack
-- **[[patterns/pattern-fan-out-worker]]**: `subagent-driven-development` uses fan-out for parallel task implementation
+- **[[frameworks/framework-claude-code]]**: [[framework-superpowers]] skills are invoked within [[framework-claude-code]]; two-stage review uses the Agent tool to spawn the code-reviewer agent
+- **[[frameworks/framework-gsd]]**: Hybrid pattern: GSD for MVP, [[framework-superpowers]] for hardening; frameworks are composable
+- **[[frameworks/framework-bmad]]**: [[framework-bmad]] plans the spec-locked module; [[framework-superpowers]] implements it with TDD
+- **[[entities/jay-west-agent-stack]]**: [[framework-superpowers]] is the stability layer of Jay's stack
+- **[[patterns/pattern-fan-out-worker]]**: `subagent-driven-development` uses [[pattern-fan-out-worker]] for parallel task implementation
 
 ---
 
 ## Jay's Experience
 
-Jay uses Superpowers as the reliability layer for anything that touches auth, payments, or agentic side-effects. Key validated findings:
+Jay uses [[framework-superpowers]] as the reliability layer for anything that touches auth, payments, or agentic side-effects. Key validated findings:
 
 1. **Iron Law 1 (TDD) eliminates the entire class of "I forgot to handle the error"**: when you write the test first, you enumerate failure modes by definition
 2. **Iron Law 3 (fresh verification) catches surprising regressions**: more than once, running tests fresh revealed a passing test that had become broken by an unrelated change

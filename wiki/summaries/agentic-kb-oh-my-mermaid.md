@@ -13,11 +13,11 @@ confidence: high
 
 ## TL;DR
 
-Documents the oh-my-mermaid integration for auto-generating architecture diagrams of the Agentic-KB codebase and ingesting them as raw docs for compilation into wiki pages. Engineers querying the KB get visual architecture context alongside prose.
+Documents the [[oh-my-mermaid]] integration for auto-generating architecture diagrams of the Agentic-KB codebase and ingesting them as raw docs for compilation into wiki pages. Engineers querying the KB get visual architecture context alongside prose.
 
 ## Workflow
 
-1. **Scan** — Run `/omm-scan` skill in Claude Code inside the repo. Generates `.omm/` directory with Mermaid diagrams from multiple perspectives (overall structure, data flow, integrations, etc.).
+1. **Scan** — Run `/omm-scan` skill in [[framework-claude-code]] inside the repo. Generates `.omm/` directory with Mermaid diagrams from multiple perspectives (overall structure, data flow, integrations, etc.).
 2. **Ingest** — Run `./scripts/ingest-omm.sh`. Each perspective becomes a frontmattered markdown file in `raw/architecture/` tagged `architecture, mermaid, autogen`.
 3. **Compile** — Hit "Compile New" in web UI or run `kb compile`. Compiler treats diagrams like any raw doc.
 4. **Query** — Ask "show me how the compile pipeline flows" and the KB returns the Mermaid diagram plus prose.

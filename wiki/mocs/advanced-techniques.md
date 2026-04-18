@@ -25,7 +25,7 @@ Key techniques:
 
 **Mistaken reasoning gets documented.** When an agent takes a wrong turn, the lesson goes into the relevant agent's profile or the personal war-story pages in `wiki/personal/`. See [[patterns/pattern-mistake-log]].
 
-**Hot cache as agent pre-attention.** The `wiki/hot.md` file is read first every session — it primes Claude's attention on what matters most right now. Keeping it ≤500 words forces prioritization. See [[patterns/pattern-hot-cache]].
+**[[pattern-hot-cache]] as agent pre-attention.** The `wiki/hot.md` file is read first every session — it primes Claude's attention on what matters most right now. Keeping it ≤500 words forces prioritization. See [[patterns/pattern-hot-cache]].
 
 ---
 
@@ -89,14 +89,14 @@ Key entity: [[entities/jay-west-agent-stack]] — full inventory of Jay's agent 
 The hardest and highest-leverage technique: designing the vault so that any subset of it loaded into Claude's context gives Claude everything it needs to act without asking clarifying questions.
 
 **Principles:**
-1. **Hot cache first** — 500 words that cover 80% of daily queries
+1. **[[pattern-hot-cache]] first** — 500 words that cover 80% of daily queries
 2. **Self-contained pages** — each page answers its question without requiring other pages to be loaded simultaneously
 3. **Explicit cross-links** — link aggressively so Claude can follow chains without re-reading index.md
 4. **Confidence-weighted loading** — load high-confidence pages first; low-confidence ones add noise
 5. **Temporal freshness** — `updated` date tells Claude how much to trust a page; stale pages get lower weight
 
 **Context budget rules:**
-- Hot cache (500 words) + 1 MoC (300-400 words) + 3 concept pages (~500 words each) = ~2,500 words — well within a tight budget
+- [[pattern-hot-cache]] (500 words) + 1 MoC (300-400 words) + 3 concept pages (~500 words each) = ~2,500 words — well within a tight budget
 - For a research session: intake form (100 words) + 6 lens files (~300 words each) = ~1,900 words
 - Never load `raw/` files in full if a `wiki/summary/` exists — the summary is the context-optimized version
 
@@ -106,8 +106,8 @@ See [[concepts/context-management]] and [[patterns/pattern-tiered-agent-memory]]
 
 ## Related
 
-- [[mocs/claude-integration|Claude Integration]] — MCP tools, session memory
+- [[mocs/claude-integration|Claude Integration]] — [[mcp-ecosystem]] tools, session memory
 - [[mocs/knowledge-workflows|Knowledge Workflows]] — Capture → Process → Connect
 - [[mocs/visualization|Visualization]] — Making connections visible
 - [[concepts/context-management]] — Context window mechanics
-- [[patterns/pattern-hot-cache]] — Hot cache pattern
+- [[patterns/pattern-hot-cache]] — [[pattern-hot-cache]] pattern

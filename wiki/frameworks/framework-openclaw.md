@@ -25,7 +25,7 @@ Key indicator: the config version `2026.3.24` and the `clawdbot.json` file sugge
 ## Core Concepts
 
 ### Workspaces
-OpenClaw maintains named workspaces:
+[[framework-openclaw]] maintains named workspaces:
 - `workspace-main` — primary workspace
 - `workspace-casey` — appears to be a named assistant persona
 - `workspace-coach` — coaching-focused assistant
@@ -39,16 +39,16 @@ Each workspace likely maintains its own conversation history, memory, and tool c
 The `antfarm/` directory and `antfarm.db` (SQLite) suggest a swarm orchestration layer — possibly managing a pool of worker agents ("ants") with a coordinator. `antfarm.db` is the persistent state store. The `workspace-antfarm-medic` suggests a health-monitoring agent for the swarm. [INFERRED]
 
 ### Identity System
-The `identity/` directory suggests OpenClaw can operate as multiple distinct identities — different system prompts, personas, or roles for different use cases. [INFERRED]
+The `identity/` directory suggests [[framework-openclaw]] can operate as multiple distinct identities — different system prompts, personas, or roles for different use cases. [INFERRED]
 
 ### Delivery Channels
-The `telegram/` directory and `telegram-tokens.env` confirm OpenClaw delivers output via Telegram bot. This enables asynchronous agent results pushed to Jay's phone, not just terminal output. The `delivery-queue/` suggests batched/queued delivery. [INFERRED]
+The `telegram/` directory and `telegram-tokens.env` confirm [[framework-openclaw]] delivers output via Telegram bot. This enables asynchronous agent results pushed to Jay's phone, not just terminal output. The `delivery-queue/` suggests batched/queued delivery. [INFERRED]
 
 ### Browser Automation
 The `browser/` directory and BROWSER.md (at top level, suggesting shared docs) indicate integrated browser control — likely Playwright or a similar headless browser for web-based tasks. The `gstack` skill (`~/.openclaw/skills/`) is referenced as a headless browser QA tool. [INFERRED]
 
 ### Skills
-OpenClaw has its own skill system separate from Claude Code's `~/.claude/skills/`. Known skills in `~/.openclaw/skills/`:
+[[framework-openclaw]] has its own skill system separate from [[framework-claude-code]]'s `~/.claude/skills/`. Known skills in `~/.openclaw/skills/`:
 - `gstack` — headless browser automation/QA
 - `agent-standup` — agent status reporting
 - `antfarm-workflows` — antfarm orchestration patterns
@@ -63,13 +63,13 @@ OpenClaw has its own skill system separate from Claude Code's `~/.claude/skills/
 - And more
 
 ### Model Configuration
-From `~/.rowboat/config/models.json` (related system): `claude-sonnet-4-5` with Anthropic flavor. OpenClaw's `openclaw.json` uses the same Anthropic API stack.
+From `~/.rowboat/config/models.json` (related system): `claude-sonnet-4-5` with [[anthropic]] flavor. [[framework-openclaw]]'s `openclaw.json` uses the same [[anthropic]] API stack.
 
 ### [[mcp-ecosystem]] Servers
-The `mcp-servers/` directory indicates OpenClaw registers and manages MCP servers, making it a full MCP host in addition to whatever native tools it provides.
+The `mcp-servers/` directory indicates [[framework-openclaw]] registers and manages [[mcp-ecosystem]] servers, making it a full [[mcp-ecosystem]] host in addition to whatever native tools it provides.
 
 ### Cron / Scheduling
-The `cron/` directory suggests OpenClaw can run scheduled agent tasks — recurring standup reports, periodic checks, automated workflows on a timer.
+The `cron/` directory suggests [[framework-openclaw]] can run scheduled agent tasks — recurring standup reports, periodic checks, automated workflows on a timer.
 
 ---
 
@@ -114,14 +114,14 @@ OpenClaw Runtime (~/.openclaw/)
 - **Antfarm swarm**: appears to support genuine multi-agent swarm patterns with persistence
 - **Scheduling**: cron-based recurring agent tasks without manual invocation
 - **Computer use integration**: can interact with GUIs, not just terminal/web APIs
-- **MCP host**: inherits MCP ecosystem extensibility
+- **[[mcp-ecosystem]] host**: inherits [[mcp-ecosystem]] ecosystem extensibility
 
 ---
 
 ## Weaknesses (Inferred)
 
 - **Black box for this KB**: internals not accessible from source; this page is inference
-- **Separate skill ecosystem**: Jay maintains two separate skill systems (Claude Code + OpenClaw); duplication risk
+- **Separate skill ecosystem**: Jay maintains two separate skill systems ([[framework-claude-code]] + [[framework-openclaw]]); duplication risk
 - **Config JSON fragility**: multiple `.bak` files and `.broken` files suggest the config has been corrupted and restored multiple times
 - **Telegram dependency for async**: if Telegram bot is down, async delivery fails
 
@@ -135,23 +135,23 @@ N/A — insufficient internal knowledge to provide a verified working example. J
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-code]]**: appears to be a parallel runtime to Claude Code, not built on top of it; may use the same underlying Anthropic API
-- **[[frameworks/framework-claude-api]]**: model config points to Anthropic API directly
-- **[[frameworks/framework-mcp]]**: MCP servers registered; full MCP host
-- **[[entities/jay-west-agent-stack]]**: OpenClaw is a distinct component of Jay's stack alongside Claude Code
-- **gstack skill**: headless browser QA tool — potentially usable for Playwright-equivalent testing from OpenClaw context
+- **[[frameworks/framework-claude-code]]**: appears to be a parallel runtime to [[framework-claude-code]], not built on top of it; may use the same underlying [[anthropic]] API
+- **[[frameworks/framework-claude-api]]**: model config points to [[anthropic]] API directly
+- **[[frameworks/framework-mcp]]**: [[mcp-ecosystem]] servers registered; full [[mcp-ecosystem]] host
+- **[[entities/jay-west-agent-stack]]**: [[framework-openclaw]] is a distinct component of Jay's stack alongside [[framework-claude-code]]
+- **gstack skill**: headless browser QA tool — potentially usable for Playwright-equivalent testing from [[framework-openclaw]] context
 
 ---
 
 ## Jay's Experience
 
-Moderate (inferred from file structure and multiple config backup files, indicating active use and iteration). Jay appears to use OpenClaw for:
+Moderate (inferred from file structure and multiple config backup files, indicating active use and iteration). Jay appears to use [[framework-openclaw]] for:
 - Persistent named assistants (casey, coach, sofie) — likely for different life/work domains
 - Swarm/antfarm multi-agent workflows
 - Scheduled/recurring agent tasks
 - Telegram-delivered async results
 
-The multiple `.broken` config files suggest OpenClaw has complex state management that occasionally fails — a cost of rich configuration.
+The multiple `.broken` config files suggest [[framework-openclaw]] has complex state management that occasionally fails — a cost of rich configuration.
 
 ---
 
@@ -166,5 +166,5 @@ The multiple `.broken` config files suggest OpenClaw has complex state managemen
 
 - `~/.openclaw/` directory listing (direct observation)
 - `~/.openclaw/openclaw.json` (config structure)
-- Jay's `~/.claude/CLAUDE.md` (mentions openclaw in stack)
+- Jay's `~/.claude/CLAUDE.md` (mentions [[framework-openclaw]] in stack)
 - [[entities/jay-west-agent-stack]]

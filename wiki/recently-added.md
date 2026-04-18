@@ -11,7 +11,7 @@ type: meta
 
 ## 2026-04-10 (INGEST)
 
-- [[wiki/concepts/rag-systems|RAG Systems]] — Comprehensive concept page: chunking strategy, hybrid retrieval, re-ranking, HyDE, grounded generation, citation verification, metadata filtering, index freshness, evaluation metrics (recall@k/MRR/nDCG), failure modes table, RAG vs LLM wiki comparison
+- [[wiki/concepts/rag-systems|RAG Systems]] — Comprehensive concept page: chunking strategy, hybrid retrieval, re-ranking, HyDE, grounded generation, citation verification, metadata filtering, index freshness, evaluation metrics (recall@k/MRR/nDCG), failure modes table, RAG vs [[llm-wiki]] comparison
 - [[wiki/summaries/siagian-agentic-engineer-roadmap-2026|Roadmap: Agentic AI Engineer 2026 (Siagian)]] — 10-section interview Q&A guide; strong on RAG system design, tool safety, production CI/CD; surfaces 6 KB gaps (RAG concept page, hybrid retrieval, grounded generation, CI/CD recipe, production deployment recipe)
 
 ## 2026-04-10
@@ -22,7 +22,7 @@ type: meta
 - [[wiki/system/policies/contradiction-policy|Contradiction Policy]] — detection algorithm, statuses, review item format
 - [[wiki/mocs/orchestration|Orchestration MoC]] — navigation hub for all orchestration patterns, concepts, frameworks
 - [[wiki/mocs/memory|Memory MoC]] — navigation hub for memory systems, patterns, and recipes
-- [[wiki/mocs/tool-use|Tool Use MoC]] — navigation hub for tool design, MCP, and permission concepts
+- [[wiki/mocs/tool-use|Tool Use MoC]] — navigation hub for tool design, [[mcp-ecosystem]], and permission concepts
 - [[wiki/mocs/evaluation|Evaluation MoC]] — navigation hub for evals, benchmarks, and judge patterns
 - [[wiki/stats|KB Stats]] — auto-generated stats page: page counts, link density, freshness, orphans
 - [[wiki/concepts/rlm-pipeline|RLM Pipeline]] — 10-stage Recursive Layered Memory retrieval pipeline (stages 4–9 live)
@@ -34,13 +34,13 @@ type: meta
 - [[wiki/frameworks/framework-markitdown|MarkItDown Framework]] — universal file-to-markdown conversion (PDF/DOCX/PPTX/XLSX/audio/YouTube/CSV/ZIP)
 - [[wiki/patterns/pattern-two-step-ingest|Two-Step Ingest Pattern]] — split ingest into analysis + generation; 60/20/5/15 context budget formula
 - [[wiki/patterns/pattern-episodic-judgment-log|Episodic Judgment Log Pattern]] — storing human judgment as append-only JSONL logs
-- [[wiki/recipes/recipe-codebase-memory|Recipe: Codebase Memory]] — using KB as persistent codebase memory across Claude Code sessions
-- [[wiki/summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl|Q&A: Multi-Agent Orchestration Patterns]] — Fan-Out Orchestrator-Worker as default; token economics; Telephone Game failure
+- [[wiki/recipes/recipe-codebase-memory|Recipe: Codebase Memory]] — using KB as persistent codebase memory across [[framework-claude-code]] sessions
+- [[wiki/summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl|Q&A: Multi-Agent Orchestration Patterns]] — [[pattern-fan-out-worker]] Orchestrator-Worker as default; token economics; Telephone Game failure
 - [[wiki/summaries/vault-3tier-architecture|Vault 3-Tier Architecture]] — Jay's production vault: orchestrator/lead/worker memory scoping and inter-tier bus
 
 ## 2026-04-08
 
-- [[wiki/entities/mcp-ecosystem|MCP Ecosystem]] — updated: Oh My Mermaid MCP server added (7 tools, JSON-RPC → server.js architecture)
+- [[wiki/entities/mcp-ecosystem|MCP Ecosystem]] — updated: Oh My Mermaid [[mcp-ecosystem]] server added (7 tools, JSON-RPC → server.js architecture)
 
 ## 2026-04-04
 

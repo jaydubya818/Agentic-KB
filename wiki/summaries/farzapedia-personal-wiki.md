@@ -40,8 +40,8 @@ Unlike typical personal knowledge management systems that chunk content and retr
 
 These are presumably pre-processed and structured into wiki-style articles before the agent interacts with them.
 
-### [[andrej-karpathy]] LLM Wiki Pattern
-The underlying pattern (attributed to Andrej Karpathy) involves maintaining a human-readable wiki that an LLM can navigate as a first-class agent task — treating the wiki as a structured knowledge graph traversed via reasoning rather than a flat vector store.
+### [[andrej-karpathy]] [[llm-wiki]] Pattern
+The underlying pattern (attributed to [[andrej-karpathy]]) involves maintaining a human-readable wiki that an LLM can navigate as a first-class agent task — treating the wiki as a structured knowledge graph traversed via reasoning rather than a flat vector store.
 
 ## Limitations / Open Questions
 - Source is very brief (tweet/short post level); implementation details are sparse

@@ -15,7 +15,7 @@ updated: 2026-04-09
 
 | Phase | Duration | Status | Goal |
 |-------|----------|--------|------|
-| Phase 1: Core Interfaces | Complete | ✅ Done | CLI, Web, MCP all working |
+| Phase 1: Core Interfaces | Complete | ✅ Done | CLI, Web, [[mcp-ecosystem]] all working |
 | Phase 2: Optimization | In Progress | 🟡 80% | Cache tuning, latency improvements |
 | Phase 3: Search Enhancement | In Progress | 🟡 30% | Full-text search implementation |
 | Phase 4: Discovery | Pending | ⏳ Q3 | Advanced filtering, knowledge graph |
@@ -41,7 +41,7 @@ updated: 2026-04-09
 - [x] Page browser
 - [x] Related pages sidebar
 
-### Milestone 1.3: MCP Server
+### Milestone 1.3: [[mcp-ecosystem]] Server
 **Status**: ✅ Complete (2026-04-09)
 
 - [x] Query endpoint
@@ -56,7 +56,7 @@ updated: 2026-04-09
 ### Milestone 2.1: Cache Management
 **Status**: 🟡 In Progress
 
-- [x] Hot cache implementation (wiki/hot.md)
+- [x] [[pattern-hot-cache]] implementation (wiki/hot.md)
 - [x] Query pattern analysis
 - [ ] Automated cache updates (weekly refresh)
 - [ ] Cache hit rate monitoring
@@ -71,7 +71,7 @@ updated: 2026-04-09
 - [x] CLI query profiling
 - [x] Web UI performance optimization
 - [ ] Batch page reads (parallel filesystem access)
-- [ ] Connection pooling (MCP)
+- [ ] Connection pooling ([[mcp-ecosystem]])
 
 **Progress**: 2/4 complete
 
@@ -140,7 +140,7 @@ updated: 2026-04-09
 
 - [ ] CLI queries <2s (currently 800ms–1.5s ✓)
 - [ ] Web load <300ms (currently 200–400ms)
-- [ ] MCP response <100ms (currently 50–80ms ✓)
+- [ ] [[mcp-ecosystem]] response <100ms (currently 50–80ms ✓)
 - [ ] Cache hit rate >50% (currently ~40%)
 - [ ] Zero broken links
 - [ ] Full-text search by 2026-05-15

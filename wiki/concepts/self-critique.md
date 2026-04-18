@@ -129,7 +129,7 @@ Verification agents work best with:
 
 ## When Agents Should Challenge Their Own Output
 
-Not always — adding a reflection loop to every output multiplies cost. Use when:
+Not always — adding a [[pattern-reflection-loop]] to every output multiplies cost. Use when:
 
 - The task has high stakes (financial decisions, production code, external communications)
 - The task involves creative or subjective judgment where first drafts are reliably weak

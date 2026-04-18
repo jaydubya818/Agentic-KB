@@ -243,7 +243,7 @@ Automate cleanup after each session — orphaned worktrees accumulate.
 
 ## Real Examples
 
-- Superpowers `using-git-worktrees` skill for risky changes
+- [[framework-superpowers]] `using-git-worktrees` skill for risky changes
 - GSD autonomous mode with `--isolation: worktree` flag
 - CI/CD pipeline: each PR gets a worktree for automated review agent
 - Nightly refactoring agents: worktrees created/merged/discarded autonomously
@@ -261,5 +261,5 @@ Automate cleanup after each session — orphaned worktrees accumulate.
 ## Sources
 
 - Git worktree documentation (`man git-worktree`)
-- [[anthropic]] Claude Code isolation mode documentation
-- Superpowers `using-git-worktrees` skill
+- [[anthropic]] [[framework-claude-code]] isolation mode documentation
+- [[framework-superpowers]] `using-git-worktrees` skill

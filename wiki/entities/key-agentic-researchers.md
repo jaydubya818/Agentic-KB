@@ -22,7 +22,7 @@ The researchers and practitioners who have most shaped the agentic AI landscape 
 See [[entities/andrej-karpathy]] for full coverage.
 
 **Key agentic contributions**:
-- LLM wiki pattern — plaintext knowledge bases for LLM context injection
+- [[llm-wiki]] pattern — plaintext knowledge bases for LLM context injection
 - "Intro to Large Language Models" (2023) — popularized "System 1 vs System 2" framing for LLM reasoning, directly leading to reasoning models
 - nanoGPT — demystified transformers; understanding transformer internals is prerequisite knowledge for agentic system design
 
@@ -36,10 +36,10 @@ See [[entities/andrej-karpathy]] for full coverage.
 **Key contributions**:
 - **LangChain** (2022): established the first widely-adopted framework for LLM application development; introduced the chain metaphor, agent executor pattern, and tool use abstractions that influenced all subsequent frameworks
 - **LCEL (LangChain Expression Language)**: declarative pipe-based composition for LLM pipelines
-- **LangGraph** (2024): graph-based stateful orchestration; introduced checkpointing, conditional edges, and the supervisor/swarm patterns to mainstream multi-agent work
+- **[[framework-langgraph]]** (2024): graph-based stateful orchestration; introduced checkpointing, conditional edges, and the supervisor/swarm patterns to mainstream multi-agent work
 - **LangSmith**: observability layer that established what "production-ready LLM tracing" should look like
 
-**Criticism (fair)**: LangChain 0.1.x introduced significant abstraction debt; the community's frustration with frequent breaking changes is legitimate. The pivot to LangGraph represents a more mature architectural vision.
+**Criticism (fair)**: LangChain 0.1.x introduced significant abstraction debt; the community's frustration with frequent breaking changes is legitimate. The pivot to [[framework-langgraph]] represents a more mature architectural vision.
 
 See [[entities/langchain-ecosystem]] and [[frameworks/framework-langgraph]].
 
@@ -55,7 +55,7 @@ See [[entities/langchain-ecosystem]] and [[frameworks/framework-langgraph]].
 - Established vocabulary: "task agent", "objective-driven agents", autonomous task decomposition
 - **Limitations he acknowledged**: BabyAGI loops infinitely without meaningful progress; it revealed the hard problems of task decomposition, prioritization, and termination that subsequent frameworks solved
 
-**Why he matters**: BabyAGI wasn't production-ready, but it was the proof-of-concept that made non-ML engineers believe in autonomous agents. The frameworks that followed ([[framework-autogen]], [[framework-crewai]], LangGraph) are all responses to BabyAGI's limitations.
+**Why he matters**: BabyAGI wasn't production-ready, but it was the proof-of-concept that made non-ML engineers believe in autonomous agents. The frameworks that followed ([[framework-autogen]], [[framework-crewai]], [[framework-langgraph]]) are all responses to BabyAGI's limitations.
 
 ---
 
@@ -80,7 +80,7 @@ See [[entities/langchain-ecosystem]] and [[frameworks/framework-langgraph]].
 
 ## Lilian Weng
 
-**Affiliation**: OpenAI (head of safety); independent blog (lilianweng.github.io)
+**Affiliation**: [[openai]] (head of safety); independent blog (lilianweng.github.io)
 **Most relevant to Jay**: "LLM Powered Autonomous Agents" blog post — the foundational survey
 
 **Key contributions**:
@@ -121,7 +121,7 @@ This maps directly to the concepts in this KB's `concepts/` directory.
 | "ReAct: Synergizing Reasoning and Acting" (2022) | Yao et al. | ReAct pattern: interleave reasoning (thought) with acting (tool use); foundational for tool-using agents |
 | "Generative Agents" (2023) | Park et al. (Stanford) | Simulated 25 agents in a virtual town; introduced memory stream + reflection + planning architecture |
 | "AutoGPT" | Riedl et al. | First widely-deployed autonomous goal-directed agent; showed and revealed limitations of unconstrained agent loops |
-| "MetaGPT" (2023) | Hong et al. | Multi-agent software development; introduced structured roles (PM, Architect, Engineer) — influenced CrewAI's design |
+| "MetaGPT" (2023) | Hong et al. | Multi-agent software development; introduced structured roles (PM, Architect, Engineer) — influenced [[framework-crewai]]'s design |
 
 ---
 
@@ -130,8 +130,8 @@ This maps directly to the concepts in this KB's `concepts/` directory.
 - **[[entities/andrej-karpathy]]**: Full page on [[andrej-karpathy]]
 - **[[entities/langchain-ecosystem]]**: Harrison Chase's company
 - **[[frameworks/framework-langgraph]]**: Chase's primary technical output
-- **[[frameworks/framework-autogen]]**: AutoGen influenced by BabyAGI and multi-agent collaboration research
-- **[[frameworks/framework-crewai]]**: CrewAI influenced by MetaGPT's role-based agent design
+- **[[frameworks/framework-autogen]]**: [[framework-autogen]] influenced by BabyAGI and multi-agent collaboration research
+- **[[frameworks/framework-crewai]]**: [[framework-crewai]] influenced by MetaGPT's role-based agent design
 - **[[concepts/multi-agent-systems]]**: Weng's taxonomy and Ng's four patterns are foundation
 
 ---

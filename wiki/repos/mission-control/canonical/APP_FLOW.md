@@ -39,7 +39,7 @@ Result:
   }
 ```
 
-## Supervisor-Worker Pattern
+## [[pattern-supervisor-worker]] Pattern
 
 ```
 Supervisor (Cloud or Local):

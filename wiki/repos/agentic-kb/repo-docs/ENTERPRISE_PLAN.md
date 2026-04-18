@@ -11,16 +11,16 @@ source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/ENTER
 
 # Agentic-KB: Enterprise Scaling Ultra Plan
 
-> Informed by Andrej Karpathy's **LLM Knowledge Bases** gist (April 4, 2026) and the emerging
+> Informed by [[andrej-karpathy]]'s **LLM Knowledge Bases** gist (April 4, 2026) and the emerging
 > pattern of agent-native infrastructure. The core insight: *"Every business has a raw/ directory.
 > Nobody's ever compiled it. That's the product."*
 
 ---
 
-## The Karpathy Shift
+## The [[andrej-karpathy]] Shift
 
 Traditional RAG retrieves from raw sources at query time — rediscovering knowledge on every call.
-Karpathy's LLM Wiki flips the model: the LLM *compiles* raw sources into a persistent, structured,
+[[andrej-karpathy]]'s [[llm-wiki]] flips the model: the LLM *compiles* raw sources into a persistent, structured,
 interlinked wiki that grows richer with every ingest. Cross-references are pre-built. Synthesis
 already reflects everything ingested. Answers come from compiled understanding, not raw retrieval.
 
@@ -36,7 +36,7 @@ multi-agent, with the compiled-wiki pattern at its core.
 | Multi-vault switcher with file counts | ✅ |
 | Live reload via SSE (fs.watch) | ✅ |
 | Private PIN access control | ✅ |
-| MCP server (5 tools) | ✅ |
+| [[mcp-ecosystem]] server (5 tools) | ✅ |
 | CLI (`kb query`, `kb search`, `kb ingest`) | ✅ |
 | Rich wiki index (tag cloud, recently modified) | ✅ |
 | Open in Obsidian deep links | ✅ |
@@ -51,7 +51,7 @@ multi-agent, with the compiled-wiki pattern at its core.
 ### P0 — Foundational Enterprise (Implement Now)
 
 #### 1. LLM Auto-Compilation (`/api/compile`)
-**The Karpathy killer feature.** Raw docs exist but aren't compiled into wiki structure.
+**The [[andrej-karpathy]] killer feature.** Raw docs exist but aren't compiled into wiki structure.
 
 - Reads files from `raw/` that haven't been compiled yet (tracks via `raw/.compiled-log.json`)
 - Claude reads each raw doc, extracts key ideas, then:
@@ -98,7 +98,7 @@ Built-in adapters for: **GitHub** (issues, PRs, discussions), **Slack** (threads
 
 #### 5. Semantic Search with Local Embeddings
 Replace pure keyword search with vector similarity:
-- On ingest/compile, generate embeddings for each wiki page (OpenAI `text-embedding-3-small` or local `nomic-embed-text`)
+- On ingest/compile, generate embeddings for each wiki page ([[openai]] `text-embedding-3-small` or local `nomic-embed-text`)
 - Store in a local SQLite vector table (via `better-sqlite3` + cosine similarity)
 - `/api/search` returns ranked results by semantic similarity, not just substring match
 - Hybrid ranking: `0.7 * semantic_score + 0.3 * keyword_score`
@@ -141,7 +141,7 @@ Stored in `vaults.json` metadata, enforced in middleware.
 
 ### P2 — Agent-Native APIs
 
-#### 10. OpenAI-Compatible Chat Completion Endpoint
+#### 10. [[openai]]-Compatible Chat Completion Endpoint
 Make the KB queryable by **any** AI agent or tool without custom integration:
 ```http
 POST /v1/chat/completions
@@ -151,12 +151,12 @@ Authorization: Bearer <api-key>
   "messages": [{"role": "user", "content": "What's our auth architecture?"}]
 }
 ```
-- Wraps `/api/query` in OpenAI response format
-- Works with LangChain, AutoGen, CrewAI, Cursor, and any OpenAI-compatible client
+- Wraps `/api/query` in [[openai]] response format
+- Works with LangChain, [[framework-autogen]], [[framework-crewai]], Cursor, and any [[openai]]-compatible client
 - Rate limited per API key
 
 #### 11. Schema-Guided Compilation
-Karpathy's third layer: a `wiki/schema.md` file that instructs the LLM *how* to maintain the wiki:
+[[andrej-karpathy]]'s third layer: a `wiki/schema.md` file that instructs the LLM *how* to maintain the wiki:
 ```markdown
 # KB Schema
 - All architecture decisions get an ADR page in `wiki/decisions/`
@@ -188,8 +188,8 @@ jobs:
 ```
 Every merged PR, closed issue, or doc change auto-ingests into the KB.
 
-#### 13. MCP Tool: `compile_wiki`
-Add to the MCP server so AI agents can trigger compilation:
+#### 13. [[mcp-ecosystem]] Tool: `compile_wiki`
+Add to the [[mcp-ecosystem]] server so AI agents can trigger compilation:
 ```json
 {
   "name": "compile_wiki",
@@ -284,23 +284,23 @@ For enterprises with existing identity providers:
 
 | Sprint | Features | Value |
 |---|---|---|
-| **Now** (this session) | Auto-compile, wiki lint, audit log, webhook ingest | Core Karpathy pattern |
+| **Now** (this session) | Auto-compile, wiki lint, audit log, webhook ingest | Core [[andrej-karpathy]] pattern |
 | **Week 1** | Semantic search, schema.md support, `kb compile` CLI cmd | 10x query quality |
 | **Week 2** | NextAuth (GitHub OAuth), RBAC, knowledge graph | Team deployment ready |
-| **Week 3** | Slack integration, GitHub Actions, OpenAI-compat API | Agent-native |
+| **Week 3** | Slack integration, GitHub Actions, [[openai]]-compat API | Agent-native |
 | **Month 2** | Docker, SSO, analytics dashboard, freshness scores | Enterprise-ready |
 
 ---
 
 ## Quick Wins Already Possible
 
-Without any new code, your KB already supports the Karpathy pattern if you treat it as:
+Without any new code, your KB already supports the [[andrej-karpathy]] pattern if you treat it as:
 1. **Dump raw docs** into `raw/` (via CLI, web UI, or Obsidian Web Clipper)
-2. **Ask Claude** (via MCP or query UI) to "read the new files in raw/ and update the relevant wiki pages"
+2. **Ask Claude** (via [[mcp-ecosystem]] or query UI) to "read the new files in raw/ and update the relevant wiki pages"
 3. **Let the wiki grow** — each compile pass makes subsequent answers richer
 
 The P0 features (`/api/compile`, `/api/lint`) just automate and formalize this existing workflow.
 
 ---
 
-*Generated: April 7, 2026 | Based on Karpathy's LLM Wiki gist (Apr 4, 2026)*
+*Generated: April 7, 2026 | Based on [[andrej-karpathy]]'s [[llm-wiki]] gist (Apr 4, 2026)*

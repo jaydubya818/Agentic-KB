@@ -41,7 +41,7 @@ Five approaches to multi-agent orchestration, evaluated from Jay's perspective a
 2. **[[framework-langgraph]]** — Graph-based orchestration from LangChain (Python)
 3. **[[framework-autogen]]** — Conversational multi-agent from Microsoft (Python)
 4. **[[framework-crewai]]** — Role-based crew orchestration (Python)
-5. **Raw Claude Code Agents** — Using Claude Code's Agent tool directly without a framework
+5. **Raw [[framework-claude-code]] Agents** — Using [[framework-claude-code]]'s Agent tool directly without a framework
 
 ---
 
@@ -72,7 +72,7 @@ Scores are relative to the comparison set, not absolute. A 5 means "best in this
 
 ## Scorecard
 
-| Criterion | GSD | LangGraph | AutoGen | CrewAI | Raw Claude Code |
+| Criterion | GSD | [[framework-langgraph]] | [[framework-autogen]] | [[framework-crewai]] | Raw [[framework-claude-code]] |
 |-----------|-----|-----------|---------|--------|-----------------|
 | Learning curve | 4 | 3 | 3 | 4 | 5 |
 | Multi-agent support | 5 | 4 | 3 | 3 | 4 |
@@ -89,96 +89,96 @@ Scores are relative to the comparison set, not absolute. A 5 means "best in this
 
 ### Learning Curve
 
-**Raw Claude Code (5)**: Zero setup. Open the CLI, write a prompt, make Agent tool calls. No new framework to learn.
+**Raw [[framework-claude-code]] (5)**: Zero setup. Open the CLI, write a prompt, make Agent tool calls. No new framework to learn.
 
-**GSD (4)** and **CrewAI (4)**: Both have a clear structure (GSD phases, CrewAI roles/tasks) that guides rather than confuses. GSD requires understanding Jay's specific workflow; CrewAI requires understanding the crew metaphor.
+**GSD (4)** and **[[framework-crewai]] (4)**: Both have a clear structure (GSD phases, [[framework-crewai]] roles/tasks) that guides rather than confuses. GSD requires understanding Jay's specific workflow; [[framework-crewai]] requires understanding the crew metaphor.
 
-**LangGraph (3)** and **AutoGen (3)**: Both require learning domain-specific abstractions before you can do anything useful. LangGraph's StateGraph, TypedDict reducers, and conditional edge patterns take 1-2 days to internalize. AutoGen's 0.4.x API is poorly documented (breaking changes from 0.2.x).
+**[[framework-langgraph]] (3)** and **[[framework-autogen]] (3)**: Both require learning domain-specific abstractions before you can do anything useful. [[framework-langgraph]]'s StateGraph, TypedDict reducers, and conditional edge patterns take 1-2 days to internalize. [[framework-autogen]]'s 0.4.x API is poorly documented (breaking changes from 0.2.x).
 
 ### Multi-Agent Support
 
 **GSD (5)**: 18+ specialized agents, all tuned for specific roles. The agent ecosystem is the framework's primary value — not generic "run an LLM", but purpose-built agents like gsd-nyquist-auditor, gsd-assumptions-analyzer.
 
-**LangGraph (4)**: Native supervisor pattern, swarm pattern, subgraph composition. The graph model is the right abstraction for multi-agent coordination. Loses a point for being Python-first (Jay's stack is TypeScript).
+**[[framework-langgraph]] (4)**: Native supervisor pattern, swarm pattern, subgraph composition. The graph model is the right abstraction for multi-agent coordination. Loses a point for being Python-first (Jay's stack is TypeScript).
 
-**Raw Claude Code (4)**: The Agent tool is a genuine multi-agent primitive with worktree isolation, tool restriction, and parallel execution. Loses a point for requiring all orchestration logic in prompts — no programmatic structure.
+**Raw [[framework-claude-code]] (4)**: The Agent tool is a genuine multi-agent primitive with worktree isolation, tool restriction, and parallel execution. Loses a point for requiring all orchestration logic in prompts — no programmatic structure.
 
-**CrewAI (3)**: Role/task/crew is intuitive for simple pipelines. Loses points for limited control flow (no cycles, weak conditionals) and no TypeScript.
+**[[framework-crewai]] (3)**: Role/task/crew is intuitive for simple pipelines. Loses points for limited control flow (no cycles, weak conditionals) and no TypeScript.
 
-**AutoGen (3)**: GroupChat is flexible but the manager LLM for speaker selection is unreliable. Code execution is strong. No TypeScript.
+**[[framework-autogen]] (3)**: GroupChat is flexible but the manager LLM for speaker selection is unreliable. Code execution is strong. No TypeScript.
 
 ### State Management
 
-**LangGraph (5)**: TypedDict state with reducers, checkpointing, resume from failure. Nothing else in this group matches this. The checkpoint story alone is worth the learning curve for long-running tasks.
+**[[framework-langgraph]] (5)**: TypedDict state with reducers, checkpointing, resume from failure. Nothing else in this group matches this. The checkpoint story alone is worth the learning curve for long-running tasks.
 
-**GSD (4)**: Phase structure provides implicit state; MEMORY.md persists across sessions; hooks enforce state transitions. Not as programmatic as LangGraph but sufficient for most cases.
+**GSD (4)**: Phase structure provides implicit state; MEMORY.md persists across sessions; hooks enforce state transitions. Not as programmatic as [[framework-langgraph]] but sufficient for most cases.
 
-**CrewAI (3)**: Task output chaining is automatic; multi-layer memory (short/long-term). Memory is better than LangGraph's (no built-in memory in LangGraph), but no checkpointing for resumable state.
+**[[framework-crewai]] (3)**: Task output chaining is automatic; multi-layer memory (short/long-term). Memory is better than [[framework-langgraph]]'s (no built-in memory in [[framework-langgraph]]), but no checkpointing for resumable state.
 
-**Raw Claude Code (3)**: No built-in state management; state lives in prompts and the messages array. MEMORY.md provides session persistence but is a manual pattern.
+**Raw [[framework-claude-code]] (3)**: No built-in state management; state lives in prompts and the messages array. MEMORY.md provides session persistence but is a manual pattern.
 
-**AutoGen (2)**: Conversation history is state, but it's untyped and hard to query programmatically. No built-in persistence.
+**[[framework-autogen]] (2)**: Conversation history is state, but it's untyped and hard to query programmatically. No built-in persistence.
 
 ### Parallelization
 
-**GSD (5)** and **Raw Claude Code (5)**: Making multiple Agent tool calls in a single response = genuine parallelism. Wave-based execution in GSD is this pattern at scale. No other framework in this list offers real parallelism this easily.
+**GSD (5)** and **Raw [[framework-claude-code]] (5)**: Making multiple Agent tool calls in a single response = genuine parallelism. Wave-based execution in GSD is this pattern at scale. No other framework in this list offers real parallelism this easily.
 
-**LangGraph (3)**: The `Send` API enables parallel node execution but requires explicit graph topology changes. Not as simple as "make N calls in one response."
+**[[framework-langgraph]] (3)**: The `Send` API enables parallel node execution but requires explicit graph topology changes. Not as simple as "make N calls in one response."
 
-**AutoGen (2)** and **CrewAI (2)**: Neither offers native parallel agent execution. AutoGen's GroupChat is sequential turn-taking. CrewAI's parallel process exists but is limited.
+**[[framework-autogen]] (2)** and **[[framework-crewai]] (2)**: Neither offers native parallel agent execution. [[framework-autogen]]'s GroupChat is sequential turn-taking. [[framework-crewai]]'s parallel process exists but is limited.
 
 ### Observability
 
-**LangGraph (5)**: LangSmith integration gives automatic tracing of every node, LLM call, tool use, with timeline visualization. Best observability story in the group.
+**[[framework-langgraph]] (5)**: LangSmith integration gives automatic tracing of every node, LLM call, tool use, with timeline visualization. Best observability story in the group.
 
-**GSD (4)**: Jay's Multi-Agent-Observability hooks capture all Claude Code events. Not as visual as LangSmith but complete.
+**GSD (4)**: Jay's Multi-Agent-Observability hooks capture all [[framework-claude-code]] events. Not as visual as LangSmith but complete.
 
-**Raw Claude Code (3)**: Only what your hooks capture. Needs explicit instrumentation.
+**Raw [[framework-claude-code]] (3)**: Only what your hooks capture. Needs explicit instrumentation.
 
-**AutoGen (3)**: Verbose console logging built in; no visual dashboard without custom setup.
+**[[framework-autogen]] (3)**: Verbose console logging built in; no visual dashboard without custom setup.
 
-**CrewAI (2)**: Verbose=True mode gives logs but no structured observability. No production telemetry built in.
+**[[framework-crewai]] (2)**: Verbose=True mode gives logs but no structured observability. No production telemetry built in.
 
 ### Production-Readiness
 
-**GSD (4)** and **LangGraph (4)**: Both have been used in production systems; both have explicit error handling patterns; both have some form of state management for recovery.
+**GSD (4)** and **[[framework-langgraph]] (4)**: Both have been used in production systems; both have explicit error handling patterns; both have some form of state management for recovery.
 
-**Raw Claude Code (4)**: Claude Code itself is production-grade. The patterns (worktree isolation, bypassPermissions for headless) are production-ready. Needs more manual instrumentation.
+**Raw [[framework-claude-code]] (4)**: [[framework-claude-code]] itself is production-grade. The patterns (worktree isolation, bypassPermissions for headless) are production-ready. Needs more manual instrumentation.
 
-**AutoGen (3)** and **CrewAI (3)**: Both have been used in production but have documented reliability issues (manager LLM routing, task orchestration failures). More suited for research and internal tools than customer-facing production.
+**[[framework-autogen]] (3)** and **[[framework-crewai]] (3)**: Both have been used in production but have documented reliability issues (manager LLM routing, task orchestration failures). More suited for research and internal tools than customer-facing production.
 
 ### Jay's Familiarity
 
-**GSD (5)** and **Raw Claude Code (5)**: Extensive daily use. Maximum productivity.
+**GSD (5)** and **Raw [[framework-claude-code]] (5)**: Extensive daily use. Maximum productivity.
 
-**LangGraph (2)**: Limited — Jay has evaluated it but not shipped with it. Would take 2-5 days to get productive.
+**[[framework-langgraph]] (2)**: Limited — Jay has evaluated it but not shipped with it. Would take 2-5 days to get productive.
 
-**AutoGen (1)** and **CrewAI (1)**: No direct experience. Starting from zero.
+**[[framework-autogen]] (1)** and **[[framework-crewai]] (1)**: No direct experience. Starting from zero.
 
 ---
 
 ## Summary Verdict
 
-**For Jay's stack: GSD first, Raw Claude Code second, LangGraph if Python is required.**
+**For Jay's stack: GSD first, Raw [[framework-claude-code]] second, [[framework-langgraph]] if Python is required.**
 
-GSD wins overall because it is tuned for Jay's exact workflow and gives both parallelism and a rich specialist agent ecosystem. For tasks that genuinely need it, Raw Claude Code Agents (no framework) is nearly as capable and has zero overhead. These two are not separate choices — GSD is built on Claude Code's Agent tool.
+GSD wins overall because it is tuned for Jay's exact workflow and gives both parallelism and a rich specialist agent ecosystem. For tasks that genuinely need it, Raw [[framework-claude-code]] Agents (no framework) is nearly as capable and has zero overhead. These two are not separate choices — GSD is built on [[framework-claude-code]]'s Agent tool.
 
-LangGraph is the strongest framework if Jay moves to Python-native orchestration or if resumable state (checkpoint) becomes a hard requirement. Its observability (LangSmith) and state management are genuinely best-in-class. The learning curve and Python requirement are the primary barriers.
+[[framework-langgraph]] is the strongest framework if Jay moves to Python-native orchestration or if resumable state (checkpoint) becomes a hard requirement. Its observability (LangSmith) and state management are genuinely best-in-class. The learning curve and Python requirement are the primary barriers.
 
-AutoGen and CrewAI are not recommended for Jay's use cases. AutoGen's strength (code execution loop) is not Jay's primary need; CrewAI's role/task model is a subset of what GSD already provides with more specialization.
+[[framework-autogen]] and [[framework-crewai]] are not recommended for Jay's use cases. [[framework-autogen]]'s strength (code execution loop) is not Jay's primary need; [[framework-crewai]]'s role/task model is a subset of what GSD already provides with more specialization.
 
-**The real question**: if you've already invested heavily in Claude Code + GSD (Jay has), the switching cost to LangGraph is significant. The features you gain (checkpointing, LangSmith) need to be weighed against lost familiarity, Python requirement, and losing the native Agent tool parallelism.
+**The real question**: if you've already invested heavily in [[framework-claude-code]] + GSD (Jay has), the switching cost to [[framework-langgraph]] is significant. The features you gain (checkpointing, LangSmith) need to be weighed against lost familiarity, Python requirement, and losing the native Agent tool parallelism.
 
 ---
 
 ## When to Re-evaluate
 
 Re-evaluate this comparison when:
-- A major LangGraph version ships with TypeScript parity (current JS version lags Python)
-- A production use case emerges that strictly requires resumable state (LangGraph checkpointing)
-- Jay evaluates AutoGen/CrewAI for a project and has direct experience to add
+- A major [[framework-langgraph]] version ships with TypeScript parity (current JS version lags Python)
+- A production use case emerges that strictly requires resumable state ([[framework-langgraph]] checkpointing)
+- Jay evaluates [[framework-autogen]]/[[framework-crewai]] for a project and has direct experience to add
 - A new framework emerges with native TypeScript + parallelism + observability (no current candidate)
-- Claude Code adds built-in observability that replaces the Multi-Agent-Observability hooks
+- [[framework-claude-code]] adds built-in observability that replaces the Multi-Agent-Observability hooks
 
 Target re-evaluation date: Q4 2026 (6 months).
 

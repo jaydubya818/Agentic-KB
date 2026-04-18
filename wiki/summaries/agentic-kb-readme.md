@@ -13,7 +13,7 @@ confidence: high
 
 ## TL;DR
 
-The Agentic-KB README describes a 87+ article personal knowledge base for agentic AI engineering, queryable via web UI, CLI, and MCP server. It documents the compile pipeline (Karpathy LLM-Wiki pattern), enterprise features added in April 2026, and the 10-stage RLM retrieval pipeline.
+The Agentic-KB README describes a 87+ article personal knowledge base for agentic AI engineering, queryable via web UI, CLI, and [[mcp-ecosystem]] server. It documents the compile pipeline ([[andrej-karpathy]] LLM-Wiki pattern), enterprise features added in April 2026, and the 10-stage RLM retrieval pipeline.
 
 ## Key Claims
 

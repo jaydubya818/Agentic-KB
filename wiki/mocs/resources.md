@@ -22,7 +22,7 @@ Essential plugins for the Agentic-KB stack (all from Obsidian community):
 | Dataview | blacksmithgu | Queryable frontmatter, live dashboards | Essential |
 | Templater | SilentVoid13 | Dynamic templates with JavaScript | Essential |
 | Obsidian Git | Vinzent03 | Auto-commit backup + git history | Essential |
-| Terminal | Namikaze09 | Shell inside Obsidian → Claude Code | Essential |
+| Terminal | Namikaze09 | Shell inside Obsidian → [[framework-claude-code]] | Essential |
 | Periodic Notes | liamcain | Daily/weekly/monthly note templates | High |
 | QuickAdd | chhoumann | Fast note capture from command palette | High |
 | Advanced URI | Vinzent03 | Deep vault links from external apps/scripts | High |
@@ -49,7 +49,7 @@ Distilled from Jay's operating experience (see [[personal/personal-jays-framewor
 
 **On Claude integration:**
 - CLAUDE.md is a contract. When Claude violates it, fix the contract, not the behavior.
-- Hot cache discipline: if hot.md exceeds 500 words, prune the oldest entries — not the most-linked ones.
+- [[pattern-hot-cache]] discipline: if hot.md exceeds 500 words, prune the oldest entries — not the most-linked ones.
 - Session-start reads cost ~5 seconds and prevent hours of context-free drift. Always pay the cost.
 
 **On knowledge quality:**
@@ -84,22 +84,22 @@ The Agentic-KB is itself a shareable template for any engineer who wants an LLM-
 ## Learning Resources
 
 **Foundational reading (all ingested into this KB):**
-- [[summaries/karpathy-llm-wiki-video]] — Karpathy's LLM wiki pattern (the seed concept)
-- [[summaries/karpathy-llm-wiki-gist]] — Karpathy's gist with implementation details
+- [[summaries/karpathy-llm-wiki-video]] — [[andrej-karpathy]]'s [[llm-wiki]] pattern (the seed concept)
+- [[summaries/karpathy-llm-wiki-gist]] — [[andrej-karpathy]]'s gist with implementation details
 - [[summaries/summary-layered-agent-memory-obsidian]] — 3-tier vault architecture for agents
 - [[summaries/summary-research-skill-graph]] — 6-lens research methodology
 - [[summaries/vault-3tier-architecture]] — formal vault architecture analysis
 
 **External resources (web search for current links):**
-- Anthropic Claude Code documentation — `docs.claude.ai`
-- MCP specification — `modelcontextprotocol.io`
-- LangGraph documentation — for orchestration framework reference
+- [[anthropic]] [[framework-claude-code]] documentation — `docs.claude.ai`
+- [[mcp-ecosystem]] specification — `modelcontextprotocol.io`
+- [[framework-langgraph]] documentation — for orchestration framework reference
 - Obsidian Help — `help.obsidian.md`
 - Obsidian Community Discord — `discord.gg/obsidianmd`
 
 **YouTube channels worth following:**
-- Andrej Karpathy — LLM fundamentals and wiki patterns
-- David Shapiro — agentic AI patterns and Claude Code usage
+- [[andrej-karpathy]] — LLM fundamentals and wiki patterns
+- David Shapiro — agentic AI patterns and [[framework-claude-code]] usage
 - Nicole van der Hoeven — Obsidian workflows and PKM
 
 **Key papers in `raw/papers/`:** see [[index]] → Summaries for full list of ingested academic sources.

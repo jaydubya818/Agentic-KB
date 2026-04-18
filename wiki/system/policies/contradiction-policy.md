@@ -46,7 +46,7 @@ A contradiction is detected when a candidate item's key claims conflict with:
 4. A correction event that establishes an opposing norm
 
 **Detection scope** (pragmatic — no embeddings required):
-- Title/keyword overlap with hot cache entries
+- Title/keyword overlap with [[pattern-hot-cache]] entries
 - Direct `related_sources` links on the candidate item
 - Pages whose slug appears in the candidate item's body text
 - Pages in the same `wiki/` subdirectory with overlapping tags
@@ -150,4 +150,4 @@ function attemptAutoResolution(candidate, conflictingPage) {
 
 **Audit trail:** All Tier 1 auto-resolutions are logged in `wiki/log.md` with `[AUTO-RESOLVED]` prefix. Jay can scan these and override any auto-resolution within 7 days.
 
-> Source: Pattern derived from LLM Wiki v2 contradiction resolution approach. See [[summaries/summary-llm-wiki-v2]].
+> Source: Pattern derived from [[llm-wiki]] v2 contradiction resolution approach. See [[summaries/summary-llm-wiki-v2]].

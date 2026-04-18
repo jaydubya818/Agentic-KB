@@ -28,7 +28,7 @@ Key files: `00 - Dashboards/Home.md`, `02 - Projects/`, `06 - Decisions/`, `07 -
 - Sofie writes verified insights back to raw/qa/ after each session
 - Sofie routes decisions to Obsidian `06 - Decisions/` and KB `wiki/personal/`
 
-## MCP Tools Available
+## [[mcp-ecosystem]] Tools Available
 - `search_wiki` — search KB before answering
 - `read_article` — deep-read a KB page
 - `load_agent_context` — load full context bundle

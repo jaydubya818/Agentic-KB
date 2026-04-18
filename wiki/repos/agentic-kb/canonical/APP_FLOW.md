@@ -58,7 +58,7 @@ updated: 2026-04-09
 ## User Workflows
 
 ### QUERY Workflow
-**Actor**: Jay West (or agent via MCP)  
+**Actor**: Jay West (or agent via [[mcp-ecosystem]])  
 **Goal**: Get answer to a question about agentic systems
 
 ```
@@ -166,7 +166,7 @@ updated: 2026-04-09
 
 ---
 
-### HOT CACHE Workflow
+### [[pattern-hot-cache]] Workflow
 **Actor**: Agent monitoring query patterns  
 **Goal**: Keep ≤500 words of most-accessed patterns in hot.md
 
@@ -191,7 +191,7 @@ updated: 2026-04-09
 ```
 
 **Current hot entries** (as of 2026-04-09):
-- supervisor-worker pattern (8 queries/week)
+- [[pattern-supervisor-worker]] pattern (8 queries/week)
 - reflection loops (6 queries/week)
 - context window management (4 queries/week)
 - tool use patterns (3 queries/week)
@@ -256,11 +256,11 @@ wiki/recipes/recipe-build-supervisor-worker.md (tested: false)
 | Query (in wiki) | 500ms–2s | 95% <3s |
 | Ingest 1 source | 30–60s | Full backfill <5m |
 | Monthly LINT pass | 2–5 minutes | Run on 1st of month |
-| Hot cache refresh | <30s | Weekly on Tuesday 9am |
+| [[pattern-hot-cache]] refresh | <30s | Weekly on Tuesday 9am |
 
 ## Integration Points
 
-- **MCP Server**: Exposes query engine to MissionControl, Pi harness agents
+- **[[mcp-ecosystem]] Server**: Exposes query engine to MissionControl, Pi harness agents
 - **CLI Tool**: `npm run query` wraps query engine for Jay's shell access
 - **Web UI**: React app at /llmwiki with search, browse, tag filtering
 - **Obsidian Vault**: Can embed [[obsidian notes]] as external references (read-only)

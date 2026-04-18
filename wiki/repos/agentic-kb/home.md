@@ -14,13 +14,13 @@ status: active
 
 Agentic-KB is a persistent, compounding knowledge base for agentic AI engineering. It serves as Jay West's organizational brain and institutional memory for multi-agent architecture, orchestration patterns, frameworks, prompt engineering, safety, evaluation, production deployment, and validated personal patterns.
 
-The system implements agentic patterns within itself—parallel agents for seeding, fan-out ingestion, and reflection-based linting. It powers the LLMwiki compilation system, MCP server for agent tooling, and CLI query interface.
+The system implements agentic patterns within itself—parallel agents for seeding, [[pattern-fan-out-worker]] ingestion, and reflection-based linting. It powers the LLMwiki compilation system, [[mcp-ecosystem]] server for agent tooling, and CLI query interface.
 
 ## Current Status
 
 - **Core wiki**: 47 concept, pattern, framework, and synthesis pages
 - **Raw imports**: Papers, transcripts, framework docs, code examples, conversations ingested
-- **Hot cache**: ≤500 words of most-frequently-used patterns maintained
+- **[[pattern-hot-cache]]**: ≤500 words of most-frequently-used patterns maintained
 - **Lint cycle**: Monthly health checks running; no critical issues
 - **Sync**: All repos properly linked; bidirectional cross-references active
 
@@ -41,30 +41,30 @@ The system implements agentic patterns within itself—parallel agents for seedi
 
 ### Raw Sources
 - **Papers**: 8 academic papers on agentic systems, multiagent orchestration, safety
-- **Transcripts**: 5 video/podcast transcripts (Karpathy, Andrej's language models, agentic architecture talks)
-- **Framework Docs**: LangGraph, AutoGen, CrewAI, Claude Code, OpenClaw documentation snapshots
-- **Code Examples**: Annotated pattern implementations (supervisor-worker, fan-out, reflection loops)
-- **Conversations**: 12 notable Claude Code sessions with complex agentic problems
+- **Transcripts**: 5 video/podcast transcripts ([[andrej-karpathy]], Andrej's language models, agentic architecture talks)
+- **Framework Docs**: [[framework-langgraph]], [[framework-autogen]], [[framework-crewai]], [[framework-claude-code]], [[framework-openclaw]] documentation snapshots
+- **Code Examples**: Annotated pattern implementations ([[pattern-supervisor-worker]], [[pattern-fan-out-worker]], reflection loops)
+- **Conversations**: 12 notable [[framework-claude-code]] sessions with complex agentic problems
 
 ### Imported Pages
 - **Concepts**: agent loop, context window, tool use, state management, orchestration, memory architectures
-- **Patterns**: supervisor-worker, fan-out-worker, reflection loop, retrieval-augmented execution
-- **Frameworks**: LangGraph, AutoGen, CrewAI, Claude Code, MCP, OpenClaw
-- **Entities**: Anthropic, OpenAI, researchers (Karpathy, Ng, others), tools and companies
+- **Patterns**: [[pattern-supervisor-worker]], [[pattern-fan-out-worker]]-worker, [[pattern-reflection-loop]], retrieval-augmented execution
+- **Frameworks**: [[framework-langgraph]], [[framework-autogen]], [[framework-crewai]], [[framework-claude-code]], [[mcp-ecosystem]], [[framework-openclaw]]
+- **Entities**: [[anthropic]], [[openai]], researchers ([[andrej-karpathy]], Ng, others), tools and companies
 
 ## Recent Tasks
 
 1. **Runtime memory planning** (2026-04-10): Created [[rewrites/plans/2026-04-10-operational-runtime-memory-layer-plan|operational runtime memory layer plan]] to harden task-local state, promotions, context loading, and writeback guarantees.
 2. **Lint pass** (2026-04-08): Identified 3 orphan pages, flagged 2 framework docs for update (>60 days)
-3. **Hot cache refresh** (2026-04-07): Promoted supervisor-worker pattern, reflection loops, memory architectures
+3. **[[pattern-hot-cache]] refresh** (2026-04-07): Promoted [[pattern-supervisor-worker]] pattern, reflection loops, memory architectures
 4. **Cross-linking** (2026-04-06): Ensured all concept pages link to relevant patterns and recipes
-5. **Framework sync** (2026-04-05): Updated LangGraph and AutoGen pages with latest version notes
+5. **Framework sync** (2026-04-05): Updated [[framework-langgraph]] and [[framework-autogen]] pages with latest version notes
 
 ## Recent Discoveries
 
 - **Memory architecture tension**: Trade-off between ephemeral context (speed) vs persistent memory (recall). Created synthesis page comparing approaches.
 - **Safety in agentic loops**: New pattern emerging around human-in-the-loop checkpoints. Needs recipe validation.
-- **Framework convergence**: LangGraph, AutoGen, and CrewAI converging on similar orchestration primitives. Opportunity for unified abstraction page.
+- **Framework convergence**: [[framework-langgraph]], [[framework-autogen]], and [[framework-crewai]] converging on similar orchestration primitives. Opportunity for unified abstraction page.
 
 ## Related Repos
 
@@ -80,7 +80,7 @@ The system implements agentic patterns within itself—parallel agents for seedi
 | Wiki pages | current | 2026-04-09 |
 | Agent definitions | current | 2026-04-09 |
 | Index | up-to-date | 2026-04-09 |
-| Hot cache | fresh | 2026-04-07 |
+| [[pattern-hot-cache]] | fresh | 2026-04-07 |
 
 All bidirectional links validated. No broken references detected.
 

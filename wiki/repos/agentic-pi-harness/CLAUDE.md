@@ -74,7 +74,7 @@ When asked to test on a specific Pi version/configuration:
 ## Key Integration Points
 
 ### Agentic-KB
-- Read patterns from [[agentic-kb/home|Agentic-KB]] (e.g., supervisor-worker, streaming)
+- Read patterns from [[agentic-kb/home|Agentic-KB]] (e.g., [[pattern-supervisor-worker]], streaming)
 - Reference recipes for implementation guidance
 - Log validated learnings back to KB (feedback loop)
 

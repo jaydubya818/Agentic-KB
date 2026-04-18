@@ -43,7 +43,7 @@ Jay currently operates two separate knowledge stores:
 **Cross-vault principles:**
 - The Agentic-KB is the source of truth for engineering knowledge. The main vault can reference it, not the reverse.
 - Do not copy content between vaults — link instead.
-- For federated search (searching both vaults in one query), use the `mcp__obsidian__*` MCP tools to read the main vault, and `mcp__agentic-kb__*` for the engineering KB.
+- For federated search (searching both vaults in one query), use the `mcp__obsidian__*` [[mcp-ecosystem]] tools to read the main vault, and `mcp__agentic-kb__*` for the engineering KB.
 
 **Planned: `wiki/personal/obsidian-vault-map.md`** — a map of which folders in the main Obsidian vault are worth ingesting into Agentic-KB on demand. Closes the cross-vault gap identified in the ByteRover analysis.
 
@@ -98,7 +98,7 @@ Where the KB is headed:
 
 **Graph database layer.** When the ontology-lite flat files in [[knowledge-systems/research-engine/knowledge/relationships|relationships]] get unwieldy (>500 edges), migrate to a local graph DB (Kuzu, DuckDB with graph extensions). The migration path is already designed in [[knowledge-systems/research-engine/methodology/ontology-lite|Ontology-Lite]].
 
-**Semantic search layer.** Add BM25 + vector hybrid search over the wiki via the `packages/mcp` MCP server in `My LLM Wiki`. The RLM pipeline pattern is the target architecture: [[concepts/rlm-pipeline]]. Recipe: [[recipes/recipe-hybrid-search-llm-wiki]].
+**Semantic search layer.** Add BM25 + vector hybrid search over the wiki via the `packages/mcp` [[mcp-ecosystem]] server in `My LLM Wiki`. The RLM pipeline pattern is the target architecture: [[concepts/rlm-pipeline]]. Recipe: [[recipes/recipe-hybrid-search-llm-wiki]].
 
 **Active KB maintenance agent.** A scheduled agent (runs nightly) that: reads `wiki/log.md` for recent writes, checks for broken links, updates `wiki/recently-added.md`, and flags any pages with `confidence: low` older than 60 days. Would use `mcp__scheduled-tasks__*`.
 

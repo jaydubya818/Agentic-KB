@@ -175,7 +175,7 @@ Promotion is where noisy task output becomes institutional memory. That transiti
 
 ### Phase 5: Wire runtime surfaces and retention around the model
 
-**Goal:** Make the memory layer usable across CLI, web, and MCP without bypass paths.
+**Goal:** Make the memory layer usable across CLI, web, and [[mcp-ecosystem]] without bypass paths.
 
 **Deliverables**
 
@@ -184,7 +184,7 @@ Promotion is where noisy task output becomes institutional memory. That transiti
   - `agent append-state`
   - `agent close-task --dry-run`
   - `agent active-task`
-- Add MCP tools that expose the same lifecycle instead of only context load and close.
+- Add [[mcp-ecosystem]] tools that expose the same lifecycle instead of only context load and close.
 - Add retention rules for completed task-local files:
   - archive after close
   - keep active pointer clean
@@ -213,7 +213,7 @@ That gives us:
 - bounded context assembly
 - auditable promotion paths
 - transactional close-task behavior
-- one memory model shared by CLI, MCP, and web
+- one memory model shared by CLI, [[mcp-ecosystem]], and web
 
 ## Tradeoffs and risks
 
@@ -231,7 +231,7 @@ We should consider this operational memory layer ready when all of the following
 3. `closeTask()` either commits all file writes and bus publications or leaves no side effects.
 4. Promotions require valid state transitions and contract-allowed approvers.
 5. A worker cannot write directly to canonical project docs, but can route approved rewrites and discoveries upward through supported promotion paths.
-6. CLI, MCP, and web all use the same runtime functions for task lifecycle operations.
+6. CLI, [[mcp-ecosystem]], and web all use the same runtime functions for task lifecycle operations.
 7. Tests cover start, resume, dry-run, rollback, promotion approval, merge approval, and abandoned-task retention.
 
 ## Recommended rollout
@@ -246,7 +246,7 @@ Week 2:
 
 - Phase 3 transactional close-task
 - Phase 4 promotion hardening
-- CLI and MCP surface updates
+- CLI and [[mcp-ecosystem]] surface updates
 
 Week 3:
 

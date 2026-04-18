@@ -24,7 +24,7 @@ updated: 2026-04-13
   <circle cx="165" cy="90" r="46" fill="#388bfd" opacity="0.15" stroke="#388bfd" stroke-width="1.5"/>
   <text x="165" y="83" text-anchor="middle" fill="#79c0ff" font-size="12" font-weight="bold">Orchestration</text>
   <text x="165" y="98" text-anchor="middle" fill="#8b949e" font-size="9">12 frameworks</text>
-  <text x="165" y="111" text-anchor="middle" fill="#8b949e" font-size="9">fan-out · supervisor</text>
+  <text x="165" y="111" text-anchor="middle" fill="#8b949e" font-size="9">[[pattern-fan-out-worker]] · supervisor</text>
 
   <!-- Memory (top-right) -->
   <circle cx="535" cy="90" r="46" fill="#3fb950" opacity="0.15" stroke="#3fb950" stroke-width="1.5"/>
@@ -35,13 +35,13 @@ updated: 2026-04-13
   <!-- Tool Use (bottom-left) -->
   <circle cx="165" cy="255" r="46" fill="#d2a8ff" opacity="0.15" stroke="#d2a8ff" stroke-width="1.5"/>
   <text x="165" y="248" text-anchor="middle" fill="#d2a8ff" font-size="12" font-weight="bold">Tool Use</text>
-  <text x="165" y="263" text-anchor="middle" fill="#8b949e" font-size="9">MCP · permissions</text>
+  <text x="165" y="263" text-anchor="middle" fill="#8b949e" font-size="9">[[mcp-ecosystem]] · permissions</text>
   <text x="165" y="276" text-anchor="middle" fill="#8b949e" font-size="9">tool design</text>
 
   <!-- Evaluation (bottom-right) -->
   <circle cx="535" cy="255" r="46" fill="#f78166" opacity="0.15" stroke="#f78166" stroke-width="1.5"/>
   <text x="535" y="248" text-anchor="middle" fill="#f78166" font-size="12" font-weight="bold">Evaluation</text>
-  <text x="535" y="263" text-anchor="middle" fill="#8b949e" font-size="9">LLM-as-judge</text>
+  <text x="535" y="263" text-anchor="middle" fill="#8b949e" font-size="9">[[llm-as-judge]]</text>
   <text x="535" y="276" text-anchor="middle" fill="#8b949e" font-size="9">trajectory eval</text>
 
   <!-- Edges center → domains -->
@@ -94,7 +94,7 @@ These get referenced across the most other pages:
 
 1. **[[concepts/rlm-pipeline]]** — The 10-stage retrieval pipeline powering this KB's query layer. Stages 4–9 live; 1–3 implementation-ready.
 2. **[[patterns/pattern-compounding-loop]]** — The core flywheel: ingest → wiki → query → save. The reason this KB gets better every session.
-3. **[[evaluations/eval-orchestration-frameworks]]** — GSD vs LangGraph vs AutoGen vs CrewAI vs raw Claude Code. Verdicts with rationale.
+3. **[[evaluations/eval-orchestration-frameworks]]** — GSD vs [[framework-langgraph]] vs [[framework-autogen]] vs [[framework-crewai]] vs raw [[framework-claude-code]]. Verdicts with rationale.
 4. **[[recipes/recipe-hybrid-search-llm-wiki]]** — BM25 + vector + typed graph + RRF. The full implementation path for RLM Stages 1–3.
 5. **[[concepts/knowledge-graphs]]** — Why typed KGs outperform flat notes and vector search for multi-hop reasoning.
 
@@ -115,14 +115,14 @@ These get referenced across the most other pages:
 ## Vault Navigation
 
 ### Knowledge Domains
-- [[mocs/orchestration|Orchestration]] — frameworks, fan-out, supervisor-worker, evaluation
-- [[mocs/memory|Memory]] — memory classes, RLM pipeline, hot cache, promotion policies
-- [[mocs/tool-use|Tool Use]] — MCP ecosystem, permissions, tool design
-- [[mocs/evaluation|Evaluation]] — LLM-as-judge, trajectory eval, benchmarks
+- [[mocs/orchestration|Orchestration]] — frameworks, [[pattern-fan-out-worker]], [[pattern-supervisor-worker]], evaluation
+- [[mocs/memory|Memory]] — memory classes, RLM pipeline, [[pattern-hot-cache]], promotion policies
+- [[mocs/tool-use|Tool Use]] — [[mcp-ecosystem]] ecosystem, permissions, tool design
+- [[mocs/evaluation|Evaluation]] — [[llm-as-judge]], trajectory eval, benchmarks
 
 ### Vault Infrastructure
 - [[mocs/vault-foundation|Vault Foundation]] — folder structure, MoCs, templates, metadata, attachments
-- [[mocs/claude-integration|Claude Integration]] — CLAUDE.md, Hermes, MCP tools, skills, context loading, session memory
+- [[mocs/claude-integration|Claude Integration]] — CLAUDE.md, Hermes, [[mcp-ecosystem]] tools, skills, context loading, session memory
 - [[mocs/core-plugins|Core Plugins]] — Terminal, Dataview, Templater, Periodic Notes, Canvas, Graph View
 - [[mocs/automation|Automation]] — skills, hooks, auto-tagging, summary generation, vault maintenance
 

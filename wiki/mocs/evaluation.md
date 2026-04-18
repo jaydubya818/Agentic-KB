@@ -25,7 +25,7 @@ updated: 2026-04-10
 ## Evaluations in This KB
 
 - [[evaluations/eval-memory-approaches]] — In-context vs file-wiki vs vector DB vs knowledge graph; file-wiki wins for Jay's use case
-- [[evaluations/eval-orchestration-frameworks]] — GSD vs LangGraph vs AutoGen vs CrewAI vs raw Claude Code; GSD first, raw Claude Code second
+- [[evaluations/eval-orchestration-frameworks]] — GSD vs [[framework-langgraph]] vs [[framework-autogen]] vs [[framework-crewai]] vs raw [[framework-claude-code]]; GSD first, raw [[framework-claude-code]] second
 
 ---
 
@@ -38,14 +38,14 @@ updated: 2026-04-10
 ## Frameworks
 
 - [[frameworks/framework-gsd]] — GSD verifier agent: four-level artifact check, stub detection, data-flow trace
-- [[frameworks/framework-claude-code]] — Claude Code: built-in test running, hook-based verification
-- [[frameworks/framework-langgraph]] — LangSmith evaluation integration for LangGraph agents
+- [[frameworks/framework-claude-code]] — [[framework-claude-code]]: built-in test running, hook-based verification
+- [[frameworks/framework-langgraph]] — LangSmith evaluation integration for [[framework-langgraph]] agents
 
 ---
 
 ## Recipes
 
-- [[recipes/recipe-agent-evaluation]] — Build an LLM-as-judge evaluation harness for agents end-to-end
+- [[recipes/recipe-agent-evaluation]] — Build an [[llm-as-judge]] evaluation harness for agents end-to-end
 
 ---
 

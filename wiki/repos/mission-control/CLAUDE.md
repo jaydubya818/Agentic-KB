@@ -15,20 +15,20 @@ Instructions for agents operating on the MissionControl orchestration system.
 
 MissionControl coordinates multi-agent networks. Agents here focus on:
 
-1. **Orchestration**: Task assignment, supervisor-worker patterns, load balancing
+1. **Orchestration**: Task assignment, [[pattern-supervisor-worker]] patterns, load balancing
 2. **Observability**: Health monitoring, metrics collection, dashboards
 3. **Fault tolerance**: Failure detection, recovery, circuit breakers
 4. **Integration**: Consume Agentic-KB patterns; coordinate Pi harness workers
 
 ## Key Integration Points
 
-- **Agentic-KB**: Query via MCP for orchestration patterns
+- **Agentic-KB**: Query via [[mcp-ecosystem]] for orchestration patterns
 - **Agentic-Pi-Harness**: Send tasks to Pi workers, receive results
 - **Dashboard**: Real-time display of agent health, task queues, metrics
 
 ## Standards
 
-- **Patterns**: Supervisor-worker for task distribution
+- **Patterns**: [[pattern-supervisor-worker]] for task distribution
 - **Metrics**: Latency (p50, p95, p99), success rate, queue depth
 - **Health checks**: Periodic ping (5-second intervals)
 - **Circuit breaker**: Stop sending tasks if failure rate >10%

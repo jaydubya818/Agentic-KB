@@ -74,7 +74,7 @@ See recipe: [[recipes/recipe-kb-lifecycle-hooks]]
 
 The INGEST workflow generates `wiki/summaries/{slug}.md` automatically for any file in `raw/`. The LLM extracts key claims, code examples, concepts, and Jay-specific insights. Summaries are 300–500 words and follow strict frontmatter schema.
 
-For batch ingestion (e.g., after a research session that produces multiple raw files), fan-out pattern applies — see [[patterns/pattern-fan-out-worker]].
+For batch ingestion (e.g., after a research session that produces multiple raw files), [[pattern-fan-out-worker]] pattern applies — see [[patterns/pattern-fan-out-worker]].
 
 Planned enhancement: a scheduled task that detects new files in `raw/` and auto-triggers INGEST. See [[mocs/core-plugins|Core Plugins]] → Periodic Notes for scheduling.
 
@@ -121,7 +121,7 @@ See [[mocs/maintenance|Maintenance MoC]] for the full health check protocol.
 ```bash
 cd /Users/jaywest/My\ LLM\ Wiki && npm run query "your question"
 ```
-Packages: CLI (`packages/cli`), MCP server (`packages/mcp`), core logic (`packages/core`).
+Packages: CLI (`packages/cli`), [[mcp-ecosystem]] server (`packages/mcp`), core logic (`packages/core`).
 
 ---
 

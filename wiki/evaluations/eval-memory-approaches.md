@@ -136,7 +136,7 @@ Context: this is evaluated for the specific use case of a **personal engineering
 
 **File-based wiki wins for Jay's use case.** It provides the best balance of setup simplicity, accuracy, transparency, write quality, and maintenance — all highly weighted criteria for a personal KB used by agents.
 
-The Karpathy pattern (this KB) is validated: plaintext markdown with structure, grep-based search, [[mcp-ecosystem]] server for agent access. The scale limit at 500+ pages is a real constraint but Jay is years away from it at current growth rates.
+The [[andrej-karpathy]] pattern (this KB) is validated: plaintext markdown with structure, grep-based search, [[mcp-ecosystem]] server for agent access. The scale limit at 500+ pages is a real constraint but Jay is years away from it at current growth rates.
 
 **Vector DB** is the right answer when:
 - Scale exceeds hundreds of documents (thousands+)

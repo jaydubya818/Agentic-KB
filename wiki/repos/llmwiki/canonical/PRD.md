@@ -13,7 +13,7 @@ updated: 2026-04-09
 
 ## Executive Summary
 
-LLMwiki is the user-facing interface to Agentic-KB. It provides CLI, web UI, and MCP server access to the knowledge base, handles indexing and caching, and optimizes for fast queries. Users interact with the KB through LLMwiki while the system keeps data in sync with the canonical wiki.
+LLMwiki is the user-facing interface to Agentic-KB. It provides CLI, web UI, and [[mcp-ecosystem]] server access to the knowledge base, handles indexing and caching, and optimizes for fast queries. Users interact with the KB through LLMwiki while the system keeps data in sync with the canonical wiki.
 
 ## Interfaces
 
@@ -27,7 +27,7 @@ LLMwiki is the user-facing interface to Agentic-KB. It provides CLI, web UI, and
 - Features: Search, browse, filter by type/tag, related pages
 - Latency target: Page load <300ms
 
-### 3. MCP Server
+### 3. [[mcp-ecosystem]] Server
 - Port: 9001
 - Tools: query_kb(), list_topics(), get_related()
 - Clients: MissionControl, Pi harness agents
@@ -36,13 +36,13 @@ LLMwiki is the user-facing interface to Agentic-KB. It provides CLI, web UI, and
 
 1. **Query Interface** — Ask questions, get answers with citations
 2. **Search** — Keyword search (now), full-text search (future)
-3. **Caching** — Hot cache of frequent patterns (≤500 words)
+3. **Caching** — [[pattern-hot-cache]] of frequent patterns (≤500 words)
 4. **Discovery** — Browse by type, tag, related pages
 5. **Integration** — Synced with Agentic-KB, agent-ready API
 
 ## Success Criteria
 
-1. CLI queries <2s, Web load <300ms, MCP <100ms
+1. CLI queries <2s, Web load <300ms, [[mcp-ecosystem]] <100ms
 2. Cache hit rate >50% on queries
 3. Zero broken links
 4. Full-text search by 2026-05-15
@@ -50,6 +50,6 @@ LLMwiki is the user-facing interface to Agentic-KB. It provides CLI, web UI, and
 
 ## Roadmap
 
-- Q2 2026: CLI/Web/MCP stable, cache optimization
+- Q2 2026: CLI/Web/[[mcp-ecosystem]] stable, cache optimization
 - Q3 2026: Full-text search, advanced filtering
 - Q4 2026: Browser plugin, API documentation

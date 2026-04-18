@@ -26,7 +26,7 @@ Distinguished from RAG by its **pre-computation of synthesis**: rather than retr
 
 ## The Core Inversion
 
-| RAG | LLM Wiki |
+| RAG | [[llm-wiki]] |
 |-----|----------|
 | Stateless — rediscovers knowledge each query | Stateful — knowledge persists and compounds |
 | Retrieves chunks, synthesizes on demand | Synthesis pre-computed, stored as wiki pages |

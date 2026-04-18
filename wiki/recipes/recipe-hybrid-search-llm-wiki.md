@@ -13,12 +13,12 @@ tested: false
 tags: [memory, context-management, rag-systems, deployment, agentic]
 ---
 
-# Recipe: Hybrid Search for LLM Wiki
+# Recipe: Hybrid Search for [[llm-wiki]]
 
 ## Goal
 Replace flat `index.md` keyword search with a three-retriever hybrid pipeline: BM25 (keywords) + vector embeddings (semantics) + typed graph traversal (structure), fused with Reciprocal Rank Fusion. Implements RLM Pipeline Stages 1–3.
 
-This is the implementation behind LLM Wiki v2's claim that hybrid search "replaces the index.md file that breaks past 200 pages." For this KB, trigger this implementation when the wiki exceeds ~150 pages and query relevance degrades noticeably.
+This is the implementation behind [[llm-wiki]] v2's claim that hybrid search "replaces the index.md file that breaks past 200 pages." For this KB, trigger this implementation when the wiki exceeds ~150 pages and query relevance degrades noticeably.
 
 ---
 
@@ -276,7 +276,7 @@ function extractEntitySlugs(query) {
 
 2. Run with a semantic query: `"how do I prevent agents from forgetting things"` — should surface memory-related pages even without exact keyword overlap.
 
-3. Run with a graph query that includes a wiki slug: `"[[pattern-fan-out-worker]] risks"` — should surface fan-out-worker AND its graph neighbors (failure modes, context isolation).
+3. Run with a graph query that includes a wiki slug: `"[[pattern-fan-out-worker]] risks"` — should surface [[pattern-fan-out-worker]]-worker AND its graph neighbors (failure modes, context isolation).
 
 4. Compare against old index.md search for the same queries — hybrid should have higher relevance on semantic and graph queries.
 

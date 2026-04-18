@@ -59,7 +59,7 @@ Beyond building the graph, graphify supports:
 - `path "NodeA" "NodeB"` — shortest path between two concepts
 - `explain "ConceptName"` — plain-language explanation of a node
 
-### Integration with Karpathy Pattern
+### Integration with [[andrej-karpathy]] Pattern
 
 "graphify is built around [[andrej-karpathy]]'s /raw folder workflow." The CLAUDE.md for this KB explicitly calls for running graphify after major ingestion runs, with output to `wiki/syntheses/knowledge-graph-{date}.html`.
 

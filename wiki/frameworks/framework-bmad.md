@@ -14,18 +14,18 @@ jay_experience: extensive
 
 ## Overview
 
-[[framework-bmad]] (Breakthrough Method for Agentic Development) is Jay West's framework for spec-locked projects — enterprise builds, client deliverables, and modules with requirements that are fully known before any code is written. Where GSD embraces uncertainty with iterative phases, BMAD front-loads all ambiguity resolution into a rigorous pre-planning stage so that implementation can proceed with maximum confidence.
+[[framework-bmad]] (Breakthrough Method for Agentic Development) is Jay West's framework for spec-locked projects — enterprise builds, client deliverables, and modules with requirements that are fully known before any code is written. Where GSD embraces uncertainty with iterative phases, [[framework-bmad]] front-loads all ambiguity resolution into a rigorous pre-planning stage so that implementation can proceed with maximum confidence.
 
-BMAD's core discipline: **no implementation starts until the spec is complete, validated, and sharded into agent-sized tasks**. This prevents mid-build spec changes from invalidating large chunks of work — the risk BMAD is designed to eliminate.
+[[framework-bmad]]'s core discipline: **no implementation starts until the spec is complete, validated, and sharded into agent-sized tasks**. This prevents mid-build spec changes from invalidating large chunks of work — the risk [[framework-bmad]] is designed to eliminate.
 
-BMAD is implemented as skills in `~/.claude/skills/bmad/` organized into four groups: core utilities, analysis, planning, and solutioning. It also draws on 12+ agent personas that can be invoked in BMAD Party Mode.
+[[framework-bmad]] is implemented as skills in `~/.claude/skills/bmad/` organized into four groups: core utilities, analysis, planning, and solutioning. It also draws on 12+ agent personas that can be invoked in [[framework-bmad]] Party Mode.
 
 ---
 
 ## Core Concepts
 
-### When to Use BMAD
-| Signal | Use BMAD? |
+### When to Use [[framework-bmad]]
+| Signal | Use [[framework-bmad]]? |
 |--------|-----------|
 | Requirements fully locked before any code | Yes |
 | Client/enterprise deliverable with approval gates | Yes |
@@ -33,10 +33,10 @@ BMAD is implemented as skills in `~/.claude/skills/bmad/` organized into four gr
 | High-stakes features with edge case risk | No (use [[framework-superpowers]]) |
 | Spec might change when you show it to stakeholders | No (use GSD first) |
 
-**Critical anti-pattern**: using BMAD when you actually don't know the requirements. A wrong spec executed perfectly is a perfectly wrong product. If requirements aren't locked, use GSD to discover them first.
+**Critical anti-pattern**: using [[framework-bmad]] when you actually don't know the requirements. A wrong spec executed perfectly is a perfectly wrong product. If requirements aren't locked, use GSD to discover them first.
 
 ### Party Mode
-BMAD Party Mode is the framework's most distinctive feature: multiple agent personas debate a decision simultaneously rather than sequentially. Invoke `bmad-party-mode` when you need multiple perspectives on an architecture choice, PRD section, or design decision.
+[[framework-bmad]] Party Mode is the framework's most distinctive feature: multiple agent personas debate a decision simultaneously rather than sequentially. Invoke `bmad-party-mode` when you need multiple perspectives on an architecture choice, PRD section, or design decision.
 
 Active personas in Party Mode (each responds in character):
 - **PM (Product Manager)**: user needs, prioritization, scope risk
@@ -49,7 +49,7 @@ Active personas in Party Mode (each responds in character):
 Party Mode output is a structured debate — each persona raises concerns and objections before consensus is sought. This is adversarial by design.
 
 ### Document-First Approach
-BMAD produces artifacts in sequence before any code is written:
+[[framework-bmad]] produces artifacts in sequence before any code is written:
 
 1. **Product Brief** → market context, problem statement, user needs
 2. **PRD (Product Requirements Document)** → functional requirements, acceptance criteria, user stories
@@ -112,7 +112,7 @@ implementation (wave by wave, shard by shard)
 ### Core (`~/.claude/skills/bmad/core/`)
 | Skill | Purpose |
 |-------|---------|
-| `bmad-init` | Initialize BMAD on a project — KB, team, scaffold |
+| `bmad-init` | Initialize [[framework-bmad]] on a project — KB, team, scaffold |
 | `bmad-brainstorming` | Structured ideation with named ideation methods |
 | `bmad-party-mode` | Multi-persona simultaneous debate |
 | `bmad-advanced-elicitation` | Deep requirements extraction techniques |
@@ -120,15 +120,15 @@ implementation (wave by wave, shard by shard)
 | `bmad-review-edge-case-hunter` | Systematic edge case discovery |
 | `bmad-distillator` | Compress large docs for context efficiency |
 | `bmad-shard-doc` | Split large specs into agent-sized chunks |
-| `bmad-help` | BMAD documentation and guidance |
-| `bmad-index-docs` | Index and cross-reference BMAD documents |
+| `bmad-help` | [[framework-bmad]] documentation and guidance |
+| `bmad-index-docs` | Index and cross-reference [[framework-bmad]] documents |
 
 ### Analysis (`~/.claude/skills/bmad/analysis/`)
 | Skill | Purpose |
 |-------|---------|
 | `bmad-product-brief` | Full product brief with market + domain research |
 | `bmad-agent-analyst` | Business analyst persona — requirements, acceptance criteria |
-| `bmad-document-project` | Document an existing codebase for BMAD onboarding |
+| `bmad-document-project` | Document an existing codebase for [[framework-bmad]] onboarding |
 | `bmad-domain-research` | Deep dive into a specific domain |
 | `bmad-market-research` | Competitive analysis and market landscape |
 | `bmad-technical-research` | Technology evaluation and selection |
@@ -185,17 +185,17 @@ BMAD Framework
 - **Shard-and-conquer**: large specs don't overwhelm any single agent context
 - **Client-ready artifacts**: PRODUCT-BRIEF, PRD, ARCHITECTURE are deliverable documents, not just internal notes
 - **Implementation readiness check**: explicit gate before code starts — prevents premature implementation
-- **Composable with Superpowers**: BMAD plans the module, Superpowers implements it with TDD
+- **Composable with [[framework-superpowers]]**: [[framework-bmad]] plans the module, [[framework-superpowers]] implements it with TDD
 
 ---
 
 ## Weaknesses
 
-- **Front-heavy**: most of BMAD's value comes before a single line of code; if the client doesn't value the artifacts, the overhead feels excessive
-- **Requirements drift is fatal**: if requirements change after PRD lock, BMAD's artifacts become technical debt (wrong documents that feel official)
+- **Front-heavy**: most of [[framework-bmad]]'s value comes before a single line of code; if the client doesn't value the artifacts, the overhead feels excessive
+- **Requirements drift is fatal**: if requirements change after PRD lock, [[framework-bmad]]'s artifacts become technical debt (wrong documents that feel official)
 - **Party Mode is expensive**: 6 personas responding in one context burns tokens quickly; not suitable for every decision
 - **Overkill for small features**: a 3-file bugfix doesn't need a PRD
-- **Not for exploration**: discovering requirements is GSD's job; BMAD assumes they're already known
+- **Not for exploration**: discovering requirements is GSD's job; [[framework-bmad]] assumes they're already known
 
 ---
 
@@ -243,23 +243,23 @@ BMAD Framework
 
 ## Integration Points
 
-- **[[frameworks/framework-gsd]]**: GSD for exploration → BMAD for locked-spec execution; or BMAD for planning, GSD-executor for implementation
-- **[[frameworks/framework-superpowers]]**: BMAD plans the spec; Superpowers implements high-stakes slices with TDD
-- **[[frameworks/framework-claude-code]]**: BMAD skills run inside [[framework-claude-code]]; party-mode uses the Agent tool for multi-persona spawning
-- **[[entities/jay-west-agent-stack]]**: BMAD is Jay's enterprise/client framework
-- Obsidian: BMAD artifacts (PRD, architecture) are stored as markdown and can be cross-referenced from the Agentic-KB
+- **[[frameworks/framework-gsd]]**: GSD for exploration → [[framework-bmad]] for locked-spec execution; or [[framework-bmad]] for planning, GSD-executor for implementation
+- **[[frameworks/framework-superpowers]]**: [[framework-bmad]] plans the spec; [[framework-superpowers]] implements high-stakes slices with TDD
+- **[[frameworks/framework-claude-code]]**: [[framework-bmad]] skills run inside [[framework-claude-code]]; party-mode uses the Agent tool for multi-persona spawning
+- **[[entities/jay-west-agent-stack]]**: [[framework-bmad]] is Jay's enterprise/client framework
+- Obsidian: [[framework-bmad]] artifacts (PRD, architecture) are stored as markdown and can be cross-referenced from the Agentic-KB
 
 ---
 
 ## Jay's Experience
 
-Jay uses BMAD for client projects (SellerFi, AMS/ARM) where the client has a stable spec and deliverables need to look professional. Key validated findings:
+Jay uses [[framework-bmad]] for client projects (SellerFi, AMS/ARM) where the client has a stable spec and deliverables need to look professional. Key validated findings:
 
 1. **Party Mode ROI on architecture decisions is extremely high**: a 45-minute party mode session on a data model caught a normalization mistake that would have required a painful migration later
 2. **`bmad-review-edge-case-hunter` consistently finds 3-5 missing behaviors**: bugs that would have been production incidents discovered in a document review
 3. **Clients value the artifacts**: PRODUCT-BRIEF and PRD give clients something to sign off on, reducing scope creep disputes
 4. **The document gate discipline is hard to maintain**: pressure to "just start coding" while the PRD is being refined is real; the implementation-readiness check helps
-5. **BMAD + GSD hybrid**: Jay often uses GSD for the MVP prototype to discover unknowns, then locks the spec with BMAD for the production build
+5. **[[framework-bmad]] + GSD hybrid**: Jay often uses GSD for the MVP prototype to discover unknowns, then locks the spec with [[framework-bmad]] for the production build
 
 ---
 
@@ -274,7 +274,7 @@ Jay uses BMAD for client projects (SellerFi, AMS/ARM) where the client has a sta
 
 ## Sources
 
-- Jay's `~/.claude/CLAUDE.md` (BMAD section)
+- Jay's `~/.claude/CLAUDE.md` ([[framework-bmad]] section)
 - Jay's `~/.claude/skills/bmad/` (skill directory structure)
 - [[entities/jay-west-agent-stack]]
 - [[frameworks/framework-gsd]]

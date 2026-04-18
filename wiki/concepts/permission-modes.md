@@ -26,7 +26,7 @@ status: stable
 
 ## Definition
 
-Permission modes in Claude Code are session-level configurations that determine which tool invocations require explicit user confirmation and which are automatically allowed. They balance development velocity against blast radius in case of agent error.
+Permission modes in [[framework-claude-code]] are session-level configurations that determine which tool invocations require explicit user confirmation and which are automatically allowed. They balance development velocity against blast radius in case of agent error.
 
 ---
 
@@ -180,5 +180,5 @@ This is preferable to starting with broad permissions "just in case." The escala
 
 ## Sources
 
-- [[anthropic]] Claude Code documentation (2025)
-- Claude Code permission system design notes
+- [[anthropic]] [[framework-claude-code]] documentation (2025)
+- [[framework-claude-code]] permission system design notes

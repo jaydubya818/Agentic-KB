@@ -14,7 +14,7 @@ source: https://docs.langchain.com/oss/python/deepagents/going-to-production
 
 # [[framework-langgraph]]
 
-LangGraph is LangChain's graph-based agent orchestration framework. It models agent execution as a stateful directed graph, enabling complex multi-step, multi-agent workflows with built-in durability and checkpointing.
+[[framework-langgraph]] is LangChain's graph-based agent orchestration framework. It models agent execution as a stateful directed graph, enabling complex multi-step, multi-agent workflows with built-in durability and checkpointing.
 
 ## What It Does
 
@@ -35,7 +35,7 @@ LangGraph is LangChain's graph-based agent orchestration framework. It models ag
 
 ### Durability
 
-LangGraph checkpoints at every step. Interrupted runs resume from the last recorded state without reprocessing. This enables:
+[[framework-langgraph]] checkpoints at every step. Interrupted runs resume from the last recorded state without reprocessing. This enables:
 - Indefinite interrupts and human-in-the-loop pauses
 - Time travel / rewinding to earlier states
 - Safe handling of sensitive or destructive operations

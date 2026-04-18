@@ -9,21 +9,21 @@ updated: 2026-04-13
 
 # Core Plugins
 
-The Obsidian plugin stack that powers the Agentic-KB. Covers the terminal integration for Claude Code, Dataview for queryable metadata, Templater for automated note creation, Periodic Notes for review cadence, Canvas for workspaces, and graph view configuration.
+The Obsidian plugin stack that powers the Agentic-KB. Covers the terminal integration for [[framework-claude-code]], Dataview for queryable metadata, Templater for automated note creation, Periodic Notes for review cadence, Canvas for workspaces, and graph view configuration.
 
 ---
 
-## Terminal + Claude Code
+## Terminal + [[framework-claude-code]]
 
 **Plugin:** Terminal (by Namikaze09) or Obsidian Terminal
 
-Enables a shell pane inside Obsidian — the primary bridge for Claude Code interaction:
+Enables a shell pane inside Obsidian — the primary bridge for [[framework-claude-code]] interaction:
 - Run `claude` directly from within the vault
 - Execute KB CLI queries: `cd /Users/jaywest/My\ LLM\ Wiki && npm run query "your question"`
 - Run git operations without leaving Obsidian
 - Trigger INGEST workflow scripts
 
-**Setup:** Point the terminal default shell to zsh. Set the working directory to vault root so `CLAUDE.md` is in scope on every Claude Code invocation.
+**Setup:** Point the terminal default shell to zsh. Set the working directory to vault root so `CLAUDE.md` is in scope on every [[framework-claude-code]] invocation.
 
 ---
 
@@ -99,13 +99,13 @@ The daily note auto-links to today's priority stack from [[personal/hermes-opera
 
 ## Advanced URI & Canvas
 
-**Advanced URI Plugin** — enables deep linking into the vault from external apps, scripts, and Claude Code:
+**Advanced URI Plugin** — enables deep linking into the vault from external apps, scripts, and [[framework-claude-code]]:
 
 ```
 obsidian://advanced-uri?vault=Agentic-KB&filepath=wiki/hot.md
 ```
 
-Use cases: Claude Code hooks that open a specific page after an INGEST run; terminal scripts that navigate to today's daily note.
+Use cases: [[framework-claude-code]] hooks that open a specific page after an INGEST run; terminal scripts that navigate to today's daily note.
 
 **Canvas** — built-in Obsidian feature for visual workspaces. See [[mocs/visualization]] for KB-specific canvas patterns:
 - Research project canvases (sources → synthesis → findings)
@@ -133,6 +133,6 @@ See [[mocs/visualization]] for full graph optimization guide and [[syntheses/lin
 ## Related
 
 - [[mocs/visualization|Visualization MoC]] — Graph view and canvas patterns in depth
-- [[mocs/claude-integration|Claude Integration]] — Terminal → Claude Code connection
+- [[mocs/claude-integration|Claude Integration]] — Terminal → [[framework-claude-code]] connection
 - [[mocs/daily-systems|Daily Systems]] — Periodic Notes configuration
 - [[mocs/automation|Automation]] — Templater + QuickAdd automation patterns

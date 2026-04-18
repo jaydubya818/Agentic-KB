@@ -14,9 +14,9 @@ confidence: high
 
 ## Framework Overview
 
-Superpowers is Jay's high-stakes feature framework — used when edge cases are costly (auth, payments, agentic systems). It is TDD-first, iron-law driven, and requires two-stage review at each implementation step. Best for: features where a wrong implementation is not easily undone.
+[[framework-superpowers]] is Jay's high-stakes feature framework — used when edge cases are costly (auth, payments, agentic systems). It is TDD-first, iron-law driven, and requires two-stage review at each implementation step. Best for: features where a wrong implementation is not easily undone.
 
-From CLAUDE.md: "High-stakes feature (auth, payments, agents) → Superpowers (TDD + verification)"
+From CLAUDE.md: "High-stakes feature (auth, payments, agents) → [[framework-superpowers]] (TDD + verification)"
 
 ## Core Iron Laws (Non-Negotiable)
 
@@ -29,7 +29,7 @@ These are framed as "iron laws" — violations invalidate work regardless of out
 
 ## Skill Set
 
-Superpowers is implemented as a collection of skills in `~/.claude/skills/superpowers/`:
+[[framework-superpowers]] is implemented as a collection of skills in `~/.claude/skills/superpowers/`:
 
 | Skill | When to Use |
 |-------|-------------|
@@ -57,18 +57,18 @@ Each implementation task goes through two reviews:
 
 The superpowers-code-reviewer agent handles plan alignment; the regular code-reviewer handles quality.
 
-## TDD in Superpowers
+## TDD in [[framework-superpowers]]
 
 Red-Green-Refactor is strictly enforced:
 - **RED:** Write failing test first. Commit with `test(...)`. Must actually fail.
 - **GREEN:** Write minimal code to pass. Commit with `feat(...)`. Must actually pass.
 - **REFACTOR:** Clean up only. Must still pass. Commit only if changes made.
 
-Unlike the GSD executor (which has TDD as an optional `tdd="true"` task attribute), Superpowers treats TDD as the default for everything.
+Unlike the GSD executor (which has TDD as an optional `tdd="true"` task attribute), [[framework-superpowers]] treats TDD as the default for everything.
 
 ## Key Differentiator from GSD
 
-| Dimension | GSD | Superpowers |
+| Dimension | GSD | [[framework-superpowers]] |
 |-----------|-----|-------------|
 | Test requirement | Optional (TDD flag per task) | Mandatory (iron law) |
 | Root cause | Deviation rules auto-fix | Must investigate before fixing |
@@ -76,9 +76,9 @@ Unlike the GSD executor (which has TDD as an optional `tdd="true"` task attribut
 | Scope | Full feature cycles | High-stakes features only |
 | Failure tolerance | Autonomous recovery (Rules 1–3) | Stop and investigate |
 
-## Superpowers Code Reviewer Agent
+## [[framework-superpowers]] Code Reviewer Agent
 
-The `superpowers-code-reviewer` agent is the Superpowers-native reviewer — it adds plan alignment checking on top of quality review. It uses `model: inherit` (takes spawner's model) and its description includes verbatim example dialogues showing when to invoke it. This is the most elaborate trigger description in Jay's agent set.
+The `superpowers-code-reviewer` agent is the [[framework-superpowers]]-native reviewer — it adds plan alignment checking on top of quality review. It uses `model: inherit` (takes spawner's model) and its description includes verbatim example dialogues showing when to invoke it. This is the most elaborate trigger description in Jay's agent set.
 
 ## Related Concepts
 

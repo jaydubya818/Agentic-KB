@@ -14,7 +14,7 @@ confidence: high
 
 ## Key Purpose
 
-The original source document for the LLM wiki pattern. Describes the architecture, operations, special files, and why it works. Intentionally left vague for customization.
+The original source document for the [[llm-wiki]] pattern. Describes the architecture, operations, special files, and why it works. Intentionally left vague for customization.
 
 ## Core Architecture
 
@@ -44,7 +44,7 @@ Raw Sources (immutable) → Wiki (LLM-generated markdown) → Schema (CLAUDE.md)
 
 The pattern transfers tedious maintenance (cross-references, consistency, updates) to LLMs while keeping intellectual work (curation, analysis, direction) with humans.
 
-## Implementation Notes from Karpathy
+## Implementation Notes from [[andrej-karpathy]]
 
 - Use Obsidian as IDE/frontend
 - Enable local image downloads to avoid broken URLs
@@ -60,7 +60,7 @@ Research wikis, fiction writing (character/theme tracking), enterprise knowledge
 
 "Left vague so that you can hack it and customize it to your own project." — [[andrej-karpathy]]
 
-This is the founding document for the pattern that Jay's Agentic-KB is built on. The schema (CLAUDE.md in this vault) is a heavily expanded version of the minimal pattern Karpathy described.
+This is the founding document for the pattern that Jay's Agentic-KB is built on. The schema (CLAUDE.md in this vault) is a heavily expanded version of the minimal pattern [[andrej-karpathy]] described.
 
 ## Related Concepts
 

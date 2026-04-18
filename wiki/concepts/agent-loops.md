@@ -77,7 +77,7 @@ The LLM writes intermediate work to a scratchpad (a designated section of the co
 - Draft → critique → revise workflows
 - When the final answer format differs significantly from reasoning format
 
-In Claude Code: agents frequently write to temp files as a scratchpad, then read back for synthesis.
+In [[framework-claude-code]]: agents frequently write to temp files as a scratchpad, then read back for synthesis.
 
 ### While-Not-Done Loops
 

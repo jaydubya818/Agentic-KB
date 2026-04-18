@@ -22,7 +22,7 @@ Practical 5-minute setup walkthrough of the [[andrej-karpathy]] [[llm-wiki]] pat
 - Ingesting one long article (AI2027) created 23 wiki pages: 6 people, 5 organizations, 1 AI systems page, plus concepts and analysis.
 - 36 YouTube videos ingested in 14 minutes using batch processing.
 
-## Hot Cache Concept
+## [[pattern-hot-cache]] Concept
 
 A `~500-character` cache of most-recent/most-used context. The agent reads hot.md first on every query, then index, then domain subindex, then searches. Reduces the need to crawl wiki pages on common queries.
 
@@ -30,7 +30,7 @@ Especially valuable for executive assistant use cases: "Point an executive assis
 
 ## Wiki vs. RAG Comparison
 
-| Dimension | LLM Wiki | Traditional RAG |
+| Dimension | [[llm-wiki]] | Traditional RAG |
 |-----------|----------|----------------|
 | Retrieval | Reads indexes, follows links | Similarity search |
 | Relationships | Explicit links | Implicit proximity |
@@ -52,9 +52,9 @@ Herk's implementation:
 - Two vaults: YouTube transcripts KB + personal second brain (Herk Brain)
 - Obsidian Web Clipper for ingesting articles from browser
 
-## Karpathy's Intentional Vagueness
+## [[andrej-karpathy]]'s Intentional Vagueness
 
-"Karpathy gist: left vague deliberately so builders can customize." The pattern is a starting point, not a specification. Each implementation can adapt the schema, page types, and workflows to the domain.
+"[[andrej-karpathy]] gist: left vague deliberately so builders can customize." The pattern is a starting point, not a specification. Each implementation can adapt the schema, page types, and workflows to the domain.
 
 ## Simplicity Emphasis
 

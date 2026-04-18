@@ -50,6 +50,6 @@ score = floor + (1.0 - floor) × exp(-ln(2) × age_days / half_life_days)
 
 1. **Stale sources are flagged**, not silently included. The context trace records each source's freshness label.
 2. **Expired sources do not auto-support canonical promotion.** They require revalidation (a new confirmed source or Jay's explicit approval) before the item can re-enter the promotion queue.
-3. **Hot cache is exempt.** `wiki/agents/<tier>/<id>/hot.md` is always included regardless of age — it's maintained by the agent, not compiled.
+3. **[[pattern-hot-cache]] is exempt.** `wiki/agents/<tier>/<id>/hot.md` is always included regardless of age — it's maintained by the agent, not compiled.
 4. **Profile is exempt.** `profile.md` is always loaded as identity; freshness does not apply.
 5. **Freshness is recalculated at load time**, not cached. Mtime is checked on every context load.

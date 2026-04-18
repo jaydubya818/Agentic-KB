@@ -141,9 +141,9 @@ Combat this via:
 
 ### Idempotency Relationship
 
-Read-before-write and idempotency are complementary. Idempotency makes retries safe; read-before-write makes writes correct. Both are needed:
+[[pattern-read-before-write]] and idempotency are complementary. Idempotency makes retries safe; [[pattern-read-before-write]] makes writes correct. Both are needed:
 
-| Scenario | Read-Before-Write | Idempotency |
+| Scenario | [[pattern-read-before-write]] | Idempotency |
 |----------|:-:|:-:|
 | Agent retries on error | Not sufficient alone | Required |
 | Agent writes stale content | Required | Not sufficient |

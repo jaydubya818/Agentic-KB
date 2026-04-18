@@ -213,11 +213,11 @@ Track document versions and timestamps. Monitor "index age" per source. See [[sy
 
 ---
 
-## RAG vs LLM Wiki (Karpathy Pattern)
+## RAG vs [[llm-wiki]] ([[andrej-karpathy]] Pattern)
 
 This KB exists partly because RAG has known failure modes. Key comparison:
 
-| Dimension | RAG | LLM Wiki (this KB) |
+| Dimension | RAG | [[llm-wiki]] (this KB) |
 |-----------|-----|---------------------|
 | Knowledge structure | Flat chunks | Interconnected pages with typed links |
 | Update mechanism | Re-embed on change | LLM rewrites/updates page in place |
@@ -227,9 +227,9 @@ This KB exists partly because RAG has known failure modes. Key comparison:
 | Compounding | None — each query starts fresh | Each ingest enriches existing pages |
 | Best for | Large unstructured corpora | Curated, structured, compounding knowledge |
 
-Andrej Karpathy's argument: RAG is broken for *compounding* knowledge because it treats each query as stateless. The LLM wiki pattern builds knowledge that gets better over time. See [[concepts/llm-wiki-pattern]], [[summaries/andrej-karpathy-thinks-rag-is-broken]].
+[[andrej-karpathy]]'s argument: RAG is broken for *compounding* knowledge because it treats each query as stateless. The [[llm-wiki]] pattern builds knowledge that gets better over time. See [[concepts/llm-wiki-pattern]], [[summaries/andrej-karpathy-thinks-rag-is-broken]].
 
-**Verdict for Jay's stack:** use the LLM wiki as the primary knowledge layer; RAG is appropriate when the source corpus is too large to maintain as wiki pages (e.g., large codebases, document repositories).
+**Verdict for Jay's stack:** use the [[llm-wiki]] as the primary knowledge layer; RAG is appropriate when the source corpus is too large to maintain as wiki pages (e.g., large codebases, document repositories).
 
 ---
 
@@ -243,8 +243,8 @@ Andrej Karpathy's argument: RAG is broken for *compounding* knowledge because it
 
 ## When NOT To Use RAG
 
-- When the KB is small enough to load in context directly (the hot cache pattern is faster and more reliable)
-- When knowledge needs to compound and cross-reference (use LLM wiki instead)
+- When the KB is small enough to load in context directly (the [[pattern-hot-cache]] pattern is faster and more reliable)
+- When knowledge needs to compound and cross-reference (use [[llm-wiki]] instead)
 - When you need deterministic, reproducible retrieval (RAG is probabilistic)
 - When you don't have the engineering bandwidth to manage chunking + indexing + freshness properly — a bad RAG system is worse than no RAG
 
@@ -264,7 +264,7 @@ Andrej Karpathy's argument: RAG is broken for *compounding* knowledge because it
 
 - [[concepts/memory-systems]] — RAG as one of four memory approaches (in-context / file-wiki / vector / knowledge graph)
 - [[concepts/context-management]] — Budget allocation between RAG content and other context classes
-- [[concepts/llm-wiki-pattern]] — The LLM wiki as an alternative to RAG for compounding knowledge
+- [[concepts/llm-wiki-pattern]] — The [[llm-wiki]] as an alternative to RAG for compounding knowledge
 - [[concepts/llm-as-judge]] — Using LLMs for re-ranking and citation verification
 - [[concepts/guardrails]] — Prompt injection defense for retrieved content
 - [[concepts/tool-use]] — RAG as a tool in an agentic pipeline
@@ -275,6 +275,6 @@ Andrej Karpathy's argument: RAG is broken for *compounding* knowledge because it
 ## Sources
 
 - [[summaries/siagian-agentic-engineer-roadmap-2026]] — Section 7: RAG Systems
-- [[summaries/andrej-karpathy-thinks-rag-is-broken]] — LLM wiki as RAG alternative
-- [[summaries/summary-nate-herk-llm-wiki]] — Hot cache pattern; token efficiency vs RAG
-- [[summaries/langchain-deepagents-production]] — Scoped memory and RAG in LangGraph production stacks
+- [[summaries/andrej-karpathy-thinks-rag-is-broken]] — [[llm-wiki]] as RAG alternative
+- [[summaries/summary-nate-herk-llm-wiki]] — [[pattern-hot-cache]] pattern; token efficiency vs RAG
+- [[summaries/langchain-deepagents-production]] — Scoped memory and RAG in [[framework-langgraph]] production stacks

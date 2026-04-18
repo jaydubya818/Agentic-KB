@@ -19,7 +19,7 @@ AI researcher and educator. Formerly at [[openai]] (co-founder) and Tesla (Direc
 
 [[andrej-karpathy]] authored the **[[llm-wiki]] Pattern** — a lightweight architecture for LLM-maintained knowledge bases. The pattern has been widely adopted for personal and enterprise knowledge management.
 
-### LLM Wiki Pattern (Gist)
+### [[llm-wiki]] Pattern (Gist)
 
 Published as a GitHub Gist, the pattern defines:
 - A three-layer architecture: Raw Sources → Wiki → Schema

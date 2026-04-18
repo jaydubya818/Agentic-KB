@@ -66,4 +66,4 @@ Transfers tedious maintenance (cross-references, consistency, updates) to LLMs w
 - YouTube channel organization
 
 ## Relevance to This KB
-This KB is a direct implementation of Karpathy's pattern. The vault structure, CLAUDE.md schema, INGEST/QUERY/LINT workflows, and the raw/wiki split all derive from this source.
+This KB is a direct implementation of [[andrej-karpathy]]'s pattern. The vault structure, CLAUDE.md schema, INGEST/QUERY/LINT workflows, and the raw/wiki split all derive from this source.

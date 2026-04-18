@@ -9,13 +9,13 @@ tags: [prompts, slash-commands, claude-code, commands, automation]
 
 # Custom Slash Commands
 
-Jay's `.claude/commands/` library. Slash commands are markdown files in `~/.claude/commands/` invoked via `/command-name` in Claude Code. Simpler than full skills — no SKILL.md overhead.
+Jay's `.claude/commands/` library. Slash commands are markdown files in `~/.claude/commands/` invoked via `/command-name` in [[framework-claude-code]]. Simpler than full skills — no SKILL.md overhead.
 
 ---
 
 ## How Slash Commands Work
 
-Claude Code reads `~/.claude/commands/` on startup. Each `.md` file becomes a `/command-name` invokable from the prompt. The file content is the system instruction for that command.
+[[framework-claude-code]] reads `~/.claude/commands/` on startup. Each `.md` file becomes a `/command-name` invokable from the prompt. The file content is the system instruction for that command.
 
 ```
 ~/.claude/commands/
@@ -185,7 +185,7 @@ Usage: /hermes
 
 1. Create `~/.claude/commands/{command-name}.md`
 2. Write the instruction content — what Claude should do when this command is invoked
-3. Test with `/command-name` in Claude Code
+3. Test with `/command-name` in [[framework-claude-code]]
 4. Document here with usage notes
 
 If a command proves high-value and needs more structure, promote to a full skill in `~/.claude/skills/`.

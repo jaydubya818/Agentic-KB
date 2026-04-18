@@ -31,7 +31,7 @@ A plain folder of markdown files — organized as a wiki with an index, [[patter
 - `index.md` — master catalog, LLM-maintained
 - `log.md` — append-only operation log
 
-### Hot Cache
+### [[pattern-hot-cache]]
 A ~500-character snippet of most-recent or most-used context. Reduces the need to crawl wiki pages on common queries. Especially valuable for executive assistant agents. Agent reads `hot.md` first before touching the broader index.
 
 ### Agent Retrieval Pattern
@@ -39,7 +39,7 @@ Connect an executive assistant agent by pointing its CLAUDE.md at the wiki path.
 
 ### [[llm-wiki]] vs Traditional RAG
 
-| Dimension | LLM Wiki | Traditional RAG |
+| Dimension | [[llm-wiki]] | Traditional RAG |
 |-----------|----------|-----------------|
 | Retrieval | Reads indexes, follows links | Similarity search |
 | Relationships | Explicit links | Implicit proximity |
@@ -62,4 +62,4 @@ Wiki graph approach works well up to hundreds of pages with good indexes. Beyond
 - [[andrej-karpathy]]'s original gist was intentionally vague to let builders customize
 
 ## Relevance to This KB
-This source directly describes the architecture pattern this KB implements. The vault structure, hot cache, CLAUDE.md workflow, and lint cycle are all first-class features of the current setup.
+This source directly describes the architecture pattern this KB implements. The vault structure, [[pattern-hot-cache]], CLAUDE.md workflow, and lint cycle are all first-class features of the current setup.

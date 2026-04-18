@@ -14,16 +14,16 @@ jay_experience: extensive
 
 ## Overview
 
-[[framework-claude-code]] is [[anthropic]]'s official CLI for Claude — an agentic coding assistant that runs in your terminal and operates directly on your filesystem, git repos, and shell. It is not a chat wrapper; it is a fully autonomous coding agent with a rich tool set, spawnable sub-agents, hooks for custom automation, a skills system for slash commands, and a structured memory system. Jay uses Claude Code as his primary development environment and orchestration layer.
+[[framework-claude-code]] is [[anthropic]]'s official CLI for Claude — an agentic coding assistant that runs in your terminal and operates directly on your filesystem, git repos, and shell. It is not a chat wrapper; it is a fully autonomous coding agent with a rich tool set, spawnable sub-agents, hooks for custom automation, a skills system for slash commands, and a structured memory system. Jay uses [[framework-claude-code]] as his primary development environment and orchestration layer.
 
-Unlike IDEs with embedded AI (Copilot, Cursor), Claude Code is a headless agent you control via prompts, permission modes, CLAUDE.md instructions, and hooks — making it fully automatable and composable into larger agentic systems.
+Unlike IDEs with embedded AI (Copilot, Cursor), [[framework-claude-code]] is a headless agent you control via prompts, permission modes, CLAUDE.md instructions, and hooks — making it fully automatable and composable into larger agentic systems.
 
 ---
 
 ## Core Concepts
 
 ### Permission Modes
-Claude Code has five distinct permission modes that determine what it can do without asking:
+[[framework-claude-code]] has five distinct permission modes that determine what it can do without asking:
 
 | Mode | Behavior |
 |------|----------|
@@ -36,7 +36,7 @@ Claude Code has five distinct permission modes that determine what it can do wit
 In `settings.json`, the `permissions.allow` and `permissions.ask` arrays fine-tune what triggers confirmation even in non-bypass modes. Jay's config allows `Edit(*)`, `Write(*)`, `WebFetch`, and all [[mcp-ecosystem]] tools by default, but asks for `git`, `npm`, `rm`, destructive bash, and network tools.
 
 ### Tools
-Claude Code exposes a built-in tool set to the model:
+[[framework-claude-code]] exposes a built-in tool set to the model:
 
 | Tool | Function |
 |------|----------|
@@ -51,12 +51,12 @@ Claude Code exposes a built-in tool set to the model:
 | `WebSearch` | Web search |
 | `ToolSearch` | Discover deferred tools by name/keyword |
 | `NotebookEdit` | Edit Jupyter notebooks |
-| MCP tools | Any tool registered from an MCP server (prefixed `mcp__`) |
+| [[mcp-ecosystem]] tools | Any tool registered from an [[mcp-ecosystem]] server (prefixed `mcp__`) |
 
-The `Agent` tool is the foundation of Claude Code's multi-agent capability. A single instruction can fan out to N parallel sub-agents, each with its own context, tool restrictions, and optional worktree isolation.
+The `Agent` tool is the foundation of [[framework-claude-code]]'s multi-agent capability. A single instruction can fan out to N parallel sub-agents, each with its own context, tool restrictions, and optional worktree isolation.
 
 ### CLAUDE.md — The Instruction Layer
-CLAUDE.md files define the operating instructions for Claude Code at three scopes:
+CLAUDE.md files define the operating instructions for [[framework-claude-code]] at three scopes:
 - **Global**: `~/.claude/CLAUDE.md` — applies to every session
 - **Project-level**: `<repo>/CLAUDE.md` — overrides global, project-specific rules
 - **Rules files**: `~/.claude/rules/*.md` — loaded when working in matching file types (e.g., `api.md` for API route files, `react.md` for `.tsx` files)
@@ -69,14 +69,14 @@ Skills are slash commands that expand to full structured prompts. They live as d
 Skills can be chained, invoked from within sub-agent prompts, and passed as `skill:` parameters to Agent tool calls.
 
 ### Memory System
-Claude Code projects maintain persistent memory at:
+[[framework-claude-code]] projects maintain persistent memory at:
 ```
 ~/.claude/projects/<hashed-project-path>/memory/MEMORY.md
 ```
 This file is auto-injected into sessions for that project directory. It stores decisions, known issues, key architectural notes, and verification commands. The schema encourages sections like `Key Decisions`, `Known Issues`, and `Verification Commands`.
 
 ### Hooks System
-Hooks execute shell commands in response to Claude Code events, enabling custom automation without modifying core behavior. Configured in `~/.claude/settings.json` under the `hooks` key.
+Hooks execute shell commands in response to [[framework-claude-code]] events, enabling custom automation without modifying core behavior. Configured in `~/.claude/settings.json` under the `hooks` key.
 
 **Hook events:**
 - `PreToolUse` — fires before a tool call; can block it (exit 2)
@@ -95,7 +95,7 @@ Jay's active hooks:
 - `stop-validation.sh` — Stop: end-of-session verification gate
 
 ### Agent Tool — Sub-Agent Spawning
-The `Agent` tool is what makes Claude Code a multi-agent framework, not just a single AI assistant:
+The `Agent` tool is what makes [[framework-claude-code]] a multi-agent framework, not just a single AI assistant:
 
 ```
 Agent tool parameters:
@@ -139,7 +139,7 @@ Model (claude-sonnet-4-6 by default)
     └── Skills (slash commands → prompt expansion)
 ```
 
-Session flow: Claude Code reads CLAUDE.md, injects memory, then enters a tool loop. Each tool call may trigger hooks. Sub-agents run as fully independent Claude Code instances with their own tool loops. Results from sub-agents are returned as strings into the orchestrator's context.
+Session flow: [[framework-claude-code]] reads CLAUDE.md, injects memory, then enters a tool loop. Each tool call may trigger hooks. Sub-agents run as fully independent [[framework-claude-code]] instances with their own tool loops. Results from sub-agents are returned as strings into the orchestrator's context.
 
 ---
 
@@ -149,7 +149,7 @@ Session flow: Claude Code reads CLAUDE.md, injects memory, then enters a tool lo
 - **Filesystem-native**: works directly with your actual files and git history; no staging
 - **Composable automation**: hooks + skills + CLAUDE.md = a fully programmable agent runtime
 - **Worktree isolation**: sub-agents can work in sandboxed git worktrees without corrupting main branch
-- **MCP extensibility**: any custom tool set can be wired in as an MCP server
+- **[[mcp-ecosystem]] extensibility**: any custom tool set can be wired in as an [[mcp-ecosystem]] server
 - **Context control**: permission modes let you go from interactive to fully headless
 - **Memory persistence**: MEMORY.md means decisions survive session boundaries
 - **Jay's most-productive tool**: the tight CLI + filesystem integration beats any IDE integration for complex multi-file agentic work
@@ -183,7 +183,7 @@ claude -p "Refactor src/auth.ts to use async/await throughout. Write the file."
 # (Written in the prompt, not as a bash command)
 ```
 
-Example orchestrator prompt that uses the Agent tool fan-out pattern:
+Example orchestrator prompt that uses the Agent tool [[pattern-fan-out-worker]] pattern:
 ```
 You are an orchestrator. Spawn three parallel agents:
 1. Agent: analyze the current test coverage in src/ and report gaps
@@ -220,26 +220,26 @@ Register in `settings.json`:
 
 ## Integration Points
 
-- **[[frameworks/framework-mcp]]**: Register MCP servers in `~/.claude/mcp_servers.json` or project-level config; tools appear prefixed `mcp__<server>__<tool>`
-- **[[frameworks/framework-gsd]]**: GSD skills (`gsd:execute-phase`, etc.) run inside Claude Code; GSD agents are `.md` files in `~/.claude/agents/`
-- **[[frameworks/framework-superpowers]]**: Superpowers skills invoked via `/superpowers:tdd` etc.; iron law enforcement via PreToolUse hooks
-- **[[frameworks/framework-bmad]]**: BMAD skills in `~/.claude/skills/bmad/`; BMAD agents reference Claude Code's Agent tool for sub-agent spawning
-- **[[entities/jay-west-agent-stack]]**: Claude Code is the primary runtime for Jay's full stack
-- **[[entities/anthropic]]**: Claude Code calls the Anthropic API; model selection in `settings.json`
-- **Obsidian**: Claude Code reads/writes the Agentic-KB vault directly; no special integration needed
+- **[[frameworks/framework-mcp]]**: Register [[mcp-ecosystem]] servers in `~/.claude/mcp_servers.json` or project-level config; tools appear prefixed `mcp__<server>__<tool>`
+- **[[frameworks/framework-gsd]]**: GSD skills (`gsd:execute-phase`, etc.) run inside [[framework-claude-code]]; GSD agents are `.md` files in `~/.claude/agents/`
+- **[[frameworks/framework-superpowers]]**: [[framework-superpowers]] skills invoked via `/superpowers:tdd` etc.; iron law enforcement via PreToolUse hooks
+- **[[frameworks/framework-bmad]]**: [[framework-bmad]] skills in `~/.claude/skills/bmad/`; [[framework-bmad]] agents reference [[framework-claude-code]]'s Agent tool for sub-agent spawning
+- **[[entities/jay-west-agent-stack]]**: [[framework-claude-code]] is the primary runtime for Jay's full stack
+- **[[entities/anthropic]]**: [[framework-claude-code]] calls the [[anthropic]] API; model selection in `settings.json`
+- **Obsidian**: [[framework-claude-code]] reads/writes the Agentic-KB vault directly; no special integration needed
 - **Multi-Agent-Observability**: hooks forward all events to Jay's observability stack via `send_event.py`
 
 ---
 
 ## Jay's Experience
 
-Jay uses Claude Code as his primary development environment — not as an assistant but as an autonomous agent runtime. Key patterns he's validated:
+Jay uses [[framework-claude-code]] as his primary development environment — not as an assistant but as an autonomous agent runtime. Key patterns he's validated:
 
-1. **Fan-out for parallelism**: spawning 3-8 parallel sub-agents for independent tasks cuts wall-clock time dramatically for research, analysis, and multi-file changes.
+1. **[[pattern-fan-out-worker]] for parallelism**: spawning 3-8 parallel sub-agents for independent tasks cuts wall-clock time dramatically for research, analysis, and multi-file changes.
 2. **Worktree isolation for risky changes**: when a sub-agent might trash state (DB migrations, auth refactors), `isolation: worktree` prevents main branch corruption.
 3. **Hooks as invariants**: using PreToolUse hooks with exit code 2 to enforce workflow rules (e.g., GSD phase gate) is more reliable than prompt instructions alone.
 4. **Memory.md as session continuity**: explicit MEMORY.md updates at the end of each session eliminate the "re-explain the project" tax.
-5. **`bypassPermissions` for scripted pipelines**: when Claude Code is being orchestrated by another agent, bypass mode prevents confirmation prompts from blocking async flows.
+5. **`bypassPermissions` for scripted pipelines**: when [[framework-claude-code]] is being orchestrated by another agent, bypass mode prevents confirmation prompts from blocking async flows.
 6. **Model tiering in sub-agents**: using `claude-haiku-4-5` for leaf tasks (grep analysis, file reads) and `claude-sonnet-4-6` for orchestration keeps costs controlled.
 
 Known footguns: the 2,000-line read limit, losing work on context auto-compact without a `CHECKPOINT:` marker, and sub-agent results being string-truncated in very large fan-outs.

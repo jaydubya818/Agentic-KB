@@ -24,8 +24,8 @@ This recipe covers two implementation paths:
 
 ## Prerequisites
 
-For Path 1 (Claude Code):
-- Claude Code installed and authenticated
+For Path 1 ([[framework-claude-code]]):
+- [[framework-claude-code]] installed and authenticated
 - A CLAUDE.md with your agent definitions, or use inline prompts
 
 For Path 2 (TypeScript SDK):
@@ -35,7 +35,7 @@ For Path 2 (TypeScript SDK):
 
 ---
 
-## Path 1: Claude Code Agent Tool (Recommended)
+## Path 1: [[framework-claude-code]] Agent Tool (Recommended)
 
 ### Step 1 — Define Specialist Agent System Prompts
 
@@ -102,7 +102,7 @@ NEVER:
 
 ### Step 2 — Write the Orchestrator Prompt
 
-This is the prompt you give to the main Claude Code session (or put in a skill):
+This is the prompt you give to the main [[framework-claude-code]] session (or put in a skill):
 
 ```markdown
 You are an orchestrator managing three specialist agents. Your job is to:
@@ -140,14 +140,14 @@ IMPORTANT: Make all parallel Agent calls in a SINGLE response message. Multiple 
 
 ### Step 3 — Run the Orchestrator
 
-In Claude Code:
+In [[framework-claude-code]]:
 ```
 You are an orchestrator... [paste the orchestrator prompt above]
 
 User task: "Analyze the tradeoffs between LangGraph and raw Claude Code agents for a production multi-agent system. Include current community adoption, technical tradeoffs, and a recommendation for a TypeScript-first team."
 ```
 
-When Claude Code receives this, it should immediately make two Agent tool calls (researcher + analyst) in the same response turn, then once those complete, dispatch the writer.
+When [[framework-claude-code]] receives this, it should immediately make two Agent tool calls (researcher + analyst) in the same response turn, then once those complete, dispatch the writer.
 
 ### Step 4 — Tool Restriction (Important)
 

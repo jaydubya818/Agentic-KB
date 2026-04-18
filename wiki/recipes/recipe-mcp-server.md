@@ -14,12 +14,12 @@ tags: [mcp, tool-use, typescript, claude-code, integration]
 
 ## Goal
 
-Write a TypeScript [[mcp-ecosystem]] server with two tools and register it in [[framework-claude-code]]. After completing this recipe, Claude Code will have access to your custom tools in every session, accessible as `mcp__your-server__tool-name`.
+Write a TypeScript [[mcp-ecosystem]] server with two tools and register it in [[framework-claude-code]]. After completing this recipe, [[framework-claude-code]] will have access to your custom tools in every session, accessible as `mcp__your-server__tool-name`.
 
-This recipe builds a "notes" MCP server with `create_note` and `search_notes` tools — simple enough to follow but realistic enough to extend.
+This recipe builds a "notes" [[mcp-ecosystem]] server with `create_note` and `search_notes` tools — simple enough to follow but realistic enough to extend.
 
 See [[frameworks/framework-mcp]] for protocol architecture.
-See [[entities/mcp-ecosystem]] for examples of production MCP servers.
+See [[entities/mcp-ecosystem]] for examples of production [[mcp-ecosystem]] servers.
 
 ---
 
@@ -270,7 +270,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node dist/in
 ```
 Expected: JSON response with your two tools listed.
 
-### Step 3 — Register in Claude Code
+### Step 3 — Register in [[framework-claude-code]]
 
 Find or create `~/.claude/mcp_servers.json`:
 
@@ -292,7 +292,7 @@ Critical: use the **absolute path** to `dist/index.js`. Relative paths don't wor
 
 ### Step 4 — Verify Registration
 
-Restart Claude Code (or start a new session):
+Restart [[framework-claude-code]] (or start a new session):
 ```bash
 claude
 ```
@@ -302,18 +302,18 @@ In the session, ask:
 What tools do you have available? Do you have any notes tools?
 ```
 
-Claude Code should list `mcp__notes__create_note` and `mcp__notes__search_notes`.
+[[framework-claude-code]] should list `mcp__notes__create_note` and `mcp__notes__search_notes`.
 
 ### Step 5 — Test the Tools
 
-Still in Claude Code:
+Still in [[framework-claude-code]]:
 ```
 Create a note titled "MCP Server Setup" with content: "I successfully built and registered a custom MCP server today. Key steps: build TypeScript, absolute path in mcp_servers.json, restart Claude Code."
 
 Then search my notes for "MCP".
 ```
 
-Expected: Claude Code calls `mcp__notes__create_note`, then calls `mcp__notes__search_notes` and finds the note you just created.
+Expected: [[framework-claude-code]] calls `mcp__notes__create_note`, then calls `mcp__notes__search_notes` and finds the note you just created.
 
 ---
 
@@ -322,7 +322,7 @@ Expected: Claude Code calls `mcp__notes__create_note`, then calls `mcp__notes__s
 - [ ] `npm run build` succeeds with no TypeScript errors
 - [ ] `echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node dist/index.js` returns tool list
 - [ ] `mcp_servers.json` has absolute path and valid JSON
-- [ ] New Claude Code session shows notes tools in tool list
+- [ ] New [[framework-claude-code]] session shows notes tools in tool list
 - [ ] `create_note` creates a file in `NOTES_DIR`
 - [ ] `search_notes` finds a note created with `create_note`
 - [ ] Tool call with invalid args returns a useful error message (not a crash)
@@ -331,16 +331,16 @@ Expected: Claude Code calls `mcp__notes__create_note`, then calls `mcp__notes__s
 
 ## Common Failures & Fixes
 
-### Failure: Claude Code doesn't show the MCP tools
+### Failure: [[framework-claude-code]] doesn't show the [[mcp-ecosystem]] tools
 Causes (in order of likelihood):
 1. **Relative path in mcp_servers.json**: use absolute path — `pwd` in the project directory to get it
 2. **Server crashes on start**: test with the manual echo command; check stderr for errors
 3. **JSON syntax error in mcp_servers.json**: validate with `python3 -m json.tool ~/.claude/mcp_servers.json`
-4. **Didn't restart Claude Code**: tools are only registered at session start
+4. **Didn't restart [[framework-claude-code]]**: tools are only registered at session start
 5. **Wrong module format**: ensure `"type": "module"` in package.json if using ESM imports
 
 ### Failure: Server starts but tool calls fail
-Cause: runtime error in the tool handler. Fix: add try-catch in every tool handler and return `{ content: [{ type: "text", text: "Error: " + message }] }` — don't let exceptions propagate; the MCP host can't handle them gracefully.
+Cause: runtime error in the tool handler. Fix: add try-catch in every tool handler and return `{ content: [{ type: "text", text: "Error: " + message }] }` — don't let exceptions propagate; the [[mcp-ecosystem]] host can't handle them gracefully.
 
 ### Failure: `NOTES_DIR` contains spaces and path breaks
 Fix: quote the path properly in `mcp_servers.json`:
@@ -355,14 +355,14 @@ Fix: quote the path properly in `mcp_servers.json`:
 1. **Add `list_notes` tool**: return all note titles and dates sorted by creation time
 2. **Add `update_note` tool**: append to an existing note rather than creating a new one
 3. **Add full-text search with ranking**: score matches by frequency and title match
-4. **Add a `resources` section**: expose notes as MCP resources (readable by URI) in addition to tools
+4. **Add a `resources` section**: expose notes as [[mcp-ecosystem]] resources (readable by URI) in addition to tools
 5. **Publish to npm**: add a bin script and `npx my-notes-server` as the command — zero-install for teammates
 
 ---
 
 ## Related Recipes
 
-- [[recipes/recipe-llm-wiki-setup]] — use MCP to expose your wiki as tools
-- [[recipes/recipe-build-tool-agent]] — consume MCP tools from a custom agent
+- [[recipes/recipe-llm-wiki-setup]] — use [[mcp-ecosystem]] to expose your wiki as tools
+- [[recipes/recipe-build-tool-agent]] — consume [[mcp-ecosystem]] tools from a custom agent
 - [[frameworks/framework-mcp]] — protocol architecture reference
 - [[entities/mcp-ecosystem]] — existing servers you can use today

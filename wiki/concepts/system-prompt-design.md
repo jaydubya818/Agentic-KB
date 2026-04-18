@@ -183,6 +183,6 @@ Treat system prompts as code:
 
 ## Sources
 
-- Anthropic System Prompts best practices (2025)
+- [[anthropic]] System Prompts best practices (2025)
 - Schulhoff et al. "The Prompt Report: A Systematic Survey of Prompting Techniques" (2024)
 - [[openai]] GPT-4 technical report system prompt guidelines

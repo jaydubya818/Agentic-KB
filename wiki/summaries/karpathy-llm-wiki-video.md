@@ -67,7 +67,7 @@ RAG-based workflows discard knowledge after every query — nothing accumulates.
 - Due diligence
 
 ## Live Demo Details
-- Model: Claude opus 4.6 via Claude Code
+- Model: Claude opus 4.6 via [[framework-claude-code]]
 - Domain: Trading strategies
 - Pages created: market structure concepts, strategy pages, psychology pages, prop firm entity pages
 - Ingested 8 raw transcripts using **parallel agents** in a single pass

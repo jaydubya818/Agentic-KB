@@ -13,7 +13,7 @@ updated: 2026-04-09
 
 ## Executive Summary
 
-Agentic-Pi-Harness is a Claude Code harness optimized for running agentic AI systems on Raspberry Pi edge hardware. It adapts orchestration patterns from Agentic-KB for resource-constrained environments, implements streaming and efficient memory management for local inference, and provides deployment infrastructure for privacy-sensitive, latency-critical, or offline-capable agent networks.
+Agentic-Pi-Harness is a [[framework-claude-code]] harness optimized for running agentic AI systems on Raspberry Pi edge hardware. It adapts orchestration patterns from Agentic-KB for resource-constrained environments, implements streaming and efficient memory management for local inference, and provides deployment infrastructure for privacy-sensitive, latency-critical, or offline-capable agent networks.
 
 The system targets two primary use cases:
 1. **Edge deployment** — Agents running locally with cloud fallback (privacy, latency)
@@ -41,7 +41,7 @@ The system targets two primary use cases:
 ## Core Features
 
 ### 1. Pattern Adaptation
-- Supervisor-worker orchestration (adapted for local execution)
+- [[pattern-supervisor-worker]] orchestration (adapted for local execution)
 - Streaming token generation (avoid loading full responses in memory)
 - Local queuing (buffer actions during network disconnection)
 - Context window management (smaller window sizes fit Pi RAM)
@@ -97,7 +97,7 @@ The system targets two primary use cases:
 
 ## Success Criteria
 
-1. **Patterns work on Pi** — Supervisor-worker, streaming, tool use all functional
+1. **Patterns work on Pi** — [[pattern-supervisor-worker]], streaming, tool use all functional
 2. **Latency acceptable** — Token generation <100ms for common models
 3. **Memory fits** — Baseline <1.0GB, inference within Pi RAM limits
 4. **Network resilient** — Queue local actions, sync when reconnected

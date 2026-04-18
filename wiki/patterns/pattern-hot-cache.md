@@ -175,7 +175,7 @@ Never evict:
 - Multi-session projects where context re-loading is a recurring cost
 - Multi-agent workflows where multiple agents need the same base context
 - Projects with stable architecture documentation that's referenced constantly
-- When prompt caching is already in use — the hot cache complements it
+- When prompt caching is already in use — the [[pattern-hot-cache]] complements it
 
 ## When NOT To Use
 

@@ -12,11 +12,11 @@ related: [framework-mcp.md, llm-owned-wiki.md, concepts/tool-use.md]
 
 # [[mcp-ecosystem]] Ecosystem
 
-The [[mcp-ecosystem]] (MCP) ecosystem encompasses the servers, clients, and tooling that expose structured capabilities to LLM agents via JSON-RPC.
+The [[mcp-ecosystem]] ([[mcp-ecosystem]]) ecosystem encompasses the servers, clients, and tooling that expose structured capabilities to LLM agents via JSON-RPC.
 
-## [[oh-my-mermaid]] MCP Server
+## [[oh-my-mermaid]] [[mcp-ecosystem]] Server
 
-The `oh-my-mermaid` project includes an MCP server at `mcp/server.js` that exposes **7 tools** so Claude (or any MCP-compatible client) can directly interact with the knowledge base:
+The `oh-my-mermaid` project includes an [[mcp-ecosystem]] server at `mcp/server.js` that exposes **7 tools** so Claude (or any [[mcp-ecosystem]]-compatible client) can directly interact with the knowledge base:
 
 | Tool | Description |
 |---|---|
@@ -28,7 +28,7 @@ The `oh-my-mermaid` project includes an MCP server at `mcp/server.js` that expos
 | `compile_wiki` | Trigger compilation of raw docs into wiki pages |
 | `lint_wiki` | Lint wiki pages for schema compliance |
 
-Each tool is a **thin wrapper** over the corresponding `/api/` route — no logic lives in the MCP layer itself.
+Each tool is a **thin wrapper** over the corresponding `/api/` route — no logic lives in the [[mcp-ecosystem]] layer itself.
 
 ### Architecture
 
@@ -48,7 +48,7 @@ flowchart LR
 
 ### Design Principle
 
-The MCP server acts purely as a protocol translation layer — JSON-RPC in, HTTP API calls out. This keeps the surface area small and ensures all business logic stays in the API layer, making the server easy to maintain and test independently.
+The [[mcp-ecosystem]] server acts purely as a protocol translation layer — JSON-RPC in, HTTP API calls out. This keeps the surface area small and ensures all business logic stays in the API layer, making the server easy to maintain and test independently.
 
 ## See Also
 

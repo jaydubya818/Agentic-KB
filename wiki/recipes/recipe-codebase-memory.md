@@ -14,7 +14,7 @@ tags: [memory, context-management, claude-code, pattern-llm-wiki, prompt-enginee
 
 ## Goal
 
-Wire your Agentic KB into a coding project so Claude has persistent memory of your codebase's components, architecture decisions, API contracts, and rejected patterns — across every session. Without this, every new Claude Code session starts blind: it re-discovers your component library, asks about design decisions you've already settled, and occasionally re-proposes approaches you already rejected.
+Wire your Agentic KB into a coding project so Claude has persistent memory of your codebase's components, architecture decisions, API contracts, and rejected patterns — across every session. Without this, every new [[framework-claude-code]] session starts blind: it re-discovers your component library, asks about design decisions you've already settled, and occasionally re-proposes approaches you already rejected.
 
 This recipe extends the [[concepts/llm-wiki-pattern]] into coding-project territory. The wiki becomes your project's living documentation layer — written by Claude, read by Claude, compounding over time.
 
@@ -22,8 +22,8 @@ This recipe extends the [[concepts/llm-wiki-pattern]] into coding-project territ
 
 ## Prerequisites
 
-- Agentic KB running (web server at `localhost:3002` and/or MCP server connected)
-- A codebase you're actively working in with Claude Code
+- Agentic KB running (web server at `localhost:3002` and/or [[mcp-ecosystem]] server connected)
+- A codebase you're actively working in with [[framework-claude-code]]
 - `CLAUDE.md` in your project root (or willing to create one)
 
 ---
@@ -184,7 +184,7 @@ After completing: update the KB with any new components, decisions, or gotchas d
 Task: {your actual request}
 ```
 
-You can bake this into a Claude Code slash command or a `CLAUDE.md` instruction so it runs automatically.
+You can bake this into a [[framework-claude-code]] slash command or a `CLAUDE.md` instruction so it runs automatically.
 
 ### Step 6 — Export Sessions Periodically
 
@@ -194,7 +194,7 @@ After any session where significant decisions were made, export the conversation
 
 ## Verification
 
-After setup, test with a fresh Claude Code session (no prior context):
+After setup, test with a fresh [[framework-claude-code]] session (no prior context):
 
 1. Ask: *"What UI components do we have for displaying tabular data?"* — Claude should cite the KB's component pages, not guess.
 2. Ask: *"Should I use Redux for this new feature?"* — Claude should reference ADR-001 and recommend Zustand without you having to explain it.
@@ -207,10 +207,10 @@ If Claude answers from KB citations rather than general knowledge, the loop is w
 ## Common Failures & Fixes
 
 ### Failure: Claude ignores the KB and answers from general knowledge
-Cause: The `CLAUDE.md` instruction is too weak or the MCP server isn't connected. Fix: Make the instruction more explicit — "You MUST search the KB before answering any question about this codebase" — and verify `search_wiki` is available as an MCP tool.
+Cause: The `CLAUDE.md` instruction is too weak or the [[mcp-ecosystem]] server isn't connected. Fix: Make the instruction more explicit — "You MUST search the KB before answering any question about this codebase" — and verify `search_wiki` is available as an [[mcp-ecosystem]] tool.
 
 ### Failure: KB pages get out of sync with actual code
-Cause: The "update after" step gets skipped when you're moving fast. Fix: Add it to your git pre-commit hook or a Claude Code post-task hook — run `kb lint` after any session to surface stale pages flagged by `updated` date drift vs. file modification dates.
+Cause: The "update after" step gets skipped when you're moving fast. Fix: Add it to your git pre-commit hook or a [[framework-claude-code]] post-task hook — run `kb lint` after any session to surface stale pages flagged by `updated` date drift vs. file modification dates.
 
 ### Failure: Component pages are too verbose and blow the context budget
 Cause: Claude writes everything it knows about a component. Fix: Add to your `wiki/schema.md` a max-length rule for component pages (e.g., "component pages must not exceed 300 words; prefer tables over prose").
@@ -230,5 +230,5 @@ Cause: Claude writes everything it knows about a component. Fix: Add to your `wi
 
 - [[recipes/recipe-llm-wiki-setup]] — foundational setup this recipe extends
 - [[recipes/recipe-claude-code-hooks]] — automate the "update after" step via hooks
-- [[recipes/recipe-mcp-server]] — how the KB MCP server exposes wiki data to Claude Code
+- [[recipes/recipe-mcp-server]] — how the KB [[mcp-ecosystem]] server exposes wiki data to [[framework-claude-code]]
 - [[patterns/pattern-hot-cache]] — keep your most-referenced component pages in `wiki/hot.md` for zero-latency retrieval

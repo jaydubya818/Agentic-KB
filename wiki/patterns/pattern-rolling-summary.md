@@ -209,7 +209,7 @@ Each level is less detailed but longer-lived. The project summary persists acros
 - [[patterns/pattern-hot-cache]] — pre-loading stable context (avoids initial bloat)
 - [[patterns/pattern-external-memory]] — writing summaries to files for cross-session persistence
 - [[concepts/context-management]] — the full context management toolkit
-- [[concepts/memory-systems]] — rolling summary implements episodic memory compression
+- [[concepts/memory-systems]] — [[pattern-rolling-summary]] implements episodic memory compression
 
 ---
 

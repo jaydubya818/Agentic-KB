@@ -13,7 +13,7 @@ Instructions for agents operating on the Agentic-KB repository.
 
 ## Purpose
 
-This KB is the authoritative source of knowledge on agentic AI systems. It serves Jay West's personal learning, project decision-making, and is exposed via CLI, web UI, and MCP server for use by other agents in the ecosystem (Pi, MissionControl, LLMwiki).
+This KB is the authoritative source of knowledge on agentic AI systems. It serves Jay West's personal learning, project decision-making, and is exposed via CLI, web UI, and [[mcp-ecosystem]] server for use by other agents in the ecosystem (Pi, MissionControl, LLMwiki).
 
 ## Owned Workflows
 
@@ -33,7 +33,7 @@ When given new raw source material (papers, transcripts, code examples, framewor
 ### QUERY
 When asked a question about agentic engineering:
 
-1. **Read hot cache** first (`wiki/hot.md` — 500 words of frequently-used patterns)
+1. **Read [[pattern-hot-cache]]** first (`wiki/hot.md` — 500 words of frequently-used patterns)
 2. **Scan index** (`wiki/index.md`) for relevant pages
 3. **Read relevant pages** (concepts, patterns, frameworks)
 4. **Synthesize** answer with citations: `[concept name](../concepts/page-name.md)`
@@ -52,7 +52,7 @@ Monthly health check. Run if asked or if wiki grows >20 pages since last lint:
 2. **Generate report**: Output to `wiki/syntheses/lint-{YYYY-MM-DD}.md`
 3. **Suggest improvements**: Gap candidates, new article ideas, priority fixes
 
-### HOT CACHE
+### [[pattern-hot-cache]]
 When a pattern is queried 3+ times/week or links received 10+ inbound links:
 
 1. **Summarize** the pattern in ≤100 words
@@ -156,10 +156,10 @@ tags: []
 ### CLI Query
 Jay runs: `cd /Users/jaywest/My\ LLM\ Wiki && npm run query "your question"`
 
-This hits the KB via the harness MCP server. Agents can do the same.
+This hits the KB via the harness [[mcp-ecosystem]] server. Agents can do the same.
 
-### MCP Server
-The KB is exposed as an MCP server for:
+### [[mcp-ecosystem]] Server
+The KB is exposed as an [[mcp-ecosystem]] server for:
 - [[mission-control/home|MissionControl]] agents requesting orchestration patterns
 - [[llmwiki/home|LLMwiki]] for CLI/web queries
 - [[agentic-pi-harness/home|Pi harness]] agents for edge deployment patterns
@@ -199,6 +199,6 @@ Jay's main vault at `/Users/jaywest/Documents/Obsidian Vault/` is separate. Don'
 
 ## Key Contacts & Escalation
 
-- **Safety patterns**: Claude Code safety team (pending review of draft synthesis)
+- **Safety patterns**: [[framework-claude-code]] safety team (pending review of draft synthesis)
 - **Framework updates**: Subscribe to vendor release notes; escalate if breaking changes
 - **Recipe testing**: Coordinate with Jay's active projects (Mission Control, Pi harness)

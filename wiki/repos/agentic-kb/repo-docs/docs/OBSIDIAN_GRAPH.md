@@ -112,7 +112,7 @@ enough to create a navigable entry point without visual noise.
 ### Entity map rules
 
 - Canonical names must be distinctive; avoid generic English
-- Short acronyms (MCP, BMAD, CoT) → `case_sensitive: true`
+- Short acronyms ([[mcp-ecosystem]], [[framework-bmad]], [[chain-of-thought]]) → `case_sensitive: true`
 - Review `reports/autolink-*.md` before every write run
 - `raw/webhooks/`, `.obsidian/`, `assets/`, `node_modules/` are skipped
 

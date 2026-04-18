@@ -287,7 +287,7 @@ When told to ingest a file from raw/:
 4. Update or create relevant concept/pattern/framework pages — integrate new info into existing knowledge
 5. Flag contradictions with existing wiki content — add contradiction note inline AND to log.md
 6. Cross-link everything bidirectionally — new page links out, existing pages get backlinks
-7. **Auto-wire canonical entities**: run `python scripts/autolink.py --vault . --entity-map scripts/entity-map.json --write` to insert `[[canonical]]` wikilinks for every known entity, framework, person, and model referenced in plain text. The script protects frontmatter, code fences, and existing wikilinks. This is the GBrain-style self-wiring pass — do NOT hand-link what the autolinker already handles.
+7. **Auto-wire canonical entities**: run `python scripts/autolink.py --vault . --entity-map scripts/entity-map.json --folder wiki --write` to insert `[[canonical]]` wikilinks for every known entity, framework, person, and model referenced in plain text. The `--folder wiki` scope keeps the sweep out of root docs, `raw/`, and `.claude/`; the script also protects frontmatter, code fences, and existing wikilinks. This is the GBrain-style self-wiring pass — do NOT hand-link what the autolinker already handles.
 8. Update `wiki/index.md` with new/updated entries
 9. Append to `wiki/log.md` with timestamp, source name, pages created/updated, contradictions found
 10. Append new pages to `wiki/recently-added.md` under today's date heading — format: `- [[path/to/page|Title]] — one-line description`

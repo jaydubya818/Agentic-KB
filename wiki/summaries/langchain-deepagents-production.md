@@ -43,7 +43,7 @@ Three concerns: identity verification, access control, credential management.
 - **Sandbox auth proxy** — injects credentials into outbound requests; sandbox code never holds raw keys
 
 ## Durability
-LangGraph checkpoints at every step. Interrupted runs resume from last state. Enables indefinite interrupts, time travel/rewinding, and safe handling of sensitive operations.
+[[framework-langgraph]] checkpoints at every step. Interrupted runs resume from last state. Enables indefinite interrupts, time travel/rewinding, and safe handling of sensitive operations.
 
 ## Memory Scoping
 

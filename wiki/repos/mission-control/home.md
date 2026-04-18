@@ -16,10 +16,10 @@ MissionControl is a multi-agent orchestration and mission planning interface. It
 
 ## Current Status
 
-- **Supervisor agents**: Implemented supervisor-worker pattern for task distribution
+- **Supervisor agents**: Implemented [[pattern-supervisor-worker]] pattern for task distribution
 - **Fleet management**: Tracks 5+ Pi devices, load balancing by resource availability
 - **Dashboard**: Real-time agent health, task queue, latency metrics
-- **Integration**: MCP server for pattern queries; bidirectional with Pi harness
+- **Integration**: [[mcp-ecosystem]] server for pattern queries; bidirectional with Pi harness
 
 ## Canonical Docs
 
@@ -32,7 +32,7 @@ MissionControl is a multi-agent orchestration and mission planning interface. It
 
 ## Recent Tasks
 
-1. **Supervisor-worker pattern validation** (2026-04-08): Tested task distribution across Pi fleet
+1. **[[pattern-supervisor-worker]] pattern validation** (2026-04-08): Tested task distribution across Pi fleet
 2. **Health monitoring** (2026-04-07): Added periodic health checks for all connected agents
 3. **Dashboard updates** (2026-04-06): Real-time metrics display (latency, queue depth, success rate)
 4. **Load balancing** (2026-04-05): Implemented round-robin task assignment with capacity awareness

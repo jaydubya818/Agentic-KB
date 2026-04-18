@@ -8,5 +8,5 @@ owner: planning-agent
 # Implementation Plan
 1. Build runtime module
 2. Seed contracts
-3. Wire CLI + MCP
+3. Wire CLI + [[mcp-ecosystem]]
 4. Test end-to-end

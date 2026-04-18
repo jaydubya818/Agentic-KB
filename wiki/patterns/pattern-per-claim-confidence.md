@@ -33,7 +33,7 @@ Page-level confidence scoring assigns a single trust score to all content on a p
 
 The LLM query pipeline treats all claims on a `confidence: high` page equally — leading to over-trust of weak claims embedded in otherwise strong pages.
 
-The v2 extension of LLM Wiki identified this as a key gap: "every **fact** carries a score" rather than every *page*.
+The v2 extension of [[llm-wiki]] identified this as a key gap: "every **fact** carries a score" rather than every *page*.
 
 ## Solution
 Annotate individual claims in a page frontmatter with a `claims` array. Each entry has:

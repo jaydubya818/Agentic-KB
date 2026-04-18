@@ -38,11 +38,11 @@ updated: 2026-04-09
 
 **URL**: `http://localhost:3000/llmwiki`
 
-## MCP Server
+## [[mcp-ecosystem]] Server
 
-- **Framework**: Claude MCP SDK
+- **Framework**: Claude [[mcp-ecosystem]] SDK
 - **Port**: 9001
-- **Protocol**: Model Context Protocol (JSON-RPC)
+- **Protocol**: [[mcp-ecosystem]] (JSON-RPC)
 - **Tools**: query_kb, list_topics, get_related
 
 **Location**: `/Users/jaywest/My\ LLM\ Wiki/packages/mcp`
@@ -56,7 +56,7 @@ updated: 2026-04-09
 | pattern-supervisor-worker | Supervisor-Worker | pattern | orchestration, multi-agent | high | stable |
 ```
 
-### Hot Cache (wiki/hot.md)
+### [[pattern-hot-cache]] (wiki/hot.md)
 ```markdown
 ## Most Accessed Patterns (480 / 600 words)
 
@@ -84,7 +84,7 @@ updated: 2026-04-09
 | CLI query (cached) | <100ms | 50–100ms ✓ |
 | CLI query (full wiki) | <2s | 800ms–1.5s ✓ |
 | Web page load | <300ms | 200–400ms |
-| MCP query | <100ms | 50–80ms ✓ |
+| [[mcp-ecosystem]] query | <100ms | 50–80ms ✓ |
 | Index rebuild | <30s | ~20s ✓ |
 
 ## Scaling
@@ -99,7 +99,7 @@ updated: 2026-04-09
 
 - CLI: Installed locally via npm, runs in user shell
 - Web: Docker container or direct Node.js process
-- MCP: Standalone process, connected to Claude Code
+- [[mcp-ecosystem]]: Standalone process, connected to [[framework-claude-code]]
 
 ## Dependencies
 
@@ -137,4 +137,4 @@ Future (full-text search):
 
 - No authentication (local use)
 - File access restricted to wiki/ directory
-- MCP server on localhost:9001 only (no public exposure)
+- [[mcp-ecosystem]] server on localhost:9001 only (no public exposure)

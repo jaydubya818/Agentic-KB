@@ -84,7 +84,7 @@ tags: [daily]
 
 **Templater setup:** Wire this template to the `D` hotkey in Templater. Set Periodic Notes to auto-create with this template on vault open.
 
-**Session granularity:** One session block per distinct Claude session or work context switch. If you opened Claude Code 3 times today, 3 session blocks.
+**Session granularity:** One session block per distinct Claude session or work context switch. If you opened [[framework-claude-code]] 3 times today, 3 session blocks.
 
 **Decision log discipline:** Every significant decision (architecture choice, priority change, skip/defer on a task) gets a row. The decision log is searchable and becomes the audit trail for "why did we do X."
 

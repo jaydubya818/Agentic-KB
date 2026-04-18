@@ -53,7 +53,7 @@ The superpowers version adds a dimension the simple reviewer lacks: does the imp
 
 When significant deviations are found, it asks the coding agent to review and confirm — it doesn't unilaterally reject.
 
-### Communication Protocol (Superpowers)
+### Communication Protocol ([[framework-superpowers]])
 
 The superpowers reviewer has an explicit protocol for different failure types:
 - Implementation problems → direct guidance on fixes

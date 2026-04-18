@@ -59,11 +59,11 @@ The Recursive Layered Memory (RLM) Pipeline is a staged retrieval architecture f
 | 9 | Token-budget packing | Pack highest-score pages up to `MAX_CONTEXT_CHARS = 24,000` |
 | 10 | LLM synthesis | Claude with citations; optional validator model |
 
-Stages 4–9 are live in Agentic-KB as of April 2026. **Stages 1–3 are P1 targets** (promoted from P2 following LLM Wiki v2 validation — see [[summaries/summary-llm-wiki-v2]]). See implementation plan below.
+Stages 4–9 are live in Agentic-KB as of April 2026. **Stages 1–3 are P1 targets** (promoted from P2 following [[llm-wiki]] v2 validation — see [[summaries/summary-llm-wiki-v2]]). See implementation plan below.
 
 ## Stages 1–3 Implementation Plan (P1)
 
-Validated by LLM Wiki v2 as the core of hybrid search. Full implementation spec in [[recipes/recipe-hybrid-search-llm-wiki]].
+Validated by [[llm-wiki]] v2 as the core of hybrid search. Full implementation spec in [[recipes/recipe-hybrid-search-llm-wiki]].
 
 ### Stage 1 — Query Normalization
 - **Intent detection:** classify query as `lookup | synthesis | comparison | gap-find`

@@ -48,7 +48,7 @@ User searches "context window":
   4. Show related pages in sidebar
 ```
 
-## MCP Server Flow
+## [[mcp-ecosystem]] Server Flow
 
 ```
 Agent asks MissionControl:

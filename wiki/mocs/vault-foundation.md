@@ -15,10 +15,10 @@ The structural bedrock of the Agentic-KB. Covers folder architecture, note organ
 
 ## Folder Structure
 
-This vault uses a hybrid PARA/Zettelkasten model adapted for agentic engineering:
+This vault uses a hybrid PARA/[[llm-wiki-pattern]] model adapted for agentic engineering:
 
 - **PARA layer** — Projects, Areas, Resources, Archive maps cleanly to `projects/`, `wiki/personal/`, `wiki/concepts|patterns|frameworks/`, and `raw/` respectively.
-- **Zettelkasten layer** — Atomic concept and pattern pages in `wiki/concepts/` and `wiki/patterns/` function as permanent notes with bidirectional links. Summaries in `wiki/summaries/` are literature notes. Syntheses in `wiki/syntheses/` are synthesis notes.
+- **[[llm-wiki-pattern]] layer** — Atomic concept and pattern pages in `wiki/concepts/` and `wiki/patterns/` function as permanent notes with bidirectional links. Summaries in `wiki/summaries/` are literature notes. Syntheses in `wiki/syntheses/` are synthesis notes.
 - **LLM-owned layer** — `wiki/` is agent-maintained. `raw/` is human-curated and immutable. The split enforces provenance hygiene.
 
 Key directories:
@@ -44,12 +44,12 @@ Key directories:
 
 Every domain has a Map of Content — a hub page that provides structured navigation and context. Current MoCs:
 
-- [[mocs/orchestration|Orchestration]] — Multi-agent, frameworks, fan-out patterns
-- [[mocs/memory|Memory]] — Memory systems, RLM pipeline, hot cache
-- [[mocs/tool-use|Tool Use]] — MCP, permissions, tool design
-- [[mocs/evaluation|Evaluation]] — LLM-as-judge, trajectory eval, benchmarks
+- [[mocs/orchestration|Orchestration]] — Multi-agent, frameworks, [[pattern-fan-out-worker]] patterns
+- [[mocs/memory|Memory]] — Memory systems, RLM pipeline, [[pattern-hot-cache]]
+- [[mocs/tool-use|Tool Use]] — [[mcp-ecosystem]], permissions, tool design
+- [[mocs/evaluation|Evaluation]] — [[llm-as-judge]], trajectory eval, benchmarks
 - [[mocs/vault-foundation|Vault Foundation]] ← you are here
-- [[mocs/claude-integration|Claude Integration]] — Hermes, CLAUDE.md, MCP tools, session memory
+- [[mocs/claude-integration|Claude Integration]] — Hermes, CLAUDE.md, [[mcp-ecosystem]] tools, session memory
 - [[mocs/core-plugins|Core Plugins]] — Obsidian plugin stack for the KB
 - [[mocs/knowledge-workflows|Knowledge Workflows]] — Capture, process, connect, research
 - [[mocs/automation|Automation]] — Skills, hooks, auto-tagging, maintenance
@@ -102,7 +102,7 @@ Raw source files (PDFs, audio transcripts) land in `raw/` subdirectories:
 - `raw/my-agents/` — Jay's `~/.claude/agents/*.md` definitions
 - `raw/my-skills/` — Jay's `~/.claude/skills/*/SKILL.md` files
 - `raw/my-hooks/` — Hook configurations
-- `raw/conversations/` — Notable exported Claude Code sessions
+- `raw/conversations/` — Notable exported [[framework-claude-code]] sessions
 
 **Rule:** `raw/` is immutable. LLMs read it, never write it. All processed output goes to `wiki/`.
 

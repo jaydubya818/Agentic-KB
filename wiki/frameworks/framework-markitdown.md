@@ -68,7 +68,7 @@ Optional Azure Document Intelligence integration (`-d -e <endpoint>`) for higher
 - **Zero format-specific code** — one API handles everything; add new formats via plugins
 - **Semantic structure preserved** — headings, lists, tables, links survive conversion; not just raw text dump
 - **Audio + YouTube native** — transcription built in; complements `kb ingest-youtube` (which uses yt-dlp + SRT) with a simpler interface
-- **LLM image description** — pass any OpenAI-compatible client to get AI-generated image descriptions inline in the output Markdown
+- **LLM image description** — pass any [[openai]]-compatible client to get AI-generated image descriptions inline in the output Markdown
 - **Stream-based** — no temp files, composable in-memory; suitable for webhook ingest pipelines
 
 ---
@@ -76,7 +76,7 @@ Optional Azure Document Intelligence integration (`-d -e <endpoint>`) for higher
 ## Weaknesses
 
 - **Not for high-fidelity rendering** — explicitly designed for LLM consumption, not document reproduction. Complex layouts (multi-column PDFs, merged Excel cells) may degrade.
-- **Python 3.10+ required** — can't be called directly from Node.js CLI/MCP without a subprocess or separate service
+- **Python 3.10+ required** — can't be called directly from Node.js CLI/[[mcp-ecosystem]] without a subprocess or separate service
 - **LLM image description adds latency + cost** — optional, but worth noting for bulk ingest
 - **Plugin ecosystem small** — `--use-plugins` flag needed; not many plugins yet as of early 2026
 
@@ -133,7 +133,7 @@ markitdown "$1" > "raw/$(basename $1 .pdf).md" && kb compile
 
 **YouTube**: Overlaps with existing `kb ingest-youtube` (yt-dlp + SRT). markitdown's YouTube support is simpler (one line) but produces less granular output than SRT timestamp parsing. Use markitdown for quick ingest; keep yt-dlp for transcript-annotated ingest.
 
-**MCP**: An MCP wrapper around markitdown would let agents convert files in-context during agentic sessions without shelling out. The `DocumentConverter` stream interface is suitable for wrapping as a `convert_file` MCP tool.
+**[[mcp-ecosystem]]**: An [[mcp-ecosystem]] wrapper around markitdown would let agents convert files in-context during agentic sessions without shelling out. The `DocumentConverter` stream interface is suitable for wrapping as a `convert_file` [[mcp-ecosystem]] tool.
 
 ---
 

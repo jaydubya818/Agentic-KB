@@ -59,7 +59,7 @@ This file should be updated weekly, not continuously. It is a decision tool, not
 - **Priority type:** Execution infrastructure
 
 ### 3) Compounding Systems Investment
-- **Objective:** Build the local research engine using Claude Code + Obsidian + skill graph + provenance-aware knowledge structure
+- **Objective:** Build the local research engine using [[framework-claude-code]] + Obsidian + skill graph + provenance-aware knowledge structure
 - **Domain / Repo:** Agentic-KB / research-engine / knowledge systems
 - **Why now:** this compounds across every domain by improving research, synthesis, decision support, and reusable intelligence
 - **Success this month looks like:**
@@ -169,13 +169,13 @@ If any of these become inaccurate, update this file.
 | Domain | Priority | Status |
 |--------|----------|--------|
 | SellerFi | High | Active — fintech, primary business |
-| Agentic-KB / LLM Wiki | High | Active — this system |
+| Agentic-KB / [[llm-wiki]] | High | Active — this system |
 | MissionControl / Hermes harness | High | Active — agent infrastructure |
 | Twinz / LifeOS | Medium | Active — personal systems |
 | AI_CEO / Agentic-Pi-Harness | Medium | Active — digital workforce |
 | comicogs / collector-media | Medium | Active |
 | AssuranceAgents | Low-Medium | Experimental |
-| OpenClaw-related systems | Medium | Active |
+| [[framework-openclaw]]-related systems | Medium | Active |
 
 ---
 
@@ -183,8 +183,8 @@ If any of these become inaccurate, update this file.
 
 - **34 agents** across orchestrator / lead / worker tiers
 - **29+ skills** in `~/.claude/skills/`
-- **Primary frameworks**: GSD (TypeScript, extensive), Superpowers (TypeScript, extensive), BMAD (extensive)
-- **Runtimes**: Claude Code (primary), Cowork (secondary)
+- **Primary frameworks**: GSD (TypeScript, extensive), [[framework-superpowers]] (TypeScript, extensive), [[framework-bmad]] (extensive)
+- **Runtimes**: [[framework-claude-code]] (primary), Cowork (secondary)
 - **KB**: `/Users/jaywest/Agentic-KB/` — markdown wiki, GitHub: jaydubya818/Agentic-KB
 - **Agent definitions**: `~/.claude/agents/`
 - **Main Obsidian vault**: `/Users/jaywest/Documents/Obsidian Vault/`
@@ -198,7 +198,7 @@ If any of these become inaccurate, update this file.
 - **SellerFi product questions** → Product Strategy first, then Engineering
 - **"What should I work on"** → Founder Ops, check this file's Priority Stack first
 - **Agent system design** → Orchestration Architecture, reference `wiki/evaluations/eval-orchestration-frameworks.md`
-- **Multi-agent implementation** → GSD or Raw Claude Code (eval verdict), not LangGraph unless Python is required
+- **Multi-agent implementation** → GSD or Raw [[framework-claude-code]] (eval verdict), not [[framework-langgraph]] unless Python is required
 
 ---
 

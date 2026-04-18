@@ -17,7 +17,7 @@ confidence: high
 Wikiwise's 6 skill files encode battle-tested operational patterns for LLM-maintained wikis: stream large documents to disk (never into context), batch sources before ingesting, dispatch parallel subagents per source, and cross-link aggressively to prevent orphans.
 
 ## Source
-Wikiwise is a native Mac app by TristanH for building and maintaining Karpathy-style LLM wikis. The skill library ships with the app scaffold and covers the core wiki maintenance workflows.
+Wikiwise is a native Mac app by TristanH for building and maintaining [[andrej-karpathy]]-style LLM wikis. The skill library ships with the app scaffold and covers the core wiki maintenance workflows.
 
 ## Key Patterns Extracted
 
@@ -29,7 +29,7 @@ readwise reader-get-document-details --document-id <id> | jq -r '.content' > raw
 This is the single most important operational rule in the library. Violating it causes context blowout on any document >10k tokens.
 
 ### 2. Parallel subagent dispatch (digest)
-Main thread handles navigation state (reads home.md + index.md first). Then dispatches one subagent per 2-3 sources. Subagents return a ≤300-word structured deliverable. This is the same fan-out pattern as [[patterns/pattern-compounding-loop]] but scoped to a single ingest session.
+Main thread handles navigation state (reads home.md + index.md first). Then dispatches one subagent per 2-3 sources. Subagents return a ≤300-word structured deliverable. This is the same [[pattern-fan-out-worker]] pattern as [[patterns/pattern-compounding-loop]] but scoped to a single ingest session.
 
 ### 3. Batch before ingest (import-readwise)
 Collect 3-5 sources before starting any ingestion. Don't process one-at-a-time. Batching allows the main thread to build a coherent picture of what's incoming and update home.md with context before the subagents run.
@@ -47,12 +47,12 @@ All tweets from a session go into one file (`raw/tweets_<topic>_<date>.md`), nev
 
 | Wikiwise Skill | KB Equivalent | Gap |
 |---------------|---------------|-----|
-| digest | Fan-out INGEST (parallel Agent calls) | KB has no formal main-thread/subagent split — should add |
+| digest | [[pattern-fan-out-worker]] INGEST (parallel Agent calls) | KB has no formal main-thread/subagent split — should add |
 | import-readwise | Not present | Would need `@readwise/cli` setup |
 | fetch-readwise-document | Not present | Critical rule to adopt: pipe to disk |
 | fetch-readwise-highlights | Not present | Would need Readwise API access |
 | ingest | INGEST Workflow (CLAUDE.md) | Wikiwise adds "2-3 inbound links" rule — KB has ≥1 |
-| ingest-tweets | Not present | Would need browser MCP |
+| ingest-tweets | Not present | Would need browser [[mcp-ecosystem]] |
 
 ## Recommended Adoptions
 1. **Pipe-to-disk rule**: any time a large file is fetched via CLI/API, stream to disk — never let body land in context
@@ -60,7 +60,7 @@ All tweets from a session go into one file (`raw/tweets_<topic>_<date>.md`), nev
 3. **Batch-before-ingest**: collect 3-5 sources before starting the ingest loop
 
 ## Related
-- [[patterns/pattern-compounding-loop]] — The fan-out ingest pattern
+- [[patterns/pattern-compounding-loop]] — The [[pattern-fan-out-worker]] ingest pattern
 - [[frameworks/framework-markitdown]] — File-to-markdown conversion for raw/ pipeline
 - [[recipes/recipe-llm-wiki-setup]] — Setup guide referencing similar patterns
 - [[concepts/context-management]] — Context overflow is the core risk being managed here

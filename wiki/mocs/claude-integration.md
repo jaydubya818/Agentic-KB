@@ -9,7 +9,7 @@ updated: 2026-04-13
 
 # Claude Integration
 
-How the Agentic-KB wires into Claude Code, Cowork, and the Claude API. Covers the Hermes orchestrator identity, CLAUDE.md configuration, MCP tool stack, skill library, context loading strategy, and session memory system.
+How the Agentic-KB wires into [[framework-claude-code]], Cowork, and the Claude API. Covers the Hermes orchestrator identity, CLAUDE.md configuration, [[mcp-ecosystem]] tool stack, skill library, context loading strategy, and session memory system.
 
 ---
 
@@ -18,7 +18,7 @@ How the Agentic-KB wires into Claude Code, Cowork, and the Claude API. Covers th
 `CLAUDE.md` (vault root) is the primary configuration file for every Claude agent that opens this vault. It defines:
 
 - **Vault schema** — folder structure, file naming, frontmatter by page type, required sections
-- **Workflows** — INGEST, QUERY, LINT, HOT CACHE, BACKFILL, EXPLORE, BRIEF, OUTPUTS
+- **Workflows** — INGEST, QUERY, LINT, [[pattern-hot-cache]], BACKFILL, EXPLORE, BRIEF, OUTPUTS
 - **Linking conventions** — 2-click rule, wiki link format, no-orphan policy
 - **Tagging taxonomy** — domain, framework, pattern category, confidence tags
 - **Writing style** — voice, length guidelines, anti-patterns
@@ -30,7 +30,7 @@ See: [[personal/hermes-operating-context]] · [[hot]]
 
 ---
 
-## Claude Code / Desktop Setup
+## [[framework-claude-code]] / Desktop Setup
 
 Framework reference: [[frameworks/framework-claude-code]]
 
@@ -39,17 +39,17 @@ Key configuration touchpoints:
 - `~/.claude/agents/` — 34 specialized agents (see [[entities/jay-west-agent-stack]])
 - `~/.claude/skills/` — 29+ skills (see [[mocs/automation]] for skill inventory)
 - `CLAUDE.md` files per repo — project-specific agent configuration
-- Claude Code hooks — pre/post tool call, session start/stop (see [[recipes/recipe-claude-code-hooks]])
+- [[framework-claude-code]] hooks — pre/post tool call, session start/stop (see [[recipes/recipe-claude-code-hooks]])
 
 In Cowork (desktop app), Claude reads `CLAUDE.md` from the mounted workspace on session start. The Hermes auto-load protocol fires immediately.
 
 ---
 
-## MCP Tools & Skills
+## [[mcp-ecosystem]] Tools & Skills
 
-MCP (Model Context Protocol) is the primary tool interface for Claude agents. Current connected MCPs in Jay's stack:
+[[mcp-ecosystem]] ([[mcp-ecosystem]]) is the primary tool interface for Claude agents. Current connected MCPs in Jay's stack:
 
-| MCP | Purpose |
+| [[mcp-ecosystem]] | Purpose |
 |-----|---------|
 | `mcp__agentic-kb__*` | Query and write this KB |
 | `mcp__obsidian__*` | Read/write main Obsidian vault |
@@ -61,7 +61,7 @@ MCP (Model Context Protocol) is the primary tool interface for Claude agents. Cu
 
 Framework reference: [[frameworks/framework-mcp]] · [[entities/mcp-ecosystem]]
 
-Skills are modular prompt packages that extend Claude's capabilities without new MCP servers. They live in `~/.claude/skills/` and are invoked via the Skill tool. See [[mocs/automation]] for the full skill inventory.
+Skills are modular prompt packages that extend Claude's capabilities without new [[mcp-ecosystem]] servers. They live in `~/.claude/skills/` and are invoked via the Skill tool. See [[mocs/automation]] for the full skill inventory.
 
 ---
 
@@ -117,8 +117,8 @@ See: [[patterns/pattern-external-memory]] · [[patterns/pattern-rolling-summary]
 ## Related
 
 - [[personal/hermes-operating-context]] — Full operating context
-- [[hot]] — Hot cache
+- [[hot]] — [[pattern-hot-cache]]
 - [[mocs/automation|Automation MoC]] — Skills and hooks
-- [[frameworks/framework-claude-code]] — Claude Code reference
-- [[frameworks/framework-mcp]] — MCP reference
+- [[frameworks/framework-claude-code]] — [[framework-claude-code]] reference
+- [[frameworks/framework-mcp]] — [[mcp-ecosystem]] reference
 - [[mocs/advanced-techniques|Advanced Techniques]] — Vault-as-context engineering

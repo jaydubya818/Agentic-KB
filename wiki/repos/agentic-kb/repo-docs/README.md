@@ -13,7 +13,7 @@ source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/READM
 
 > Jay West | Built: 2026-04-04 | Last major update: 2026-04-09 | Maintained by LLM + Human
 
-A personal knowledge base for agentic AI engineering — 87+ articles covering concepts, patterns, frameworks, entities, recipes, and evaluations. Queryable via a Wikipedia-style web UI, CLI, and MCP server.
+A personal knowledge base for agentic AI engineering — 87+ articles covering concepts, patterns, frameworks, entities, recipes, and evaluations. Queryable via a Wikipedia-style web UI, CLI, and [[mcp-ecosystem]] server.
 
 Inspired by [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy) — raw sources are **compiled** by Claude into a persistent, cross-referenced wiki. Not RAG: the compile step is deliberate, auditable, and runs incrementally over a logged state.
 
@@ -37,20 +37,20 @@ RLM pipeline upgrade pass — stages 6–9 now live, two-step compile, auto-rein
 
 ## What's New — April 7, 2026
 
-Enterprise-scaling pass inspired by the Karpathy LLM-Wiki gist and patterns borrowed from [archivist-oss](https://github.com/NetworkBuild3r/archivist-oss):
+Enterprise-scaling pass inspired by the [[andrej-karpathy]] LLM-Wiki gist and patterns borrowed from [archivist-oss](https://github.com/NetworkBuild3r/archivist-oss):
 
-- 🔐 **Namespace-level RBAC** — `X-KB-Namespace` header or Bearer-token identity resolution, per-namespace read/write ACLs, audit log now records identity. See [`web/src/lib/rbac.ts`](web/src/lib/rbac.ts) and [`namespaces.example.json`](namespaces.example.json).
-- 📉 **Temporal decay + hotness ranking** — search results are now scored as `baseScore × decay(mtime) × hotness(audit hits)`. 180-day half-life, 30-day hotness window. See [`web/src/lib/ranking.ts`](web/src/lib/ranking.ts).
-- 🕸️ **Graph-based semantic search** — hybrid keyword + graph traversal over graphify's `graph.json` (222 nodes, 299 links, 12 hyperedges). 1-hop traversal + hyperedge expansion. See [`web/src/lib/graph-search.ts`](web/src/lib/graph-search.ts).
-- 🧠 **Karpathy compile pipeline** — `/api/compile` streams SSE progress while Claude batches raw docs into wiki pages using `wiki/schema.md` as system prompt. Incremental via `raw/.compiled-log.json`.
+- 🔐 **Namespace-level RBAC** — `X-KB-Namespace` header or Bearer-token identity resolution, per-namespace read/write ACLs, audit log now records identity. See [__PROTECTED_50__](web/src/lib/rbac.ts) and [__PROTECTED_51__](namespaces.example.json).
+- 📉 **Temporal decay + hotness ranking** — search results are now scored as `baseScore × decay(mtime) × hotness(audit hits)`. 180-day half-life, 30-day hotness window. See [__PROTECTED_53__](web/src/lib/ranking.ts).
+- 🕸️ **Graph-based semantic search** — hybrid keyword + graph traversal over graphify's `graph.json` (222 nodes, 299 links, 12 hyperedges). 1-hop traversal + hyperedge expansion. See [__PROTECTED_55__](web/src/lib/graph-search.ts).
+- 🧠 **[[andrej-karpathy]] compile pipeline** — `/api/compile` streams SSE progress while Claude batches raw docs into wiki pages using `wiki/schema.md` as system prompt. Incremental via `raw/.compiled-log.json`.
 - 🩺 **Wiki lint + scheduled daily health check** — `/api/lint` detects contradictions, orphans, stale pages, knowledge gaps → `wiki/lint-report.md`. Runs daily at 07:00 via a scheduled task.
 - 🪝 **Webhook ingest with auto-adapters** — `/api/ingest/webhook` accepts GitHub issues/PRs, Slack, and generic JSON. GitHub Actions workflow at `.github/workflows/kb-ingest.yml` auto-ingests merged PRs, closed issues, and pushed docs.
 - 🎥 **YouTube + Twitter ingest CLI** — `kb ingest-youtube <url>` (yt-dlp + SRT parsing) and `kb ingest-twitter <archive.zip>` (parses the Twitter/X data export).
 - 🏛️ **Interactive architecture viewer** — [oh-my-mermaid](https://github.com/oh-my-mermaid/oh-my-mermaid) integration. Clickable drill-down through 6 nested perspectives of the system. Linked from the wiki sidebar.
 - 🔗 **Sidebar Tools section** — one-click jump to the architecture viewer and to Obsidian's global graph view (via Advanced URI plugin).
-- 🧪 **10-stage RLM retrieval pipeline** — reference design documented in [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md). Temporal decay + hotness (stages 4–5) were live; **stages 6–9 are now live as of April 9**.
+- 🧪 **10-stage RLM retrieval pipeline** — reference design documented in [__PROTECTED_65__](docs/RLM_PIPELINE.md). Temporal decay + hotness (stages 4–5) were live; **stages 6–9 are now live as of April 9**.
 
-See [`ENTERPRISE_PLAN.md`](ENTERPRISE_PLAN.md) for the full P0–P3 roadmap.
+See [__PROTECTED_66__](ENTERPRISE_PLAN.md) for the full P0–P3 roadmap.
 
 ---
 
@@ -102,7 +102,7 @@ kb read concepts/tool-use
 
 Full Wikipedia-style knowledge base browser at `http://localhost:3002`.
 
-**Sidebar Tools section** — one-click jump to the interactive architecture viewer (oh-my-mermaid) and to Obsidian's global graph view (via the Advanced URI plugin). Added 2026-04-07.
+**Sidebar Tools section** — one-click jump to the interactive architecture viewer ([[oh-my-mermaid]]) and to Obsidian's global graph view (via the Advanced URI plugin). Added 2026-04-07.
 
 ### Features
 
@@ -195,9 +195,9 @@ export PRIVATE_PIN=1124
 
 ---
 
-## MCP Server
+## [[mcp-ecosystem]] Server
 
-Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
+Exposes the KB as [[mcp-ecosystem]] tools for Claude Desktop and any [[mcp-ecosystem]]-compatible agent.
 
 ### Configuration (`~/Library/Application Support/Claude/claude_desktop_config.json`)
 
@@ -227,7 +227,7 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
 | `read_index` | Read the master wiki index |
 | `list_articles` | List all articles in a section |
 | `query_wiki` | Natural language Q&A — Claude synthesizes an answer from ranked wiki pages |
-| `compile_wiki` | Run the Karpathy compile pipeline — batches new/changed raw docs to Claude and writes wiki pages |
+| `compile_wiki` | Run the [[andrej-karpathy]] compile pipeline — batches new/changed raw docs to Claude and writes wiki pages |
 | `lint_wiki` | Health check — returns contradictions, orphans, stale pages, and knowledge gaps |
 
 > **Note on long-running tools:** `compile_wiki` is a synchronous wrapper around an SSE endpoint and can time out on large batches. For full recompiles, use the web UI's `CompilePanel` (streams via `EventSource`, no timeout) or `kb compile --mode full`.
@@ -245,7 +245,7 @@ query_wiki(question: "What frameworks do I prefer?", scope: "all", pin: "1124")
 
 ---
 
-## Compile Pipeline (Karpathy LLM Wiki)
+## Compile Pipeline ([[andrej-karpathy]] [[llm-wiki]])
 
 The compile pipeline is the heart of the KB — it's what makes this *not* a RAG system. Raw markdown in `raw/` is batched, sent to Claude with `wiki/schema.md` as the system prompt, and written back as structured wiki pages. State is tracked in `raw/.compiled-log.json` so re-runs are incremental.
 
@@ -255,7 +255,7 @@ The compile pipeline is the heart of the KB — it's what makes this *not* a RAG
 
 **CLI:** `kb compile` (incremental) or `kb compile --mode full`.
 
-**MCP:** `compile_wiki` tool — works for small incremental runs but may time out on large batches.
+**[[mcp-ecosystem]]:** `compile_wiki` tool — works for small incremental runs but may time out on large batches.
 
 ### How it works
 
@@ -296,7 +296,7 @@ Added 2026-04-07 as part of the enterprise-scaling pass.
 
 Multi-tenant access control. Every write is scoped to a namespace. One KB, many teams / projects / agents.
 
-**Config file:** `namespaces.json` (copy from [`namespaces.example.json`](namespaces.example.json))
+**Config file:** `namespaces.json` (copy from [__PROTECTED_131__](namespaces.example.json))
 
 ```json
 {
@@ -335,7 +335,7 @@ finalScore = baseScore × decay(mtime) × hotness(audit hits) × confidence(fron
 
 Results include `baseScore`, `decay`, `hotness`, `confidence`, and `score` so the UI can show why a page ranked where it did.
 
-Implementation: [`web/src/lib/ranking.ts`](web/src/lib/ranking.ts). Wired into [`graph-search.ts`](web/src/lib/graph-search.ts).
+Implementation: [__PROTECTED_154__](web/src/lib/ranking.ts). Wired into [__PROTECTED_155__](web/src/lib/graph-search.ts).
 
 ### Webhook Ingest
 
@@ -352,7 +352,7 @@ Implementation: [`web/src/lib/ranking.ts`](web/src/lib/ranking.ts). Wired into [
 | Slack | `token` or `channel_id` in body | Slash command or Events API |
 | Generic JSON | Fallback | Requires `title` + `content` fields |
 
-**GitHub Actions workflow:** [`.github/workflows/kb-ingest.yml`](.github/workflows/kb-ingest.yml) auto-ingests merged PRs, closed issues, and pushed `docs/**.md` on merge. Requires `KB_WEBHOOK_URL` and `KB_WEBHOOK_SECRET` repo secrets.
+**GitHub Actions workflow:** [__PROTECTED_166__](.github/workflows/kb-ingest.yml) auto-ingests merged PRs, closed issues, and pushed `docs/**.md` on merge. Requires `KB_WEBHOOK_URL` and `KB_WEBHOOK_SECRET` repo secrets.
 
 ### Scheduled Lint
 
@@ -366,11 +366,11 @@ A scheduled task (`kb-daily-lint`) runs `POST /api/lint` every day at 07:00 loca
 
 Results land in `wiki/lint-report.md`. The scheduled task alerts only on P0 contradictions or > 5 new orphans; otherwise a quiet `KB healthy` summary.
 
-See [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md) for how lint fits into the 10-stage retrieval pipeline reference design.
+See [__PROTECTED_175__](docs/RLM_PIPELINE.md) for how lint fits into the 10-stage retrieval pipeline reference design.
 
 ---
 
-## Architecture Visualization (oh-my-mermaid)
+## Architecture Visualization ([[oh-my-mermaid]])
 
 Interactive clickable architecture explorer with drill-down nested perspectives.
 
@@ -395,7 +395,7 @@ Or click **Architecture Diagram ↗** in the wiki sidebar Tools section.
 `.omm/overall-architecture/` with 6 clickable child lenses:
 - `web-ui` — Next.js app components and routes
 - `cli` — `kb` command structure
-- `mcp-server` — 7 MCP tools
+- `mcp-server` — 7 [[mcp-ecosystem]] tools
 - `api-routes` — all `/api/*` endpoints and their shared libs
 - `github-actions` — kb-ingest workflow
 - `vault` — raw/, wiki/, graphify-out, audit.log
@@ -404,11 +404,11 @@ Plus three leaf perspectives: `compile-pipeline`, `query-pipeline`, `ingest-flow
 
 ### Regenerating
 
-In Claude Code, run `/omm-scan` to have Claude re-analyze the codebase and refresh the diagrams, then run `./scripts/ingest-omm.sh` to sync the refreshed perspectives into `raw/architecture/` (ready for the next compile).
+In [[framework-claude-code]], run `/omm-scan` to have Claude re-analyze the codebase and refresh the diagrams, then run `./scripts/ingest-omm.sh` to sync the refreshed perspectives into `raw/architecture/` (ready for the next compile).
 
-> **Why kebab-case matters:** oh-my-mermaid drills into child elements by matching node IDs to child directory names. Always use kebab-case IDs (`web-ui`, `compile-pipeline`) in diagrams — uppercase or camelCase IDs break drill-down.
+> **Why kebab-case matters:** [[oh-my-mermaid]] drills into child elements by matching node IDs to child directory names. Always use kebab-case IDs (`web-ui`, `compile-pipeline`) in diagrams — uppercase or camelCase IDs break drill-down.
 
-See [`docs/OH_MY_MERMAID.md`](docs/OH_MY_MERMAID.md) for the full workflow.
+See [__PROTECTED_193__](docs/OH_MY_MERMAID.md) for the full workflow.
 
 ---
 
@@ -422,7 +422,7 @@ Private articles have `visibility: private` in their frontmatter (or live in `wi
 |---------|--------------|
 | **Web UI** | Click 🔒 in top bar → enter PIN → private articles appear in search |
 | **CLI** | Set `PRIVATE_PIN=1124` env var (auto-used) or pass `--pin 1124` |
-| **MCP** | Pass `pin: "1124"` parameter to any tool with `scope: "private"` or `scope: "all"` |
+| **[[mcp-ecosystem]]** | Pass `pin: "1124"` parameter to any tool with `scope: "private"` or `scope: "all"` |
 | **API** | `?scope=private&pin=1124` query param or `x-private-pin: 1124` header |
 
 ### Marking an article private
@@ -444,7 +444,7 @@ Or place in `wiki/personal/` — that directory is always treated as private.
 PRIVATE_PIN=1124
 ```
 
-**MCP + CLI** — in `claude_desktop_config.json` env and `~/.zshrc`:
+**[[mcp-ecosystem]] + CLI** — in `claude_desktop_config.json` env and `~/.zshrc`:
 ```bash
 export PRIVATE_PIN=1124
 ```
@@ -612,18 +612,18 @@ Scheduled task (kb-daily-lint)
 
 ### Key design decisions
 
-- **Compile, not retrieve** — Karpathy LLM-Wiki pattern. Raw docs are deliberately compiled into persistent wiki pages. Query-time retrieval operates over the compiled, curated wiki — not over raw chunks.
+- **Compile, not retrieve** — [[andrej-karpathy]] LLM-Wiki pattern. Raw docs are deliberately compiled into persistent wiki pages. Query-time retrieval operates over the compiled, curated wiki — not over raw chunks.
 - **No database** — all content is markdown read directly via `fs.readFileSync`. Every request reads fresh from disk. `force-dynamic` on all routes.
 - **Hybrid search, not pure vector** — keyword + graph traversal (over graphify's `graph.json`) + temporal decay + hotness. Vector store is an optional P2 add (see RLM pipeline doc).
 - **Fail-open RBAC** — no `namespaces.json` = open access (back-compat). Add the file to enforce per-namespace ACLs.
 - **Append-only audit log** — every `query`, `ingest`, `compile`, `lint`, `webhook` op writes a JSON line to `logs/audit.log`. Never truncated. Feeds the hotness ranking multiplier.
 - **Cookie-based vault selection** — `active_vault_path` cookie propagates through Next.js server components via `cookies()`
 - **PIN auth is server-enforced** — `PRIVATE_PIN` env var read server-side only; never exposed to client
-- **MCP is filesystem-first** — `search_wiki`, `read_article`, `list_articles` go direct to disk. `query_wiki`, `compile_wiki`, `lint_wiki` call the HTTP API.
+- **[[mcp-ecosystem]] is filesystem-first** — `search_wiki`, `read_article`, `list_articles` go direct to disk. `query_wiki`, `compile_wiki`, `lint_wiki` call the HTTP API.
 
 ### RLM Pipeline Stage Status
 
-10-stage Recursive Layered Memory retrieval pipeline — see [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md) for full spec.
+10-stage Recursive Layered Memory retrieval pipeline — see [__PROTECTED_257__](docs/RLM_PIPELINE.md) for full spec.
 
 | Stage | Name | Status | Notes |
 |-------|------|--------|-------|
@@ -642,12 +642,12 @@ Scheduled task (kb-daily-lint)
 
 | Doc | Purpose |
 |-----|---------|
-| [`ENTERPRISE_PLAN.md`](ENTERPRISE_PLAN.md) | P0–P3 enterprise scaling roadmap |
-| [`docs/RLM_PIPELINE.md`](docs/RLM_PIPELINE.md) | 10-stage retrieval pipeline reference design |
-| [`docs/OH_MY_MERMAID.md`](docs/OH_MY_MERMAID.md) | Architecture visualization workflow |
-| [`wiki/schema.md`](wiki/schema.md) | Compile pipeline system prompt |
-| [`CLAUDE.md`](CLAUDE.md) | Agent workflows (EXPLORE, BRIEF, ingest conventions) |
-| [`namespaces.example.json`](namespaces.example.json) | RBAC config template |
+| [__PROTECTED_266__](ENTERPRISE_PLAN.md) | P0–P3 enterprise scaling roadmap |
+| [__PROTECTED_267__](docs/RLM_PIPELINE.md) | 10-stage retrieval pipeline reference design |
+| [__PROTECTED_268__](docs/OH_MY_MERMAID.md) | Architecture visualization workflow |
+| [__PROTECTED_269__](wiki/schema.md) | Compile pipeline system prompt |
+| [__PROTECTED_270__](CLAUDE.md) | Agent workflows (EXPLORE, BRIEF, ingest conventions) |
+| [__PROTECTED_271__](namespaces.example.json) | RBAC config template |
 
 ---
 
@@ -666,7 +666,7 @@ Scheduled task (kb-daily-lint)
 
 ## 🤖 Agent Memory Runtime
 
-Agentic-KB ships a zero-dep operational agent memory runtime at `lib/agent-runtime/` (plain `.mjs`, importable by the web app, CLI, and MCP server). It turns the vault into a layered brain for orchestrator / lead / worker agents with bounded context, transactional writeback, a discovery/escalation/standards/handoff bus, and canonical promotion/merge paths.
+Agentic-KB ships a zero-dep operational agent memory runtime at `lib/agent-runtime/` (plain `.mjs`, importable by the web app, CLI, and [[mcp-ecosystem]] server). It turns the vault into a layered brain for orchestrator / lead / worker agents with bounded context, transactional writeback, a discovery/escalation/standards/handoff bus, and canonical promotion/merge paths.
 
 ### Architecture
 
@@ -745,9 +745,9 @@ node cli/kb.js agent trace gsd-executor --last 20
 | `GET/POST /api/agents/bus/[channel]` | List / publish bus items |
 | `POST /api/agents/promote` | Promote a bus item |
 
-### MCP tools
+### [[mcp-ecosystem]] tools
 
-Added to `mcp/server.js`: `list_agents`, `load_agent_context`, `close_agent_task`, `publish_bus_item`, `list_agent_bus_items`, `promote_learning`. Worker-tier MCP sessions literally cannot write outside their sandbox — contracts gate every write.
+Added to `mcp/server.js`: `list_agents`, `load_agent_context`, `close_agent_task`, `publish_bus_item`, `list_agent_bus_items`, `promote_learning`. Worker-tier [[mcp-ecosystem]] sessions literally cannot write outside their sandbox — contracts gate every write.
 
 ### Tests
 

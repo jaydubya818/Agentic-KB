@@ -25,7 +25,7 @@ Reusable prompts, thinking tools, and slash commands for working with Claude acr
 
 ## How to Use
 
-**In Claude Code:** paste the prompt text directly, or invoke the relevant slash command if registered in `~/.claude/commands/`.
+**In [[framework-claude-code]]:** paste the prompt text directly, or invoke the relevant slash command if registered in `~/.claude/commands/`.
 
 **In Cowork:** paste prompt text into the conversation. Hermes will detect the intent and route accordingly.
 

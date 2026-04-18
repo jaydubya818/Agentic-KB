@@ -15,7 +15,7 @@ updated: 2026-04-09
 
 | Phase | Duration | Status | Goal |
 |-------|----------|--------|------|
-| Phase 1: Core Orchestration | Complete | ✅ Done | Supervisor-worker, task assignment working |
+| Phase 1: Core Orchestration | Complete | ✅ Done | [[pattern-supervisor-worker]], task assignment working |
 | Phase 2: Fleet Management | In Progress | 🟡 75% | Multi-Pi coordination, load balancing |
 | Phase 3: Observability | In Progress | 🟡 70% | Dashboard, metrics, real-time monitoring |
 | Phase 4: Fault Tolerance | Pending | ⏳ Q2 | Failure detection, recovery, circuit breakers |
@@ -25,7 +25,7 @@ updated: 2026-04-09
 
 ## Completed Milestones
 
-- ✅ Phase 1.1: Supervisor-worker pattern (2026-04-03)
+- ✅ Phase 1.1: [[pattern-supervisor-worker]] pattern (2026-04-03)
 - ✅ Phase 1.2: Task assignment to workers (2026-04-06)
 - ✅ Phase 1.3: Basic health monitoring (2026-04-08)
 

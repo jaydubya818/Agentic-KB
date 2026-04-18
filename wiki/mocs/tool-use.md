@@ -7,14 +7,14 @@ updated: 2026-04-10
 ---
 
 # Tool Use — Map of Content
-> Navigation hub for tool design, MCP integration, permissions, and verification patterns.
+> Navigation hub for tool design, [[mcp-ecosystem]] integration, permissions, and verification patterns.
 
 ---
 
 ## Core Concepts
 
-- [[concepts/tool-use]] — How agents select, call, and handle results from tools; function calling, MCP, native tools
-- [[concepts/permission-modes]] — Tool and action permissions for agents; Claude Code permission tiers, allow/deny lists
+- [[concepts/tool-use]] — How agents select, call, and handle results from tools; function calling, [[mcp-ecosystem]], native tools
+- [[concepts/permission-modes]] — Tool and action permissions for agents; [[framework-claude-code]] permission tiers, allow/deny lists
 - [[concepts/human-in-the-loop]] — Approval gates for destructive or irreversible tool calls
 - [[concepts/guardrails]] — Hard and soft constraints on which tools agents can invoke
 - [[concepts/agent-failure-modes]] — Tool-related failure modes: hallucinated calls, silent failures, retries
@@ -29,25 +29,25 @@ updated: 2026-04-10
 
 ## Frameworks & Protocols
 
-- [[frameworks/framework-mcp]] — Model Context Protocol: the standard for exposing tools to LLMs; JSON-RPC, tool schemas, server lifecycle
-- [[frameworks/framework-claude-code]] — Claude Code native tools: Bash, Read, Write, Edit, Glob, Grep, Agent; permission system
+- [[frameworks/framework-mcp]] — [[mcp-ecosystem]]: the standard for exposing tools to LLMs; JSON-RPC, tool schemas, server lifecycle
+- [[frameworks/framework-claude-code]] — [[framework-claude-code]] native tools: Bash, Read, Write, Edit, Glob, Grep, Agent; permission system
 - [[frameworks/framework-claude-api]] — Claude API tool_use blocks; streaming, parallel tool calls, tool_result handling
 - [[frameworks/framework-gsd]] — GSD tool conventions: atomic commits, TDD-first, verification before completion
 - [[frameworks/framework-markitdown]] — Tool for converting files to markdown; integrates into raw/ ingest pipeline
 
 ---
 
-## MCP Ecosystem
+## [[mcp-ecosystem]] Ecosystem
 
-- [[entities/mcp-ecosystem]] — MCP server catalog: Figma, Context7, Exa, Firecrawl, Oh My Mermaid, custom servers
+- [[entities/mcp-ecosystem]] — [[mcp-ecosystem]] server catalog: Figma, Context7, Exa, Firecrawl, Oh My Mermaid, custom servers
 
 ---
 
 ## Recipes
 
-- [[recipes/recipe-mcp-server]] — Write and register a custom MCP server in TypeScript
+- [[recipes/recipe-mcp-server]] — Write and register a custom [[mcp-ecosystem]] server in TypeScript
 - [[recipes/recipe-build-tool-agent]] — Build a Claude agent with custom tools from scratch
-- [[recipes/recipe-claude-code-hooks]] — Claude Code hooks for automation around tool calls
+- [[recipes/recipe-claude-code-hooks]] — [[framework-claude-code]] hooks for automation around tool calls
 
 ---
 

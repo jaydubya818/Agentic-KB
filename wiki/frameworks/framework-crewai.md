@@ -16,7 +16,7 @@ jay_experience: none
 
 [[framework-crewai]] is a Python multi-agent framework built around the metaphor of a crew of workers — agents are defined by **role**, **goal**, and **backstory**, and they execute **tasks** in either sequential or hierarchical order. The framing is deliberately human-analogous: a Researcher agent, a Writer agent, a QA agent each have a professional identity that shapes their behavior.
 
-CrewAI sits between [[framework-autogen]] (conversational) and [[framework-langgraph]] (graph/state machine) on the flexibility spectrum. It is more opinionated than LangGraph but less verbose than AutoGen for structured pipelines. Best suited for well-defined workflows where the task sequence is known upfront and agents have clear, non-overlapping responsibilities.
+[[framework-crewai]] sits between [[framework-autogen]] (conversational) and [[framework-langgraph]] (graph/state machine) on the flexibility spectrum. It is more opinionated than [[framework-langgraph]] but less verbose than [[framework-autogen]] for structured pipelines. Best suited for well-defined workflows where the task sequence is known upfront and agents have clear, non-overlapping responsibilities.
 
 ---
 
@@ -72,7 +72,7 @@ Tasks can be:
 **Parallel process**: multiple tasks run concurrently (Python asyncio). Results merged before next stage.
 
 ### Memory Types
-CrewAI has a layered memory system — more sophisticated than most frameworks:
+[[framework-crewai]] has a layered memory system — more sophisticated than most frameworks:
 
 | Memory Type | Scope | Backend |
 |-------------|-------|---------|
@@ -87,7 +87,7 @@ Enable with `memory=True` on the Crew. Long-term memory uses SQLite by default; 
 When `allow_delegation=True`, an agent can assign a subtask to another agent in the crew. The receiving agent executes it and returns results. This enables emergent hierarchy without explicit manager definition — a researcher might delegate fact-checking to a specialized verifier.
 
 ### Tools Integration
-CrewAI tools are wrappers around LangChain tools (most), custom Python functions, or its own built-in tools. Built-ins include: `SerperDevTool` (web search), `FileReadTool`, `CSVSearchTool`, `PDFSearchTool`, `WebsiteSearchTool`. Any LangChain tool works via `LangChainTool` wrapper.
+[[framework-crewai]] tools are wrappers around LangChain tools (most), custom Python functions, or its own built-in tools. Built-ins include: `SerperDevTool` (web search), `FileReadTool`, `CSVSearchTool`, `PDFSearchTool`, `WebsiteSearchTool`. Any LangChain tool works via `LangChainTool` wrapper.
 
 ---
 
@@ -134,7 +134,7 @@ Manager LLM
 
 - **Backstory is prompt engineering, not magic**: agent identity fields are just injected text; poorly written backstories produce generic behavior
 - **Hierarchical process is brittle**: the manager LLM can make poor delegation decisions, loop, or miss tasks
-- **Limited control flow**: no conditional edges, no cycles within the task graph; LangGraph is far more expressive
+- **Limited control flow**: no conditional edges, no cycles within the task graph; [[framework-langgraph]] is far more expressive
 - **Memory adds cost**: short-term RAG creates embedding calls for every task; adds latency and cost
 - **Python-only**: no TypeScript SDK
 - **LangChain coupling**: inherits LangChain's abstraction overhead for tools
@@ -200,9 +200,9 @@ print(result.raw)
 
 ---
 
-## CrewAI vs LangGraph vs AutoGen
+## [[framework-crewai]] vs [[framework-langgraph]] vs [[framework-autogen]]
 
-| Dimension | CrewAI | LangGraph | AutoGen |
+| Dimension | [[framework-crewai]] | [[framework-langgraph]] | [[framework-autogen]] |
 |-----------|--------|-----------|---------|
 | Metaphor | Role-based crew | State machine | Conversation |
 | Setup speed | Fast | Medium | Medium |
@@ -217,16 +217,16 @@ print(result.raw)
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-api]]**: CrewAI supports [[anthropic]] models via LiteLLM integration (`llm="claude-sonnet-4-6"`)
-- **[[entities/langchain-ecosystem]]**: CrewAI tools are LangChain-compatible; uses LangChain's tool interface
-- **[[evaluations/eval-orchestration-frameworks]]**: CrewAI scored against GSD, LangGraph, AutoGen
+- **[[frameworks/framework-claude-api]]**: [[framework-crewai]] supports [[anthropic]] models via LiteLLM integration (`llm="claude-sonnet-4-6"`)
+- **[[entities/langchain-ecosystem]]**: [[framework-crewai]] tools are LangChain-compatible; uses LangChain's tool interface
+- **[[evaluations/eval-orchestration-frameworks]]**: [[framework-crewai]] scored against GSD, [[framework-langgraph]], [[framework-autogen]]
 - **[[entities/model-landscape]]**: Supports any model via LiteLLM
 
 ---
 
 ## Jay's Experience
 
-None. Jay has not used CrewAI. Assessment based on documentation and public demos. Key reason for non-adoption: CrewAI's role/backstory metaphor doesn't align with Jay's [[framework-claude-code]] + GSD workflow; GSD provides equivalent structured role-based execution with agents that understand his specific project context. Would evaluate if hiring collaborators who prefer the "crew" mental model as a low-code starting point.
+None. Jay has not used [[framework-crewai]]. Assessment based on documentation and public demos. Key reason for non-adoption: [[framework-crewai]]'s role/backstory metaphor doesn't align with Jay's [[framework-claude-code]] + GSD workflow; GSD provides equivalent structured role-based execution with agents that understand his specific project context. Would evaluate if hiring collaborators who prefer the "crew" mental model as a low-code starting point.
 
 ---
 
@@ -234,13 +234,13 @@ None. Jay has not used CrewAI. Assessment based on documentation and public demo
 
 - 0.80.x (2025): memory system stable; parallel process improved; output_file for tasks
 - Switched from direct [[openai]] SDK to LiteLLM for provider abstraction
-- CrewAI Enterprise: hosted version with monitoring; separate product
+- [[framework-crewai]] Enterprise: hosted version with monitoring; separate product
 - `pip install crewai crewai-tools` — tools are a separate package
 
 ---
 
 ## Sources
 
-- CrewAI GitHub and documentation (knowledge cutoff — verify current API)
+- [[framework-crewai]] GitHub and documentation (knowledge cutoff — verify current API)
 - [[evaluations/eval-orchestration-frameworks]]
 - [[entities/langchain-ecosystem]]

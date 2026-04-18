@@ -10,9 +10,9 @@ updated: 2026-04-04
 
 ## Overview
 
-[[anthropic]] is an AI safety company founded in 2021 by former [[openai]] researchers Dario Amodei (CEO), Daniela Amodei (President), and others. Its primary product is the Claude family of language models. Anthropic's strategic differentiation from OpenAI is an explicit safety-first research mandate — Constitutional AI, the Responsible Scaling Policy, and interpretability research are central to its identity, not marketing.
+[[anthropic]] is an AI safety company founded in 2021 by former [[openai]] researchers Dario Amodei (CEO), Daniela Amodei (President), and others. Its primary product is the Claude family of language models. [[anthropic]]'s strategic differentiation from [[openai]] is an explicit safety-first research mandate — Constitutional AI, the Responsible Scaling Policy, and interpretability research are central to its identity, not marketing.
 
-Anthropic is the vendor behind Jay's primary toolchain: [[frameworks/framework-claude-api]], [[frameworks/framework-claude-code]], and [[frameworks/framework-mcp]].
+[[anthropic]] is the vendor behind Jay's primary toolchain: [[frameworks/framework-claude-api]], [[frameworks/framework-claude-code]], and [[frameworks/framework-mcp]].
 
 ---
 
@@ -45,26 +45,26 @@ Direct REST + SDK access to Claude models. See [[frameworks/framework-claude-api
 - 200K context window across all tiers
 
 ### [[framework-claude-code]]
-Anthropic's official CLI for Claude — an agentic coding assistant and multi-agent runtime. See [[frameworks/framework-claude-code]] for full coverage. Key capabilities: Agent tool for sub-agent spawning, hooks system, [[mcp-ecosystem]] hosting, skills/slash commands, CLAUDE.md instruction layer.
+[[anthropic]]'s official CLI for Claude — an agentic coding assistant and multi-agent runtime. See [[frameworks/framework-claude-code]] for full coverage. Key capabilities: Agent tool for sub-agent spawning, hooks system, [[mcp-ecosystem]] hosting, skills/slash commands, CLAUDE.md instruction layer.
 
-### [[mcp-ecosystem]] (MCP)
-Open protocol published by Anthropic for standardizing agent-to-tool connectivity. See [[frameworks/framework-mcp]]. MCP enables any MCP-compatible host to use tools from any MCP server without custom integration per-pair.
+### [[mcp-ecosystem]] ([[mcp-ecosystem]])
+Open protocol published by [[anthropic]] for standardizing agent-to-tool connectivity. See [[frameworks/framework-mcp]]. [[mcp-ecosystem]] enables any [[mcp-ecosystem]]-compatible host to use tools from any [[mcp-ecosystem]] server without custom integration per-pair.
 
 ### Claude.ai
-Consumer and Teams web interface. Includes MCP integration (Figma MCP for design-to-code, Google Drive, etc.). Not directly part of Jay's developer workflow but relevant for design collaboration (Figma MCP via claude.ai).
+Consumer and Teams web interface. Includes [[mcp-ecosystem]] integration (Figma [[mcp-ecosystem]] for design-to-code, Google Drive, etc.). Not directly part of Jay's developer workflow but relevant for design collaboration (Figma [[mcp-ecosystem]] via claude.ai).
 
 ---
 
 ## Safety Research
 
 ### Constitutional AI (CAI)
-Anthropic's technique for training AI systems to be helpful, harmless, and honest using a set of constitutional principles. The model critiques and revises its own outputs against the constitution. Published as a research paper; the principles inform Claude's base behavior.
+[[anthropic]]'s technique for training AI systems to be helpful, harmless, and honest using a set of constitutional principles. The model critiques and revises its own outputs against the constitution. Published as a research paper; the principles inform Claude's base behavior.
 
 ### Responsible Scaling Policy (RSP)
-A pre-commitment framework: Anthropic defines AI Safety Levels (ASL-1 through ASL-4+) and commits to specific safety measures required before deploying models at each level. RSP is Anthropic's answer to "how do you prevent your own models from causing catastrophic harm?"
+A pre-commitment framework: [[anthropic]] defines AI Safety Levels (ASL-1 through ASL-4+) and commits to specific safety measures required before deploying models at each level. RSP is [[anthropic]]'s answer to "how do you prevent your own models from causing catastrophic harm?"
 
 ### Interpretability Research
-Anthropic's team (led by Chris Olah) works on mechanistic interpretability — understanding what's happening inside neural networks. Key work: circuits research, features as superposition, monosemanticity. This is basic science, not product — but it informs safety decisions.
+[[anthropic]]'s team (led by Chris Olah) works on mechanistic interpretability — understanding what's happening inside neural networks. Key work: circuits research, features as superposition, monosemanticity. This is basic science, not product — but it informs safety decisions.
 
 ---
 
@@ -72,28 +72,28 @@ Anthropic's team (led by Chris Olah) works on mechanistic interpretability — u
 
 | Person | Role | Notable Work |
 |--------|------|-------------|
-| Dario Amodei | CEO & Co-founder | Former VP Research at OpenAI; published GPT-2, GPT-3 |
+| Dario Amodei | CEO & Co-founder | Former VP Research at [[openai]]; published GPT-2, GPT-3 |
 | Daniela Amodei | President & Co-founder | Operations, policy, go-to-market |
 | Amanda Askell | Researcher | Claude's character and values; RLHF research |
 | Chris Olah | Interpretability Researcher | Circuits (transformer internals), feature visualization, monosemanticity |
 | Jared Kaplan | Researcher | Scaling laws (Kaplan et al.) — foundational work on LLM scaling |
-| Tom Brown | Researcher | GPT-3 lead at OpenAI; now at Anthropic |
+| Tom Brown | Researcher | GPT-3 lead at [[openai]]; now at [[anthropic]] |
 
 ---
 
 ## Competitive Position (April 2026)
 
-| Dimension | Anthropic | OpenAI |
+| Dimension | [[anthropic]] | [[openai]] |
 |-----------|-----------|--------|
 | Flagship model | claude-opus-4-6 | GPT-4o / o4 |
 | Safety emphasis | Constitutional AI, RSP | Safety board (complicated history) |
 | Extended reasoning | Extended thinking (Opus) | o3/o4 reasoning models |
-| Coding assistant | Claude Code (CLI) | Codex / GPT in IDEs |
-| Tool protocol | MCP (open standard) | Function calling (proprietary format) |
+| Coding assistant | [[framework-claude-code]] (CLI) | Codex / GPT in IDEs |
+| Tool protocol | [[mcp-ecosystem]] (open standard) | Function calling (proprietary format) |
 | Context window | 200K | 128K (GPT-4o) / 200K (some) |
-| Developer experience | Claude Code + MCP | Assistants API + function calling |
+| Developer experience | [[framework-claude-code]] + [[mcp-ecosystem]] | Assistants API + function calling |
 
-Anthropic's primary advantages: larger effective context window, extended thinking, Constitutional AI safety properties, and Claude Code as a first-class agentic development environment. OpenAI's advantages: larger ecosystem, more third-party integrations, DALL-E/Whisper/Realtime API for multimodal.
+[[anthropic]]'s primary advantages: larger effective context window, extended thinking, Constitutional AI safety properties, and [[framework-claude-code]] as a first-class agentic development environment. [[openai]]'s advantages: larger ecosystem, more third-party integrations, DALL-E/Whisper/Realtime API for multimodal.
 
 ---
 
@@ -101,15 +101,15 @@ Anthropic's primary advantages: larger effective context window, extended thinki
 
 - **[[frameworks/framework-claude-api]]**: the core API Jay builds on
 - **[[frameworks/framework-claude-code]]**: Jay's primary development environment
-- **[[frameworks/framework-mcp]]**: Anthropic-published open protocol
-- **[[entities/model-landscape]]**: full model comparison including Anthropic, OpenAI, Google
+- **[[frameworks/framework-mcp]]**: [[anthropic]]-published open protocol
+- **[[entities/model-landscape]]**: full model comparison including [[anthropic]], [[openai]], Google
 - **[[entities/openai]]**: primary competitor; complementary in some areas (multimodal)
 
 ---
 
 ## Sources
 
-- Anthropic website and API documentation (knowledge cutoff — verify current)
+- [[anthropic]] website and API documentation (knowledge cutoff — verify current)
 - Jay's `~/.claude/CLAUDE.md` (model selection heuristics)
 - Jay's `~/.claude/settings.json` (actual model config)
 - [[entities/model-landscape]]

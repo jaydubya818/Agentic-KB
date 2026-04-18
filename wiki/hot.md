@@ -19,7 +19,7 @@ id: 01KNNVX2QWP0WXED8KH2N8K1JE
 
 **[[pattern-plan-execute-verify]]**: Separate planner, executor, verifier agents. Each has focused context; no single agent holds all three roles. GSD implementation: planner creates PLAN.md (2–3 tasks, ≤50% context), executor commits atomically per task, verifier does goal-backward analysis (trusts code, not SUMMARY claims). See [[summaries/summary-gsd-framework-skills]].
 
-**Hot Cache**: ≤500-word summary file. Read first on every query. Update when a pattern is queried 3+ times. Prevents re-reading full wiki on common queries. See [[summaries/summary-nate-herk-llm-wiki]] (95% token reduction with wiki vs. RAG).
+**[[pattern-hot-cache]]**: ≤500-word summary file. Read first on every query. Update when a pattern is queried 3+ times. Prevents re-reading full wiki on common queries. See [[summaries/summary-nate-herk-llm-wiki]] (95% token reduction with wiki vs. RAG).
 
 **[[pattern-read-before-write]]**: Every mutating agent operation preceded by a read of current state. Prevents silent overwrites. GSD executor: `git status --short` before every commit staging.
 
@@ -41,7 +41,7 @@ id: 01KNNVX2QWP0WXED8KH2N8K1JE
 ## Context Window Survival
 1. Read only targeted sections (offset+limit on large files >2000 lines)
 2. Grep before reading (`grep -n "functionName" file` → use offset)
-3. Compact at 75% context (auto-compact trigger in Claude Code)
+3. Compact at 75% context (auto-compact trigger in [[framework-claude-code]])
 4. Use hot.md to avoid re-reading common context
 5. Agents write findings to disk (Write-and-Return pattern) — don't return large bodies to orchestrator
 

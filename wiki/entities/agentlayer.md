@@ -15,11 +15,11 @@ source: https://agentlayer-ai.netlify.app/
 
 ## Overview
 
-AgentLayer (https://agentlayer-ai.netlify.app/) is a boutique consulting and implementation firm specializing in enterprise AI agent architecture. They focus on helping organizations move from AI experimentation to production-grade agentic deployments with governance baked in.
+[[agentlayer]] (https://agentlayer-ai.netlify.app/) is a boutique consulting and implementation firm specializing in enterprise AI agent architecture. They focus on helping organizations move from AI experimentation to production-grade agentic deployments with governance baked in.
 
 Their commentary on NVIDIA GTC 2026 (via Raj Kumar, Head of AI Strategy) gained traction as a concise synthesis of what the agentic enterprise era means for large organizations.
 
-## Market Context (as cited by AgentLayer, 2026)
+## Market Context (as cited by [[agentlayer]], 2026)
 
 - **86%** of enterprises lack agent-ready architecture
 - **72%** plan to deploy agents in 2026, but only **14%** have production-ready systems
@@ -29,7 +29,7 @@ These figures highlight the gap between intent and readiness — governance infr
 
 ## The FORGE Framework
 
-AgentLayer's proprietary delivery methodology:
+[[agentlayer]]'s proprietary delivery methodology:
 
 - **Timeline**: 90 days to first production agent
 - **Efficiency target**: 60%+ process efficiency gain
@@ -45,11 +45,11 @@ AgentLayer's proprietary delivery methodology:
 
 ## Key Person
 
-**Raj Kumar** — Head of AI Strategy at AgentLayer. Active on LinkedIn synthesizing enterprise AI trends, particularly around NVIDIA's agentic ecosystem announcements.
+**Raj Kumar** — Head of AI Strategy at [[agentlayer]]. Active on LinkedIn synthesizing enterprise AI trends, particularly around NVIDIA's agentic ecosystem announcements.
 
 ## Positioning
 
-AgentLayer positions governance as the enterprise competitive moat in an era where agent *building* infrastructure is commoditizing. Their view: the differentiator is not who can build agents fastest, but who can govern, audit, and scale agent behavior responsibly.
+[[agentlayer]] positions governance as the enterprise competitive moat in an era where agent *building* infrastructure is commoditizing. Their view: the differentiator is not who can build agents fastest, but who can govern, audit, and scale agent behavior responsibly.
 
 This aligns with the broader trend of [enterprise AI governance](../concepts/enterprise-ai-governance.md) becoming a first-class architectural concern rather than an afterthought.
 

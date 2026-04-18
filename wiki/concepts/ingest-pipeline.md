@@ -25,7 +25,7 @@ The separation also enables multi-source ingestion without coupling source-speci
 
 ## Entry Points
 
-The OMM ingest system supports four categories of entry points:
+The [[oh-my-mermaid]] ingest system supports four categories of entry points:
 
 | Entry Point | Mechanism | Destination |
 |---|---|---|

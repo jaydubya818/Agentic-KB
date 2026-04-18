@@ -14,15 +14,15 @@ jay_experience: moderate
 
 ## Overview
 
-[[mcp-ecosystem]] ([[mcp-ecosystem]]) is an open protocol from [[anthropic]] that standardizes how AI agents connect to external tools, data sources, and services. Instead of each agent framework inventing its own plugin API, MCP defines a universal client/server interface: you write an MCP server once and any MCP-compatible host ([[framework-claude-code]], Claude Desktop, [[framework-openclaw]], custom harnesses) can use its tools.
+[[mcp-ecosystem]] ([[mcp-ecosystem]]) is an open protocol from [[anthropic]] that standardizes how AI agents connect to external tools, data sources, and services. Instead of each agent framework inventing its own plugin API, [[mcp-ecosystem]] defines a universal client/server interface: you write an [[mcp-ecosystem]] server once and any [[mcp-ecosystem]]-compatible host ([[framework-claude-code]], Claude Desktop, [[framework-openclaw]], custom harnesses) can use its tools.
 
-MCP is to AI agents what REST was to web services — a shared contract that decouples the consumer (the model/agent) from the provider (the tool implementation).
+[[mcp-ecosystem]] is to AI agents what REST was to web services — a shared contract that decouples the consumer (the model/agent) from the provider (the tool implementation).
 
 ---
 
 ## Core Concepts
 
-### What an MCP Server Can Expose
+### What an [[mcp-ecosystem]] Server Can Expose
 
 | Capability | Description | Example |
 |------------|-------------|---------|
@@ -30,27 +30,27 @@ MCP is to AI agents what REST was to web services — a shared contract that dec
 | **Resources** | File/data sources the model can read | `project://schema.sql`, `config://env` |
 | **Prompts** | Reusable prompt templates | `explain-error`, `write-test` |
 
-Most production MCP servers focus on **tools** — the callable function interface is the most broadly useful capability and maps directly to Claude's tool-use format.
+Most production [[mcp-ecosystem]] servers focus on **tools** — the callable function interface is the most broadly useful capability and maps directly to Claude's tool-use format.
 
 ### Protocol Mechanics
-MCP uses JSON-RPC 2.0 over stdio (for local servers) or HTTP+SSE (for remote servers). The flow:
+[[mcp-ecosystem]] uses JSON-RPC 2.0 over stdio (for local servers) or HTTP+SSE (for remote servers). The flow:
 
-1. Host (Claude Code) starts the MCP server as a subprocess or connects to its HTTP endpoint
+1. Host ([[framework-claude-code]]) starts the [[mcp-ecosystem]] server as a subprocess or connects to its HTTP endpoint
 2. Host calls `tools/list` to discover available tools
-3. Host includes tools in model requests (auto-injected by Claude Code)
-4. Model returns `tool_use` blocks targeting MCP tools
-5. Host routes the call to the MCP server via `tools/call`
+3. Host includes tools in model requests (auto-injected by [[framework-claude-code]])
+4. Model returns `tool_use` blocks targeting [[mcp-ecosystem]] tools
+5. Host routes the call to the [[mcp-ecosystem]] server via `tools/call`
 6. Server returns results; host injects as `tool_result`
 7. Loop continues until model stops calling tools
 
-Tool names in Claude Code are prefixed: `mcp__<server-name>__<tool-name>`.
+Tool names in [[framework-claude-code]] are prefixed: `mcp__<server-name>__<tool-name>`.
 
 ### Trust Model
-MCP servers run as separate processes with their own credentials and capabilities. Trust is not transitive:
+[[mcp-ecosystem]] servers run as separate processes with their own credentials and capabilities. Trust is not transitive:
 - **Registered servers are trusted** to their stated capability scope — but the model can be tricked into calling them with malicious inputs (prompt injection risk)
 - **Principle of least privilege**: expose only tools the agent actually needs
 - **Stdio servers** are more trusted (local process, same user) than HTTP servers (network-exposed, potentially remote)
-- **User confirmation** can be required per-tool via Claude Code's permission system
+- **User confirmation** can be required per-tool via [[framework-claude-code]]'s permission system
 
 Security risk: a tool that reads arbitrary files + a tool that posts to the internet = an exfiltration vector. Scope tools tightly.
 
@@ -74,8 +74,8 @@ Claude Code (MCP Host)
         └── return tool_result to model
 ```
 
-### Registration in Claude Code
-Register MCP servers in `~/.claude/mcp_servers.json` (global) or `.claude/mcp_servers.json` (project-level):
+### Registration in [[framework-claude-code]]
+Register [[mcp-ecosystem]] servers in `~/.claude/mcp_servers.json` (global) or `.claude/mcp_servers.json` (project-level):
 
 ```json
 {
@@ -102,18 +102,18 @@ Register MCP servers in `~/.claude/mcp_servers.json` (global) or `.claude/mcp_se
 
 ## Strengths
 
-- **Write once, use everywhere**: one MCP server works with Claude Code, Claude Desktop, OpenClaw, and any future MCP-compatible host
+- **Write once, use everywhere**: one [[mcp-ecosystem]] server works with [[framework-claude-code]], Claude Desktop, [[framework-openclaw]], and any future [[mcp-ecosystem]]-compatible host
 - **Separation of concerns**: tool implementation is decoupled from the agent; update the server without changing agent prompts
 - **Rich ecosystem**: growing library of pre-built servers (Figma, context7, firecrawl, exa, Postgres, filesystem, GitHub, etc.)
-- **Resources capability**: MCP resources give agents a structured way to read external data without arbitrary file access
+- **Resources capability**: [[mcp-ecosystem]] resources give agents a structured way to read external data without arbitrary file access
 - **Prompted templates**: standardized prompt sharing across teams and tools
 
 ---
 
 ## Weaknesses
 
-- **Overhead**: each MCP call is a round-trip IPC or HTTP request — adds latency vs. native tool execution
-- **Debugging**: failures in MCP servers are opaque from the model's perspective; need separate server logs
+- **Overhead**: each [[mcp-ecosystem]] call is a round-trip IPC or HTTP request — adds latency vs. native tool execution
+- **Debugging**: failures in [[mcp-ecosystem]] servers are opaque from the model's perspective; need separate server logs
 - **Versioning complexity**: server API changes can silently break agent behavior
 - **Security surface**: each server is an attack surface; malicious tool results can contain prompt injections
 - **stdio limitation**: local stdio servers aren't horizontally scalable; HTTP servers add deployment complexity
@@ -122,7 +122,7 @@ Register MCP servers in `~/.claude/mcp_servers.json` (global) or `.claude/mcp_se
 
 ## Minimal Working Examples
 
-### TypeScript MCP Server (2 tools)
+### TypeScript [[mcp-ecosystem]] Server (2 tools)
 
 ```typescript
 import { Server } from "@modelcontextprotocol/sdk/server/index.js"
@@ -205,7 +205,7 @@ const transport = new StdioServerTransport()
 await server.connect(transport)
 ```
 
-### Python MCP Server (minimal)
+### Python [[mcp-ecosystem]] Server (minimal)
 
 ```python
 from mcp.server import Server
@@ -243,11 +243,11 @@ asyncio.run(main())
 
 ---
 
-## Ecosystem — Known MCP Servers
+## Ecosystem — Known [[mcp-ecosystem]] Servers
 
 | Server | Function | Install |
 |--------|----------|---------|
-| **Figma MCP** | Read Figma designs, write back, Code Connect | claude.ai Figma integration |
+| **Figma [[mcp-ecosystem]]** | Read Figma designs, write back, Code Connect | claude.ai Figma integration |
 | **context7** | Library documentation lookup (resolves `use context7`) | `npx @upstash/context7-mcp` |
 | **firecrawl** | Web scraping and crawling with structured output | `npx firecrawl-mcp` |
 | **exa** | Semantic web search | `npx exa-mcp-server` |
@@ -258,47 +258,47 @@ asyncio.run(main())
 
 ---
 
-## MCP vs Direct Tool Use
+## [[mcp-ecosystem]] vs Direct Tool Use
 
-| Dimension | MCP Server | Native Claude Code Tool |
+| Dimension | [[mcp-ecosystem]] Server | Native [[framework-claude-code]] Tool |
 |-----------|-----------|------------------------|
-| Portability | Any MCP host | Claude Code only |
+| Portability | Any [[mcp-ecosystem]] host | [[framework-claude-code]] only |
 | Setup | Server process + registration | Hook or built-in |
 | Latency | IPC/HTTP overhead | Near-zero |
 | Debugging | Separate server logs | Inline with session |
 | Sharing | Easy (publish as npm package) | Hard (copy hooks) |
 | Security | Isolated process | Same process as CC |
 
-**Use MCP when**: you want the tool available across multiple agents/hosts, or the tool is complex enough to warrant its own process (DB connections, browser sessions, external APIs).
+**Use [[mcp-ecosystem]] when**: you want the tool available across multiple agents/hosts, or the tool is complex enough to warrant its own process (DB connections, browser sessions, external APIs).
 
-**Use native Claude Code hooks when**: the automation is simple, performance-critical, or tightly coupled to Claude Code's internal state.
+**Use native [[framework-claude-code]] hooks when**: the automation is simple, performance-critical, or tightly coupled to [[framework-claude-code]]'s internal state.
 
 ---
 
 ## Integration Points
 
-- **[[frameworks/framework-claude-code]]**: MCP servers are consumed by Claude Code; tools appear in the model's tool array automatically
-- **[[frameworks/framework-claude-api]]**: Tool call format from MCP is identical to the raw API tool format; MCP is just a delivery mechanism
-- **[[entities/mcp-ecosystem]]**: Catalog of available MCP servers
-- **[[entities/anthropic]]**: Anthropic owns the MCP specification and reference implementations
-- **[[recipes/recipe-mcp-server]]**: Step-by-step guide to writing and registering a custom MCP server
+- **[[frameworks/framework-claude-code]]**: [[mcp-ecosystem]] servers are consumed by [[framework-claude-code]]; tools appear in the model's tool array automatically
+- **[[frameworks/framework-claude-api]]**: Tool call format from [[mcp-ecosystem]] is identical to the raw API tool format; [[mcp-ecosystem]] is just a delivery mechanism
+- **[[entities/mcp-ecosystem]]**: Catalog of available [[mcp-ecosystem]] servers
+- **[[entities/anthropic]]**: [[anthropic]] owns the [[mcp-ecosystem]] specification and reference implementations
+- **[[recipes/recipe-mcp-server]]**: Step-by-step guide to writing and registering a custom [[mcp-ecosystem]] server
 
 ---
 
 ## Jay's Experience
 
-Jay runs several MCP servers including his LLM Wiki KB server (exposes this knowledge base as tools) and Figma MCP for design-to-code work. Key findings:
+Jay runs several [[mcp-ecosystem]] servers including his [[llm-wiki]] KB server (exposes this knowledge base as tools) and Figma [[mcp-ecosystem]] for design-to-code work. Key findings:
 
-1. **stdio servers are simpler to debug**: process logs go to stderr, visible in Claude Code's output. HTTP servers need separate infrastructure.
+1. **stdio servers are simpler to debug**: process logs go to stderr, visible in [[framework-claude-code]]'s output. HTTP servers need separate infrastructure.
 2. **Tool descriptions are load-bearing**: the model's tool selection depends heavily on the `description` field — write it like documentation, not like a function signature.
-3. **Namespace your tools**: `mcp__server__toolname` is verbose but collision-free. If a server exposes tools with names that clash with built-in Claude Code tools, the MCP version wins.
-4. **Security first**: Jay's KB server is read-only; the MCP server never writes to the wiki (that's Claude Code's job). Principle of least privilege.
+3. **Namespace your tools**: `mcp__server__toolname` is verbose but collision-free. If a server exposes tools with names that clash with built-in [[framework-claude-code]] tools, the [[mcp-ecosystem]] version wins.
+4. **Security first**: Jay's KB server is read-only; the [[mcp-ecosystem]] server never writes to the wiki (that's [[framework-claude-code]]'s job). Principle of least privilege.
 
 ---
 
 ## Version Notes
 
-- MCP 1.x: stable JSON-RPC 2.0 over stdio; HTTP+SSE transport available but less common in local setups
+- [[mcp-ecosystem]] 1.x: stable JSON-RPC 2.0 over stdio; HTTP+SSE transport available but less common in local setups
 - TypeScript SDK: `@modelcontextprotocol/sdk` — check npm for latest
 - Python SDK: `mcp` package on PyPI
 
@@ -306,8 +306,8 @@ Jay runs several MCP servers including his LLM Wiki KB server (exposes this know
 
 ## Sources
 
-- Jay's `~/.claude/settings.json` (MCP permissions)
-- Jay's `/Users/jaywest/My LLM Wiki/packages/mcp/` (KB MCP server)
+- Jay's `~/.claude/settings.json` ([[mcp-ecosystem]] permissions)
+- Jay's `/Users/jaywest/My LLM Wiki/packages/mcp/` (KB [[mcp-ecosystem]] server)
 - [[entities/mcp-ecosystem]]
 - [[entities/anthropic]]
 - [[recipes/recipe-mcp-server]]

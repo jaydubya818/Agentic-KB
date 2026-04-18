@@ -50,7 +50,7 @@ Layered architecture: `app/ → core/ → agents/ → tools/ → rag/ → eval/ 
 "Prompting is interface design." Specify role, task, constraints, output schema, examples, and tool-use policies. Version prompts like code. Context budgeting = allocating % of window to instructions/chat/docs/memory; enforce and compress when exceeded. See [[concepts/context-management]].
 
 ### On Framework Selection
-**LangGraph** is recommended for production: explicit state machines, checkpointing, retries, HITL. **CrewAI** for role-based multi-agent. **AutoGen** for agent-to-agent chat. Key anti-pattern: treating framework as architecture. Framework is an implementation tool; architecture is your state model, tool boundaries, data contracts, and safety rules. Aligns with [[evaluations/eval-orchestration-frameworks]].
+**[[framework-langgraph]]** is recommended for production: explicit state machines, checkpointing, retries, HITL. **[[framework-crewai]]** for role-based multi-agent. **[[framework-autogen]]** for agent-to-agent chat. Key anti-pattern: treating framework as architecture. Framework is an implementation tool; architecture is your state model, tool boundaries, data contracts, and safety rules. Aligns with [[evaluations/eval-orchestration-frameworks]].
 
 ### On Memory
 Three memory types that complement each other:
@@ -111,7 +111,7 @@ Production readiness = reliability + safety + observability + maintainability + 
 
 ## Contradictions with Existing KB
 
-None found. Framework ranking (LangGraph for production, GSD for Jay's stack) is complementary — Siagian writes from a Python/LangChain ecosystem perspective; Jay's stack is Claude Code-first.
+None found. Framework ranking ([[framework-langgraph]] for production, GSD for Jay's stack) is complementary — Siagian writes from a Python/LangChain ecosystem perspective; Jay's stack is [[framework-claude-code]]-first.
 
 ---
 

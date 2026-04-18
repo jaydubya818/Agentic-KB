@@ -13,18 +13,18 @@ updated: 2026-04-09
 
 ## Executive Summary
 
-Agentic-KB is a persistent, compounding knowledge base for agentic AI systems. It organizes Jay West's research, patterns, frameworks, and validated learnings into a searchable, cross-linked wiki that powers a CLI tool, web UI, MCP server, and agent runtime. The system itself implements agentic patterns—parallel ingestion, fan-out compilation, reflection-based linting.
+Agentic-KB is a persistent, compounding knowledge base for agentic AI systems. It organizes Jay West's research, patterns, frameworks, and validated learnings into a searchable, cross-linked wiki that powers a CLI tool, web UI, [[mcp-ecosystem]] server, and agent runtime. The system itself implements agentic patterns—parallel ingestion, [[pattern-fan-out-worker]] compilation, reflection-based linting.
 
 ## User Personas
 
 ### Primary User: Jay West (Knowledge Architect)
 - Builds agentic systems; needs to capture and recall patterns across projects
-- Runs monthly lint passes; maintains index and hot cache
+- Runs monthly lint passes; maintains index and [[pattern-hot-cache]]
 - Feeds raw sources (papers, transcripts, code) into ingestion pipeline
 - Queries the KB for inspiration on architectural decisions
 
-### Secondary User: Agent Consumer (MCP Client)
-- Asks KB questions via MCP server API or CLI
+### Secondary User: Agent Consumer ([[mcp-ecosystem]] Client)
+- Asks KB questions via [[mcp-ecosystem]] server API or CLI
 - Gets structured answers with citations and links
 - Needs up-to-date framework info and pattern recommendations
 
@@ -37,7 +37,7 @@ Agentic-KB is a persistent, compounding knowledge base for agentic AI systems. I
 
 ### 1. Wiki Compilation & Organization
 - **Concept pages**: Foundational ideas (agent loop, context windows, tool use, state management)
-- **Pattern pages**: Reusable design patterns (supervisor-worker, fan-out-worker, reflection loops)
+- **Pattern pages**: Reusable design patterns ([[pattern-supervisor-worker]], [[pattern-fan-out-worker]]-worker, reflection loops)
 - **Framework pages**: Third-party tools with strengths, weaknesses, Jay's experience level
 - **Recipe pages**: Step-by-step implementation guides with test status
 - **Synthesis pages**: Cross-source analysis and comparisons
@@ -48,13 +48,13 @@ Agentic-KB is a persistent, compounding knowledge base for agentic AI systems. I
 - Creates summary pages (1:1 per source) and synthesizes into existing wiki structure
 - Flags contradictions for review
 - Updates index and log automatically
-- Supports parallel fan-out ingestion via agents
+- Supports parallel [[pattern-fan-out-worker]] ingestion via agents
 
 ### 3. Query Interface
 - **CLI**: `npm run query "your question"` → synthesized answer with citations
 - **Web UI**: Search, filter by type/tag, browse index
-- **MCP Server**: Structured queries from other agents (MissionControl, Pi harness)
-- **Hot Cache**: ≤500 words of most-accessed patterns for fast retrieval
+- **[[mcp-ecosystem]] Server**: Structured queries from other agents (MissionControl, Pi harness)
+- **[[pattern-hot-cache]]**: ≤500 words of most-accessed patterns for fast retrieval
 
 ### 4. Health & Maintenance
 - **Monthly lint**: Detect orphan pages, stale frameworks, untested recipes, missing links
@@ -83,7 +83,7 @@ Agentic-KB is a persistent, compounding knowledge base for agentic AI systems. I
 ### Scalability
 - Current: 47 pages, ~100k tokens
 - Growth target: 10-15 pages/month (sustainable rate)
-- At scale (200 pages): Hot cache becomes critical for query performance
+- At scale (200 pages): [[pattern-hot-cache]] becomes critical for query performance
 - Graphify visualization essential for discovering connections
 
 ### Completeness
@@ -95,15 +95,15 @@ Agentic-KB is a persistent, compounding knowledge base for agentic AI systems. I
 
 1. **KB is consulted before major architectural decisions** — Jay uses KB as reference for projects
 2. **Lint passes monthly** — Orphan pages caught, frameworks kept current, recipes validated
-3. **Hot cache drives 50%+ of queries** — Most-accessed patterns accessible in <100 words
+3. **[[pattern-hot-cache]] drives 50%+ of queries** — Most-accessed patterns accessible in <100 words
 4. **No contradictions older than 1 month** — Source conflicts resolved promptly
 5. **≥70% of recipes tested** — Patterns validated on real projects
-6. **MCP/CLI/Web all operational** — Multiple consumption paths working
+6. **[[mcp-ecosystem]]/CLI/Web all operational** — Multiple consumption paths working
 
 ## Roadmap
 
 ### Q2 2026
-- [ ] Complete framework sync (LangGraph, AutoGen, CrewAI, OpenClaw)
+- [ ] Complete framework sync ([[framework-langgraph]], [[framework-autogen]], [[framework-crewai]], [[framework-openclaw]])
 - [ ] Recipe testing campaign (2/4 → 4/8 recipes validated)
 - [ ] Safety patterns section created (3 new pages)
 - [ ] Graphify integration (visual KB browsing)

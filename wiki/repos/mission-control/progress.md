@@ -15,7 +15,7 @@ updated: 2026-04-09
 ### 1. Fleet Orchestration
 **Status**: In Progress | **Owner**: Jay West | **Due**: 2026-04-25
 
-- [x] Supervisor-worker pattern implemented
+- [x] [[pattern-supervisor-worker]] pattern implemented
 - [x] Task assignment to Pi workers
 - [ ] Multi-Pi coordination (failover, rebalancing)
 - [ ] Task batching for efficiency
@@ -44,7 +44,7 @@ updated: 2026-04-09
 
 ## Completed (Last 30 days)
 
-- ✅ Supervisor-worker pattern deployed
+- ✅ [[pattern-supervisor-worker]] pattern deployed
 - ✅ Load balancing implemented
 - ✅ Basic health monitoring
 

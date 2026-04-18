@@ -13,11 +13,11 @@ updated: 2026-04-09
 
 ## Executive Summary
 
-MissionControl is a multi-agent orchestration and mission planning system. It coordinates distributed agent networks (cloud-based supervisors, Pi edge workers), manages task assignment and execution, monitors fleet health, and provides observability dashboards. The system implements supervisor-worker and load-balancing patterns from Agentic-KB, optimized for both cloud and edge deployments.
+MissionControl is a multi-agent orchestration and mission planning system. It coordinates distributed agent networks (cloud-based supervisors, Pi edge workers), manages task assignment and execution, monitors fleet health, and provides observability dashboards. The system implements [[pattern-supervisor-worker]] and load-balancing patterns from Agentic-KB, optimized for both cloud and edge deployments.
 
 ## Core Features
 
-1. **Multi-Agent Orchestration** — Supervisor-worker pattern for task distribution
+1. **Multi-Agent Orchestration** — [[pattern-supervisor-worker]] pattern for task distribution
 2. **Fleet Management** — Track, health-check, and coordinate 20+ Pi devices
 3. **Load Balancing** — Assign tasks based on agent capacity and current load
 4. **Observability** — Real-time dashboards, metrics, alerts

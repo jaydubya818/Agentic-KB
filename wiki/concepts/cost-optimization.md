@@ -116,7 +116,7 @@ messages = [
 ]
 ```
 
-**Explicit cache control** (Anthropic API):
+**Explicit cache control** ([[anthropic]] API):
 ```python
 response = client.messages.create(
     model="claude-sonnet-4-6",
@@ -166,7 +166,7 @@ def semantic_cache_lookup(query: str, cache: VectorCache, threshold: float = 0.9
 
 ### Batching
 
-Group independent LLM calls into batches. Anthropic's batch API provides ~50% cost discount with ~24-hour turnaround:
+Group independent LLM calls into batches. [[anthropic]]'s batch API provides ~50% cost discount with ~24-hour turnaround:
 
 ```python
 # Use for: nightly evals, bulk processing, non-realtime tasks
@@ -253,6 +253,6 @@ Track cost per task type to identify expensive paths and target optimizations.
 
 ## Sources
 
-- Anthropic Pricing and Token documentation (2025)
-- Anthropic Prompt Caching documentation (2025)
+- [[anthropic]] Pricing and Token documentation (2025)
+- [[anthropic]] Prompt Caching documentation (2025)
 - LLM cost engineering practices from production deployments

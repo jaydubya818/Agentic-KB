@@ -22,7 +22,7 @@ confidence: medium
 # Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026
 
 ## Source
-LinkedIn post by Raj Kumar, Head of AI Strategy at [[agentlayer]], captured April 6, 2026. Related site: https://agentlayer-ai.netlify.app/. **Note:** This is a vendor-authored LinkedIn post with marketing intent; statistics (86%, 72%, $52B) are AgentLayer-sourced and unverified.
+LinkedIn post by Raj Kumar, Head of AI Strategy at [[agentlayer]], captured April 6, 2026. Related site: https://agentlayer-ai.netlify.app/. **Note:** This is a vendor-authored LinkedIn post with marketing intent; statistics (86%, 72%, $52B) are [[agentlayer]]-sourced and unverified.
 
 ## Core Claim
 NVIDIA GTC 2026 marked the formal start of the "Agentic Enterprise" era. NVIDIA launched an open-source Agent Toolkit with Adobe, Salesforce, SAP, and 13 other platform partners. Jensen Huang framed it as employees being "supercharged by teams of frontier, specialized and custom-built agents."
@@ -37,13 +37,13 @@ NVIDIA GTC 2026 marked the formal start of the "Agentic Enterprise" era. NVIDIA 
 ### The Org Chart Is Changing
 - New structure: human roles + agent roles operating as a hybrid workforce
 - Leaders designing for this now are projected to outperform laggards
-- AgentLayer stat: 86% of enterprises lack agent-ready architecture; only 14% have production-ready systems
+- [[agentlayer]] stat: 86% of enterprises lack agent-ready architecture; only 14% have production-ready systems
 
 ### Governance as Competitive Moat
 - With open-source infrastructure commoditizing build, governance = differentiation
 - Compliance, auditability, and responsible scaling are the hard problems
 
-## 20 Enterprise AI Compliance Requirements (per AgentLayer)
+## 20 Enterprise AI Compliance Requirements (per [[agentlayer]])
 
 Grouped thematically:
 
@@ -79,11 +79,11 @@ Grouped thematically:
 19. Enable Logging & Audits (track inputs, outputs, decisions)
 20. Secure AI Infrastructure (protect models, pipelines, APIs)
 
-## AgentLayer's FORGE Framework
+## [[agentlayer]]'s FORGE Framework
 - **Goal:** 90 days to first production agent, 60%+ process efficiency, Q1 ROI
 - **Five pillars:** Workforce Architecture Design, Enterprise Deployment Engineering, Human-in-the-Loop Workflow Design, Agent Operations (AgentOps), Risk Governance/Security/Compliance
 
-## Market Context (AgentLayer-cited, treat as estimates)
+## Market Context ([[agentlayer]]-cited, treat as estimates)
 - $52B projected AI agent market by 2030, 46% CAGR
 - 72% of enterprises plan agent deployment in 2026
 - Gap between 2025 experimenters and 2026 deployers is widening

@@ -28,7 +28,7 @@ The barrier to *building* agents is falling rapidly — NVIDIA's open-source Age
 - Agents act autonomously, making decisions that may be difficult to explain or reverse
 - Enterprise data, legal liability, and user trust are all on the line
 - Regulatory frameworks (EU AI Act and equivalents) impose hard compliance requirements
-- 86% of enterprises reportedly lack agent-ready governance architecture (AgentLayer, 2026)
+- 86% of enterprises reportedly lack agent-ready governance architecture ([[agentlayer]], 2026)
 
 ## The 20 Enterprise AI Compliance Requirements
 

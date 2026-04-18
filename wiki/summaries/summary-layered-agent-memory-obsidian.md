@@ -19,9 +19,9 @@ confidence: medium
 # Summary: Layered Agent Memory — Obsidian-Backed 4-Layer System
 
 ## Source
-Video transcript demonstrating an Obsidian-based memory architecture for AI agents. Demonstrated with OpenClaw/Hermes; the underlying architecture patterns are framework-agnostic.
+Video transcript demonstrating an Obsidian-based memory architecture for AI agents. Demonstrated with [[framework-openclaw]]/Hermes; the underlying architecture patterns are framework-agnostic.
 
-> **Note:** Patterns extracted here are generalized. No OpenClaw-specific implementation details are applied to this KB.
+> **Note:** Patterns extracted here are generalized. No [[framework-openclaw]]-specific implementation details are applied to this KB.
 
 ---
 
@@ -80,7 +80,7 @@ A dedicated `mistakes.md` file receives entries any time the user flags an error
 ## Key Claims
 - "I haven't noticed a single compaction since putting in this system" [UNVERIFIED — subjective, single source]
 - Write cadence of every 3–5 tool calls prevents context loss without overloading the vault
-- Shared workspace enables seamless handoff between agents (e.g., Hermes drafts a script → OpenClaw resumes it)
+- Shared workspace enables seamless handoff between agents (e.g., Hermes drafts a script → [[framework-openclaw]] resumes it)
 
 ---
 
