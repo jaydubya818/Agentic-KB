@@ -9,6 +9,17 @@ type: meta
 
 ---
 
+## 2026-04-18 (AUTORESEARCH — agent evaluation harnesses, Round 1)
+
+- [[wiki/frameworks/framework-inspect-ai|Inspect AI]] — UK AISI OSS eval framework; three primitives (datasets/solvers/scorers), sandbox defaults, Agent Bridge for 3rd-party agents, [[mcp-ecosystem]] support
+- [[wiki/frameworks/framework-promptfoo|promptfoo]] — Declarative YAML eval + red-team CLI; now [[openai]]-owned, MIT; CI/CD native, local-first
+- [[wiki/frameworks/framework-deepeval|DeepEval]] — Pytest-native eval with 50+ research-backed metrics including named agent metrics (PlanQuality, ToolCalling, ArgumentCorrectness)
+- [[wiki/frameworks/framework-langsmith|LangSmith]] — LangChain's proprietary eval + observability SaaS; unique trace-to-dataset workflow; deep [[framework-langgraph]] integration
+- [[wiki/summaries/inspect-ai-framework-docs|Summary: Inspect AI docs]]
+- [[wiki/summaries/promptfoo-framework-docs|Summary: promptfoo docs]]
+- [[wiki/summaries/deepeval-framework-docs|Summary: DeepEval docs]]
+- [[wiki/summaries/langsmith-framework-docs|Summary: LangSmith docs]]
+
 ## 2026-04-10 (INGEST)
 
 - [[wiki/concepts/rag-systems|RAG Systems]] — Comprehensive concept page: chunking strategy, hybrid retrieval, re-ranking, HyDE, grounded generation, citation verification, metadata filtering, index freshness, evaluation metrics (recall@k/MRR/nDCG), failure modes table, RAG vs [[llm-wiki]] comparison

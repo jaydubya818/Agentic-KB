@@ -70,7 +70,7 @@ Applied to skill files and CLAUDE.md: the routing/priority rules and the hardest
 
 The U-shaped attention curve (Liu et al. "Lost in the Middle" 2023) is the canonical evidence for aggressive context curation — but subsequent work shows the effect is partially an artifact of position-embedding choices in older models. Frontier long-context models (Claude 3+, Gemini 1.5+) exhibit substantially flatter attention curves across 100k+ tokens; the "middle" failure mode may be smaller than the folk advice suggests for current-generation models.
 
-Summarisation as a context-management strategy is lossy in ways that are hard to audit. The summary is a model-written artefact that the next model step treats as authoritative; errors compound silently. Anthropic's own research on context compression shows that preserving raw references with targeted retrieval beats summary-based compression on recall tasks.
+Summarisation as a context-management strategy is lossy in ways that are hard to audit. The summary is a model-written artefact that the next model step treats as authoritative; errors compound silently. [[anthropic]]'s own research on context compression shows that preserving raw references with targeted retrieval beats summary-based compression on recall tasks.
 
 Tight context budgets can induce sycophantic shortcutting. When the model's scratchpad is aggressively pruned, it can lose the intermediate reasoning needed to catch errors — the cost-optimization win becomes a quality loss that doesn't show up until production. The right budget is task-dependent and experimental, not a universal rule.
 

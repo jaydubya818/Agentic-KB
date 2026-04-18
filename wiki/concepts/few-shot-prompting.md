@@ -177,7 +177,7 @@ Min et al. (2022) produced the most counter-intuitive result in few-shot researc
 
 Lu et al. (2022) show that example ordering alone can swing performance by 20+ points on classification tasks — which means published few-shot numbers are often not reproducible without the exact example order. The technique is far less robust than academic reporting suggests.
 
-Frontier instruction-tuned models have largely absorbed the behaviours that few-shot was compensating for in the GPT-3 era. On Claude 3+ and GPT-4+, zero-shot with a clear task description frequently matches or beats few-shot on classification and extraction tasks at a fraction of the token cost. The Karpathy-era intuition that "more examples are always better" is domain-specific.
+Frontier instruction-tuned models have largely absorbed the behaviours that few-shot was compensating for in the GPT-3 era. On Claude 3+ and GPT-4+, zero-shot with a clear task description frequently matches or beats few-shot on classification and extraction tasks at a fraction of the token cost. The [[andrej-karpathy]]-era intuition that "more examples are always better" is domain-specific.
 
 Open questions: (a) does the Min et al. "labels don't matter" finding hold for reasoning-trained models, or does it dissolve once the model actually reasons over demonstrations? (b) At what instruction-following capability does few-shot start costing more than it returns?
 

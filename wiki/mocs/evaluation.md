@@ -37,9 +37,18 @@ updated: 2026-04-10
 
 ## Frameworks
 
+### Eval-First Frameworks (added 2026-04-18 via /autoresearch)
+
+- [[frameworks/framework-inspect-ai]] — UK AISI open-source eval framework; strongest agent + sandbox story in the cohort
+- [[frameworks/framework-deepeval]] — Pytest-native eval with named agent metrics (PlanQuality, ToolCalling, ArgumentCorrectness)
+- [[frameworks/framework-promptfoo]] — Declarative YAML eval + red-team CLI; now [[openai]]-owned, MIT
+- [[frameworks/framework-langsmith]] — LangChain's proprietary eval + observability SaaS; unique trace-to-dataset workflow
+
+### Agent-Stack Frameworks with Eval Features
+
 - [[frameworks/framework-gsd]] — GSD verifier agent: four-level artifact check, stub detection, data-flow trace
 - [[frameworks/framework-claude-code]] — [[framework-claude-code]]: built-in test running, hook-based verification
-- [[frameworks/framework-langgraph]] — LangSmith evaluation integration for [[framework-langgraph]] agents
+- [[frameworks/framework-langgraph]] — [[framework-langsmith]] evaluation integration for [[framework-langgraph]] agents
 
 ---
 
@@ -63,6 +72,9 @@ The V2 runtime uses promotion scoring as an inline evaluation mechanism:
 ## Key Summaries
 
 - [[summaries/siagian-agentic-engineer-roadmap-2026]] — Eval section: RAG metrics (recall@k, MRR, nDCG), agent task suites, error buckets, CI/CD blocking on metric regression
-
 - [[summaries/summary-gsd-verifier]] — GSD Verifier agent: four-level check, stub detection, re-verification protocol
 - [[summaries/summary-code-reviewer-agent]] — Code review as evaluation: severity levels, six dimensions, plan alignment
+- [[summaries/inspect-ai-framework-docs]] — Inspect AI (UK AISI): three-primitive eval, sandbox defaults, Agent Bridge
+- [[summaries/deepeval-framework-docs]] — DeepEval (Confident AI): 50+ metrics, named agent metrics, Pytest-native
+- [[summaries/promptfoo-framework-docs]] — promptfoo ([[openai]]-owned, MIT): declarative YAML, red-team first-class, CI/CD native
+- [[summaries/langsmith-framework-docs]] — LangSmith (LangChain): trace-to-dataset workflow, unified eval + observability

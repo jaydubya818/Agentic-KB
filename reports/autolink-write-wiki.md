@@ -73,7 +73,7 @@
 - `Claude Code` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
 
-### wiki/patterns/pattern-fan-out-worker.md
+### wiki/patterns/pattern-[[pattern-fan-out-worker]]-worker.md
 - `Claude Code` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
 - `fan-out` → 1 replacement(s)
@@ -98,7 +98,7 @@
 ### wiki/patterns/pattern-task-breakdown-agent.md
 - `fan-out` → 1 replacement(s)
 
-### wiki/patterns/pattern-supervisor-worker.md
+### wiki/patterns/pattern-[[pattern-supervisor-worker]].md
 - `LangGraph` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
 
@@ -113,7 +113,7 @@
 ### wiki/patterns/pattern-llm-wiki.md
 - `Andrej Karpathy` → 1 replacement(s)
 
-### wiki/patterns/pattern-plan-execute-verify.md
+### wiki/patterns/pattern-[[pattern-plan-execute-verify]].md
 - `Anthropic` → 1 replacement(s)
 
 ### wiki/patterns/pattern-rolling-summary.md
@@ -133,7 +133,7 @@
 - `multi-agent system` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
 
-### wiki/patterns/pattern-read-before-write.md
+### wiki/patterns/pattern-[[pattern-read-before-write]].md
 - `Read-Before-Write` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
 
@@ -273,7 +273,7 @@
 - `Karpathy` → 1 replacement(s)
 - `LLM Wiki` → 1 replacement(s)
 
-### wiki/concepts/llm-as-judge.md
+### wiki/concepts/[[llm-as-judge]].md
 - `LLM-as-Judge` → 1 replacement(s)
 
 ### wiki/concepts/human-in-the-loop.md
@@ -421,7 +421,7 @@
 - `BMAD` → 1 replacement(s)
 - `MCP` → 1 replacement(s)
 
-### wiki/frameworks/framework-crewai.md
+### wiki/frameworks/framework-[[framework-crewai]].md
 - `Claude Code` → 1 replacement(s)
 - `LangGraph` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
@@ -429,20 +429,20 @@
 - `CrewAI` → 1 replacement(s)
 - `OpenAI` → 1 replacement(s)
 
-### wiki/frameworks/framework-langgraph.md
+### wiki/frameworks/framework-[[framework-langgraph]].md
 - `LangGraph` → 1 replacement(s)
 
 ### wiki/frameworks/framework-gsd.md
 - `multi-agent system` → 1 replacement(s)
 
-### wiki/frameworks/framework-openclaw.md
+### wiki/frameworks/framework-[[framework-openclaw]].md
 - `Claude Code` → 1 replacement(s)
 - `Superpowers` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
 - `OpenClaw` → 1 replacement(s)
 - `MCP` → 1 replacement(s)
 
-### wiki/frameworks/framework-rowboat.md
+### wiki/frameworks/framework-[[framework-rowboat]].md
 - `Claude Code` → 1 replacement(s)
 - `Anthropic` → 1 replacement(s)
 - `OpenClaw` → 1 replacement(s)
@@ -481,7 +481,7 @@
 - `Anthropic` → 1 replacement(s)
 - `OpenAI` → 1 replacement(s)
 
-### wiki/entities/oh-my-mermaid.md
+### wiki/entities/[[oh-my-mermaid]].md
 - `omm` → 1 replacement(s)
 
 ### wiki/entities/agentlayer.md

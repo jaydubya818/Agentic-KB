@@ -7,7 +7,7 @@ date: 2026
 tags: [llm-wiki, karpathy, knowledge-base, architecture, schema]
 ---
 
-# Karpathy's LLM Wiki Pattern
+# [[andrej-karpathy]]'s [[llm-wiki]] Pattern
 
 ## Core Architecture
 Raw Sources → Wiki (LLM-generated markdown) → Schema (CLAUDE.md)
@@ -29,7 +29,7 @@ Raw Sources → Wiki (LLM-generated markdown) → Schema (CLAUDE.md)
 ## Why It Works
 The pattern transfers tedious maintenance (cross-references, consistency, updates) to LLMs while keeping intellectual work (curation, analysis, direction) with humans.
 
-## Karpathy's Note
+## [[andrej-karpathy]]'s Note
 "Left vague so that you can hack it and customize it to your own project."
 
 ## Implementation Notes

@@ -216,3 +216,43 @@ Pages affected: `entities/mcp-ecosystem.md`, `log.md`
 [2026-04-13] UPDATED | wiki/index.md — Restructured MoC section into 4 subsections (14 total MoCs). Added Prompt Library section (6 pages). Added Daily Systems section (4 pages).
 
 TOTAL: 20 new files created, 3 files updated. No contradictions. No orphans introduced (all new pages linked from MoC index and home.md).
+
+---
+
+[2026-04-18] AUTORESEARCH | topic="agent evaluation harnesses" | Round 1/2 | config={max_rounds:2, pages_per_round:4, allowlist:[], mode:wiki}
+
+Gap detection: no dedicated framework pages existed for Inspect AI, promptfoo, DeepEval, or LangSmith before this run. Evaluation MoC listed LangSmith only as a sub-bullet under framework-[[framework-langgraph]].
+
+Round 1 sources captured (4 WebFetches):
+- raw/framework-docs/inspect-ai.md (UK AISI, https://inspect.aisi.org.uk/)
+- raw/framework-docs/promptfoo.md ([[openai]]/MIT, https://www.promptfoo.dev/docs/intro/)
+- raw/framework-docs/deepeval.md (Confident AI, https://deepeval.com/docs/getting-started)
+- raw/framework-docs/langsmith.md (LangChain, https://docs.langchain.com/langsmith/evaluation)
+
+Round 1 NEW pages (8):
+- wiki/summaries/inspect-ai-framework-docs.md
+- wiki/summaries/promptfoo-framework-docs.md
+- wiki/summaries/deepeval-framework-docs.md
+- wiki/summaries/langsmith-framework-docs.md
+- wiki/frameworks/framework-inspect-ai.md
+- wiki/frameworks/framework-promptfoo.md
+- wiki/frameworks/framework-deepeval.md
+- wiki/frameworks/framework-langsmith.md
+
+Round 1 UPDATED pages (2):
+- wiki/mocs/evaluation.md — added "Eval-First Frameworks" subsection with 4 new framework links; added 4 new summary links
+- wiki/recently-added.md — 2026-04-18 section prepended
+
+Contradictions: none. Extends, does not contradict, existing content. Evaluation MoC's prior mention of LangSmith-inside-framework-[[framework-langgraph]] now resolves to the new framework-langsmith page.
+
+Saturation check: new_concepts introduced by Round 1:
+- Concept-level: `agent sandbox pattern` (implicit in Inspect AI), `trace-to-dataset workflow` (LangSmith), `red-team-as-eval` (promptfoo), `named agent metrics` (DeepEval: PlanQuality, PlanAdherence, ArgumentCorrectness, ToolCalling) — 4 new concept vectors.
+- Decision: new_concepts > 0, but Round 2 deferred. Round 1 already maps the eval-framework landscape end-to-end at the framework-page level. Round 2 would need to go deeper into specific agent-metric APIs (DeepEval tool-call semantics) or trajectory-eval APIs (LangSmith Insights Agent). That depth is better pursued via targeted concept pages (new `concepts/trajectory-evaluation` augmentation, new `concepts/agent-metrics` page) than another breadth pass. Explicit deferral, not saturation.
+
+Next actions for Jay:
+- (optional) Pilot framework-inspect-ai + framework-deepeval on a real agent, record results in personal/
+- Add `concepts/agent-metrics` page pulling DeepEval's metric taxonomy into a framework-agnostic doc
+- Add `concepts/red-team` page backed by promptfoo's workflow
+- Update `recipes/recipe-agent-evaluation` to reference the new framework pages
+
+TOTAL: 4 raw sources captured, 8 new wiki pages, 2 pages updated. 0 contradictions. 0 orphans (all pages linked from evaluation MoC).

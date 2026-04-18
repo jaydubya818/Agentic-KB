@@ -90,7 +90,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Frameworks (12)
+## Frameworks (16)
 
 | Page | Vendor | Version | Jay's Experience | Last Checked |
 |------|--------|---------|-----------------|--------------|
@@ -100,10 +100,14 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[frameworks/framework-claude-api]] | [[anthropic]] | claude-sonnet-4-6 | extensive | 2026-04-04 |
 | [[frameworks/framework-claude-code]] | [[anthropic]] | 1.x | extensive | 2026-04-04 |
 | [[frameworks/framework-crewai]] | [[framework-crewai]] | 0.80.x | none | 2026-04-04 |
+| [[frameworks/framework-deepeval]] | Confident AI Inc. | rolling | none | 2026-04-18 |
 | [[frameworks/framework-gsd]] | Jay West | 1.28.0 | extensive | 2026-04-04 |
+| [[frameworks/framework-inspect-ai]] | UK AISI | rolling | none | 2026-04-18 |
 | [[frameworks/framework-langgraph]] | LangChain | 0.2.x | limited | 2026-04-04 |
+| [[frameworks/framework-langsmith]] | LangChain Inc. | rolling | none | 2026-04-18 |
 | [[frameworks/framework-mcp]] | [[anthropic]] | 1.x | moderate | 2026-04-04 |
 | [[frameworks/framework-openclaw]] | Unknown | 2026.3.24 | moderate | 2026-04-04 |
+| [[frameworks/framework-promptfoo]] | [[openai]] (acquired) | rolling | none | 2026-04-18 |
 | [[frameworks/framework-rowboat]] | [[framework-rowboat]] Labs | unknown | limited | 2026-04-09 |
 | [[frameworks/framework-superpowers]] | Jay West | 5.0.6 | extensive | 2026-04-04 |
 

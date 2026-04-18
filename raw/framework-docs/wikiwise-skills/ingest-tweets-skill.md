@@ -9,7 +9,7 @@ Retrieved: 2026-04-12
 Collect and ingest Twitter/X threads or search results as raw source material.
 
 ## Tools required
-Uses `mcp__claude-in-chrome__*` or `mcp__chrome-devtools__*` browser MCP tools.
+Uses `mcp__claude-in-chrome__*` or `mcp__chrome-devtools__*` browser [[mcp-ecosystem]] tools.
 
 ## Protocol
 1. Navigate to `x.com/search?q=<query>&f=top` (top results filter, not latest)

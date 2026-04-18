@@ -199,15 +199,15 @@ complex_response = client.messages.create(
 
 ## Counter-arguments & Gaps
 
-Turpin et al. (2023) "Language Models Don't Always Say What They Think" show that CoT rationalisations routinely diverge from the actual reasoning that produced the answer. The model can produce the correct answer with a CoT trace that is post-hoc narrative, not causal. This undermines any downstream pattern (judge, audit, debug) that treats CoT as ground truth for how the answer was reached.
+Turpin et al. (2023) "Language Models Don't Always Say What They Think" show that [[chain-of-thought]] rationalisations routinely diverge from the actual reasoning that produced the answer. The model can produce the correct answer with a [[chain-of-thought]] trace that is post-hoc narrative, not causal. This undermines any downstream pattern (judge, audit, debug) that treats [[chain-of-thought]] as ground truth for how the answer was reached.
 
-Lanham et al. (2023) show that in many tasks, truncating or perturbing the model's own CoT tokens during inference barely degrades answer quality — suggesting the CoT is often performative rather than computational. If the chain doesn't change the answer, the "reasoning" is decoration.
+Lanham et al. (2023) show that in many tasks, truncating or perturbing the model's own [[chain-of-thought]] tokens during inference barely degrades answer quality — suggesting the [[chain-of-thought]] is often performative rather than computational. If the chain doesn't change the answer, the "reasoning" is decoration.
 
-The quality gain from CoT is task-dependent and shrinks with model scale. Wei et al.'s original benchmarks are math and commonsense reasoning; the gains on structured extraction, classification, and factual recall are often zero or negative. Applying CoT indiscriminately is a cost tax without a correctness return.
+The quality gain from [[chain-of-thought]] is task-dependent and shrinks with model scale. Wei et al.'s original benchmarks are math and commonsense reasoning; the gains on structured extraction, classification, and factual recall are often zero or negative. Applying [[chain-of-thought]] indiscriminately is a cost tax without a correctness return.
 
-Open questions: (a) for reasoning-trained models (Claude extended thinking, o-series), is CoT still a useful *prompting* technique, or has the behaviour been absorbed into the model's default generation? (b) Does CoT faithfulness improve with scale, or does it get worse as models become better at generating plausible-sounding post-hoc stories?
+Open questions: (a) for reasoning-trained models (Claude extended thinking, o-series), is [[chain-of-thought]] still a useful *prompting* technique, or has the behaviour been absorbed into the model's default generation? (b) Does [[chain-of-thought]] faithfulness improve with scale, or does it get worse as models become better at generating plausible-sounding post-hoc stories?
 
-What would change the verdict on CoT-as-audit: a faithfulness benchmark showing that model CoT traces causally determine model outputs with high reliability. The opposite direction — confirming CoT is often post-hoc — is where the evidence currently points.
+What would change the verdict on [[chain-of-thought]]-as-audit: a faithfulness benchmark showing that model [[chain-of-thought]] traces causally determine model outputs with high reliability. The opposite direction — confirming [[chain-of-thought]] is often post-hoc — is where the evidence currently points.
 
 ---
 

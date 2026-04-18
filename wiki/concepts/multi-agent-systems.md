@@ -146,7 +146,7 @@ Cognition AI's "Don't Build Multi-Agents" (2024) is the most-cited contrarian ca
 
 Coordination overhead is systematically underestimated. The token cost of inter-agent messages, the latency of orchestrator round-trips, and the debugging cost of cross-agent causality often exceed the capability gain from specialisation. Published multi-agent wins rarely control for equivalent single-agent token budgets; when they do, the gap shrinks dramatically.
 
-The specialisation argument assumes prompt/context specialisation genuinely improves model behaviour — but modern frontier models handle role-based prompts within a single agent nearly as well as dedicated agents. The question "why can't one agent play two roles in sequence?" rarely has a principled answer beyond "we want fan-out parallelism," which has its own costs.
+The specialisation argument assumes prompt/context specialisation genuinely improves model behaviour — but modern frontier models handle role-based prompts within a single agent nearly as well as dedicated agents. The question "why can't one agent play two roles in sequence?" rarely has a principled answer beyond "we want [[pattern-fan-out-worker]] parallelism," which has its own costs.
 
 Open questions: (a) at what task complexity does multi-agent start to pay back its coordination tax? No clean empirical threshold exists. (b) Is the right architectural unit the *agent* or the *task graph*? Framing the same decomposition as a workflow with tool calls, rather than as agents, often works better.
 

@@ -197,9 +197,9 @@ Tool-use reliability is substantially worse than headline numbers suggest. Berke
 
 The argument "tool use is safer than native code generation" is weaker than it appears. Schema validation catches structural errors but not semantic ones — a model can call the correct tool with correctly-typed parameters that mean the wrong thing. Tool safety is a function of tool design (idempotency, dry-run modes, permission gates), not of the tool-use abstraction itself.
 
-MCP standardisation helps reduce integration cost but doesn't improve model reliability at choosing tools. The fragility shifts from "did the tool call parse" to "did the model pick the right tool." Teams adopting MCP often report improved DX but no measurable gain in agent end-task correctness.
+[[mcp-ecosystem]] standardisation helps reduce integration cost but doesn't improve model reliability at choosing tools. The fragility shifts from "did the tool call parse" to "did the model pick the right tool." Teams adopting [[mcp-ecosystem]] often report improved DX but no measurable gain in agent end-task correctness.
 
-Open questions: (a) how much of observed tool-use error is the model vs. bad tool descriptions? Anthropic's own guidance suggests most reliability wins come from rewriting tool descriptions, not from model changes. (b) At what tool-catalogue size does selection reliability collapse? Evidence suggests the floor is around 20–40 tools before reliability drops noticeably, but this is under-characterised.
+Open questions: (a) how much of observed tool-use error is the model vs. bad tool descriptions? [[anthropic]]'s own guidance suggests most reliability wins come from rewriting tool descriptions, not from model changes. (b) At what tool-catalogue size does selection reliability collapse? Evidence suggests the floor is around 20–40 tools before reliability drops noticeably, but this is under-characterised.
 
 What would change the verdict on tool-use-as-capable: controlled evaluations showing <5% tool error rates on multi-step production-representative tasks. Current numbers on any benchmark of realistic complexity are materially higher.
 

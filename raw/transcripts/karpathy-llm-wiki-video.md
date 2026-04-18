@@ -10,19 +10,19 @@ tags: [llm-wiki, karpathy, knowledge-base, obsidian, claude-code]
 # Transcript: Building a Trading Strategies LLM Knowledge Base
 
 ## Key Concepts Covered
-- Karpathy's LLM wiki pattern explained
+- [[andrej-karpathy]]'s [[llm-wiki]] pattern explained
 - Three-layer architecture: raw sources, wiki, schema
 - Core operations: ingest, query, lint
 - Division of labor: human curates, LLM maintains
 - Four principles: explicit, yours, file-over-app, bring-your-own-AI
-- Live build demo in Claude Code using opus 4.6
+- Live build demo in [[framework-claude-code]] using opus 4.6
 - Obsidian as IDE/frontend
 - Querying the wiki and automatic backfilling
 
 ## Raw Transcript
 
-Chapter 1: Intro - Andrej Karpathy's tweet and the concept of LLM knowledge bases
-So, I'm sure many of you saw this tweet from Andre Karpathy last week talking about LLM knowledge bases. It caught a lot of interest as kind of a new way to use AI as a research tool. And the core concept was to use LLMs to build personal knowledge bases for various topics of your research interest.
+Chapter 1: Intro - [[andrej-karpathy]]'s tweet and the concept of LLM knowledge bases
+So, I'm sure many of you saw this tweet from Andre [[andrej-karpathy]] last week talking about LLM knowledge bases. It caught a lot of interest as kind of a new way to use AI as a research tool. And the core concept was to use LLMs to build personal knowledge bases for various topics of your research interest.
 
 Chapter 2: The problem with RAG and why LLM-powered wikis are better
 Right now most people's experience with LLMs and documents look like RAG — retrieval automated generation. You upload some files to ChatGPT or NotebookLM or whatever tool and when you ask a question it retrieves some chunks and generates an answer. And that works fine for simple questions. But here's the issue. Nothing accumulates. Every time you ask a question, the LLM is rediscovering knowledge from scratch. It's reweaving together fragments every single time.
@@ -57,5 +57,5 @@ Chapter 6: Four principles
 Chapter 7: What you can build
 Research, personal second brain, business internal wiki, reading/book notes, due diligence.
 
-Chapter 8: Live build in Claude Code
+Chapter 8: Live build in [[framework-claude-code]]
 Used opus 4.6. Built trading strategies wiki. Created: market structure concepts, strategy pages, psychology pages, entity pages for prop firms. Ingested 8 raw transcripts using parallel agents.

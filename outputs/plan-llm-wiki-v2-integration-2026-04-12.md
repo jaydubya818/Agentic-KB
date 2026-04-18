@@ -1,10 +1,10 @@
-# LLM Wiki v2 Integration Plan
+# [[llm-wiki]] v2 Integration Plan
 > Created: 2026-04-12 | Status: Draft — awaiting Jay approval before execution
 
 ---
 
 ## Source
-Social post describing "LLM Wiki v2" — an extension of Karpathy's original LLM Wiki pattern adding confidence scoring, memory tiers, knowledge graphs, hybrid search, automated hooks, forgetting curves, and AI-driven contradiction resolution. Built on lessons from the `agentmemory` library.
+Social post describing "[[llm-wiki]] v2" — an extension of [[andrej-karpathy]]'s original [[llm-wiki]] pattern adding confidence scoring, memory tiers, knowledge graphs, hybrid search, automated hooks, forgetting curves, and AI-driven contradiction resolution. Built on lessons from the `agentmemory` library.
 
 ---
 
@@ -38,7 +38,7 @@ Do not rebuild what already works. The existing KB's memory system (8 classes, f
 
 These are concepts the KB should know about regardless of whether they're implemented.
 
-**1A. Create summary page for LLM Wiki v2**
+**1A. Create summary page for [[llm-wiki]] v2**
 - Path: `wiki/summaries/summary-llm-wiki-v2.md`
 - Content: Map v2 features, note what's already in KB, note genuine gaps
 - Cross-link to: `rlm-pipeline`, `freshness-policy`, `contradiction-policy`, Graphify
@@ -99,7 +99,7 @@ The v2 hybrid search (BM25 + vector + graph + RRF) maps directly to RLM Pipeline
 - Add implementation notes: what library handles each (BM25 → fuse.js or lunr.js; vector → local embeddings or Jina; graph → existing graphify-out/graph.json)
 - Flag Stages 1–3 as P1 (was P2) given v2 validation
 
-**3B. Create recipe: hybrid search for LLM wiki**
+**3B. Create recipe: hybrid search for [[llm-wiki]]**
 - Path: `wiki/recipes/recipe-hybrid-search-llm-wiki.md`
 - Step-by-step implementation of BM25 + vector + RRF on a markdown wiki
 - Prerequisites: wiki > 100 pages (index.md starts to break), Node.js, graph.json from Graphify
