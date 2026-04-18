@@ -260,6 +260,20 @@ This KB exists partly because RAG has known failure modes. Key comparison:
 
 ---
 
+## Counter-arguments & Gaps
+
+The "RAG is broken" framing popularised by [[andrej-karpathy]] critiques RAG as a substitute for compounding knowledge — but for lookup tasks (documentation search, policy retrieval, product catalogs) RAG is not broken at all. The critique collapses two different jobs into one verdict; the actual question is whether the task is lookup or accretion.
+
+Fine-tuning vs. RAG is a false binary. Hybrid systems — fine-tuning for domain style and vocabulary, RAG for volatile facts — beat either approach in production in every published comparison we have. The debate usually assumes you must pick one.
+
+Retrieval quality is hostage to the embedding model. The 2023 cohort of embedding models materially underperforms the 2025 cohort on domain-specific retrieval; any RAG-pessimism grounded in older embeddings is now partially obsolete. But this also means the technology floor keeps moving, so tuning cycles never end.
+
+Open questions: (a) at what corpus size does the [[llm-wiki]] compounding pattern beat retrieval for synthesis tasks? No empirical answer. (b) Does chunk overlap and query rewriting actually help, or does it just feel like it helps because you're iterating? Rigorous ablation studies are rare. (c) How much of observed RAG quality comes from the generator's ability to ignore bad retrievals rather than from retrieval quality itself?
+
+What would change the verdict: a controlled study isolating retrieval quality from generator robustness. Most published RAG benchmarks conflate the two.
+
+---
+
 ## Related Concepts
 
 - [[concepts/memory-systems]] — RAG as one of four memory approaches (in-context / file-wiki / vector / knowledge graph)

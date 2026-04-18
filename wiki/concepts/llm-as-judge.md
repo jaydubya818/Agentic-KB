@@ -194,6 +194,20 @@ If calibration is below threshold, either: refine the rubric, switch judge model
 
 ---
 
+## Counter-arguments & Gaps
+
+The 80% judge-human agreement figure from Zheng et al. covers aesthetic and helpfulness judgements on conversational tasks — not correctness on reasoning or factual tasks, where agreement drops materially. Treating MT-Bench numbers as a universal endorsement of LLM judging is the most common mistake.
+
+Positional bias remains unsolved. Chen et al. (2024) show that even randomizing answer order and averaging scores does not fully eliminate position effects — the bias is baked into attention patterns, not just surface ordering. Workarounds reduce bias; they do not remove it.
+
+A weak judge cannot reliably evaluate a stronger generator. The consensus direction is "no," but the threshold is unquantified — there's no established rule for the capability gap at which judge reliability collapses. Teams routinely use GPT-3.5 class judges to score GPT-4 class outputs without surfacing the ceiling effect.
+
+Open questions: (a) does judge calibration degrade over time as generator distributions shift (calibration drift)? (b) can ensemble-of-judges reliably beat a single stronger judge, or does shared pretraining bias make ensembles correlated failure modes? The evidence is preliminary on both.
+
+What would change the verdict: a benchmark showing consistent judge agreement above 90% on correctness-graded tasks across multiple domains without human recalibration. None exists yet.
+
+---
+
 ## Related Concepts
 
 - [[concepts/self-critique]] — using judge pattern within a generation loop
@@ -208,3 +222,4 @@ If calibration is below threshold, either: refine the rubric, switch judge model
 - Zheng et al. "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena" (2023)
 - Shankar et al. "Who Validates the Validators?" (2024)
 - Wang et al. "Large Language Models are not Fair Evaluators" (2023)
+- Chen et al. "Humans or LLMs as the Judge? A Study on Judgement Bias" (2024)

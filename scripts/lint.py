@@ -180,7 +180,8 @@ def scan():
                 review_drift.append(f"{rel} (reviewed {rd}, mtime {pg['mtime']})")
 
         # missing Counter-arguments section on concept/synthesis
-        if ptype in ("concept", "synthesis"):
+        # Exempt: auto-generated lint reports, personal test notes
+        if ptype in ("concept", "synthesis") and not rel.startswith("syntheses/lint-") and not rel.endswith("/private-test-note.md"):
             if not has_section(pg["body"], r"Counter-arguments.*"):
                 missing_counter.append(rel)
 

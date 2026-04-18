@@ -197,6 +197,20 @@ complex_response = client.messages.create(
 
 ---
 
+## Counter-arguments & Gaps
+
+Turpin et al. (2023) "Language Models Don't Always Say What They Think" show that CoT rationalisations routinely diverge from the actual reasoning that produced the answer. The model can produce the correct answer with a CoT trace that is post-hoc narrative, not causal. This undermines any downstream pattern (judge, audit, debug) that treats CoT as ground truth for how the answer was reached.
+
+Lanham et al. (2023) show that in many tasks, truncating or perturbing the model's own CoT tokens during inference barely degrades answer quality — suggesting the CoT is often performative rather than computational. If the chain doesn't change the answer, the "reasoning" is decoration.
+
+The quality gain from CoT is task-dependent and shrinks with model scale. Wei et al.'s original benchmarks are math and commonsense reasoning; the gains on structured extraction, classification, and factual recall are often zero or negative. Applying CoT indiscriminately is a cost tax without a correctness return.
+
+Open questions: (a) for reasoning-trained models (Claude extended thinking, o-series), is CoT still a useful *prompting* technique, or has the behaviour been absorbed into the model's default generation? (b) Does CoT faithfulness improve with scale, or does it get worse as models become better at generating plausible-sounding post-hoc stories?
+
+What would change the verdict on CoT-as-audit: a faithfulness benchmark showing that model CoT traces causally determine model outputs with high reliability. The opposite direction — confirming CoT is often post-hoc — is where the evidence currently points.
+
+---
+
 ## Related Concepts
 
 - [[concepts/few-shot-prompting]] — providing examples to guide [[chain-of-thought]]
@@ -210,5 +224,7 @@ complex_response = client.messages.create(
 
 - Wei et al. "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models" (2022)
 - Kojima et al. "Large Language Models are Zero-Shot Reasoners" (2022)
+- Turpin et al. "Language Models Don't Always Say What They Think" (2023)
+- Lanham et al. "Measuring Faithfulness in Chain-of-Thought Reasoning" (2023)
 - [[anthropic]] Extended Thinking documentation (2025)
 - Yao et al. "Tree of Thoughts" (2023)
