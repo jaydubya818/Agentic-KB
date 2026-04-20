@@ -934,6 +934,59 @@ async function agentCmd(sub, rest) {
     }
     return
   }
+  // ── dry-run close-task (preview without commit) ────────────────────────────
+  if (sub === 'dry-run-close-task') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent dry-run-close-task <agent-id> --payload <file.json>')
+    const payloadIdx = rest.indexOf('--payload')
+    if (payloadIdx < 0) throw new Error('--payload <file.json> required')
+    const fsMod = await import('fs')
+    const payload = JSON.parse(fsMod.readFileSync(rest[payloadIdx + 1], 'utf8'))
+    const c = rt.loadContract(AGENT_KB_ROOT, id)
+    if (!c) throw new Error(`Agent not found: ${id}`)
+    const preview = rt.dryRunCloseTask(AGENT_KB_ROOT, c, payload)
+    console.log(`\n=== Dry-run close-task for ${id} ===`)
+    console.log(`Would succeed: ${preview.wouldSucceed}`)
+    console.log(`Plan: ${preview.summary.total} ops (${preview.summary.file_writes} files, ${preview.summary.bus_publishes} bus)`)
+    for (const w of preview.planned) {
+      const flag = w.allowed ? '✓' : '✗'
+      console.log(`  ${flag} [${w.op}] ${w.path} — ${w.reason}`)
+    }
+    if (!preview.wouldSucceed) process.exit(2)
+    return
+  }
+
+  // ── new (scaffold a worker/lead/orchestrator contract + seeded wiki tree) ──
+  if (sub === 'new') {
+    const id = rest[0]
+    if (!id) throw new Error('Usage: kb agent new <agent-id> --tier worker|lead|orchestrator [--domain X] [--team Y] [--force]')
+    const tierIdx = rest.indexOf('--tier')
+    const tier = tierIdx >= 0 ? rest[tierIdx + 1] : 'worker'
+    const domainIdx = rest.indexOf('--domain')
+    const domain = domainIdx >= 0 ? rest[domainIdx + 1] : 'platform'
+    const teamIdx = rest.indexOf('--team')
+    const team = teamIdx >= 0 ? rest[teamIdx + 1] : null
+    const force = rest.includes('--force')
+    const { scaffoldAgent } = await import(pathMod.join(AGENT_KB_ROOT, 'lib/agent-runtime/scaffold.mjs'))
+    const result = scaffoldAgent(AGENT_KB_ROOT, { id, tier, domain, team, force })
+    console.log(`✅ Scaffolded agent: ${id} [${tier}] domain=${domain}`)
+    for (const p of result.created) console.log(`   created: ${p}`)
+    for (const p of result.skipped) console.log(`   skipped (exists): ${p}`)
+    return
+  }
+
+  // ── verify-audit (check hash chain integrity) ──────────────────────────────
+  if (sub === 'verify-audit') {
+    const r = rt.verifyAuditChain(AGENT_KB_ROOT)
+    if (r.ok) {
+      console.log(`✓ audit.log chain OK — ${r.scanned} entries`)
+    } else {
+      console.log(`✗ audit.log chain BROKEN at entry ${r.firstBreakAt}: ${r.reason} (scanned ${r.scanned})`)
+      process.exit(2)
+    }
+    return
+  }
+
   throw new Error(`Unknown agent subcommand: ${sub}`)
 }
 

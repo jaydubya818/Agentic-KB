@@ -2,7 +2,11 @@
 > Owner: Jay West | Domain: Agentic AI Systems & Harness Engineering | Built: 2026-04-04
 
 ## Cowork Session Start — Hermes Mode
-On every Cowork session start: read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`, then operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
+On every Cowork session start:
+1. Read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`.
+2. Stage call transcripts by running `node scripts/watch-call-transcripts.mjs --once` (silent no-op if `$FATHOM_TRANSCRIPTS_DIR` / the default Drive path is absent).
+3. Check `raw/transcripts/` for files with `ingest_status: pending` — if any exist, surface the count in the opening status and offer to run the Call Transcript INGEST per `wiki/transcript-ingest.md` before other work.
+4. Operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
 
 ---
 

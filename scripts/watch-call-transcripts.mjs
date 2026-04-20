@@ -39,6 +39,7 @@ const LOG_FILE = path.join(KB_ROOT, 'raw', '.call-transcript-ingest-log.json')
 const POLL_INTERVAL_MS = 60_000 // 1 minute
 
 const SUPPORTED_EXT = new Set(['.md', '.txt', '.vtt', '.srt'])
+const SKIP_NAMES = new Set(['README.md', 'readme.md', 'README.txt', '.DS_Store'])
 
 // ─── Ingest log ──────────────────────────────────────────────────────────────
 
@@ -77,6 +78,9 @@ function stageFile(srcPath, log) {
   const mtime = stat.mtimeMs
 
   if (log.ingested[rel] && log.ingested[rel].mtime === mtime) return false
+
+  const base = path.basename(srcPath)
+  if (SKIP_NAMES.has(base)) return false
 
   const ext = path.extname(srcPath).toLowerCase()
   if (!SUPPORTED_EXT.has(ext)) return false

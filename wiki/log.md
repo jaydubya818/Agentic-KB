@@ -273,3 +273,7 @@ Infrastructure added (not a content INGEST):
 
 Contradictions: none.
 Next step for Jay: confirm the transcription-tool output path, then `export FATHOM_TRANSCRIPTS_DIR=/actual/path` (or edit the script default).
+
+Session-start hook wired: `CLAUDE.md → Cowork Session Start — Hermes Mode` now runs `scripts/watch-call-transcripts.mjs --once` and surfaces pending-ingest count before other work. No OS-level scheduler needed.
+
+Env wired on host: `FATHOM_TRANSCRIPTS_DIR="$HOME/Fathom-Transcripts"` appended to `~/.zshrc`. Drop folder `~/Fathom-Transcripts/` created with a README explaining the wiring. End-to-end smoke test passed: watcher finds the folder, skips the README via `SKIP_NAMES` filter, stages 0 transcripts (expected — folder has no real calls yet). Pipeline is primed; point your Fathom/Zapier/Fireflies/Otter automation at `~/Fathom-Transcripts/` and the next Cowork session will auto-ingest.

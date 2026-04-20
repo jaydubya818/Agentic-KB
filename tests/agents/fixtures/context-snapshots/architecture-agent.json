@@ -1,0 +1,53 @@
+{
+  "files": [
+    {
+      "path": "wiki/agents/leads/planning-agent/domain-standards.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/leads/planning-agent/gotchas.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/orchestrators/architecture-agent/gotchas.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/orchestrators/architecture-agent/hot.md",
+      "class": "hot"
+    },
+    {
+      "path": "wiki/agents/orchestrators/architecture-agent/profile.md",
+      "class": "profile"
+    },
+    {
+      "path": "wiki/projects/example-project/prd.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/system/policies/contradiction-policy.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/system/policies/freshness-policy.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/system/policies/promotion-rules.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/system/policies/source-trust-policy.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/system/policies/tier-loading-policy.md",
+      "class": "learned"
+    }
+  ],
+  "trace_summary": {
+    "included": 11,
+    "excluded": 0,
+    "truncated": false
+  }
+}

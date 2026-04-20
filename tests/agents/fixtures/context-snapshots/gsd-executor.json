@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "wiki/agents/leads/planning-agent/domain-standards.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/leads/planning-agent/gotchas.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/workers/gsd-executor/gotchas.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/workers/gsd-executor/hot.md",
+      "class": "hot"
+    },
+    {
+      "path": "wiki/agents/workers/gsd-executor/profile.md",
+      "class": "profile"
+    },
+    {
+      "path": "wiki/projects/example-project/implementation-plan.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/projects/example-project/specs.md",
+      "class": "learned"
+    }
+  ],
+  "trace_summary": {
+    "included": 7,
+    "excluded": 0,
+    "truncated": false
+  }
+}
