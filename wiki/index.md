@@ -12,6 +12,11 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[wiki/stats|KB Stats]] — Auto-generated: page counts, link density, freshness, orphans
 - [[wiki/log|Operation Log]] — Full operation audit trail
 
+### Operational (call-transcript loop)
+- [[wiki/action-tracker|Action Tracker]] — Open commitments extracted from calls & sessions
+- [[wiki/decisions/README|Decisions Log]] — Durable decisions, one page each
+- [[wiki/transcript-ingest|Transcript Ingest SOP]] — How calls become wiki content
+
 ## Maps of Content
 
 ### Knowledge Domains

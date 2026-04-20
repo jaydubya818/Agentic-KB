@@ -293,6 +293,9 @@ When told to ingest a file from raw/:
 10. Append new pages to `wiki/recently-added.md` under today's date heading — format: `- [[path/to/page|Title]] — one-line description`
 11. Update relevant MoC pages in `wiki/mocs/` if the new content fits an existing domain (orchestration, memory, tool-use, evaluation)
 
+### Call Transcript INGEST (sub-workflow)
+When the file in `raw/transcripts/` has frontmatter `type: call-transcript` and `ingest_status: pending`, follow the SOP in `wiki/transcript-ingest.md`. In short: run passes for **summary** (`wiki/summaries/`), **actions** (append to `wiki/action-tracker.md`), and **decisions** (new page per decision in `wiki/decisions/`), then fall through to steps 4-11 of the standard INGEST above. Flip frontmatter `ingest_status: ingested` when done. Auto-staging happens via `scripts/watch-call-transcripts.mjs` (watches `$FATHOM_TRANSCRIPTS_DIR`, default `~/Google Drive/My Drive/Fathom`).
+
 ### QUERY Workflow
 When asked a question against the KB:
 1. Read `wiki/hot.md` first (frequently-used patterns, ≤500 words)

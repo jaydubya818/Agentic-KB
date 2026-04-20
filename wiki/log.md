@@ -256,3 +256,20 @@ Next actions for Jay:
 - Update `recipes/recipe-agent-evaluation` to reference the new framework pages
 
 TOTAL: 4 raw sources captured, 8 new wiki pages, 2 pages updated. 0 contradictions. 0 orphans (all pages linked from evaluation MoC).
+
+---
+
+## 2026-04-20 — Call Transcript Ingest Loop scaffolded
+
+Infrastructure added (not a content INGEST):
+- `scripts/watch-call-transcripts.mjs` — polls `$FATHOM_TRANSCRIPTS_DIR` (default `~/Google Drive/My Drive/Fathom`), stages `.md`/`.txt`/`.vtt`/`.srt` into `raw/transcripts/` with `type: call-transcript, ingest_status: pending` frontmatter. Dedupe log at `raw/.call-transcript-ingest-log.json`.
+- `wiki/action-tracker.md` — operational tracker. Open / Blocked / Completed sections.
+- `wiki/decisions/` — new MoC folder with README schema.
+- `wiki/transcript-ingest.md` — SOP extending standard INGEST for call transcripts (summary + actions + decisions passes).
+- `CLAUDE.md` — added `Call Transcript INGEST (sub-workflow)` section pointing to the SOP.
+- `raw/clippings/` — drop zone created (previously referenced in schema but missing on disk).
+- `wiki/index.md` — added Operational sub-section under Quick Navigation.
+- Scheduled task `daily-call-transcript-ingest` — runs 07:30 local daily; stages new transcripts and INGESTs them.
+
+Contradictions: none.
+Next step for Jay: confirm the transcription-tool output path, then `export FATHOM_TRANSCRIPTS_DIR=/actual/path` (or edit the script default).
