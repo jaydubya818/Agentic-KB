@@ -6,3 +6,8 @@
 - Local:         http://localhost:3002
 - Network:       http://10.0.0.157:3002
 ✓ Ready in 64ms
+WikiQuery error: TypeError: Invalid state: Controller is already closed
+    at i (.next/server/chunks/063q_next_dist_esm_build_templates_app-route_102fyp1.js:25:1184)
+    at Object.start (.next/server/chunks/063q_next_dist_esm_build_templates_app-route_102fyp1.js:25:2961) {
+  code: 'ERR_INVALID_STATE'
+}
