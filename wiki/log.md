@@ -277,3 +277,20 @@ Next step for Jay: confirm the transcription-tool output path, then `export FATH
 Session-start hook wired: `CLAUDE.md → Cowork Session Start — Hermes Mode` now runs `scripts/watch-call-transcripts.mjs --once` and surfaces pending-ingest count before other work. No OS-level scheduler needed.
 
 Env wired on host: `FATHOM_TRANSCRIPTS_DIR="$HOME/Fathom-Transcripts"` appended to `~/.zshrc`. Drop folder `~/Fathom-Transcripts/` created with a README explaining the wiring. End-to-end smoke test passed: watcher finds the folder, skips the README via `SKIP_NAMES` filter, stages 0 transcripts (expected — folder has no real calls yet). Pipeline is primed; point your Fathom/Zapier/Fireflies/Otter automation at `~/Fathom-Transcripts/` and the next Cowork session will auto-ingest.
+
+Pipeline broadened to include Obsidian meeting notes:
+- `sofie-watch-obsidian.mjs` now stamps `ingest_status: pending` on files from `05 - Meetings/` (only) — type `meeting-note`.
+- `wiki/transcript-ingest.md` SOP trigger expanded: `{call-transcript | meeting-note} + ingest_status: pending`.
+- `CLAUDE.md` session-start hook now runs BOTH watchers (`watch-call-transcripts.mjs` + `sofie-watch-obsidian.mjs`) and checks pending count.
+
+Smoke test on real machine: `~/Documents/Obsidian Vault/05 - Meetings/` is empty (no notes yet), 2 daily notes staged (correctly NOT tagged pending — daily notes don't trigger the SOP). Zero false-positive ingests. Pipeline primed and idempotent.
+
+Fathom/Zapier path removed per user decision — keeping Obsidian-only:
+- Deleted: `~/Fathom-Transcripts/` folder, `scripts/watch-call-transcripts.mjs`, `raw/.call-transcript-ingest-log.json`.
+- Stripped `FATHOM_TRANSCRIPTS_DIR` export from `~/.zshrc`.
+- CLAUDE.md session-start now runs only `sofie-watch-obsidian.mjs`.
+- CLAUDE.md sub-workflow renamed `Call Transcript INGEST` → `Meeting Note INGEST`; trigger simplified to `type: meeting-note` + `ingest_status: pending`.
+- `wiki/transcript-ingest.md` rewritten for meeting-notes only; removed Fathom/Fireflies/Otter/Zoom references.
+- Kept: `sofie-watch-obsidian.mjs` (with the `ingest_status: pending` stamp on meetings), `wiki/action-tracker.md`, `wiki/decisions/`, `raw/clippings/`.
+
+Sanity: `.zshrc` clean (0 FATHOM refs), watch-call-transcripts.mjs gone, sofie watcher runs fine. Single-path system.

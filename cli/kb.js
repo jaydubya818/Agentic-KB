@@ -979,9 +979,9 @@ async function agentCmd(sub, rest) {
   if (sub === 'verify-audit') {
     const r = rt.verifyAuditChain(AGENT_KB_ROOT)
     if (r.ok) {
-      console.log(`✓ audit.log chain OK — ${r.scanned} entries`)
+      console.log(`✓ audit.log chain OK — ${r.scanned} entries (${r.signed} signed, ${r.legacy} legacy/pre-chain)`)
     } else {
-      console.log(`✗ audit.log chain BROKEN at entry ${r.firstBreakAt}: ${r.reason} (scanned ${r.scanned})`)
+      console.log(`✗ audit.log chain BROKEN at entry ${r.firstBreakAt}: ${r.reason} (scanned ${r.scanned}, signed ${r.signed}, legacy ${r.legacy})`)
       process.exit(2)
     }
     return

@@ -4,7 +4,7 @@
 ## Cowork Session Start — Hermes Mode
 On every Cowork session start:
 1. Read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`.
-2. Stage call transcripts by running `node scripts/watch-call-transcripts.mjs --once` (silent no-op if `$FATHOM_TRANSCRIPTS_DIR` / the default Drive path is absent).
+2. Stage meeting-derived content: `node scripts/sofie-watch-obsidian.mjs --once` — Obsidian Vault `05 - Meetings/` → `raw/transcripts/` as `type: meeting-note` with `ingest_status: pending`. Silent no-op if the source folder is empty.
 3. Check `raw/transcripts/` for files with `ingest_status: pending` — if any exist, surface the count in the opening status and offer to run the Call Transcript INGEST per `wiki/transcript-ingest.md` before other work.
 4. Operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
 
@@ -297,8 +297,10 @@ When told to ingest a file from raw/:
 10. Append new pages to `wiki/recently-added.md` under today's date heading — format: `- [[path/to/page|Title]] — one-line description`
 11. Update relevant MoC pages in `wiki/mocs/` if the new content fits an existing domain (orchestration, memory, tool-use, evaluation)
 
-### Call Transcript INGEST (sub-workflow)
-When the file in `raw/transcripts/` has frontmatter `type: call-transcript` and `ingest_status: pending`, follow the SOP in `wiki/transcript-ingest.md`. In short: run passes for **summary** (`wiki/summaries/`), **actions** (append to `wiki/action-tracker.md`), and **decisions** (new page per decision in `wiki/decisions/`), then fall through to steps 4-11 of the standard INGEST above. Flip frontmatter `ingest_status: ingested` when done. Auto-staging happens via `scripts/watch-call-transcripts.mjs` (watches `$FATHOM_TRANSCRIPTS_DIR`, default `~/Google Drive/My Drive/Fathom`).
+### Meeting Note INGEST (sub-workflow)
+When a file in `raw/transcripts/` has frontmatter `type: meeting-note` AND `ingest_status: pending`, follow the SOP in `wiki/transcript-ingest.md`. In short: run passes for **summary** (`wiki/summaries/`), **actions** (append to `wiki/action-tracker.md`), and **decisions** (new page per decision in `wiki/decisions/`), then fall through to steps 4-11 of the standard INGEST above. Flip frontmatter `ingest_status: ingested` when done.
+
+Auto-staging: `scripts/sofie-watch-obsidian.mjs` watches `~/Documents/Obsidian Vault/05 - Meetings/` and stages meetings as `type: meeting-note` with `ingest_status: pending`.
 
 ### QUERY Workflow
 When asked a question against the KB:

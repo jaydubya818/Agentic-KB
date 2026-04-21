@@ -77,13 +77,17 @@ function ingestFile(obsidianPath, log) {
   const isSession = rel.includes('Sessions')
   const type = isSession ? 'sofie-session' : isMeeting ? 'meeting-note' : isDaily ? 'daily-note' : 'obsidian-note'
 
+  // Meeting notes feed the call-transcript INGEST SOP (summary/actions/decisions pass).
+  // Other types (sessions, daily-notes, generic obsidian) remain as-is.
+  const ingestStatusLine = isMeeting ? 'ingest_status: pending\n' : ''
+
   const frontmatter = `---
 title: "${baseName}"
 type: ${type}
 source: obsidian-vault
 source_path: "${rel}"
 verified: false
-date: ${dateStr}
+${ingestStatusLine}date: ${dateStr}
 ingested_at: ${now.toISOString()}
 tags: [sofie, obsidian, ${type}]
 ---

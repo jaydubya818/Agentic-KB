@@ -8,15 +8,17 @@ reviewed: false
 reviewed_date: ""
 ---
 
-# Call Transcript Ingest — SOP
-> Extension of the standard [[CLAUDE|INGEST]] workflow for files of type `call-transcript`.
-> Triggered when a file in `raw/transcripts/` has frontmatter `type: call-transcript` and `ingest_status: pending`.
+# Meeting Note Ingest — SOP
+> Extension of the standard [[CLAUDE|INGEST]] workflow for meeting-derived files.
+> Triggered when a file in `raw/transcripts/` has frontmatter `type: meeting-note` AND `ingest_status: pending`.
+> Source: Obsidian Vault `05 - Meetings/` staged via `sofie-watch-obsidian.mjs`.
+> Non-meeting types (`sofie-session`, `daily-note`, `obsidian-note`, YouTube transcripts) do NOT trigger this SOP — they use the standard INGEST workflow.
 
 ## TL;DR
-Standard INGEST handles knowledge extraction. Transcript INGEST adds three extraction passes — **summary**, **actions**, **decisions** — that write to operational wiki targets (not just `summaries/`).
+Standard INGEST handles knowledge extraction. Meeting-note INGEST adds three extraction passes — **summary**, **actions**, **decisions** — that write to operational wiki targets (not just `summaries/`).
 
 ## Pipeline
-For each pending call transcript in `raw/transcripts/`:
+For each pending meeting note in `raw/transcripts/`:
 
 1. **Read** the full transcript including the staged frontmatter.
 2. **Summary pass** — write `wiki/summaries/{slug}.md` using the standard summary frontmatter. Include:
@@ -52,10 +54,10 @@ For each pending call transcript in `raw/transcripts/`:
 ## Failure Modes & Recovery
 - **Transcript is empty or garbled** → skip, log a warning to `wiki/log.md`, leave `ingest_status: pending` so it surfaces on the next lint pass.
 - **Ambiguous decision vs. action** → default to action. Decisions are a higher bar: they outlast the sprint.
-- **Same call transcribed twice** (Fathom + Zoom recording of the same meeting) → detect by title + date proximity; stage both but ingest only the longer one; move the duplicate to `raw/archive/transcripts/`.
+- **Same meeting noted twice** (Obsidian note + a separate transcript file of the same meeting) → detect by title + date proximity; ingest the longer one; move the duplicate to `raw/archive/transcripts/`.
 
 ## Related
 - [[CLAUDE|Schema / INGEST canonical workflow]]
 - [[action-tracker|Action Tracker]]
 - [[decisions/README|Decisions Log]]
-- `scripts/watch-call-transcripts.mjs` — staging script
+- `scripts/sofie-watch-obsidian.mjs` — staging script (Obsidian Vault → `raw/transcripts/`)
