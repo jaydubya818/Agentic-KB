@@ -121,6 +121,36 @@ test('vault: fanout vault_path matches contract vault_writes only', () => {
   assert.ok(!fs.existsSync(path.join(vault, '06 - Decisions')) || fs.readdirSync(path.join(vault, '06 - Decisions')).length === 0)
 })
 
+test('vault: memoryUpdate routes to Memory.md when contract allows', () => {
+  const vault = makeFakeVault()
+  const kb = makeFakeKb()
+  const r = runSofieVaultFanout(kb, sofieContract, {
+    memoryUpdate: { heading: 'Goal shift', body: 'Q3 priority pivot to onboarding.' },
+  })
+  assert.equal(r.ok, true, JSON.stringify(r))
+  const memContent = fs.readFileSync(path.join(vault, 'Memory.md'), 'utf8')
+  assert.match(memContent, /Goal shift/)
+  assert.match(memContent, /Q3 priority pivot/)
+})
+
+test('vault: memoryUpdate accepts plain string', () => {
+  const vault = makeFakeVault()
+  const kb = makeFakeKb()
+  const r = runSofieVaultFanout(kb, sofieContract, {
+    memoryUpdate: 'Quick note: switched to vault-canonical Memory.md.',
+  })
+  assert.equal(r.ok, true)
+  const memContent = fs.readFileSync(path.join(vault, 'Memory.md'), 'utf8')
+  assert.match(memContent, /Quick note/)
+})
+
+test('vault: empty memoryUpdate produces no op', () => {
+  const ops = planSofieVaultOps({ memoryUpdate: '   ' })
+  assert.equal(ops.length, 0)
+  const ops2 = planSofieVaultOps({ memoryUpdate: { body: '' } })
+  assert.equal(ops2.length, 0)
+})
+
 test('vault: vaultRoot env override works', () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'vault-root-'))
   const prev = process.env.OBSIDIAN_VAULT_ROOT
