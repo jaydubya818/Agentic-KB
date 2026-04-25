@@ -5,7 +5,7 @@
   "description": "Root deps shared across cli/, mcp/, web/, and lib/agent-runtime/",
   "type": "module",
   "dependencies": {
-    "yaml": "^2.6.0"
+    "yaml": "^2.8.3"
   },
   "scripts": {
     "test": "node --test tests/agents/",

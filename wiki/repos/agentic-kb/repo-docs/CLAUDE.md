@@ -3,19 +3,26 @@ repo_name: "Agentic-KB"
 repo_visibility: public
 source_type: github
 branch: main
-commit_sha: 844c471f3d48aedc6dd2ad7d79c864b797176b33
+commit_sha: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 source_path: CLAUDE.md
-imported_at: "2026-04-10T21:58:41.986Z"
+imported_at: "2026-04-25T16:05:33.249Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/CLAUDE.md"
 ---
 
 # Agentic Engineering Knowledge Base — Schema v1.0
 > Owner: Jay West | Domain: Agentic AI Systems & Harness Engineering | Built: 2026-04-04
 
+## Cowork Session Start — Hermes Mode
+On every Cowork session start:
+1. Read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`.
+2. Stage meeting-derived content: `node scripts/sofie-watch-obsidian.mjs --once` — Obsidian Vault `05 - Meetings/` → `raw/transcripts/` as `type: meeting-note` with `ingest_status: pending`. Silent no-op if the source folder is empty.
+3. Check `raw/transcripts/` for files with `ingest_status: pending` — if any exist, surface the count in the opening status and offer to run the Call Transcript INGEST per `wiki/transcript-ingest.md` before other work.
+4. Operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
+
 ---
 
 ## Purpose
-A persistent, compounding knowledge base for agentic AI engineering. Covers multi-agent architecture, orchestration patterns, frameworks, prompt engineering, safety, evaluation, production deployment, and Jay's personal validated patterns. The KB itself uses agentic patterns — parallel agents for seeding, [[pattern-fan-out-worker]] for ingestion, reflection for linting.
+A persistent, compounding knowledge base for agentic AI engineering. Covers multi-agent architecture, orchestration patterns, frameworks, prompt engineering, safety, evaluation, production deployment, and Jay's personal validated patterns. The KB itself uses agentic patterns — parallel agents for seeding, fan-out for ingestion, reflection for linting.
 
 ---
 
@@ -32,6 +39,7 @@ Agentic-KB/
 │   ├── my-hooks/           # Jay's Claude Code hook configs
 │   ├── code-examples/      # Annotated code patterns
 │   ├── conversations/      # Notable Claude Code sessions (exported)
+│   ├── clippings/          # Obsidian Web Clipper drop zone — INGEST auto-routes to correct raw/ subdir
 │   └── changelogs/         # Framework version notes
 ├── wiki/                   # LLM-OWNED — never edit manually
 │   ├── concepts/           # Universal agentic concepts
@@ -76,6 +84,8 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD
 related: []          # wiki links to related concepts/patterns
 status: stable | evolving | deprecated
+reviewed: false      # true once Jay has human-verified the content
+reviewed_date: ""    # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -93,6 +103,8 @@ confidence: high | medium | low
 sources: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+reviewed: false      # true once Jay has human-verified the content
+reviewed_date: ""    # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -109,6 +121,8 @@ github: string         # URL if open source
 tags: []
 last_checked: YYYY-MM-DD
 jay_experience: none | limited | moderate | extensive
+reviewed: false        # true once Jay has human-verified the content
+reviewed_date: ""      # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -123,6 +137,8 @@ prerequisites: []
 tested: true | false
 tested_date: YYYY-MM-DD    # only if tested: true
 tags: []
+reviewed: false            # true once Jay has human-verified the content
+reviewed_date: ""          # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -139,6 +155,8 @@ date_ingested: YYYY-MM-DD
 tags: []
 key_concepts: []        # list of concepts this source touches
 confidence: high | medium | low
+reviewed: false         # true once Jay has human-verified the content
+reviewed_date: ""       # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -152,6 +170,8 @@ question: string        # the question this synthesis answers
 tags: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+reviewed: false         # true once Jay has human-verified the content
+reviewed_date: ""       # YYYY-MM-DD when Jay flipped reviewed to true
 ---
 ```
 
@@ -164,6 +184,8 @@ category: pattern | lesson | anti-pattern | decision | war-story
 confidence: high | medium | low   # how validated is this
 date: YYYY-MM-DD
 tags: []
+reviewed: false                   # personal pages authored by Jay may start true; LLM-drafted ones start false
+reviewed_date: ""                 # YYYY-MM-DD when reviewed flipped to true
 ---
 ```
 
@@ -178,8 +200,9 @@ tags: []
 4. **Key Variants** — flavors and configurations
 5. **When To Use** — conditions and signals
 6. **Risks & Pitfalls** — failure modes, what goes wrong
-7. **Related Concepts** — `[[wiki links]]`
-8. **Sources** — `[[wiki/summaries/...]]` links
+7. **Counter-arguments & Gaps** — opposing views, what the evidence does NOT show, unresolved questions. Mandatory bias check — never ship a one-sided compilation.
+8. **Related Concepts** — `[[wiki links]]`
+9. **Sources** — `[[wiki/summaries/...]]` links
 
 ### Pattern Pages (required)
 1. **Problem** — the recurring design problem
@@ -221,6 +244,14 @@ tags: []
 6. **When to Re-evaluate** — what would change this verdict
 7. **Sources** — `[[wiki links]]`
 
+### Synthesis Pages (required)
+1. **Question** — the question this synthesis answers, stated plainly
+2. **Argument** — the synthesised position, one declarative paragraph
+3. **Evidence** — sources with key quotes or data
+4. **Counter-arguments & Gaps** — opposing views, missing evidence, unresolved questions. Mandatory bias check — never ship a one-sided synthesis.
+5. **Conclusion** — resolved position, remaining uncertainty, or open question for next round
+6. **Sources** — `[[wiki links]]`
+
 ---
 
 ## Linking Conventions
@@ -228,6 +259,7 @@ tags: []
 - Always link the **first mention** of any concept on a page
 - No orphan pages — every new page needs ≥1 inbound link from an existing page
 - Summary pages always link to their corresponding raw source
+- **2-click rule:** every concept, pattern, framework, and recipe must be reachable from `wiki/home.md` in ≤2 clicks. Home → MoC → Page is the standard path. If a page isn't reachable this way, add it to the relevant MoC. Run a reachability check after every ingestion session.
 - Pattern pages link to the concept pages they rely on
 - Recipe pages link to the patterns and concepts they implement
 - When creating a new page, immediately add a link from index.md and from ≥1 relevant existing page
@@ -263,14 +295,23 @@ tags: []
 
 ### INGEST Workflow
 When told to ingest a file from raw/:
+0. **If the file is in `raw/clippings/`**: inspect the source URL / file type and move it to the correct raw/ subdir first (papers → `papers/`, transcripts → `transcripts/`, docs → `framework-docs/`, tweets/threads → `conversations/` or a new `raw/social/`). Never ingest out of `clippings/` — it is a staging zone only.
 1. Read the full source file
 2. Extract: concepts, patterns, frameworks mentioned, key claims, code examples, Jay-specific insights
 3. Create `wiki/summaries/{source-slug}.md` with full frontmatter and key points
 4. Update or create relevant concept/pattern/framework pages — integrate new info into existing knowledge
 5. Flag contradictions with existing wiki content — add contradiction note inline AND to log.md
 6. Cross-link everything bidirectionally — new page links out, existing pages get backlinks
-7. Update `wiki/index.md` with new/updated entries
-8. Append to `wiki/log.md` with timestamp, source name, pages created/updated, contradictions found
+7. **Auto-wire canonical entities**: run `python scripts/autolink.py --vault . --entity-map scripts/entity-map.json --folder wiki --write` to insert `[[canonical]]` wikilinks for every known entity, framework, person, and model referenced in plain text. The `--folder wiki` scope keeps the sweep out of root docs, `raw/`, and `.claude/`; the script also protects frontmatter, code fences, and existing wikilinks. This is the GBrain-style self-wiring pass — do NOT hand-link what the autolinker already handles.
+8. Update `wiki/index.md` with new/updated entries
+9. Append to `wiki/log.md` with timestamp, source name, pages created/updated, contradictions found
+10. Append new pages to `wiki/recently-added.md` under today's date heading — format: `- [[path/to/page|Title]] — one-line description`
+11. Update relevant MoC pages in `wiki/mocs/` if the new content fits an existing domain (orchestration, memory, tool-use, evaluation)
+
+### Meeting Note INGEST (sub-workflow)
+When a file in `raw/transcripts/` has frontmatter `type: meeting-note` AND `ingest_status: pending`, follow the SOP in `wiki/transcript-ingest.md`. In short: run passes for **summary** (`wiki/summaries/`), **actions** (append to `wiki/action-tracker.md`), and **decisions** (new page per decision in `wiki/decisions/`), then fall through to steps 4-11 of the standard INGEST above. Flip frontmatter `ingest_status: ingested` when done.
+
+Auto-staging: `scripts/sofie-watch-obsidian.mjs` watches `~/Documents/Obsidian Vault/05 - Meetings/` and stages meetings as `type: meeting-note` with `ingest_status: pending`.
 
 ### QUERY Workflow
 When asked a question against the KB:
@@ -290,11 +331,14 @@ When asked to lint the wiki:
 4. Check for **stale framework pages** (`last_checked` > 60 days ago)
 5. Check for **low-confidence claims** that could be verified with a web search
 6. Check for **recipe pages** with `tested: false` older than 30 days — flag for testing
-7. Identify **gap candidates** — concepts referenced but no concept page exists
-8. Suggest **new article candidates** based on gap analysis
-9. Output lint report to `wiki/syntheses/lint-{YYYY-MM-DD}.md`
+7. Check for **unreviewed pages** (`reviewed: false`) with file mtime > 30 days — list for Jay's review queue
+8. Check for **review drift** — pages where `reviewed: true` but file mtime > `reviewed_date` (content changed after human review) — flag for re-review
+9. Check for **concept/synthesis pages missing `Counter-arguments & Gaps` section** — bias-check violation
+10. Identify **gap candidates** — concepts referenced but no concept page exists
+11. Suggest **new article candidates** based on gap analysis
+12. Output lint report to `wiki/syntheses/lint-{YYYY-MM-DD}.md`
 
-### [[pattern-hot-cache]] Rules
+### HOT CACHE Rules
 `wiki/hot.md` holds ≤500 words. Update when:
 - A pattern/concept is referenced in 3+ query responses
 - Jay explicitly requests something be cached
@@ -323,6 +367,21 @@ When a query reveals a gap not in the wiki:
 8. **Confidence levels must be honest** — default to `medium` when uncertain
 9. **Never hallucinate sources** — if a claim has no source, mark it `[UNVERIFIED]`
 10. **Append to log.md, never overwrite** — it is an audit trail
+11. **Counter-arguments are mandatory** — every concept and synthesis page must include a `Counter-arguments & Gaps` section. Never ship a one-sided compilation; if ten sources agree, the page must still name what the evidence does NOT show and what would change the verdict.
+12. **Reviewed flag starts false** — every LLM-authored page is born `reviewed: false`. Only Jay flips to `true` and stamps `reviewed_date`. Automation (INGEST, /autoresearch, BACKFILL) must never set `reviewed: true`.
+13. **One-way rule (personal vault is read-only)** — the agent compile-vault (`Agentic-KB/`) may READ from the personal write-vault (`/Users/jaywest/Documents/Obsidian Vault/`) but must NEVER write, edit, rename, or delete anything inside it. Personal notes flow IN via `raw/clippings/` or the Sofie watcher; nothing flows back out. The optional `scripts/install-personal-vault-guard.sh` pre-commit hook enforces this at git layer.
+14. **2-source rule for compile** — `/foundry-compile` only promotes a theme to a wiki/concepts/, wiki/patterns/, or wiki/frameworks/ page after ≥2 summaries cite it. Single-source themes are deferred to `wiki/candidates.md` and re-evaluated each compile. The `--force` flag bypasses the gate but is logged as `[FORCED]` in `wiki/_meta/compile-log.md`.
+
+---
+
+## Foundry Slash Commands
+
+UX layer over the existing `kb` CLI. Each command is a thin shell that documents intent, calls the appropriate script, and enforces a refuse list. Source: `.claude/commands/foundry-*.md`.
+
+- **`/foundry-ingest`** — sha256-dedup new files in `raw/clippings/` and route to the correct `raw/<subdir>/` (papers, transcripts, framework-docs, conversations, articles). Idempotent — re-runs are no-ops. Calls `scripts/ingest-dedup.mjs`.
+- **`/foundry-compile`** — run the 2-source gate. PROMOTE themes with ≥2 sources (new pages or updates), DEFER single-source themes to `wiki/candidates.md`, GRADUATE themes that crossed the threshold since last run. Logs every run to `wiki/_meta/compile-log.md`. Calls `scripts/compile-2source-gate.mjs`.
+- **`/foundry-ask "<question>"`** — query the wiki with citation enforcement. Returns answer + ≥2 `[[wiki/...]]` citations or surfaces a "no-source warning" header. Wraps `kb query`.
+- **`/foundry-lint`** — run `kb lint` plus Foundry extras: candidate-health (which deferred themes are now ready to graduate) and keyword drift (any tag down >70% in the last 30 days vs. 90).
 
 ---
 
@@ -334,23 +393,54 @@ Main vault: `/Users/jaywest/Documents/Obsidian Vault/`
 - Don't copy content from main vault — link instead
 - Jay's main vault entity map: `scripts/entity-map.json`
 
-### My [[llm-wiki]] Harness
+### My LLM Wiki Harness
 Harness: `/Users/jaywest/My LLM Wiki/`
 - `packages/cli` — CLI for querying this KB from terminal
-- `packages/mcp` — [[mcp-ecosystem]] server exposing KB as agent tool
+- `packages/mcp` — MCP server exposing KB as agent tool
 - `packages/core` — Core ingestion/query logic
 - Run queries via: `cd /Users/jaywest/My\ LLM\ Wiki && npm run query "your question"`
 
-### [[framework-claude-code]] Infrastructure
+### Claude Code Infrastructure
 - Agent definitions in: `/Users/jaywest/.claude/agents/`
 - Skill definitions in: `/Users/jaywest/.claude/skills/`
 - Use `gsd-executor` for complex wiki builds
-- Use parallel Agent tool calls for [[pattern-fan-out-worker]] ingestion
+- Use parallel Agent tool calls for fan-out ingestion
 
 ### Graphify
 - After major ingestion runs, invoke `/graphify` on the wiki index
 - Output goes to `wiki/syntheses/knowledge-graph-{date}.html`
 - Use graph view to identify orphan clusters and under-linked concepts
+
+---
+
+## Writing Style Guide
+
+All wiki pages — concept, pattern, recipe, framework — follow these rules:
+
+**Structure (4-part):**
+1. **TL;DR / Lead** — one declarative sentence stating the verdict or definition, no hedging
+2. **The argument** — 2–4 paragraphs explaining the mechanism, tradeoffs, and evidence
+3. **Specifics** — code sketches, tables, numbered steps — whatever makes the argument concrete
+4. **Connections** — Related concepts, related patterns, sources (wiki links only)
+
+**Voice:**
+- Opinionated and direct. State a position. "X is better than Y for Z" not "X may be preferred in some scenarios."
+- Declarative sentences. Avoid "can be", "might", "could potentially."
+- First mention of any proper noun (framework, pattern name, person) gets a wiki link — never again on the same page.
+- No filler intros. Start with the content.
+
+**Length:**
+- Concept pages: 400–800 words
+- Pattern pages: 500–900 words
+- Recipe pages: as long as the steps require; no length limit, but no padding
+- Framework pages: 600–1000 words
+- Summaries: 300–500 words
+
+**Anti-patterns (never do these):**
+- "This is a complex topic with many facets." → Delete. Start with the facet that matters.
+- Bullet-point lists masquerading as prose. Bullets for 3+ parallel items; prose otherwise.
+- Passive voice in TL;DRs. "X is used to..." → "X does..."
+- Hedged verdicts without evidence. If you're uncertain, say `[UNVERIFIED]` and note what would resolve it.
 
 ---
 

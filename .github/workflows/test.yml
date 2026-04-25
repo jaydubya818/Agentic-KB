@@ -1,0 +1,53 @@
+name: test
+
+on:
+  push:
+    branches: [main, "feat/**", "fix/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  agent-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install root deps
+        run: npm ci --omit=optional --no-audit --no-fund
+
+      - name: Run agent-runtime tests
+        run: node --test tests/agents/
+
+      - name: Run path-safety fuzzer
+        run: node --test tests/agents/fuzz-paths.test.mjs
+
+      - name: Verify context-snapshot drift
+        run: |
+          node --test tests/agents/context-snapshots.test.mjs
+          if [ -n "$(git status --porcelain tests/agents/fixtures/context-snapshots/)" ]; then
+            echo "::error::Context snapshots drifted. Run UPDATE_SNAPSHOTS=1 node --test tests/agents/context-snapshots.test.mjs and commit."
+            git diff tests/agents/fixtures/context-snapshots/
+            exit 1
+          fi
+
+      - name: Verify audit chain (if present)
+        run: |
+          if [ -f logs/audit.log ]; then
+            node cli/kb.js agent verify-audit
+          else
+            echo "no audit.log committed (expected)"
+          fi
+
+      - name: Tier read-leak audit
+        run: |
+          if [ -f scripts/audit-context-leaks.mjs ]; then
+            node scripts/audit-context-leaks.mjs --strict
+          else
+            echo "tier-leak audit script not yet present (Phase 2)"
+          fi

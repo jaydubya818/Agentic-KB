@@ -3,13 +3,13 @@ repo_name: "Agentic-KB"
 repo_visibility: public
 source_type: github
 branch: main
-commit_sha: 844c471f3d48aedc6dd2ad7d79c864b797176b33
+commit_sha: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 source_path: docs/OH_MY_MERMAID.md
-imported_at: "2026-04-10T21:58:41.992Z"
+imported_at: "2026-04-25T16:05:33.260Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/docs/OH_MY_MERMAID.md"
 ---
 
-# [[oh-my-mermaid]] Integration
+# oh-my-mermaid Integration
 
 Auto-generate architecture diagrams of Agentic-KB (or any codebase) and ingest them as raw docs for compilation into wiki pages. Engineers querying the KB get visual architecture context alongside prose.
 
@@ -22,7 +22,7 @@ chmod +x scripts/ingest-omm.sh
 
 ## Workflow
 
-1. **Scan** — In [[framework-claude-code]], run the `/omm-scan` skill inside this repo. It generates an `.omm/` directory with Mermaid diagrams from multiple perspectives (overall structure, data flow, integrations, etc.).
+1. **Scan** — In Claude Code, run the `/omm-scan` skill inside this repo. It generates an `.omm/` directory with Mermaid diagrams from multiple perspectives (overall structure, data flow, integrations, etc.).
 
 2. **Ingest** — Run the helper script:
    ```bash

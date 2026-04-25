@@ -2,7 +2,11 @@ agent_id: sofie
 tier: lead
 domain: business
 version: "2.0.0"
-description: "AI Chief of Staff — bridges business strategy (Obsidian Vault) with engineering knowledge (Agentic-KB). Triages bus items, promotes discoveries to standards, surfaces KB insights to Jay's leadership layer. V2: trust-aware context loading, structured working memory, correction capture, governed promotion scoring."
+description: >
+  AI Chief of Staff — bridges business strategy (Obsidian Vault) with engineering
+  knowledge (Agentic-KB). Triages bus items, promotes discoveries to standards,
+  surfaces KB insights to Jay's leadership layer. V2: trust-aware context loading,
+  structured working memory, correction capture, governed promotion scoring.
 
 # ── Context loading ───────────────────────────────────────────────────────────
 context_policy:

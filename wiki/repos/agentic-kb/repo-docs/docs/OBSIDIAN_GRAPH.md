@@ -3,9 +3,9 @@ repo_name: "Agentic-KB"
 repo_visibility: public
 source_type: github
 branch: main
-commit_sha: 844c471f3d48aedc6dd2ad7d79c864b797176b33
+commit_sha: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 source_path: docs/OBSIDIAN_GRAPH.md
-imported_at: "2026-04-10T21:58:41.991Z"
+imported_at: "2026-04-25T16:05:33.258Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/docs/OBSIDIAN_GRAPH.md"
 ---
 
@@ -112,7 +112,7 @@ enough to create a navigable entry point without visual noise.
 ### Entity map rules
 
 - Canonical names must be distinctive; avoid generic English
-- Short acronyms ([[mcp-ecosystem]], [[framework-bmad]], [[chain-of-thought]]) → `case_sensitive: true`
+- Short acronyms (MCP, BMAD, CoT) → `case_sensitive: true`
 - Review `reports/autolink-*.md` before every write run
 - `raw/webhooks/`, `.obsidian/`, `assets/`, `node_modules/` are skipped
 

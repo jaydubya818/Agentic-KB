@@ -1309,6 +1309,70 @@ async function canonicalCmd(sub, rest) {
   throw new Error(`Unknown canonical subcommand: ${sub}`)
 }
 
+// ─── env ─────────────────────────────────────────────────────────────────
+
+async function envCmd(sub) {
+  const fsMod = await import('fs')
+  const required = [
+    { key: 'OBSIDIAN_VAULT_ROOT', check: 'path-exists', default: pathMod.join(process.env.HOME || '', 'Documents', 'Obsidian Vault') },
+    { key: 'KB_API_URL', check: 'present-or-default', default: 'http://localhost:3002' },
+    { key: 'KB_DAILY_COST_CAP_USD', check: 'present-or-default', default: '5' },
+  ]
+  const optional = [
+    { key: 'ANTHROPIC_API_KEY', check: 'present', note: 'required for kb query / kb compile' },
+    { key: 'PRIVATE_PIN', check: 'present', note: 'required for wiki/personal/** access' },
+  ]
+
+  const rows = []
+  let bad = 0
+  for (const r of required) {
+    const v = process.env[r.key] || r.default
+    let status = 'ok'
+    if (r.check === 'path-exists') {
+      if (!fsMod.existsSync(v)) { status = 'missing-path'; bad++ }
+    } else if (r.check === 'present' && !v) { status = 'unset'; bad++ }
+    rows.push({ key: r.key, value: v.length > 60 ? v.slice(0, 57) + '...' : v, status, kind: 'required' })
+  }
+  for (const r of optional) {
+    const v = process.env[r.key] || ''
+    rows.push({ key: r.key, value: v ? '[set]' : '', status: v ? 'ok' : 'unset', kind: 'optional', note: r.note })
+  }
+
+  console.log('\n=== Agentic-KB env check ===')
+  for (const r of rows) {
+    const flag = r.status === 'ok' ? '✓' : (r.kind === 'required' ? '✗' : '·')
+    const note = r.note ? `  (${r.note})` : ''
+    console.log(`  ${flag} ${r.key.padEnd(28)} ${r.value || '—'}  [${r.status}]${note}`)
+  }
+  if (bad > 0) {
+    console.log(`\n❌ ${bad} required env issue(s). See .env.example.`)
+    process.exit(2)
+  }
+  console.log('\n✓ env OK')
+}
+
+// ─── bootstrap ────────────────────────────────────────────────────────────
+
+async function bootstrapCmd(role) {
+  const fsMod = await import('fs')
+  if (!role || role === '--list') {
+    const dir = pathMod.join(AGENT_KB_ROOT, 'wiki/personal/agent-bootstrap')
+    if (!fsMod.existsSync(dir)) throw new Error('No bootstrap dir found')
+    const roles = fsMod.readdirSync(dir).filter(f => f.endsWith('.md') && f !== 'universal.md').map(f => f.replace(/\.md$/, ''))
+    console.log('Available roles:')
+    for (const r of roles) console.log(`  - ${r}`)
+    console.log(`\nUsage: kb bootstrap <role>   (then pipe to | pbcopy)`)
+    return
+  }
+  const universal = pathMod.join(AGENT_KB_ROOT, 'wiki/personal/agent-bootstrap/universal.md')
+  const roleFile = pathMod.join(AGENT_KB_ROOT, `wiki/personal/agent-bootstrap/${role}.md`)
+  if (!fsMod.existsSync(universal)) throw new Error(`Missing: ${universal}`)
+  if (!fsMod.existsSync(roleFile)) throw new Error(`Unknown role: ${role}. Run kb bootstrap --list`)
+  process.stdout.write(fsMod.readFileSync(universal, 'utf8'))
+  process.stdout.write('\n\n')
+  process.stdout.write(fsMod.readFileSync(roleFile, 'utf8'))
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -1368,6 +1432,10 @@ try {
     await rewriteCmd(args[1], args.slice(2))
   } else if (command === 'canonical') {
     await canonicalCmd(args[1], args.slice(2))
+  } else if (command === 'env') {
+    await envCmd(args[1], args.slice(2))
+  } else if (command === 'bootstrap') {
+    await bootstrapCmd(args[1], args.slice(2))
   } else {
     console.error(`Unknown command: ${command}`)
     usage()
