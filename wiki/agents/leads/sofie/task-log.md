@@ -12,3 +12,7 @@ updated: 2026-04-10
 - Profile, [[pattern-hot-cache]], and task log initialized
 - raw/qa/ and raw/transcripts/ directories created for ingest pipeline
 - Integration plan filed in Obsidian: `02 - Projects/Agentic-KB - Sofie Integration Plan.md`
+
+
+## 2026-04-25T15:40:52.592Z
+Triaged Q3 priorities + 2 client updates

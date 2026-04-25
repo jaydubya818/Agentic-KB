@@ -77,3 +77,8 @@
 {"ts":"2026-04-10T21:58:41.995Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-dry-wiki.md","action":"write"}
 {"ts":"2026-04-10T21:58:41.996Z","op":"repo-doc-sync","repo":"Agentic-KB","path":"wiki/repos/Agentic-KB/repo-docs/reports/autolink-write-wiki.md","action":"write"}
 {"ts":"2026-04-14T04:58:24.069Z","op":"query","vault":"Agentic-KB","q":"What is Hermes and what are its work lanes?","scope":"public","articlesRead":5}
+{"ts":"2026-04-25T15:40:52.593Z","op":"agent-write","agent_id":"sofie","contract_hash":"1657d3a7f7a0cf46","path":"wiki/agents/leads/sofie/task-log.md","kind":"append","prev_hash":"0000000000000000","entry_hash":"bbc78729458211c4"}
+{"ts":"2026-04-25T15:40:52.594Z","op":"vault-write","agent_id":"sofie","contract_hash":"1657d3a7f7a0cf46","kind":"create","vault_path":"06 - Decisions/2026-04-25 - ship-vault-writeback.md","prev_hash":"bbc78729458211c4","entry_hash":"0107183b5cec59d8"}
+{"ts":"2026-04-25T15:40:52.594Z","op":"vault-write","agent_id":"sofie","contract_hash":"1657d3a7f7a0cf46","kind":"append","vault_path":"07 - Tasks/Action Tracker.md","prev_hash":"0107183b5cec59d8","entry_hash":"28f0b4d043dfb437"}
+{"ts":"2026-04-25T15:40:52.594Z","op":"vault-write","agent_id":"sofie","contract_hash":"1657d3a7f7a0cf46","kind":"create","vault_path":"04 - Sessions/2026-04-25-q3-alignment.md","prev_hash":"28f0b4d043dfb437","entry_hash":"a6beb6e04d85c0ae"}
+{"ts":"2026-04-25T15:40:52.595Z","op":"agent-close-task","agent_id":"sofie","contract_hash":"1657d3a7f7a0cf46","status":"ok","committed":1,"bus":0,"prev_hash":"a6beb6e04d85c0ae","entry_hash":"37b30e92ae67bf85"}
