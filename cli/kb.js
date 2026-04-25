@@ -39,7 +39,8 @@ const AGENT_KB_ROOT = pathMod.resolve(pathMod.dirname(fileURLToPath(import.meta.
     if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
       v = v.slice(1, -1)
     }
-    if (process.env[k] === undefined) process.env[k] = v
+    // Override only if shell value is missing or empty.
+    if (process.env[k] === undefined || process.env[k] === '') process.env[k] = v
   }
 })()
 
