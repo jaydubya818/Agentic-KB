@@ -1,118 +1,138 @@
 ---
-id: 01KQ2Z439J752WAEZVTJD6C97S
+id: 01KQ308V70139EX1KTSRA6XJYA
 title: Multi-Agent Systems
 type: concept
-tags: [agents, orchestration, architecture, context, patterns]
-created: 2024-01-01
-updated: 2026-04-25
+tags: [agents, orchestration, architecture, patterns, workflow]
+created: 2026-04-08
+updated: 2026-04-09
 visibility: public
 confidence: high
-related: [context-management, agent-failure-modes, agent-loops, cost-optimization]
+related: [pattern-supervisor-worker, pattern-fan-out, agent-loops, context-management, agent-failure-modes]
 ---
 
 # Multi-Agent Systems
 
-Multi-agent architectures distribute work across multiple language model instances, each with its own context window. When designed well, this distribution enables capabilities beyond single-agent limits. When designed poorly, it introduces coordination overhead that negates benefits.
-
-> **Critical insight**: Sub-agents exist primarily to isolate context, not to anthropomorphize role division.
-
 ## Definition
 
-A multi-agent system is a collection of LLM-powered agents that coordinate to accomplish tasks that exceed the capabilities of any single agent. Each agent operates within its own context window, enabling parallel execution, specialization, and separation of concerns.
+A multi-agent system is an architecture where multiple LLM-powered agents collaborate — each handling a scoped subtask — coordinated by an orchestrator or via a defined topology. Agents are not anthropomorphized roles; they are **context isolation boundaries**.
+
+> "Sub-agents exist primarily to isolate context, not to anthropomorphize role division."
+
+The goal is to decompose work too large or too parallel for a single agent's context window into manageable, independently executable units.
+
+---
 
 ## Why It Matters
 
-### The Context Bottleneck
+Single-agent systems hit three ceilings:
 
-Single agents face inherent ceilings in reasoning capability, context management, and tool coordination. As tasks grow more complex, context windows fill with accumulated history, retrieved documents, and tool outputs. Performance degrades via predictable patterns:
+1. **Context limits** — long tasks overflow the context window
+2. **Latency** — sequential tool calls are slow for parallelisable work
+3. **Reliability** — one agent doing everything increases blast radius of errors
 
-- **Lost-in-the-middle effect**: Relevant information buried in long contexts is underweighted
-- **Attention scarcity**: Model attention is diluted across too many tokens
-- **Context poisoning**: Accumulated errors and irrelevant content degrade downstream reasoning
+Multi-agent architectures solve all three — at the cost of coordination overhead, token multiplication, and failure propagation complexity.
 
-Multi-agent architectures address these limitations by partitioning work across multiple context windows. Each agent operates in a clean context focused on its subtask. Results aggregate at a coordination layer without any single context bearing the full burden.
+---
 
-### The Parallelization Argument
+## The Three Core Patterns
 
-Many tasks contain parallelizable subtasks that a single agent must execute sequentially. A research task might require searching multiple independent sources, analyzing different documents, or comparing competing approaches. Multi-agent systems assign these to concurrent agents, reducing wall-clock time and preventing context accumulation.
-
-## Core Patterns
-
-Three dominant architectural patterns exist:
-
-| Pattern | Control Style | Best For |
+| Pattern | Best For | Key Risk |
 |---|---|---|
-| **Supervisor / Orchestrator** | Centralized | Tasks with clear decomposition, auditability requirements |
-| **Peer-to-Peer / Swarm** | Distributed handoffs | Flexible routing, emergent collaboration |
-| **Hierarchical** | Layered abstraction | Large-scale systems with multiple domains |
+| **Fan-Out Orchestrator-Worker** | Independent parallel subtasks | Token cost multiplies rapidly |
+| **Pipeline** | Sequential ETL-style stages with clear interfaces | Single slow stage blocks everything |
+| **Hierarchical** | Large projects with natural sub-domains | Failure propagation is hard to trace |
 
-See [pattern-supervisor-worker](../patterns/pattern-supervisor-worker.md) for implementation details on the most common pattern.
+---
 
-## Token Economics
+## Pattern 1: Fan-Out Orchestrator-Worker (Default Choice)
 
-Multi-agent systems consume significantly more tokens than single-agent approaches. Production benchmarks show:
+A central orchestrator maintains the high-level plan and dispatches atomic, independent subtasks to stateless workers — all **in a single response turn** to achieve true parallelism.
 
-| Architecture | Token Multiplier | Use Case |
-|---|---|---|
-| Single agent chat | 1× baseline | Simple queries |
-| Single agent with tools | ~4× baseline | Tool-using tasks |
-| Multi-agent system | ~15× baseline | Complex research / coordination |
+```
+Orchestrator → Worker A (subtask 1) ─┐
+             → Worker B (subtask 2) ─┼─ parallel execution
+             → Worker C (subtask 3) ─┘
+             ← collects all results
+             → synthesizes final output
+```
 
-Research on the BrowseComp evaluation found that **three factors explain 95% of performance variance**:
-1. Token usage (~80% of variance)
-2. Number of tool calls
-3. Model choice
+### The Parallelism Rule (Critical)
 
-This validates the multi-agent approach: distributing work across agents with separate context windows adds capacity for parallel reasoning.
+Multiple agent calls issued **in a single response turn** execute in parallel. Calls across separate turns are sequential.
 
-**Model selection matters more than raw token budgets.** Claude Sonnet 4.5 showed larger performance gains than doubling tokens on earlier Sonnet versions. GPT-5.2's thinking mode similarly outperforms raw token increases. Model selection and multi-agent architecture are complementary strategies — not substitutes.
+```
+# WRONG — sequential, slow:
+Turn 1: Agent call #1 → wait → result
+Turn 2: Agent call #2 → wait → result
 
-See [cost-optimization](cost-optimization.md) for strategies to manage token spend in multi-agent systems.
+# RIGHT — parallel, fast:
+Turn 1: Agent calls #1, #2, #3 simultaneously → wait → all results
+```
 
-## Design Principles
+Your orchestrator prompt **must explicitly instruct** the agent to dispatch all parallel calls in a single response.
 
-1. **Isolate context by task boundary**, not by organizational analogy. Don't create an "HR agent" and a "Finance agent" — create agents scoped to information domains.
-2. **Explicit coordination protocols**: Agents must have well-defined handoff contracts (inputs, outputs, error signals).
-3. **Consensus mechanisms that avoid sycophancy**: Aggregating outputs from multiple agents requires deliberate strategies to surface disagreement rather than average it away.
-4. **Failure containment**: Design so that one agent's failure degrades gracefully rather than cascading. See [agent-failure-modes](agent-failure-modes.md).
+### Orchestrator Prompt Rules
 
-## When to Use Multi-Agent Architecture
+- Explicitly forbid the orchestrator from doing specialist work (`NEVER do X yourself`)
+- Require all parallel dispatches in a **single response turn**
+- Define explicit error recovery paths
+- Scope workers to specific tools (restrict capabilities)
 
-- Single-agent context limits constrain task complexity
-- Tasks decompose naturally into parallel subtasks
-- Different subtasks require different tool sets or system prompts
-- Building systems that must handle multiple domains simultaneously
-- Scaling agent capabilities beyond single-context limits
+---
 
-## When NOT to Use It
+## Pattern 2: Pipeline
 
-- Task is simple enough to fit in a single context window
-- Coordination overhead would dominate execution time
-- Latency requirements are strict (multi-agent adds round-trip overhead)
-- Debugging complexity is a primary concern (distributed agents are harder to trace)
+Best for sequential, dependent stages where the output of stage N feeds stage N+1:
 
-## Common Failure Modes
+```
+Ingester → Analyst → Formatter → Publisher
+```
 
-- **Bottlenecks**: Supervisor becomes a throughput constraint
-- **Divergence**: Agents operating on stale or inconsistent shared state
-- **Error propagation**: Upstream agent mistakes cascade through the pipeline
-- **Over-decomposition**: Too many agents for the task complexity; coordination cost exceeds benefit
+Use for ETL-style workflows, document processing, or code generation pipelines where each stage has a clean interface. Validate output before passing forward.
 
-See [agent-failure-modes](agent-failure-modes.md) for detailed treatment.
+**Risk**: a single slow or failing stage blocks the entire pipeline. Add validation gates between stages.
+
+---
+
+## Pattern 3: Hierarchical
+
+Use when the problem has natural sub-domains that are themselves complex enough to warrant their own orchestrator:
+
+```
+Root Orchestrator
+├── Domain Orchestrator A → Workers
+└── Domain Orchestrator B → Workers
+```
+
+Best for large, long-running projects. Hardest to debug — failures deep in the hierarchy are difficult to trace. Requires robust logging at every level (see [agent observability](agent-observability.md)).
+
+---
 
 ## Example
 
-A research synthesis task:
-1. **Orchestrator** receives query, decomposes into 4 sub-questions
-2. **Search agents** (×4, parallel) each retrieve and summarize one sub-question
-3. **Synthesis agent** receives all 4 summaries, writes final report
-4. **Critique agent** reviews the report for gaps
+A research assistant agent:
+- **Orchestrator**: receives a research question, decomposes into 4 sub-questions
+- **Workers A–D**: each searches a different source in parallel (single turn dispatch)
+- **Orchestrator**: collects all results, synthesizes a final report
 
-No single context window ever holds all retrieved documents simultaneously.
+Without the parallel dispatch rule, this takes 4× as long.
+
+---
+
+## Common Pitfalls
+
+- **Sequential dispatch**: issuing agent calls one per turn, losing all parallelism benefit
+- **Orchestrator doing specialist work**: undermines the separation of concerns
+- **No error recovery paths**: one worker failure cascades
+- **Unbounded token cost**: spawning too many workers multiplies context cost rapidly
+- **Over-decomposition**: splitting work so finely that coordination overhead exceeds compute savings
+
+---
 
 ## See Also
 
-- [Context Management](context-management.md)
-- [Agent Failure Modes](agent-failure-modes.md)
-- [Agent Loops](agent-loops.md)
-- [Cost Optimization](cost-optimization.md)
+- [Agent Loops](agent-loops.md) — the execution model underlying each agent
+- [Context Management](context-management.md) — why context isolation is the primary motivation
+- [Agent Failure Modes](agent-failure-modes.md) — what goes wrong and how to detect it
+- [Agent Observability](agent-observability.md) — tracing failures in hierarchical systems
+- [Human-in-the-Loop](human-in-the-loop.md) — when to add approval gates between stages

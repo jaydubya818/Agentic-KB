@@ -442,3 +442,59 @@ Pages affected: `concepts/prd-to-json-conversion.md`, `_meta/compile-log.md`
 ## 2026-04-25 — Compiled `my-skills/react-best-practices-skill.md`
 
 Pages affected: `concepts/react-nextjs-performance.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/skill-creator-skill.md`
+
+Pages affected: `concepts/skills.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/tool-design-skill.md`
+
+Pages affected: `concepts/tool-design.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/vercel-react-best-practices-skill.md`
+
+Pages affected: `concepts/react-nextjs-performance.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/vitest-best-practices-skill.md`
+
+Pages affected: `patterns/vitest-best-practices.md`, `concepts/test-doubles-and-mocking.md`
+
+## 2026-04-25 — Compiled `note/agent-memory-runtime-plan.md`
+
+Pages affected: `concepts/agent-memory-runtime.md`, `concepts/memory-systems.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `note/agentic-pi-harness-project-plan.md`
+
+Pages affected: `personal/agentic-pi-harness-project-plan.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `note/karpathy-wiki-test.md`
+
+Pages affected: `patterns/llm-wiki-pattern.md`, `concepts/knowledge-compilation.md`
+
+## 2026-04-25 — Compiled `note/private-test-note.md`
+
+Pages affected: `concepts/pin-lock-system.md`
+
+## 2026-04-25 — Compiled `papers/siagian-agentic-engineer-roadmap-2026.md`
+
+Pages affected: `concepts/agentic-engineering-stack.md`, `concepts/agent-failure-modes.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `qa/2026-04-08-compare-what-the-multi-agent-systems-article-says-about-supe.md`
+
+Pages affected: `wiki/log.md`, `concepts/multi-agent-systems.md`
+
+## 2026-04-25 — Compiled `qa/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl.md`
+
+Pages affected: `concepts/multi-agent-systems.md`
+
+## 2026-04-25 — Compiled `qa/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration.md`
+
+Pages affected: `concepts/multi-agent-systems.md`
+
+## 2026-04-25 — Compiled `qa/2026-04-09-what-is-the-best-pattern-for-multi-agent-orchestration.md`
+
+Pages affected: `concepts/multi-agent-systems.md`
+
+## 2026-04-25 — Compiled `qa/sofie-session-2026-04-10-multi-agent-patterns-q-a.md`
+
+Pages affected: `patterns/pattern-supervisor-worker.md`, `concepts/minimal-worker-context.md`

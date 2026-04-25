@@ -4,12 +4,9 @@ import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 import { parse as yamlParse } from 'yaml'
+import { isSafeRef } from '../../../../../../../lib/safe-ref.mjs'
 
 export const dynamic = 'force-dynamic'
-
-// Restrict ref to characters valid in git revision names. Blocks shell metachars
-// even though we use execFileSync (no shell) — defense in depth.
-const SAFE_REF = /^[A-Za-z0-9_./~^@-]{1,200}$/
 
 /**
  * GET /api/agents/[id]/diff?ref=HEAD~1
@@ -30,7 +27,7 @@ export async function GET(
     return NextResponse.json({ error: 'invalid agent id' }, { status: 400 })
   }
 
-  if (!SAFE_REF.test(ref)) {
+  if (!isSafeRef(ref)) {
     return NextResponse.json({ error: 'invalid ref' }, { status: 400 })
   }
 

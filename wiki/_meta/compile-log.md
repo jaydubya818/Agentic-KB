@@ -1,10 +1,15 @@
 ---
-id: 01KQ2ZFAPCDAESP8Y4JHFHEBYJ
+id: 01KQ302S14955GA05YA648Y29E
 ---
 
 # Compile Log
 
+This file tracks what was created or updated during each compile run.
+
+---
+
 ## 2026-04-25
 
-### Created
-- `concepts/react-nextjs-performance.md` — Compiled from `my-skills/react-best-practices-skill.md`. Covers Vercel's 45-rule React/Next.js performance optimization guide across 8 priority categories (waterfalls, bundle size, server-side, client-side fetching, re-renders, rendering, JS performance, advanced patterns).
+### Source: `papers/siagian-agentic-engineer-roadmap-2026.md`
+- **Created**: `concepts/agentic-engineering-stack.md` — Full-stack overview of agentic AI engineering layers (Python → LLM → Framework → Advanced → Production), based on Siagian 2026 roadmap
+- **Updated**: `concepts/agent-failure-modes.md` — Expanded with taxonomy from Siagian: loop/control failures, input validation, security (prompt injection), and operational pitfalls including hallucination mitigation strategies

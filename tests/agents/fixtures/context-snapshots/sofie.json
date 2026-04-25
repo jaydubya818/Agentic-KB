@@ -29,11 +29,7 @@
       "class": "learned"
     },
     {
-      "path": "wiki/concepts/agent-evaluation.md",
-      "class": "learned"
-    },
-    {
-      "path": "wiki/concepts/agent-observability.md",
+      "path": "wiki/concepts/agent-failure-modes.md",
       "class": "learned"
     },
     {
@@ -54,6 +50,10 @@
     },
     {
       "path": "wiki/personal/agent-bootstrap/universal.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/agentic-pi-harness-project-plan.md",
       "class": "learned"
     },
     {
@@ -79,7 +79,7 @@
   ],
   "trace_summary": {
     "included": 19,
-    "excluded": 8,
+    "excluded": 9,
     "truncated": true
   }
 }

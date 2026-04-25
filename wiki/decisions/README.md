@@ -40,3 +40,6 @@ tags: []
 
 ## Index
 <!-- INGEST prepends new decisions here. Most recent first. -->
+
+### Architecture Decision Records (ADRs)
+- [[decisions/ADR-001-mcp-sdk-migration|ADR-001 — Defer MCP SDK Server → McpServer migration]] (deferred, 2026-04-25)

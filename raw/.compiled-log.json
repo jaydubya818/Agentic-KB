@@ -561,5 +561,101 @@
       "concepts/react-nextjs-performance.md",
       "_meta/compile-log.md"
     ]
+  },
+  "my-skills/skill-creator-skill.md": {
+    "compiledAt": "2026-04-25T18:48:06.104Z",
+    "pagesAffected": [
+      "concepts/skills.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/tool-design-skill.md": {
+    "compiledAt": "2026-04-25T18:49:08.559Z",
+    "pagesAffected": [
+      "concepts/tool-design.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/vercel-react-best-practices-skill.md": {
+    "compiledAt": "2026-04-25T18:49:59.525Z",
+    "pagesAffected": [
+      "concepts/react-nextjs-performance.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/vitest-best-practices-skill.md": {
+    "compiledAt": "2026-04-25T18:51:23.351Z",
+    "pagesAffected": [
+      "patterns/vitest-best-practices.md",
+      "concepts/test-doubles-and-mocking.md"
+    ]
+  },
+  "note/agent-memory-runtime-plan.md": {
+    "compiledAt": "2026-04-25T18:53:25.428Z",
+    "pagesAffected": [
+      "concepts/agent-memory-runtime.md",
+      "concepts/memory-systems.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "note/agentic-pi-harness-project-plan.md": {
+    "compiledAt": "2026-04-25T18:54:21.862Z",
+    "pagesAffected": [
+      "personal/agentic-pi-harness-project-plan.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "note/karpathy-wiki-test.md": {
+    "compiledAt": "2026-04-25T18:55:58.699Z",
+    "pagesAffected": [
+      "patterns/llm-wiki-pattern.md",
+      "concepts/knowledge-compilation.md"
+    ]
+  },
+  "note/private-test-note.md": {
+    "compiledAt": "2026-04-25T18:56:32.450Z",
+    "pagesAffected": [
+      "concepts/pin-lock-system.md"
+    ]
+  },
+  "papers/siagian-agentic-engineer-roadmap-2026.md": {
+    "compiledAt": "2026-04-25T18:57:53.188Z",
+    "pagesAffected": [
+      "concepts/agentic-engineering-stack.md",
+      "concepts/agent-failure-modes.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "qa/2026-04-08-compare-what-the-multi-agent-systems-article-says-about-supe.md": {
+    "compiledAt": "2026-04-25T18:58:45.578Z",
+    "pagesAffected": [
+      "wiki/log.md",
+      "concepts/multi-agent-systems.md"
+    ]
+  },
+  "qa/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl.md": {
+    "compiledAt": "2026-04-25T18:59:34.744Z",
+    "pagesAffected": [
+      "concepts/multi-agent-systems.md"
+    ]
+  },
+  "qa/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration.md": {
+    "compiledAt": "2026-04-25T19:00:14.412Z",
+    "pagesAffected": [
+      "concepts/multi-agent-systems.md"
+    ]
+  },
+  "qa/2026-04-09-what-is-the-best-pattern-for-multi-agent-orchestration.md": {
+    "compiledAt": "2026-04-25T19:01:12.057Z",
+    "pagesAffected": [
+      "concepts/multi-agent-systems.md"
+    ]
+  },
+  "qa/sofie-session-2026-04-10-multi-agent-patterns-q-a.md": {
+    "compiledAt": "2026-04-25T19:01:57.900Z",
+    "pagesAffected": [
+      "patterns/pattern-supervisor-worker.md",
+      "concepts/minimal-worker-context.md"
+    ]
   }
 }
