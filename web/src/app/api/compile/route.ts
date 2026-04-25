@@ -36,22 +36,22 @@ interface CompiledLog {
 }
 
 function loadLog(root: string): CompiledLog {
-  try { return JSON.parse(fs.readFileSync(path.join(root, COMPILED_LOG), 'utf8')) as CompiledLog }
+  try { return JSON.parse(fs.readFileSync(path.join(/* turbopackIgnore: true */ root, COMPILED_LOG), 'utf8')) as CompiledLog }
   catch { return {} }
 }
 function saveLog(root: string, log: CompiledLog): void {
-  const p = path.join(root, COMPILED_LOG)
-  fs.mkdirSync(path.dirname(p), { recursive: true })
-  fs.writeFileSync(p, JSON.stringify(log, null, 2))
+  const p = path.join(/* turbopackIgnore: true */ root, COMPILED_LOG)
+  fs.mkdirSync(/* turbopackIgnore: true */ path.dirname(p), { recursive: true })
+  fs.writeFileSync(/* turbopackIgnore: true */ p, JSON.stringify(log, null, 2))
 }
 
 /** Recursively collect all .md files under a directory */
 function collectMd(dir: string, base = dir): string[] {
-  if (!fs.existsSync(dir)) return []
+  if (!fs.existsSync(/* turbopackIgnore: true */ dir)) return []
   const results: string[] = []
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+  for (const entry of fs.readdirSync(/* turbopackIgnore: true */ dir, { withFileTypes: true })) {
     if (entry.name.startsWith('.')) continue
-    const full = path.join(dir, entry.name)
+    const full = path.join(/* turbopackIgnore: true */ dir, entry.name)
     if (entry.isDirectory()) results.push(...collectMd(full, base))
     else if (entry.name.endsWith('.md')) results.push(path.relative(base, full))
   }
@@ -60,8 +60,8 @@ function collectMd(dir: string, base = dir): string[] {
 
 /** Read the schema.md if it exists (guides LLM compilation style) */
 function readSchema(wikiRoot: string): string {
-  const schemaPath = path.join(wikiRoot, 'schema.md')
-  try { return fs.readFileSync(schemaPath, 'utf8') }
+  const schemaPath = path.join(/* turbopackIgnore: true */ wikiRoot, 'schema.md')
+  try { return fs.readFileSync(/* turbopackIgnore: true */ schemaPath, 'utf8') }
   catch { return '' }
 }
 
@@ -114,15 +114,15 @@ const WIKI_SECTIONS = [
 ] as const
 
 function reindexWiki(wikiRoot: string): void {
-  const indexPath = path.join(wikiRoot, 'index.md')
-  if (!fs.existsSync(indexPath)) return
+  const indexPath = path.join(/* turbopackIgnore: true */ wikiRoot, 'index.md')
+  if (!fs.existsSync(/* turbopackIgnore: true */ indexPath)) return
 
-  let indexContent = fs.readFileSync(indexPath, 'utf8')
+  let indexContent = fs.readFileSync(/* turbopackIgnore: true */ indexPath, 'utf8')
 
   for (const section of WIKI_SECTIONS) {
-    const sectionDir = path.join(wikiRoot, section)
-    const count = fs.existsSync(sectionDir)
-      ? fs.readdirSync(sectionDir).filter(f => f.endsWith('.md') && !f.startsWith('.')).length
+    const sectionDir = path.join(/* turbopackIgnore: true */ wikiRoot, section)
+    const count = fs.existsSync(/* turbopackIgnore: true */ sectionDir)
+      ? fs.readdirSync(/* turbopackIgnore: true */ sectionDir).filter(f => f.endsWith('.md') && !f.startsWith('.')).length
       : 0
 
     // Match headers like "## Concepts (12)" or "## Concepts" and update/add count
@@ -133,7 +133,7 @@ function reindexWiki(wikiRoot: string): void {
     )
   }
 
-  fs.writeFileSync(indexPath, indexContent, 'utf8')
+  fs.writeFileSync(/* turbopackIgnore: true */ indexPath, indexContent, 'utf8')
 }
 
 export async function POST(request: NextRequest): Promise<Response> {
@@ -157,7 +157,7 @@ export async function POST(request: NextRequest): Promise<Response> {
 
   const vaultRoot = request.cookies.get('active_vault_path')?.value || DEFAULT_KB_ROOT
   const wikiRoot = resolveContentRoot(vaultRoot)
-  const rawRoot = path.join(vaultRoot, 'raw')
+  const rawRoot = path.join(/* turbopackIgnore: true */ vaultRoot, 'raw')
   const encoder = new TextEncoder()
 
   const stream = new ReadableStream({
@@ -196,9 +196,9 @@ export async function POST(request: NextRequest): Promise<Response> {
         let totalPagesUpdated = 0
 
         for (const relFile of toCompile) {
-          const rawPath = path.join(rawRoot, relFile)
+          const rawPath = path.join(/* turbopackIgnore: true */ rawRoot, relFile)
           let rawContent = ''
-          try { rawContent = fs.readFileSync(rawPath, 'utf8') }
+          try { rawContent = fs.readFileSync(/* turbopackIgnore: true */ rawPath, 'utf8') }
           catch { send({ type: 'skip', file: relFile, reason: 'unreadable' }); continue }
 
           if (rawContent.length < 50) {
@@ -342,10 +342,10 @@ Rules:
 
           for (const op of ops) {
             if (!op.path || !op.content) continue
-            const pagePath = path.join(wikiRoot, op.path)
-            fs.mkdirSync(path.dirname(pagePath), { recursive: true })
-            const existed = fs.existsSync(pagePath)
-            fs.writeFileSync(pagePath, op.content, 'utf8')
+            const pagePath = path.join(/* turbopackIgnore: true */ wikiRoot, op.path)
+            fs.mkdirSync(/* turbopackIgnore: true */ path.dirname(pagePath), { recursive: true })
+            const existed = fs.existsSync(/* turbopackIgnore: true */ pagePath)
+            fs.writeFileSync(/* turbopackIgnore: true */ pagePath, op.content, 'utf8')
             ensureId(pagePath)
             affectedPages.push(op.path)
             if (existed) totalPagesUpdated++; else totalPagesCreated++
@@ -362,9 +362,9 @@ Rules:
 
           // Append to wiki/log.md
           const logEntry = `\n## ${new Date().toISOString().slice(0, 10)} — Compiled \`${relFile}\`\n\nPages affected: ${affectedPages.map(p => `\`${p}\``).join(', ')}\n`
-          const wikiLogPath = path.join(wikiRoot, 'log.md')
-          if (!fs.existsSync(wikiLogPath)) {
-            fs.writeFileSync(wikiLogPath, '# Wiki Compilation Log\n\nChronological record of all compile operations.\n')
+          const wikiLogPath = path.join(/* turbopackIgnore: true */ wikiRoot, 'log.md')
+          if (!fs.existsSync(/* turbopackIgnore: true */ wikiLogPath)) {
+            fs.writeFileSync(/* turbopackIgnore: true */ wikiLogPath, '# Wiki Compilation Log\n\nChronological record of all compile operations.\n')
           }
           fs.appendFileSync(wikiLogPath, logEntry)
         }

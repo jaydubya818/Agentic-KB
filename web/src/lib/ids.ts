@@ -61,7 +61,7 @@ function parseFrontmatter(content: string): { fm: Map<string, string>; raw: stri
  */
 export function ensureId(absPath: string): string | null {
   let content: string
-  try { content = fs.readFileSync(absPath, 'utf8') } catch { return null }
+  try { content = fs.readFileSync(/* turbopackIgnore: true */ absPath, 'utf8') } catch { return null }
 
   const parsed = parseFrontmatter(content)
   if (parsed) {
@@ -74,14 +74,14 @@ export function ensureId(absPath: string): string | null {
     const id = ulid()
     const newFm = `id: ${id}\n${parsed.raw}`
     const updated = `---\n${newFm}\n---${parsed.body}`
-    fs.writeFileSync(absPath, updated, 'utf8')
+    fs.writeFileSync(/* turbopackIgnore: true */ absPath, updated, 'utf8')
     return id
   }
 
   // No frontmatter at all — prepend a minimal block.
   const id = ulid()
   const updated = `---\nid: ${id}\n---\n\n${content}`
-  fs.writeFileSync(absPath, updated, 'utf8')
+  fs.writeFileSync(/* turbopackIgnore: true */ absPath, updated, 'utf8')
   return id
 }
 
@@ -101,7 +101,7 @@ function walk(dir: string, out: string[]): void {
   let entries: fs.Dirent[]
   try { entries = fs.readdirSync(dir, { withFileTypes: true }) } catch { return }
   for (const ent of entries) {
-    const full = path.join(dir, ent.name)
+    const full = path.join(/* turbopackIgnore: true */ dir, ent.name)
     if (ent.isDirectory()) {
       if (ent.name.startsWith('.')) continue
       walk(full, out)
@@ -130,7 +130,7 @@ export function buildIdIndex(vaultRoot: string = DEFAULT_KB_ROOT): Map<string, s
   const map = new Map<string, string>()
   const scanDirs = ['wiki', 'raw']
   for (const d of scanDirs) {
-    const base = path.join(vaultRoot, d)
+    const base = path.join(/* turbopackIgnore: true */ vaultRoot, d)
     const files: string[] = []
     walk(base, files)
     for (const abs of files) {

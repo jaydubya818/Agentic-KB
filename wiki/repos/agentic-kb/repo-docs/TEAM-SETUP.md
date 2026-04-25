@@ -149,7 +149,7 @@ Hermes is your AI orchestrator. On every session start it reads:
 
 **Web server not responding on :3002**
 ```bash
-launchctl start com.$(whoami).agentic-kb-web
+launchctl kickstart -k gui/$(id -u)/com.$(whoami).agentic-kb-web
 # Or check logs:
 tail -f ~/Agentic-KB/logs/web-server.log
 ```
@@ -189,9 +189,8 @@ npm run build --prefix ~/My\ LLM\ Wiki/packages/core
 npm run build --prefix ~/My\ LLM\ Wiki/packages/cli
 npm run build --prefix ~/My\ LLM\ Wiki/packages/mcp
 
-# Restart web server
-launchctl stop com.$(whoami).agentic-kb-web
-launchctl start com.$(whoami).agentic-kb-web
+# Restart web server after code/config changes or stale behavior
+launchctl kickstart -k gui/$(id -u)/com.$(whoami).agentic-kb-web
 ```
 
 ---
