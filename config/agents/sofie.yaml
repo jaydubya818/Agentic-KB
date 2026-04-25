@@ -34,6 +34,10 @@ context_policy:
       max_items: 5
   # V2: reserve space for challenger sources that may reveal contradictions
   challenger_budget_bytes: 4096
+  # Cross-tier reads honored by `class: learned scope: all`. Documented
+  # exceptions surface in tier-leak audit; expand only with security review.
+  permitted_cross_tier_reads:
+    - wiki/agents/orchestrators/architecture-agent/gotchas.md
 
 # ── Reasoning policy (V2) ────────────────────────────────────────────────────
 reasoning_policy:

@@ -498,3 +498,7 @@ Pages affected: `concepts/multi-agent-systems.md`
 ## 2026-04-25 — Compiled `qa/sofie-session-2026-04-10-multi-agent-patterns-q-a.md`
 
 Pages affected: `patterns/pattern-supervisor-worker.md`, `concepts/minimal-worker-context.md`
+
+## 2026-04-25 — Compiled `transcripts/obsidian-2026-04-21-2026-03-24.md`
+
+Pages affected: `entities/mission-control.md`, `entities/seller-fi.md`, `concepts/agent-resources-platform.md`

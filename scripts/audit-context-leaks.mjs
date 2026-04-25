@@ -34,6 +34,7 @@ const FORBIDDEN_FOR_TIER = {
 
 const contracts = listContracts(KB_ROOT)
 const findings = []
+const allowed = []
 
 for (const c of contracts) {
   const bundle = loadAgentContext(KB_ROOT, c, {
@@ -42,16 +43,24 @@ for (const c of contracts) {
     agent: c.agent_id,
   })
   const forbidden = FORBIDDEN_FOR_TIER[c.tier] || []
+  // Allowlist from contract.context_policy.permitted_cross_tier_reads.
+  // Each entry is an exact relative path (no globs yet).
+  const allowlist = new Set(c.context_policy?.permitted_cross_tier_reads || [])
   for (const f of bundle.files || []) {
     for (const re of forbidden) {
       if (re.test(f.path)) {
-        findings.push({
+        const entry = {
           agent_id: c.agent_id,
           tier: c.tier,
           leaked_path: f.path,
           file_class: f.class,
           rule: re.source,
-        })
+        }
+        if (allowlist.has(f.path)) {
+          allowed.push(entry)
+        } else {
+          findings.push(entry)
+        }
       }
     }
   }
@@ -78,7 +87,7 @@ const lines = [
 ]
 
 if (findings.length === 0) {
-  lines.push('✓ No cross-tier reads detected. All workers stay in worker scope; all leads stay below orchestrator scope.')
+  lines.push('✓ No undeclared cross-tier reads. All workers stay in worker scope; all leads stay below orchestrator scope.')
 } else {
   lines.push('## Leaks')
   lines.push('')
@@ -89,12 +98,28 @@ if (findings.length === 0) {
   }
 }
 
+if (allowed.length > 0) {
+  lines.push('')
+  lines.push(`## Permitted Cross-Tier Reads (${allowed.length})`)
+  lines.push('')
+  lines.push('Declared in each contract\'s `context_policy.permitted_cross_tier_reads`.')
+  lines.push('')
+  lines.push('| Agent | Tier | Allowed Path | Class |')
+  lines.push('|-------|------|--------------|-------|')
+  for (const f of allowed) {
+    lines.push(`| ${f.agent_id} | ${f.tier} | \`${f.leaked_path}\` | ${f.file_class} |`)
+  }
+}
+
 fs.writeFileSync(reportPath, lines.join('\n') + '\n')
 
-console.log(`Tier-leak audit: scanned ${contracts.length} contracts, ${findings.length} findings`)
+console.log(`Tier-leak audit: scanned ${contracts.length} contracts, ${findings.length} findings, ${allowed.length} permitted`)
 console.log(`Report: ${path.relative(KB_ROOT, reportPath)}`)
 if (verbose && findings.length > 0) {
-  for (const f of findings) console.log(`  ${f.agent_id} (${f.tier}) → ${f.leaked_path}`)
+  for (const f of findings) console.log(`  LEAK ${f.agent_id} (${f.tier}) → ${f.leaked_path}`)
+}
+if (verbose && allowed.length > 0) {
+  for (const f of allowed) console.log(`  OK   ${f.agent_id} (${f.tier}) → ${f.leaked_path}`)
 }
 
 if (strict && findings.length > 0) {

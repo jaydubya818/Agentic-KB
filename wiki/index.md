@@ -53,7 +53,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Concepts (20)
+## Concepts (68)
 
 | Page | Type | Tags | Confidence | Description |
 |------|------|------|------------|-------------|
@@ -80,7 +80,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Patterns (8)
+## Patterns (61)
 
 | Page | Category | Problem | Confidence |
 |------|----------|---------|------------|
@@ -95,7 +95,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Frameworks (16)
+## Frameworks (18)
 
 | Page | Vendor | Version | Jay's Experience | Last Checked |
 |------|--------|---------|-----------------|--------------|
@@ -118,7 +118,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Entities (8)
+## Entities (12)
 
 | Page | Category | Description |
 |------|----------|-------------|
@@ -133,7 +133,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Recipes (12)
+## Recipes (14)
 
 | Page | Difficulty | Time | Description |
 |------|-----------|------|-------------|
@@ -161,7 +161,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (22 raw sources ingested)
+## Summaries (42) (22 raw sources ingested)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -210,7 +210,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/summary-research-skill-graph|Local Research Engine — The Research Skill Graph System]] — Practitioner system deployed at 4 companies (60% research cost reduction): 6-lens forced-perspective analysis (technical/economic/historical/geopolitical/contrarian/first-principles), 5-tier source evaluation, contradiction-as-feature protocol, compound knowledge base. Scaffolded at research-skill-graph/.
 - [[summaries/summary-wikiwise-skills|Wikiwise Skill Library — Ingest, Digest, Readwise]] — 6 operational skill files from TristanH/wikiwise: stream-to-disk rule for large documents, parallel subagent dispatch, batch-before-ingest, 2-3 inbound-link density rule, user-confirmed highlight search, single-file tweet collection.
 
-## Personal (Jay's patterns)
+## Personal (6) (Jay's patterns)
 
 | Page | Category | Confidence | Description |
 |------|----------|------------|-------------|
@@ -244,7 +244,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Syntheses (2)
+## Syntheses (5)
 
 | Page | Question | Created |
 |------|----------|---------|

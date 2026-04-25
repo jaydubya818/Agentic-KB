@@ -657,5 +657,33 @@
       "patterns/pattern-supervisor-worker.md",
       "concepts/minimal-worker-context.md"
     ]
+  },
+  "transcripts/Untitled.md": {
+    "compiledAt": "2026-04-25T19:03:57.046Z",
+    "pagesAffected": [
+      "wiki/log.md",
+      "concepts/llm-wiki.md"
+    ]
+  },
+  "transcripts/karpathy-llm-wiki-video.md": {
+    "compiledAt": "2026-04-25T19:04:51.479Z",
+    "pagesAffected": [
+      "concepts/llm-wiki-pattern.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "transcripts/obsidian-2026-04-21-2026-03-22.md": {
+    "compiledAt": "2026-04-25T19:06:10.612Z",
+    "pagesAffected": [
+      "concepts/daily-note-template.md"
+    ]
+  },
+  "transcripts/obsidian-2026-04-21-2026-03-24.md": {
+    "compiledAt": "2026-04-25T19:07:00.728Z",
+    "pagesAffected": [
+      "entities/mission-control.md",
+      "entities/seller-fi.md",
+      "concepts/agent-resources-platform.md"
+    ]
   }
 }
