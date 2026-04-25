@@ -358,6 +358,19 @@ When a query reveals a gap not in the wiki:
 10. **Append to log.md, never overwrite** — it is an audit trail
 11. **Counter-arguments are mandatory** — every concept and synthesis page must include a `Counter-arguments & Gaps` section. Never ship a one-sided compilation; if ten sources agree, the page must still name what the evidence does NOT show and what would change the verdict.
 12. **Reviewed flag starts false** — every LLM-authored page is born `reviewed: false`. Only Jay flips to `true` and stamps `reviewed_date`. Automation (INGEST, /autoresearch, BACKFILL) must never set `reviewed: true`.
+13. **One-way rule (personal vault is read-only)** — the agent compile-vault (`Agentic-KB/`) may READ from the personal write-vault (`/Users/jaywest/Documents/Obsidian Vault/`) but must NEVER write, edit, rename, or delete anything inside it. Personal notes flow IN via `raw/clippings/` or the Sofie watcher; nothing flows back out. The optional `scripts/install-personal-vault-guard.sh` pre-commit hook enforces this at git layer.
+14. **2-source rule for compile** — `/foundry-compile` only promotes a theme to a wiki/concepts/, wiki/patterns/, or wiki/frameworks/ page after ≥2 summaries cite it. Single-source themes are deferred to `wiki/candidates.md` and re-evaluated each compile. The `--force` flag bypasses the gate but is logged as `[FORCED]` in `wiki/_meta/compile-log.md`.
+
+---
+
+## Foundry Slash Commands
+
+UX layer over the existing `kb` CLI. Each command is a thin shell that documents intent, calls the appropriate script, and enforces a refuse list. Source: `.claude/commands/foundry-*.md`.
+
+- **`/foundry-ingest`** — sha256-dedup new files in `raw/clippings/` and route to the correct `raw/<subdir>/` (papers, transcripts, framework-docs, conversations, articles). Idempotent — re-runs are no-ops. Calls `scripts/ingest-dedup.mjs`.
+- **`/foundry-compile`** — run the 2-source gate. PROMOTE themes with ≥2 sources (new pages or updates), DEFER single-source themes to `wiki/candidates.md`, GRADUATE themes that crossed the threshold since last run. Logs every run to `wiki/_meta/compile-log.md`. Calls `scripts/compile-2source-gate.mjs`.
+- **`/foundry-ask "<question>"`** — query the wiki with citation enforcement. Returns answer + ≥2 `[[wiki/...]]` citations or surfaces a "no-source warning" header. Wraps `kb query`.
+- **`/foundry-lint`** — run `kb lint` plus Foundry extras: candidate-health (which deferred themes are now ready to graduate) and keyword drift (any tag down >70% in the last 30 days vs. 90).
 
 ---
 

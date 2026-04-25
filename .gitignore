@@ -19,3 +19,6 @@ graphify-out/cache/
 # …but keep project-level skills versioned (SKILL.md definitions live here)
 !.claude/skills/
 !.claude/skills/**
+# …and project-level slash commands (Foundry: /foundry-ingest, /foundry-compile, /foundry-ask, /foundry-lint)
+!.claude/commands/
+!.claude/commands/**
