@@ -1,15 +1,15 @@
 ---
-title: Compile Log
-type: meta
-purpose: Append-only audit of every /foundry-compile run — what promoted, what deferred, what graduated
+id: 01KQ2WXFGKDAW6F18M0FRTQ2Y3
 ---
 
 # Compile Log
 
-Append-only. The 2-source gate writes one entry per `/foundry-compile --execute` run.
+This file tracks pages created or updated during each compile run.
 
-Each entry shows:
-- **promote**: themes that compiled to wiki pages (with `(forced: N)` if any single-source bypasses)
-- **defer**: themes added to `wiki/candidates.md` waiting for a second source
-- **graduate**: themes that were candidates last run and now compiled
+---
 
+## 2026-04-08
+
+### Source: `architecture/2026-04-07-omm-overall-architecture.md`
+
+- **Updated** `concepts/llm-wiki-compile-pipeline.md` — Added full architecture diagram, client entry points table, and feature summary (hybrid search, RBAC, audit log, temporal decay, lint) drawn from the overall-architecture source.

@@ -19,3 +19,7 @@ WikiQuery error: TypeError: Invalid state: Controller is already closed
 - Local:         http://localhost:3002
 - Network:       http://169.254.223.102:3002
 ✓ Ready in 65ms
+▲ Next.js 16.2.2
+- Local:         http://localhost:3002
+- Network:       http://169.254.223.102:3002
+✓ Ready in 68ms

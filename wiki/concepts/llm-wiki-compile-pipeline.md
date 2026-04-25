@@ -1,70 +1,66 @@
 ---
-id: 01KNNVX2QFZJKJ9Z858F6CPQMJ
+id: 01KQ2WXFGJDR7SSGAR8SB19KHP
 title: "LLM Wiki Compile Pipeline"
 type: concept
-tags: [knowledge-base, llm, automation, workflow, architecture]
-created: 2026-04-08
+tags: [knowledge-base, architecture, agents, workflow, llm]
+created: 2024-01-01
 updated: 2026-04-08
 visibility: public
 confidence: high
-related: [llm-wiki, llm-wiki-pattern, llm-owned-wiki]
-source: architecture/2026-04-07-omm-compile-pipeline.md
+related: [llm-wiki-pattern, llm-owned-wiki, knowledge-graphs, ingest-pipeline]
 ---
 
-# [[llm-wiki]] Compile Pipeline
+# LLM Wiki Compile Pipeline
 
 ## Definition
 
-The compile pipeline is the engine behind the [LLM-owned wiki pattern](llm-wiki.md). It reads raw documents from a `raw/` directory, deduplicates against a compiled-log state file, batches new or changed documents to Claude with a schema prompt, and writes the results back as structured wiki pages — all incrementally and with live progress streaming.
+The Agentic-KB compile pipeline is a deliberate, auditable process in which Claude transforms raw markdown documents (`raw/`) into structured wiki pages (`wiki/`). This is explicitly **not RAG** — rather than retrieving chunks at query time, the compile step permanently synthesises source material into curated, persistent knowledge.
 
-This is the core loop that transforms unstructured notes and documents into a curated, cross-referenced knowledge base without manual curation.
+The pipeline follows the [Karpathy-pattern LLM Wiki](llm-wiki-pattern.md): raw inputs are ingested once, compiled into structured pages, and the resulting wiki becomes the durable knowledge store.
 
 ## Why It Matters
 
-The compile pipeline operationalises the [LLM-wiki pattern](llm-wiki-pattern.md): instead of a human manually maintaining a wiki, an LLM processes raw inputs and produces structured pages on demand. Key properties:
+- **Auditability**: Every compile action is appended to an immutable `logs/audit.log`, making the provenance of each wiki page traceable.
+- **Deliberateness**: Unlike RAG, knowledge is curated at write time, not retrieved opportunistically at query time. This means errors surface earlier and the wiki stays coherent.
+- **Persistence**: Compiled pages outlive the raw source context and can be referenced, linked, and updated independently.
 
-- **Incremental by default** — only new or changed documents are processed per run, keeping costs and latency low
-- **Full recompile is explicit** — a deliberate opt-in, not the default, preventing unnecessary API spend
-- **State-tracked** — `raw/.compiled-log.json` records what has already been compiled, enabling idempotent reruns
-- **Observable** — progress is streamed via SSE to a web UI (`CompilePanel`), making the pipeline transparent
-- **Schema-driven** — `wiki/schema.md` is injected as the system prompt, so Claude knows exactly how to format and place pages
+## System Architecture
 
-## Pipeline Flow
+The pipeline is exposed through three client entry points, all routing through a shared API layer:
+
+| Client | Description |
+|---|---|
+| Web UI (`web/`) | Next.js app on `:3002` for browser-based access |
+| CLI (`cli/kb.js`) | Command-line interface for scripting and local use |
+| MCP Server (`mcp/server.js`) | Machine-readable interface for agent integrations |
+| GitHub Actions | Webhook-triggered automation for CI/CD compile runs |
+
+All clients call the same **API Routes** layer, which reads/writes `raw/` and `wiki/`, reads the knowledge graph (`graphify-out/`), and appends to the audit log.
 
 ```
-User triggers compile
-  → POST SSE to /api/compile
-  → Read raw/**/*.md + raw/.compiled-log.json
-  → Filter: new or changed only
-  → Batch with wiki/schema.md as system prompt
-  → Claude API returns JSON ops (create/update)
-  → Write wiki/**.md pages
-  → Append run summary to wiki/log.md
-  → Save updated state to .compiled-log.json
-  → Stream SSE progress events → CompilePanel UI
-  → Loop until all new docs processed → SSE done
+Clients (Web UI, CLI, MCP, GitHub Actions)
+        ↓
+   API Routes
+        ↓
+  ┌─────┬──────┬────────┬───────────┐
+ raw/  wiki/  graph/  audit.log
 ```
+
+## Key Features
+
+- **Hybrid search**: Combines keyword scanning with graph traversal over the [knowledge graph](knowledge-graphs.md) built by `graphify`.
+- **Namespace-level RBAC**: Access control is enforced at the namespace level, enabling multi-tenant or role-segmented wikis.
+- **Temporal decay + hotness ranking**: Pages and entities are scored by recency and access frequency, surfacing the most relevant content.
+- **Append-only audit log**: All mutations are logged immutably for governance and debugging.
+- **Scheduled lint**: Automated linting keeps the wiki well-formed over time.
 
 ## Example
 
-A user drops three new markdown notes into `raw/`. They click **Compile New** in the web UI. The pipeline:
-1. Reads all files in `raw/`
-2. Checks `.compiled-log.json` — two files already compiled, one is new
-3. Sends the new file + `wiki/schema.md` to Claude
-4. Receives back a JSON array of page ops (e.g., `create concepts/my-topic.md`)
-5. Writes the page, appends to `wiki/log.md`, updates `.compiled-log.json`
-6. Streams a progress event to the UI; user sees it complete in real time
-
-## Common Pitfalls
-
-- **Schema drift** — if `wiki/schema.md` changes, previously compiled pages may be inconsistent with new ones. A selective recompile of affected pages may be needed.
-- **Log corruption** — if `.compiled-log.json` is lost or corrupted, a full recompile must be triggered to restore correct state.
-- **Batch sizing** — very large raw documents may need to be split before batching to stay within context limits.
+A raw document (`raw/architecture/2026-04-07-omm-overall-architecture.md`) is ingested, analysed for key entities and claims, then compiled by Claude into one or more structured wiki pages under `wiki/concepts/` or `wiki/patterns/`. The compile step checks for existing pages to update before creating new ones.
 
 ## See Also
 
-- [LLM Wiki](llm-wiki.md) — the wiki approach this pipeline powers
-- [LLM Wiki Pattern](llm-wiki-pattern.md) — the broader design pattern
-- [LLM-Owned Wiki](llm-owned-wiki.md) — philosophy behind LLM-curated knowledge bases
-- [Cost Optimization](cost-optimization.md) — incremental compile as a cost control strategy
-- [Agent Observability](agent-observability.md) — SSE streaming as an observability mechanism
+- [LLM Wiki Pattern](llm-wiki-pattern.md)
+- [LLM-Owned Wiki](llm-owned-wiki.md)
+- [Knowledge Graphs](knowledge-graphs.md)
+- [Ingest Pipeline](ingest-pipeline.md)

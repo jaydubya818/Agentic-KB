@@ -1,13 +1,13 @@
 ---
-id: 01KNNVX2QM35SV0NPBRTC4H227
+id: 01KQ2WTMD4071TTT51BXX81M8Z
 title: "Vault Architecture"
 type: concept
-tags: [knowledge-base, architecture, obsidian, workflow]
+tags: [knowledge-base, architecture, knowledge-graph]
 created: 2026-04-08
 updated: 2026-04-08
 visibility: public
 confidence: high
-related: [llm-owned-wiki, llm-wiki-pattern, state-persistence, agent-observability]
+related: [llm-wiki-compile-pipeline, knowledge-graphs, ingest-pipeline]
 source: architecture/2026-04-07-omm-overall-architecture-vault.md
 ---
 
@@ -15,49 +15,50 @@ source: architecture/2026-04-07-omm-overall-architecture-vault.md
 
 ## Definition
 
-The **Vault** is the on-disk state of a compiled knowledge base (KB). It is the canonical, persistent representation of all source material, compiled wiki pages, semantic graph data, and audit logs. In the [[oh-my-mermaid]] ([[oh-my-mermaid]]) system, the vault is organised into four primary directories, each serving a distinct role in the compile pipeline.
+The **Vault** is the on-disk state of the knowledge base. It is the complete, authoritative filesystem representation of all source material, compiled pages, the knowledge graph, and audit logs. Everything that enters or leaves the KB passes through or is recorded within the Vault.
 
 ## Structure
 
-| Directory | Purpose |
+The Vault is organised into four primary components:
+
+| Path | Role |
 |---|---|
-| `raw/` | Source material staged for compilation — notes, transcripts, webhooks, raw documents |
+| `raw/` | Source material (notes, transcripts, webhooks) staged for compilation |
 | `wiki/` | Compiled pages produced by Claude via the compile pipeline |
-| `graphify-out/graph.json` | Knowledge graph (222 nodes, 299 links, 12 hyperedges) used for semantic search |
-| `logs/audit.log` | Append-only JSONL record of every operation performed on the vault |
+| `graphify-out/graph.json` | The knowledge graph (222 nodes, 299 links, 12 hyperedges) used for semantic search |
+| `logs/audit.log` | Append-only JSONL record of every operation performed on the Vault |
 
-A lint report (`wiki/lint-report.md`) is also generated from wiki content to surface structural issues.
+### Data Flow
 
-## Data Flow
-
-```mermaid
-flowchart LR
-    raw[(raw/<br/>source docs)] -->|compile| wiki[(wiki/<br/>compiled pages)]
-    wiki -->|graphify| graph[(graphify-out/<br/>graph.json)]
-    raw -->|every write| audit[(logs/audit.log)]
-    wiki -->|every write| audit
-    wiki -->|lint report| lint-report[(wiki/lint-report.md)]
 ```
-
-1. **raw/ → wiki/**: The compile pipeline (Claude-driven) transforms raw source documents into structured wiki pages.
-2. **wiki/ → graphify-out/**: The graphify step builds a semantic knowledge graph from compiled pages.
-3. **raw/ and wiki/ → audit.log**: Every write operation to either directory is appended to the audit log, providing a full history.
-4. **wiki/ → lint-report.md**: A linting pass generates a quality report on wiki content.
+raw/ ──compile──▶ wiki/ ──graphify──▶ graphify-out/graph.json
+ │                  │
+ └──every write──▶  └──every write──▶ logs/audit.log
+                    │
+                    └──lint report──▶ wiki/lint-report.md
+```
 
 ## Why It Matters
 
-- **Separation of concerns**: Raw source material is kept separate from compiled output, making the pipeline reproducible — raw docs can be recompiled at any time.
-- **Auditability**: The append-only audit log (`logs/audit.log`) provides a tamper-evident record of all changes, supporting [agent observability](../concepts/agent-observability.md) and governance.
-- **Semantic search**: The knowledge graph derived from compiled pages enables richer retrieval than plain text search.
-- **Linting**: The lint report closes the feedback loop, allowing the system to self-assess the quality of its compiled output.
+Understanding the Vault's layout is essential for reasoning about how information moves through the KB:
+
+1. **Raw → Wiki**: Source documents in `raw/` are transformed into structured wiki pages in `wiki/` by the [compile pipeline](llm-wiki-compile-pipeline.md).
+2. **Wiki → Graph**: Compiled pages in `wiki/` are processed by `graphify` to produce `graph.json`, which powers [semantic search](knowledge-graphs.md).
+3. **Auditability**: Every write to `raw/` or `wiki/` is appended to `logs/audit.log`, providing a tamper-evident JSONL trace of all KB operations.
+4. **Lint**: The `wiki/` directory also produces a lint report at `wiki/lint-report.md` to surface schema or quality issues in compiled pages.
 
 ## Example
 
-A webhook fires, depositing a new transcript into `raw/`. The compile pipeline reads it, produces a structured wiki page in `wiki/concepts/`, appends a record to `logs/audit.log`, and schedules a graphify run to update `graph.json`.
+A new transcript dropped into `raw/` by a webhook is:
+1. Picked up by the compile pipeline
+2. Compiled by Claude into one or more pages under `wiki/`
+3. The write to `wiki/` is recorded in `logs/audit.log`
+4. `graphify` runs and updates `graphify-out/graph.json` with new nodes and links
+5. Semantic search queries can now surface the new content
 
 ## See Also
 
-- [LLM-Owned Wiki](../concepts/llm-owned-wiki.md) — the broader pattern of an LLM maintaining a wiki
-- [LLM Wiki Pattern](../concepts/llm-wiki-pattern.md) — design patterns for LLM-maintained knowledge bases
-- [State Persistence](../concepts/state-persistence.md) — how agent state is stored across sessions
-- [Agent Observability](../concepts/agent-observability.md) — audit logs and tracing in agentic systems
+- [LLM Wiki Compile Pipeline](llm-wiki-compile-pipeline.md) — the process that transforms `raw/` into `wiki/`
+- [Knowledge Graphs](knowledge-graphs.md) — how `graph.json` enables semantic search
+- [Ingest Pipeline](ingest-pipeline.md) — how source material enters `raw/`
+- [LLM-Owned Wiki](llm-owned-wiki.md) — broader context on the wiki pattern this Vault implements

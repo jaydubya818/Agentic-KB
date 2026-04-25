@@ -193,5 +193,27 @@
       "entities/mcp-ecosystem.md",
       "log.md"
     ]
+  },
+  "architecture/2026-04-07-omm-overall-architecture-vault.md": {
+    "compiledAt": "2026-04-25T18:01:00.582Z",
+    "pagesAffected": [
+      "concepts/vault-architecture.md",
+      "concepts/llm-wiki-compile-pipeline.md",
+      "concepts/knowledge-graphs.md"
+    ]
+  },
+  "architecture/2026-04-07-omm-overall-architecture-web-ui.md": {
+    "compiledAt": "2026-04-25T18:01:46.079Z",
+    "pagesAffected": [
+      "concepts/oh-my-mermaid-web-ui.md",
+      "concepts/server-sent-events-streaming.md"
+    ]
+  },
+  "architecture/2026-04-07-omm-overall-architecture.md": {
+    "compiledAt": "2026-04-25T18:02:33.875Z",
+    "pagesAffected": [
+      "concepts/llm-wiki-compile-pipeline.md",
+      "_meta/compile-log.md"
+    ]
   }
 }

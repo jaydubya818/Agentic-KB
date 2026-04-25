@@ -294,3 +294,15 @@ Fathom/Zapier path removed per user decision — keeping Obsidian-only:
 - Kept: `sofie-watch-obsidian.mjs` (with the `ingest_status: pending` stamp on meetings), `wiki/action-tracker.md`, `wiki/decisions/`, `raw/clippings/`.
 
 Sanity: `.zshrc` clean (0 FATHOM refs), watch-call-transcripts.mjs gone, sofie watcher runs fine. Single-path system.
+
+## 2026-04-25 — Compiled `architecture/2026-04-07-omm-overall-architecture-vault.md`
+
+Pages affected: `concepts/vault-architecture.md`, `concepts/llm-wiki-compile-pipeline.md`, `concepts/knowledge-graphs.md`
+
+## 2026-04-25 — Compiled `architecture/2026-04-07-omm-overall-architecture-web-ui.md`
+
+Pages affected: `concepts/oh-my-mermaid-web-ui.md`, `concepts/server-sent-events-streaming.md`
+
+## 2026-04-25 — Compiled `architecture/2026-04-07-omm-overall-architecture.md`
+
+Pages affected: `concepts/llm-wiki-compile-pipeline.md`, `_meta/compile-log.md`
