@@ -101,6 +101,16 @@ Promote:         kb promote <channel> <id> --approver <name>
 
 ---
 
+## Current local operational note
+
+For reliable `kb search` / `kb query` / `kb lint` behavior on this machine:
+
+```bash
+cd /Users/jaywest/Agentic-KB
+export KB_API_URL=http://localhost:3000
+npm --prefix web run dev
+```
+
 ## Loading from disk
 
 ```bash

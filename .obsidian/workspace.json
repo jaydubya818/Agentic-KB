@@ -193,6 +193,8 @@
   },
   "active": "fbb7b28ed968d69c",
   "lastOpenFiles": [
+    "wiki/personal/agent-bootstrap/pi-acceptance-test.md",
+    "wiki/personal/agent-bootstrap/hermes-acceptance-test.md",
     "wiki/system/bus/discovery/discovery-2026-04-25-004.md",
     "wiki/agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md",
     "wiki/system/bus/discovery/discovery-2026-04-25-003.md",
@@ -220,8 +222,6 @@
     "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/soul-examples/Scribe.md",
     "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/soul-examples/Scout.md",
     "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/soul-examples/BJ.md",
-    "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/schema/SCHEMA.md",
-    "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/operating-manual/STATE_MACHINE.md",
     "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/workers",
     "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/soul-examples",
     "wiki/repos/MissionControl/repo-docs/docs/openclaw-bootstrap/schema",

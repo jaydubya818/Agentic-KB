@@ -53,6 +53,7 @@ Commands:
   kb lint
   kb reindex            Rebuild wiki/index.md from actual files on disk
   kb session bootstrap <hermes|pi|universal>
+  kb session acceptance <hermes|pi>
   kb ingest-file <path> Convert any file to markdown (via markitdown) and drop into raw/
   kb ingest-youtube <url>
   kb ingest-twitter <archive.zip>
@@ -98,6 +99,8 @@ Examples:
   kb ingest-file ~/Documents/spec.docx --dir framework-docs
   kb session bootstrap hermes | pbcopy
   kb session bootstrap pi | pbcopy
+  kb session acceptance hermes
+  kb session acceptance pi
   kb repo list
   kb repo sync my-project --token ghp_xxxxx
   kb repo search my-project "authentication"
@@ -262,6 +265,20 @@ async function pending() {
 
 async function sessionCmd(sub, rest) {
   const fs = await import('fs')
+  const bootstrapDir = pathMod.join(AGENT_KB_ROOT, 'wiki', 'personal', 'agent-bootstrap')
+
+  async function emitFiles(files) {
+    for (const file of files) {
+      if (!fs.existsSync(file)) {
+        throw new Error(`Session file not found: ${file}`)
+      }
+    }
+
+    const output = `${files.map((file) => fs.readFileSync(file, 'utf8')).join('\n')}\n`
+    if (!process.stdout.write(output)) {
+      await new Promise((resolve) => process.stdout.once('drain', resolve))
+    }
+  }
 
   if (sub === 'bootstrap') {
     const role = rest[0]
@@ -269,20 +286,19 @@ async function sessionCmd(sub, rest) {
       throw new Error('Usage: kb session bootstrap <hermes|pi|universal>')
     }
 
-    const bootstrapDir = pathMod.join(AGENT_KB_ROOT, 'wiki', 'personal', 'agent-bootstrap')
-    const parts = [pathMod.join(bootstrapDir, 'universal.md')]
-    if (role !== 'universal') parts.push(pathMod.join(bootstrapDir, `${role}.md`))
+    const files = [pathMod.join(bootstrapDir, 'universal.md')]
+    if (role !== 'universal') files.push(pathMod.join(bootstrapDir, `${role}.md`))
+    await emitFiles(files)
+    return
+  }
 
-    for (const file of parts) {
-      if (!fs.existsSync(file)) {
-        throw new Error(`Bootstrap file not found: ${file}`)
-      }
+  if (sub === 'acceptance') {
+    const role = rest[0]
+    if (!role || !['hermes', 'pi'].includes(role)) {
+      throw new Error('Usage: kb session acceptance <hermes|pi>')
     }
 
-    const output = `${parts.map((file) => fs.readFileSync(file, 'utf8')).join('\n')}\n`
-    if (!process.stdout.write(output)) {
-      await new Promise((resolve) => process.stdout.once('drain', resolve))
-    }
+    await emitFiles([pathMod.join(bootstrapDir, `${role}-acceptance-test.md`)])
     return
   }
 
