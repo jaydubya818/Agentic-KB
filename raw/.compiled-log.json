@@ -451,5 +451,115 @@
       "patterns/pattern-playwright-e2e.md",
       "_meta/compile-log.md"
     ]
+  },
+  "my-skills/evaluation-skill.md": {
+    "compiledAt": "2026-04-25T18:34:05.106Z",
+    "pagesAffected": [
+      "concepts/agent-evaluation.md",
+      "concepts/llm-as-judge.md"
+    ]
+  },
+  "my-skills/filesystem-context-skill.md": {
+    "compiledAt": "2026-04-25T18:35:06.741Z",
+    "pagesAffected": [
+      "concepts/context-management.md",
+      "patterns/pattern-filesystem-context.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/frontend-code-review-skill.md": {
+    "compiledAt": "2026-04-25T18:35:53.365Z",
+    "pagesAffected": [
+      "concepts/frontend-code-review-skill.md"
+    ]
+  },
+  "my-skills/frontend-testing-skill.md": {
+    "compiledAt": "2026-04-25T18:36:38.015Z",
+    "pagesAffected": [
+      "concepts/frontend-testing.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/graphify-skill.md": {
+    "compiledAt": "2026-04-25T18:37:32.558Z",
+    "pagesAffected": [
+      "concepts/knowledge-graphs.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/gstack-skill.md": {
+    "compiledAt": "2026-04-25T18:38:21.924Z",
+    "pagesAffected": [
+      "concepts/gstack.md"
+    ]
+  },
+  "my-skills/hosted-agents-skill.md": {
+    "compiledAt": "2026-04-25T18:39:29.397Z",
+    "pagesAffected": [
+      "concepts/agent-sandboxing.md",
+      "patterns/pattern-hosted-agent-infrastructure.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/memory-systems-skill.md": {
+    "compiledAt": "2026-04-25T18:40:25.094Z",
+    "pagesAffected": [
+      "concepts/memory-systems.md"
+    ]
+  },
+  "my-skills/multi-agent-patterns-skill.md": {
+    "compiledAt": "2026-04-25T18:41:07.891Z",
+    "pagesAffected": [
+      "concepts/multi-agent-systems.md"
+    ]
+  },
+  "my-skills/mysql-skill.md": {
+    "compiledAt": "2026-04-25T18:42:04.618Z",
+    "pagesAffected": [
+      "concepts/mysql-innodb-best-practices.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/postgres-skill.md": {
+    "compiledAt": "2026-04-25T18:42:46.290Z",
+    "pagesAffected": [
+      "concepts/postgresql-operations.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/prd-creator-skill.md": {
+    "compiledAt": "2026-04-25T18:43:25.001Z",
+    "pagesAffected": [
+      "concepts/prd-creation-skill.md"
+    ]
+  },
+  "my-skills/prd-skill.md": {
+    "compiledAt": "2026-04-25T18:44:11.726Z",
+    "pagesAffected": [
+      "recipes/recipe-prd-generator.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/project-development-skill.md": {
+    "compiledAt": "2026-04-25T18:45:20.513Z",
+    "pagesAffected": [
+      "concepts/task-model-fit.md",
+      "patterns/pattern-staged-llm-pipeline.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/ralph-skill.md": {
+    "compiledAt": "2026-04-25T18:46:17.485Z",
+    "pagesAffected": [
+      "concepts/prd-to-json-conversion.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/react-best-practices-skill.md": {
+    "compiledAt": "2026-04-25T18:47:15.916Z",
+    "pagesAffected": [
+      "concepts/react-nextjs-performance.md",
+      "_meta/compile-log.md"
+    ]
   }
 }

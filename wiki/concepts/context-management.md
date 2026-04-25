@@ -1,98 +1,67 @@
 ---
-id: 01KQ2YKKASYWVNDXDXMTN5RWWA
+id: 01KQ2YS2KHKJ6XHV41EWQM822R
 title: Context Management
 type: concept
-tags: [context, memory, agents, llm, architecture]
+tags: [context, memory, agents, architecture, retrieval]
 created: 2026-04-25
 updated: 2026-04-25
 visibility: public
 confidence: high
-related: [memory-systems, cost-optimization, agent-loops]
+related: [memory-systems, agent-loops, agent-failure-modes]
 ---
 
 # Context Management
 
+Context management is the discipline of controlling what information occupies an agent's context window at any given moment. Because context windows are finite, effective agents must make deliberate decisions about what to include, exclude, and defer.
+
 ## Definition
 
-Context management encompasses the strategies and techniques used to make optimal use of a language model's finite context window. Because context windows are bounded, effective management determines what information is present, how it is represented, and when it is refreshed or discarded. The goal is to preserve signal while eliminating noise, extending the *effective* capacity of a context without requiring a larger model or a longer native window.
+Context management encompasses the strategies, patterns, and mechanisms used to ensure agents have the right information available at the right time — without overloading or polluting the context window with irrelevant content.
 
-> "Effective optimization can double or triple effective context capacity without requiring larger models or longer contexts."
+Context engineering can fail in four predictable ways:
+1. **Missing context** — the information the agent needs is not in the available context at all
+2. **Poor retrieval** — retrieved context fails to encapsulate what was actually needed
+3. **Over-retrieval** — retrieved context far exceeds what is needed, wasting tokens and degrading attention
+4. **Discovery failure** — agents cannot locate niche information buried across many files or sources
 
 ## Why It Matters
 
-- **Cost**: Tokens in = tokens billed. Reducing unnecessary content directly lowers inference costs.
-- **Latency**: Shorter contexts are processed faster, reducing round-trip times in production systems.
-- **Quality**: Cluttered context degrades model reasoning. Compact, high-signal context improves output quality.
-- **Scale**: Long-running agents and multi-turn workflows quickly exhaust raw context windows without active management.
+As agents accumulate capabilities — more tools, instructions, skills, and conversation history — the context window fills up. Static context (always-included content like system prompts and tool definitions) grows over time, crowding out space for dynamic, task-relevant information. Poor context management leads to higher costs, degraded model attention, and agent failures.
 
-## Core Strategies
+## Static vs Dynamic Context
 
-### 1. Compaction
+**Static context** is always included in the prompt regardless of task relevance: system instructions, tool definitions, critical rules. It is predictable and reliable but consumes tokens unconditionally.
 
-When a context approaches its limit, compaction summarizes the existing window and reinitialises a fresh context with the summary. This distils conversation history, tool outputs, and retrieved documents into a compact form that preserves essential information.
+**Dynamic context** is loaded on-demand when relevant to the current task. The agent receives minimal static pointers (names, descriptions, file paths) and uses retrieval tools to load full content only when needed.
 
-**Compression priority:**
-- Tool outputs → replace with key findings, metrics, conclusions
-- Old turns → summarise early conversation, preserve decisions and commitments
-- Retrieved documents → summarise if fresh versions are accessible
-- **Never compress the system prompt**
-
-Compaction is typically the first lever to reach for when context pressure builds.
-
-### 2. Observation Masking
-
-Tool outputs can account for 80%+ of token usage in agent trajectories. Observation masking replaces verbose tool outputs with compact references once their immediate purpose has been served. The raw data remains retrievable if needed but does not consume context continuously.
-
-**Masking heuristics:**
-- **Never mask**: outputs critical to the current task, outputs from the most recent turn, outputs actively used in reasoning
-- **Consider masking**: outputs from 3+ turns ago, verbose outputs whose key points can be extracted
-- **Always mask**: repeated outputs, boilerplate headers/footers, outputs already summarised elsewhere
-
-### 3. KV-Cache Optimization
-
-The KV-cache stores Key and Value tensors computed during a forward pass so they can be reused across subsequent calls. Structuring prompts to place stable content (system prompt, persistent instructions) at the front maximises cache hits and reduces both latency and compute cost.
-
-Key practices:
-- Keep the system prompt stable and at the top of the context
-- Append new turns rather than reconstructing the full prompt
-- Avoid unnecessary shuffling of context blocks between calls
-
-### 4. Context Partitioning
-
-For complex tasks, splitting work across isolated context windows (sub-agents or parallel calls) prevents any single context from becoming overloaded. Each partition focuses on a narrow slice of the problem, and results are aggregated by an orchestrator.
-
-This is especially effective for:
-- Document-level analysis where each document is processed independently
-- Parallel tool calls that do not require shared state
-- Long-running agent pipelines with distinct phases
+Dynamic discovery is more token-efficient and can improve response quality by reducing potentially confusing or contradictory information. The trade-off: it requires the model to correctly recognise when additional context is needed. This works well with frontier models but may fail with less capable models.
 
 ## Example
 
-An agent processing a 200-page document corpus:
-1. **Partition**: route each document to a sub-agent with its own context
-2. **Summarise**: each sub-agent returns a compact findings summary
-3. **Mask**: after the orchestrator has incorporated a sub-agent's findings, mask the full output and retain only the summary reference
-4. **Compact**: if the orchestrator's own context fills up, run compaction before continuing
+An agent handling a complex research task stores large tool outputs (web search results, database query rows) to files rather than keeping them in the message history. When it needs a specific fact, it uses grep or a targeted file read to pull only the relevant lines — rather than re-reading thousands of tokens of raw output.
 
-## When to Apply
+## Filesystem-Based Context
 
-| Signal | Recommended Technique |
-|---|---|
-| Context nearing limit mid-task | Compaction |
-| High token costs from tool outputs | Observation masking |
-| Repeated prompt prefixes across calls | KV-cache optimisation |
-| Task too large for one context | Context partitioning |
+The filesystem is a particularly effective substrate for dynamic context management. It provides:
+
+- **Persistence** across long agent trajectories and across sub-agent boundaries
+- **Selective retrieval** via search tools (grep, line reads, semantic search)
+- **Scratch pads** for intermediate results from large tool outputs
+- **Shared state** between sub-agents without direct message passing
+- **Self-updating instructions** for agents that learn and refine their own behaviour
+
+See the [filesystem context pattern](../patterns/pattern-filesystem-context.md) for implementation details.
 
 ## Common Pitfalls
 
-- **Over-compressing too early**: losing detail before it has been used
-- **Masking active observations**: masking outputs still needed for ongoing reasoning
-- **Unstable system prompts**: minor edits invalidate the KV-cache, negating its benefits
-- **Ignoring the system prompt**: it is always worth compressing other content before touching the system prompt
+- Returning large tool outputs directly into message history instead of writing to files
+- Including all possible instructions statically when most are rarely relevant
+- Failing to implement any discovery mechanism, leaving the agent unable to find information it does not know is missing
+- Over-relying on dynamic discovery with weaker models that do not self-prompt retrieval reliably
 
 ## See Also
 
-- [Memory Systems](memory-systems.md) — longer-term persistence beyond the context window
-- [Cost Optimization](cost-optimization.md) — broader cost reduction strategies including batching and model selection
-- [Agent Loops](agent-loops.md) — how context management integrates with the agent execution loop
-- [Multi-Agent Systems](multi-agent-systems.md) — context partitioning via sub-agent delegation
+- [Memory Systems](memory-systems.md)
+- [Agent Loops](agent-loops.md)
+- [Agent Failure Modes](agent-failure-modes.md)
+- [Filesystem Context Pattern](../patterns/pattern-filesystem-context.md)

@@ -378,3 +378,67 @@ Pages affected: `concepts/context-management.md`
 ## 2026-04-25 — Compiled `my-skills/e2e-tester-skill.md`
 
 Pages affected: `patterns/pattern-playwright-e2e.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/evaluation-skill.md`
+
+Pages affected: `concepts/agent-evaluation.md`, `concepts/llm-as-judge.md`
+
+## 2026-04-25 — Compiled `my-skills/filesystem-context-skill.md`
+
+Pages affected: `concepts/context-management.md`, `patterns/pattern-filesystem-context.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/frontend-code-review-skill.md`
+
+Pages affected: `concepts/frontend-code-review-skill.md`
+
+## 2026-04-25 — Compiled `my-skills/frontend-testing-skill.md`
+
+Pages affected: `concepts/frontend-testing.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/graphify-skill.md`
+
+Pages affected: `concepts/knowledge-graphs.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/gstack-skill.md`
+
+Pages affected: `concepts/gstack.md`
+
+## 2026-04-25 — Compiled `my-skills/hosted-agents-skill.md`
+
+Pages affected: `concepts/agent-sandboxing.md`, `patterns/pattern-hosted-agent-infrastructure.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/memory-systems-skill.md`
+
+Pages affected: `concepts/memory-systems.md`
+
+## 2026-04-25 — Compiled `my-skills/multi-agent-patterns-skill.md`
+
+Pages affected: `concepts/multi-agent-systems.md`
+
+## 2026-04-25 — Compiled `my-skills/mysql-skill.md`
+
+Pages affected: `concepts/mysql-innodb-best-practices.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/postgres-skill.md`
+
+Pages affected: `concepts/postgresql-operations.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/prd-creator-skill.md`
+
+Pages affected: `concepts/prd-creation-skill.md`
+
+## 2026-04-25 — Compiled `my-skills/prd-skill.md`
+
+Pages affected: `recipes/recipe-prd-generator.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/project-development-skill.md`
+
+Pages affected: `concepts/task-model-fit.md`, `patterns/pattern-staged-llm-pipeline.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/ralph-skill.md`
+
+Pages affected: `concepts/prd-to-json-conversion.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/react-best-practices-skill.md`
+
+Pages affected: `concepts/react-nextjs-performance.md`, `_meta/compile-log.md`
