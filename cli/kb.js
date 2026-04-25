@@ -1405,6 +1405,24 @@ async function bootstrapCmd(role) {
   process.stdout.write(fsMod.readFileSync(roleFile, 'utf8'))
 }
 
+// ─── redact ───────────────────────────────────────────────────────────────
+
+async function redactCmd(sub, rest) {
+  const fsMod = await import('fs')
+  const { redact, loadAllRules } = await import(AGENT_RUNTIME_PATH)
+  if (sub !== 'preview') throw new Error('Usage: kb redact preview <file>')
+  const file = rest[0]
+  if (!file) throw new Error('Usage: kb redact preview <file>')
+  if (!fsMod.existsSync(file)) throw new Error(`File not found: ${file}`)
+  const content = fsMod.readFileSync(file, 'utf8')
+  const rules = loadAllRules(AGENT_KB_ROOT)
+  const r = redact(content, rules)
+  console.log(`\n=== Redaction preview: ${file} ===`)
+  console.log(`Total hits: ${r.total} (rules fired: ${r.hits.length})`)
+  for (const h of r.hits) console.log(`  ${h.count.toString().padStart(4)}  ${h.rule}`)
+  if (r.total === 0) console.log('  (clean — nothing matched)')
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -1468,6 +1486,8 @@ try {
     await envCmd(args[1], args.slice(2))
   } else if (command === 'bootstrap') {
     await bootstrapCmd(args[1], args.slice(2))
+  } else if (command === 'redact') {
+    await redactCmd(args[1], args.slice(2))
   } else {
     console.error(`Unknown command: ${command}`)
     usage()

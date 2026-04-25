@@ -1,58 +1,72 @@
 ---
-id: 01KNNVX2QE0E4YGR040749BKZ1
+id: 01KQ2XBP9QM0Z8SEHSDQF0R4W9
 title: "Ingest Pipeline"
 type: concept
-tags: [architecture, knowledge-base, workflow, automation, mcp]
-created: 2026-04-08
-updated: 2026-04-08
+tags: [knowledge-base, workflow, automation, rag, agents]
+created: 2026-04-25
+updated: 2026-04-25
 visibility: public
 confidence: high
-related: [llm-owned-wiki, state-persistence, enterprise-ai-governance]
-source: architecture/2026-04-07-omm-ingest-flow.md
+related: [llm-wiki-compile-pipeline, fetch-readwise-highlights, llm-wiki-pattern]
 ---
 
 # Ingest Pipeline
 
 ## Definition
 
-The ingest pipeline is the set of entry points and routing logic that brings raw content into a knowledge base vault before any compilation or structuring occurs. In the Oh My Mermaid ([[oh-my-mermaid]]) system, ingest and compile are explicitly decoupled: content is staged in `raw/` directories and only promoted to structured wiki pages during a separate, explicit compile run.
+The ingest pipeline is the stage of the Wikiwise workflow that converts raw source material into structured wiki content. It is the downstream complement to skills like [fetch-readwise-highlights](../patterns/fetch-readwise-highlights.md) that produce raw source files — those files are inputs *to* the ingest pipeline, not finished wiki pages.
+
+The distinction is deliberate:
+
+> Highlights are raw source material, not wiki content.
+
+Raw material (fetched highlights, article dumps, notes) must pass through the INGEST skill to be compiled, structured, and cross-referenced before landing in the wiki.
 
 ## Why It Matters
 
-Decoupling ingest from compile allows content to be staged, reviewed, and batched before it influences the knowledge base. This prevents noisy or unreviewed content from immediately polluting structured wiki pages, and supports audit trails on all writes.
+Keeping the fetch and ingest stages separate enforces a clean data flow:
 
-The separation also enables multi-source ingestion without coupling source-specific logic to the compilation step — each source deposits into `raw/`, and the compile step handles the rest uniformly.
+1. **Fetch** — gather relevant source material, scoped and confirmed by the user
+2. **Ingest** — compile raw material into wiki pages following the schema, applying structure, tags, cross-references, and frontmatter
 
-## Entry Points
+This separation means raw files can be reviewed, edited, or discarded before they influence the knowledge base. It also makes the pipeline auditable: the `raw/` directory is a staging area, not the wiki itself.
 
-The [[oh-my-mermaid]] ingest system supports four categories of entry points:
+## Pipeline Flow
 
-| Entry Point | Mechanism | Destination |
-|---|---|---|
-| Web UI upload | `/api/ingest` | `raw/uploads/` |
-| YouTube URL | `kb ingest-youtube` CLI | `raw/transcripts/` |
-| Twitter archive | `kb ingest-twitter` CLI | `raw/twitter/` |
-| Webhooks (GitHub, Slack, custom) | `/api/ingest/webhook` with namespace RBAC | `raw/webhooks/<ns>/` |
+```
+User query
+    │
+    ▼
+fetch-readwise-highlights
+    │  (vector search → dedup → group)
+    ▼
+raw/readwise/<topic>_highlights.md
+    │
+    ▼
+INGEST skill
+    │  (compile → structure → frontmatter → cross-reference)
+    ▼
+wiki/<section>/<page>.md
+```
 
-GitHub webhooks fire on merged PRs, closed issues, and pushed docs. Slack and custom API clients use the same webhook endpoint, scoped by namespace token.
+## File Path Convention
 
-## Audit Trail
+Raw source files produced by the fetch skill follow the naming convention:
 
-All writes to `raw/` are logged to `audit.log` with operation type (`ingest` or `webhook`). Nothing bypasses the audit step.
+```
+raw/readwise/<topic>_highlights.md
+```
 
-## Example
+This scopes all staging material under `raw/` and namespaces by source type, making it easy to identify what has and hasn't been ingested.
 
-A GitHub Action on a merged PR POSTs to `/api/ingest/webhook` with a namespace token. The payload lands in `raw/webhooks/github/`. On the next scheduled compile run, the compile step picks up the new file, identifies the appropriate wiki section, and creates or updates the relevant page.
+## Key Rules
 
-## Common Pitfalls
-
-- **Forgetting to trigger compile**: Content sits in `raw/` indefinitely if no compile run is scheduled or manually triggered.
-- **Namespace token leakage**: Webhook RBAC relies on namespace tokens — rotating and scoping these properly is essential for multi-tenant deployments.
-- **Source [[pattern-fan-out-worker]]**: Adding new sources requires only a new entry point → `raw/<dir>/` mapping, not changes to the compile logic.
+- Never treat a raw file as finished wiki content — always run INGEST
+- INGEST should apply the full wiki schema (frontmatter, section placement, cross-references)
+- The `raw/` directory is ephemeral staging; the `wiki/` directory is the canonical knowledge base
 
 ## See Also
 
-- [LLM-Owned Wiki](llm-owned-wiki.md) — the broader pattern this pipeline serves
-- [State Persistence](state-persistence.md) — how staged raw content relates to durable knowledge state
-- [Enterprise AI Governance](enterprise-ai-governance.md) — audit logging and RBAC in agentic systems
-- [Multi-Tenancy Agents](multi-tenancy-agents.md) — namespace-scoped webhook access
+- [fetch-readwise-highlights](../patterns/fetch-readwise-highlights.md) — the upstream skill that produces raw highlight files
+- [LLM Wiki Compile Pipeline](../concepts/llm-wiki-compile-pipeline.md) — broader compilation pipeline
+- [LLM Wiki Pattern](../concepts/llm-wiki-pattern.md)

@@ -215,5 +215,119 @@
       "concepts/llm-wiki-compile-pipeline.md",
       "_meta/compile-log.md"
     ]
+  },
+  "architecture/2026-04-07-omm-query-pipeline.md": {
+    "compiledAt": "2026-04-25T18:03:23.619Z",
+    "pagesAffected": [
+      "concepts/query-pipeline.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "framework-docs/deepeval.md": {
+    "compiledAt": "2026-04-25T18:04:03.369Z",
+    "pagesAffected": [
+      "frameworks/framework-deepeval.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "framework-docs/inspect-ai.md": {
+    "compiledAt": "2026-04-25T18:04:50.621Z",
+    "pagesAffected": [
+      "frameworks/inspect-ai.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "framework-docs/promptfoo.md": {
+    "compiledAt": "2026-04-25T18:06:22.716Z",
+    "pagesAffected": [
+      "frameworks/promptfoo.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "framework-docs/vault-3tier-architecture.md": {
+    "compiledAt": "2026-04-25T18:07:46.570Z",
+    "pagesAffected": [
+      "concepts/agent-vault.md",
+      "concepts/memory-systems.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "framework-docs/wikiwise-skills/digest-skill.md": {
+    "compiledAt": "2026-04-25T18:08:21.040Z",
+    "pagesAffected": [
+      "concepts/ingest-pipeline.md"
+    ]
+  },
+  "framework-docs/wikiwise-skills/fetch-readwise-document-skill.md": {
+    "compiledAt": "2026-04-25T18:09:16.147Z",
+    "pagesAffected": [
+      "patterns/pattern-safe-cli-document-fetch.md",
+      "recipes/readwise-to-wikiwise-ingest.md"
+    ]
+  },
+  "framework-docs/wikiwise-skills/fetch-readwise-highlights-skill.md": {
+    "compiledAt": "2026-04-25T18:10:19.576Z",
+    "pagesAffected": [
+      "patterns/fetch-readwise-highlights.md",
+      "concepts/human-in-the-loop.md",
+      "concepts/ingest-pipeline.md"
+    ]
+  },
+  "framework-docs/wikiwise-skills/import-readwise-skill.md": {
+    "compiledAt": "2026-04-25T18:11:26.423Z",
+    "pagesAffected": [
+      "patterns/pattern-import-readwise-skill.md",
+      "patterns/pattern-parallel-subagent-ingest.md"
+    ]
+  },
+  "framework-docs/wikiwise-skills/ingest-skill.md": {
+    "compiledAt": "2026-04-25T18:12:28.964Z",
+    "pagesAffected": [
+      "patterns/wiki-ingest-workflow.md",
+      "concepts/cross-linking-and-orphan-prevention.md",
+      "concepts/contradiction-handling-in-knowledge-bases.md"
+    ]
+  },
+  "framework-docs/wikiwise-skills/ingest-tweets-skill.md": {
+    "compiledAt": "2026-04-25T18:13:32.389Z",
+    "pagesAffected": [
+      "patterns/pattern-ingest-tweets-skill.md",
+      "concepts/source-trust-tiers.md"
+    ]
+  },
+  "my-agents/gsd-integration-checker.md": {
+    "compiledAt": "2026-04-25T18:14:20.193Z",
+    "pagesAffected": [
+      "concepts/integration-verification.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-nyquist-auditor.md": {
+    "compiledAt": "2026-04-25T18:14:59.121Z",
+    "pagesAffected": [
+      "agents/workers/gsd-nyquist-auditor/profile.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-phase-researcher.md": {
+    "compiledAt": "2026-04-25T18:15:42.345Z",
+    "pagesAffected": [
+      "agents/workers/gsd-phase-researcher/profile.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-plan-checker.md": {
+    "compiledAt": "2026-04-25T18:16:32.721Z",
+    "pagesAffected": [
+      "concepts/goal-backward-verification.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-planner.md": {
+    "compiledAt": "2026-04-25T18:17:22.483Z",
+    "pagesAffected": [
+      "agents/workers/gsd-planner/profile.md",
+      "_meta/compile-log.md"
+    ]
   }
 }

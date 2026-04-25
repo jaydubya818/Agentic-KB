@@ -1,15 +1,13 @@
 ---
-id: 01KQ2WXFGKDAW6F18M0FRTQ2Y3
+id: 01KQ2XRK9KNE5PRX90WZCA8GWZ
 ---
 
 # Compile Log
 
-This file tracks pages created or updated during each compile run.
+## 2026-04-25
 
----
-
-## 2026-04-08
-
-### Source: `architecture/2026-04-07-omm-overall-architecture.md`
-
-- **Updated** `concepts/llm-wiki-compile-pipeline.md` — Added full architecture diagram, client entry points table, and feature summary (hybrid search, RBAC, audit log, temporal decay, lint) drawn from the overall-architecture source.
+### Created: `agents/workers/gsd-planner/profile.md`
+- **Source**: `my-agents/gsd-planner.md`
+- **Type**: Entity (agent profile)
+- **Summary**: Profile page for the GSD Planner agent — covers role, spawn contexts, tools, context fidelity protocol, project context discovery, and output format.
+- **Cross-references**: gsd-executor/profile, concepts/multi-agent-systems, concepts/human-in-the-loop, concepts/agent-loops

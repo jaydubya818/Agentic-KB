@@ -306,3 +306,67 @@ Pages affected: `concepts/oh-my-mermaid-web-ui.md`, `concepts/server-sent-events
 ## 2026-04-25 — Compiled `architecture/2026-04-07-omm-overall-architecture.md`
 
 Pages affected: `concepts/llm-wiki-compile-pipeline.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `architecture/2026-04-07-omm-query-pipeline.md`
+
+Pages affected: `concepts/query-pipeline.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `framework-docs/deepeval.md`
+
+Pages affected: `frameworks/framework-deepeval.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `framework-docs/inspect-ai.md`
+
+Pages affected: `frameworks/inspect-ai.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `framework-docs/promptfoo.md`
+
+Pages affected: `frameworks/promptfoo.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `framework-docs/vault-3tier-architecture.md`
+
+Pages affected: `concepts/agent-vault.md`, `concepts/memory-systems.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `framework-docs/wikiwise-skills/digest-skill.md`
+
+Pages affected: `concepts/ingest-pipeline.md`
+
+## 2026-04-25 — Compiled `framework-docs/wikiwise-skills/fetch-readwise-document-skill.md`
+
+Pages affected: `patterns/pattern-safe-cli-document-fetch.md`, `recipes/readwise-to-wikiwise-ingest.md`
+
+## 2026-04-25 — Compiled `framework-docs/wikiwise-skills/fetch-readwise-highlights-skill.md`
+
+Pages affected: `patterns/fetch-readwise-highlights.md`, `concepts/human-in-the-loop.md`, `concepts/ingest-pipeline.md`
+
+## 2026-04-25 — Compiled `framework-docs/wikiwise-skills/import-readwise-skill.md`
+
+Pages affected: `patterns/pattern-import-readwise-skill.md`, `patterns/pattern-parallel-subagent-ingest.md`
+
+## 2026-04-25 — Compiled `framework-docs/wikiwise-skills/ingest-skill.md`
+
+Pages affected: `patterns/wiki-ingest-workflow.md`, `concepts/cross-linking-and-orphan-prevention.md`, `concepts/contradiction-handling-in-knowledge-bases.md`
+
+## 2026-04-25 — Compiled `framework-docs/wikiwise-skills/ingest-tweets-skill.md`
+
+Pages affected: `patterns/pattern-ingest-tweets-skill.md`, `concepts/source-trust-tiers.md`
+
+## 2026-04-25 — Compiled `my-agents/gsd-integration-checker.md`
+
+Pages affected: `concepts/integration-verification.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-agents/gsd-nyquist-auditor.md`
+
+Pages affected: `agents/workers/gsd-nyquist-auditor/profile.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-agents/gsd-phase-researcher.md`
+
+Pages affected: `agents/workers/gsd-phase-researcher/profile.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-agents/gsd-plan-checker.md`
+
+Pages affected: `concepts/goal-backward-verification.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-agents/gsd-planner.md`
+
+Pages affected: `agents/workers/gsd-planner/profile.md`, `_meta/compile-log.md`
