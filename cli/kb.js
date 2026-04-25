@@ -16,15 +16,35 @@
  *   PRIVATE_PIN  - PIN for accessing private content
  */
 
-const API_URL = process.env.KB_API_URL || 'http://localhost:3002'
-const PRIVATE_PIN = process.env.PRIVATE_PIN || ''
-
 // Resolve KB root from this script location: cli/kb.js -> repo root
 import pathMod from 'path'
 import os from 'os'
+import fsMod from 'fs'
 import { fileURLToPath } from 'url'
 import { safeJoin, validateSlug } from '../lib/agent-runtime/safe-path.mjs'
 const AGENT_KB_ROOT = pathMod.resolve(pathMod.dirname(fileURLToPath(import.meta.url)), '..')
+
+// Auto-load .env from repo root before any env reads. Zero-dep.
+// Lines: KEY=value, KEY="value", KEY='value'. Ignores #comments and blanks.
+;(function loadEnv() {
+  const file = pathMod.join(AGENT_KB_ROOT, '.env')
+  if (!fsMod.existsSync(file)) return
+  for (const raw of fsMod.readFileSync(file, 'utf8').split('\n')) {
+    const line = raw.replace(/^export\s+/, '').trim()
+    if (!line || line.startsWith('#')) continue
+    const eq = line.indexOf('=')
+    if (eq <= 0) continue
+    const k = line.slice(0, eq).trim()
+    let v = line.slice(eq + 1).trim()
+    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+      v = v.slice(1, -1)
+    }
+    if (process.env[k] === undefined) process.env[k] = v
+  }
+})()
+
+const API_URL = process.env.KB_API_URL || 'http://localhost:3002'
+const PRIVATE_PIN = process.env.PRIVATE_PIN || ''
 
 /** Expand a leading ~ using HOME or os.homedir(); throw if neither is set. */
 function expandHome(p) {

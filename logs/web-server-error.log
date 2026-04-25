@@ -1,0 +1,5 @@
+WikiQuery error: TypeError: Invalid state: Controller is already closed
+    at i (.next/server/chunks/063q_next_dist_esm_build_templates_app-route_102fyp1.js:25:1344)
+    at Object.start (.next/server/chunks/063q_next_dist_esm_build_templates_app-route_102fyp1.js:25:3121) {
+  code: 'ERR_INVALID_STATE'
+}
