@@ -1,13 +1,13 @@
 # Wiki Lint Report
 
-> Generated: 2026-04-25 16:59 | Vault: Agentic-KB | Pages scanned: 494
+> Generated: 2026-04-25 17:15 | Vault: Agentic-KB | Pages scanned: 495
 
 ## Summary
 
 | Check | Count | Severity |
 |---|---|---|
 | Contradictions | 0 | 🟢 Clear |
-| Orphaned pages | 138 | 🟡 Medium |
+| Orphaned pages | 139 | 🟡 Medium |
 | Stale pages | 12 | 🟡 Medium |
 | Knowledge gaps | 0 | 🟢 Clear |
 
@@ -39,6 +39,7 @@
 - `archive/repos/Pi/20260425/sofie-contract.md` — sofie-contract
 - `archive/repos/Pi/20260425/trees.md` — trees
 - `candidates.md` — Compile Candidates
+- `decisions/ADR-001-mcp-sdk-migration.md` — ADR-001: Defer MCP SDK Server → McpServer migration
 - `decisions/README.md` — Decisions Log
 - `mocs/advanced-techniques.md` — Advanced Techniques
 - `mocs/claude-integration.md` — Claude Integration

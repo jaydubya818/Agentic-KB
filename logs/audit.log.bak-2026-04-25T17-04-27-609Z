@@ -389,10 +389,5 @@
 {"ts":"2026-04-25T16:58:12.287Z","op":"bus-transition","channel":"discovery","id":"discovery-2026-04-25-003","from":"open","to":"archived","actor":"hermes-cleanup","prev_hash":"6d1ed40c9d10f3d2","entry_hash":"7d1967ebdd8d69e8"}
 {"ts":"2026-04-25T16:58:12.288Z","op":"bus-transition","channel":"discovery","id":"discovery-2026-04-25-004","from":"open","to":"archived","actor":"hermes-cleanup","prev_hash":"7d1967ebdd8d69e8","entry_hash":"2bc34a80d6c45ade"}
 {"ts":"2026-04-25T16:59:50.671Z","op":"lint","vault":"Agentic-KB","pagesScanned":494,"contradictions":0,"orphans":138,"gaps":0,"prev_hash":"2bc34a80d6c45ade","entry_hash":"0a21bedf2495d71e"}
-{"ts":"2026-04-25T17:03:11.992Z","op":"query","vault":"Agentic-KB","q":"supervisor-worker pattern","scope":"public","articlesRead":5,"prev_hash":"0a21bedf2495d71e","entry_hash":"1fd54f0e706609fd"}
-{"ts":"2026-04-25T17:03:53.445Z","op":"lint","vault":"Agentic-KB","pagesScanned":495,"contradictions":0,"orphans":139,"gaps":0,"prev_hash":"1fd54f0e706609fd","entry_hash":"f1b47dfe1aaeb550"}
-{"ts":"2026-04-25T17:05:21.160Z","op":"query","vault":"Agentic-KB","q":"supervisor-worker pattern","scope":"public","articlesRead":5,"prev_hash":"f1b47dfe1aaeb550","entry_hash":"e0e42b418c49905c"}
-{"ts":"2026-04-25T17:06:03.895Z","op":"lint","vault":"Agentic-KB","pagesScanned":492,"contradictions":0,"orphans":139,"gaps":0,"prev_hash":"e0e42b418c49905c","entry_hash":"c9b079b747c48024"}
-{"ts":"2026-04-25T17:07:01.307Z","op":"lint","vault":"Agentic-KB","pagesScanned":495,"contradictions":0,"orphans":139,"gaps":0,"prev_hash":"c9b079b747c48024","entry_hash":"3e8a78929895c65b"}
-{"ts":"2026-04-25T17:09:53.473Z","op":"lint","vault":"Agentic-KB","pagesScanned":495,"contradictions":0,"orphans":139,"gaps":0,"prev_hash":"3e8a78929895c65b","entry_hash":"5d3834fa5f51986c"}
-{"ts":"2026-04-25T17:15:16.163Z","op":"lint","vault":"Agentic-KB","pagesScanned":495,"contradictions":0,"orphans":139,"gaps":0,"prev_hash":"5d3834fa5f51986c","entry_hash":"767aae62cddecdca"}
+{"ts":"2026-04-25T17:03:11.992Z","op":"query","vault":"Agentic-KB","q":"supervisor-worker pattern","scope":"public","articlesRead":5}
+{"ts":"2026-04-25T17:03:53.445Z","op":"lint","vault":"Agentic-KB","pagesScanned":495,"contradictions":0,"orphans":139,"gaps":0}

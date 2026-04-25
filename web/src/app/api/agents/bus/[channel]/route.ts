@@ -3,8 +3,8 @@ import { DEFAULT_KB_ROOT } from '@/lib/articles'
 import {
   listBusItems,
   publishBusItem,
-  resolveIdentity,
-} from '../../../../../../../lib/agent-runtime/index.mjs'
+} from '../../../../../../../lib/agent-runtime/bus.mjs'
+import { resolveIdentity } from '../../../../../../../lib/agent-runtime/identity.mjs'
 
 export const dynamic = 'force-dynamic'
 

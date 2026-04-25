@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
-import { loadContract, loadAgentContext } from '../../../../../../../lib/agent-runtime/index.mjs'
+import { loadContract } from '../../../../../../../lib/agent-runtime/contracts.mjs'
+import { loadAgentContext } from '../../../../../../../lib/agent-runtime/context-loader.mjs'
 
 export const dynamic = 'force-dynamic'
 

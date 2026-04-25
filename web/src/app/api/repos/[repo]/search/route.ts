@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 import { getRepo, repoWikiRoot } from '../../../../../../../lib/repo-runtime/index.mjs'
-import { parseFrontmatter } from '../../../../../../../lib/agent-runtime/index.mjs'
+import { parseFrontmatter } from '../../../../../../../lib/agent-runtime/frontmatter.mjs'
 
 export const dynamic = 'force-dynamic'
 

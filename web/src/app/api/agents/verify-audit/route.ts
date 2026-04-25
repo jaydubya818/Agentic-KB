@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
-import { verifyAuditChain } from '../../../../../../lib/agent-runtime/index.mjs'
+import { verifyAuditChain } from '../../../../../../lib/agent-runtime/audit.mjs'
 
 export const dynamic = 'force-dynamic'
 

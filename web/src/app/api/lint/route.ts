@@ -16,6 +16,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import { DEFAULT_KB_ROOT, resolveContentRoot } from '@/lib/articles'
 import { appendAuditLog } from '@/lib/audit'
+import { buildInboundLinkMap, isOrphanCandidate, isStalePage } from '../../../../../lib/wiki-lint.mjs'
 
 export const dynamic = 'force-dynamic'
 
@@ -27,6 +28,8 @@ interface PageSummary {
   title: string
   tags: string[]
   updated?: string
+  staleAfterDays?: number
+  reviewCadenceDays?: number
   links: string[]   // markdown links found in content
   wordCount: number
 }
@@ -59,6 +62,8 @@ function collectWikiSummaries(wikiRoot: string): PageSummary[] {
           title: (data.title as string) || entry.name.replace('.md', ''),
           tags: Array.isArray(data.tags) ? data.tags as string[] : [],
           updated: data.updated as string | undefined,
+          staleAfterDays: typeof data.stale_after_days === 'number' ? data.stale_after_days as number : undefined,
+          reviewCadenceDays: typeof data.review_cadence_days === 'number' ? data.review_cadence_days as number : undefined,
           links: [...mdLinks, ...wikiLinks],
           wordCount: content.split(/\s+/).length,
         })
@@ -68,24 +73,6 @@ function collectWikiSummaries(wikiRoot: string): PageSummary[] {
 
   walk(wikiRoot)
   return summaries
-}
-
-function buildInboundLinkMap(pages: PageSummary[]): Map<string, string[]> {
-  const inbound = new Map<string, string[]>()
-  pages.forEach(p => inbound.set(p.relPath, []))
-
-  for (const page of pages) {
-    for (const link of page.links) {
-      // Normalize link to a relPath match
-      const normalized = link.replace(/^\.\//, '').replace(/^\//, '')
-      for (const [relPath] of inbound) {
-        if (relPath.endsWith(normalized) || relPath.includes(normalized.replace('.md', ''))) {
-          inbound.get(relPath)!.push(page.relPath)
-        }
-      }
-    }
-  }
-  return inbound
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -111,20 +98,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   // Build inbound link map for orphan detection
   const inboundMap = buildInboundLinkMap(pages)
 
-  // Detect orphans (no inbound links, not index.md)
+  // Detect orphans (no inbound links, excluding operational/generated pages)
   const orphans = pages.filter(p =>
-    !p.relPath.includes('index') &&
-    !p.relPath.includes('log.md') &&
+    isOrphanCandidate(p.relPath) &&
     (inboundMap.get(p.relPath)?.length ?? 0) === 0
   )
 
-  // Detect stale pages (updated > 30 days ago or no updated field)
-  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
-  const stalePages = pages.filter(p => {
-    if (!p.updated) return false  // no date = not auto-stale
-    const d = new Date(p.updated)
-    return !isNaN(d.getTime()) && d < thirtyDaysAgo
-  })
+  // Detect stale pages using per-page review cadence when present
+  const stalePages = pages.filter(p => isStalePage(p))
 
   // Build a concise wiki overview for Claude to detect contradictions + gaps
   const overview = pages.slice(0, 40).map(p =>
