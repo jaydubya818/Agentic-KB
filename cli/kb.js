@@ -216,7 +216,7 @@ async function readArticle(slug) {
   }
 }
 
-async function listSection(section) {
+async function listSection(section, opts = {}) {
   const fs = await import('fs')
   const KB_ROOT = new URL('..', import.meta.url).pathname
   let sectionDir
@@ -234,17 +234,33 @@ async function listSection(section) {
   }
 
   const files = fs.readdirSync(sectionDir).filter(f => f.endsWith('.md'))
-  console.log(`\n📂 ${section} — ${files.length} articles\n`)
-
-  for (const f of files) {
+  const rows = files.map(f => {
     const content = fs.readFileSync(pathMod.join(sectionDir, f), 'utf8')
     const titleMatch = content.match(/^title:\s*(.+)$/m)
     const title = titleMatch ? titleMatch[1].replace(/^["']|["']$/g, '') : f.replace(/\.md$/, '')
-    const vaultMatch = content.match(/^vault:\s*true/m)
-    const privMatch = content.match(/^visibility:\s*private/m)
-    const badge = [vaultMatch ? '✦' : '', privMatch ? '🔒' : ''].filter(Boolean).join('')
-    console.log(`  ${title} ${badge}`)
-    console.log(`  → ${section}/${f.replace(/\.md$/, '')}`)
+    const vault = /^vault:\s*true/m.test(content)
+    const priv = /^visibility:\s*private/m.test(content)
+    return { slug: `${section}/${f.replace(/\.md$/, '')}`, title, vault, priv }
+  })
+
+  console.log(`\n📂 ${section} — ${rows.length} articles\n`)
+
+  if (opts.table) {
+    const titleW = Math.max(...rows.map(r => r.title.length), 5)
+    console.log(`  ${'TITLE'.padEnd(titleW)}  FLAGS  SLUG`)
+    console.log(`  ${'-'.repeat(titleW)}  -----  ----`)
+    for (const r of rows) {
+      const flags = [r.vault ? '✦' : ' ', r.priv ? '🔒' : ' '].join('')
+      console.log(`  ${r.title.padEnd(titleW)}  ${flags}    ${r.slug}`)
+    }
+    console.log()
+    return
+  }
+
+  for (const r of rows) {
+    const badge = [r.vault ? '✦' : '', r.priv ? '🔒' : ''].filter(Boolean).join('')
+    console.log(`  ${r.title} ${badge}`)
+    console.log(`  → ${r.slug}`)
     console.log()
   }
 }
@@ -1409,8 +1425,8 @@ try {
     if (!positional[0]) { console.error('Usage: kb read <slug>'); process.exit(1) }
     await readArticle(positional[0])
   } else if (command === 'list') {
-    if (!positional[0]) { console.error('Usage: kb list <section>'); process.exit(1) }
-    await listSection(positional[0])
+    if (!positional[0]) { console.error('Usage: kb list <section> [--table]'); process.exit(1) }
+    await listSection(positional[0], { table: args.includes('--table') })
   } else if (command === 'pending') {
     await pending()
   } else if (command === 'compile') {

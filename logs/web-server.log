@@ -11,3 +11,7 @@ WikiQuery error: TypeError: Invalid state: Controller is already closed
     at Object.start (.next/server/chunks/063q_next_dist_esm_build_templates_app-route_102fyp1.js:25:2961) {
   code: 'ERR_INVALID_STATE'
 }
+▲ Next.js 16.2.2
+- Local:         http://localhost:3002
+- Network:       http://169.254.223.102:3002
+✓ Ready in 5.0s

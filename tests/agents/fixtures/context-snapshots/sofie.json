@@ -33,15 +33,23 @@
       "class": "learned"
     },
     {
-      "path": "wiki/concepts/agent-loops.md",
-      "class": "learned"
-    },
-    {
       "path": "wiki/concepts/agent-observability.md",
       "class": "learned"
     },
     {
+      "path": "wiki/concepts/agent-sandboxing.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/agent-bootstrap/hermes-acceptance-test.md",
+      "class": "learned"
+    },
+    {
       "path": "wiki/personal/agent-bootstrap/hermes.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/agent-bootstrap/pi-acceptance-test.md",
       "class": "learned"
     },
     {
@@ -74,7 +82,7 @@
     }
   ],
   "trace_summary": {
-    "included": 18,
+    "included": 20,
     "excluded": 7,
     "truncated": true
   }
