@@ -204,6 +204,8 @@
   },
   "active": "fbb7b28ed968d69c",
   "lastOpenFiles": [
+    "tests/clipping-write.test.mjs",
+    "scripts/lib/clipping-write.mjs",
     "wiki/concepts/agent-resources-platform.md",
     "wiki/entities/seller-fi.md",
     "wiki/entities/mission-control.md",
@@ -237,9 +239,7 @@
     "wiki/agents/workers/gsd-research-synthesizer",
     "wiki/agents/workers/code-reviewer/profile.md",
     "wiki/agents/workers/code-reviewer",
-    "tests/agents/safe-ref.test.mjs",
     "wiki/concepts/pin-lock-system.md",
-    "wiki/patterns/llm-wiki-pattern.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Untitled 2.canvas",
