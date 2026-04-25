@@ -1405,6 +1405,44 @@ async function bootstrapCmd(role) {
   process.stdout.write(fsMod.readFileSync(roleFile, 'utf8'))
 }
 
+// ─── redact ───────────────────────────────────────────────────────────────
+
+async function redactCmd(sub, rest) {
+  const fsMod = await import('fs')
+  const { redact, loadAllRules } = await import(AGENT_RUNTIME_PATH)
+  if (sub !== 'preview') throw new Error('Usage: kb redact preview <file>')
+  const file = rest[0]
+  if (!file) throw new Error('Usage: kb redact preview <file>')
+  if (!fsMod.existsSync(file)) throw new Error(`File not found: ${file}`)
+  const content = fsMod.readFileSync(file, 'utf8')
+  const rules = loadAllRules(AGENT_KB_ROOT)
+  const r = redact(content, rules)
+  console.log(`\n=== Redaction preview: ${file} ===`)
+  console.log(`Total hits: ${r.total} (rules fired: ${r.hits.length})`)
+  for (const h of r.hits) console.log(`  ${h.count.toString().padStart(4)}  ${h.rule}`)
+  if (r.total === 0) console.log('  (clean — nothing matched)')
+}
+
+// ─── cost ─────────────────────────────────────────────────────────────────
+
+async function costCmd() {
+  const { summary } = await import(AGENT_RUNTIME_PATH)
+  const s = summary(AGENT_KB_ROOT)
+  console.log('\n=== Agentic-KB API cost ===')
+  console.log(`Today:        $${s.today_usd.toFixed(4)}  (${s.pct_of_cap}% of $${s.daily_cap_usd} cap)`)
+  console.log(`Month-to-date $${s.month_usd.toFixed(4)}`)
+  console.log(`Total calls:  ${s.total_calls}`)
+  if (Object.keys(s.by_model).length > 0) {
+    console.log(`\nBy model:`)
+    for (const [m, usd] of Object.entries(s.by_model)) {
+      console.log(`  ${m.padEnd(28)} $${usd.toFixed(4)}`)
+    }
+  }
+  if (s.pct_of_cap >= 80) {
+    console.log(`\n⚠  At ${s.pct_of_cap}% of daily cap. Raise KB_DAILY_COST_CAP_USD or wait for rollover.`)
+  }
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -1468,6 +1506,10 @@ try {
     await envCmd(args[1], args.slice(2))
   } else if (command === 'bootstrap') {
     await bootstrapCmd(args[1], args.slice(2))
+  } else if (command === 'redact') {
+    await redactCmd(args[1], args.slice(2))
+  } else if (command === 'cost') {
+    await costCmd(args[1], args.slice(2))
   } else {
     console.error(`Unknown command: ${command}`)
     usage()

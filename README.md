@@ -8,7 +8,46 @@ Raw sources are **compiled** by Claude into a persistent, cross-referenced wiki.
 
 ---
 
-## What's New — April 24, 2026 (Latest)
+## What's New — April 25, 2026 (Latest)
+
+Foundation lift + Phase 1–5 punch list — **108/108 agent tests passing** (was 86):
+
+**Phase 0 — Foundation**
+- 📦 **Real YAML parser** — vendored `yaml@2.8.3`. Hand-rolled `parseYamlLite` (~130 lines) deleted. Block scalars, anchors, aliases now safe.
+- 🛡️ **Centralized path-safety** — `lib/agent-runtime/path-safety.mjs` is now the single source of truth for adversarial input rejection. Both KB and vault write-guards import the same 13-check `UNSAFE_CHECKS` table.
+- 🤖 **GitHub Actions CI** — `.github/workflows/test.yml` runs runtime tests + fuzzer + context-snapshot drift gate + audit-chain verify + tier-leak audit on every push/PR.
+- 🌱 **`.env.example` + `kb env check` + `kb bootstrap <role>`** — first-run experience covered. Bootstrap CLI replaces paste-only docs.
+
+**Phase 1 — Real bug fixes**
+- 🔧 **`kb list <section>` + `--table`** — bug already fixed by earlier refactor; added aligned-column rendering.
+- 📋 **MCP SDK migration → ADR-001** — 1148-line rewrite deferred with documented plan. Seeds `wiki/decisions/`.
+- 🧠 **Sofie `Memory.md` route** — `payload.memoryUpdate` now writes to vault Memory.md. `scripts/sofie-sync-memory.mjs` mirrors hash to KB profile.
+
+**Phase 2 — Boundary safety**
+- 🔒 **Redaction layer** — `lib/agent-runtime/redaction.mjs` with default rules (email, phone, SSN, JWT, AWS, PEM). 10 tests. Pluggable custom rules from `config/redaction.yaml`. CLI: `kb redact preview <file>`.
+- 🚨 **Tier read-leak audit** — `scripts/audit-context-leaks.mjs`: scans every contract's effective context bundle, flags cross-tier reads (worker→lead, lead→orchestrator). Report-only in CI; promote to `--strict` once contracts add `permitted_cross_tier_reads:` allowlist.
+
+**Phase 3 — Production bake**
+- 🧪 **Foundry-compile gate** — plan-mode verified against 178 pages: theme extraction works, classification works, candidates routing works. `--execute` blocked by missing `ANTHROPIC_API_KEY`. Logged in `wiki/_meta/compile-log.md`.
+
+**Phase 4 — Habits + ergonomics**
+- 📝 **ADR auto-emit** — Sofie close-task with `decisions[]` now drops both vault decision file AND `wiki/decisions/ADR-NNN-{slug}.md` with bidirectional backlinks.
+- 💰 **Cost meter** — `lib/agent-runtime/cost-meter.mjs` tracks per-call USD, daily/monthly rollup, hard cap from `KB_DAILY_COST_CAP_USD` (default $5). CLI: `kb cost`.
+- ⏰ **Candidates TTL** — `scripts/candidates-ttl.mjs`: tracks single-source theme age via sidecar JSON. Auto-archives themes >90d to `wiki/archive/candidates-expired/`.
+- 🪦 **Outputs/ deprecated** — drafts now land directly in `wiki/syntheses/` with `status: draft`. CLAUDE.md spec updated.
+
+**Phase 5 — Strategic cleanup**
+- 🪄 **Cowork skill** — `~/.claude/skills/agentic-kb-session/SKILL.md`. Auto-loads bootstrap when sessions touch the KB/Vault.
+- 📄 **PR template + CONTRIBUTING.md** — `.github/pull_request_template.md` lists every verification step. CONTRIBUTING covers scaffolding, security, vault boundary.
+- 🔄 **Off-site mirror script** — `scripts/mirror-push.sh` pushes to `mirror` remote when configured. No-op if not.
+- 🧠 **Sofie reasoning modes** — `loadAgentContext({mode})` adds conditional includes for `critique` (lint reports), `plan` (ADRs), `compare` (evaluations).
+- 🌐 **`vault_id` schema field** — reserved on contracts (multi-vault federation, post-MVP).
+- 🔍 **Contract diff API** — `GET /api/agents/[id]/diff?ref=HEAD~1` returns parsed before/after + field diffs.
+- 🧬 **Embeddings stub** — `lib/search/embeddings.mjs` documents activation criteria (≥500 pages OR keyword recall <60%).
+
+---
+
+## What's New — April 24, 2026
 
 Runtime hardening pass — 10 enhancements, **86/86 agent tests passing** (78 runtime + 4 fuzzer + 4 snapshots):
 

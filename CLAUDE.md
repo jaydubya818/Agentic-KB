@@ -466,14 +466,9 @@ When asked for an executive briefing:
 2. Read the top 5-8 relevant pages in full
 3. Write a 400-600 word structured briefing: **Current State → Key Tensions → Open Questions → Recommended Next Steps**
 4. Every claim cites its wiki page: `[Source: wiki/concepts/page-name]`
-5. Save automatically to `outputs/brief-{topic}-{YYYY-MM-DD}.md`
-6. Offer to promote to `wiki/syntheses/` if it surfaces new connections
+5. Write directly to `wiki/syntheses/synthesis-brief-{topic}-{YYYY-MM-DD}.md` with frontmatter `status: draft`
+6. Promote `status: stable` once cross-linked from ≥1 other wiki page
 
-### OUTPUTS Directory
-`outputs/` holds generated artefacts that aren't wiki pages yet:
-- Executive briefings (`brief-*.md`)
-- One-off comparisons (`compare-*.md`)
-- Query answers worth keeping (`answer-*.md`)
-- Exploration reports (`explore-*.md`)
-
-Promote to `wiki/syntheses/` when content is stable, cross-referenced, and worth linking to from other pages. Never link TO `outputs/` from wiki pages — it's a staging area, not permanent storage.
+> **`outputs/` deprecated** (2026-04-25, ADR pending): drafts now land directly
+> in `wiki/syntheses/` with `status: draft`. Removes a staging surface and a
+> manual promotion step. Existing `outputs/` content can be migrated lazily.

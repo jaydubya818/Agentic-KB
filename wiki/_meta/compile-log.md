@@ -1,15 +1,16 @@
 ---
-id: 01KQ2WXFGKDAW6F18M0FRTQ2Y3
+id: 01KQ2Y94433T5T9Y8Y6ZC1V4DN
+title: "Compile Log"
+type: personal
+tags: [knowledge-base]
+created: 2026-04-25
+updated: 2026-04-25
+visibility: private
 ---
 
 # Compile Log
 
-This file tracks pages created or updated during each compile run.
+## 2026-04-25
 
----
-
-## 2026-04-08
-
-### Source: `architecture/2026-04-07-omm-overall-architecture.md`
-
-- **Updated** `concepts/llm-wiki-compile-pipeline.md` — Added full architecture diagram, client entry points table, and feature summary (hybrid search, RBAC, audit log, temporal decay, lint) drawn from the overall-architecture source.
+### Created
+- `agents/workers/code-reviewer/profile.md` — compiled from `my-agents/superpowers-code-reviewer.md`. Documents the code-reviewer worker agent: invocation criteria, review dimensions (plan alignment, code quality, architecture, documentation), issue severity categories, and communication protocol.

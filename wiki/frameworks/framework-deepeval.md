@@ -1,84 +1,98 @@
 ---
-title: DeepEval
+id: 01KQ2X06X6N0YKAF6BHQ5K70A0
+title: "DeepEval"
 type: framework
-vendor: Confident AI Inc.
-version: latest (rolling)
-language: python
-license: open-source
-github: https://github.com/confident-ai/deepeval
-tags: [evaluation, framework, llm-as-judge, pytest, opentelemetry]
-last_checked: 2026-04-18
-jay_experience: none
+tags: [evaluation, llm-as-judge, frameworks, agents, testing]
+created: 2026-04-18
+updated: 2026-04-18
+visibility: public
 confidence: high
-reviewed: false
-reviewed_date: ""
-related: [concepts/llm-as-judge, concepts/trajectory-evaluation, concepts/benchmark-design, concepts/agent-failure-modes, frameworks/framework-inspect-ai, frameworks/framework-promptfoo, frameworks/framework-langsmith]
+source: https://deepeval.com/docs/getting-started
+related: [llm-as-judge, agent-observability, benchmark-design]
 ---
 
-# [[framework-deepeval]]
+# DeepEval
 
-[[framework-deepeval]] is the Pytest-native LLM evaluation framework with the richest catalogue of named agent metrics — `PlanQualityMetric`, `PlanAdherenceMetric`, `ArgumentCorrectnessMetric`, `ToolCallingMetric` — that map directly onto [[concepts/trajectory-evaluation]]. Built by Confident AI Inc. Pairs with a paid cloud for team collaboration.
+Open-source LLM evaluation framework built by Confident AI Inc. Designed to make it easy to build and iterate on LLM applications by providing pytest-style unit testing, 50+ built-in metrics, and agent-specific evaluations. Backed by a paid cloud platform for collaborative eval and monitoring.
 
-## Overview
-Open-source Python framework positioning itself as the "Pytest for LLMs." You write test cases as Python functions, decorate them with `@deepeval`, and plug in one of 50+ research-backed metrics. It treats LLM evaluation like unit testing — fit naturally into existing CI pipelines.
+## What It Does
 
-## Core Concepts
-- **LLMTestCase** — single unit of LLM-app interaction. Required: `input`, `actual_output`. Optional: `expected_output`, `retrieval_context`, `tools_called`, etc.
-- **Metric** — scorer that returns a float + pass/fail. 50+ shipped metrics, most [[concepts/llm-as-judge]]-based.
-- **Golden** — ideal input/output pair; source of truth for dataset-driven eval.
-- **Dataset** — collection of goldens.
-- **`@observe` decorator** — tracing hook; non-intrusive instrumentation for component-level eval.
+DeepEval lets you write structured evaluations for LLM outputs — from simple correctness checks to multi-turn conversational tests. It treats evaluation as software testing: each interaction is a `LLMTestCase`, each quality criterion is a `Metric`, and suites of them run just like pytest.
 
-## Architecture
-Pure Python library on top of Pytest. No server, no cloud dependency for the OSS core. `pytest` runs your LLM test functions, metrics call out to a judge model (default [[openai]]), results are assertable + reportable. `@observe` emits OpenTelemetry traces for production observability interop. Confident AI's cloud adds team collaboration on top.
+Key capabilities:
+- **50+ built-in metrics** — mostly [LLM-as-a-Judge](../concepts/llm-as-judge.md) with research backing, plus multimodal support
+- **Agent-specific metrics** — plan quality, plan adherence, argument correctness, tool selection
+- **LLM tracing** — non-intrusive `@observe` decorator for component-level visibility
+- **OpenTelemetry export** — production tracing and monitoring interop
+- **Multi-turn support** — conversational test cases for chatbots and agents
 
-## Strengths
-- **Named agent metrics**: `PlanQualityMetric`, `PlanAdherenceMetric`, `ArgumentCorrectnessMetric`, `ToolCallingMetric` out of the box. Closest match in this cohort to [[concepts/trajectory-evaluation]].
-- **Pytest-native**: zero onboarding cost for Pytest-using teams; runs as `pytest` command; standard CI reports.
-- **50+ metrics**: hallucination, faithfulness, answer relevancy, bias, toxicity, summarization, custom GEval, RAG metrics (recall@k, MRR, contextual relevance).
-- **Multi-turn support**: `ConversationalTestCase` for chatbot + agent eval.
-- **Judge flexibility**: [[openai]] default, also [[anthropic]], Azure, Gemini, Ollama, custom.
-- **OpenTelemetry export**: production tracing interop for real deployments.
-- **Research-backed**: vendor claims per-metric citations to academic literature.
+## Key Concepts
 
-## Weaknesses
-- **Judge dependency**: metrics are [[llm-as-judge]]-heavy; subject to all caveats in [[concepts/llm-as-judge]]'s Counter-arguments & Gaps section (Chen 2024 positional bias, weak-judge/strong-generator ceiling).
-- **Rate-limit stalling**: documented limitation — evals stall on provider quota exhaustion; framework retries with exponential backoff.
-- **No built-in sandboxing**: for code-running agents, sandbox yourself. [[framework-inspect-ai]] wins here.
-- **No declarative config path**: Python only; [[framework-promptfoo]] wins for teams wanting YAML.
-- **Paid cloud for collaboration**: OSS core is solid, but team features live behind the Confident AI paywall.
+**Test Case** (`LLMTestCase`) — a single unit of LLM-app interaction. Required fields: `input`, `actual_output`. Optional: `expected_output`, retrieval context, conversation history.
 
-## Minimal Working Example
+**Metric** — a scoring function applied to a test case. Can be deterministic or LLM-judged. Threshold-based pass/fail.
+
+**Dataset (Goldens)** — collections of ideal input/output pairs used to drive systematic evaluations at scale.
+
+**Evaluation Modes:**
+1. **End-to-End** — black-box evaluation treating the full app as a unit
+2. **Component-Level** — white-box evaluation using LLM tracing; `@observe` decorator provides per-component visibility aligned with [agent observability](../concepts/agent-observability.md) patterns
+
+## Agent-Specific Metrics
+
+| Metric | What It Measures |
+|---|---|
+| `PlanQualityMetric` | Quality of agent-generated plans |
+| `PlanAdherenceMetric` | Whether the agent follows its plan |
+| `ArgumentCorrectnessMetric` | Correctness of tool-call arguments |
+| `ToolCallingMetric` | Correctness of tool selection |
+
+These make DeepEval particularly suited to evaluating agentic systems where tool use and planning are central behaviours.
+
+## When to Use It
+
+- You want **pytest-native LLM testing** in an existing Python CI pipeline
+- You need **agent-level metrics** (tool calls, plan adherence) beyond simple output correctness
+- You want **component-level tracing** without heavy instrumentation overhead
+- Your team is evaluating with multiple judge model providers (OpenAI, Anthropic, Gemini, Ollama, Azure)
+
+## Minimal Example
+
 ```python
 from deepeval import assert_test
 from deepeval.test_case import LLMTestCase
-from deepeval.metrics import GEval, ToolCallingMetric
+from deepeval.metrics import GEval
 
-def test_agent_tool_call():
-    metric = ToolCallingMetric(threshold=0.8)
+def test_correctness():
+    metric = GEval(
+        name="Correctness",
+        criteria="Determine if output is correct based on expected output.",
+        threshold=0.5
+    )
     test_case = LLMTestCase(
-        input="What is the weather in Paris?",
-        actual_output="The weather in Paris is 15°C and sunny.",
-        tools_called=[{"name": "get_weather", "arguments": {"city": "Paris"}}],
-        expected_tools=[{"name": "get_weather", "arguments": {"city": "Paris"}}]
+        input="Sample question",
+        actual_output="Model response",
+        expected_output="Ideal response"
     )
     assert_test(test_case, [metric])
 ```
-Run: `pytest test_agent_tool_call.py` (or `deepeval test run`).
 
-## Integration Points
-- Pytest native — any Pytest-compatible CI works
-- OpenTelemetry — export traces to Jaeger, Tempo, Datadog, etc.
-- Confident AI cloud for team collaboration (paid)
-- Any LLM framework: [[framework-langchain]], [[framework-langgraph]], [[framework-crewai]], raw API — DeepEval wraps the outputs, not the framework
+## Limitations
 
-## Jay's Experience
-N/A — not yet piloted. Top candidate for the metrics layer of [[recipes/recipe-agent-evaluation]]; named agent metrics are a direct match for what the recipe needs.
+- Evaluations can **stall on LLM provider rate limits** or insufficient quotas; framework uses exponential backoff with automatic retry
+- Heavy reliance on LLM-as-a-Judge means evaluation cost scales with test suite size
+- Advanced features (collaborative dashboards, CI integrations) require the paid Confident AI cloud platform
 
-## Version Notes
-- Rolling release; last_checked 2026-04-18
-- Active development at [confident-ai/deepeval](https://github.com/confident-ai/deepeval)
+## Installation
 
-## Sources
-- [[summaries/deepeval-framework-docs]]
-- [[raw/framework-docs/deepeval]]
+```bash
+pip install -U deepeval
+```
+
+License: Open source (`confident-ai/deepeval`). Community support via Discord.
+
+## See Also
+
+- [LLM-as-Judge](../concepts/llm-as-judge.md) — the evaluation paradigm underpinning most DeepEval metrics
+- [Agent Observability](../concepts/agent-observability.md) — how tracing and `@observe` fit into broader observability
+- [Benchmark Design](../concepts/benchmark-design.md) — principles for designing evaluation datasets and goldens
