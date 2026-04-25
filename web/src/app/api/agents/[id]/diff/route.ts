@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { execSync } from 'child_process'
+import { execFileSync } from 'child_process'
+import fs from 'fs'
+import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 import { parse as yamlParse } from 'yaml'
 
 export const dynamic = 'force-dynamic'
+
+// Restrict ref to characters valid in git revision names. Blocks shell metachars
+// even though we use execFileSync (no shell) — defense in depth.
+const SAFE_REF = /^[A-Za-z0-9_./~^@-]{1,200}$/
 
 /**
  * GET /api/agents/[id]/diff?ref=HEAD~1
@@ -24,11 +30,15 @@ export async function GET(
     return NextResponse.json({ error: 'invalid agent id' }, { status: 400 })
   }
 
+  if (!SAFE_REF.test(ref)) {
+    return NextResponse.json({ error: 'invalid ref' }, { status: 400 })
+  }
+
   const file = `config/agents/${safeId}.yaml`
 
   let beforeRaw = ''
   try {
-    beforeRaw = execSync(`git -C "${DEFAULT_KB_ROOT}" show ${ref}:${file}`, {
+    beforeRaw = execFileSync('git', ['-C', DEFAULT_KB_ROOT, 'show', `${ref}:${file}`], {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
     })
@@ -38,7 +48,7 @@ export async function GET(
 
   let afterRaw = ''
   try {
-    afterRaw = execSync(`cat "${DEFAULT_KB_ROOT}/${file}"`, { encoding: 'utf8' })
+    afterRaw = fs.readFileSync(path.join(DEFAULT_KB_ROOT, file), 'utf8')
   } catch {
     return NextResponse.json({ error: `working-tree ${file} not readable` }, { status: 404 })
   }

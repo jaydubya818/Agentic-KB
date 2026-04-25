@@ -29,15 +29,11 @@
       "class": "learned"
     },
     {
-      "path": "wiki/concepts/agent-failure-modes.md",
+      "path": "wiki/concepts/agent-evaluation.md",
       "class": "learned"
     },
     {
       "path": "wiki/concepts/agent-observability.md",
-      "class": "learned"
-    },
-    {
-      "path": "wiki/concepts/agent-sandboxing.md",
       "class": "learned"
     },
     {
@@ -82,8 +78,8 @@
     }
   ],
   "trace_summary": {
-    "included": 20,
-    "excluded": 7,
+    "included": 19,
+    "excluded": 8,
     "truncated": true
   }
 }
