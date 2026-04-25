@@ -50,6 +50,9 @@ are available — use them BEFORE answering, and write back AFTER acting.
 ═══ MANDATORY FLOW ═══
 
 Before ANY answer or action:
+  0. Preflight:    if kb query/search/read/lint returns `fetch failed`, ensure the
+                   KB web/API is live on http://localhost:3002 or fall back to
+                   direct wiki reads.
   1. Search KB:    mcp__agentic-kb__search_wiki  OR  kb search "<query>"
   2. If business/strategy: also search vault.
   3. Cite sources inline using [[wiki/path/page]] or [vault: <path>].
@@ -62,16 +65,17 @@ After completing meaningful work:
 
 ═══ KEY COMMANDS ═══
 
-KB query:        kb query "<question>"        # AI synthesis with citations
-KB search:       kb search "<keywords>"
+KB query:        kb query "<question>"        # AI synthesis with citations; requires KB API
+KB search:       kb search "<keywords>"      # requires KB API
 KB compile:      kb compile                   # raw/ → wiki/
-KB lint:         kb lint
+KB lint:         kb lint                      # requires KB API
 Agent list:      kb agent list
 Agent context:   kb agent context <id> --project <p>
+Agent start:     kb agent start-task <id> --project <p> --description "<task>"
 Sofie close:     kb agent close-task sofie --payload <file.json>
 Sofie dry-run:   kb agent dry-run-close-task sofie --payload <file.json>
 Verify audit:    kb agent verify-audit
-Bus list:        kb bus list discovery
+Bus list:        kb bus list <repo-name> <channel>
 Promote:         kb promote <channel> <id> --approver <name>
 
 ═══ SOFIE CLOSE-TASK PAYLOAD SHAPE ═══
@@ -96,6 +100,16 @@ Promote:         kb promote <channel> <id> --approver <name>
 ```
 
 ---
+
+## Current local operational note
+
+For reliable `kb search` / `kb query` / `kb lint` behavior on this machine:
+
+```bash
+cd /Users/jaywest/Agentic-KB
+export KB_API_URL=http://localhost:3000
+npm --prefix web run dev
+```
 
 ## Loading from disk
 

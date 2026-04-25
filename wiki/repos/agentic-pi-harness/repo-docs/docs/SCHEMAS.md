@@ -1,0 +1,185 @@
+---
+repo_name: "Agentic-Pi-Harness"
+repo_visibility: private
+source_type: github
+branch: main
+commit_sha: 5deb5faadc138a6bbd7455f7177b53a18960bb78
+source_path: docs/SCHEMAS.md
+imported_at: "2026-04-25T16:05:39.342Z"
+source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-Pi-Harness/main/docs/SCHEMAS.md"
+---
+
+# Schemas, Versioning & Canonicalization
+
+This release documents the **Tier A / canonical golden-path** schema surface only.
+
+Tier B and deferred schema families may still exist elsewhere in the repo, but they are **not part of the Tier A release contract** described here.
+
+## Rule: every persisted Tier A type has a Zod schema + `schemaVersion`
+
+Persisted means anything written to disk for the canonical golden path, read back during verification/replay, or hashed as part of the deterministic audit trail.
+
+Current Tier A persisted families are:
+- session/provenance/checkpoint
+- replay tape
+- effect log
+- policy decisions
+- sanitization / tool audit sidecar schemas
+- stream events
+- metrics snapshot
+
+Each schema lives in `src/schemas/<name>.ts` and is re-exported from `src/schemas/index.ts`.
+
+## Current schema modules under `src/schemas/`
+
+### Core helpers
+- `canonical.ts` — canonical framing + hashing helpers used by tape and digest code
+- `index.ts` — central re-export surface for schema modules
+- `parse.ts` — shared parse helper used for schema-validated reads
+
+> **0.4.0 note (canonical helpers):** `canonical.ts` gained a `FrameTag` type
+> alias and a streaming helper `sha256HexFramed(frame, value)` that feeds the
+> frame tag + separator + canonical JSON directly into a single `createHash`
+> call. Output is byte-identical to `sha256Hex(framedCanonical(frame, value))`;
+> committed `goldens/canonical/` digests are unchanged. No persisted-schema
+> surface changed, so no `schemaVersion` bump is required.
+
+### Session / provenance / checkpoint
+- `sessionContext.ts` — persisted session-level identity and runtime context shape
+- `provenanceManifest.ts` — session start manifest written for the canonical run
+- `checkpoint.ts` — crash-safe loop end state (`sessionId`, `turnIndex`, `messageCount`, `lastEventAt`, `stopReason`)
+- `metricsSnapshot.ts` — persisted counters snapshot written at session end
+
+### Replay tape / stream
+- `streamEvent.ts` — normalized canonical stream events used by the mock adapter and loop
+- `tapeRecord.ts` — replay tape header and event records, including hash-chain fields
+
+### Effect / policy / audit sidecars
+- `effectRecord.ts` — effect log record for mutating tool calls
+- `policyDecision.ts` — persisted policy decision record supporting both `provenanceMode: "placeholder"` and `provenanceMode: "real"` without changing the outer artifact shape
+- `toolAuditRecord.ts` — tool audit record schema reserved for persisted tool-sidecar output
+- `sanitizationRecord.ts` — sanitization sidecar schema for tool-output containment metadata
+
+## Current Tier A artifact families
+
+### 1) Session / provenance / checkpoint
+Written during `run` for the canonical golden path:
+- `sessions/<sessionId>/provenance.json`
+- `sessions/<sessionId>/checkpoint.json`
+- `sessions/<sessionId>/metrics.json`
+
+Schema modules:
+- `provenanceManifest.ts`
+- `checkpoint.ts`
+- `metricsSnapshot.ts`
+- `sessionContext.ts`
+
+### 2) Replay tape
+Written to:
+- `tapes/<sessionId>.jsonl`
+
+The tape contains:
+- one header record
+- ordered event records
+- `prevHash` / `recordHash` chain fields
+
+Schema modules:
+- `streamEvent.ts`
+- `tapeRecord.ts`
+
+### 3) Effect log
+Written to:
+- `effects/<sessionId>.jsonl`
+
+Tier A writes one `EffectRecord` for the single canonical mutating tool call.
+
+Schema module:
+- `effectRecord.ts`
+
+### 4) Policy decisions
+Written to:
+- `sessions/<sessionId>/policy.jsonl`
+
+Tier A uses placeholder approvals only. Tier B Milestone 1 adds real policy decisions while preserving the same persisted field names and overall record shape.
+
+Current compatibility contract:
+- placeholder mode persists `provenanceMode: "placeholder"`
+- real mode persists `provenanceMode: "real"`
+- `result` remains `"approve" | "deny" | "ask"`
+- Tier B Milestone 2 may set `hookDecision` when a `PreToolUse` hook denies after base policy evaluation
+- `mutatedByHook` remains `false` in Milestone 2
+- `approvalRequiredBy` remains `null` in Milestone 2 hook mediation
+- no new artifact family or replay tape event type is introduced for hooks in Milestone 2
+
+Schema module:
+- `policyDecision.ts`
+
+### 5) Sanitization / tool audit sidecars
+These schemas are part of the persisted schema surface and are kept versioned even though the Tier A golden path does not yet emit separate sidecar files for them.
+
+Schema modules:
+- `sanitizationRecord.ts`
+- `toolAuditRecord.ts`
+
+### 6) Stream events
+The normalized event stream is the canonical replay unit and is embedded inside tape event records.
+
+Schema module:
+- `streamEvent.ts`
+
+### 7) Metrics snapshot
+A simple persisted counters snapshot is written at session end.
+
+Schema module:
+- `metricsSnapshot.ts`
+
+## Read path
+
+All persisted Tier A reads should go through schema validation.
+
+Current helpers/readers include:
+- `parseOrThrow(...)` in `src/schemas/parse.ts`
+- `readTape(...)` in `src/replay/recorder.ts`
+- `readEffectLog(...)` in `src/effect/recorder.ts`
+- `readPolicyLog(...)` in `src/policy/decision.ts`
+- `readProvenance(...)` in `src/session/provenance.ts`
+
+The Tier A rule is: **no unchecked deserialization for persisted contract data**.
+
+## Migration posture for Tier A
+
+Current Tier A / early Tier B posture is intentionally conservative:
+- no new migrator work is included in this release line
+- replay/verification should **fail closed** on unsupported or invalid persisted data
+- migration is allowed **only if** a tested migrator exists
+
+In other words: if a future schema version changes and no tested migrator is present, the correct behavior for this Tier A release line is to reject the artifact rather than guess.
+
+## Canonicalization (for hashing)
+
+Canonicalization is used for deterministic hashing in the Tier A proof path.
+
+Current framing usage includes:
+- `pi-tape-v1` for replay tape records
+- policy/provenance digest inputs as implemented by current runtime helpers
+
+Implementation lives in:
+- `src/schemas/canonical.ts`
+
+Tier A depends on canonical hashing for:
+- replay tape hash-chain verification
+- stable digest generation used by persisted session artifacts
+
+## Schema-drift guard
+
+Local pre-commit guard:
+- `scripts/check-schema-drift.mjs`
+
+Rule:
+- if files under `src/schemas/` change, `docs/SCHEMAS.md` must be updated and staged in the same commit
+
+This release uses that guard as a documentation-alignment check for the Tier A contract.
+
+## Sofie phase note
+- Re-exported Sofie authority types from `src/schemas/index.ts`.
+- No persisted artifact outer shape changed.

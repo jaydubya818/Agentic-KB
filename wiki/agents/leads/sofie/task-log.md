@@ -16,3 +16,15 @@ updated: 2026-04-10
 
 ## 2026-04-25T15:40:52.592Z
 Triaged Q3 priorities + 2 client updates
+
+
+## 2026-04-25T16:01:05.463Z
+BOOTSTRAP E2E TEST 20260425-090048 — validate Sofie vault writeback and retrieval
+
+
+## 2026-04-25T16:11:03.148Z
+BOOTSTRAP-HERMES-20260425-090856 routed via Hermes
+
+
+## 2026-04-25T16:15:20.733Z
+BOOTSTRAP-HERMES-20260425-091234 acceptance test through Sofie

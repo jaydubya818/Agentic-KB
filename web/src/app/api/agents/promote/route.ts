@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 import {
-  promoteLearning,
+  promoteDiscovery as promoteLearning,
   mergeRewrite,
-  resolveIdentity,
-} from '../../../../../../lib/agent-runtime/index.mjs'
+} from '../../../../../../lib/agent-runtime/promotion.mjs'
+import { resolveIdentity } from '../../../../../../lib/agent-runtime/identity.mjs'
 
 export const dynamic = 'force-dynamic'
 

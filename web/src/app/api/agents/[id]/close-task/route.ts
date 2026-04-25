@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
-import { loadContract, closeTask } from '../../../../../../../lib/agent-runtime/index.mjs'
+import { loadContract } from '../../../../../../../lib/agent-runtime/contracts.mjs'
+import { closeTask } from '../../../../../../../lib/agent-runtime/writeback.mjs'
 
 export const dynamic = 'force-dynamic'
 

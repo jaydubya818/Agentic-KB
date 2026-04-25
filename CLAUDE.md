@@ -371,6 +371,7 @@ UX layer over the existing `kb` CLI. Each command is a thin shell that documents
 - **`/foundry-compile`** — run the 2-source gate. PROMOTE themes with ≥2 sources (new pages or updates), DEFER single-source themes to `wiki/candidates.md`, GRADUATE themes that crossed the threshold since last run. Logs every run to `wiki/_meta/compile-log.md`. Calls `scripts/compile-2source-gate.mjs`.
 - **`/foundry-ask "<question>"`** — query the wiki with citation enforcement. Returns answer + ≥2 `[[wiki/...]]` citations or surfaces a "no-source warning" header. Wraps `kb query`.
 - **`/foundry-lint`** — run `kb lint` plus Foundry extras: candidate-health (which deferred themes are now ready to graduate) and keyword drift (any tag down >70% in the last 30 days vs. 90).
+- **`/foundry-propose`** — surface actionable proposals from the KB's own history (stuck candidates >30d, repeat-graduates a.k.a. flapping themes, heavy backlog >50 deferred). Reactive — user accepts/rejects manually. No auto-act. Append-only ledger at `wiki/_meta/proposals.md` with stable PROP-### IDs. Calls `scripts/foundry-propose.mjs`.
 
 ---
 

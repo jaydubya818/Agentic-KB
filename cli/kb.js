@@ -52,6 +52,8 @@ Commands:
   kb compile [--mode full|incremental]
   kb lint
   kb reindex            Rebuild wiki/index.md from actual files on disk
+  kb session bootstrap <hermes|pi|universal>
+  kb session acceptance <hermes|pi>
   kb ingest-file <path> Convert any file to markdown (via markitdown) and drop into raw/
   kb ingest-youtube <url>
   kb ingest-twitter <archive.zip>
@@ -95,6 +97,10 @@ Examples:
   kb reindex
   kb ingest-file ~/Downloads/paper.pdf
   kb ingest-file ~/Documents/spec.docx --dir framework-docs
+  kb session bootstrap hermes | pbcopy
+  kb session bootstrap pi | pbcopy
+  kb session acceptance hermes
+  kb session acceptance pi
   kb repo list
   kb repo sync my-project --token ghp_xxxxx
   kb repo search my-project "authentication"
@@ -210,7 +216,7 @@ async function readArticle(slug) {
   }
 }
 
-async function listSection(section) {
+async function listSection(section, opts = {}) {
   const fs = await import('fs')
   const KB_ROOT = new URL('..', import.meta.url).pathname
   let sectionDir
@@ -228,17 +234,33 @@ async function listSection(section) {
   }
 
   const files = fs.readdirSync(sectionDir).filter(f => f.endsWith('.md'))
-  console.log(`\n📂 ${section} — ${files.length} articles\n`)
-
-  for (const f of files) {
-    const content = fs.readFileSync(path.join(sectionDir, f), 'utf8')
+  const rows = files.map(f => {
+    const content = fs.readFileSync(pathMod.join(sectionDir, f), 'utf8')
     const titleMatch = content.match(/^title:\s*(.+)$/m)
     const title = titleMatch ? titleMatch[1].replace(/^["']|["']$/g, '') : f.replace(/\.md$/, '')
-    const vaultMatch = content.match(/^vault:\s*true/m)
-    const privMatch = content.match(/^visibility:\s*private/m)
-    const badge = [vaultMatch ? '✦' : '', privMatch ? '🔒' : ''].filter(Boolean).join('')
-    console.log(`  ${title} ${badge}`)
-    console.log(`  → ${section}/${f.replace(/\.md$/, '')}`)
+    const vault = /^vault:\s*true/m.test(content)
+    const priv = /^visibility:\s*private/m.test(content)
+    return { slug: `${section}/${f.replace(/\.md$/, '')}`, title, vault, priv }
+  })
+
+  console.log(`\n📂 ${section} — ${rows.length} articles\n`)
+
+  if (opts.table) {
+    const titleW = Math.max(...rows.map(r => r.title.length), 5)
+    console.log(`  ${'TITLE'.padEnd(titleW)}  FLAGS  SLUG`)
+    console.log(`  ${'-'.repeat(titleW)}  -----  ----`)
+    for (const r of rows) {
+      const flags = [r.vault ? '✦' : ' ', r.priv ? '🔒' : ' '].join('')
+      console.log(`  ${r.title.padEnd(titleW)}  ${flags}    ${r.slug}`)
+    }
+    console.log()
+    return
+  }
+
+  for (const r of rows) {
+    const badge = [r.vault ? '✦' : '', r.priv ? '🔒' : ''].filter(Boolean).join('')
+    console.log(`  ${r.title} ${badge}`)
+    console.log(`  → ${r.slug}`)
     console.log()
   }
 }
@@ -255,6 +277,48 @@ async function pending() {
     console.log(`   Run: open ${API_URL}/process  (or visit in browser)`)
     console.log(`   Or:  curl -X POST ${API_URL}/api/process/run-all\n`)
   }
+}
+
+async function sessionCmd(sub, rest) {
+  const fs = await import('fs')
+  const bootstrapDir = pathMod.join(AGENT_KB_ROOT, 'wiki', 'personal', 'agent-bootstrap')
+
+  async function emitFiles(files) {
+    for (const file of files) {
+      if (!fs.existsSync(file)) {
+        throw new Error(`Session file not found: ${file}`)
+      }
+    }
+
+    const output = `${files.map((file) => fs.readFileSync(file, 'utf8')).join('\n')}\n`
+    if (!process.stdout.write(output)) {
+      await new Promise((resolve) => process.stdout.once('drain', resolve))
+    }
+  }
+
+  if (sub === 'bootstrap') {
+    const role = rest[0]
+    if (!role || !['hermes', 'pi', 'universal'].includes(role)) {
+      throw new Error('Usage: kb session bootstrap <hermes|pi|universal>')
+    }
+
+    const files = [pathMod.join(bootstrapDir, 'universal.md')]
+    if (role !== 'universal') files.push(pathMod.join(bootstrapDir, `${role}.md`))
+    await emitFiles(files)
+    return
+  }
+
+  if (sub === 'acceptance') {
+    const role = rest[0]
+    if (!role || !['hermes', 'pi'].includes(role)) {
+      throw new Error('Usage: kb session acceptance <hermes|pi>')
+    }
+
+    await emitFiles([pathMod.join(bootstrapDir, `${role}-acceptance-test.md`)])
+    return
+  }
+
+  throw new Error(`Unknown session subcommand: ${sub}`)
 }
 
 
@@ -1277,6 +1341,70 @@ async function canonicalCmd(sub, rest) {
   throw new Error(`Unknown canonical subcommand: ${sub}`)
 }
 
+// ─── env ─────────────────────────────────────────────────────────────────
+
+async function envCmd(sub) {
+  const fsMod = await import('fs')
+  const required = [
+    { key: 'OBSIDIAN_VAULT_ROOT', check: 'path-exists', default: pathMod.join(process.env.HOME || '', 'Documents', 'Obsidian Vault') },
+    { key: 'KB_API_URL', check: 'present-or-default', default: 'http://localhost:3002' },
+    { key: 'KB_DAILY_COST_CAP_USD', check: 'present-or-default', default: '5' },
+  ]
+  const optional = [
+    { key: 'ANTHROPIC_API_KEY', check: 'present', note: 'required for kb query / kb compile' },
+    { key: 'PRIVATE_PIN', check: 'present', note: 'required for wiki/personal/** access' },
+  ]
+
+  const rows = []
+  let bad = 0
+  for (const r of required) {
+    const v = process.env[r.key] || r.default
+    let status = 'ok'
+    if (r.check === 'path-exists') {
+      if (!fsMod.existsSync(v)) { status = 'missing-path'; bad++ }
+    } else if (r.check === 'present' && !v) { status = 'unset'; bad++ }
+    rows.push({ key: r.key, value: v.length > 60 ? v.slice(0, 57) + '...' : v, status, kind: 'required' })
+  }
+  for (const r of optional) {
+    const v = process.env[r.key] || ''
+    rows.push({ key: r.key, value: v ? '[set]' : '', status: v ? 'ok' : 'unset', kind: 'optional', note: r.note })
+  }
+
+  console.log('\n=== Agentic-KB env check ===')
+  for (const r of rows) {
+    const flag = r.status === 'ok' ? '✓' : (r.kind === 'required' ? '✗' : '·')
+    const note = r.note ? `  (${r.note})` : ''
+    console.log(`  ${flag} ${r.key.padEnd(28)} ${r.value || '—'}  [${r.status}]${note}`)
+  }
+  if (bad > 0) {
+    console.log(`\n❌ ${bad} required env issue(s). See .env.example.`)
+    process.exit(2)
+  }
+  console.log('\n✓ env OK')
+}
+
+// ─── bootstrap ────────────────────────────────────────────────────────────
+
+async function bootstrapCmd(role) {
+  const fsMod = await import('fs')
+  if (!role || role === '--list') {
+    const dir = pathMod.join(AGENT_KB_ROOT, 'wiki/personal/agent-bootstrap')
+    if (!fsMod.existsSync(dir)) throw new Error('No bootstrap dir found')
+    const roles = fsMod.readdirSync(dir).filter(f => f.endsWith('.md') && f !== 'universal.md').map(f => f.replace(/\.md$/, ''))
+    console.log('Available roles:')
+    for (const r of roles) console.log(`  - ${r}`)
+    console.log(`\nUsage: kb bootstrap <role>   (then pipe to | pbcopy)`)
+    return
+  }
+  const universal = pathMod.join(AGENT_KB_ROOT, 'wiki/personal/agent-bootstrap/universal.md')
+  const roleFile = pathMod.join(AGENT_KB_ROOT, `wiki/personal/agent-bootstrap/${role}.md`)
+  if (!fsMod.existsSync(universal)) throw new Error(`Missing: ${universal}`)
+  if (!fsMod.existsSync(roleFile)) throw new Error(`Unknown role: ${role}. Run kb bootstrap --list`)
+  process.stdout.write(fsMod.readFileSync(universal, 'utf8'))
+  process.stdout.write('\n\n')
+  process.stdout.write(fsMod.readFileSync(roleFile, 'utf8'))
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -1297,8 +1425,8 @@ try {
     if (!positional[0]) { console.error('Usage: kb read <slug>'); process.exit(1) }
     await readArticle(positional[0])
   } else if (command === 'list') {
-    if (!positional[0]) { console.error('Usage: kb list <section>'); process.exit(1) }
-    await listSection(positional[0])
+    if (!positional[0]) { console.error('Usage: kb list <section> [--table]'); process.exit(1) }
+    await listSection(positional[0], { table: args.includes('--table') })
   } else if (command === 'pending') {
     await pending()
   } else if (command === 'compile') {
@@ -1317,6 +1445,8 @@ try {
     await reindex(opts.pin)
   } else if (command === 'agent') {
     await agentCmd(args[1], args.slice(2))
+  } else if (command === 'session') {
+    await sessionCmd(args[1], args.slice(2))
   } else if (command === 'bus') {
     if (args[1] === 'list' || args[1] === 'publish' || args[1] === 'transition') {
       // New repo-aware bus commands
@@ -1334,6 +1464,10 @@ try {
     await rewriteCmd(args[1], args.slice(2))
   } else if (command === 'canonical') {
     await canonicalCmd(args[1], args.slice(2))
+  } else if (command === 'env') {
+    await envCmd(args[1], args.slice(2))
+  } else if (command === 'bootstrap') {
+    await bootstrapCmd(args[1], args.slice(2))
   } else {
     console.error(`Unknown command: ${command}`)
     usage()

@@ -3,9 +3,9 @@ repo_name: "Agentic-KB"
 repo_visibility: public
 source_type: github
 branch: main
-commit_sha: 844c471f3d48aedc6dd2ad7d79c864b797176b33
+commit_sha: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 source_path: AGENTS.md
-imported_at: "2026-04-10T21:58:41.984Z"
+imported_at: "2026-04-25T16:05:33.248Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/AGENTS.md"
 ---
 
@@ -15,7 +15,7 @@ source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-KB/main/AGENT
 ---
 
 ## Purpose
-A persistent, compounding knowledge base for agentic AI engineering. Covers multi-agent architecture, orchestration patterns, frameworks, prompt engineering, safety, evaluation, production deployment, and Jay's personal validated patterns. The KB itself uses agentic patterns — parallel agents for seeding, [[pattern-fan-out-worker]] for ingestion, reflection for linting.
+A persistent, compounding knowledge base for agentic AI engineering. Covers multi-agent architecture, orchestration patterns, frameworks, prompt engineering, safety, evaluation, production deployment, and Jay's personal validated patterns. The KB itself uses agentic patterns — parallel agents for seeding, fan-out for ingestion, reflection for linting.
 
 ---
 
@@ -294,7 +294,7 @@ When asked to lint the wiki:
 8. Suggest **new article candidates** based on gap analysis
 9. Output lint report to `wiki/syntheses/lint-{YYYY-MM-DD}.md`
 
-### [[pattern-hot-cache]] Rules
+### HOT CACHE Rules
 `wiki/hot.md` holds ≤500 words. Update when:
 - A pattern/concept is referenced in 3+ query responses
 - Jay explicitly requests something be cached
@@ -334,10 +334,10 @@ Main vault: `/Users/jaywest/Documents/Obsidian Vault/`
 - Don't copy content from main vault — link instead
 - Jay's main vault entity map: `scripts/entity-map.json`
 
-### My [[llm-wiki]] Harness
+### My LLM Wiki Harness
 Harness: `/Users/jaywest/My LLM Wiki/`
 - `packages/cli` — CLI for querying this KB from terminal
-- `packages/mcp` — [[mcp-ecosystem]] server exposing KB as agent tool
+- `packages/mcp` — MCP server exposing KB as agent tool
 - `packages/core` — Core ingestion/query logic
 - Run queries via: `cd /Users/jaywest/My\ LLM\ Wiki && npm run query "your question"`
 
@@ -345,7 +345,7 @@ Harness: `/Users/jaywest/My LLM Wiki/`
 - Agent definitions in: `/Users/jaywest/.Codex/agents/`
 - Skill definitions in: `/Users/jaywest/.Codex/skills/`
 - Use `gsd-executor` for complex wiki builds
-- Use parallel Agent tool calls for [[pattern-fan-out-worker]] ingestion
+- Use parallel Agent tool calls for fan-out ingestion
 
 ### Graphify
 - After major ingestion runs, invoke `/graphify` on the wiki index

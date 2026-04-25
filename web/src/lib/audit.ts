@@ -4,14 +4,16 @@
  */
 import fs from 'fs'
 import path from 'path'
+import { appendAudit } from '../../../lib/agent-runtime/audit.mjs'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
 
-const LOGS_DIR = path.join(DEFAULT_KB_ROOT, 'logs')
-const AUDIT_FILE = path.join(LOGS_DIR, 'audit.log')
+const AUDIT_FILE = path.join(DEFAULT_KB_ROOT, 'logs', 'audit.log')
+
+type AuditOp = 'query' | 'query-save' | 'ingest' | 'compile' | 'lint' | 'webhook'
 
 export interface AuditEntry {
   ts: string
-  op: 'query' | 'ingest' | 'compile' | 'lint' | 'webhook'
+  op: AuditOp
   vault?: string
   user?: string
   [key: string]: unknown
@@ -19,9 +21,7 @@ export interface AuditEntry {
 
 export function appendAuditLog(entry: Omit<AuditEntry, 'ts'>): void {
   try {
-    fs.mkdirSync(LOGS_DIR, { recursive: true })
-    const line = JSON.stringify({ ts: new Date().toISOString(), ...entry })
-    fs.appendFileSync(AUDIT_FILE, line + '\n')
+    appendAudit(DEFAULT_KB_ROOT, entry)
   } catch {
     // non-fatal — never let audit logging break the main flow
   }

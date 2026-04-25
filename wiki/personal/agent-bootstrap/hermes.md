@@ -46,7 +46,7 @@ Delegation contract:
 ```
 Hermes: Starting a session. Run this loop:
   1. Read wiki/hot.md and wiki/personal/hermes-operating-context.md.
-  2. List open bus items: kb bus list discovery
+  2. List open bus items: kb bus list Agentic-KB discovery
   3. List Sofie's pending triage: read wiki/agents/leads/sofie/weekly-digest.md
   4. Cross-reference Vault 07 - Tasks/Action Tracker.md for stale items.
   5. Give me a 5-bullet status report. Cite each claim with [[wiki/...]]
@@ -60,7 +60,10 @@ delegation, and which clients have I applied it to?"
 
 Required:
   - KB: kb query "supervisor-worker pattern" → expect [[pattern-supervisor-worker]]
-  - Vault: search 01 - Clients/ for any mention of supervisor / orchestration
+  - If kb query returns `fetch failed`, start the KB web/API or fall back to
+    direct wiki reads and mark any gaps [UNVERIFIED].
+  - Vault: search 01 - Clients/ if present; otherwise search project/client notes
+    for any mention of supervisor / orchestration and mark gaps [UNVERIFIED].
   - Synthesize. Every claim cites source. Surface gaps as [UNVERIFIED].
   - File the synthesis as a discovery for Sofie if novel.
 ```

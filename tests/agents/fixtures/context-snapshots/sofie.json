@@ -33,10 +33,6 @@
       "class": "learned"
     },
     {
-      "path": "wiki/concepts/agent-loops.md",
-      "class": "learned"
-    },
-    {
       "path": "wiki/concepts/agent-observability.md",
       "class": "learned"
     },
@@ -45,11 +41,23 @@
       "class": "learned"
     },
     {
-      "path": "wiki/patterns/pattern-adversarial-plan-review.md",
+      "path": "wiki/personal/agent-bootstrap/hermes-acceptance-test.md",
       "class": "learned"
     },
     {
-      "path": "wiki/patterns/pattern-architecture-decision-record.md",
+      "path": "wiki/personal/agent-bootstrap/hermes.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/agent-bootstrap/pi-acceptance-test.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/agent-bootstrap/pi.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/agent-bootstrap/universal.md",
       "class": "learned"
     },
     {
@@ -74,8 +82,8 @@
     }
   ],
   "trace_summary": {
-    "included": 18,
-    "excluded": 4,
+    "included": 20,
+    "excluded": 7,
     "truncated": true
   }
 }
