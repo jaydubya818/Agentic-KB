@@ -397,3 +397,4 @@
 {"ts":"2026-04-25T17:09:53.473Z","op":"lint","vault":"Agentic-KB","pagesScanned":495,"contradictions":0,"orphans":139,"gaps":0,"prev_hash":"3e8a78929895c65b","entry_hash":"5d3834fa5f51986c"}
 {"ts":"2026-04-25T17:15:16.163Z","op":"lint","vault":"Agentic-KB","pagesScanned":495,"contradictions":0,"orphans":139,"gaps":0,"prev_hash":"5d3834fa5f51986c","entry_hash":"767aae62cddecdca"}
 {"ts":"2026-04-25T19:07:00.733Z","op":"compile","vault":"Agentic-KB","mode":"incremental","docsCompiled":77,"pagesCreated":67,"pagesUpdated":70,"prev_hash":"767aae62cddecdca","entry_hash":"64da61ce26754633"}
+{"ts":"2026-04-25T21:38:24.521Z","op":"query","vault":"Agentic-KB","q":"what is the supervisor-worker pattern","scope":"public","articlesRead":5,"prev_hash":"64da61ce26754633","entry_hash":"b4bf57fe3a223a59"}
