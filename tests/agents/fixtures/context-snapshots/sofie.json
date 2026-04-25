@@ -1,8 +1,81 @@
 {
-  "files": [],
+  "files": [
+    {
+      "path": "wiki/agents/leads/planning-agent/domain-standards.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/leads/planning-agent/gotchas.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/leads/sofie/hot.md",
+      "class": "hot"
+    },
+    {
+      "path": "wiki/agents/leads/sofie/profile.md",
+      "class": "profile"
+    },
+    {
+      "path": "wiki/agents/leads/sofie/weekly-digest.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/orchestrators/architecture-agent/gotchas.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/agents/workers/gsd-executor/gotchas.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/concepts/agent-failure-modes.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/concepts/agent-loops.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/concepts/agent-observability.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/concepts/agent-sandboxing.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/patterns/pattern-adversarial-plan-review.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/patterns/pattern-architecture-decision-record.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/hermes-operating-context.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/personal-agent-design-observations.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/personal-jays-framework-philosophy.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/personal-setup-overview.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/private-test-note.md",
+      "class": "learned"
+    }
+  ],
   "trace_summary": {
-    "included": 0,
-    "excluded": 0,
-    "truncated": false
+    "included": 18,
+    "excluded": 4,
+    "truncated": true
   }
 }

@@ -952,6 +952,13 @@ async function agentCmd(sub, rest) {
       const flag = w.allowed ? '✓' : '✗'
       console.log(`  ${flag} [${w.op}] ${w.path} — ${w.reason}`)
     }
+    if (Array.isArray(preview.vault_planned) && preview.vault_planned.length > 0) {
+      console.log(`Vault ops: ${preview.vault_planned.length}`)
+      for (const v of preview.vault_planned) {
+        const flag = v.allowed ? '✓' : '✗'
+        console.log(`  ${flag} [vault:${v.kind}] ${v.vault_path} — ${v.reason}`)
+      }
+    }
     if (!preview.wouldSucceed) process.exit(2)
     return
   }

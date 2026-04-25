@@ -2,11 +2,7 @@ agent_id: sofie
 tier: lead
 domain: business
 version: "2.0.0"
-description: >
-  AI Chief of Staff — bridges business strategy (Obsidian Vault) with engineering
-  knowledge (Agentic-KB). Triages bus items, promotes discoveries to standards,
-  surfaces KB insights to Jay's leadership layer. V2: trust-aware context loading,
-  structured working memory, correction capture, governed promotion scoring.
+description: "AI Chief of Staff — bridges business strategy (Obsidian Vault) with engineering knowledge (Agentic-KB). Triages bus items, promotes discoveries to standards, surfaces KB insights to Jay's leadership layer. V2: trust-aware context loading, structured working memory, correction capture, governed promotion scoring."
 
 # ── Context loading ───────────────────────────────────────────────────────────
 context_policy:
@@ -117,3 +113,14 @@ forbidden_paths:
   - wiki/agents/orchestrators/**
   - config/**
   - raw/papers/**
+
+# ── Vault writes (Obsidian Vault — sanctioned exception) ────────────────────
+# Sofie is the only agent allowed to write back into Jay's Obsidian Vault.
+# Resolved against $OBSIDIAN_VAULT_ROOT (default: ~/Documents/Obsidian Vault).
+# Routed via lib/agent-runtime/vault-writeback.mjs::planSofieVaultOps.
+vault_writes:
+  - 06 - Decisions/**
+  - 07 - Tasks/Action Tracker.md
+  - 04 - Sessions/**
+  - 01 - Clients/**
+  - Memory.md

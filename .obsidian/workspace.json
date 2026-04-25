@@ -193,6 +193,8 @@
   },
   "active": "fbb7b28ed968d69c",
   "lastOpenFiles": [
+    "tests/agents/vault-writeback.test.mjs",
+    "lib/agent-runtime/vault-writeback.mjs",
     "scripts/foundry-finalize.sh",
     "tests/foundry-integration.test.mjs",
     "scripts/lib/compile-gate-core.mjs",
@@ -212,8 +214,6 @@
     "raw/transcripts/obsidian-2026-04-21-2026-03-24.md",
     "raw/transcripts/obsidian-2026-04-21-2026-03-22.md",
     "web/src/app/agents/page.tsx",
-    "web/src/app/agents",
-    "web/src/app/api/agents/verify-audit/route.ts",
     "raw/transcripts/call-2026-04-20-readme.md",
     "wiki/transcript-ingest.md",
     "wiki/decisions/README.md",
