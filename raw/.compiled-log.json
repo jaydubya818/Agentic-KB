@@ -329,5 +329,127 @@
       "agents/workers/gsd-planner/profile.md",
       "_meta/compile-log.md"
     ]
+  },
+  "my-agents/gsd-project-researcher.md": {
+    "compiledAt": "2026-04-25T18:18:10.808Z",
+    "pagesAffected": [
+      "wiki/log.md",
+      "wiki/summaries/summary-gsd-project-researcher.md"
+    ]
+  },
+  "my-agents/gsd-research-synthesizer.md": {
+    "compiledAt": "2026-04-25T18:19:16.950Z",
+    "pagesAffected": [
+      "agents/workers/gsd-research-synthesizer/profile.md",
+      "concepts/multi-agent-systems.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-roadmapper.md": {
+    "compiledAt": "2026-04-25T18:20:10.941Z",
+    "pagesAffected": [
+      "agents/workers/gsd-roadmapper/profile.md",
+      "patterns/pattern-goal-backward-planning.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-ui-auditor.md": {
+    "compiledAt": "2026-04-25T18:20:56.096Z",
+    "pagesAffected": [
+      "agents/workers/gsd-ui-auditor/profile.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-ui-researcher.md": {
+    "compiledAt": "2026-04-25T18:22:28.831Z",
+    "pagesAffected": [
+      "agents/workers/gsd-ui-researcher/profile.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/gsd-user-profiler.md": {
+    "compiledAt": "2026-04-25T18:23:12.391Z",
+    "pagesAffected": [
+      "agents/workers/gsd-user-profiler/profile.md"
+    ]
+  },
+  "my-agents/gsd-verifier.md": {
+    "compiledAt": "2026-04-25T18:24:16.907Z",
+    "pagesAffected": [
+      "agents/workers/gsd-verifier/profile.md",
+      "concepts/goal-vs-task-completion.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/perf-analyzer.md": {
+    "compiledAt": "2026-04-25T18:24:57.298Z",
+    "pagesAffected": [
+      "agents/workers/perf-analyzer/profile.md"
+    ]
+  },
+  "my-agents/security-reviewer.md": {
+    "compiledAt": "2026-04-25T18:25:46.891Z",
+    "pagesAffected": [
+      "agents/workers/security-reviewer/profile.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-agents/superpowers-code-reviewer.md": {
+    "compiledAt": "2026-04-25T18:26:24.003Z",
+    "pagesAffected": [
+      "agents/workers/code-reviewer/profile.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/advanced-evaluation-skill.md": {
+    "compiledAt": "2026-04-25T18:27:00.156Z",
+    "pagesAffected": [
+      "concepts/llm-as-judge.md"
+    ]
+  },
+  "my-skills/bdi-mental-states-skill.md": {
+    "compiledAt": "2026-04-25T18:27:54.095Z",
+    "pagesAffected": [
+      "concepts/bdi-architecture.md"
+    ]
+  },
+  "my-skills/component-refactoring-skill.md": {
+    "compiledAt": "2026-04-25T18:28:47.317Z",
+    "pagesAffected": [
+      "patterns/pattern-react-component-refactoring.md",
+      "_meta/compile-log.md"
+    ]
+  },
+  "my-skills/context-compression-skill.md": {
+    "compiledAt": "2026-04-25T18:29:42.543Z",
+    "pagesAffected": [
+      "concepts/context-management.md",
+      "patterns/pattern-anchored-iterative-summarization.md"
+    ]
+  },
+  "my-skills/context-degradation-skill.md": {
+    "compiledAt": "2026-04-25T18:30:24.530Z",
+    "pagesAffected": [
+      "concepts/context-management.md"
+    ]
+  },
+  "my-skills/context-fundamentals-skill.md": {
+    "compiledAt": "2026-04-25T18:31:13.238Z",
+    "pagesAffected": [
+      "concepts/context-management.md"
+    ]
+  },
+  "my-skills/context-optimization-skill.md": {
+    "compiledAt": "2026-04-25T18:32:07.257Z",
+    "pagesAffected": [
+      "concepts/context-management.md"
+    ]
+  },
+  "my-skills/e2e-tester-skill.md": {
+    "compiledAt": "2026-04-25T18:32:54.026Z",
+    "pagesAffected": [
+      "patterns/pattern-playwright-e2e.md",
+      "_meta/compile-log.md"
+    ]
   }
 }

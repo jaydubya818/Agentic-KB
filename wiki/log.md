@@ -370,3 +370,11 @@ Pages affected: `concepts/goal-backward-verification.md`, `_meta/compile-log.md`
 ## 2026-04-25 — Compiled `my-agents/gsd-planner.md`
 
 Pages affected: `agents/workers/gsd-planner/profile.md`, `_meta/compile-log.md`
+
+## 2026-04-25 — Compiled `my-skills/context-optimization-skill.md`
+
+Pages affected: `concepts/context-management.md`
+
+## 2026-04-25 — Compiled `my-skills/e2e-tester-skill.md`
+
+Pages affected: `patterns/pattern-playwright-e2e.md`, `_meta/compile-log.md`
