@@ -1,13 +1,16 @@
 ---
-id: 01KQ2XRK9KNE5PRX90WZCA8GWZ
+id: 01KQ2Y94433T5T9Y8Y6ZC1V4DN
+title: "Compile Log"
+type: personal
+tags: [knowledge-base]
+created: 2026-04-25
+updated: 2026-04-25
+visibility: private
 ---
 
 # Compile Log
 
 ## 2026-04-25
 
-### Created: `agents/workers/gsd-planner/profile.md`
-- **Source**: `my-agents/gsd-planner.md`
-- **Type**: Entity (agent profile)
-- **Summary**: Profile page for the GSD Planner agent — covers role, spawn contexts, tools, context fidelity protocol, project context discovery, and output format.
-- **Cross-references**: gsd-executor/profile, concepts/multi-agent-systems, concepts/human-in-the-loop, concepts/agent-loops
+### Created
+- `agents/workers/code-reviewer/profile.md` — compiled from `my-agents/superpowers-code-reviewer.md`. Documents the code-reviewer worker agent: invocation criteria, review dimensions (plan alignment, code quality, architecture, documentation), issue severity categories, and communication protocol.

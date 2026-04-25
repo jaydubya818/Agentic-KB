@@ -1423,6 +1423,26 @@ async function redactCmd(sub, rest) {
   if (r.total === 0) console.log('  (clean — nothing matched)')
 }
 
+// ─── cost ─────────────────────────────────────────────────────────────────
+
+async function costCmd() {
+  const { summary } = await import(AGENT_RUNTIME_PATH)
+  const s = summary(AGENT_KB_ROOT)
+  console.log('\n=== Agentic-KB API cost ===')
+  console.log(`Today:        $${s.today_usd.toFixed(4)}  (${s.pct_of_cap}% of $${s.daily_cap_usd} cap)`)
+  console.log(`Month-to-date $${s.month_usd.toFixed(4)}`)
+  console.log(`Total calls:  ${s.total_calls}`)
+  if (Object.keys(s.by_model).length > 0) {
+    console.log(`\nBy model:`)
+    for (const [m, usd] of Object.entries(s.by_model)) {
+      console.log(`  ${m.padEnd(28)} $${usd.toFixed(4)}`)
+    }
+  }
+  if (s.pct_of_cap >= 80) {
+    console.log(`\n⚠  At ${s.pct_of_cap}% of daily cap. Raise KB_DAILY_COST_CAP_USD or wait for rollover.`)
+  }
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -1488,6 +1508,8 @@ try {
     await bootstrapCmd(args[1], args.slice(2))
   } else if (command === 'redact') {
     await redactCmd(args[1], args.slice(2))
+  } else if (command === 'cost') {
+    await costCmd(args[1], args.slice(2))
   } else {
     console.error(`Unknown command: ${command}`)
     usage()
