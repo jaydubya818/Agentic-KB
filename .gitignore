@@ -2,6 +2,15 @@
 web/node_modules/
 web/.next/
 web/.env.local
+node_modules/
+
+# Secrets — root .env carries ANTHROPIC_API_KEY etc. Never commit.
+.env
+.env.local
+.env.*.local
+
+# Cost + audit logs (generated per-machine)
+logs/api-cost.log
 
 # Graphify temp files
 .graphify_*
