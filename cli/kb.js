@@ -52,6 +52,7 @@ Commands:
   kb compile [--mode full|incremental]
   kb lint
   kb reindex            Rebuild wiki/index.md from actual files on disk
+  kb session bootstrap <hermes|pi|universal>
   kb ingest-file <path> Convert any file to markdown (via markitdown) and drop into raw/
   kb ingest-youtube <url>
   kb ingest-twitter <archive.zip>
@@ -95,6 +96,8 @@ Examples:
   kb reindex
   kb ingest-file ~/Downloads/paper.pdf
   kb ingest-file ~/Documents/spec.docx --dir framework-docs
+  kb session bootstrap hermes | pbcopy
+  kb session bootstrap pi | pbcopy
   kb repo list
   kb repo sync my-project --token ghp_xxxxx
   kb repo search my-project "authentication"
@@ -231,7 +234,7 @@ async function listSection(section) {
   console.log(`\n📂 ${section} — ${files.length} articles\n`)
 
   for (const f of files) {
-    const content = fs.readFileSync(path.join(sectionDir, f), 'utf8')
+    const content = fs.readFileSync(pathMod.join(sectionDir, f), 'utf8')
     const titleMatch = content.match(/^title:\s*(.+)$/m)
     const title = titleMatch ? titleMatch[1].replace(/^["']|["']$/g, '') : f.replace(/\.md$/, '')
     const vaultMatch = content.match(/^vault:\s*true/m)
@@ -255,6 +258,35 @@ async function pending() {
     console.log(`   Run: open ${API_URL}/process  (or visit in browser)`)
     console.log(`   Or:  curl -X POST ${API_URL}/api/process/run-all\n`)
   }
+}
+
+async function sessionCmd(sub, rest) {
+  const fs = await import('fs')
+
+  if (sub === 'bootstrap') {
+    const role = rest[0]
+    if (!role || !['hermes', 'pi', 'universal'].includes(role)) {
+      throw new Error('Usage: kb session bootstrap <hermes|pi|universal>')
+    }
+
+    const bootstrapDir = pathMod.join(AGENT_KB_ROOT, 'wiki', 'personal', 'agent-bootstrap')
+    const parts = [pathMod.join(bootstrapDir, 'universal.md')]
+    if (role !== 'universal') parts.push(pathMod.join(bootstrapDir, `${role}.md`))
+
+    for (const file of parts) {
+      if (!fs.existsSync(file)) {
+        throw new Error(`Bootstrap file not found: ${file}`)
+      }
+    }
+
+    const output = `${parts.map((file) => fs.readFileSync(file, 'utf8')).join('\n')}\n`
+    if (!process.stdout.write(output)) {
+      await new Promise((resolve) => process.stdout.once('drain', resolve))
+    }
+    return
+  }
+
+  throw new Error(`Unknown session subcommand: ${sub}`)
 }
 
 
@@ -1317,6 +1349,8 @@ try {
     await reindex(opts.pin)
   } else if (command === 'agent') {
     await agentCmd(args[1], args.slice(2))
+  } else if (command === 'session') {
+    await sessionCmd(args[1], args.slice(2))
   } else if (command === 'bus') {
     if (args[1] === 'list' || args[1] === 'publish' || args[1] === 'transition') {
       // New repo-aware bus commands
