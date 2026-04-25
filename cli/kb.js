@@ -1443,6 +1443,89 @@ async function costCmd() {
   }
 }
 
+// ─── health ───────────────────────────────────────────────────────────────
+
+async function healthCmd() {
+  const fsMod = await import('fs')
+  const { spawnSync } = await import('child_process')
+  const rt = await import(AGENT_RUNTIME_PATH)
+
+  const checks = []
+  const add = (name, ok, detail) => checks.push({ name, ok, detail })
+
+  // env
+  const vault = process.env.OBSIDIAN_VAULT_ROOT || pathMod.join(process.env.HOME || '', 'Documents', 'Obsidian Vault')
+  add('env.OBSIDIAN_VAULT_ROOT', fsMod.existsSync(vault), vault)
+  add('env.ANTHROPIC_API_KEY', !!process.env.ANTHROPIC_API_KEY, process.env.ANTHROPIC_API_KEY ? '[set]' : 'unset (kb query/compile blocked)')
+  add('env.KB_DAILY_COST_CAP_USD', true, process.env.KB_DAILY_COST_CAP_USD || '5 (default)')
+
+  // contracts
+  const contracts = rt.listContracts(AGENT_KB_ROOT)
+  add('contracts.loaded', contracts.length > 0, `${contracts.length} contracts`)
+
+  // audit chain
+  const audit = rt.verifyAuditChain(AGENT_KB_ROOT)
+  add('audit.chain', audit.ok, audit.ok ? `${audit.scanned} entries (${audit.signed} signed, ${audit.legacy} legacy)` : `BROKEN: ${audit.reason} at ${audit.firstBreakAt}`)
+
+  // tests
+  const tests = spawnSync('node', ['--test', 'tests/agents/runtime.test.mjs', 'tests/agents/fuzz-paths.test.mjs', 'tests/agents/vault-writeback.test.mjs', 'tests/agents/redaction.test.mjs', 'tests/agents/context-snapshots.test.mjs'], { cwd: AGENT_KB_ROOT, encoding: 'utf8' })
+  const passMatch = tests.stdout.match(/# pass (\d+)/)
+  const failMatch = tests.stdout.match(/# fail (\d+)/)
+  const passes = passMatch ? parseInt(passMatch[1], 10) : 0
+  const fails = failMatch ? parseInt(failMatch[1], 10) : -1
+  add('tests', tests.status === 0 && fails === 0, `${passes} pass / ${fails} fail`)
+
+  // cost
+  const cost = rt.summary(AGENT_KB_ROOT)
+  add('cost.today', cost.pct_of_cap < 100, `$${cost.today_usd.toFixed(4)} (${cost.pct_of_cap}% of $${cost.daily_cap_usd} cap)`)
+
+  // orphans (latest static-lint report if present)
+  const reportDir = pathMod.join(AGENT_KB_ROOT, 'wiki/system/reports')
+  let latestReport = null
+  if (fsMod.existsSync(reportDir)) {
+    const reports = fsMod.readdirSync(reportDir).filter(f => f.startsWith('static-lint-')).sort().reverse()
+    if (reports[0]) latestReport = reports[0]
+  }
+  if (latestReport) {
+    const content = fsMod.readFileSync(pathMod.join(reportDir, latestReport), 'utf8')
+    const orphans = (content.match(/^orphans:\s*(\d+)/m) || [])[1]
+    const stale = (content.match(/^stale:\s*(\d+)/m) || [])[1]
+    add('lint.orphans', parseInt(orphans, 10) < 100, `${orphans} (from ${latestReport})`)
+    add('lint.stale', true, `${stale}`)
+  } else {
+    add('lint.orphans', false, 'no static-lint report — run `node scripts/static-lint.mjs --apply`')
+  }
+
+  // tier-leak
+  const tierReport = pathMod.join(AGENT_KB_ROOT, 'wiki/system/reports', `tier-leak-audit-${new Date().toISOString().slice(0, 10)}.md`)
+  if (fsMod.existsSync(tierReport)) {
+    const tc = fsMod.readFileSync(tierReport, 'utf8')
+    const findings = (tc.match(/^findings:\s*(\d+)/m) || [])[1]
+    add('lint.tier_leaks', parseInt(findings, 10) === 0, `${findings} declared cross-tier reads`)
+  }
+
+  // candidates
+  const candFile = pathMod.join(AGENT_KB_ROOT, 'wiki/candidates.md')
+  if (fsMod.existsSync(candFile)) {
+    const lines = fsMod.readFileSync(candFile, 'utf8').split('\n').filter(l => /^-\s+[a-z]/.test(l))
+    add('candidates', lines.length < 200, `${lines.length} single-source themes`)
+  }
+
+  // print
+  const passN = checks.filter(c => c.ok).length
+  const failN = checks.filter(c => !c.ok).length
+  console.log(`\n=== KB Health ===  ${passN}/${checks.length} ok`)
+  for (const c of checks) {
+    const flag = c.ok ? '✓' : '✗'
+    console.log(`  ${flag} ${c.name.padEnd(28)} ${c.detail}`)
+  }
+  if (failN > 0) {
+    console.log(`\n${failN} issue(s). Address per detail.`)
+    process.exit(2)
+  }
+  console.log('\n✓ KB healthy')
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 if (!command || command === 'help' || command === '--help') {
@@ -1510,6 +1593,8 @@ try {
     await redactCmd(args[1], args.slice(2))
   } else if (command === 'cost') {
     await costCmd(args[1], args.slice(2))
+  } else if (command === 'health') {
+    await healthCmd()
   } else {
     console.error(`Unknown command: ${command}`)
     usage()

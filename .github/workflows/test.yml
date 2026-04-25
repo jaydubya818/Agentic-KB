@@ -44,13 +44,27 @@ jobs:
             echo "no audit.log committed (expected)"
           fi
 
-      - name: Tier read-leak audit (report-only)
+      - name: Tier read-leak audit (strict)
         run: |
           if [ -f scripts/audit-context-leaks.mjs ]; then
-            # Report-only — declared cross-tier reads (via context_policy scope)
-            # are surfaced but do not fail CI yet. Switch to --strict once
-            # contracts add explicit `permitted_cross_tier_reads:` allowlist.
-            node scripts/audit-context-leaks.mjs --verbose
+            # Strict: any cross-tier read not declared in the contract's
+            # `context_policy.permitted_cross_tier_reads` allowlist fails CI.
+            node scripts/audit-context-leaks.mjs --strict --verbose
           else
             echo "tier-leak audit script not yet present"
+          fi
+
+      - name: Static wiki lint (orphans/stale) — report-only
+        run: |
+          if [ -f scripts/static-lint.mjs ]; then
+            node scripts/static-lint.mjs --top 0
+          else
+            echo "static-lint script not yet present"
+          fi
+
+      - name: KB health snapshot (advisory)
+        if: always()
+        run: |
+          if grep -q "'health'" cli/kb.js 2>/dev/null; then
+            node cli/kb.js health || true
           fi
