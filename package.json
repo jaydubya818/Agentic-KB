@@ -1,0 +1,16 @@
+{
+  "name": "agentic-kb-root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Root deps shared across cli/, mcp/, web/, and lib/agent-runtime/",
+  "type": "module",
+  "dependencies": {
+    "yaml": "^2.6.0"
+  },
+  "scripts": {
+    "test": "node --test tests/agents/",
+    "test:fuzz": "node --test tests/agents/fuzz-paths.test.mjs",
+    "test:snapshots": "node --test tests/agents/context-snapshots.test.mjs",
+    "test:snapshots:update": "UPDATE_SNAPSHOTS=1 node --test tests/agents/context-snapshots.test.mjs"
+  }
+}
