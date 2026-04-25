@@ -889,7 +889,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (name === 'list_repos') {
       const repos = repoRuntime.listRepos(KB_ROOT)
       const filtered = args.status ? repos.filter(r => r.status === String(args.status)) : repos
-      const lines = filtered.map(r => `${r.name} [${r.status || 'unknown'}] - ${r.docCount || 0} docs, last-sync: ${r.lastSync || 'never'}`)
+      const lines = filtered.map(r => `${r.repo_name || r.name || 'unknown'} [${r.status || 'unknown'}] - ${r.markdown_file_count || r.docCount || 0} docs, last-sync: ${r.last_sync_at || r.lastSync || 'never'}`)
       return { content: [{ type: 'text', text: lines.length > 0 ? lines.join('\n') : 'No repos tracked.' }] }
     }
 
