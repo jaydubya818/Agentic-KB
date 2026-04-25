@@ -8,7 +8,24 @@ Raw sources are **compiled** by Claude into a persistent, cross-referenced wiki.
 
 ---
 
-## What's New — April 10, 2026 (Latest)
+## What's New — April 24, 2026 (Latest)
+
+Runtime hardening pass — 10 enhancements, **86/86 agent tests passing** (78 runtime + 4 fuzzer + 4 snapshots):
+
+- 🔒 **Writeback lockfile** — `lib/agent-runtime/locks.mjs`: per-agent O_EXCL lock with PID/age staleness check. `closeTask` commit phase runs under `withLock('agent:<id>')`. Prevents concurrent compaction/log interleaving.
+- 🔐 **Contract hash in audit + trace** — `contractHash()` stamps sha256[:16] on every contract at load. Every audit entry, runtime trace, and bus publication carries `contract_hash`. Session-long tamper-evidence for "agent X did Y under policy Z".
+- ⛓️ **Hash-chained audit log** — `audit.log` entries now carry `prev_hash` + `entry_hash`. `verifyAuditChain()` walks the chain, distinguishes legacy/pre-chain from broken. CLI `kb agent verify-audit`, route `GET /api/agents/verify-audit`.
+- 🛡️ **Forbidden-path fuzzer** — `tests/agents/fuzz-paths.test.mjs` fires 25 exploit seeds + 2000 randomized mutations. Caught 335 real leaks first run. `paths.mjs` now rejects null bytes, newlines, backslashes, `%2e/%2f`, drive letters, `~`, `file://`, dot-segments before any glob match.
+- ✅ **Schema validation on load** — `validateContract` throws with full error list: bad tier, non-array allowed_writes, missing `path|class` in include rules, non-numeric priority, unsafe glob patterns. Fails at load, not first use.
+- 🧪 **Dry-run close-task** — `closeTask({ dryRun: true })` short-circuits to plan-only preview. New CLI `kb agent dry-run-close-task`, route `POST /api/agents/[id]/dry-run-close-task`.
+- 📸 **Context-bundle snapshot tests** — `tests/agents/context-snapshots.test.mjs` snapshots each contract's effective context bundle. `UPDATE_SNAPSHOTS=1` to accept drift. PR-time visibility on policy changes.
+- 🧠 **Hot → Learned summarization hook** — `hot-learned.mjs` writes a dated digest to `wiki/agents/<tier>s/<id>/learned/hot-digest/` after any `closeTask` that touched `hot.md`. Pluggable summarizer (default = heading/bullet extraction, zero-dep).
+- 🏗️ **Contract scaffolder** — `kb agent new <id> --tier worker|lead|orchestrator [--domain X] [--team Y]` + `lib/agent-runtime/scaffold.mjs`. One command = contract YAML + profile/hot/task-log/gotchas seeded with tier-aware defaults. Replaces 8 manual file edits.
+- 🖥️ **/agents web page** — `web/src/app/agents/page.tsx`: roster + audit-chain health badge + tabs for context (file table + excluded reasons), audit (recent entries with contract_hash column), trace (runtime JSONL). Live project scoping. Backed by new routes `[id]/audit`, `[id]/dry-run-close-task`, `verify-audit`.
+
+---
+
+## What's New — April 10, 2026
 
 Task lifecycle hardening + repo runtime parity + codebase quality pass — **112/112 tests passing** (78 agent + 34 repo):
 
