@@ -65,6 +65,133 @@ The `matcher` field is a regex matched against the tool name. Examples:
 - `CLAUDE_TOOL_OUTPUT` — tool's output (PostToolUse only)
 - `CLAUDE_SESSION_ID` — current session ID
 
+> **Note:** the env-var input pattern above applies to `PreToolUse` and `PostToolUse`. The newer events listed below take input via stdin JSON instead. See "Input formats" subsection below.
+
+---
+
+## Additional Events (2026 update)
+
+The events table above predates several [[framework-claude-code]] additions. Current canonical list:
+
+| Event | When It Fires | Can Block? | Special |
+|-------|---------------|-----------|---------|
+| `PreToolUse` | Before a tool call | Yes (exit 2) | env-var input |
+| `PostToolUse` | After a tool call | No | env-var input |
+| `PostToolUseFailure` | After a failed tool call | No | env-var input |
+| `Notification` | On status notifications | No | |
+| `Stop` | When the assistant finishes a turn | No | |
+| `SubagentStart` | When a sub-agent begins | No | |
+| `SubagentStop` | When a sub-agent finishes | No | |
+| `SessionStart` | At session creation/resume | No | **stdout → additionalContext** |
+| `SessionEnd` | When a session terminates | No | matchers: `prompt_input_exit`, etc. |
+| `PreCompact` | Before context compression | No | **stdout → additionalContext** |
+| `UserPromptSubmit` | When a user submits a prompt | No | stdin JSON |
+| `PermissionRequest` | On permission prompt | No | stdin JSON |
+
+### Matcher conventions per event
+
+| Event | Valid matchers |
+|-------|----------------|
+| `SessionStart` | `startup`, `resume`, `clear`, `compact`, `""` (all) |
+| `SessionEnd` | `clear`, `resume`, `logout`, `prompt_input_exit`, `bypass_permissions_disabled`, `other` |
+| `PreCompact` | `manual`, `auto`, `""` (both) |
+| Tool events | regex against tool name |
+
+### Input formats
+
+Two patterns coexist in [[framework-claude-code]]:
+
+**1. Env-var pattern** (older — `PreToolUse`, `PostToolUse`, `PostToolUseFailure`):
+hook process receives `CLAUDE_TOOL_NAME`, `CLAUDE_TOOL_INPUT`, `CLAUDE_TOOL_OUTPUT`, `CLAUDE_SESSION_ID` as environment variables. See Step 1 above.
+
+**2. stdin JSON pattern** (newer — `UserPromptSubmit`, `PermissionRequest`, session events):
+hook receives a JSON payload on stdin. Parse it explicitly:
+
+```python
+import json, sys
+payload = json.load(sys.stdin)
+session_id = payload.get("session_id")
+# event-specific fields beyond session_id depend on the event
+```
+
+### Context injection (`additionalContext`)
+
+`SessionStart`, `PreCompact`, and `PreToolUse` can push content into the model's context window. Two output styles:
+
+**Style 1 — raw stdout (simplest):**
+
+```bash
+cat ~/.claude/memory/identity.md
+```
+
+stdout is injected as additional context. **Capped at 10,000 chars per hook entry.** Excess is saved to a file, not delivered.
+
+**Style 2 — structured JSON (matches Jay's stack — `pre-tool-memory.py` uses this):**
+
+```python
+import json, sys
+output = {
+    "hookSpecificOutput": {
+        "hookEventName": "PreToolUse",
+        "additionalContext": "...injected text..."
+    }
+}
+print(json.dumps(output))
+sys.exit(0)
+```
+
+Each hook entry within an event runs as its own process and gets its own 10K stdout budget. **To inject more than 10K of context at SessionStart, split into multiple hook entries** — each cats a different file.
+
+### Worked example — SessionStart vault context injection
+
+This is what's wired into Jay's `~/.claude/settings.json` as of 2026-04-26 (loads `hermes-operating-context.md` + `hot.md` into every fresh session, with `hermes-operating-context.md` re-injected on PreCompact so it survives compression):
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [{
+          "type": "command",
+          "command": "cat /Users/jaywest/Agentic-KB/wiki/personal/hermes-operating-context.md 2>/dev/null",
+          "timeout": 5
+        }]
+      },
+      {
+        "matcher": "",
+        "hooks": [{
+          "type": "command",
+          "command": "cat /Users/jaywest/Agentic-KB/wiki/hot.md 2>/dev/null",
+          "timeout": 5
+        }]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [{
+          "type": "command",
+          "command": "cat /Users/jaywest/Agentic-KB/wiki/personal/hermes-operating-context.md 2>/dev/null",
+          "timeout": 5
+        }]
+      }
+    ]
+  }
+}
+```
+
+Verification (after install):
+```
+claude        # fresh session
+> What is in my Active Portfolio Domains table?
+```
+If the SessionStart hook fires correctly, Claude answers from `hermes-operating-context.md` without you naming the file.
+
+### Note on the env-var pattern with newer events
+
+The older steps in this recipe (`file-read-guard.sh`, `lint-on-edit.sh`, `log-bash.js`, `stop-validation.sh`) all use env vars. **They still work** for `PreToolUse`, `PostToolUse`, and `Stop`. Don't migrate them to stdin JSON unnecessarily — both patterns are supported.
+
 ---
 
 ## Steps
