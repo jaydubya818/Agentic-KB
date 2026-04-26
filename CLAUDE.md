@@ -5,8 +5,11 @@
 On every Cowork session start:
 1. Read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`.
 2. Stage meeting-derived content: `node scripts/sofie-watch-obsidian.mjs --once` — Obsidian Vault `05 - Meetings/` → `raw/transcripts/` as `type: meeting-note` with `ingest_status: pending`. Silent no-op if the source folder is empty.
-3. Check `raw/transcripts/` for files with `ingest_status: pending` — if any exist, surface the count in the opening status and offer to run the Call Transcript INGEST per `wiki/transcript-ingest.md` before other work.
-4. Operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
+3. **Run ambient quick-capture**: invoke `/foundry-capture` (umbrella for `/foundry-capture-slack` + `/foundry-capture-notes`) to pull anything new from the dedicated Slack `#kb-inbox` channel and the Apple Notes `KB Inbox` folder into `raw/clippings/`. Silent no-op if both inboxes are empty or already deduped. Surface the count in the opening status if anything was written and offer to run `/foundry-ingest` next.
+4. Check `raw/transcripts/` for files with `ingest_status: pending` — if any exist, surface the count in the opening status and offer to run the Call Transcript INGEST per `wiki/transcript-ingest.md` before other work. Same for `raw/clippings/` newly-written from step 3.
+5. Operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
+
+> The bootstrap intentionally STAGES (steps 2-3) but does not auto-INGEST. Staging is read-only on the source surface and write-only into `raw/`; ingest is the gated step that creates wiki pages and is always offered, never forced. This preserves Rule 12 (LLM-authored pages start `reviewed: false`) and Rule 13 (one-way personal vault).
 
 ---
 
