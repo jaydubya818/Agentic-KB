@@ -32,6 +32,10 @@ git add \
   .claude/commands/foundry-ask.md \
   .claude/commands/foundry-lint.md \
   .claude/commands/foundry-propose.md \
+  .claude/commands/foundry-capture.md \
+  .claude/commands/foundry-capture-slack.md \
+  .claude/commands/foundry-capture-notes.md \
+  scripts/lib/clipping-write.mjs \
   scripts/compile-2source-gate.mjs \
   scripts/ingest-dedup.mjs \
   scripts/install-personal-vault-guard.sh \
@@ -41,6 +45,7 @@ git add \
   scripts/foundry-finalize.sh \
   tests/foundry-integration.test.mjs \
   tests/foundry-propose.test.mjs \
+  tests/clipping-write.test.mjs \
   wiki/candidates.md \
   wiki/_meta/compile-log.md \
   outputs/plan-foundry-integration-2026-04-18.md
@@ -52,7 +57,7 @@ echo
 
 # 4. Run tests as a final gate.
 echo "→ Running tests..."
-node --test tests/foundry-integration.test.mjs tests/foundry-propose.test.mjs
+node --test tests/foundry-integration.test.mjs tests/foundry-propose.test.mjs tests/clipping-write.test.mjs
 
 # 5. Commit (skip if nothing staged — e.g. re-run after a previous commit).
 if git diff --cached --quiet; then

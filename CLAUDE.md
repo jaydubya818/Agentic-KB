@@ -372,6 +372,9 @@ UX layer over the existing `kb` CLI. Each command is a thin shell that documents
 - **`/foundry-ask "<question>"`** — query the wiki with citation enforcement. Returns answer + ≥2 `[[wiki/...]]` citations or surfaces a "no-source warning" header. Wraps `kb query`.
 - **`/foundry-lint`** — run `kb lint` plus Foundry extras: candidate-health (which deferred themes are now ready to graduate) and keyword drift (any tag down >70% in the last 30 days vs. 90).
 - **`/foundry-propose`** — surface actionable proposals from the KB's own history (stuck candidates >30d, repeat-graduates a.k.a. flapping themes, heavy backlog >50 deferred). Reactive — user accepts/rejects manually. No auto-act. Append-only ledger at `wiki/_meta/proposals.md` with stable PROP-### IDs. Calls `scripts/foundry-propose.mjs`.
+- **`/foundry-capture-slack`** — pull messages from a dedicated Slack channel (default `#kb-inbox`) via Hermes MCP, write each to `raw/clippings/` with provenance frontmatter. sha256-deduped via `scripts/lib/clipping-write.mjs`. Source surface stays read-only.
+- **`/foundry-capture-notes`** — pull notes from a dedicated Apple Notes folder (default `KB Inbox`), write each to `raw/clippings/`. Same dedup + provenance shape as the Slack capture.
+- **`/foundry-capture`** — umbrella: runs both Slack + Notes captures in sequence, then recommends `/foundry-ingest`.
 
 ---
 
