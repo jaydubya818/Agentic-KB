@@ -204,6 +204,7 @@
   },
   "active": "fbb7b28ed968d69c",
   "lastOpenFiles": [
+    "wiki/system/reports/tier-leak-audit-2026-04-26.md",
     "tests/clipping-write.test.mjs",
     "scripts/lib/clipping-write.mjs",
     "wiki/concepts/agent-resources-platform.md",
@@ -238,7 +239,6 @@
     "wiki/agents/workers/gsd-research-synthesizer/profile.md",
     "wiki/agents/workers/gsd-research-synthesizer",
     "wiki/agents/workers/code-reviewer/profile.md",
-    "wiki/agents/workers/code-reviewer",
     "wiki/concepts/pin-lock-system.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
