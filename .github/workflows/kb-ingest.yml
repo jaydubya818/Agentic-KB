@@ -30,11 +30,24 @@ jobs:
     name: Ingest merged PR
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      KB_WEBHOOK_URL: ${{ secrets.KB_WEBHOOK_URL }}
+      KB_WEBHOOK_SECRET: ${{ secrets.KB_WEBHOOK_SECRET }}
     steps:
-      - name: Push PR to KB
+      - name: Skip if webhook not configured
+        id: gate
         run: |
-          curl -sf -X POST "${{ secrets.KB_WEBHOOK_URL }}/api/ingest/webhook" \
-            -H "Authorization: Bearer ${{ secrets.KB_WEBHOOK_SECRET }}" \
+          if [ -z "$KB_WEBHOOK_URL" ] || [ -z "$KB_WEBHOOK_SECRET" ]; then
+            echo "::notice::KB_WEBHOOK_URL or KB_WEBHOOK_SECRET not set — skipping ingest"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Push PR to KB
+        if: steps.gate.outputs.skip == 'false'
+        run: |
+          curl -sf -X POST "$KB_WEBHOOK_URL/api/ingest/webhook" \
+            -H "Authorization: Bearer $KB_WEBHOOK_SECRET" \
             -H "Content-Type: application/json" \
             -H "X-GitHub-Event: pull_request" \
             -d '{
@@ -54,11 +67,24 @@ jobs:
     name: Ingest closed issue
     if: github.event_name == 'issues'
     runs-on: ubuntu-latest
+    env:
+      KB_WEBHOOK_URL: ${{ secrets.KB_WEBHOOK_URL }}
+      KB_WEBHOOK_SECRET: ${{ secrets.KB_WEBHOOK_SECRET }}
     steps:
-      - name: Push issue to KB
+      - name: Skip if webhook not configured
+        id: gate
         run: |
-          curl -sf -X POST "${{ secrets.KB_WEBHOOK_URL }}/api/ingest/webhook" \
-            -H "Authorization: Bearer ${{ secrets.KB_WEBHOOK_SECRET }}" \
+          if [ -z "$KB_WEBHOOK_URL" ] || [ -z "$KB_WEBHOOK_SECRET" ]; then
+            echo "::notice::KB_WEBHOOK_URL or KB_WEBHOOK_SECRET not set — skipping ingest"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Push issue to KB
+        if: steps.gate.outputs.skip == 'false'
+        run: |
+          curl -sf -X POST "$KB_WEBHOOK_URL/api/ingest/webhook" \
+            -H "Authorization: Bearer $KB_WEBHOOK_SECRET" \
             -H "Content-Type: application/json" \
             -H "X-GitHub-Event: issues" \
             -d '{
@@ -77,26 +103,41 @@ jobs:
     name: Ingest pushed docs
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    env:
+      KB_WEBHOOK_URL: ${{ secrets.KB_WEBHOOK_URL }}
+      KB_WEBHOOK_SECRET: ${{ secrets.KB_WEBHOOK_SECRET }}
     steps:
+      - name: Skip if webhook not configured
+        id: gate
+        run: |
+          if [ -z "$KB_WEBHOOK_URL" ] || [ -z "$KB_WEBHOOK_SECRET" ]; then
+            echo "::notice::KB_WEBHOOK_URL or KB_WEBHOOK_SECRET not set — skipping ingest"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.gate.outputs.skip == 'false'
         with:
           fetch-depth: 2
 
       - name: Get changed markdown files
         id: changed
+        if: steps.gate.outputs.skip == 'false'
         run: |
           FILES=$(git diff --name-only HEAD~1 HEAD -- '*.md' 'docs/**' 'ADRs/**' | head -10)
           echo "files=$FILES" >> $GITHUB_OUTPUT
 
       - name: Push each changed doc to KB
-        if: steps.changed.outputs.files != ''
+        if: steps.gate.outputs.skip == 'false' && steps.changed.outputs.files != ''
         run: |
           for FILE in ${{ steps.changed.outputs.files }}; do
             if [ -f "$FILE" ]; then
               TITLE=$(head -1 "$FILE" | sed 's/^#* *//')
               CONTENT=$(cat "$FILE")
-              curl -sf -X POST "${{ secrets.KB_WEBHOOK_URL }}/api/ingest/webhook" \
-                -H "Authorization: Bearer ${{ secrets.KB_WEBHOOK_SECRET }}" \
+              curl -sf -X POST "$KB_WEBHOOK_URL/api/ingest/webhook" \
+                -H "Authorization: Bearer $KB_WEBHOOK_SECRET" \
                 -H "Content-Type: application/json" \
                 -d "{
                   \"title\": \"$(echo $TITLE | sed 's/\"/\\\"/g')\",
