@@ -5,7 +5,7 @@
 On every Cowork session start:
 1. Read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`.
 2. Stage meeting-derived content: `node scripts/sofie-watch-obsidian.mjs --once` — Obsidian Vault `05 - Meetings/` → `raw/transcripts/` as `type: meeting-note` with `ingest_status: pending`. Silent no-op if the source folder is empty.
-3. **Run ambient quick-capture**: invoke `/foundry-capture` (umbrella for `/foundry-capture-slack` + `/foundry-capture-notes`) to pull anything new from the dedicated Slack `#kb-inbox` channel and the Apple Notes `KB Inbox` folder into `raw/clippings/`. Silent no-op if both inboxes are empty or already deduped. Surface the count in the opening status if anything was written and offer to run `/foundry-ingest` next.
+3. **Run ambient quick-capture**: invoke `/foundry-capture-notes` to pull anything new from the Apple Notes `KB Inbox` folder into `raw/clippings/`. Silent no-op if the folder is empty or already deduped. Surface the count in the opening status if anything was written and offer to run `/foundry-ingest` next. (Slack capture exists as `/foundry-capture-slack` for personal Slack workspaces, but is intentionally NOT in the bootstrap to avoid mixing corporate workspace data into the personal KB.)
 4. Check `raw/transcripts/` for files with `ingest_status: pending` — if any exist, surface the count in the opening status and offer to run the Call Transcript INGEST per `wiki/transcript-ingest.md` before other work. Same for `raw/clippings/` newly-written from step 3.
 5. Operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
 

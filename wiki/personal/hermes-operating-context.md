@@ -33,14 +33,14 @@ This file should be updated weekly, not continuously. It is a decision tool, not
 > Update this section at the start of each week or whenever priorities shift. Last updated: 2026-04-12.
 
 ### 1) Primary Focus This Week
-- **Objective:** [FILL THIS IN — single highest-leverage business outcome for this week]
-- **Domain / Repo:** [SellerFi or other active top-priority domain]
-- **Why now:** this is the highest-leverage active outcome and should outrank background system work
-- **Success this week looks like:** [specific shipped outcome, decision, demo, launch, or unblock]
-- **Current status:** [not started / in progress / blocked / close to done]
-- **Blockers:** [list concrete blockers or write "none"]
+- **Objective:** NOT YET DEFINED — Jay to fill in. **Hermes instruction:** do not infer or invent a primary focus. If asked to prioritize, surface this gap first; do not treat any other domain as the implicit weekly priority.
+- **Domain / Repo:** Likely SellerFi (per durable lessons), unconfirmed for this week
+- **Why now:** N/A until objective defined
+- **Success this week looks like:** N/A
+- **Current status:** undefined
+- **Blockers:** the absence of this entry is itself Blocker 1, below
 - **Horizon:** This week
-- **Priority type:** Business-critical
+- **Priority type:** Business-critical (pending definition)
 
 ### 2) Secondary Active Commitment
 - **Objective:** Operationalize Hermes / MissionControl / active orchestration workflow
