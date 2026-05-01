@@ -192,15 +192,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/farzapedia-personal-wiki|Farzapedia Personal Wiki]] — Personal wiki over iMessages/Notes/diary using agentic index-navigation (Librarian pattern) instead of RAG
 - [[summaries/karpathy-llm-wiki-video|Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)]] — Transcript explaining the LLM-wiki architectural pattern: persistent interlinked wikis as a compound-knowledge alternative to stateless RAG, with three-layer architecture, core operations (ingest/query/lint), and live [[framework-claude-code]] demo
 - [[summaries/nate-herk-llm-wiki|Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)]] — Walkthrough of the [[llm-wiki]] pattern: markdown-only KB, [[pattern-hot-cache]], lint workflow, and 95% token reduction vs RAG
-- [[summaries/19-oss-agent-repos-curated|19 OSS Agent Repos — Curated List]] — Curated overview of 19 open-source GitHub repos spanning multi-agent orchestration, autonomous coding agents, memory/reasoning, and production tooling
-- [[summaries/nvidia-gtc-2026-agentic-enterprise|Enterprise AI Agent Workforce Architecture — NVIDIA GTC 2026]] — NVIDIA GTC 2026 launch recap (via [[agentlayer]] LinkedIn post): OpenShell runtime, enterprise agent adoption stats, and a 20-requirement compliance checklist for enterprise AI governance
-- [[summaries/karpathy-llm-wiki-gist|Karpathy LLM Wiki Pattern — Gist]] — [[andrej-karpathy]]'s minimal spec for an LLM-maintained knowledge base: immutable raw sources, LLM-owned wiki, and a co-evolving schema file
-- [[summaries/langchain-deepagents-production|LangChain Deep Agents — Going to Production]] — LangSmith/[[framework-langgraph]] production stack: durable checkpointing, scoped memory, sandbox execution, middleware guardrails, and multi-tenancy patterns
-- [[summaries/andrej-karpathy-thinks-rag-is-broken|Andrej Karpathy Thinks RAG Is Broken]] — Note summarizing [[andrej-karpathy]]'s [[llm-wiki]] project: a persistent, compounding knowledge base pattern proposed as a replacement for RAG
 - [[summaries/private-test-note|Private Test Note]] — Internal test fixture for verifying PIN lock system across web UI, [[mcp-ecosystem]], and CLI surfaces
-- [[summaries/farzapedia-personal-wiki|Farzapedia Personal Wiki]] — Personal wiki over iMessages/Notes/diary using agentic Librarian navigation (no RAG); inspired by [[andrej-karpathy]] [[llm-wiki]] pattern
-- [[summaries/karpathy-llm-wiki-video|Building a Trading Strategies LLM Knowledge Base (Karpathy Pattern)]] — Transcript explaining the [[llm-wiki]] pattern: three-layer architecture (raw/wiki/schema), INGEST/QUERY/LINT operations, and division of labor between human curator and LLM maintainer
-- [[summaries/nate-herk-llm-wiki|Set Up Your LLM Knowledge Base in 5 Minutes (Nate Herk)]] — Walkthrough of [[andrej-karpathy]]'s [[llm-wiki]] pattern: markdown-only KB, [[pattern-hot-cache]], lint cycle, and [[llm-wiki]] vs RAG tradeoffs; one user cut token usage 95%
 - [[summaries/siagian-agentic-engineer-roadmap-2026|Agentic AI Engineer Roadmap 2026 (Siagian)]] — 10-section interview Q&A guide: Python→LLM→Framework→Memory→Tools→RAG→Agents→Production; strong on RAG system design, hybrid retrieval, grounded generation, CI/CD for agents; surfaces 6 KB gaps
 - [[summaries/2026-04-08-what-is-the-best-pattern-for-multi-agent-orchestration-in-cl|Q&A: Best Pattern for Multi-Agent Orchestration in Claude Code]] — Synthesized Q&A recommending the [[pattern-fan-out-worker]] Orchestrator-Worker pattern as the default; covers three sub-patterns, Agent tool parameters, token economics (~15× multiplier for multi-agent), the Telephone Game failure mode, and when to avoid multi-agent altogether
 - [[summaries/vault-3tier-architecture|Agent Vault — 3-Tier Architecture]] — Jay's production vault memory system: scoped context loading and explicit write targets for all 32 agents across orchestrator/lead/worker tiers
@@ -210,7 +202,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/summary-research-skill-graph|Local Research Engine — The Research Skill Graph System]] — Practitioner system deployed at 4 companies (60% research cost reduction): 6-lens forced-perspective analysis (technical/economic/historical/geopolitical/contrarian/first-principles), 5-tier source evaluation, contradiction-as-feature protocol, compound knowledge base. Scaffolded at research-skill-graph/.
 - [[summaries/summary-wikiwise-skills|Wikiwise Skill Library — Ingest, Digest, Readwise]] — 6 operational skill files from TristanH/wikiwise: stream-to-disk rule for large documents, parallel subagent dispatch, batch-before-ingest, 2-3 inbound-link density rule, user-confirmed highlight search, single-file tweet collection.
 
-## Personal (6) (Jay's patterns)
+## Personals (6) (Jay's patterns)
 
 | Page | Category | Confidence | Description |
 |------|----------|------------|-------------|

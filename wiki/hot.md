@@ -2,7 +2,10 @@
 id: 01KNNVX2QWP0WXED8KH2N8K1JE
 ---
 
-# [[pattern-hot-cache]]
+# Hot Cache
+
+Implements [[patterns/pattern-hot-cache]].
+
 > ≤500 words | Most-used patterns and concepts | Updated: 2026-04-04
 
 ## Jay's Default Framework Decision
@@ -51,7 +54,7 @@ id: 01KNNVX2QWP0WXED8KH2N8K1JE
 - **Complex reasoning**: Zep/Graphiti for temporal knowledge graphs (94.8% DMR accuracy)
 - **Full control**: Letta for agent self-management of memory
 
-Key finding: Letta's filesystem agents scored 74% on LoCoMo using basic file operations, beating Mem0's specialized tools at 68.5%. Tool complexity matters less than reliable retrieval.
+Key finding (LoCoMo 2024 benchmark): Letta's filesystem agents scored 74% using basic file operations, beating Mem0's specialized tools at 68.5%. Tool complexity matters less than reliable retrieval. *Note: numbers from original benchmark — re-verify if comparing current versions.*
 
 ## Key File Locations
 - Agents: `~/.claude/agents/`

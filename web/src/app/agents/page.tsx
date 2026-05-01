@@ -63,7 +63,17 @@ export default function AgentsPage() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    fetch('/api/agents/list').then(r => r.json()).then(d => setAgents(d.agents || []))
+    fetch('/api/agents/list')
+      .then(r => r.json())
+      .then(d => {
+        const list: Contract[] = d.agents || []
+        setAgents(list)
+        // Pre-select first agent so the panel renders something useful on
+        // first load instead of an empty "Select an agent." placeholder.
+        if (list.length > 0) {
+          setSelected(prev => prev ?? list[0].agent_id)
+        }
+      })
     fetch('/api/agents/verify-audit').then(r => r.json()).then(setChain).catch(() => {})
   }, [])
 

@@ -23,7 +23,7 @@ updated: 2026-04-13
   <!-- Orchestration (top-left) -->
   <circle cx="165" cy="90" r="46" fill="#388bfd" opacity="0.15" stroke="#388bfd" stroke-width="1.5"/>
   <text x="165" y="83" text-anchor="middle" fill="#79c0ff" font-size="12" font-weight="bold">Orchestration</text>
-  <text x="165" y="98" text-anchor="middle" fill="#8b949e" font-size="9">12 frameworks</text>
+  <text x="165" y="98" text-anchor="middle" fill="#8b949e" font-size="9">18 frameworks</text>
   <text x="165" y="111" text-anchor="middle" fill="#8b949e" font-size="9">[[pattern-fan-out-worker]] · supervisor</text>
 
   <!-- Memory (top-right) -->
@@ -58,11 +58,11 @@ updated: 2026-04-13
 
   <!-- Stats bar -->
   <rect x="20" y="310" width="660" height="22" rx="4" fill="#161b22"/>
-  <text x="40" y="325" fill="#388bfd" font-size="10">20 concepts</text>
-  <text x="140" y="325" fill="#3fb950" font-size="10">8 patterns</text>
-  <text x="230" y="325" fill="#d2a8ff" font-size="10">12 frameworks</text>
-  <text x="350" y="325" fill="#f78166" font-size="10">12 recipes</text>
-  <text x="440" y="325" fill="#e3b341" font-size="10">21 summaries</text>
+  <text x="40" y="325" fill="#388bfd" font-size="10">68 concepts</text>
+  <text x="140" y="325" fill="#3fb950" font-size="10">61 patterns</text>
+  <text x="230" y="325" fill="#d2a8ff" font-size="10">18 frameworks</text>
+  <text x="350" y="325" fill="#f78166" font-size="10">14 recipes</text>
+  <text x="440" y="325" fill="#e3b341" font-size="10">42 summaries</text>
   <text x="560" y="325" fill="#8b949e" font-size="10">2 evaluations</text>
 </svg>
 

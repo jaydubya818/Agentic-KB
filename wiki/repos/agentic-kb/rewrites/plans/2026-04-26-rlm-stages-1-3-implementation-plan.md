@@ -213,9 +213,11 @@ Total: ~8h work across 3 sessions. The recipe's 4-6h estimate covers Phases 1–
 
 ## Next step
 
-Start Phase 1 by running `npm install flexsearch @xenova/transformers --save` and creating `scripts/search/build-bm25-index.mjs` per Step 1 of the recipe. Validate against the vault before moving to Phase 2.
+**Status as of 2026-04-26:** Phase 1 Step 1 (BM25 indexer) is drafted and ready to install — see install instructions and code in this session's `outputs/PLAN-B-PHASE-1-STEP-1-INSTALL.md` and `outputs/build-bm25-index.mjs`. Improvements over the recipe prototype: CLI arg / env var path, multi-line frontmatter parser, body cleaning (wikilinks + code stripping), atomic writes via tmp+rename, progress output and final stats, per-file error handling, dotfile skipping.
 
-Reason: BM25 is the cheapest, fastest-to-validate retriever. Confirms the toolchain works (Node, FlexSearch, file walking) before committing to the heavier vector pipeline.
+Manual steps required (sandbox can't reach your shell): `npm install flexsearch --save`, drop the .mjs into `scripts/search/`, add npm script, add gitignore entries, run.
+
+Reason BM25 first: cheapest and fastest-to-validate retriever. Confirms the toolchain works (Node, FlexSearch, file walking) before committing to the heavier vector pipeline. Step 2 (vector indexer) follows once Step 1 is verified.
 
 ## Open questions for Jay
 

@@ -808,6 +808,73 @@ async function reindexLocal() {
   for (const [s, c] of Object.entries(counts)) {
     if (c > 0) console.log(`   ${s}: ${c}`)
   }
+
+  // Dedupe the bulleted summary section in wiki/index.md by wiki-link slug.
+  // Repeat ingest passes were stacking duplicate bullets for the same source,
+  // which surfaced as visible doubles in /wiki.
+  {
+    let idx = content
+    const lines = idx.split('\n')
+    const seen = new Set()
+    let inBullets = false
+    let removed = 0
+    const kept = []
+    for (const line of lines) {
+      // Activate the dedupe window only inside the summaries area, between
+      // the "## Summaries" header and the next section header.
+      if (/^##\s+Summaries\b/.test(line)) { inBullets = true; kept.push(line); continue }
+      if (inBullets && /^##\s+/.test(line)) { inBullets = false }
+      if (inBullets) {
+        const m = line.match(/^-\s+\[\[(summaries\/[A-Za-z0-9._/-]+)/)
+        if (m) {
+          const slug = m[1]
+          if (seen.has(slug)) { removed++; continue }
+          seen.add(slug)
+        }
+      }
+      kept.push(line)
+    }
+    if (removed > 0) {
+      idx = kept.join('\n')
+      content = idx
+      console.log(`✅ Deduped ${removed} duplicate summary bullet(s) in index.md`)
+    }
+    // Persist dedupe before SVG sync below.
+    fs.writeFileSync(indexPath, content, 'utf8')
+  }
+
+  // Sync the SVG concept-map stats bar in wiki/home.md so the front-door
+  // numbers don't drift from the master index.
+  const homePath = path.join(wikiDir, 'home.md')
+  if (fs.existsSync(homePath)) {
+    let home = fs.readFileSync(homePath, 'utf8')
+    const before = home
+    const svgFields = [
+      ['concepts', 'concepts'],
+      ['patterns', 'patterns'],
+      ['frameworks', 'frameworks'],
+      ['recipes', 'recipes'],
+      ['summaries', 'summaries'],
+      ['evaluations', 'evaluations'],
+    ]
+    for (const [section, label] of svgFields) {
+      const n = counts[section] ?? 0
+      // Match: <text ...>20 concepts</text> → replace count, preserve label.
+      home = home.replace(
+        new RegExp(`(<text[^>]*>)\\s*\\d+\\s+${label}(\\s*</text>)`, 'g'),
+        `$1${n} ${label}$2`,
+      )
+    }
+    // Also keep the orchestration tile's framework count fresh.
+    home = home.replace(
+      /(<text[^>]*>)\d+\s+frameworks(<\/text>)/,
+      `$1${counts.frameworks} frameworks$2`,
+    )
+    if (home !== before) {
+      fs.writeFileSync(homePath, home, 'utf8')
+      console.log(`✅ wiki/home.md SVG stats synced`)
+    }
+  }
 }
 
 // ─── Agent Runtime Commands ───────────────────────────────────────────────
