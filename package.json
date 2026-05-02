@@ -9,7 +9,7 @@
     "yaml": "^2.8.3"
   },
   "scripts": {
-    "test": "node --test tests/agents/",
+    "test": "node --test tests/agents/*.test.mjs",
     "test:local": "node --test tests/agents/*.test.mjs",
     "test:fuzz": "node --test tests/agents/fuzz-paths.test.mjs",
     "test:snapshots": "node --test tests/agents/context-snapshots.test.mjs",
