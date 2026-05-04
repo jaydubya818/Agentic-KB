@@ -16,7 +16,7 @@ Implements [[patterns/pattern-hot-cache]].
 
 ## Most-Used Patterns
 
-**[[pattern-[[pattern-fan-out-worker]]-worker]]**: Spawn N parallel agents in a single message → aggregate results → return. [[framework-claude-code]]'s Agent tool: multiple calls in one response = true parallelism. See [[summaries/summary-graphify-skill]] for working example.
+**[[patterns/pattern-fan-out-worker]]**: Spawn N parallel agents in a single message → aggregate results → return. [[framework-claude-code]]'s Agent tool: multiple calls in one response = true parallelism. See [[summaries/summary-graphify-skill]] for working example.
 
 **[[pattern-supervisor-worker]]**: Central orchestrator routes to specialists. Orchestrator has full tools; workers have restricted sets. Beware the Telephone Game Problem: supervisors paraphrase sub-agent responses incorrectly. Fix with a `forward_message` tool that bypasses synthesis when the sub-agent's response is final.
 
