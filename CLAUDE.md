@@ -5,7 +5,7 @@
 On every Cowork session start:
 1. Read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`.
 2. Stage meeting-derived content: `node scripts/sofie-watch-obsidian.mjs --once` — Obsidian Vault `05 - Meetings/` → `raw/transcripts/` as `type: meeting-note` with `ingest_status: pending`. Silent no-op if the source folder is empty.
-3. **Run ambient quick-capture**: invoke `/foundry-capture-notes` to pull anything new from the Apple Notes `KB Inbox` folder into `raw/clippings/`. Silent no-op if the folder is empty or already deduped. Surface the count in the opening status if anything was written and offer to run `/foundry-ingest` next. (Slack capture exists as `/foundry-capture-slack` for personal Slack workspaces, but is intentionally NOT in the bootstrap to avoid mixing corporate workspace data into the personal KB.)
+3. **Run ambient quick-capture**: invoke `/foundry-capture` (umbrella: Apple Notes `KB Inbox` + Snipd `Snipd` folder) to pull anything new into `raw/clippings/`. Silent no-op if the folders are empty or already deduped. Surface the count in the opening status if anything was written and offer to run `/foundry-ingest` next. (Slack capture exists as `/foundry-capture-slack` for personal Slack workspaces, but is intentionally NOT in the umbrella to avoid mixing corporate workspace data into the personal KB.)
 4. Check `raw/transcripts/` for files with `ingest_status: pending` — if any exist, surface the count in the opening status and offer to run the Call Transcript INGEST per `wiki/transcript-ingest.md` before other work. Same for `raw/clippings/` newly-written from step 3.
 5. Operate as Hermes for the remainder of the session. Route all requests by work lane, apply the delegation contract, surface escalation triggers, and produce decision-ready artifacts. See `~/.claude/agents/hermes.md` for the full SOUL.
 
@@ -377,7 +377,8 @@ UX layer over the existing `kb` CLI. Each command is a thin shell that documents
 - **`/foundry-propose`** — surface actionable proposals from the KB's own history (stuck candidates >30d, repeat-graduates a.k.a. flapping themes, heavy backlog >50 deferred). Reactive — user accepts/rejects manually. No auto-act. Append-only ledger at `wiki/_meta/proposals.md` with stable PROP-### IDs. Calls `scripts/foundry-propose.mjs`.
 - **`/foundry-capture-slack`** — pull messages from a dedicated Slack channel (default `#kb-inbox`) via Hermes MCP, write each to `raw/clippings/` with provenance frontmatter. sha256-deduped via `scripts/lib/clipping-write.mjs`. Source surface stays read-only.
 - **`/foundry-capture-notes`** — pull notes from a dedicated Apple Notes folder (default `KB Inbox`), write each to `raw/clippings/`. Same dedup + provenance shape as the Slack capture.
-- **`/foundry-capture`** — umbrella: runs the enabled capture sources (currently Apple Notes only — Slack capture is intentionally NOT in this umbrella; see `.claude/commands/foundry-capture.md` for why), then recommends `/foundry-ingest`.
+- **`/foundry-capture-snipd`** — pull Snipd podcast highlights from a dedicated Apple Notes folder (default `Snipd`), write each clip to `raw/clippings/` with `type_hint: transcript-clip`. Snipd's iOS share sheet writes directly into the source folder; this command moves clips through the same dedup + ingest gate as everything else, eventually landing in `raw/transcripts/`.
+- **`/foundry-capture`** — umbrella: runs the enabled capture sources (Apple Notes + Snipd — Slack capture is intentionally NOT in this umbrella; see `.claude/commands/foundry-capture.md` for why), then recommends `/foundry-ingest`.
 
 ---
 
