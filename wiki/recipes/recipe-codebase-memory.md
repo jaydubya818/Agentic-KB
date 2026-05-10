@@ -22,7 +22,7 @@ This recipe extends the [[concepts/llm-wiki-pattern]] into coding-project territ
 
 ## Prerequisites
 
-- Agentic KB running (web server at `localhost:3002` and/or [[mcp-ecosystem]] server connected)
+- Agentic KB running (web server at `localhost:3009` and/or [[mcp-ecosystem]] server connected)
 - A codebase you're actively working in with [[framework-claude-code]]
 - `CLAUDE.md` in your project root (or willing to create one)
 

@@ -75,7 +75,7 @@ Pi: Build & verify gauntlet on Agentic-KB:
   Phase 1: cd web && npm run build                  (zero build errors)
   Phase 2: npx tsc --noEmit -p web/tsconfig.json    (clean)
   Phase 3: node --test tests/agents/*.test.mjs      (all green)
-  Phase 4: node cli/kb.js lint                      (requires KB API on localhost:3002)
+  Phase 4: node cli/kb.js lint                      (requires KB API on localhost:3009)
 
   Report each phase as a row. Red phase → halt + escalate. Otherwise
   publish discovery "<date>: gauntlet clean".

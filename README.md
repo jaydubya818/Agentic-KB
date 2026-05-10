@@ -161,8 +161,8 @@ See [`ENTERPRISE_PLAN.md`](ENTERPRISE_PLAN.md) for the full P0–P3 roadmap.
 ```bash
 # 1. Start the web UI
 cd /Users/jaywest/Agentic-KB/web
-PORT=3002 npm run dev
-# → http://localhost:3002/wiki
+PORT=3009 npm run dev
+# → http://localhost:3009/wiki
 
 # 1b. (Optional) Architecture viewer
 omm view               # → http://localhost:4567
@@ -180,7 +180,7 @@ kb read concepts/tool-use
 
 ## Web UI
 
-Full Wikipedia-style knowledge base browser at `http://localhost:3002`.
+Full Wikipedia-style knowledge base browser at `http://localhost:3009`.
 
 **Sidebar Tools section** — one-click jump to the interactive architecture viewer (oh-my-mermaid) and to Obsidian's global graph view (via the Advanced URI plugin). Added 2026-04-07.
 
@@ -284,12 +284,12 @@ kb repo close-task <name> <agent-id> --payload payload.json [--dry-run]
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `KB_API_URL` | `http://localhost:3002` | Web server base URL |
+| `KB_API_URL` | `http://localhost:3009` | Web server base URL |
 | `PRIVATE_PIN` | _(empty)_ | PIN for private content access |
 
 Set in `~/.zshrc`:
 ```bash
-export KB_API_URL=http://localhost:3002
+export KB_API_URL=http://localhost:3009
 export PRIVATE_PIN=1124
 ```
 
@@ -308,7 +308,7 @@ Exposes the KB as MCP tools for Claude Desktop and any MCP-compatible agent.
       "command": "node",
       "args": ["/Users/jaywest/Agentic-KB/mcp/server.js"],
       "env": {
-        "KB_API_URL": "http://localhost:3002",
+        "KB_API_URL": "http://localhost:3009",
         "PRIVATE_PIN": "1124"
       }
     }
@@ -562,7 +562,7 @@ The compile pipeline is the heart of the KB — it's what makes this *not* a RAG
 
 ### Running a compile
 
-**Web UI (recommended for full runs):** Open `http://localhost:3002/wiki` and click **Compile New** in the `CompilePanel`. Streams live progress via `EventSource` with no timeout. Use **Recompile All** to force a full rebuild.
+**Web UI (recommended for full runs):** Open `http://localhost:3009/wiki` and click **Compile New** in the `CompilePanel`. Streams live progress via `EventSource` with no timeout. Use **Recompile All** to force a full rebuild.
 
 **CLI:** `kb compile` (incremental) or `kb compile --mode full`.
 
@@ -800,16 +800,16 @@ Edit a markdown file in Obsidian → wiki updates in the browser automatically (
 
 ### Via browser
 
-1. Go to `http://localhost:3002/ingest`
+1. Go to `http://localhost:3009/ingest`
 2. Paste raw text or upload a file
 3. The AI processes it, extracts key knowledge, and writes a structured wiki article
-4. View the queue at `http://localhost:3002/process`
+4. View the queue at `http://localhost:3009/process`
 
 ### Via CLI (raw file drop)
 
 1. Drop file into `raw/` subdirectory (`papers/`, `transcripts/`, `framework-docs/`, `note/`, etc.)
 2. Check queue: `kb pending`
-3. Process via browser at `/process` or trigger: `curl -X POST http://localhost:3002/api/process/run-all`
+3. Process via browser at `/process` or trigger: `curl -X POST http://localhost:3009/api/process/run-all`
 
 ### Raw source directories
 

@@ -29,7 +29,7 @@ are available — use them BEFORE answering, and write back AFTER acting.
 1. AGENTIC-KB (engineering brain — canonical)
    Path:    /Users/jaywest/Agentic-KB/
    Wiki:    wiki/ (concepts, patterns, frameworks, recipes, summaries, syntheses)
-   Web UI:  http://localhost:3002
+   Web UI:  http://localhost:3009
    CLI:     node /Users/jaywest/Agentic-KB/cli/kb.js <cmd>
    MCP:     mcp__agentic-kb__* tools
 
@@ -51,7 +51,7 @@ are available — use them BEFORE answering, and write back AFTER acting.
 
 Before ANY answer or action:
   0. Preflight:    if kb query/search/read/lint returns `fetch failed`, ensure the
-                   KB web/API is live on http://localhost:3002 or fall back to
+                   KB web/API is live on http://localhost:3009 or fall back to
                    direct wiki reads.
   1. Search KB:    mcp__agentic-kb__search_wiki  OR  kb search "<query>"
   2. If business/strategy: also search vault.
