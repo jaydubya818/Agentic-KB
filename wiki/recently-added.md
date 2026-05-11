@@ -91,3 +91,11 @@ type: meta
 - [[wiki/summaries/summary-karpathy-llm-wiki-gist|Summary: Karpathy LLM Wiki Gist]]
 - [[wiki/summaries/summary-karpathy-llm-wiki-video|Summary: Karpathy LLM Wiki Video]]
 - [[wiki/summaries/summary-nate-herk-llm-wiki|Summary: Nate Herk LLM Wiki]]
+
+## 2026-05-11 — Apple Notes 5-day batch ingest
+
+- [[summaries/garrytan-meta-meta-prompting|Meta-Meta-Prompting (Garry Tan)]] — manifesto for personal-AI-as-OS; drove today's context-graph PRs
+- [[summaries/cyrilxbt-obsidian-smart-vault|How to Build an Obsidian Knowledge Vault That Gets Smarter (CyrilXBT)]] — validates Jay's current Agentic-KB architecture; suggests "Stuck on:" CLAUDE.md field
+- [[summaries/cyrilxbt-claude-code-solo-founders|Claude Code for Solo Founders (CyrilXBT)]] — 13 reusable prompt templates; templates 1/4/8 apply to SellerFi + MissionControl
+- [[summaries/thariq-claude-code-html|The Unreasonable Effectiveness of HTML for Claude Code (Thariq)]] — HTML > markdown for inter-agent payloads; deferred (need 2nd source)
+- [[summaries/cyrilxbt-5-employees-agent|5 Employees for $20/month (CyrilXBT)]] — useful only for the role-decomposition exercise; economics overstated
