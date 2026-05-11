@@ -31,3 +31,8 @@ graphify-out/cache/
 # …and project-level slash commands (Foundry: /foundry-ingest, /foundry-compile, /foundry-ask, /foundry-lint)
 !.claude/commands/
 !.claude/commands/**
+
+# Personal context graph — real seed contains PII (therapy themes, relationships).
+# Only seed.example.json (placeholders) is committable.
+wiki/personal/context-graph/seed.json
+wiki/personal/context-graph/seed.*.local.json
