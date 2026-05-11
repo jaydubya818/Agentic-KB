@@ -1,6 +1,18 @@
 # Agentic Engineering Knowledge Base — Schema v1.0
 > Owner: Jay West | Domain: Agentic AI Systems & Harness Engineering | Built: 2026-04-04
 
+## Stuck on
+> Single thing where Jay needs the most thinking help right now. Agents read this at session start to bias suggestions toward unblocking the active hard problem. Update freely — empty is fine, vague is fine, but stale-and-wrong is worse than empty.
+
+_(unset — replace with the current biggest blocker)_
+
+## Next milestone
+> What "done" looks like for the current sprint. One sentence.
+
+_(unset)_
+
+---
+
 ## Cowork Session Start — Hermes Mode
 On every Cowork session start:
 1. Read `wiki/personal/hermes-operating-context.md` and `wiki/hot.md`.
