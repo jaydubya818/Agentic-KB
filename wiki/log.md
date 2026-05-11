@@ -502,3 +502,27 @@ Pages affected: `patterns/pattern-supervisor-worker.md`, `concepts/minimal-worke
 ## 2026-04-25 — Compiled `transcripts/obsidian-2026-04-21-2026-03-24.md`
 
 Pages affected: `entities/mission-control.md`, `entities/seller-fi.md`, `concepts/agent-resources-platform.md`
+
+## 2026-05-11 — Apple Notes 5-day batch ingest (via morning-review Phase C/E/E2 pipeline)
+
+Source: Apple Notes captures from 2026-05-06 through 2026-05-11, surfaced through morning-review with apple_notes URL extractor bug fix (Phase C), X.com syndication fetcher (Phase E), and fxtwitter full-article-body fetcher (Phase E2).
+
+Pages created (5 summaries, 5 raw articles):
+- wiki/summaries/garrytan-meta-meta-prompting.md
+- wiki/summaries/cyrilxbt-obsidian-smart-vault.md
+- wiki/summaries/cyrilxbt-claude-code-solo-founders.md
+- wiki/summaries/thariq-claude-code-html.md
+- wiki/summaries/cyrilxbt-5-employees-agent.md
+- raw/articles/garrytan-meta-meta-prompting.md
+- raw/articles/cyrilxbt-obsidian-smart-vault.md
+- raw/articles/cyrilxbt-claude-code-solo-founders.md
+- raw/articles/thariq-claude-code-html.md
+- raw/articles/cyrilxbt-5-employees-agent.md
+
+Contradictions flagged: none in this batch. Thariq's HTML-as-tool-output thesis contradicts the implicit markdown-everywhere convention in Agentic-KB, but the disagreement is in scope (Thariq is talking about inter-agent payloads, KB is talking about human-readable wiki), not the same claim.
+
+Candidates for future promotion (single source, deferred per Rule 14):
+- "Role decomposition" pattern (cyrilxbt-5-employees) — single source, deferred to wiki/candidates.md
+- "HTML as tool-output format" pattern (thariq-claude-code-html) — single source, deferred
+
+reviewed: false on all new pages — Jay flips when reviewed.
