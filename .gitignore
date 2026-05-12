@@ -36,3 +36,8 @@ graphify-out/cache/
 # Only seed.example.json (placeholders) is committable.
 wiki/personal/context-graph/seed.json
 wiki/personal/context-graph/seed.*.local.json
+
+# PIN-protected private layer — plaintext stays local; .enc blobs may commit
+wiki/_private/*
+!wiki/_private/.enc/
+!wiki/_private/.enc/**

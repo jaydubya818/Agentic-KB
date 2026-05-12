@@ -4,14 +4,32 @@
 ## Stuck on
 > Single thing where Jay needs the most thinking help right now. Agents read this at session start to bias suggestions toward unblocking the active hard problem. Update freely — empty is fine, vague is fine, but stale-and-wrong is worse than empty.
 >
-> **Privacy:** This field is on public GitHub. Anything sensitive (active interviews, comp negotiations, personal context) lives in the PIN-protected layer at `wiki/_private/stuck-on.md` (gitignored). Use `npm run pin:status` to see whether you have private content set.
+> **Privacy:** This field lives on public GitHub. Anything sensitive (active interviews, comp negotiations, personal context) lives in the PIN-protected private layer (see below). Run `npm run pin:status` to see local state.
 
-_(see `wiki/_private/stuck-on.md` locally; not committed)_
+_(see `wiki/_private/stuck-on.md` locally — plaintext gitignored, encrypted `.enc` may be committed)_
 
 ## Next milestone
 > What "done" looks like for the current sprint. One sentence. Same privacy rule as above.
 
-_(see `wiki/_private/next-milestone.md` locally; not committed)_
+_(see `wiki/_private/next-milestone.md` locally)_
+
+## PIN-protected private layer
+
+Sensitive content (active interviews, comp, family context, therapy themes, anything you would not put in a public repo) lives under `wiki/_private/` and is gated behind a PIN. Plaintext `.md` files there are gitignored; encrypted `.enc` blobs may be committed and synced across machines.
+
+Workflow:
+
+```
+npm run pin:init           # one-time setup; creates wiki/_private/ with sample stubs
+npm run pin:status         # show lock state, file counts, drift warnings
+npm run pin:lock           # encrypt *.md → .enc/*.enc, remove plaintext (prompts for PIN)
+npm run pin:unlock         # decrypt .enc/*.enc → *.md (prompts for PIN)
+npm run pin:read NAME      # decrypt one file to stdout, do not write plaintext
+```
+
+PIN is read from argv, `$AGENTIC_KB_PIN`, or interactive prompt. Crypto: AES-256-GCM with PBKDF2 (100k iterations, SHA-256) key derivation. PIN is never persisted. If you lose your PIN, the `.enc` files are unrecoverable.
+
+**Rule (mandatory):** any time an agent identifies that content includes Jay's name, employer interview activity, comp, family, therapy, or other clearly-personal context, the agent MUST write it to `wiki/_private/` (or update existing files there) rather than to any committable file under `wiki/`. The PIN-protected layer is the only safe write target for PII inside this repo.
 
 ---
 
