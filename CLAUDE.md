@@ -3,13 +3,15 @@
 
 ## Stuck on
 > Single thing where Jay needs the most thinking help right now. Agents read this at session start to bias suggestions toward unblocking the active hard problem. Update freely — empty is fine, vague is fine, but stale-and-wrong is worse than empty.
+>
+> **Privacy:** This field is on public GitHub. Anything sensitive (active interviews, comp negotiations, personal context) lives in the PIN-protected layer at `wiki/_private/stuck-on.md` (gitignored). Use `npm run pin:status` to see whether you have private content set.
 
-_(unset — replace with the current biggest blocker)_
+_(see `wiki/_private/stuck-on.md` locally; not committed)_
 
 ## Next milestone
-> What "done" looks like for the current sprint. One sentence.
+> What "done" looks like for the current sprint. One sentence. Same privacy rule as above.
 
-_(unset)_
+_(see `wiki/_private/next-milestone.md` locally; not committed)_
 
 ---
 
