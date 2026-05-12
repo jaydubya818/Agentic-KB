@@ -1,0 +1,133 @@
+#!/usr/bin/env bash
+# scripts/hooks/pre-commit — PII leak guard for Agentic-KB
+#
+# Blocks a commit if the staged diff contains likely-PII strings that should
+# only live in wiki/_private/ (the PIN-protected layer).
+#
+# Install once with:
+#   git config core.hooksPath scripts/hooks
+#
+# Skip a known-safe commit with:
+#   git commit --no-verify -m "..."
+# (use sparingly; this hook exists for a reason)
+#
+# Update the deny-list when you discover a new leak vector. Patterns are
+# case-insensitive grep-style. Each pattern is checked against ONLY the
+# staged diff (additions), not the full file — so the same string already
+# committed in history won't re-trigger.
+
+set -euo pipefail
+
+# Files we deliberately keep PII-friendly. The hook never scans these.
+WHITELIST_FILES=(
+  "wiki/_private/"           # PIN-protected layer
+  "logs/"                    # local-only logs (gitignored anyway)
+)
+
+# Patterns that indicate PII / sensitive personal context. Add over time.
+# Format: each line is a regex passed to `grep -Ei`.
+PII_PATTERNS=(
+  # Active interview cycles and hiring managers — the 2026-05-11 incident class
+  '\bmichelle\b'
+  'hiring manager interview'
+  'interview cycle'
+  'interview cheat ?sheet'
+  'interview prep'
+  'hiring manager round'
+
+  # Companies in the context of active interviews (not as topic / case study)
+  '(netflix|google|meta|amazon|apple|microsoft|openai|anthropic).{0,40}(interview|hiring|offer|recruit)'
+
+  # Compensation
+  '\b(comp|compensation|salary|stock options|equity)\b.{0,80}(negotiat|offer|range|\$[0-9])'
+  '\$[0-9]{3},?[0-9]{3}\b'        # $400,000 etc.
+  '\$[0-9]+[kK]\b'                 # $400k etc.
+
+  # Family / household
+  '\bspouse\b'
+  '\bwife\b'
+  '\bhusband\b'
+  '\bpartner\b.{0,30}(home|kid|family|raising)'
+  'my (kids|children|parents)\b'
+
+  # Therapy / mental health
+  '\btherap(y|ist)\b'
+  '\bemdr\b'
+
+  # Phone numbers (US)
+  '\b\(?[0-9]{3}\)?[-. ][0-9]{3}[-. ][0-9]{4}\b'
+
+  # Personal email patterns (Jay's primary)
+  'jaydubya818@gmail\.com'
+)
+
+# Collect added/modified files in this commit
+staged_files=$(git diff --cached --name-only --diff-filter=AM)
+
+if [ -z "$staged_files" ]; then
+  exit 0
+fi
+
+# Filter out whitelisted paths
+files_to_scan=()
+while IFS= read -r f; do
+  is_whitelisted=0
+  for w in "${WHITELIST_FILES[@]}"; do
+    if [[ "$f" == "$w"* ]]; then
+      is_whitelisted=1
+      break
+    fi
+  done
+  if [ "$is_whitelisted" -eq 0 ]; then
+    files_to_scan+=("$f")
+  fi
+done <<< "$staged_files"
+
+if [ ${#files_to_scan[@]} -eq 0 ]; then
+  exit 0
+fi
+
+# Grab the staged diff (additions only — lines starting with '+', not the '+++ ' file headers)
+staged_diff=$(git diff --cached -U0 -- "${files_to_scan[@]}" \
+  | grep -E '^\+' \
+  | grep -vE '^\+\+\+' \
+  || true)
+
+if [ -z "$staged_diff" ]; then
+  exit 0
+fi
+
+hits=()
+for pattern in "${PII_PATTERNS[@]}"; do
+  match=$(echo "$staged_diff" | grep -Ei "$pattern" || true)
+  if [ -n "$match" ]; then
+    hits+=("pattern: $pattern")
+    hits+=("$(echo "$match" | head -3 | sed 's/^/    /')")
+  fi
+done
+
+if [ ${#hits[@]} -gt 0 ]; then
+  echo "" >&2
+  echo "🛑 pre-commit: PII guard triggered" >&2
+  echo "" >&2
+  echo "The staged diff contains content matching the PII deny-list:" >&2
+  echo "" >&2
+  for line in "${hits[@]}"; do
+    echo "  $line" >&2
+  done
+  echo "" >&2
+  echo "What to do:" >&2
+  echo "  1. Move sensitive content to wiki/_private/ (gitignored)" >&2
+  echo "  2. Re-stage the cleaned files" >&2
+  echo "  3. Try the commit again" >&2
+  echo "" >&2
+  echo "If this is a false positive and the content is genuinely safe to commit:" >&2
+  echo "  git commit --no-verify -m \"...\"" >&2
+  echo "" >&2
+  echo "If a new false-positive pattern keeps tripping, edit scripts/hooks/pre-commit" >&2
+  echo "and tighten the regex." >&2
+  echo "" >&2
+  exit 1
+fi
+
+exit 0
