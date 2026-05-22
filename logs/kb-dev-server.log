@@ -1,0 +1,28 @@
+
+> agentic-kb-web@0.1.0 dev
+> next dev -p 3009
+
+⚠ You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env
+▲ Next.js 16.2.2 (Turbopack)
+- Local:         http://localhost:3009
+- Network:       http://10.0.0.157:3009
+- Environments: .env.local
+✓ Ready in 205ms
+
+ GET /api/pending-count 200 in 75ms (next.js: 66ms, application-code: 9ms)
+ POST /api/lint 200 in 42s (next.js: 38ms, application-code: 42s)
+ GET /api/pending-count 200 in 5ms (next.js: 1375µs, application-code: 4ms)
+ POST /api/query 200 in 6.2s (next.js: 177ms, application-code: 6.0s)
+ POST /api/query 200 in 39.3s (next.js: 3ms, application-code: 39.3s)
+ POST /api/query 200 in 48s (next.js: 5ms, application-code: 48s)
+ POST /api/query 200 in 32.8s (next.js: 3ms, application-code: 32.8s)
+ POST /api/query 200 in 22.1s (next.js: 4ms, application-code: 22.1s)
+ GET /api/pending-count 200 in 8ms (next.js: 3ms, application-code: 5ms)
+ POST /api/lint 200 in 39.2s (next.js: 3ms, application-code: 39.2s)
+ POST /api/query 200 in 45s (next.js: 6ms, application-code: 45s)
+ POST /api/query 200 in 43s (next.js: 2ms, application-code: 43s)
+ POST /api/query 200 in 30.9s (next.js: 4ms, application-code: 30.9s)
+ POST /api/query 200 in 20.4s (next.js: 5ms, application-code: 20.4s)
+ GET /api/pending-count 200 in 10ms (next.js: 5ms, application-code: 5ms)
+ POST /api/lint 200 in 39.4s (next.js: 3ms, application-code: 39.4s)
+ POST /api/compile 401 in 153ms (next.js: 149ms, application-code: 4ms)

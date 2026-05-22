@@ -4,6 +4,38 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-05-16 (9 new wiki pages — 3 syntheses + 6 graduating candidates)
+
+[2026-05-16] NEW FILE | wiki/syntheses/synthesis-eval-metrics-to-failure-modes.md — Bridges framework-deepeval and concepts/agent-failure-modes. Maps PlanQuality→task-decomposition, ToolCalling→tool-selection, ArgumentCorrectness→hallucinated-parameters. Identifies coverage gaps: safety violations, context-length failures not addressed by named DeepEval metrics.
+
+[2026-05-16] NEW FILE | wiki/syntheses/synthesis-rag-eval-to-llm-judge.md — Bridges concepts/rag-systems and concepts/llm-as-judge. Establishes deterministic/judge split: recall@k/MRR/nDCG are deterministic; citation faithfulness, grounded generation quality, hallucination detection require judge. Explains why citation verification cannot be string-matched.
+
+[2026-05-16] NEW FILE | wiki/syntheses/synthesis-episodic-judgment-log-to-trace-dataset.md — Bridges patterns/pattern-episodic-judgment-log and frameworks/framework-langsmith. Establishes architectural equivalence between JSONL judgment pattern and LangSmith trace-to-dataset. Documents build/buy decision with replay and diff-view as LangSmith differentiators.
+
+[2026-05-16] NEW FILE | wiki/recipes/recipe-agent-cicd.md — Full CI/CD pipeline for agent systems: lint→types→unit→integration→Docker→staging→eval-gate→production. Includes eval gate script, GitHub Actions YAML, prompt change review gate protocol, baseline metric snapshot pattern.
+
+[2026-05-16] NEW FILE | wiki/patterns/pattern-grounded-generation.md — Grounded generation pattern: chunk ID injection → constrained generation → post-generation citation verification via LLM judge. Includes 4-phase implementation sketch in Python.
+
+[2026-05-16] NEW FILE | wiki/concepts/hybrid-retrieval.md — BM25 + vector + optional graph retrieval fused via Reciprocal Rank Fusion. Covers RRF formula, k=60 tuning, variant enumeration (standard/full hybrid/re-ranking), failure modes.
+
+[2026-05-16] NEW FILE | wiki/recipes/recipe-production-deployment.md — Production agent deployment: FastAPI orchestrator + Redis async queue + PostgreSQL state + vector store + Prometheus/Grafana. Includes service topology diagram, Docker Compose, SLO targets, rollback procedure.
+
+[2026-05-16] NEW FILE | wiki/patterns/pattern-react.md — ReAct (Reasoning + Acting) orchestration pattern: Thought→Action→Observation loop. Includes Python implementation with loop control, comparison vs. pattern-plan-execute-verify, engineering challenges.
+
+[2026-05-16] NEW FILE | wiki/concepts/metadata-filtering.md — Metadata filtering in RAG retrieval layer. Covers security requirement (model-based filtering is unreliable), multi-tenant implementation, permission hierarchy, vector store filter expressions (Weaviate, Qdrant).
+
+Backlinks added:
+- wiki/concepts/rag-systems.md: added links to hybrid-retrieval, pattern-grounded-generation, metadata-filtering
+- wiki/frameworks/framework-deepeval.md: added link to synthesis-eval-metrics-to-failure-modes
+- wiki/frameworks/framework-langsmith.md: added link to synthesis-episodic-judgment-log-to-trace-dataset
+- wiki/patterns/pattern-episodic-judgment-log.md: added link to synthesis-episodic-judgment-log-to-trace-dataset
+
+Candidates graduated (removed from single-source list): react-pattern, rag (grounded-generation + hybrid-retrieval + metadata-filtering subthemes), recipes/recipe-agent-cicd, recipe-production-deployment
+
+Contradictions flagged: none.
+
+reviewed: false on all 9 new pages.
+
 ## 2026-04-12 (Hermes Agent Formalization)
 
 [2026-04-12] NEW FILE | ~/.claude/agents/hermes.md — Full Hermes orchestrator agent definition. Includes: session-start memory load protocol (reads wiki/hot.md + wiki/personal/hermes-operating-context.md on every start), complete SOUL (identity, mission, scope, responsibilities, delegation contract, decision rights, escalation triggers, priority framework, output contract, memory rules KB-wired, hard constraints), full Repo Awareness appendix (10 work lanes, routing heuristics, multi-lane task handling, repo clustering), Specialist Invocation Contract. Model: claude-sonnet-4-6.
@@ -526,3 +558,42 @@ Candidates for future promotion (single source, deferred per Rule 14):
 - "HTML as tool-output format" pattern (thariq-claude-code-html) — single source, deferred
 
 reviewed: false on all new pages — Jay flips when reviewed.
+
+## 2026-05-16 — agentmemory / LLM Wiki v2 provenance resolved (Contradiction 1 from 2026-04-12)
+
+The contradiction flagged in `wiki/log.md` on 2026-04-12 (Lint Pass — *"agentmemory primary source NOT FOUND (Twitter-only, no public repo)"*) is resolved. The repo exists; the earlier search targeted the wrong namespace.
+
+**Resolution:**
+- **Repo:** [`github.com/rohitg00/agentmemory`](https://github.com/rohitg00/agentmemory) — "Persistent memory for AI coding agents based on real-world benchmarks." Owner: Rohit Ghumare (`rohitg00`), not a GitHub org called `agentmemory`.
+- **"LLM Wiki v2" gist:** [`gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2`](https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2) — *"LLM Wiki v2 — extending Karpathy's LLM Wiki pattern with lessons from building agentmemory"*. This is the actual social-post artifact behind the 2026-04-12 ingest.
+
+**Why the original search failed:** the lint pass on 2026-04-12 searched `github.com/agentmemory` (assumed organization) and found only the unrelated `Huaman-Agent-Memory` survey. The correct namespace is `github.com/rohitg00/agentmemory`.
+
+**Implication for `wiki/summaries/summary-llm-wiki-v2.md`:** the `source_url` frontmatter is currently stale (`https://twitter.com/ (social post, exact URL unavailable)`). The gist URL above is the canonical primary source. Confidence on this summary can rise from `medium` once Jay verifies the gist content matches the claims in the summary. Not auto-updating per Rule 12 — Jay's call to flip `reviewed`.
+
+**Follow-up (deferred, not done in this session):**
+1. Ingest the gist as `raw/transcripts/llm-wiki-v2-gist-rohitg00.md` (or `raw/framework-docs/`, depending on classification).
+2. Optionally clone/skim `github.com/rohitg00/agentmemory` README into `raw/framework-docs/` as a second source — would unblock graduation of `pattern-typed-knowledge-graph` and `pattern-per-claim-confidence` (currently single-source, deferred per Rule 14).
+
+Source for resolution: WebSearch result during morning-review-daily 2026-05-16 follow-up. No wiki pages other than this log entry were modified.
+
+## 2026-05-16 — INGEST: LLM Wiki v2 gist (rohitg00) — primary source
+
+**Source:** [`gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2`](https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2) (1,158 stars / 167 forks, last active 2026-05-07). Fork of `karpathy/llm-wiki.md`.
+
+**Files written:**
+- `raw/framework-docs/llm-wiki-v2-gist-rohitg00.md` — raw gist content + comment thread highlights
+- `wiki/summaries/summary-llm-wiki-v2-gist-rohitg00.md` — synthesis with counter-arguments (`reviewed: false`, confidence `high`)
+
+**Supersession:** `summaries/summary-llm-wiki-v2.md` (ingested 2026-04-12 from the social post only, confidence `medium`) is superseded by this primary-source summary. Old summary preserved per Rule 4 — Jay flips it to `deprecated` / `reviewed: true` when desired.
+
+**Contradiction note:** the gist's pro-decay + pro-numeric-confidence stance conflicts with substantive critique from `Mattia83it` and `gnusupport` in the gist's own comment thread. Recorded in the new summary's `Counter-arguments & Gaps` section. Agentic-KB's existing Rule 12 / Rule 4 / Rule 14 align with the conservative critique, not the gist's blueprint. No silent wiki edit — counter-position is captured at ingest time, not on a later sweep.
+
+**Gap unblocks:**
+- `pattern-hybrid-search` and `concepts/reciprocal-rank-fusion` now have a second source (this gist + `siagian-agentic-engineer-roadmap-2026`) → eligible for graduation under Rule 14 on next `/foundry-compile` run.
+- `pattern-typed-knowledge-graph` and `pattern-per-claim-confidence` still single-sourced unless the agentmemory repo README is ingested as a third source (deferred).
+
+**Not done in this session (deferred):**
+- Ingest `github.com/rohitg00/agentmemory` README into `raw/framework-docs/` (would unblock per-claim confidence + typed graph graduation).
+- Run `/foundry-compile` to graduate hybrid-search candidate.
+- Update `wiki/index.md` and the MoCs to link the new summary — deferred until Jay reviews.

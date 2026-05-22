@@ -73,9 +73,36 @@ export function deriveTitle(text) {
   return firstLine.length > 80 ? firstLine.slice(0, 77) + '…' : firstLine
 }
 
+/** Normalize a timestamp string to ISO-UTC; pass through on parse failure
+ *  so the hash stays defined for unparseable inputs. */
+export function normalizeTs(ts) {
+  if (!ts) return ''
+  const d = new Date(ts)
+  return Number.isNaN(d.getTime()) ? String(ts) : d.toISOString()
+}
+
+/** Normalize body text for hashing: NFC, drop a leading `<type>:` prefix line
+ *  if it matches the declared --type, then trim. The leading-prefix strip
+ *  mirrors the type-hint detection that /foundry-capture-notes does upstream;
+ *  it makes the hash invariant to whether the caller stripped the prefix or
+ *  left it in the body. */
+export function normalizeTextForHash(text, { type } = {}) {
+  let t = (text ?? '').normalize('NFC')
+  if (type) {
+    const re = new RegExp(`^\\s*${type}\\s*:\\s*`, 'i')
+    const firstNl = t.indexOf('\n')
+    const firstLine = firstNl === -1 ? t : t.slice(0, firstNl)
+    if (re.test(firstLine)) {
+      const stripped = firstLine.replace(re, '')
+      t = firstNl === -1 ? stripped : stripped + t.slice(firstNl)
+    }
+  }
+  return t.trim()
+}
+
 /** Stable canonical hash over the fields that define identity. */
-export function canonicalHash({ source, author = '', ts = '', text }) {
-  const canon = `${source}\0${author}\0${ts}\0${text.trim()}`
+export function canonicalHash({ source, author = '', ts = '', text, type }) {
+  const canon = `${source}\0${author}\0${normalizeTs(ts)}\0${normalizeTextForHash(text, { type })}`
   return crypto.createHash('sha256').update(canon).digest('hex')
 }
 
@@ -99,10 +126,14 @@ export function buildFrontmatter({ source, author, ts, title, type, extraTags, h
 }
 
 export function buildBody(input) {
-  const ts = input.ts || new Date().toISOString()
+  // Normalize ts ONCE so filename and hash both derive from the same canonical
+  // value. Without this, a Z-suffixed `--ts` and a local-time `--ts` of the
+  // same instant produced different hashes AND different filenames — the
+  // dedup-by-filename-suffix check then missed real duplicates.
+  const ts = normalizeTs(input.ts || new Date().toISOString())
   const text = (input.text ?? '').trim()
   const title = input.title || deriveTitle(text)
-  const hash = canonicalHash({ source: input.source, author: input.author, ts, text })
+  const hash = canonicalHash({ source: input.source, author: input.author, ts, text, type: input.type })
   const slug = slugify(title)
   const fm = buildFrontmatter({
     source: input.source,

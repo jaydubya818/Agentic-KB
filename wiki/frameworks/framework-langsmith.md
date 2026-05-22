@@ -86,3 +86,6 @@ N/A — not yet piloted. Secondary option for the [[recipes/recipe-agent-evaluat
 ## Sources
 - [[summaries/langsmith-framework-docs]]
 - [[raw/framework-docs/langsmith]]
+
+## See Also
+- [[syntheses/synthesis-episodic-judgment-log-to-trace-dataset]] — LangSmith's trace-to-dataset workflow is architecturally equivalent to the portable JSONL Episodic Judgment Log pattern; analysis of the build/buy decision

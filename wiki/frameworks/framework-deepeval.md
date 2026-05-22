@@ -96,3 +96,4 @@ License: Open source (`confident-ai/deepeval`). Community support via Discord.
 - [LLM-as-Judge](../concepts/llm-as-judge.md) — the evaluation paradigm underpinning most DeepEval metrics
 - [Agent Observability](../concepts/agent-observability.md) — how tracing and `@observe` fit into broader observability
 - [Benchmark Design](../concepts/benchmark-design.md) — principles for designing evaluation datasets and goldens
+- [[syntheses/synthesis-eval-metrics-to-failure-modes]] — maps DeepEval's named agent metrics (PlanQuality, ToolCalling, ArgumentCorrectness) to the agent failure modes taxonomy

@@ -14,6 +14,8 @@ import {
   buildFilename,
   buildFrontmatter,
   buildBody,
+  normalizeTs,
+  normalizeTextForHash,
 } from '../scripts/lib/clipping-write.mjs'
 
 describe('slugify', () => {
@@ -64,6 +66,66 @@ describe('canonicalHash', () => {
     const a = canonicalHash({ source: 'slack', text: 'hi' })
     const b = canonicalHash({ source: 'slack', text: 'hi   \n  ' })
     assert.equal(a, b)
+  })
+  it('treats Z-suffixed and local-time ISO of the same instant as identical', () => {
+    // The dedup drift bug: '2026-05-16T08:40:32Z' and '2026-05-16T08:40:32.000Z'
+    // and 'Sat May 16 2026 08:40:32 GMT+0000' all represent the same instant.
+    const a = canonicalHash({ source: 'apple-notes', ts: '2026-05-16T08:40:32Z', text: 'body' })
+    const b = canonicalHash({ source: 'apple-notes', ts: '2026-05-16T08:40:32.000Z', text: 'body' })
+    assert.equal(a, b)
+  })
+  it('strips a leading <type>: prefix line when --type matches', () => {
+    // apple-notes sometimes passes 'paper: foo' as text, sometimes 'foo' with
+    // the prefix already stripped by the caller. Hash should be identical
+    // when --type=paper is declared in both cases.
+    const a = canonicalHash({ source: 'apple-notes', type: 'paper', text: 'paper: Morning-review test' })
+    const b = canonicalHash({ source: 'apple-notes', type: 'paper', text: 'Morning-review test' })
+    assert.equal(a, b)
+  })
+  it('does NOT strip a <type>: prefix when --type differs', () => {
+    // Safety: only strip when the caller declared the prefix is a type-hint.
+    const a = canonicalHash({ source: 'apple-notes', type: 'note', text: 'paper: Morning-review test' })
+    const b = canonicalHash({ source: 'apple-notes', type: 'note', text: 'Morning-review test' })
+    assert.notEqual(a, b)
+  })
+  it('is unicode-NFC invariant', () => {
+    // 'é' as composed (U+00E9) vs decomposed (U+0065 U+0301) should hash the same.
+    const a = canonicalHash({ source: 'slack', text: 'café' })
+    const b = canonicalHash({ source: 'slack', text: 'café' })
+    assert.equal(a, b)
+  })
+})
+
+describe('normalizeTs', () => {
+  it('collapses Z and ms variants to canonical ISO', () => {
+    assert.equal(normalizeTs('2026-05-16T08:40:32Z'), '2026-05-16T08:40:32.000Z')
+    assert.equal(normalizeTs('2026-05-16T08:40:32.000Z'), '2026-05-16T08:40:32.000Z')
+  })
+  it('passes through unparseable input', () => {
+    assert.equal(normalizeTs('not-a-date'), 'not-a-date')
+  })
+  it('returns empty string for empty input', () => {
+    assert.equal(normalizeTs(''), '')
+    assert.equal(normalizeTs(undefined), '')
+  })
+})
+
+describe('normalizeTextForHash', () => {
+  it('NFC-normalizes', () => {
+    assert.equal(normalizeTextForHash('café'), 'café')
+  })
+  it('strips leading "<type>: " when type matches', () => {
+    assert.equal(normalizeTextForHash('paper: foo bar', { type: 'paper' }), 'foo bar')
+    assert.equal(normalizeTextForHash('PAPER: foo bar', { type: 'paper' }), 'foo bar')  // case-insensitive
+  })
+  it('does not strip when type does not match', () => {
+    assert.equal(normalizeTextForHash('paper: foo bar', { type: 'note' }), 'paper: foo bar')
+  })
+  it('strips type-prefix only from the first line, preserving rest', () => {
+    assert.equal(
+      normalizeTextForHash('paper: first line\nsecond line', { type: 'paper' }),
+      'first line\nsecond line'
+    )
   })
 })
 

@@ -259,8 +259,32 @@ related:
 
 ---
 
+## Hermes Agent v0.14 Capabilities (2026-05-22)
+
+Jay's **local Hermes Agent** (`~/.hermes`, CLI `hermes`) was updated from v0.10 → v0.14. Use these surfaces deliberately; Cursor Hermes (`~/.claude/agents/hermes.md`) and MissionControl harness are separate layers.
+
+| Capability | How to use | Jay's status |
+|------------|------------|--------------|
+| Session memory search | Ask in `hermes chat`: "what did we work on April 15?" — uses `session_search` + auto session logging | Enabled |
+| Background tasks | `/background <prompt>` or `/bg` while continuing main chat | Available (CLI + gateway) |
+| xAI / Grok OAuth | `hermes model` → **xAI Grok OAuth** | **Logged in** ✓ — `x_search` + `video_gen` enabled |
+| X post/search | xAI OAuth + `xurl` skill | OAuth ✓ for search; `xurl` installed, posting auth via browser |
+| Codex CLI lane | OpenAI Codex auth ✓; `kanban-codex-lane` skill for workers; delegation uses Codex | Active |
+| AI video | CLI `video_gen` tool; Grok Imagine via xAI OAuth | **Enabled** ✓ |
+| Auto Kanban | Drop goals in **triage** on board: `hermes dashboard` → Kanban tab; `auto_decompose: true`; profiles: default→orchestrate, alan→research, mira→narrative, turing→build | DB initialized; gateway must run for dispatch |
+
+**Kanban routing defaults (config):** `orchestrator_profile: default`, `default_assignee: turing`, `dispatch_in_gateway: true`.
+
+**Kanban → MissionControl bridge:** `pnpm kanban:mission -- --task-id <id> --start` (see `docs/guides/hermes-agent-v0.14-capabilities.md`).
+
+**Operator commands:** `hermes gateway start` (required for kanban dispatch), `hermes dashboard`, `hermes doctor`, `hermes status`.
+
+---
+
 ## Open Blockers / Known Constraints (append-only)
 
+- [2026-05-22] xAI Grok OAuth configured ✓ — `x_search` + `video_gen` enabled on CLI.
+- [2026-05-22] xurl CLI installed; setup script at `scripts/xurl-setup.sh` uses redirect `http://localhost:8081/callback` (avoids LobsterBoard on 8080). Needs X Developer app credentials via `pnpm xurl:setup`.
 - [2026-04-12] RLM Stages 1–3 not yet implemented. Recipe at `wiki/recipes/recipe-hybrid-search-llm-wiki.md`. P1 priority.
 - [2026-04-12] `wiki/mocs/repos.md` not yet created. Repo canonical docs not 2-click reachable from home.md.
 - [2026-04-12] Priority 1 SellerFi objective undefined — Hermes cannot fully prioritize daily work.
@@ -274,3 +298,4 @@ related:
 - [2026-04-12] Wikiwise ingest: stream large docs to disk before loading into context. Pipe via `jq -r '.content' > file`.
 - [2026-04-12] Priority stack structure finalized. Weekly update ritual: replace stack rows, review blockers, update deprioritized list. Takes 3 minutes.
 - [2026-04-12] Research engine: build as KB module not separate system. Markdown-first, graph-aware. Add ontology-lite before graph DB.
+- [2026-05-22] Hermes Agent updated to v0.14; Kanban auto-decompose on; session_search + /background ready. xAI OAuth complete; MissionControl bridge smoke-tested (mis_26uu4hjn).

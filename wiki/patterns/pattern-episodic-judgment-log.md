@@ -166,3 +166,4 @@ The failures log is described as the most valuable: "It encodes pattern recognit
 - [[patterns/pattern-tiered-agent-memory]] — tier-scoped memory lifetime; judgment logs are personal-tier, long-lived
 - [[concepts/memory-systems]] — the four-type taxonomy; judgment logs extend the episodic memory type
 - [[concepts/context-management]] — primacy-recency attention curve affects how judgment log entries should be structured (lead with the lesson, reasoning in the middle)
+- [[syntheses/synthesis-episodic-judgment-log-to-trace-dataset]] — this pattern is architecturally equivalent to LangSmith's trace-to-dataset workflow; see the synthesis for build/buy analysis

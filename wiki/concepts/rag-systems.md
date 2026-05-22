@@ -283,6 +283,9 @@ What would change the verdict: a controlled study isolating retrieval quality fr
 - [[concepts/guardrails]] — Prompt injection defense for retrieved content
 - [[concepts/tool-use]] — RAG as a tool in an agentic pipeline
 - [[concepts/observability]] — Tracing retrieval quality in production
+- [[concepts/hybrid-retrieval]] — BM25 + vector + graph fusion via RRF; the recommended retrieval architecture for production RAG
+- [[concepts/metadata-filtering]] — Filter by tenant/permission at retrieval time; never post-retrieval or by model instruction
+- [[patterns/pattern-grounded-generation]] — Anchor claims to chunk IDs and verify each citation with an LLM judge
 
 ---
 

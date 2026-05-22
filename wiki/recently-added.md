@@ -99,3 +99,20 @@ type: meta
 - [[summaries/cyrilxbt-claude-code-solo-founders|Claude Code for Solo Founders (CyrilXBT)]] — 13 reusable prompt templates; templates 1/4/8 apply to SellerFi + MissionControl
 - [[summaries/thariq-claude-code-html|The Unreasonable Effectiveness of HTML for Claude Code (Thariq)]] — HTML > markdown for inter-agent payloads; deferred (need 2nd source)
 - [[summaries/cyrilxbt-5-employees-agent|5 Employees for $20/month (CyrilXBT)]] — useful only for the role-decomposition exercise; economics overstated
+
+## 2026-05-16 — 9 new wiki pages (3 syntheses + 6 graduating candidates)
+
+- [[syntheses/synthesis-eval-metrics-to-failure-modes|Synthesis: DeepEval Metrics → Failure Modes]] — maps PlanQuality/ToolCalling/ArgumentCorrectness to the agent failure taxonomy; creates a diagnostic feedback loop
+- [[syntheses/synthesis-rag-eval-to-llm-judge|Synthesis: RAG Eval → LLM-as-Judge decomposition]] — deterministic metrics for retrieval, judge required for generation; explains why citation verification can't be string-matched
+- [[syntheses/synthesis-episodic-judgment-log-to-trace-dataset|Synthesis: Episodic Judgment Log vs. LangSmith trace-to-dataset]] — architecturally equivalent patterns; build/buy decision with vendor lock-in tradeoff
+- [[recipes/recipe-agent-cicd|Recipe: Agent CI/CD Pipeline]] — lint → test → Docker → staging → eval gate → production; prompt changes go through the same review gate as code
+- [[patterns/pattern-grounded-generation|Pattern: Grounded Generation]] — anchor claims to chunk IDs at generation; verify each citation with LLM judge before returning
+- [[concepts/hybrid-retrieval|Concept: Hybrid Retrieval]] — BM25 + vector + optional graph fused via RRF; recovers documents neither approach gets alone
+- [[recipes/recipe-production-deployment|Recipe: Production Deployment]] — FastAPI + Redis queue + PostgreSQL + vector store + Prometheus/Grafana production topology
+- [[patterns/pattern-react|Pattern: ReAct (Reasoning + Acting)]] — Thought→Action→Observation loop; better for exploratory tasks than Plan-Execute-Verify
+- [[concepts/metadata-filtering|Concept: Metadata Filtering]] — filter by tenant/permission in the retrieval layer; never post-retrieval or by model instruction
+
+## 2026-05-16
+
+- [[summaries/summary-llm-wiki-v2-gist-rohitg00|LLM Wiki v2 — Rohitg00's gist (primary source)]] — resolves 2026-04-12 missing-source contradiction; supersedes `summary-llm-wiki-v2.md` (social-post-only); unblocks `pattern-hybrid-search` + `concepts/reciprocal-rank-fusion` graduation.
+- `raw/framework-docs/llm-wiki-v2-gist-rohitg00.md` — gist text + comment-thread counter-arguments captured at ingest.

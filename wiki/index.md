@@ -77,6 +77,8 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[concepts/trajectory-evaluation]] | concept | evaluation | — | Evaluating the full sequence of agent decisions |
 | [[concepts/reciprocal-rank-fusion]] | concept | memory, rag-systems, evaluation | high | Score-free algorithm for merging BM25 + vector + graph ranked lists via 1/(k+rank) |
 | [[concepts/knowledge-graphs]] | concept | knowledge-graph, memory, rag-systems, agentic | high | Entities + typed directed edges + triples + ontology + inference; multi-hop reasoning that relational DBs and vector search can't perform |
+| [[concepts/hybrid-retrieval]] | concept | memory, rag-systems, context-management, agentic | high | BM25 + vector + optional graph fused via RRF; recovers documents neither approach gets alone |
+| [[concepts/metadata-filtering]] | concept | rag-systems, memory, safety, multi-agent | high | Filter by tenant/permission in the retrieval layer before documents reach the model; filtering post-retrieval or by model instruction is a security failure |
 
 ---
 
@@ -92,6 +94,8 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[patterns/pattern-mistake-log]] | memory | Agents repeat the same errors across sessions because corrections live only in the current conversation | medium |
 | [[patterns/pattern-per-claim-confidence]] | memory | Page-level confidence is too coarse — a page can mix high-confidence decisions with low-confidence speculation, all weighted equally | medium |
 | [[patterns/pattern-typed-knowledge-graph]] | memory | Wiki link graphs track connection existence but not semantics — can't distinguish "A caused B" from "A implements B" | medium |
+| [[patterns/pattern-grounded-generation]] | evaluation | LLM outputs that cite retrieved content often hallucinate citations or make claims not supported by source chunks | high |
+| [[patterns/pattern-react]] | orchestration | Agents that reason only from parametric memory hallucinate and cannot update beliefs from new information mid-task | high |
 
 ---
 
@@ -149,6 +153,8 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[recipes/recipe-kb-lifecycle-hooks]] | intermediate | 2-3h | Automate ingest, session-end compression, and scheduled decay/lint hooks |
 | [[recipes/recipe-hybrid-search-llm-wiki]] | advanced | 4-6h | BM25 + vector + typed graph + RRF hybrid search (RLM Stages 1–3 implementation) |
 | [[recipes/recipe-local-research-engine]] | intermediate | 1-2h setup | 6-lens research skill graph ([[framework-claude-code]] + Obsidian): 60% research cost reduction, compound knowledge base |
+| [[recipes/recipe-agent-cicd]] | advanced | 4-8h | CI/CD pipeline for agent systems: prompt changes gated like code changes, metric regression blocks merge |
+| [[recipes/recipe-production-deployment]] | advanced | 8-16h | FastAPI + Redis queue + PostgreSQL + vector store + Prometheus/Grafana production agent deployment topology |
 
 ---
 
@@ -236,12 +242,15 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Syntheses (5)
+## Syntheses (8)
 
 | Page | Question | Created |
 |------|----------|---------|
 | [[syntheses/lint-2026-04-06]] | What structural issues, gaps, and maintenance needs exist in the wiki as of 2026-04-06? | 2026-04-06 |
 | [[syntheses/lint-2026-04-12]] | What structural issues, gaps, and maintenance needs exist in the wiki as of 2026-04-12? | 2026-04-12 |
+| [[syntheses/synthesis-eval-metrics-to-failure-modes]] | Do modern agent eval framework metrics directly operationalize the agent failure modes taxonomy? | 2026-05-16 |
+| [[syntheses/synthesis-rag-eval-to-llm-judge]] | Which RAG evaluation metrics decompose naturally into LLM-as-Judge tasks vs. deterministic scorers? | 2026-05-16 |
+| [[syntheses/synthesis-episodic-judgment-log-to-trace-dataset]] | Is the Episodic Judgment Log pattern the vendor-agnostic equivalent of LangSmith's trace-to-dataset workflow? | 2026-05-16 |
 
 ---
 

@@ -16,29 +16,8 @@
               "icon": "claude-logo",
               "title": "Claude Terminal"
             }
-          },
-          {
-            "id": "f84bc7fa0b5a23ae",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
-            "id": "2c1bacc0ccfb7c12",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -213,8 +192,16 @@
       "claude-code-mcp:Toggle Claude Terminal": false
     }
   },
-  "active": "c4c4738c9d0b6597",
+  "active": "fbb7b28ed968d69c",
   "lastOpenFiles": [
+    "raw/clippings/2026-05-16T15-40-32__apple-notes__test-capture-2026-05-16__71249b22.md",
+    "raw/clippings/2026-05-16T08-40-32__apple-notes__test-capture-2026-05-16__89fd0950.md",
+    "raw/articles/2026-05-16T15-40-32__apple-notes__test-capture-2026-05-16__697339fa.md",
+    "raw/articles/2026-05-16T08-40-32__apple-notes__test-capture-2026-05-16__2009bf0b.md",
+    "raw/clippings/2026-05-16T15-40-32__apple-notes__test-capture-2026-05-16__697339fa.md",
+    "raw/clippings/2026-05-16T08-40-32__apple-notes__test-capture-2026-05-16__2009bf0b.md",
+    "Untitled.md",
+    "Untitled",
     "docs/morning-review/2026-05-10-capture-netflix-talent-tech-cultural-intelligence-.md",
     "docs/morning-review/2026-05-10-consolidate-netflix-talent-tech-em-interview-prep-.md",
     "docs/morning-review/2026-05-09-prompt-engineering-recommendations.md",
@@ -237,20 +224,12 @@
     "wiki/concepts/frontend-testing.md",
     "wiki/concepts/frontend-code-review-skill.md",
     "wiki/concepts/bdi-architecture.md",
-    "wiki/concepts/agentic-engineering-stack.md",
-    "wiki/concepts/agent-memory-runtime.md",
-    "wiki/concepts/agent-evaluation.md",
-    "wiki/agents/workers/security-reviewer/profile.md",
     "wiki/agents/workers/security-reviewer",
-    "wiki/agents/workers/perf-analyzer/profile.md",
     "wiki/agents/workers/perf-analyzer",
-    "wiki/agents/workers/gsd-verifier/profile.md",
     "wiki/agents/workers/gsd-verifier",
-    "wiki/agents/workers/gsd-user-profiler/profile.md",
     "wiki/agents/workers/gsd-user-profiler",
     "wiki/agents/workers/gsd-ui-researcher",
     "wiki/agents/workers/gsd-ui-auditor",
-    "wiki/agents/workers/gsd-roadmapper",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Untitled 2.canvas",
