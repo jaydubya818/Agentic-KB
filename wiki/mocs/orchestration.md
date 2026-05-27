@@ -42,6 +42,7 @@ updated: 2026-04-10
 - [[frameworks/framework-bmad]] — [[framework-bmad]]: Jay's document-driven multi-agent planning framework
 - [[frameworks/framework-rowboat]] — [[framework-rowboat]]: TypeScript, Qdrant-backed, [[mcp-ecosystem]]-native orchestration
 - [[frameworks/framework-mcp]] — [[mcp-ecosystem]]: protocol layer for tool exposure across orchestrators
+- [[concepts/gstack]] — Jay's GSD agent stack: workers, leads, orchestrators
 
 ---
 
