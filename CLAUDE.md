@@ -45,6 +45,29 @@ On every Cowork session start:
 
 ---
 
+## Apply-by-default directive (2026-05-23)
+When the morning-review scheduled task (or any session) surfaces KB intelligence — proposed syntheses, candidate graduations, provenance gaps, active proposals — the default behavior is to **apply, not just file**. Sequence:
+
+1. Run `node scripts/compile-2source-gate.mjs --execute` to graduate candidates that pass the 2-source gate.
+2. Run `node scripts/foundry-propose.mjs --execute --top 3` to persist proposals to the ledger.
+3. Edit pages flagged for provenance gaps to add `[UNVERIFIED]` markers and downgrade `confidence` to `medium` (never touch `reviewed:`).
+4. Draft proposed syntheses as `wiki/syntheses/synthesis-<slug>.md` with full schema, born `reviewed: false`.
+5. Update `wiki/index.md`, `wiki/log.md`, `wiki/recently-added.md` per Rule 2.
+
+Hard guards: never delete pages, never flip `reviewed: true`, never push to git, never touch the personal vault outside the daily note (Rule 13). If applying would require dropping an opposing claim from an existing page, STOP and surface it — that's a contradiction needing human resolution.
+
+---
+
+## Daily-note directive (2026-05-23)
+
+On every scheduled run and every Cowork session start, **read the current daily note** at `wiki/daily-systems/logs/{today}.md` (fall back to vault-root `{today}.md`, then the most recent prior daily note). Scan the **KB Updates**, **Open Threads**, and **Decisions Log** sections, and **apply actionable items to the setup/repos** — do not just file or summarize. If today's note doesn't exist yet, create it from the template in `wiki/daily-systems/daily-notes.md`.
+
+**Be proactive, don't ask.** Jay's standing preference: when a next step is obvious (create the folder, seed the note, apply the directive), do it. Ask only when the choice is irreversible or genuinely ambiguous. Surface what you did in the run summary so it's auditable.
+
+Each scheduled run should append its own block to today's daily note under `## Automated Notes` (`### <task-name> @ <date>`) so the log compounds across the day.
+
+---
+
 ## Purpose
 A persistent, compounding knowledge base for agentic AI engineering. Covers multi-agent architecture, orchestration patterns, frameworks, prompt engineering, safety, evaluation, production deployment, and Jay's personal validated patterns. The KB itself uses agentic patterns — parallel agents for seeding, fan-out for ingestion, reflection for linting.
 
