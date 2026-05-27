@@ -133,3 +133,4 @@ Packages: CLI (`packages/cli`), [[mcp-ecosystem]] server (`packages/mcp`), core 
 - [[recipes/recipe-claude-code-hooks]] — Hook implementation
 - [[recipes/recipe-kb-lifecycle-hooks]] — KB-specific hook patterns
 - [[concepts/prd-to-json-conversion]] — PRD → JSON pipeline for autonomous agents
+- [[daily-systems/3-session-automation-wiring]] — 3-session daily automation wiring guide
