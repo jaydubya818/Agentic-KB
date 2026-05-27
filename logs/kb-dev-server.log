@@ -26,3 +26,87 @@
  GET /api/pending-count 200 in 10ms (next.js: 5ms, application-code: 5ms)
  POST /api/lint 200 in 39.4s (next.js: 3ms, application-code: 39.4s)
  POST /api/compile 401 in 153ms (next.js: 149ms, application-code: 4ms)
+ GET /api/pending-count 200 in 53ms (next.js: 18ms, application-code: 34ms)
+ POST /api/lint 200 in 39.0s (next.js: 4ms, application-code: 39.0s)
+ POST /api/query 200 in 40.0s (next.js: 7ms, application-code: 40.0s)
+ POST /api/query 200 in 45s (next.js: 2ms, application-code: 45s)
+ POST /api/query 200 in 39.1s (next.js: 1314µs, application-code: 39.1s)
+ POST /api/query 200 in 19.7s (next.js: 1989µs, application-code: 19.7s)
+ POST /api/compile 401 in 9ms (next.js: 4ms, application-code: 5ms)
+ POST /api/compile 401 in 6ms (next.js: 2ms, application-code: 4ms)
+ POST /api/compile 401 in 7ms (next.js: 4ms, application-code: 3ms)
+ POST /api/query 200 in 38.9s (next.js: 10ms, application-code: 38.9s)
+ GET /api/pending-count 200 in 8ms (next.js: 3ms, application-code: 6ms)
+ POST /api/lint 200 in 43s (next.js: 2ms, application-code: 43s)
+ POST /api/query 200 in 42s (next.js: 5ms, application-code: 42s)
+ POST /api/query 200 in 43s (next.js: 1280µs, application-code: 43s)
+ POST /api/query 200 in 17.9s (next.js: 1717µs, application-code: 17.9s)
+ POST /api/compile 401 in 8ms (next.js: 4ms, application-code: 4ms)
+ POST /api/compile 401 in 5ms (next.js: 1752µs, application-code: 3ms)
+ POST /api/compile 401 in 5ms (next.js: 1665µs, application-code: 3ms)
+ POST /api/compile 401 in 5ms (next.js: 1704µs, application-code: 3ms)
+ POST /api/compile 401 in 5ms (next.js: 1518µs, application-code: 4ms)
+ POST /api/compile 401 in 4ms (next.js: 1291µs, application-code: 3ms)
+ GET /api/health 404 in 1273ms (next.js: 1152ms, application-code: 121ms)
+ POST /api/compile 401 in 7ms (next.js: 3ms, application-code: 4ms)
+ POST /api/query 200 in 41s (next.js: 5ms, application-code: 41s)
+ POST /api/query 200 in 44s (next.js: 3ms, application-code: 44s)
+ POST /api/query 200 in 34.3s (next.js: 3ms, application-code: 34.3s)
+ POST /api/query 200 in 17.3s (next.js: 2ms, application-code: 17.3s)
+ POST /api/compile 401 in 7ms (next.js: 3ms, application-code: 4ms)
+ GET /api/pending-count 200 in 9ms (next.js: 4ms, application-code: 5ms)
+ POST /api/lint 200 in 37.5s (next.js: 3ms, application-code: 37.5s)
+ POST /api/lint 200 in 43s (next.js: 1764µs, application-code: 43s)
+ POST /api/lint 200 in 36.0s (next.js: 5ms, application-code: 36.0s)
+ POST /api/lint 200 in 38.0s (next.js: 3ms, application-code: 38.0s)
+ POST /api/lint 200 in 36.9s (next.js: 1505µs, application-code: 36.9s)
+ POST /api/lint 200 in 37.8s (next.js: 1640µs, application-code: 37.8s)
+ POST /api/lint 200 in 42s (next.js: 1301µs, application-code: 42s)
+ POST /api/lint 200 in 39.9s (next.js: 1922µs, application-code: 39.9s)
+ GET /api/pending-count 200 in 13ms (next.js: 5ms, application-code: 8ms)
+ POST /api/lint 200 in 41s (next.js: 4ms, application-code: 41s)
+ POST /api/lint 200 in 7.0min (next.js: 3ms, application-code: 7.0min)
+ POST /api/lint 200 in 6.4min (next.js: 1568µs, application-code: 6.4min)
+ POST /api/query 200 in 40s (next.js: 5ms, application-code: 40s)
+WikiQuery error: Error: read ECONNRESET
+    at ignore-listed frames {
+  [cause]: Error: read ECONNRESET
+      at ignore-listed frames {
+    errno: -54,
+    code: 'ECONNRESET',
+    syscall: 'read'
+  }
+}
+ POST /api/query 200 in 15.9min (next.js: 1949µs, application-code: 15.9min)
+WikiQuery error: Error: Socket timeout
+    at ignore-listed frames {
+  [cause]: Error: Socket timeout
+      at ignore-listed frames {
+    code: 'ERR_SOCKET_TIMEOUT',
+    timeout: 601000
+  }
+}
+ POST /api/query 200 in 26.2min (next.js: 2ms, application-code: 26.2min)
+WikiQuery error: Error: read ECONNRESET
+    at ignore-listed frames {
+  [cause]: Error: read ECONNRESET
+      at ignore-listed frames {
+    errno: -54,
+    code: 'ECONNRESET',
+    syscall: 'read'
+  }
+}
+ POST /api/query 200 in 17.9min (next.js: 1871µs, application-code: 17.9min)
+WikiQuery error: Error: Socket timeout
+    at ignore-listed frames {
+  [cause]: Error: Socket timeout
+      at ignore-listed frames {
+    code: 'ERR_SOCKET_TIMEOUT',
+    timeout: 601000
+  }
+}
+ POST /api/query 200 in 17.8min (next.js: 1976µs, application-code: 17.8min)
+ POST /api/query 200 in 43s (next.js: 4ms, application-code: 43s)
+ POST /api/lint 200 in 54s (next.js: 4ms, application-code: 54s)
+ POST /api/lint 200 in 38.8s (next.js: 2ms, application-code: 38.8s)
+ POST /api/lint 200 in 40s (next.js: 2ms, application-code: 40s)
