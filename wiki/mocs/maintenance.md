@@ -127,3 +127,4 @@ The KB is also optimized as a context source for Claude. Key principles (detaile
 - [[mocs/visualization|Visualization]] — Graph view as health signal
 - [[log]] — Append-only audit trail
 - [[syntheses/lint-2026-04-12]] — Most recent lint report
+- [[concepts/pin-lock-system]] — PIN-protected private layer for sensitive content
