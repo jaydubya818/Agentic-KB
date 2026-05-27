@@ -28,6 +28,7 @@ updated: 2026-04-10
 - [[patterns/pattern-two-step-ingest]] — Split orchestration into analysis + generation calls; 60/20/5/15 budget formula
 - [[patterns/pattern-episodic-judgment-log]] — Storing human judgment as first-class orchestration context
 - [[patterns/pattern-compounding-loop]] — raw → wiki → query → save loop with compounding knowledge gain
+- [[patterns/pattern-goal-backward-planning]] — Plan backward from verifiable goal state
 
 ---
 
