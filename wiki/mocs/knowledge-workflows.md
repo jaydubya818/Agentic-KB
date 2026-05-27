@@ -131,3 +131,4 @@ QUERY workflow: for questions against existing KB content, run [[CLAUDE.md#QUERY
 - [[knowledge-systems/research-engine/command-center|Research Engine]]
 - [[concepts/knowledge-compilation]] — Compiling raw notes into wiki pages
 - [[concepts/query-pipeline]] — Wiki retrieval pipeline architecture
+- [[concepts/daily-note-template]] — Daily capture template (Obsidian)
