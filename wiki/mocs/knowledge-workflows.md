@@ -132,3 +132,4 @@ QUERY workflow: for questions against existing KB content, run [[CLAUDE.md#QUERY
 - [[concepts/knowledge-compilation]] — Compiling raw notes into wiki pages
 - [[concepts/query-pipeline]] — Wiki retrieval pipeline architecture
 - [[concepts/daily-note-template]] — Daily capture template (Obsidian)
+- [[patterns/pattern-anchored-iterative-summarization]] — Iterative summarization anchored on a stable thesis
