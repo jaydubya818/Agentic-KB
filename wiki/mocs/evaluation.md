@@ -28,6 +28,7 @@ updated: 2026-04-10
 
 - [[evaluations/eval-memory-approaches]] — In-context vs file-wiki vs vector DB vs knowledge graph; file-wiki wins for Jay's use case
 - [[evaluations/eval-orchestration-frameworks]] — GSD vs [[framework-langgraph]] vs [[framework-autogen]] vs [[framework-crewai]] vs raw [[framework-claude-code]]; GSD first, raw [[framework-claude-code]] second
+- [[evaluations/eval-nous-research-hermes]] — Nous Research Hermes vs Jay's Hermes orchestrator
 
 ---
 
