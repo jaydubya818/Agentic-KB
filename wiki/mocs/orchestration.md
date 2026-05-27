@@ -30,6 +30,7 @@ updated: 2026-04-10
 - [[patterns/pattern-compounding-loop]] — raw → wiki → query → save loop with compounding knowledge gain
 - [[patterns/pattern-goal-backward-planning]] — Plan backward from verifiable goal state
 - [[patterns/pattern-hosted-agent-infrastructure]] — Hosted agent infra: long-running runtime, queues, observability
+- [[patterns/pattern-staged-llm-pipeline]] — Multi-stage LLM pipeline with explicit handoffs
 
 ---
 
