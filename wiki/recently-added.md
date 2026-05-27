@@ -9,6 +9,12 @@ type: meta
 
 ---
 
+## 2026-05-27 (morning-review-daily apply pass)
+
+- [[wiki/syntheses/synthesis-rrf-as-rlm-fusion-stage|Reciprocal Rank Fusion as the RLM Pipeline's Score-Merging Stage]] — Bridges concepts/rlm-pipeline and concepts/reciprocal-rank-fusion; argues RRF is the score-free fusion primitive the pipeline's stages 4–9 require, with `k=60` as the canonical default; notes inherited [UNVERIFIED PROVENANCE] from the RRF page
+- [[wiki/concepts/rlm-pipeline|RLM Pipeline]] — UPDATED: added bidirectional link to synthesis-rrf-as-rlm-fusion-stage in `related` frontmatter
+- [[wiki/concepts/reciprocal-rank-fusion|Reciprocal Rank Fusion]] — UPDATED: added bidirectional link to synthesis-rrf-as-rlm-fusion-stage in `related` frontmatter
+
 ## 2026-05-23 (morning-review-daily apply pass)
 
 - [[wiki/syntheses/synthesis-react-as-native-trajectory-eval|ReAct as Native Trajectory-Eval Substrate]] — Argues ReAct's loop *is* the eval trace, making trajectory metrics nearly free; recommends ReAct-first when eval-driven iteration is in the loop

@@ -4,6 +4,22 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-05-27 (morning-review-daily apply pass — 1 synthesis drafted, compile-write blocked, 1 proposal logged)
+
+[2026-05-27] NEW FILE | wiki/syntheses/synthesis-rrf-as-rlm-fusion-stage.md — Bridges concepts/rlm-pipeline and concepts/reciprocal-rank-fusion. Argues Reciprocal Rank Fusion is the score-free fusion algorithm the RLM Pipeline's stages 4–9 implicitly require for merging BM25 + vector + graph retrievers, with `k=60` as the canonical Cormack 2009 default. Counter-arguments cover learned-to-rank alternatives, score normalization, and inherited [UNVERIFIED PROVENANCE] from the RRF page. Born `reviewed: false`. Bidirectional links added to both source concept pages.
+
+[2026-05-27] SKIPPED-AS-DUPLICATE | Connection 3 (Episodic Judgment Log ↔ Per-Claim Confidence) from today's KB intelligence query was surfaced as "not yet written" but `synthesis-judgment-events-as-confidence-labels.md` (created 2026-05-25) already covers this bridge. No new synthesis drafted.
+
+[2026-05-27] SKIPPED-NEAR-DUPLICATE | Connection 2 (recipe-agent-cicd ↔ trajectory-evaluation) is close in scope to existing `synthesis-deepeval-metrics-as-trajectory-vocabulary.md` (2026-05-25), which already names DeepEval metrics as the CI/CD eval gate vocabulary. The recipe→concept bridge is a meaningful refinement but was not drafted to avoid near-duplicate work; surfaced in morning report for Jay's review.
+
+[2026-05-27] OPERATION | scripts/compile-2source-gate.mjs --execute ran. Plan: 29 PROMOTE / 108 DEFER / 0 GRADUATE — identical to 2026-05-23/24/25 runs (same 29 promotions perma-pending). Compile-log written (`wiki/_meta/compile-log.md`), but the `kb compile` write phase errored with `Error: undefined` — page creation for the 29 promotions remains BLOCKED. Same blockage pattern as 2026-05-23 (then attributed to PIN); root cause likely separate. Needs investigation.
+
+[2026-05-27] OPERATION | scripts/foundry-propose.mjs --execute --top 3 ran. Wrote 1 new proposal: PROP-112 [HEAVY_BACKLOG] (defer count 108 exceeds threshold 50). Other 108 detectors fired but already proposed. Total proposals now 112.
+
+[2026-05-27] CAPTURE | sofie-watch-obsidian ran clean (0 new). Apple Notes `KB Inbox` had 1 note (`test-capture-2026-05-16`) — confirmed as duplicate via clipping-write dedup. Snipd folder empty. No /foundry-ingest triggered.
+
+[2026-05-27] CONTRADICTIONS | None new. agentmemory provenance gap (from 2026-04-12 lint) remains unresolved; both downstream pages (`reciprocal-rank-fusion`, `pattern-per-claim-confidence`) still carry [UNVERIFIED PROVENANCE] markers from 2026-05-23.
+
 ## 2026-05-23 (morning-review-daily apply pass — 3 syntheses + 2 provenance markers; compile blocked on PIN)
 
 [2026-05-23] NEW FILE | wiki/syntheses/synthesis-react-as-native-trajectory-eval.md — Bridges patterns/pattern-react and concepts/trajectory-evaluation. Argues ReAct's Thought→Action→Observation loop is the only agentic pattern where the production loop and the eval trace are the same data structure, making trajectory-evaluation metrics nearly free to collect. Counter-arguments cover context-compression tax and PEV planning-depth tradeoff. Born `reviewed: false`.

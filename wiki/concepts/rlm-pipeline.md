@@ -6,7 +6,7 @@ confidence: high
 sources: ["[[summaries/agentic-kb-rlm-pipeline]]", "[[summaries/agentic-kb-readme]]"]
 created: 2026-04-10
 updated: 2026-04-12
-related: ["[[concepts/ingest-pipeline]]", "[[concepts/context-management]]", "[[concepts/observability]]", "[[patterns/pattern-hot-cache]]"]
+related: ["[[concepts/ingest-pipeline]]", "[[concepts/context-management]]", "[[concepts/observability]]", "[[patterns/pattern-hot-cache]]", "[[syntheses/synthesis-rrf-as-rlm-fusion-stage]]"]
 status: evolving
 claims:
   - text: "Stages 4–9 are live in Agentic-KB as of April 2026"

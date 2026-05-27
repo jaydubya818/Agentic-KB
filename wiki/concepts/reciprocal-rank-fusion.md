@@ -12,6 +12,7 @@ related:
   - [[concepts/rlm-pipeline]]
   - [[concepts/rag-systems]]
   - [[patterns/pattern-typed-knowledge-graph]]
+  - [[syntheses/synthesis-rrf-as-rlm-fusion-stage]]
 status: stable
 ---
 
