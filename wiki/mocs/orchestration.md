@@ -19,6 +19,7 @@ updated: 2026-04-10
 - [[concepts/human-in-the-loop]] — When and how humans intervene; approval gates, ambiguity resolution
 - [[concepts/context-management]] — Managing finite context across orchestration steps; tiered loading, budget allocation
 - [[concepts/agent-failure-modes]] — Common orchestration failure modes: Telephone Game, runaway loops, context collapse
+- [[concepts/bdi-architecture]] — Belief–Desire–Intention agent model
 
 ---
 
