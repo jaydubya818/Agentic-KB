@@ -136,3 +136,4 @@ See [[mocs/visualization]] for full graph optimization guide and [[syntheses/lin
 - [[mocs/claude-integration|Claude Integration]] — Terminal → [[framework-claude-code]] connection
 - [[mocs/daily-systems|Daily Systems]] — Periodic Notes configuration
 - [[mocs/automation|Automation]] — Templater + QuickAdd automation patterns
+- [[concepts/prd-creation-skill]] — Claude skill for generating PRDs
