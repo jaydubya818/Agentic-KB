@@ -29,6 +29,7 @@ updated: 2026-04-10
 - [[patterns/pattern-episodic-judgment-log]] — Storing human judgment as first-class orchestration context
 - [[patterns/pattern-compounding-loop]] — raw → wiki → query → save loop with compounding knowledge gain
 - [[patterns/pattern-goal-backward-planning]] — Plan backward from verifiable goal state
+- [[patterns/pattern-hosted-agent-infrastructure]] — Hosted agent infra: long-running runtime, queues, observability
 
 ---
 
