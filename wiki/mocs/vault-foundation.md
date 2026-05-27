@@ -114,3 +114,4 @@ Raw source files (PDFs, audio transcripts) land in `raw/` subdirectories:
 - [[mocs/claude-integration|Claude Integration MoC]]
 - [[home]] — Visual front door
 - [[index]] — Master catalog
+- [[concepts/agent-vault]] — Vault-as-agent-memory architecture
