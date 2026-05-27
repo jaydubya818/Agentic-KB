@@ -67,3 +67,4 @@ updated: 2026-04-10
 - [[concepts/sandboxed-execution]] — Running tool calls in sandboxed environments
 - [[concepts/observability]] — Tracing and logging tool call sequences
 - [[concepts/tool-design]] — Designing tools agents can use reliably
+- [[syntheses/synthesis-access-boundary-codesign]] — Retrieval and tool-access boundaries must be co-designed
