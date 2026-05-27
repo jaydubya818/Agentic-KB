@@ -19,6 +19,7 @@ updated: 2026-04-10
 - [[concepts/benchmark-design]] — Designing benchmarks for agentic tasks; task suites, success criteria, repeatability
 - [[concepts/agent-failure-modes]] — Failure taxonomy; useful as eval criteria scaffold
 - [[concepts/rag-systems]] — RAG eval metrics: recall@k, precision@k, MRR, nDCG, factuality, citation correctness
+- [[concepts/integration-verification]] — Verifying integrations end-to-end as eval criteria
 
 ---
 
