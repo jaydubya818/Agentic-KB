@@ -9,6 +9,14 @@ type: meta
 
 ---
 
+## 2026-05-23 (morning-review-daily apply pass)
+
+- [[wiki/syntheses/synthesis-react-as-native-trajectory-eval|ReAct as Native Trajectory-Eval Substrate]] — Argues ReAct's loop *is* the eval trace, making trajectory metrics nearly free; recommends ReAct-first when eval-driven iteration is in the loop
+- [[wiki/syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary|Retrieval Filtering and Tool Permissions as a Co-Enforced Access Boundary]] — Argues metadata filtering and permission modes are one boundary, not two; flags that recipe-production-deployment lacks cross-reference to either
+- [[wiki/syntheses/synthesis-episodic-judgment-as-freshness-signal|Episodic Judgment Events as the Highest-Authority Freshness Signal]] — Proposes routing contradiction+correction events from episodic log to freshness engine; minimal-risk scope to avoid rubber-stamp inflation
+- [[wiki/concepts/reciprocal-rank-fusion|Reciprocal Rank Fusion]] — UPDATED: added [UNVERIFIED PROVENANCE] block; confidence high→medium pending verifiable primary source
+- [[wiki/patterns/pattern-per-claim-confidence|Per-Claim Confidence]] — UPDATED: added [UNVERIFIED PROVENANCE] block flagging single-source provenance gap
+
 ## 2026-04-18 (AUTORESEARCH — agent evaluation harnesses, Round 1)
 
 - [[wiki/frameworks/framework-inspect-ai|Inspect AI]] — UK AISI OSS eval framework; three primitives (datasets/solvers/scorers), sandbox defaults, Agent Bridge for 3rd-party agents, [[mcp-ecosystem]] support
@@ -116,3 +124,21 @@ type: meta
 
 - [[summaries/summary-llm-wiki-v2-gist-rohitg00|LLM Wiki v2 — Rohitg00's gist (primary source)]] — resolves 2026-04-12 missing-source contradiction; supersedes `summary-llm-wiki-v2.md` (social-post-only); unblocks `pattern-hybrid-search` + `concepts/reciprocal-rank-fusion` graduation.
 - `raw/framework-docs/llm-wiki-v2-gist-rohitg00.md` — gist text + comment-thread counter-arguments captured at ingest.
+
+
+## 2026-05-24
+
+- [[syntheses/synthesis-episodic-judgment-as-contradiction-resolver-training|Synthesis: Episodic Judgment Log → Contradiction Auto-Resolver Training Data]] — the v2 gap "AI contradiction resolution → routes to human review only" is already being filled by the episodic log; the missing piece is a second consumer on the same event bus, not a new data collection problem.
+- [[syntheses/synthesis-per-claim-confidence-as-rag-precision-layer|Synthesis: Per-Claim Confidence → RAG Retrieval Metric Precision]] — claim-level confidence scores could weight chunk relevance in nDCG/MRR, replacing binary chunk relevance with continuous claim-quality; integration point is a re-ranking stage after RRF fusion.
+- [[syntheses/synthesis-model-tier-eval-framework-matrix|Synthesis: Model Tiering → Eval Framework Selection Matrix]] — proposes a two-dimensional (agent tier × task type) selection matrix for choosing between DeepEval / LangSmith / promptfoo / Inspect AI; flagged as a hypothesis to test, not a recommendation to ship.
+- `wiki/_meta/proposals.md` — new entry `PROP-002 [HEAVY_BACKLOG]` (108 deferred themes; >50 threshold).
+- `wiki/_meta/compile-log.md` — 2-source gate ledger entries (29 promote, 108 defer queued; compile blocked pending PIN).
+
+
+## 2026-05-25
+
+- [[syntheses/synthesis-judgment-events-as-confidence-labels|Synthesis: Episodic Judgment Events as Ground-Truth Labels for Per-Claim Confidence]] — bridges `pattern-episodic-judgment-log` and `pattern-per-claim-confidence`; argues that human correction events should calibrate confidence scores, with the heuristic as fallback for unlabeled claims.
+- [[syntheses/synthesis-permissions-as-single-compiled-policy|Synthesis: Retrieval Filters + Tool Permissions Compile from a Single Policy]] — extends the co-enforced-boundary synthesis to design-time: a single DSL policy compiles to both vector-store metadata filters and tool allowlists, eliminating drift in multi-tenant systems.
+- [[syntheses/synthesis-deepeval-metrics-as-trajectory-vocabulary|Synthesis: DeepEval's Named Agent Metrics as Trajectory Eval Vocabulary]] — names DeepEval's PlanQuality / ToolCalling / ArgumentCorrectness as the missing operational vocabulary that turns the ReAct-as-trace claim into a pytest-native CI gate.
+- `wiki/_meta/proposals.md` — 109 new proposals appended (108 stuck candidates + `PROP-111 [HEAVY_BACKLOG]`).
+- `wiki/_meta/compile-log.md` — 2-source gate ledger run (29 promote queued, 108 defer, 0 graduate; actual page compile crashed with `Error: undefined` — re-run needed).

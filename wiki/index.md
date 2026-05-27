@@ -242,7 +242,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Syntheses (8)
+## Syntheses (14)
 
 | Page | Question | Created |
 |------|----------|---------|
@@ -251,6 +251,15 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[syntheses/synthesis-eval-metrics-to-failure-modes]] | Do modern agent eval framework metrics directly operationalize the agent failure modes taxonomy? | 2026-05-16 |
 | [[syntheses/synthesis-rag-eval-to-llm-judge]] | Which RAG evaluation metrics decompose naturally into LLM-as-Judge tasks vs. deterministic scorers? | 2026-05-16 |
 | [[syntheses/synthesis-episodic-judgment-log-to-trace-dataset]] | Is the Episodic Judgment Log pattern the vendor-agnostic equivalent of LangSmith's trace-to-dataset workflow? | 2026-05-16 |
+| [[syntheses/synthesis-react-as-native-trajectory-eval]] | Why is ReAct uniquely cheap to evaluate compared to other agentic patterns, and what does that mean for pattern selection when evaluation is a first-order concern? | 2026-05-23 |
+| [[syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary]] | In a multi-tenant agentic deployment, where do retrieval-layer metadata filtering and tool-execution permission modes intersect, and what failure modes emerge when they're designed independently? | 2026-05-23 |
+| [[syntheses/synthesis-episodic-judgment-as-freshness-signal]] | Should human-judgment events stored in the episodic log be routed to the freshness-decay engine as authoritative signals that reset (or accelerate) decay clocks on the facts they touch? | 2026-05-23 |
+| [[syntheses/synthesis-episodic-judgment-as-contradiction-resolver-training]] | What is the missing training signal for moving contradiction resolution from human-routed to LLM-auto-resolved, and where does it come from? | 2026-05-24 |
+| [[syntheses/synthesis-per-claim-confidence-as-rag-precision-layer]] | Why do document-level RAG metrics (recall@k, MRR, nDCG) systematically over-credit retrievers, and what would fix it? | 2026-05-24 |
+| [[syntheses/synthesis-model-tier-eval-framework-matrix]] | Which eval framework should you use at which model tier, and why is indiscriminate use of any one of them as wasteful as using Opus for boilerplate? | 2026-05-24 |
+| [[syntheses/synthesis-judgment-events-as-confidence-labels]] | Should per-claim confidence scores be calibrated against human correction events captured in the episodic judgment log, rather than scored from automated heuristics alone? | 2026-05-25 |
+| [[syntheses/synthesis-permissions-as-single-compiled-policy]] | In a multi-tenant agentic system, should retrieval-side metadata filtering and tool-side allowlists be authored separately, or compiled from a single policy document? | 2026-05-25 |
+| [[syntheses/synthesis-deepeval-metrics-as-trajectory-vocabulary]] | Can DeepEval's named agent metrics (PlanQuality, ToolCalling, ArgumentCorrectness) serve as the operational vocabulary that turns trajectory evaluation into a measurable CI/CD gate? | 2026-05-25 |
 
 ---
 

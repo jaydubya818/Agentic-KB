@@ -25,6 +25,8 @@ related:
 
 # Pattern: Per-Claim Confidence
 
+> **[UNVERIFIED PROVENANCE]** Sole source `summaries/summary-llm-wiki-v2` traces to `github.com/agentmemory` which could not be located — primary source is a social-media post only. Pattern remains coherent and useful, but is *single-source* and the source itself has a provenance gap. See `wiki/syntheses/lint-2026-04-12.md` §7. Confidence is already `medium`; flagging here so future readers can apply additional scrutiny before treating this as canonical. — 2026-05-23
+
 ## Problem
 Page-level confidence scoring assigns a single trust score to all content on a page. This breaks when a page contains:
 - High-confidence architectural decisions validated by Jay + multiple sources

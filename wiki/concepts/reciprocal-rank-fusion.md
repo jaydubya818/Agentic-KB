@@ -2,7 +2,7 @@
 title: Reciprocal Rank Fusion
 type: concept
 tags: [memory, context-management, rag-systems, evaluation, agentic]
-confidence: high
+confidence: medium
 sources:
   - [[summaries/summary-llm-wiki-v2]]
   - [[summaries/siagian-agentic-engineer-roadmap-2026]]
@@ -16,6 +16,8 @@ status: stable
 ---
 
 # Reciprocal Rank Fusion
+
+> **[UNVERIFIED PROVENANCE]** This page was derived in part from `summaries/summary-llm-wiki-v2`, whose primary source (`github.com/agentmemory`) could not be located — the only available trace was a social-media post. The RRF algorithm itself is well-documented in IR literature (Cormack, Clarke & Buettcher, 2009) and is corroborated by `siagian-agentic-engineer-roadmap-2026`. The provenance gap affects only the *attribution path*, not the algorithmic correctness. See `wiki/syntheses/lint-2026-04-12.md` §7 for the blocked-ingest record. Confidence downgraded to `medium` until a verifiable primary source is filed. — 2026-05-23
 
 ## TL;DR
 A score-free algorithm for merging ranked result lists from incompatible retrievers (BM25, vector search, graph traversal) into a single unified ranking. Uses position in each list, not raw scores.

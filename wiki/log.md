@@ -4,6 +4,24 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-05-23 (morning-review-daily apply pass — 3 syntheses + 2 provenance markers; compile blocked on PIN)
+
+[2026-05-23] NEW FILE | wiki/syntheses/synthesis-react-as-native-trajectory-eval.md — Bridges patterns/pattern-react and concepts/trajectory-evaluation. Argues ReAct's Thought→Action→Observation loop is the only agentic pattern where the production loop and the eval trace are the same data structure, making trajectory-evaluation metrics nearly free to collect. Counter-arguments cover context-compression tax and PEV planning-depth tradeoff. Born `reviewed: false`.
+
+[2026-05-23] NEW FILE | wiki/syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary.md — Bridges concepts/metadata-filtering and concepts/permission-modes. Argues retrieval filtering and tool permissions are two enforcement points on a single access boundary that must be co-designed in multi-tenant deployments. Recommends updating recipes/recipe-production-deployment to cross-reference both. Born `reviewed: false`.
+
+[2026-05-23] NEW FILE | wiki/syntheses/synthesis-episodic-judgment-as-freshness-signal.md — Bridges patterns/pattern-episodic-judgment-log and system/policies/freshness-policy. Argues human-judgment events should be routed to the freshness engine as authoritative decay signals; proposes minimal-risk scope (contradictions + corrections only, not confirmations). Calls out coupling cost and rubber-stamp risk in counter-arguments. Born `reviewed: false`.
+
+[2026-05-23] UPDATE | wiki/concepts/reciprocal-rank-fusion.md — Added [UNVERIFIED PROVENANCE] block; downgraded confidence high→medium. Source `agentmemory` could not be located (Twitter-only). Algorithm itself corroborated by Cormack/Clarke/Buettcher 2009 + siagian-agentic-engineer-roadmap-2026.
+
+[2026-05-23] UPDATE | wiki/patterns/pattern-per-claim-confidence.md — Added [UNVERIFIED PROVENANCE] block. Single source traces to `agentmemory`; flagged for future readers without downgrading existing `medium` confidence.
+
+[2026-05-23] OPERATION | scripts/compile-2source-gate.mjs --execute ran successfully. Plan: 29 PROMOTE / 108 DEFER / 0 GRADUATE. Updated wiki/candidates.md + wiki/_meta/compile-log.md. The actual `kb compile` API call returned `error: 🔒 Compile requires a valid PIN.` — page creation for the 29 promotions is BLOCKED pending Jay running `node cli/kb.js compile` with `KB_PIN` set.
+
+[2026-05-23] OPERATION | scripts/foundry-propose.mjs --execute --top 3 ran. Wrote PROP-001 [HEAVY_BACKLOG] to wiki/_meta/proposals.md (defer count 108 exceeds threshold 50; recommends running /foundry-compile more often or pruning low-value candidates).
+
+[2026-05-23] CONTRADICTIONS | None new. Re-confirmed agentmemory provenance gap from 2026-04-12 lint is now flagged on both downstream pages.
+
 ## 2026-05-16 (9 new wiki pages — 3 syntheses + 6 graduating candidates)
 
 [2026-05-16] NEW FILE | wiki/syntheses/synthesis-eval-metrics-to-failure-modes.md — Bridges framework-deepeval and concepts/agent-failure-modes. Maps PlanQuality→task-decomposition, ToolCalling→tool-selection, ArgumentCorrectness→hallucinated-parameters. Identifies coverage gaps: safety violations, context-length failures not addressed by named DeepEval metrics.
@@ -597,3 +615,66 @@ Source for resolution: WebSearch result during morning-review-daily 2026-05-16 f
 - Ingest `github.com/rohitg00/agentmemory` README into `raw/framework-docs/` (would unblock per-claim confidence + typed graph graduation).
 - Run `/foundry-compile` to graduate hybrid-search candidate.
 - Update `wiki/index.md` and the MoCs to link the new summary — deferred until Jay reviews.
+
+
+---
+
+## 2026-05-24 — morning-review-daily APPLY pass
+
+**Trigger:** Scheduled `morning-review-daily` run + user-confirmed apply of the KB intelligence findings.
+
+**Actions taken:**
+- **2-source gate run** (`scripts/compile-2source-gate.mjs --execute`): ledger appended to `wiki/_meta/compile-log.md` — 29 promote, 108 defer, 0 graduate. Actual page compilation **BLOCKED** — `kb compile` endpoint requires PIN-protected layer credentials, not available in automated context. Promote candidates remain queued for next manual-PIN compile run.
+- **Proposals ledger** (`scripts/foundry-propose.mjs --execute --top 3`): 1 new proposal written to `wiki/_meta/proposals.md` — `PROP-002 [HEAVY_BACKLOG]` (108 deferred themes > 50 threshold).
+- **Provenance markers**: verified — both `wiki/concepts/reciprocal-rank-fusion` and `wiki/patterns/pattern-per-claim-confidence` already carry `[UNVERIFIED PROVENANCE]` markers from the 2026-05-23 pass. Asymmetric confidence treatment (RRF downgraded high→medium; per-claim held at medium) is intentional and documented in the marker text. No new edits needed.
+- **3 new syntheses drafted** (all `reviewed: false`, per Rule 12):
+  - `[[syntheses/synthesis-episodic-judgment-as-contradiction-resolver-training]]` — bridges `[[patterns/pattern-episodic-judgment-log]]` and the v2 gap "AI contradiction resolution → routes to human review only".
+  - `[[syntheses/synthesis-per-claim-confidence-as-rag-precision-layer]]` — bridges `[[patterns/pattern-per-claim-confidence]]` and `[[concepts/rag-systems]]` evaluation metrics.
+  - `[[syntheses/synthesis-model-tier-eval-framework-matrix]]` — bridges `[[hot]]` model-tiering and the four eval frameworks (deepeval/langsmith/promptfoo/inspect-ai).
+- **Index updated**: 3 new synthesis rows appended to the synthesis table in `wiki/index.md`.
+- **Recently-added updated**: 3 new entries under today's date.
+- **Daily note appended**: KB Intelligence section appended to `~/Documents/Obsidian Vault/Daily Notes/2026-05-24.md` (the only personal-vault write — Rule 13 preserved otherwise).
+
+**Contradictions flagged:** None new. Carry-forward `agentmemory` provenance gap (originally 2026-04-12) remains unresolved — affects RRF and per-claim-confidence pages.
+
+**Open threads from this pass:**
+- 29 PROMOTE candidates queued in compile-log but not compiled — needs manual PIN-supplied run of `kb compile`.
+- `PROP-002 [HEAVY_BACKLOG]` recommends auditing `wiki/candidates.md` for low-value themes to drop, or seeding 2nd sources for the highest-leverage themes.
+- All 3 new syntheses born `reviewed: false` — awaiting human review.
+
+**Refuse list observed:** No deletes. No `reviewed: true` flips. No git push. No edits to personal vault outside the daily note.
+
+
+---
+
+## [2026-05-25] — Morning Review daily pipeline + KB intelligence apply pass
+
+**Trigger:** Scheduled task `morning-review-daily` @ 06:03 PDT.
+
+**Inputs processed:**
+- Apple Notes (24h): 1 note (filtered + classified into 3 findings).
+- KB captures: 0 new (`KB Inbox` test note deduplicated; Snipd folder empty).
+- KB intelligence queries: 5 (connections, patterns, tensions, leverage, proposals).
+
+**Pages created:** 3 syntheses (all `reviewed: false`, per Rule 12)
+- `[[syntheses/synthesis-judgment-events-as-confidence-labels]]` — bridges `[[patterns/pattern-episodic-judgment-log]]` ↔ `[[patterns/pattern-per-claim-confidence]]`.
+- `[[syntheses/synthesis-permissions-as-single-compiled-policy]]` — bridges `[[concepts/rag-systems]]` ↔ `[[concepts/permission-modes]]`.
+- `[[syntheses/synthesis-deepeval-metrics-as-trajectory-vocabulary]]` — bridges `[[frameworks/framework-deepeval]]` ↔ `[[concepts/trajectory-evaluation]]`.
+
+**Actions taken:**
+- **2-source gate run** (`scripts/compile-2source-gate.mjs --execute`): plan generated (29 promote, 108 defer, 0 graduate) but actual `kb compile` step **CRASHED with `Error: undefined`**. No pages compiled this run. Plan logged to `/tmp/foundry-compile-20260525.log`. Needs re-run with debug output.
+- **Proposals ledger** (`scripts/foundry-propose.mjs --execute --top 3`): 109 new proposals written to `wiki/_meta/proposals.md` — 108 `STUCK_CANDIDATE` entries (single-source themes aged ≥30d) + 1 `PROP-111 [HEAVY_BACKLOG]` (108 deferred themes vs. 50 threshold).
+- **Provenance markers**: no new edits. The only flagged dispute (`agentmemory` provenance on `[[concepts/reciprocal-rank-fusion]]` and `[[patterns/pattern-per-claim-confidence]]`) already carries `[UNVERIFIED PROVENANCE]` from the 2026-05-23 pass.
+- **Index updated**: 3 new synthesis rows appended; Syntheses header count corrected from 8 → 14 (was already stale by 3 from 2026-05-24).
+- **Recently-added updated**: new `2026-05-25` block with 3 syntheses + proposals/compile-log notes.
+- **Daily note appended**: KB Intelligence section appended to `~/Documents/Obsidian Vault/Daily Notes/2026-05-25.md` (the only personal-vault write — Rule 13 preserved otherwise).
+
+**Contradictions flagged:** None new. Carry-forward `agentmemory` provenance gap (originally 2026-04-12) remains unresolved.
+
+**Open threads from this pass:**
+- 29 PROMOTE candidates queued in `compile-log.md` but not compiled — `Error: undefined` blocked the `kb compile` step. Needs investigation.
+- `PROP-111 [HEAVY_BACKLOG]` (108 defers > 50) recommends auditing `wiki/candidates.md` for low-value themes or seeding 2nd sources for the highest-leverage ones.
+- All 3 new syntheses born `reviewed: false` — awaiting human review.
+- High-leverage question surfaced: *Does ReAct's structural evaluability advantage survive context compression?* — touches `synthesis-react-as-native-trajectory-eval`, `synthesis-eval-metrics-to-failure-modes`, `synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary`, `lint-2026-04-12`.
+
+**Refuse list observed:** No deletes. No `reviewed: true` flips. No git push. No edits to personal vault outside the daily note.
