@@ -111,3 +111,4 @@ See [[concepts/context-management]] and [[patterns/pattern-tiered-agent-memory]]
 - [[mocs/visualization|Visualization]] — Making connections visible
 - [[concepts/context-management]] — Context window mechanics
 - [[patterns/pattern-hot-cache]] — [[pattern-hot-cache]] pattern
+- [[concepts/server-sent-events-streaming]] — SSE for streaming LLM output
