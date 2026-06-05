@@ -4,6 +4,10 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-05-30 (Apple Notes Hermes/Obsidian link review)
+
+[2026-05-30] NEW FILE | wiki/patterns/pattern-agent-proof-of-work-loop.md — Captures the closed-loop verification pattern from the Apple Notes link review: output is not completion; agents must verify, leave receipts, surface exceptions, and update future runs. Added backlinks from mocs/orchestration and mocs/evaluation; added entry to wiki/recently-added.md.
+
 ## 2026-05-27 (morning-review-daily apply pass — 1 synthesis drafted, compile-write blocked, 1 proposal logged)
 
 [2026-05-27] NEW FILE | wiki/syntheses/synthesis-rrf-as-rlm-fusion-stage.md — Bridges concepts/rlm-pipeline and concepts/reciprocal-rank-fusion. Argues Reciprocal Rank Fusion is the score-free fusion algorithm the RLM Pipeline's stages 4–9 implicitly require for merging BM25 + vector + graph retrievers, with `k=60` as the canonical Cormack 2009 default. Counter-arguments cover learned-to-rank alternatives, score normalization, and inherited [UNVERIFIED PROVENANCE] from the RRF page. Born `reviewed: false`. Bidirectional links added to both source concept pages.

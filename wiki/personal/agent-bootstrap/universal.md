@@ -31,13 +31,14 @@ are available — use them BEFORE answering, and write back AFTER acting.
    Wiki:    wiki/ (concepts, patterns, frameworks, recipes, summaries, syntheses)
    Web UI:  http://localhost:3009
    CLI:     node /Users/jaywest/Agentic-KB/cli/kb.js <cmd>
-   MCP:     mcp__agentic-kb__* tools
+   MCP:     mcp__agentic-kb__* tools, plus mcp__obsidian__* when that MCP is pointed at Agentic-KB
 
 2. OBSIDIAN VAULT (business strategy + decisions — Sofie's home)
    Path:    /Users/jaywest/Documents/Obsidian Vault/
    Layout:  Memory.md, Home.md, 01 - Clients/, 04 - Sessions/,
             06 - Decisions/, 07 - Tasks/Action Tracker.md, Transcripts/
-   MCP:     mcp__obsidian__* / mcp__obsidian-remote__*
+   Access:  read-only to agents via file/search tools unless Jay explicitly overrides.
+            Do NOT assume mcp__obsidian__* points here; current safe default is Agentic-KB.
 
 3. SOFIE (AI Chief of Staff — bridges KB ↔ Vault)
    Contract: config/agents/sofie.yaml (lead tier, business domain)
@@ -74,6 +75,8 @@ Agent context:   kb agent context <id> --project <p>
 Agent start:     kb agent start-task <id> --project <p> --description "<task>"
 Sofie close:     kb agent close-task sofie --payload <file.json>
 Sofie dry-run:   kb agent dry-run-close-task sofie --payload <file.json>
+                   # Required before vault-affecting payloads; preview shows
+                   # allowlist, dedupe, contradiction, review, and receipt fields.
 Verify audit:    kb agent verify-audit
 Bus list:        kb bus list <repo-name> <channel>
 Promote:         kb promote <channel> <id> --approver <name>
@@ -87,6 +90,7 @@ Promote:         kb promote <channel> <id> --approver <name>
   "actions":    [{ "task": "...", "owner": "...", "deadline": "YYYY-MM-DD" }],
   "sessionSummary": { "title": "...", "body": "...", "tags": [...] },
   "clientUpdates":  [{ "client": "<name>", "body": "..." }],
+  "memoryUpdate": { "heading": "...", "body": "..." },
   "discoveries": [{ "body": "<insight worth promoting>" }]
 }
 

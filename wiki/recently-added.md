@@ -9,6 +9,10 @@ type: meta
 
 ---
 
+## 2026-05-30 (Apple Notes Hermes/Obsidian link review)
+
+- [[wiki/patterns/pattern-agent-proof-of-work-loop|Agent Proof-of-Work Loop]] — Pattern extracted from Hermes/Obsidian community posts and Jay's 2026-05-30 manual Apple Notes review: agents must verify outputs, leave receipts, route exceptions to humans, and convert failures into learning updates before claiming completion.
+
 ## 2026-05-27 (morning-review-daily apply pass)
 
 - [[wiki/syntheses/synthesis-rrf-as-rlm-fusion-stage|Reciprocal Rank Fusion as the RLM Pipeline's Score-Merging Stage]] — Bridges concepts/rlm-pipeline and concepts/reciprocal-rank-fusion; argues RRF is the score-free fusion primitive the pipeline's stages 4–9 require, with `k=60` as the canonical default; notes inherited [UNVERIFIED PROVENANCE] from the RRF page

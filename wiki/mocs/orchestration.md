@@ -31,6 +31,7 @@ updated: 2026-04-10
 - [[patterns/pattern-goal-backward-planning]] — Plan backward from verifiable goal state
 - [[patterns/pattern-hosted-agent-infrastructure]] — Hosted agent infra: long-running runtime, queues, observability
 - [[patterns/pattern-staged-llm-pipeline]] — Multi-stage LLM pipeline with explicit handoffs
+- [[patterns/pattern-agent-proof-of-work-loop]] — Verification + receipts + exception review loop for agent work before completion claims
 
 ---
 

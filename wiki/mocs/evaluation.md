@@ -35,6 +35,7 @@ updated: 2026-04-10
 ## Patterns
 
 - [[patterns/pattern-compounding-loop]] — Verified ingest (×1.25 boost) as a primitive eval signal; quality gate on promotion
+- [[patterns/pattern-agent-proof-of-work-loop]] — Closed-loop agent verification: output → verification → receipts → exception review → learning update
 
 ---
 
