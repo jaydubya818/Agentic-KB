@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-05-29 14:07 | Vault: Agentic-KB | Pages scanned: 599
+> Generated: 2026-06-06 18:47 | Vault: Agentic-KB | Pages scanned: 603
 
 ## Summary
 
