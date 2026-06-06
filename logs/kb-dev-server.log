@@ -479,3 +479,7 @@ WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_err
  POST /api/query 200 in 38.3s (next.js: 1955µs, application-code: 38.3s)
  POST /api/query 200 in 39.0s (next.js: 3ms, application-code: 39.0s)
  POST /api/query 200 in 25.3s (next.js: 3ms, application-code: 25.3s)
+ POST /api/query 200 in 40s (next.js: 5ms, application-code: 40s)
+ POST /api/query 200 in 43s (next.js: 1736µs, application-code: 43s)
+ POST /api/query 200 in 39.1s (next.js: 2ms, application-code: 39.1s)
+ POST /api/query 200 in 21.4s (next.js: 2ms, application-code: 21.4s)
