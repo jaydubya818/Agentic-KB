@@ -3,9 +3,9 @@ repo_name: "Agentic-Pi-Harness"
 repo_visibility: private
 source_type: github
 branch: main
-commit_sha: 5deb5faadc138a6bbd7455f7177b53a18960bb78
+commit_sha: 6ca54127576e6b9273297bbd8eff4671ca45b187
 source_path: README.md
-imported_at: "2026-04-25T16:05:39.327Z"
+imported_at: "2026-06-06T18:59:58.681Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-Pi-Harness/main/README.md"
 ---
 
@@ -295,7 +295,10 @@ Useful commands:
 ```bash
 npm run golden:verify
 npm run golden:replay
+npm run bench
 ```
+
+`npm test` covers the deterministic unit/fuzz/chaos suite. The hash-chain microbench is opt-in via `npm run bench` because its latency ceiling is environment-sensitive.
 
 The CI workflow also runs the golden path and compares the produced artifacts against these committed golden files.
 
@@ -327,6 +330,15 @@ pi-harness hermes-smoke [--workdir <path>] [--output-dir <path>]
 pi-harness hermes-run [--workdir <path>] [--out-root <path>] [--objective <text>]
 pi-harness hermes-bridge [--host <host>] [--port <port>] [--auth-token <token>] [--state-root <path>]
 pi-harness hermes-doctor [--url <url>] [--token-file <path>] [--workdir <path>]
+pi-harness acceptance-hermes [--url <url>] [--token-file <path>] [--workdir <path>]
+pi-harness acceptance-pi [workdir] [outRoot] [--trace=<path>]
+kb session acceptance hermes [--url <url>] [--token-file <path>] [--workdir <path>]
+kb session acceptance pi [workdir] [outRoot] [--trace=<path>]
+
+npm run lint
+npm run typecheck
+npm test
+npm run bench
 ```
 
 During development you can run the TypeScript entrypoint directly:
@@ -359,6 +371,12 @@ Local HTTP bridge:
 npm run hermes:bridge -- --host 127.0.0.1 --port 8787 --auth-token "$PI_HERMES_BRIDGE_TOKEN"
 ```
 
+Persistent macOS LaunchAgent setup:
+
+```bash
+scripts/setup-hermes-bridge-launchagent.sh --load
+```
+
 Bridge state persists by default under:
 
 ```bash
@@ -371,6 +389,32 @@ Hermes doctor:
 
 ```bash
 npm run hermes:doctor -- --url http://127.0.0.1:8787
+```
+
+See [`docs/HERMES-BRIDGE-LAUNCHAGENT.md`](docs/HERMES-BRIDGE-LAUNCHAGENT.md) for the persistent bridge setup.
+
+Hermes acceptance helper (self-contained by default — it starts a temporary local bridge and token automatically):
+
+```bash
+npm run acceptance:hermes
+# or
+kb session acceptance hermes
+```
+
+To target an already-running external bridge instead:
+
+```bash
+npm run acceptance:hermes -- --url http://127.0.0.1:8787
+# or
+kb session acceptance hermes --url http://127.0.0.1:8787
+```
+
+Pi acceptance helper:
+
+```bash
+npm run acceptance:pi
+# or
+kb session acceptance pi
 ```
 
 When you want Pi to inspect Hermes itself, point `--workdir` at:

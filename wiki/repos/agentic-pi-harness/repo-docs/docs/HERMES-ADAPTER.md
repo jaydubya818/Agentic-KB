@@ -3,9 +3,9 @@ repo_name: "Agentic-Pi-Harness"
 repo_visibility: private
 source_type: github
 branch: main
-commit_sha: 5deb5faadc138a6bbd7455f7177b53a18960bb78
+commit_sha: 6ca54127576e6b9273297bbd8eff4671ca45b187
 source_path: "docs/HERMES-ADAPTER.md"
-imported_at: "2026-04-25T16:05:39.338Z"
+imported_at: "2026-06-06T18:59:58.684Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-Pi-Harness/main/docs/HERMES-ADAPTER.md"
 ---
 
@@ -267,6 +267,24 @@ Hermes doctor:
 ```bash
 npm run hermes:doctor -- --url http://127.0.0.1:8787
 ```
+
+## Persistent macOS bridge setup
+
+To keep the bridge online across shells and restarts, install the LaunchAgent helper:
+
+```bash
+scripts/setup-hermes-bridge-launchagent.sh --load
+```
+
+This writes the token, wrapper script, and LaunchAgent plist into `~/.pi/` and `~/Library/LaunchAgents/`.
+
+Dry run:
+
+```bash
+scripts/setup-hermes-bridge-launchagent.sh --dry-run
+```
+
+For the full control/verification flow, see [`docs/HERMES-BRIDGE-LAUNCHAGENT.md`](./HERMES-BRIDGE-LAUNCHAGENT.md).
 
 It validates:
 - bridge reachability

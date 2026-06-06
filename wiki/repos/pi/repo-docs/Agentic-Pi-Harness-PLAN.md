@@ -5,7 +5,7 @@ source_type: github
 branch: main
 commit_sha: 1a669c97bc2760e9298c6ff3d892feea5426fc09
 source_path: "Agentic-Pi-Harness-PLAN.md"
-imported_at: "2026-04-25T16:05:44.777Z"
+imported_at: "2026-06-06T18:59:45.085Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Pi/main/Agentic-Pi-Harness-PLAN.md"
 ---
 

@@ -3,9 +3,9 @@ repo_name: "Agentic-Pi-Harness"
 repo_visibility: private
 source_type: github
 branch: main
-commit_sha: 5deb5faadc138a6bbd7455f7177b53a18960bb78
+commit_sha: 6ca54127576e6b9273297bbd8eff4671ca45b187
 source_path: GOVERNED_EXECUTION_MODEL_V1.md
-imported_at: "2026-04-25T16:05:39.323Z"
+imported_at: "2026-06-06T18:59:58.679Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-Pi-Harness/main/GOVERNED_EXECUTION_MODEL_V1.md"
 ---
 

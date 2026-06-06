@@ -3,15 +3,35 @@ repo_name: "Agentic-Pi-Harness"
 repo_visibility: private
 source_type: github
 branch: main
-commit_sha: 5deb5faadc138a6bbd7455f7177b53a18960bb78
+commit_sha: 6ca54127576e6b9273297bbd8eff4671ca45b187
 source_path: CHANGELOG.md
-imported_at: "2026-04-25T16:05:39.318Z"
+imported_at: "2026-06-06T18:59:58.676Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Agentic-Pi-Harness/main/CHANGELOG.md"
 ---
 
 # Changelog
 
 All notable changes to Agentic-Pi-Harness. Versioning follows SemVer.
+
+## [Unreleased]
+
+### Fixed
+- `npm run lint` now has a repo-local TypeScript ESLint config instead of failing with missing-config / unmatched-pattern errors.
+- `npm test` no longer runs the hash-chain microbench by default; the perf bench moved to opt-in `npm run bench`.
+
+### Changed
+- Hash-chain bench ceilings are now explicitly env-configurable via `PI_HASHCHAIN_BENCH_CEILING_MS`, with defaults widened to `12ms` local / `16ms` CI for slower storage/runner variance.
+
+## [0.70.2] — 2026-04-25
+
+### Added
+- Acceptance helpers: `pi-harness acceptance-hermes` and `pi-harness acceptance-pi`.
+- `kb` CLI entrypoint with `kb session acceptance hermes` and `kb session acceptance pi`.
+- Hermes acceptance helper can now run in self-contained embedded mode without a pre-started bridge, token file, or KB server.
+- Saved acceptance runbooks under `wiki/personal/agent-bootstrap/` for Hermes and Pi.
+
+### Changed
+- Version bump to `0.70.2`.
 
 ## [0.4.0] — 2026-04-18
 

@@ -5,7 +5,7 @@ source_type: github
 branch: main
 commit_sha: 1a669c97bc2760e9298c6ff3d892feea5426fc09
 source_path: "docs/sofie-contract.md"
-imported_at: "2026-04-25T16:01:56.260Z"
+imported_at: "2026-06-06T18:59:45.093Z"
 source_url: "https://raw.githubusercontent.com/jaydubya818/Pi/main/docs/sofie-contract.md"
 ---
 
