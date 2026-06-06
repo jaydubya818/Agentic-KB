@@ -43,3 +43,6 @@ tags: []
 
 ### Architecture Decision Records (ADRs)
 - [[decisions/ADR-001-mcp-sdk-migration|ADR-001 — Defer MCP SDK Server → McpServer migration]] (deferred, 2026-04-25)
+
+### Decisions
+- [[decisions/decision-obsidian-mcp-integration|Obsidian + Claude Code MCP Integration]] (decided, 2026-05-16)
