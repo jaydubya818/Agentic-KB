@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-06-06 18:47 | Vault: Agentic-KB | Pages scanned: 603
+> Generated: 2026-06-07 14:07 | Vault: Agentic-KB | Pages scanned: 605
 
 ## Summary
 
@@ -8,13 +8,14 @@
 |---|---|---|
 | Contradictions | 0 | 🟢 Clear |
 | Orphaned pages | 23 | 🟡 Medium |
-| Stale pages | 241 | 🟡 Medium |
+| Stale pages | 242 | 🟡 Medium |
 | Knowledge gaps | 0 | 🟢 Clear |
 
 ## 🟡 Orphaned Pages (no inbound links)
 
 - `_meta/compile-log.md` — compile-log
 - `_meta/proposals.md` — Foundry Proposals
+- `_quarantine/wiki-wiki-stray-log-20260606.md` — Compile Log
 - `agents/leads/planning-agent/domain-standards.md` — Planning Agent — Domain Standards
 - `agents/leads/sofie/weekly-digest.md` — KB Digest — 2026-04-10
 - `candidates.md` — Compile Candidates
@@ -24,20 +25,20 @@
 - `concepts/postgresql-operations.md` — PostgreSQL Operations Reference
 - `concepts/react-nextjs-performance.md` — React & Next.js Performance Optimization
 - `daily-systems/logs/2026-05-23.md` — 2026-05-23
-- `decisions/decision-obsidian-mcp-integration.md` — Obsidian + Claude Code MCP Integration — Evaluation & Decision
 - `patterns/pattern-playwright-e2e.md` — Playwright E2E Testing Pattern
 - `patterns/pattern-react-component-refactoring.md` — React Component Refactoring
 - `recipes/readwise-to-wikiwise-ingest.md` — Readwise Reader → Wikiwise Ingest
 - `recipes/recipe-prd-generator.md` — PRD Generator Skill
+- `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
 - `syntheses/lint-2026-04-18.md` — Lint Report — 2026-04-18
 - `syntheses/synthesis-repo-aware-system-implementation.md` — Repo-Aware Knowledge & Agent Memory System — Implementation Summary
 - `system/reports/static-lint-2026-04-25.md` — Static Wiki Lint — 2026-04-25
 - `system/reports/tier-leak-audit-2026-04-25.md` — Tier Read-Leak Audit — 2026-04-25
 - `system/reports/tier-leak-audit-2026-04-26.md` — Tier Read-Leak Audit — 2026-04-26
-- `wiki/summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
 
 ## 🟡 Stale Pages (30+ days since update)
 
+- `_quarantine/wiki-wiki-stray-log-20260606.md` — last updated: Tue Apr 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `action-tracker.md` — last updated: Sun Apr 19 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `agents/leads/planning-agent/gotchas.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `agents/leads/sofie/hot.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
@@ -267,6 +268,7 @@
 - `summaries/nate-herk-llm-wiki.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `summaries/nvidia-gtc-2026-agentic-enterprise.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `summaries/private-test-note.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `summaries/summary-gsd-project-researcher.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `summaries/vault-3tier-architecture.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/lint-2026-04-06.md` — last updated: Sun Apr 05 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/lint-2026-04-12.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
@@ -278,4 +280,3 @@
 - `system/policies/promotion-rules.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `system/policies/source-trust-policy.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `transcript-ingest.md` — last updated: Sun Apr 19 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
-- `wiki/summaries/summary-gsd-project-researcher.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
