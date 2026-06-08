@@ -29,7 +29,7 @@
       "class": "learned"
     },
     {
-      "path": "wiki/concepts/agent-failure-modes.md",
+      "path": "wiki/concepts/agent-observability.md",
       "class": "learned"
     },
     {
@@ -57,19 +57,27 @@
       "class": "learned"
     },
     {
-      "path": "wiki/personal/hermes-operating-context.md",
+      "path": "wiki/personal/context-graph/README.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/context-graph/schema.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/hermes-apple-notes-setup-review-2026-05-31.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/hermes-apple-notes-setup-review-2026-06-01.md",
+      "class": "learned"
+    },
+    {
+      "path": "wiki/personal/hermes-apple-notes-setup-review-2026-06-04.md",
       "class": "learned"
     },
     {
       "path": "wiki/personal/personal-agent-design-observations.md",
-      "class": "learned"
-    },
-    {
-      "path": "wiki/personal/personal-jays-framework-philosophy.md",
-      "class": "learned"
-    },
-    {
-      "path": "wiki/personal/personal-setup-overview.md",
       "class": "learned"
     },
     {
@@ -78,8 +86,8 @@
     }
   ],
   "trace_summary": {
-    "included": 19,
-    "excluded": 9,
+    "included": 21,
+    "excluded": 12,
     "truncated": true
   }
 }
