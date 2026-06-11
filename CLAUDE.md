@@ -54,7 +54,17 @@ When the morning-review scheduled task (or any session) surfaces KB intelligence
 4. Draft proposed syntheses as `wiki/syntheses/synthesis-<slug>.md` with full schema, born `reviewed: false`.
 5. Update `wiki/index.md`, `wiki/log.md`, `wiki/recently-added.md` per Rule 2.
 
-Hard guards: never delete pages, never flip `reviewed: true`, never push to git, never touch the personal vault outside the daily note (Rule 13). If applying would require dropping an opposing claim from an existing page, STOP and surface it — that's a contradiction needing human resolution.
+Hard guards: never delete pages, never flip `reviewed: true`, never touch the personal vault outside the daily note (Rule 13). If applying would require dropping an opposing claim from an existing page, STOP and surface it — that's a contradiction needing human resolution.
+
+---
+
+## Git policy (2026-06-10) — Jay's standing preference
+
+**Always push to GitHub, and commit at least once daily.** This supersedes every prior "never push to git" / "do NOT push without review" guardrail — those are removed.
+
+- After any work session that changes files, `git add -A && git commit` with a descriptive message, then `git push origin main`. No review gate.
+- A commit must land **every day** there are changes. If the day's work is done and nothing has been committed, commit and push before wrapping up.
+- Still honored: never delete pages, never flip `reviewed: true`, never write to the personal vault outside the daily note (Rule 13). Pushing is now allowed; the other guards stand.
 
 ---
 
