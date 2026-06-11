@@ -16,6 +16,30 @@
               "icon": "claude-logo",
               "title": "Claude Terminal"
             }
+          },
+          {
+            "id": "3e335adf5cced64a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "wiki/repos/MissionControl/repo-docs/docs/guides/TELEGRAM_COMMANDS.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "TELEGRAM_COMMANDS"
+            }
           }
         ]
       }
@@ -194,6 +218,7 @@
   },
   "active": "fbb7b28ed968d69c",
   "lastOpenFiles": [
+    "wiki/reports",
     "raw/clippings/2026-05-16T08-40-32__apple-notes__test-capture-2026-05-16__323f37fc.md",
     "wiki/archive/repos/MissionControl/20260606/ui-style.md",
     "wiki/archive/repos/MissionControl/20260606/RUNBOOK.md",
@@ -219,7 +244,6 @@
     "wiki/archive/repos/MissionControl/20260606/HEARTBEAT.md",
     "wiki/archive/repos/MissionControl/20260606/AGENTS.md",
     "wiki/archive/repos/MissionControl/20260606/REPO_STRUCTURE.md",
-    "wiki/archive/repos/MissionControl/20260606/DEFAULTS.md",
     "wiki/archive/repos/MissionControl/20260606",
     "wiki/archive/repos/MissionControl",
     "wiki/_quarantine",
