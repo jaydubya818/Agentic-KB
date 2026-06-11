@@ -698,3 +698,20 @@ Source for resolution: WebSearch result during morning-review-daily 2026-05-16 f
 - High-leverage question surfaced: *Does ReAct's structural evaluability advantage survive context compression?* — touches `synthesis-react-as-native-trajectory-eval`, `synthesis-eval-metrics-to-failure-modes`, `synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary`, `lint-2026-04-12`.
 
 **Refuse list observed:** No deletes. No `reviewed: true` flips. No git push. No edits to personal vault outside the daily note.
+
+
+---
+
+## 2026-06-10 — CONTRADICTION RESOLVED: agentmemory provenance gap (closed)
+
+**Operation:** Manual resolution at Jay's direction ("fix it"). Closes the `agentmemory` provenance dispute open since the 2026-04-12 lint and re-confirmed unresolved on 2026-05-23, 2026-05-27, and 2026-05-30.
+
+**Finding:** The `github.com/agentmemory` primary source is confirmed unrecoverable — only a social-media post exists, no verifiable repo or artifact. Resolved by corroboration policy, not source recovery, with a split decision by source-count:
+
+- `[[concepts/reciprocal-rank-fusion]]` — **RESOLVED → confidence `medium` → `high`.** RRF (`k=60` default) is canonically documented in IR literature (Cormack, Clarke & Buettcher, SIGIR 2009) and independently corroborated by `[[summaries/siagian-agentic-engineer-roadmap-2026]]`. Two independent sources clear the Rule 14 2-source bar. `[UNVERIFIED PROVENANCE]` marker replaced with `[PROVENANCE RESOLVED]`. `updated: 2026-06-10`.
+- `[[patterns/pattern-per-claim-confidence]]` — **RESOLVED as won't-fix → confidence held at `medium`.** No independent corroborating source exists; deliberately NOT promoted to canonical. Marker replaced with `[PROVENANCE RESOLVED — won't-fix]`; loop closed as "retained at medium, not verified." Re-open only if a 2nd source is filed. `updated: 2026-06-10`.
+- `[[summaries/summary-llm-wiki-v2]]` — provenance note added; summary stays `confidence: medium` (single social-post source).
+
+**Guards observed:** No `reviewed:` flags touched (Rule 12). No deletes (Rule 1). No git push. No opposing claim dropped — the dispute was a provenance/attribution gap, not a factual contradiction, so no human-escalation trigger fired. Lint blocked-ingest record at `lint-2026-04-12.md` §7 retained intact for audit.
+
+**Net:** 0 open contradictions remaining in the dispute ledger.

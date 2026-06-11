@@ -2,12 +2,12 @@
 title: Reciprocal Rank Fusion
 type: concept
 tags: [memory, context-management, rag-systems, evaluation, agentic]
-confidence: medium
+confidence: high
 sources:
   - [[summaries/summary-llm-wiki-v2]]
   - [[summaries/siagian-agentic-engineer-roadmap-2026]]
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-06-10
 related:
   - [[concepts/rlm-pipeline]]
   - [[concepts/rag-systems]]
@@ -18,7 +18,7 @@ status: stable
 
 # Reciprocal Rank Fusion
 
-> **[UNVERIFIED PROVENANCE]** This page was derived in part from `summaries/summary-llm-wiki-v2`, whose primary source (`github.com/agentmemory`) could not be located — the only available trace was a social-media post. The RRF algorithm itself is well-documented in IR literature (Cormack, Clarke & Buettcher, 2009) and is corroborated by `siagian-agentic-engineer-roadmap-2026`. The provenance gap affects only the *attribution path*, not the algorithmic correctness. See `wiki/syntheses/lint-2026-04-12.md` §7 for the blocked-ingest record. Confidence downgraded to `medium` until a verifiable primary source is filed. — 2026-05-23
+> **[PROVENANCE RESOLVED — 2026-06-10]** Closed via corroboration, not source recovery. The unlocatable `github.com/agentmemory` attribution affected only the *attribution path*, never algorithmic correctness. RRF (with the `k=60` default) is canonically documented in IR literature — Cormack, Clarke & Buettcher, *Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods* (SIGIR 2009) — and independently corroborated by `[[summaries/siagian-agentic-engineer-roadmap-2026]]`. With two independent corroborating sources the page clears the 2-source bar (Rule 14); confidence restored to `high`. Supersedes the 2026-05-23 `[UNVERIFIED PROVENANCE]` flag. Blocked-ingest record retained at `wiki/syntheses/lint-2026-04-12.md` §7.
 
 ## TL;DR
 A score-free algorithm for merging ranked result lists from incompatible retrievers (BM25, vector search, graph traversal) into a single unified ranking. Uses position in each list, not raw scores.

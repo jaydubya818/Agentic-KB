@@ -9,6 +9,14 @@ type: meta
 
 ---
 
+## 2026-06-10 (agentmemory provenance gap — RESOLVED)
+- [[wiki/concepts/reciprocal-rank-fusion|Reciprocal Rank Fusion]] — UPDATED: `[UNVERIFIED PROVENANCE]` replaced with `[PROVENANCE RESOLVED]`; closed via corroboration (Cormack et al. 2009 + siagian roadmap); confidence medium→high.
+- [[wiki/patterns/pattern-per-claim-confidence|Per-Claim Confidence]] — UPDATED: provenance loop closed as won't-fix; still single-source, retained at `medium`, not promoted to canonical.
+- [[wiki/summaries/summary-llm-wiki-v2|LLM Wiki v2]] — UPDATED: provenance note added; source confirmed unrecoverable; stays `medium`.
+- Downstream syntheses (`synthesis-rrf-as-rlm-fusion-stage`, `synthesis-per-claim-confidence-as-rag-precision-layer`) updated to reflect resolution. 0 open contradictions remaining.
+
+---
+
 ## 2026-05-30 (Apple Notes Hermes/Obsidian link review)
 
 - [[wiki/patterns/pattern-agent-proof-of-work-loop|Agent Proof-of-Work Loop]] — Pattern extracted from Hermes/Obsidian community posts and Jay's 2026-05-30 manual Apple Notes review: agents must verify outputs, leave receipts, route exceptions to humans, and convert failures into learning updates before claiming completion.

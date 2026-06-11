@@ -22,6 +22,8 @@ confidence: medium
 ## Source
 Social post describing an extension of [[andrej-karpathy]]'s [[llm-wiki]] pattern, attributed to lessons from the `agentmemory` library (persistent memory engine for AI agents). 5,000 GitHub stars in 48 hours. Primary source not yet ingested — this summary is from the social post only.
 
+> **[PROVENANCE — RESOLVED 2026-06-10]** The `agentmemory` primary source was searched and confirmed unrecoverable (no matching repo; only the social post). Downstream resolution: `[[concepts/reciprocal-rank-fusion]]` was closed via independent corroboration (Cormack et al. 2009 + `[[summaries/siagian-agentic-engineer-roadmap-2026]]`) and restored to `high`; `[[patterns/pattern-per-claim-confidence]]` has no second source and is retained at `medium` (won't-fix). This summary itself stays `confidence: medium` as a single social-post source.
+
 > **Note:** Several v2 features are already implemented in this KB at equal or greater sophistication. See Gap Analysis below.
 
 ---

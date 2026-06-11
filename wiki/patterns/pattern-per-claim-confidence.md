@@ -15,7 +15,7 @@ confidence: medium
 sources:
   - [[summaries/summary-llm-wiki-v2]]
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-06-10
 related:
   - [[system/policies/source-trust-policy]]
   - [[system/policies/promotion-rules]]
@@ -25,7 +25,7 @@ related:
 
 # Pattern: Per-Claim Confidence
 
-> **[UNVERIFIED PROVENANCE]** Sole source `summaries/summary-llm-wiki-v2` traces to `github.com/agentmemory` which could not be located — primary source is a social-media post only. Pattern remains coherent and useful, but is *single-source* and the source itself has a provenance gap. See `wiki/syntheses/lint-2026-04-12.md` §7. Confidence is already `medium`; flagging here so future readers can apply additional scrutiny before treating this as canonical. — 2026-05-23
+> **[PROVENANCE RESOLVED — 2026-06-10, won't-fix]** The `github.com/agentmemory` primary source is confirmed unrecoverable (social-media post only; no verifiable artifact). Unlike `[[concepts/reciprocal-rank-fusion]]`, this pattern has **no independent corroborating source**, so it is deliberately **not** promoted to canonical. Decision: retain as a coherent, first-principles single-source pattern at `confidence: medium`; do not treat as verified. This closes the open provenance loop carried since 2026-05-23 — resolved as "retained at medium, not verified," not as "confirmed." Re-open and upgrade only if a second independent source is filed. See `wiki/syntheses/lint-2026-04-12.md` §7.
 
 ## Problem
 Page-level confidence scoring assigns a single trust score to all content on a page. This breaks when a page contains:

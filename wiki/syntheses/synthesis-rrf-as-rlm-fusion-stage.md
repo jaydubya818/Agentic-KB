@@ -10,7 +10,7 @@ sources:
 question: What algorithm fills the score-merging slot in the RLM Pipeline's multi-source retrieval stages (4–9), and why is it Reciprocal Rank Fusion?
 tags: [memory, context-management, rag-systems, agentic, retrieval, calibration]
 created: 2026-05-27
-updated: 2026-05-27
+updated: 2026-06-10
 reviewed: false
 reviewed_date: ""
 ---
@@ -26,7 +26,7 @@ RRF is the algorithm the RLM Pipeline implicitly requires but never names. The p
 ## Evidence
 [[concepts/rlm-pipeline]] describes a 10-stage Recursive Layered Memory architecture whose middle stages (4–9) handle multi-source retrieval, decay weighting, and hot-cache population. The page explicitly lists `RRF k=60 is the correct default for merging BM25 + vector + graph` as a `high` confidence claim with `last_verified: 2026-04-12`, but does not contain an `Implementation` section that walks through the RRF call site. The fusion step is named in a claim but not connected to its algorithm page in the body.
 
-[[concepts/reciprocal-rank-fusion]] documents the algorithm in full — score-free, position-based merging via `score(d) = Σ 1/(k + rank_i(d))` with `k=60` — and lists `concepts/rlm-pipeline` in its `related` frontmatter. But the page is currently flagged `[UNVERIFIED PROVENANCE]` and downgraded to `medium` confidence because its primary attribution (`summary-llm-wiki-v2` → `github.com/agentmemory`) could not be located. Critically, the *algorithm itself* is independently corroborated by Cormack, Clarke & Buettcher (2009) and by `siagian-agentic-engineer-roadmap-2026`. The provenance gap affects attribution, not correctness.
+[[concepts/reciprocal-rank-fusion]] documents the algorithm in full — score-free, position-based merging via `score(d) = Σ 1/(k + rank_i(d))` with `k=60` — and lists `concepts/rlm-pipeline` in its `related` frontmatter. The page's `agentmemory` attribution gap was **resolved 2026-06-10** via corroboration: the *algorithm itself* is independently documented by Cormack, Clarke & Buettcher (2009) and by `siagian-agentic-engineer-roadmap-2026`, which clears the 2-source bar and restores RRF to `high` confidence. The provenance gap affected attribution, not correctness; this synthesis inherits the resolution.
 
 [[summaries/siagian-agentic-engineer-roadmap-2026]] explicitly endorses hybrid retrieval as the production default and names RRF as the merging primitive: "dense (embeddings) + sparse (BM25) → re-rank with cross-encoder or LLM judge; reciprocal rank fusion for incompatible score spaces."
 

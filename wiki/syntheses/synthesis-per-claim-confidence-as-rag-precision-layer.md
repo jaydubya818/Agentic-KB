@@ -28,13 +28,13 @@ The integration point is clean. `[[concepts/rag-systems]]` lists RRF (reciprocal
 ## Evidence
 
 - `[[concepts/rag-systems]]` documents the standard evaluation suite (recall@k, precision@k, MRR, nDCG) operating at chunk granularity.
-- `[[patterns/pattern-per-claim-confidence]]` (added 2026-04-12, flagged `[UNVERIFIED PROVENANCE]` 2026-05-23) produces sentence-level confidence annotations on pages where the pattern is applied.
+- `[[patterns/pattern-per-claim-confidence]]` (added 2026-04-12; provenance resolved 2026-06-10 as won't-fix — still single-source, retained at `medium`, not promoted to canonical) produces sentence-level confidence annotations on pages where the pattern is applied.
 - `[[summaries/summary-llm-wiki-v2]]` describes the RLM Pipeline using RRF fusion with no claim-quality weighting — meaning the integration point exists but is currently a pass-through.
 - The synthesis already on file `[[syntheses/synthesis-rag-eval-to-llm-judge]]` argues that LLM-judge evaluation is the next step beyond classical IR metrics; per-claim weighting is a complementary, cheaper intermediate.
 
 ## Counter-arguments & Gaps
 
-The pattern has a known provenance gap (`[UNVERIFIED PROVENANCE]` on the source page) — building eval weight on top of a single-source pattern compounds the trust debt. Before promoting this synthesis to canonical, the underlying pattern needs an independent corroborating source, or the integration needs to be sketched in a way that degrades gracefully when claim confidence is missing.
+The pattern's provenance gap was resolved 2026-06-10 as won't-fix — it remains single-source (`medium`, not canonical), so the caution stands: building eval weight on top of a single-source pattern compounds the trust debt. Before promoting this synthesis to canonical, the underlying pattern still needs an independent corroborating source, or the integration needs to be sketched in a way that degrades gracefully when claim confidence is missing.
 
 Per-claim confidence is also expensive to produce at scale. `[[patterns/pattern-per-claim-confidence]]` itself notes that it's "high-effort, selective application required" — most pages won't carry these annotations. Any retrieval weighting must handle pages without per-claim scores without silently down-ranking them; otherwise the eval system becomes a tax on un-annotated content rather than a precision improvement.
 
