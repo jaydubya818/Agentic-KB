@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-06-10 14:08 | Vault: Agentic-KB | Pages scanned: 605
+> Generated: 2026-06-11 14:07 | Vault: Agentic-KB | Pages scanned: 605
 
 ## Summary
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | Contradictions | 0 | 🟢 Clear |
 | Orphaned pages | 23 | 🟡 Medium |
-| Stale pages | 242 | 🟡 Medium |
+| Stale pages | 240 | 🟡 Medium |
 | Knowledge gaps | 0 | 🟢 Clear |
 
 ## 🟡 Orphaned Pages (no inbound links)
@@ -112,7 +112,6 @@
 - `concepts/query-pipeline.md` — last updated: Tue Apr 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/rag-systems.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/react-nextjs-performance.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
-- `concepts/reciprocal-rank-fusion.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/rlm-pipeline.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/sandboxed-execution.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/self-critique.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
@@ -190,7 +189,6 @@
 - `patterns/pattern-minimal-permissions.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-mistake-log.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-parallel-subagent-ingest.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
-- `patterns/pattern-per-claim-confidence.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-pipeline.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-plan-execute-verify.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-playwright-e2e.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
