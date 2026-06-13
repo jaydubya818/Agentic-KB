@@ -200,11 +200,11 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
+      "claude-code-mcp:Toggle Claude Terminal": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -212,11 +212,10 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "obsidian-git:Open Git source control": false,
-      "claude-code-mcp:Toggle Claude Terminal": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "fbb7b28ed968d69c",
+  "active": "c4c4738c9d0b6597",
   "lastOpenFiles": [
     "wiki/reports",
     "raw/clippings/2026-05-16T08-40-32__apple-notes__test-capture-2026-05-16__323f37fc.md",
