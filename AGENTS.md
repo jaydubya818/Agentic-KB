@@ -250,6 +250,25 @@ tags: []
 
 ## Workflows
 
+### NIGHT SHIFT Automation
+The Agentic-KB vault is wired for a Hermes-native version of the autonomous second-brain night shift.
+
+Selected vault: `/Users/jaywest/Agentic-KB`
+
+Before any scheduled or autonomous write:
+1. Read `house-rules.md`.
+2. Use `playbooks/night-shift-map.md` to map the generic second-brain pattern onto this vault's native schema.
+3. Follow the specific playbook in `playbooks/`.
+4. Preserve `raw/` as source-of-truth. Scheduled jobs must not edit or delete raw originals.
+5. Use `.night-shift/state/` for idempotency instead of moving files.
+6. End with a briefing in `briefings/`, even for no-op runs.
+
+Capture locations:
+- Messy human captures: `raw/inbox/`
+- URL queue: `raw/reading-list.md`
+- Scratch space: `.night-shift/desk/`
+- Human-facing reports: `briefings/`
+
 ### INGEST Workflow
 When told to ingest a file from raw/:
 1. Read the full source file
