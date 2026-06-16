@@ -255,19 +255,34 @@ The Agentic-KB vault is wired for a Hermes-native version of the autonomous seco
 
 Selected vault: `/Users/jaywest/Agentic-KB`
 
+During scheduled Night Shift runs, follow this instruction order:
+1. `house-rules.md`
+2. `playbooks/night-shift-map.md`
+3. the specific Night Shift playbook
+4. legacy INGEST guidance only when it does not conflict with the three files above
+
+These Night Shift instructions override legacy INGEST guidance during scheduled Night Shift runs.
+
 Before any scheduled or autonomous write:
 1. Read `house-rules.md`.
 2. Use `playbooks/night-shift-map.md` to map the generic second-brain pattern onto this vault's native schema.
 3. Follow the specific playbook in `playbooks/`.
-4. Preserve `raw/` as source-of-truth. Scheduled jobs must not edit or delete raw originals.
-5. Use `.night-shift/state/` for idempotency instead of moving files.
+4. Preserve `raw/` as source-of-truth. Scheduled jobs must not edit, delete, move, archive, truncate, overwrite, or mark raw files as ingested by changing the raw file itself.
+5. Use `.night-shift/state/` for processing state and idempotency instead of moving or editing raw files.
 6. End with a briefing in `briefings/`, even for no-op runs.
+7. If a job fails, blocks, or exits early before completing its normal briefing, write an error briefing to `briefings/errors/{job-name}-YYYY-MM-DD-HHMM.md`.
+
+Error briefings must include: job name, job ID if available, timestamp, phase/stage where it failed, error or blocked reason, files read, files written or attempted, files that may need review, rollback guidance, and safest next action for Jay.
+
+Mutable scheduled jobs must run `git status --porcelain` before making changes. If the worktree has dirty files outside the job's expected write paths, stop and write a blocked/error briefing.
 
 Capture locations:
 - Messy human captures: `raw/inbox/`
 - URL queue: `raw/reading-list.md`
 - Scratch space: `.night-shift/desk/`
+- Processing state: `.night-shift/state/`
 - Human-facing reports: `briefings/`
+- Error reports: `briefings/errors/`
 
 ### INGEST Workflow
 When told to ingest a file from raw/:
