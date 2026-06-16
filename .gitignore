@@ -41,3 +41,6 @@ wiki/personal/context-graph/seed.*.local.json
 wiki/_private/*
 !wiki/_private/.enc/
 !wiki/_private/.enc/**
+# Known noisy web server logs (exact files only; do not ignore all logs)
+logs/web-server-error.log
+logs/web-server.log

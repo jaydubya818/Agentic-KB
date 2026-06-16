@@ -274,7 +274,7 @@ Before any scheduled or autonomous write:
 
 Error briefings must include: job name, job ID if available, timestamp, phase/stage where it failed, error or blocked reason, files read, files written or attempted, files that may need review, rollback guidance, and safest next action for Jay.
 
-Mutable scheduled jobs must run `git status --porcelain` before making changes. If the worktree has dirty files outside the job's expected write paths, stop and write a blocked/error briefing.
+Mutable scheduled jobs must run `git status --porcelain` before making changes. Dirty-worktree safety checks may ignore exactly these known noisy log files: `logs/web-server-error.log` and `logs/web-server.log`. Do not ignore `logs/` broadly. If the worktree has any other dirty files outside the job's expected write paths, stop and write a blocked/error briefing.
 
 Capture locations:
 - Messy human captures: `raw/inbox/`

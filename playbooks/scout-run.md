@@ -31,6 +31,11 @@ Expected write paths for Scout:
 - `raw/transcripts/`
 - `raw/code-examples/`
 
+Known noisy log exception:
+- Ignore exactly `logs/web-server-error.log` and `logs/web-server.log` when evaluating dirty-worktree safety.
+- Do not ignore `logs/` broadly.
+- Any other dirty file outside expected write paths must still block the job.
+
 If the worktree has dirty files outside those expected write paths, stop before making changes and write a blocked/error briefing to `briefings/errors/agentic-kb-scout-run-YYYY-MM-DD-HHMM.md`.
 
 ## Raw overwrite protection
