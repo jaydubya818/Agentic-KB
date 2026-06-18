@@ -715,3 +715,35 @@ Source for resolution: WebSearch result during morning-review-daily 2026-05-16 f
 **Guards observed:** No `reviewed:` flags touched (Rule 12). No deletes (Rule 1). No git push. No opposing claim dropped — the dispute was a provenance/attribution gap, not a factual contradiction, so no human-escalation trigger fired. Lint blocked-ingest record at `lint-2026-04-12.md` §7 retained intact for audit.
 
 **Net:** 0 open contradictions remaining in the dispute ledger.
+
+
+---
+
+## 2026-06-18 — morning-review-daily scheduled run
+
+**Trigger:** Scheduled task `morning-review-daily` @ 09:26 PDT.
+
+**Inputs processed:**
+- Apple Notes (24h): 0 notes (AppleScript timed out at 60s — known intermittent issue).
+- KB captures: 0 new (`KB Inbox` test note already deduped; Snipd folder empty; sofie-watch found no pending meeting notes).
+- KB intelligence queries: 5 (connections, patterns, tensions, leverage, proposals) — generated from direct wiki file reads (kb CLI requires server at :3002, not running in automated context).
+
+**Pages created:** 0 (read-only run per refuse list — no wiki/ writes).
+
+**Actions taken:**
+- Morning Review pipeline: completed (exit 0) — 0 findings, 103 stale lifecycle alerts, 1 daily note written.
+- KB intelligence section appended to `Daily Notes/2026-06-18.md` in Obsidian Vault (only personal-vault write — Rule 13 preserved).
+- Obsidian Vault: committed locally (`master`, no remote push — remote not configured).
+
+**Contradictions flagged:** None new. 0 open contradictions in ledger (resolved 2026-06-10).
+
+**Graduates identified (not yet compiled — needs PIN):**
+- `verification-before-completion` — corroborated by `pattern-agent-proof-of-work-loop`.
+- `token-economics` — corroborated by `wiki/concepts/rlm-pipeline`.
+
+**Open threads:**
+- `kb compile` endpoint (PIN-gated) needed to actually promote the two ready-to-graduate candidates.
+- KB server at :3002 not running in automated context — queries executed via direct file reads instead.
+- Obsidian Vault has no git remote configured — push step skipped.
+
+**Refuse list observed:** No deletes. No `reviewed: true` flips. No wiki/ page edits. Daily note append only.
