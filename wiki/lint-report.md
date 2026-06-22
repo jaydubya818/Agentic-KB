@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-06-21 14:07 | Vault: Agentic-KB | Pages scanned: 606
+> Generated: 2026-06-22 14:08 | Vault: Agentic-KB | Pages scanned: 603
 
 ## Summary
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | Contradictions | 0 | 🟢 Clear |
 | Orphaned pages | 24 | 🟡 Medium |
-| Stale pages | 248 | 🟡 Medium |
+| Stale pages | 252 | 🟡 Medium |
 | Knowledge gaps | 0 | 🟢 Clear |
 
 ## 🟡 Orphaned Pages (no inbound links)
@@ -278,10 +278,14 @@
 - `syntheses/lint-2026-04-12.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/lint-2026-04-18.md` — last updated: Fri Apr 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/oss-agent-ecosystem-map.md` — last updated: Sat Apr 04 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-access-boundary-codesign.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-episodic-judgment-as-freshness-signal.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-episodic-judgment-log-to-trace-dataset.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-eval-metrics-to-failure-modes.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-rag-eval-to-llm-judge.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-react-as-native-trajectory-eval.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-repo-aware-system-implementation.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `system/policies/contradiction-policy.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `system/policies/freshness-policy.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `system/policies/promotion-rules.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
