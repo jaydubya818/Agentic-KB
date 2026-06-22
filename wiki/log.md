@@ -747,3 +747,35 @@ Source for resolution: WebSearch result during morning-review-daily 2026-05-16 f
 - Obsidian Vault has no git remote configured — push step skipped.
 
 **Refuse list observed:** No deletes. No `reviewed: true` flips. No wiki/ page edits. Daily note append only.
+
+---
+
+## 2026-06-22 — morning-review-daily scheduled run
+
+**Trigger:** Scheduled task `morning-review-daily` @ 06:05 PDT.
+
+**Inputs processed:**
+- Apple Notes (24h): 16 notes reviewed (job prep materials, platform architecture patterns) — Morning Review pipeline exit 0, 5 findings, 3 auto-applied, 2 human-approval items.
+- KB captures: 0 new (`KB Inbox` test note already deduped; Snipd folder empty; sofie-watch found no pending meeting notes).
+- KB intelligence queries: 5 (connections, patterns, tensions, leverage, proposals) — generated from direct wiki file reads (kb CLI requires server at :3002, not running in automated context).
+
+**Pages created:** 0 (read-only run per refuse list — no wiki/ writes).
+
+**Actions taken:**
+- Morning Review pipeline: completed (exit 0) — 16 notes, 5 findings, 3 auto-applied (KB notes + daily TODO), 2 human-approval items (rescue Recently Deleted notes + consolidate overlapping prep notes).
+- KB intelligence section appended to `Daily Notes/2026-06-22.md` in Obsidian Vault (only personal-vault write — Rule 13 preserved).
+- Obsidian Vault: committed locally (`master 1e6e98e` — "Morning review + KB intelligence — 2026-06-22").
+
+**Contradictions flagged:** None new. 0 open contradictions in ledger.
+
+**Graduates identified (not yet compiled — compile step still crashed):**
+- `verification-before-completion` — corroborated by `pattern-agent-proof-of-work-loop` (same as 2026-06-18 run — still blocked by compile crash).
+- `token-economics` — corroborated by `wiki/concepts/rlm-pipeline` (same as 2026-06-18 — still blocked).
+
+**Open threads:**
+- `compile-2source-gate.mjs --execute` crashes with `Error: undefined` — blocking 29 promote candidates. High priority to debug.
+- 108 deferred candidates in HEAVY_BACKLOG — audit candidates.md recommended.
+- Human approval queue from morning review: (1) rescue 3 notes from Recently Deleted before permanent deletion; (2) consolidate 4 overlapping preparation notes into canonical form.
+- KB server at :3002 not running in automated context — queries executed via direct file reads.
+
+**Refuse list observed:** No deletes. No `reviewed: true` flips. No wiki/ page edits. Daily note append only.
