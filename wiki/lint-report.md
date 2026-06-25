@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-06-22 14:08 | Vault: Agentic-KB | Pages scanned: 603
+> Generated: 2026-06-24 (lint failed — Anthropic API credits exhausted; last successful scan 2026-06-22) | Vault: Agentic-KB | Pages scanned: 603
 
 ## Summary
 
