@@ -1,0 +1,53 @@
+{
+  "processed": [
+    {
+      "url": "https://github.com/langchain-ai/rag-from-scratch",
+      "destination": "raw/framework-docs/langchain-ai-rag-from-scratch.md",
+      "captured_at": "2026-06-18T11:59:54.385675-07:00",
+      "sha256": "0e520783853458307ae4ef189b6bc86a6d1b7e40d290ff60be6b27bea410afa6",
+      "source_note": "Apple Notes 2026-06-16: RAG notebooks; use to refresh Agentic-KB RAG recipes/evals."
+    },
+    {
+      "url": "https://github.com/chopratejas/headroom",
+      "destination": "raw/framework-docs/chopratejas-headroom.md",
+      "captured_at": "2026-06-18T11:59:55.329035-07:00",
+      "sha256": "8d10f33674bbcbfc1ee281e8c07891ec3eadf240b2761d8350369ab64f2ae1bd",
+      "source_note": "Apple Notes 2026-06-18/13: token-compression proxy; evaluate for Hermes/local-agent cost reduction before enabling."
+    },
+    {
+      "url": "https://github.com/mgechev/skills-best-practices",
+      "destination": "raw/framework-docs/mgechev-skills-best-practices.md",
+      "captured_at": "2026-06-18T11:59:56.251040-07:00",
+      "sha256": "fb35d181c5b351122f497731655984d19b315d1579da049ec6038d597163c65d",
+      "source_note": "Apple Notes 2026-06-16: skill structure and validation best practices; compare against Hermes skill-authoring guidance."
+    },
+    {
+      "url": "https://github.com/microsoft/SkillOpt",
+      "destination": "raw/framework-docs/microsoft-skillopt.md",
+      "captured_at": "2026-06-18T11:59:57.278400-07:00",
+      "sha256": "7f2850e92fe229a09c7b4534c77fdaf36b03b12670b7e26b3887754c9f1e0220",
+      "source_note": "Apple Notes 2026-06-15: skill training/evaluation loop; evaluate for nightly skill improvement gates, not direct auto-mutation."
+    },
+    {
+      "url": "https://github.com/Ar9av/obsidian-wiki",
+      "destination": "raw/framework-docs/ar9av-obsidian-wiki.md",
+      "captured_at": "2026-06-18T11:59:58.314131-07:00",
+      "sha256": "ba1c03801fee69898f334555a196e4987f8db2c75f8fe3431e957a8bc3e24c3d",
+      "source_note": "Apple Notes 2026-06-15: Obsidian-backed persistent AI memory; compare against existing Jarrett-Wiki-Test pilot and Agentic-KB schema."
+    },
+    {
+      "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+      "destination": "raw/framework-docs/rohitg00-ai-engineering-from-scratch.md",
+      "captured_at": "2026-06-18T11:59:59.320330-07:00",
+      "sha256": "580a41830ce938c74dcc3bb79823bc8221526d4fc2cf15be73a6ad3f9752e7b3",
+      "source_note": "Apple Notes 2026-06-15: artifact-based AI engineering curriculum; mine only agent/MCP/RAG production lessons relevant to Jay's setup."
+    },
+    {
+      "url": "https://x.com/sumanth_077/status/2066530299467706495",
+      "destination": "raw/framework-docs/x-twitter-2066530299467706495.md",
+      "captured_at": "2026-06-18T12:00:00.042098-07:00",
+      "sha256": "e0b451647029ceef958148bc3fa24c3915c7775225ae12372f2a1bb4f38d18dc",
+      "source_note": "Apple Notes 2026-06-15: LEANN lightweight local RAG claim; resolve source repo/paper and evaluate for local personal-data retrieval."
+    }
+  ]
+}

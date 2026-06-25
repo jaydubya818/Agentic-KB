@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "job": "agentic-kb-refinery-run",
+  "updated_at": "2026-06-16T03:17:13-07:00",
+  "processed": {},
+  "last_run": {
+    "timestamp": "2026-06-16T03:17:13-07:00",
+    "result": "no-op",
+    "scanned": {
+      "raw_inbox_files": [
+        "raw/inbox/README.md"
+      ],
+      "status_unprocessed_files": []
+    },
+    "skipped": [
+      {
+        "path": "raw/inbox/README.md",
+        "reason": "operational README, not source material",
+        "sha256": "a393bcb302e6eb1f9a222fb837b07583e96e5d401f5022cf2909e4297ca36f87"
+      }
+    ],
+    "processed_count": 0
+  }
+}

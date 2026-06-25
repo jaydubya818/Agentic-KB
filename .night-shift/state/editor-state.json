@@ -1,7 +1,25 @@
 {
-  "last_run_timestamp": null,
+  "last_run_timestamp": "2026-06-22T06:26:03-0700",
   "files_considered": [],
-  "outputs_written": [],
-  "status": "never_run",
-  "briefing_path": null
+  "outputs_written": [
+    "briefings/errors/agentic-kb-editor-run-2026-06-22-0626.md"
+  ],
+  "status": "blocked_dirty_worktree",
+  "briefing_path": "briefings/errors/agentic-kb-editor-run-2026-06-22-0626.md",
+  "blocked_stage": "pre-run dirty-worktree safety check",
+  "blocking_dirty_files": [
+    "logs/audit.log",
+    "logs/kb-dev-server.log",
+    "playbooks/editor-run.md",
+    "playbooks/refinery-run.md",
+    "playbooks/scout-run.md",
+    "raw/reading-list.md",
+    "raw/framework-docs/ar9av-obsidian-wiki.md",
+    "raw/framework-docs/chopratejas-headroom.md",
+    "raw/framework-docs/langchain-ai-rag-from-scratch.md",
+    "raw/framework-docs/mgechev-skills-best-practices.md",
+    "raw/framework-docs/microsoft-skillopt.md",
+    "raw/framework-docs/rohitg00-ai-engineering-from-scratch.md",
+    "raw/framework-docs/x-twitter-2066530299467706495.md"
+  ]
 }

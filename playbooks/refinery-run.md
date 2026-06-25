@@ -41,9 +41,14 @@ Expected write paths for Refinery:
 - `wiki/index.md`
 - `wiki/log.md`
 
-Known noisy log exception:
-- Ignore exactly `logs/web-server-error.log` and `logs/web-server.log` when evaluating dirty-worktree safety.
-- Do not ignore `logs/` broadly.
+Known noisy log and intake exceptions:
+- Ignore exactly these runtime logs when evaluating dirty-worktree safety:
+  - `logs/web-server-error.log`
+  - `logs/web-server.log`
+  - `logs/audit.log`
+  - `logs/kb-dev-server.log`
+- Ignore exactly `raw/reading-list.md` as the human/agent-maintained Scout intake queue.
+- Do not ignore `logs/` or `raw/` broadly.
 - Any other dirty file outside expected write paths must still block the job.
 
 If the worktree has dirty files outside those expected write paths, stop before making changes and write a blocked/error briefing to `briefings/errors/agentic-kb-refinery-run-YYYY-MM-DD-HHMM.md`.

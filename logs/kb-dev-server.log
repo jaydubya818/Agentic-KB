@@ -7,140 +7,14 @@
 - Local:         http://localhost:3009
 - Network:       http://10.0.0.157:3009
 - Environments: .env.local
-✓ Ready in 205ms
+✓ Ready in 219ms
 
- GET /api/pending-count 200 in 75ms (next.js: 66ms, application-code: 9ms)
- POST /api/lint 200 in 42s (next.js: 38ms, application-code: 42s)
- GET /api/pending-count 200 in 5ms (next.js: 1375µs, application-code: 4ms)
- POST /api/query 200 in 6.2s (next.js: 177ms, application-code: 6.0s)
- POST /api/query 200 in 39.3s (next.js: 3ms, application-code: 39.3s)
- POST /api/query 200 in 48s (next.js: 5ms, application-code: 48s)
- POST /api/query 200 in 32.8s (next.js: 3ms, application-code: 32.8s)
- POST /api/query 200 in 22.1s (next.js: 4ms, application-code: 22.1s)
- GET /api/pending-count 200 in 8ms (next.js: 3ms, application-code: 5ms)
- POST /api/lint 200 in 39.2s (next.js: 3ms, application-code: 39.2s)
- POST /api/query 200 in 45s (next.js: 6ms, application-code: 45s)
- POST /api/query 200 in 43s (next.js: 2ms, application-code: 43s)
- POST /api/query 200 in 30.9s (next.js: 4ms, application-code: 30.9s)
- POST /api/query 200 in 20.4s (next.js: 5ms, application-code: 20.4s)
- GET /api/pending-count 200 in 10ms (next.js: 5ms, application-code: 5ms)
- POST /api/lint 200 in 39.4s (next.js: 3ms, application-code: 39.4s)
- POST /api/compile 401 in 153ms (next.js: 149ms, application-code: 4ms)
- GET /api/pending-count 200 in 53ms (next.js: 18ms, application-code: 34ms)
- POST /api/lint 200 in 39.0s (next.js: 4ms, application-code: 39.0s)
- POST /api/query 200 in 40.0s (next.js: 7ms, application-code: 40.0s)
- POST /api/query 200 in 45s (next.js: 2ms, application-code: 45s)
- POST /api/query 200 in 39.1s (next.js: 1314µs, application-code: 39.1s)
- POST /api/query 200 in 19.7s (next.js: 1989µs, application-code: 19.7s)
- POST /api/compile 401 in 9ms (next.js: 4ms, application-code: 5ms)
- POST /api/compile 401 in 6ms (next.js: 2ms, application-code: 4ms)
- POST /api/compile 401 in 7ms (next.js: 4ms, application-code: 3ms)
- POST /api/query 200 in 38.9s (next.js: 10ms, application-code: 38.9s)
- GET /api/pending-count 200 in 8ms (next.js: 3ms, application-code: 6ms)
- POST /api/lint 200 in 43s (next.js: 2ms, application-code: 43s)
- POST /api/query 200 in 42s (next.js: 5ms, application-code: 42s)
- POST /api/query 200 in 43s (next.js: 1280µs, application-code: 43s)
- POST /api/query 200 in 17.9s (next.js: 1717µs, application-code: 17.9s)
- POST /api/compile 401 in 8ms (next.js: 4ms, application-code: 4ms)
- POST /api/compile 401 in 5ms (next.js: 1752µs, application-code: 3ms)
- POST /api/compile 401 in 5ms (next.js: 1665µs, application-code: 3ms)
- POST /api/compile 401 in 5ms (next.js: 1704µs, application-code: 3ms)
- POST /api/compile 401 in 5ms (next.js: 1518µs, application-code: 4ms)
- POST /api/compile 401 in 4ms (next.js: 1291µs, application-code: 3ms)
- GET /api/health 404 in 1273ms (next.js: 1152ms, application-code: 121ms)
- POST /api/compile 401 in 7ms (next.js: 3ms, application-code: 4ms)
- POST /api/query 200 in 41s (next.js: 5ms, application-code: 41s)
- POST /api/query 200 in 44s (next.js: 3ms, application-code: 44s)
- POST /api/query 200 in 34.3s (next.js: 3ms, application-code: 34.3s)
- POST /api/query 200 in 17.3s (next.js: 2ms, application-code: 17.3s)
- POST /api/compile 401 in 7ms (next.js: 3ms, application-code: 4ms)
- GET /api/pending-count 200 in 9ms (next.js: 4ms, application-code: 5ms)
- POST /api/lint 200 in 37.5s (next.js: 3ms, application-code: 37.5s)
- POST /api/lint 200 in 43s (next.js: 1764µs, application-code: 43s)
- POST /api/lint 200 in 36.0s (next.js: 5ms, application-code: 36.0s)
- POST /api/lint 200 in 38.0s (next.js: 3ms, application-code: 38.0s)
- POST /api/lint 200 in 36.9s (next.js: 1505µs, application-code: 36.9s)
- POST /api/lint 200 in 37.8s (next.js: 1640µs, application-code: 37.8s)
- POST /api/lint 200 in 42s (next.js: 1301µs, application-code: 42s)
- POST /api/lint 200 in 39.9s (next.js: 1922µs, application-code: 39.9s)
- GET /api/pending-count 200 in 13ms (next.js: 5ms, application-code: 8ms)
- POST /api/lint 200 in 41s (next.js: 4ms, application-code: 41s)
- POST /api/lint 200 in 7.0min (next.js: 3ms, application-code: 7.0min)
- POST /api/lint 200 in 6.4min (next.js: 1568µs, application-code: 6.4min)
- POST /api/query 200 in 40s (next.js: 5ms, application-code: 40s)
-WikiQuery error: Error: read ECONNRESET
-    at ignore-listed frames {
-  [cause]: Error: read ECONNRESET
-      at ignore-listed frames {
-    errno: -54,
-    code: 'ECONNRESET',
-    syscall: 'read'
-  }
-}
- POST /api/query 200 in 15.9min (next.js: 1949µs, application-code: 15.9min)
-WikiQuery error: Error: Socket timeout
-    at ignore-listed frames {
-  [cause]: Error: Socket timeout
-      at ignore-listed frames {
-    code: 'ERR_SOCKET_TIMEOUT',
-    timeout: 601000
-  }
-}
- POST /api/query 200 in 26.2min (next.js: 2ms, application-code: 26.2min)
-WikiQuery error: Error: read ECONNRESET
-    at ignore-listed frames {
-  [cause]: Error: read ECONNRESET
-      at ignore-listed frames {
-    errno: -54,
-    code: 'ECONNRESET',
-    syscall: 'read'
-  }
-}
- POST /api/query 200 in 17.9min (next.js: 1871µs, application-code: 17.9min)
-WikiQuery error: Error: Socket timeout
-    at ignore-listed frames {
-  [cause]: Error: Socket timeout
-      at ignore-listed frames {
-    code: 'ERR_SOCKET_TIMEOUT',
-    timeout: 601000
-  }
-}
- POST /api/query 200 in 17.8min (next.js: 1976µs, application-code: 17.8min)
- POST /api/query 200 in 43s (next.js: 4ms, application-code: 43s)
- POST /api/lint 200 in 54s (next.js: 4ms, application-code: 54s)
- POST /api/lint 200 in 38.8s (next.js: 2ms, application-code: 38.8s)
- POST /api/lint 200 in 40s (next.js: 2ms, application-code: 40s)
- POST /api/query 200 in 38.7s (next.js: 3ms, application-code: 38.7s)
- POST /api/query 200 in 48s (next.js: 1837µs, application-code: 48s)
- POST /api/query 200 in 36.0s (next.js: 1832µs, application-code: 35.9s)
- POST /api/query 200 in 26.7s (next.js: 1961µs, application-code: 26.7s)
- POST /api/compile 401 in 7ms (next.js: 3ms, application-code: 5ms)
- GET /api/pending-count 200 in 9ms (next.js: 2ms, application-code: 6ms)
- POST /api/lint 200 in 41s (next.js: 2ms, application-code: 41s)
- POST /api/lint 200 in 42s (next.js: 1694µs, application-code: 42s)
- POST /api/lint 200 in 37.1s (next.js: 1437µs, application-code: 37.1s)
- POST /api/lint 200 in 46s (next.js: 1286µs, application-code: 46s)
- POST /api/lint 200 in 40s (next.js: 1433µs, application-code: 40s)
- POST /api/lint 200 in 90s (next.js: 1360µs, application-code: 90s)
- POST /api/lint 200 in 39.0s (next.js: 1688µs, application-code: 39.0s)
- POST /api/lint 200 in 37.8s (next.js: 1281µs, application-code: 37.8s)
- POST /api/lint 200 in 42s (next.js: 1286µs, application-code: 42s)
- POST /api/lint 200 in 39.4s (next.js: 1279µs, application-code: 39.4s)
- POST /api/lint 200 in 41s (next.js: 1742µs, application-code: 41s)
- POST /api/lint 200 in 41s (next.js: 1419µs, application-code: 41s)
- GET /api/pending-count 200 in 73ms (next.js: 35ms, application-code: 38ms)
- POST /api/lint 200 in 39.5s (next.js: 15ms, application-code: 39.5s)
- POST /api/query 200 in 38.8s (next.js: 4ms, application-code: 38.8s)
- POST /api/query 200 in 44s (next.js: 4ms, application-code: 44s)
- POST /api/query 200 in 35.5s (next.js: 2ms, application-code: 35.5s)
- POST /api/query 200 in 21.4s (next.js: 3ms, application-code: 21.4s)
- POST /api/query 200 in 38.5s (next.js: 3ms, application-code: 38.5s)
- POST /api/query 200 in 39.6s (next.js: 3ms, application-code: 39.6s)
- POST /api/query 200 in 33.7s (next.js: 2ms, application-code: 33.6s)
- POST /api/query 200 in 18.4s (next.js: 3ms, application-code: 18.4s)
- GET /api/pending-count 200 in 7ms (next.js: 3ms, application-code: 4ms)
- POST /api/lint 200 in 40s (next.js: 4ms, application-code: 40s)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdsV9rYCrygiNhAvWZoA"}
+ GET /api/pending-count 200 in 73ms (next.js: 64ms, application-code: 9ms)
+ POST /api/lint 200 in 47s (next.js: 41ms, application-code: 47s)
+ POST /api/query 200 in 36.3s (next.js: 20ms, application-code: 36.2s)
+ POST /api/query 200 in 48s (next.js: 953µs, application-code: 48s)
+ POST /api/query 200 in 56s (next.js: 880µs, application-code: 56s)
+WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcLFJAJV2eDqNWx4hhfz7"}
     at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
     at async Object.start (src/app/api/query/route.ts:248:27)
   75 |  */
@@ -154,34 +28,34 @@ WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_err
   headers: {
     'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
     'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a054031e1c034f1b-SJC',
+    'cf-ray': 'a103bc264fa65024-SJC',
     connection: 'keep-alive',
     'content-encoding': 'gzip',
     'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
     'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:21:01 GMT',
-    'request-id': 'req_011CbdsV9rYCrygiNhAvWZoA',
+    date: 'Tue, 23 Jun 2026 13:10:48 GMT',
+    'request-id': 'req_011CcLFJAJV2eDqNWx4hhfz7',
     server: 'cloudflare',
-    'set-cookie': '_cfuvid=3AUWB7UOpYa7GVudF5x4gR30yWMSIV_c17PT9fw9Nzk-1780377661.1328688-1.0.1.1-Qy6dQdRXxOa8vO7bn.C1g3WqF2kK2nVk6sXSfd_sg9U; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'set-cookie': '_cfuvid=jifeHf1rfJBuSGDLWMhR5XQOFS_.As1KvS3dgY8uyuM-1782220248.0472634-1.0.1.1-_XhBHM_rwji553mRUJrX4jk56xdcZcH8pfSCOnzJ0pY; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-453a6d2babb38b06b31e0b40f6cf8c04-d163c2066aa303ba-01',
+    traceresponse: '00-40ce5c2a5f85d869f8c2be9288abf5ce-99e8bfbaa1b75d80-01',
     'transfer-encoding': 'chunked',
     vary: 'Accept-Encoding',
     'x-robots-tag': 'none',
     'x-should-retry': 'false'
   },
-  request_id: 'req_011CbdsV9rYCrygiNhAvWZoA',
+  request_id: 'req_011CcLFJAJV2eDqNWx4hhfz7',
   error: {
     type: 'error',
     error: {
       type: 'invalid_request_error',
       message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
     },
-    request_id: 'req_011CbdsV9rYCrygiNhAvWZoA'
+    request_id: 'req_011CcLFJAJV2eDqNWx4hhfz7'
   }
 }
- POST /api/query 200 in 378ms (next.js: 11ms, application-code: 367ms)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdsVBdh5T54HFpxVcK5i"}
+ POST /api/query 200 in 295ms (next.js: 623µs, application-code: 294ms)
+WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcLFKXSzfJo9e44fxBZM9"}
     at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
     at async Object.start (src/app/api/query/route.ts:248:27)
   75 |  */
@@ -195,34 +69,34 @@ WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_err
   headers: {
     'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
     'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a0540320ba6c4f1b-SJC',
+    'cf-ray': 'a103bc99ee26d019-SJC',
     connection: 'keep-alive',
     'content-encoding': 'gzip',
     'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
     'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:21:01 GMT',
-    'request-id': 'req_011CbdsVBdh5T54HFpxVcK5i',
+    date: 'Tue, 23 Jun 2026 13:11:06 GMT',
+    'request-id': 'req_011CcLFKXSzfJo9e44fxBZM9',
     server: 'cloudflare',
-    'set-cookie': '_cfuvid=7moTvOmj0m31EwhD5.MZKo5lrcKS_pTDil40uGQx1fY-1780377661.559801-1.0.1.1-6aQsK7WcBgp69U2CcKb5xE5qHGeL18XXVgmkoaCu5dU; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'set-cookie': '_cfuvid=LDdzXuay8jmsArYlc7xZidolNbH2afk35B3jn7g5z1U-1782220266.5482645-1.0.1.1-jPiooxGxUks4I8QztUaDbCRcMEw6ydNn9PUu0NDSc0c; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-044e8e91d51ae83c9ce24303f803fbda-8a95f16e6b0947d6-01',
+    traceresponse: '00-5299a8337b5b0e872f9f6c114ee9e54f-b19b6cfb02683665-01',
     'transfer-encoding': 'chunked',
     vary: 'Accept-Encoding',
     'x-robots-tag': 'none',
     'x-should-retry': 'false'
   },
-  request_id: 'req_011CbdsVBdh5T54HFpxVcK5i',
+  request_id: 'req_011CcLFKXSzfJo9e44fxBZM9',
   error: {
     type: 'error',
     error: {
       type: 'invalid_request_error',
       message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
     },
-    request_id: 'req_011CbdsVBdh5T54HFpxVcK5i'
+    request_id: 'req_011CcLFKXSzfJo9e44fxBZM9'
   }
 }
- POST /api/query 200 in 139ms (next.js: 2ms, application-code: 136ms)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdsVCoPnugSreQa8yGCA"}
+ POST /api/query 200 in 261ms (next.js: 698µs, application-code: 260ms)
+WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcLFLEuMUphoXyHcpLdcW"}
     at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
     at async Object.start (src/app/api/query/route.ts:248:27)
   75 |  */
@@ -236,34 +110,155 @@ WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_err
   headers: {
     'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
     'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a05403224e134f1b-SJC',
+    'cf-ray': 'a103bcd68ba889cc-SJC',
     connection: 'keep-alive',
     'content-encoding': 'gzip',
     'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
     'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:21:01 GMT',
-    'request-id': 'req_011CbdsVCoPnugSreQa8yGCA',
+    date: 'Tue, 23 Jun 2026 13:11:16 GMT',
+    'request-id': 'req_011CcLFLEuMUphoXyHcpLdcW',
     server: 'cloudflare',
-    'set-cookie': '_cfuvid=kZ7fuHr4wXRgRrFi.OnxEo1pgTtAFWxRJE6rjGctu7I-1780377661.8109024-1.0.1.1-r__pDTRJsyv3UdzMDbtIuBUA_shAkwwGUQyHvkbUgjI; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'set-cookie': '_cfuvid=BilyTjTX.nOcVdB0AWY3jW6zY0G3Cyspq1iC94urzvs-1782220276.246721-1.0.1.1-vfeqVAntOXAJGvessDRdXDU1nnPesc0fL7ijWoB_cpQ; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-bff710f1543dbf906d9d72d4ecbdac87-1368f139f6028c8c-01',
+    traceresponse: '00-b36d6fc6204dbe76436caebb22ed58bd-07756f791683cad1-01',
     'transfer-encoding': 'chunked',
     vary: 'Accept-Encoding',
     'x-robots-tag': 'none',
     'x-should-retry': 'false'
   },
-  request_id: 'req_011CbdsVCoPnugSreQa8yGCA',
+  request_id: 'req_011CcLFLEuMUphoXyHcpLdcW',
   error: {
     type: 'error',
     error: {
       type: 'invalid_request_error',
       message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
     },
-    request_id: 'req_011CbdsVCoPnugSreQa8yGCA'
+    request_id: 'req_011CcLFLEuMUphoXyHcpLdcW'
   }
 }
- POST /api/query 200 in 182ms (next.js: 3ms, application-code: 179ms)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdsVE15JwyzJhubGh7z7"}
+ POST /api/query 200 in 377ms (next.js: 591µs, application-code: 377ms)
+ GET /api/pending-count 200 in 9ms (next.js: 1925µs, application-code: 7ms)
+⨯ Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcLKarmixBZ1nbpWjVzyN"}
+    at async POST (src/app/api/lint/route.ts:124:22)
+  122 |
+  123 |   // Ask Claude for contradiction + gap analysis
+> 124 |   const aiResponse = await client.messages.create({
+      |                      ^
+  125 |     model: 'claude-sonnet-4-6',
+  126 |     max_tokens: 2048,
+  127 |     messages: [{ {
+  status: 400,
+  headers: {
+    'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': 'a1040e845f9a9ddb-SJC',
+    connection: 'keep-alive',
+    'content-encoding': 'gzip',
+    'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
+    'content-type': 'application/json',
+    date: 'Tue, 23 Jun 2026 14:07:02 GMT',
+    'request-id': 'req_011CcLKarmixBZ1nbpWjVzyN',
+    server: 'cloudflare',
+    'set-cookie': '_cfuvid=FR7HIlTq3uLlRUEqc5G4zZj6oRGfe2UftmrvUS9MvW0-1782223621.817213-1.0.1.1-ZzUkZmy2.ZkbKwKpWBV.BqTgWpkx.PQuWr_vnsDfPrs; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    traceresponse: '00-d20bd977a1accc6ff75e5d5ec07daacc-6836769be2288483-01',
+    'transfer-encoding': 'chunked',
+    vary: 'Accept-Encoding',
+    'x-robots-tag': 'none',
+    'x-should-retry': 'false'
+  },
+  request_id: 'req_011CcLKarmixBZ1nbpWjVzyN',
+  error: {
+    type: 'error',
+    error: {
+      type: 'invalid_request_error',
+      message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
+    },
+    request_id: 'req_011CcLKarmixBZ1nbpWjVzyN'
+  }
+}
+ POST /api/lint 500 in 763ms (next.js: 1491µs, application-code: 762ms)
+⨯ Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcLKcWPvoW1tbpqQfTzUK"}
+    at async POST (src/app/api/lint/route.ts:124:22)
+  122 |
+  123 |   // Ask Claude for contradiction + gap analysis
+> 124 |   const aiResponse = await client.messages.create({
+      |                      ^
+  125 |     model: 'claude-sonnet-4-6',
+  126 |     max_tokens: 2048,
+  127 |     messages: [{ {
+  status: 400,
+  headers: {
+    'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': 'a1040f106ea507e8-SJC',
+    connection: 'keep-alive',
+    'content-encoding': 'gzip',
+    'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
+    'content-type': 'application/json',
+    date: 'Tue, 23 Jun 2026 14:07:24 GMT',
+    'request-id': 'req_011CcLKcWPvoW1tbpqQfTzUK',
+    server: 'cloudflare',
+    'set-cookie': '_cfuvid=fhAcQGCaClgt4FOhF03npFBImjPntaCsgmYC1jIe3u8-1782223644.2213063-1.0.1.1-i7OGDBlR5iXUwfBvaMIv1k1SXW.eIRe_zowItkDleFc; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    traceresponse: '00-1a7ed72509f443b14c65eab2838f7174-2708e5c0656e0451-01',
+    'transfer-encoding': 'chunked',
+    vary: 'Accept-Encoding',
+    'x-robots-tag': 'none',
+    'x-should-retry': 'false'
+  },
+  request_id: 'req_011CcLKcWPvoW1tbpqQfTzUK',
+  error: {
+    type: 'error',
+    error: {
+      type: 'invalid_request_error',
+      message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
+    },
+    request_id: 'req_011CcLKcWPvoW1tbpqQfTzUK'
+  }
+}
+ POST /api/lint 500 in 313ms (next.js: 1162µs, application-code: 312ms)
+⨯ Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcLKcsaQHkPBpuzqe3EYt"}
+    at async POST (src/app/api/lint/route.ts:124:22)
+  122 |
+  123 |   // Ask Claude for contradiction + gap analysis
+> 124 |   const aiResponse = await client.messages.create({
+      |                      ^
+  125 |     model: 'claude-sonnet-4-6',
+  126 |     max_tokens: 2048,
+  127 |     messages: [{ {
+  status: 400,
+  headers: {
+    'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': 'a1040f2ef9bdccf8-SJC',
+    connection: 'keep-alive',
+    'content-encoding': 'gzip',
+    'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
+    'content-type': 'application/json',
+    date: 'Tue, 23 Jun 2026 14:07:29 GMT',
+    'request-id': 'req_011CcLKcsaQHkPBpuzqe3EYt',
+    server: 'cloudflare',
+    'set-cookie': '_cfuvid=OvyK4Iy1mCyqn0P0h2U3rn9q34hwD1vKWQkU3M6Goa4-1782223649.1127818-1.0.1.1-oYDCAHay69DbCqF0fVdzVkWK3OzBOne5L4pPy8b1qAo; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    traceresponse: '00-5299dc09eb5acfff9ad74ea35e824b9a-ad0f81e4f5822efc-01',
+    'transfer-encoding': 'chunked',
+    vary: 'Accept-Encoding',
+    'x-robots-tag': 'none',
+    'x-should-retry': 'false'
+  },
+  request_id: 'req_011CcLKcsaQHkPBpuzqe3EYt',
+  error: {
+    type: 'error',
+    error: {
+      type: 'invalid_request_error',
+      message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
+    },
+    request_id: 'req_011CcLKcsaQHkPBpuzqe3EYt'
+  }
+}
+ POST /api/lint 500 in 1032ms (next.js: 972µs, application-code: 1031ms)
+WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcN8evs7yF3UVUK1TA8XV"}
     at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
     at async Object.start (src/app/api/query/route.ts:248:27)
   75 |  */
@@ -277,34 +272,34 @@ WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_err
   headers: {
     'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
     'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a05403240a934f1b-SJC',
+    'cf-ray': 'a10bf0dd3e56e8d9-SJC',
     connection: 'keep-alive',
     'content-encoding': 'gzip',
     'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
     'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:21:02 GMT',
-    'request-id': 'req_011CbdsVE15JwyzJhubGh7z7',
+    date: 'Wed, 24 Jun 2026 13:04:53 GMT',
+    'request-id': 'req_011CcN8evs7yF3UVUK1TA8XV',
     server: 'cloudflare',
-    'set-cookie': '_cfuvid=JfjrhkNlcxbDXO7bxgudTRXIXNiVjbmhRx18Izv3l1o-1780377662.082593-1.0.1.1-LUUp1nb83js2Zpe_0yDzYfKF_dv7oXQR9jQ5Hu42nGE; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'set-cookie': '_cfuvid=93U7r2dmaFxcnNC4OlBXptEzxrFnClTumHZ9M_5oOeI-1782306293.3114548-1.0.1.1-rwZg1mgLnDo5q1o3cU39bcIHcFd6dlWLxyHZzWPG3RM; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-8e500cd406fc036ff98c47268fe1ae4f-2536346be68c4695-01',
+    traceresponse: '00-9f01419ce1dcf0920085c5293512780b-947c32e6a0f39b38-01',
     'transfer-encoding': 'chunked',
     vary: 'Accept-Encoding',
     'x-robots-tag': 'none',
     'x-should-retry': 'false'
   },
-  request_id: 'req_011CbdsVE15JwyzJhubGh7z7',
+  request_id: 'req_011CcN8evs7yF3UVUK1TA8XV',
   error: {
     type: 'error',
     error: {
       type: 'invalid_request_error',
       message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
     },
-    request_id: 'req_011CbdsVE15JwyzJhubGh7z7'
+    request_id: 'req_011CcN8evs7yF3UVUK1TA8XV'
   }
 }
- POST /api/query 200 in 199ms (next.js: 3ms, application-code: 196ms)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdsbWa9He5xf5qqwjtUz"}
+ POST /api/query 200 in 413ms (next.js: 1706µs, application-code: 411ms)
+WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcN8fQJsSzskFEiDCMH4h"}
     at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
     at async Object.start (src/app/api/query/route.ts:248:27)
   75 |  */
@@ -318,214 +313,111 @@ WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_err
   headers: {
     'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
     'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a05405392d86d59a-SJC',
+    'cf-ray': 'a10bf1057e5feb34-SJC',
     connection: 'keep-alive',
     'content-encoding': 'gzip',
     'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
     'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:22:27 GMT',
-    'request-id': 'req_011CbdsbWa9He5xf5qqwjtUz',
+    date: 'Wed, 24 Jun 2026 13:04:59 GMT',
+    'request-id': 'req_011CcN8fQJsSzskFEiDCMH4h',
     server: 'cloudflare',
-    'set-cookie': '_cfuvid=nKFNHexDnw4zYfAnvbSNNNT7ta8JDPbpqStxC0qyK24-1780377747.3828375-1.0.1.1-SjxKdCJwESp1IYTMs4ofrU3qAckX7oM7cBzQ33Ckzeg; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'set-cookie': '_cfuvid=VhI30bJEGTuSy3BABpNLAEGmcyM8rPtNFUI21lFf744-1782306299.7520206-1.0.1.1-MVG.6esBq69npvn.Vk99VFV1crpCErjjbboXV0YcpDQ; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-bc44d11d61896707b7aa4b11bed4525f-e25357f83a5de341-01',
+    traceresponse: '00-bc112e462999d398e0e5872a2452cbea-caf571a72b46c0ad-01',
     'transfer-encoding': 'chunked',
     vary: 'Accept-Encoding',
     'x-robots-tag': 'none',
     'x-should-retry': 'false'
   },
-  request_id: 'req_011CbdsbWa9He5xf5qqwjtUz',
+  request_id: 'req_011CcN8fQJsSzskFEiDCMH4h',
   error: {
     type: 'error',
     error: {
       type: 'invalid_request_error',
       message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
     },
-    request_id: 'req_011CbdsbWa9He5xf5qqwjtUz'
+    request_id: 'req_011CcN8fQJsSzskFEiDCMH4h'
   }
 }
- POST /api/query 200 in 214ms (next.js: 2ms, application-code: 212ms)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdscSjEcTKmF4z8WSfWJ"}
-    at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
-    at async Object.start (src/app/api/query/route.ts:248:27)
-  75 |  */
-  76 | async function identifyRelevantPages(question: string, indexContent: string, scope = 'publ...
-> 77 |   const response = await client.messages.create({
-     |                    ^
-  78 |     model: 'claude-sonnet-4-6',
-  79 |     max_tokens: 512,
-  80 |     messages: [ {
+ POST /api/query 200 in 241ms (next.js: 663µs, application-code: 241ms)
+ GET /api/pending-count 200 in 5ms (next.js: 1470µs, application-code: 3ms)
+⨯ Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcNDPxgvfoqX8iz2YReu3"}
+    at async POST (src/app/api/lint/route.ts:124:22)
+  122 |
+  123 |   // Ask Claude for contradiction + gap analysis
+> 124 |   const aiResponse = await client.messages.create({
+      |                      ^
+  125 |     model: 'claude-sonnet-4-6',
+  126 |     max_tokens: 2048,
+  127 |     messages: [{ {
   status: 400,
   headers: {
     'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
     'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a05405884b9ec782-SJC',
+    'cf-ray': 'a10c4bf44df141ce-SJC',
     connection: 'keep-alive',
     'content-encoding': 'gzip',
     'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
     'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:22:40 GMT',
-    'request-id': 'req_011CbdscSjEcTKmF4z8WSfWJ',
+    date: 'Wed, 24 Jun 2026 14:07:04 GMT',
+    'request-id': 'req_011CcNDPxgvfoqX8iz2YReu3',
     server: 'cloudflare',
-    'set-cookie': '_cfuvid=5.OCZDLEzBnCLT4Q6_ztyrQRwTz1bS5fBZKilavLiL0-1780377760.0414958-1.0.1.1-HubilcLbXh_2QiI7gSJcJrH1QNHNdfe6ing92cxwTzM; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'set-cookie': '_cfuvid=JdUZXpWph0aNoVhsTRC8cANkgrhyBMgZwJTnaieqeUY-1782310024.3657522-1.0.1.1-mvuOBjeZDMBVkl1tViWIJNiO1QYgCnRwzJo7MBtJd40; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-82ed4057d85f2b3359566b06ec83d1f4-0c9ce966c0ade51f-01',
+    traceresponse: '00-60848d0629b5e162e8033ba53a5d0db8-97d6715e24519bbf-01',
     'transfer-encoding': 'chunked',
     vary: 'Accept-Encoding',
     'x-robots-tag': 'none',
     'x-should-retry': 'false'
   },
-  request_id: 'req_011CbdscSjEcTKmF4z8WSfWJ',
+  request_id: 'req_011CcNDPxgvfoqX8iz2YReu3',
   error: {
     type: 'error',
     error: {
       type: 'invalid_request_error',
       message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
     },
-    request_id: 'req_011CbdscSjEcTKmF4z8WSfWJ'
+    request_id: 'req_011CcNDPxgvfoqX8iz2YReu3'
   }
 }
- POST /api/query 200 in 219ms (next.js: 2ms, application-code: 217ms)
- GET / 307 in 907ms (next.js: 848ms, application-code: 59ms)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdsijfdZtYLKbQr2n8sC"}
-    at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
-    at async Object.start (src/app/api/query/route.ts:248:27)
-  75 |  */
-  76 | async function identifyRelevantPages(question: string, indexContent: string, scope = 'publ...
-> 77 |   const response = await client.messages.create({
-     |                    ^
-  78 |     model: 'claude-sonnet-4-6',
-  79 |     max_tokens: 512,
-  80 |     messages: [ {
+ POST /api/lint 500 in 421ms (next.js: 1251µs, application-code: 420ms)
+⨯ Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcPHS6aDDuvVLtScz9rgt"}
+    at async POST (src/app/api/lint/route.ts:124:22)
+  122 |
+  123 |   // Ask Claude for contradiction + gap analysis
+> 124 |   const aiResponse = await client.messages.create({
+      |                      ^
+  125 |     model: 'claude-sonnet-4-6',
+  126 |     max_tokens: 2048,
+  127 |     messages: [{ {
   status: 400,
   headers: {
     'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
     'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a054079d8cc12fe9-SJC',
+    'cf-ray': 'a110f3a6cfa37a20-SJC',
     connection: 'keep-alive',
     'content-encoding': 'gzip',
     'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
     'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:24:05 GMT',
-    'request-id': 'req_011CbdsijfdZtYLKbQr2n8sC',
+    date: 'Thu, 25 Jun 2026 03:40:36 GMT',
+    'request-id': 'req_011CcPHS6aDDuvVLtScz9rgt',
     server: 'cloudflare',
-    'set-cookie': '_cfuvid=l9nCBs2fsqC_Y3ScdqSBLILvba2pjVzj.2F2..q.fYw-1780377845.3707476-1.0.1.1-gvP2UmAFb2h7OOvNL8k9CpVaETLb1hq6x80Y_USHwlc; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'set-cookie': '_cfuvid=Ubprpfa2ap6_EGdi2hXxrnB8FDRLfQUoHuROrHYx.JY-1782358836.2901506-1.0.1.1-B8kFRWoeYBwE1lyeM8VJK03QVoGY52ebrKh.cwwFMec; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-f5260d16c7ecc0a258b91f6133535337-75b61103a52530cd-01',
+    traceresponse: '00-a0358559e9ebcbf29617c48d0cd92f95-06081cf86eeb223d-01',
     'transfer-encoding': 'chunked',
     vary: 'Accept-Encoding',
     'x-robots-tag': 'none',
     'x-should-retry': 'false'
   },
-  request_id: 'req_011CbdsijfdZtYLKbQr2n8sC',
+  request_id: 'req_011CcPHS6aDDuvVLtScz9rgt',
   error: {
     type: 'error',
     error: {
       type: 'invalid_request_error',
       message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
     },
-    request_id: 'req_011CbdsijfdZtYLKbQr2n8sC'
+    request_id: 'req_011CcPHS6aDDuvVLtScz9rgt'
   }
 }
- POST /api/query 200 in 248ms (next.js: 3ms, application-code: 246ms)
- GET / 307 in 23ms (next.js: 1946µs, application-code: 21ms)
-WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CbdsjREtHgETPSLxVw1H3"}
-    at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
-    at async Object.start (src/app/api/query/route.ts:248:27)
-  75 |  */
-  76 | async function identifyRelevantPages(question: string, indexContent: string, scope = 'publ...
-> 77 |   const response = await client.messages.create({
-     |                    ^
-  78 |     model: 'claude-sonnet-4-6',
-  79 |     max_tokens: 512,
-  80 |     messages: [ {
-  status: 400,
-  headers: {
-    'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
-    'cf-cache-status': 'DYNAMIC',
-    'cf-ray': 'a05407d79bf715dd-SJC',
-    connection: 'keep-alive',
-    'content-encoding': 'gzip',
-    'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
-    'content-type': 'application/json',
-    date: 'Tue, 02 Jun 2026 05:24:14 GMT',
-    'request-id': 'req_011CbdsjREtHgETPSLxVw1H3',
-    server: 'cloudflare',
-    'set-cookie': '_cfuvid=OUX4zkn4.ZQDXm0gG3kXD74PJH6HhOvr.r64HHf1JK0-1780377854.6532068-1.0.1.1-CbUIx2gdEkOl58Ve1n4sJwMTa.z6b3JTZf7yXroLJts; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
-    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
-    traceresponse: '00-bd87c02dfdf71a50d2f8859a076a50c2-a6a64c97772424d5-01',
-    'transfer-encoding': 'chunked',
-    vary: 'Accept-Encoding',
-    'x-robots-tag': 'none',
-    'x-should-retry': 'false'
-  },
-  request_id: 'req_011CbdsjREtHgETPSLxVw1H3',
-  error: {
-    type: 'error',
-    error: {
-      type: 'invalid_request_error',
-      message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
-    },
-    request_id: 'req_011CbdsjREtHgETPSLxVw1H3'
-  }
-}
- POST /api/query 200 in 242ms (next.js: 559µs, application-code: 242ms)
- POST /api/query 200 in 6.0s (next.js: 1840µs, application-code: 6.0s)
- POST /api/query 200 in 42s (next.js: 1298µs, application-code: 42s)
- POST /api/query 200 in 45s (next.js: 1673µs, application-code: 45s)
- POST /api/query 200 in 39.2s (next.js: 1598µs, application-code: 39.2s)
- POST /api/query 200 in 21.3s (next.js: 1696µs, application-code: 21.3s)
- POST /api/query 200 in 40s (next.js: 27ms, application-code: 40.0s)
- POST /api/query 200 in 38.3s (next.js: 1955µs, application-code: 38.3s)
- POST /api/query 200 in 39.0s (next.js: 3ms, application-code: 39.0s)
- POST /api/query 200 in 25.3s (next.js: 3ms, application-code: 25.3s)
- POST /api/query 200 in 40s (next.js: 5ms, application-code: 40s)
- POST /api/query 200 in 43s (next.js: 1736µs, application-code: 43s)
- POST /api/query 200 in 39.1s (next.js: 2ms, application-code: 39.1s)
- POST /api/query 200 in 21.4s (next.js: 2ms, application-code: 21.4s)
- GET /api/pending-count 200 in 14ms (next.js: 8ms, application-code: 6ms)
- POST /api/lint 200 in 41s (next.js: 4ms, application-code: 41s)
- POST /api/query 200 in 38.7s (next.js: 4ms, application-code: 38.7s)
- POST /api/query 200 in 42s (next.js: 2ms, application-code: 42s)
- POST /api/query 200 in 50s (next.js: 1886µs, application-code: 50s)
- POST /api/query 200 in 23.2s (next.js: 1992µs, application-code: 23.2s)
- GET /api/pending-count 200 in 9ms (next.js: 2ms, application-code: 6ms)
- POST /api/lint 200 in 41s (next.js: 4ms, application-code: 41s)
- GET /api/pending-count 200 in 11ms (next.js: 6ms, application-code: 6ms)
- POST /api/lint 200 in 68s (next.js: 3ms, application-code: 68s)
- POST /api/query 200 in 45s (next.js: 3ms, application-code: 45s)
- POST /api/query 200 in 42s (next.js: 3ms, application-code: 42s)
- POST /api/query 200 in 34.5s (next.js: 2ms, application-code: 34.5s)
- POST /api/query 200 in 23.8s (next.js: 3ms, application-code: 23.8s)
- POST /api/lint 200 in 36.3s (next.js: 3ms, application-code: 36.3s)
- POST /api/query 200 in 41s (next.js: 35ms, application-code: 40s)
- POST /api/query 200 in 46s (next.js: 4ms, application-code: 46s)
- POST /api/query 200 in 36.0s (next.js: 3ms, application-code: 35.9s)
- POST /api/query 200 in 17.2s (next.js: 3ms, application-code: 17.2s)
- POST /api/query 200 in 22.0s (next.js: 3ms, application-code: 22.0s)
- GET /api/pending-count 200 in 10ms (next.js: 4ms, application-code: 6ms)
- POST /api/lint 200 in 36.7s (next.js: 3ms, application-code: 36.7s)
- POST /api/query 200 in 36.0s (next.js: 11ms, application-code: 36.0s)
- POST /api/query 200 in 44s (next.js: 3ms, application-code: 44s)
- POST /api/query 200 in 39.3s (next.js: 5ms, application-code: 39.3s)
- POST /api/query 200 in 23.4s (next.js: 3ms, application-code: 23.4s)
- GET /api/pending-count 200 in 7ms (next.js: 3ms, application-code: 4ms)
- POST /api/lint 200 in 46s (next.js: 4ms, application-code: 46s)
- POST /api/query 200 in 41s (next.js: 6ms, application-code: 41s)
- POST /api/query 200 in 44s (next.js: 1491µs, application-code: 44s)
- POST /api/query 200 in 46s (next.js: 4ms, application-code: 46s)
- POST /api/query 200 in 18.8s (next.js: 1803µs, application-code: 18.8s)
- GET /api/pending-count 200 in 10ms (next.js: 5ms, application-code: 6ms)
- POST /api/lint 200 in 44s (next.js: 4ms, application-code: 44s)
- GET /api/pending-count 200 in 67ms (next.js: 30ms, application-code: 37ms)
- POST /api/lint 200 in 41s (next.js: 8ms, application-code: 41s)
- POST /api/query 200 in 40s (next.js: 6ms, application-code: 40s)
- POST /api/query 200 in 44s (next.js: 2ms, application-code: 44s)
- POST /api/query 200 in 41s (next.js: 2ms, application-code: 41s)
- POST /api/query 200 in 24.4s (next.js: 2ms, application-code: 24.4s)
- POST /api/query 200 in 45s (next.js: 11ms, application-code: 45s)
- POST /api/query 200 in 41s (next.js: 4ms, application-code: 41s)
- POST /api/query 200 in 42s (next.js: 5ms, application-code: 42s)
- POST /api/query 200 in 14.4s (next.js: 5ms, application-code: 14.4s)
- GET /api/pending-count 200 in 12ms (next.js: 6ms, application-code: 5ms)
- POST /api/lint 200 in 39.6s (next.js: 4ms, application-code: 39.6s)
+ POST /api/lint 500 in 395ms (next.js: 1347µs, application-code: 394ms)

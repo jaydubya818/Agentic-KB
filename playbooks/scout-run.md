@@ -7,7 +7,7 @@ Use `/Users/jaywest/Agentic-KB/raw/reading-list.md` as the URL queue. For each u
 
 1. Read `AGENTS.md`, `house-rules.md`, `playbooks/night-shift-map.md`, and this playbook.
 2. Run the pre-run dirty-worktree check below before making changes.
-3. Fetch the page text using available web/browser tools.
+3. Fetch the page text using available web/browser tools. For GitHub repos, capture the README plus clearly linked docs/`llms.txt` when present; do not clone or execute unknown repo code during Scout.
 4. Save the full extracted source, not a summary, into the most appropriate `raw/` subfolder:
    - agent/framework docs → `raw/framework-docs/{slug}.md`
    - articles or essays → `raw/framework-docs/{slug}.md` unless a better existing raw folder fits
@@ -31,9 +31,14 @@ Expected write paths for Scout:
 - `raw/transcripts/`
 - `raw/code-examples/`
 
-Known noisy log exception:
-- Ignore exactly `logs/web-server-error.log` and `logs/web-server.log` when evaluating dirty-worktree safety.
-- Do not ignore `logs/` broadly.
+Known noisy log and intake exceptions:
+- Ignore exactly these runtime logs when evaluating dirty-worktree safety:
+  - `logs/web-server-error.log`
+  - `logs/web-server.log`
+  - `logs/audit.log`
+  - `logs/kb-dev-server.log`
+- Ignore exactly `raw/reading-list.md` as the human/agent-maintained Scout intake queue.
+- Do not ignore `logs/` or `raw/` broadly.
 - Any other dirty file outside expected write paths must still block the job.
 
 If the worktree has dirty files outside those expected write paths, stop before making changes and write a blocked/error briefing to `briefings/errors/agentic-kb-scout-run-YYYY-MM-DD-HHMM.md`.
