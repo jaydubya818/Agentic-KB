@@ -9,13 +9,14 @@ sources:
   - "Anthropic: Prompt caching documentation (2025)"
   - "Production LLM cost engineering practices (2024-2025)"
 created: 2026-04-04
-updated: 2026-04-04
+updated: 2026-06-25
 related:
   - "[[concepts/context-management]]"
   - "[[concepts/memory-systems]]"
   - "[[concepts/agent-loops]]"
   - "[[patterns/pattern-hot-cache]]"
   - "[[patterns/pattern-rolling-summary]]"
+  - "[[frameworks/framework-headroom]]"
 status: stable
 ---
 
@@ -182,6 +183,12 @@ async def batch_evaluate(prompts: list[str]) -> list[str]:
     return [r.result.message.content[0].text for r in batch.results]
 ```
 
+### Reversible Context Compression
+
+[[frameworks/framework-headroom]] adds a separate cost lever from rolling summaries: content-aware compression with a local retrieval fallback. Instead of summarizing old conversation turns into a new message, Headroom compresses tool outputs, logs, files, RAG chunks, and prompts before provider submission, while CCR caches originals locally so the agent can retrieve detail on demand.
+
+Use this when the cost driver is verbose tool/RAG/log context, not just long conversation history. Keep a separate uncompressed trace for eval/debugging; compression that saves tokens but destroys failure evidence is a false economy.
+
 ### Avoiding Redundant Re-Reads
 
 A common token waste: agents re-read files or context they already have. Prevention:
@@ -239,6 +246,7 @@ Track cost per task type to identify expensive paths and target optimizations.
 - **Haiku for the wrong tasks**: Haiku is great for simple tasks; using it for complex reasoning produces errors that cost more to fix than Sonnet would have cost to use
 - **Cache staleness**: Semantic cache returns an outdated response after the world changes; always include temporal context in cache key when responses might change over time
 - **Hidden costs**: Context compression itself costs tokens; verbose tool outputs that you trim still cost input tokens; model the full cost chain
+- **Compression hides evidence**: proxy compression can remove details needed for debugging, citation verification, or trajectory evaluation unless originals and traces are preserved
 
 ---
 
@@ -248,6 +256,7 @@ Track cost per task type to identify expensive paths and target optimizations.
 - [[concepts/memory-systems]] — external memory as alternative to long in-context history
 - [[patterns/pattern-hot-cache]] — caching frequently-needed context
 - [[patterns/pattern-rolling-summary]] — compressing long contexts
+- [[frameworks/framework-headroom]] — local-first reversible compression layer for agent context
 
 ---
 
@@ -256,3 +265,4 @@ Track cost per task type to identify expensive paths and target optimizations.
 - [[anthropic]] Pricing and Token documentation (2025)
 - [[anthropic]] Prompt Caching documentation (2025)
 - LLM cost engineering practices from production deployments
+- [[summaries/chopratejas-headroom]] — Headroom source-reported reversible compression layer and token-savings claims

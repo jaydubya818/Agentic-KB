@@ -1,16 +1,98 @@
 {
   "schema": 1,
   "job": "agentic-kb-refinery-run",
-  "updated_at": "2026-06-16T03:17:13-07:00",
-  "processed": {},
+  "updated_at": "2026-06-25T03:22:44-07:00",
+  "processed": {
+    "raw/framework-docs/mgechev-skills-best-practices.md": {
+      "sha256": "18ada3a8eab879c132eeefafa0ea6fc23bba7258400cf50902f61add5a1a9210",
+      "processed_at": "2026-06-25T03:22:44-07:00",
+      "outputs": [
+        "wiki/summaries/mgechev-skills-best-practices.md",
+        "wiki/concepts/skills.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ]
+    },
+    "raw/framework-docs/microsoft-skillopt.md": {
+      "sha256": "8df4fa35072154d8b6014b5f1c0f0b1bef696921e4ae6f4695385b2a4fb8bbd7",
+      "processed_at": "2026-06-25T03:22:44-07:00",
+      "outputs": [
+        "wiki/summaries/microsoft-skillopt.md",
+        "wiki/frameworks/framework-skillopt.md",
+        "wiki/concepts/skills.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ]
+    },
+    "raw/framework-docs/x-twitter-2066530299467706495.md": {
+      "sha256": "e88682da5f1b98bef99ba6fa4cc5d7a53c106b9deaf61030caafac53a329dfeb",
+      "processed_at": "2026-06-25T03:22:44-07:00",
+      "outputs": [
+        "wiki/summaries/x-twitter-2066530299467706495.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Tweet-only source; no framework page created until primary repo/paper is captured."
+    },
+    "raw/framework-docs/chopratejas-headroom.md": {
+      "sha256": "34659f236ad4404eee7a311e167ef2fad22c08f9ad12e6bb463f1257e8374718",
+      "processed_at": "2026-06-25T03:22:44-07:00",
+      "outputs": [
+        "wiki/summaries/chopratejas-headroom.md",
+        "wiki/frameworks/framework-headroom.md",
+        "wiki/concepts/cost-optimization.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ]
+    },
+    "raw/framework-docs/ar9av-obsidian-wiki.md": {
+      "sha256": "e64e9f9c4950193d54464554c2ac84678ff49edba6d3a4978752aa811cbf0701",
+      "processed_at": "2026-06-25T03:22:44-07:00",
+      "outputs": [
+        "wiki/summaries/ar9av-obsidian-wiki.md",
+        "wiki/frameworks/framework-obsidian-wiki.md",
+        "wiki/patterns/llm-wiki-pattern.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ]
+    },
+    "raw/framework-docs/langchain-ai-rag-from-scratch.md": {
+      "sha256": "851a3959847c78d3d763b80222508f7ebe6db94bdfbd4850c88b10a548cb606f",
+      "processed_at": "2026-06-25T03:22:44-07:00",
+      "outputs": [
+        "wiki/summaries/langchain-ai-rag-from-scratch.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "README-only capture too thin for atomic RAG page updates."
+    },
+    "raw/framework-docs/rohitg00-ai-engineering-from-scratch.md": {
+      "sha256": "70250db8a5afe44e21f0c9c69ef79b92bc79cca0b814f7400e7578fffbf5db32",
+      "processed_at": "2026-06-25T03:22:44-07:00",
+      "outputs": [
+        "wiki/summaries/rohitg00-ai-engineering-from-scratch.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Treated as curriculum/source corpus; no broad framework page created."
+    }
+  },
   "last_run": {
-    "timestamp": "2026-06-16T03:17:13-07:00",
-    "result": "no-op",
+    "timestamp": "2026-06-25T03:22:44-07:00",
+    "result": "processed",
     "scanned": {
       "raw_inbox_files": [
         "raw/inbox/README.md"
       ],
-      "status_unprocessed_files": []
+      "status_unprocessed_files": [
+        "raw/framework-docs/mgechev-skills-best-practices.md",
+        "raw/framework-docs/microsoft-skillopt.md",
+        "raw/framework-docs/x-twitter-2066530299467706495.md",
+        "raw/framework-docs/chopratejas-headroom.md",
+        "raw/framework-docs/ar9av-obsidian-wiki.md",
+        "raw/framework-docs/langchain-ai-rag-from-scratch.md",
+        "raw/framework-docs/rohitg00-ai-engineering-from-scratch.md"
+      ]
     },
     "skipped": [
       {
@@ -19,6 +101,6 @@
         "sha256": "a393bcb302e6eb1f9a222fb837b07583e96e5d401f5022cf2909e4297ca36f87"
       }
     ],
-    "processed_count": 0
+    "processed_count": 7
   }
 }

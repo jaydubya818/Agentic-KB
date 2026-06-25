@@ -4,10 +4,10 @@ title: "LLM Wiki Pattern"
 type: pattern
 tags: [knowledge-base, llm, rag, patterns, knowledge-management, obsidian]
 created: 2026-04-07
-updated: 2026-04-25
+updated: 2026-06-25
 visibility: public
 confidence: high
-related: [concepts/knowledge-compilation, concepts/llm-wiki, concepts/ingest-pipeline, concepts/memory-systems]
+related: [concepts/knowledge-compilation, concepts/llm-wiki, concepts/ingest-pipeline, concepts/memory-systems, frameworks/framework-obsidian-wiki]
 source: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
 ---
 
@@ -43,6 +43,8 @@ wiki/                       ← structured, interlinked, persistent knowledge ba
 3. **Query** — humans (or agents) query the structured wiki directly, not the raw sources.
 4. **Compound** — each new ingest enriches existing pages rather than adding isolated blobs.
 
+5. **Implementation package** — tools such as [[frameworks/framework-obsidian-wiki]] turn the pattern into reusable skills, manifests, linting, query workflows, and graph export. Agentic-KB uses the same core pattern but maps it onto this vault's native schema, raw immutability rules, and `.night-shift/state/` idempotency instead of adopting another framework's folders directly.
+
 The LLM handles cross-referencing and synthesis autonomously; humans only need to supply sources and ask questions.
 
 ## Example
@@ -65,6 +67,7 @@ An engineering team dumps meeting notes, ADRs, and Slack exports into `raw/`. A 
 - [LLM Wiki](../concepts/llm-wiki.md)
 - [Memory Systems](../concepts/memory-systems.md)
 - [Knowledge Graphs](../concepts/knowledge-graphs.md)
+- [[frameworks/framework-obsidian-wiki]] — packaged Obsidian implementation of the pattern with manifests, provenance, and multi-agent ingest
 
 ## ⚠️ Contradictions
 

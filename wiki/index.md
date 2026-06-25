@@ -3,7 +3,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 ---
 
 # Agentic Engineering KB — Master Index
-> Last updated: 2026-04-12 (session 2) | Maintained by LLM | Never edit manually
+> Last updated: 2026-06-25 (refinery run) | Maintained by LLM | Never edit manually
 
 ## Quick Navigation
 - [[wiki/home|Home]] — Visual front door: concept map, top 5 pages, KB roadmap
@@ -99,11 +99,12 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Frameworks (18)
+## Frameworks (21)
 
 | Page | Vendor | Version | Jay's Experience | Last Checked |
 |------|--------|---------|-----------------|--------------|
 | [[frameworks/framework-autogen]] | Microsoft | 0.4.x | none | 2026-04-04 |
+| [[frameworks/framework-headroom]] | Tejas Chopra / contributors | rolling | none | 2026-06-25 |
 | [[frameworks/framework-markitdown]] | Microsoft | 0.1.x | none | 2026-04-09 |
 | [[frameworks/framework-bmad]] | Jay West | current | extensive | 2026-04-04 |
 | [[frameworks/framework-claude-api]] | [[anthropic]] | claude-sonnet-4-6 | extensive | 2026-04-04 |
@@ -112,12 +113,16 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[frameworks/framework-deepeval]] | Confident AI Inc. | rolling | none | 2026-04-18 |
 | [[frameworks/framework-gsd]] | Jay West | 1.28.0 | extensive | 2026-04-04 |
 | [[frameworks/framework-inspect-ai]] | UK AISI | rolling | none | 2026-04-18 |
+| [[frameworks/inspect-ai]] | UK AISI | unknown | none | 2026-04-18 |
 | [[frameworks/framework-langgraph]] | LangChain | 0.2.x | limited | 2026-04-04 |
 | [[frameworks/framework-langsmith]] | LangChain Inc. | rolling | none | 2026-04-18 |
 | [[frameworks/framework-mcp]] | [[anthropic]] | 1.x | moderate | 2026-04-04 |
 | [[frameworks/framework-openclaw]] | Unknown | 2026.3.24 | moderate | 2026-04-04 |
+| [[frameworks/framework-obsidian-wiki]] | Ar9av / contributors | rolling | limited | 2026-06-25 |
 | [[frameworks/framework-promptfoo]] | [[openai]] (acquired) | rolling | none | 2026-04-18 |
+| [[frameworks/promptfoo]] | OpenAI / promptfoo | unknown | none | 2026-04-25 |
 | [[frameworks/framework-rowboat]] | [[framework-rowboat]] Labs | unknown | limited | 2026-04-09 |
+| [[frameworks/framework-skillopt]] | Microsoft | 0.1.0 | none | 2026-06-25 |
 | [[frameworks/framework-superpowers]] | Jay West | 5.0.6 | extensive | 2026-04-04 |
 
 ---
@@ -167,7 +172,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (42) (22 raw sources ingested)
+## Summaries (56)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -207,6 +212,13 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/summary-knowledge-graphs-explainer|Knowledge Graphs — Everything Is Connected]] — Comprehensive explainer: nodes/edges/properties, triple model (S-P-O), ontology (classes + instances), named graphs with temporal context, graph inference (derive unstated facts), SPARQL/Cypher querying, KG vs relational DB decision guide. Application map to this KB included.
 - [[summaries/summary-research-skill-graph|Local Research Engine — The Research Skill Graph System]] — Practitioner system deployed at 4 companies (60% research cost reduction): 6-lens forced-perspective analysis (technical/economic/historical/geopolitical/contrarian/first-principles), 5-tier source evaluation, contradiction-as-feature protocol, compound knowledge base. Scaffolded at research-skill-graph/.
 - [[summaries/summary-wikiwise-skills|Wikiwise Skill Library — Ingest, Digest, Readwise]] — 6 operational skill files from TristanH/wikiwise: stream-to-disk rule for large documents, parallel subagent dispatch, batch-before-ingest, 2-3 inbound-link density rule, user-confirmed highlight search, single-file tweet collection.
+- [[summaries/mgechev-skills-best-practices|Best Practices for Creating Agent Skills]] — Practitioner guidance on lean `SKILL.md` files, progressive disclosure, frontmatter discoverability, deterministic scripts, and skill validation loops.
+- [[summaries/microsoft-skillopt|SkillOpt — Executive Strategy for Self-Evolving Agent Skills]] — Microsoft framework for validation-gated skill optimization and SkillOpt-Sleep nightly proposal loops.
+- [[summaries/chopratejas-headroom|Headroom — Context Compression Layer for AI Agents]] — Local-first compression proxy/library/MCP layer with reversible CCR retrieval, source-reported token savings, and cross-agent memory claims.
+- [[summaries/ar9av-obsidian-wiki|Ar9av Obsidian Wiki]] — Packaged Obsidian/LLM-wiki implementation with delta tracking, provenance, multi-agent history ingest, tiered query, graph export, and QMD optional search.
+- [[summaries/langchain-ai-rag-from-scratch|LangChain RAG From Scratch]] — Thin README/source pointer for RAG notebooks covering indexing, retrieval, and generation basics; no atomic page changes from this capture alone.
+- [[summaries/x-twitter-2066530299467706495|LEANN Lightweight Local RAG Claim]] — Low-confidence tweet lead claiming 97% lower-storage local RAG via selective recomputation; primary repo/paper still needed.
+- [[summaries/rohitg00-ai-engineering-from-scratch|AI Engineering from Scratch]] — Artifact-based AI engineering curriculum; high-signal areas are MCP/tools, agent workbench, RAG/eval, multi-agent, and production capstones.
 
 ## Personals (6) (Jay's patterns)
 

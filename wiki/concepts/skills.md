@@ -4,9 +4,12 @@ title: Skills
 type: concept
 tags: [agents, architecture, context, knowledge-base, workflow]
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-06-25
 visibility: public
 confidence: high
+sources:
+  - "[[summaries/mgechev-skills-best-practices]]"
+  - "[[summaries/microsoft-skillopt]]"
 ---
 
 # Skills
@@ -78,11 +81,27 @@ A `rotate-pdf` skill might include:
 
 This keeps the skill's footprint small and the behavior reliable.
 
+## Quality Gates for Skill Authoring
+
+[[summaries/mgechev-skills-best-practices]] adds a useful operational standard: skills should be validated like agent-facing interfaces, not merely edited like documentation.
+
+1. **Discovery validation** — test the YAML `name` and `description` in isolation. Generate prompts that should trigger the skill and near-miss prompts that should not. Rewrite descriptions that are too broad or too vague.
+2. **Logic validation** — have an agent simulate execution step by step and flag the exact lines where it would need to guess.
+3. **Edge-case testing** — ask a QA-style model to attack unsupported configurations, ambiguous fallbacks, and failure states.
+4. **Architecture refinement** — enforce progressive disclosure: `SKILL.md` stays lean; dense rules move into `references/`, deterministic operations into `scripts/`, and templates into `assets/`.
+
+## Validation-Gated Skill Optimization
+
+[[frameworks/framework-skillopt]] pushes the same idea further: treat the skill document as trainable state, propose bounded edits from scored rollouts, and accept changes only when a held-out validation set improves. That is the right governance model for automated skill improvement: proposal first, validation gate second, human adoption for high-impact skills.
+
+For Hermes, the practical rule is: **never let a nightly job directly mutate an important live skill just because a reflection pass produced a plausible edit.** Stage the patch, run fixtures, preserve rollback, then adopt.
+
 ## Common Pitfalls
 
 - **Over-explaining**: Don't add context Claude already has from pretraining. Every token competes with real task content.
 - **Vague descriptions**: The `description` frontmatter field is the only thing that triggers skill selection — if it's ambiguous, the skill won't fire at the right time.
 - **Monolithic skills**: Skills should be modular. A skill that tries to do too much becomes a maintenance burden and uses tokens indiscriminately.
+- **No eval gate**: A skill can read well and still route poorly or force the agent to hallucinate missing steps. Discovery and logic validation are part of the artifact.
 
 ## See Also
 
@@ -90,3 +109,5 @@ This keeps the skill's footprint small and the behavior reliable.
 - [Agent Loops](agent-loops.md)
 - [Memory Systems](memory-systems.md)
 - [LLM-Owned Wiki](llm-owned-wiki.md)
+- [[summaries/mgechev-skills-best-practices]] — practitioner quality gates for authoring agent skills
+- [[frameworks/framework-skillopt]] — validation-gated optimization loop for skill documents

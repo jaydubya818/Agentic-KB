@@ -4,6 +4,45 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 # Wiki Compile Log
 
+## 2026-06-25 — Agentic-KB Refinery Run
+
+**Trigger:** Scheduled `agentic-kb-refinery-run`.
+
+**Pre-run safety:** `git status --porcelain` showed one pre-existing dirty file inside an expected Refinery write path: `briefings/scout-2026-06-24.md`. No dirty files outside allowed Refinery paths or the two explicitly allowed noisy logs, so the run proceeded.
+
+**Sources processed:** 7 raw files marked `status: unprocessed` under `raw/framework-docs/`; `raw/inbox/README.md` skipped as operational intake guidance.
+
+**Summaries created:**
+- `[[summaries/mgechev-skills-best-practices]]` from `raw/framework-docs/mgechev-skills-best-practices.md`
+- `[[summaries/microsoft-skillopt]]` from `raw/framework-docs/microsoft-skillopt.md`
+- `[[summaries/chopratejas-headroom]]` from `raw/framework-docs/chopratejas-headroom.md`
+- `[[summaries/ar9av-obsidian-wiki]]` from `raw/framework-docs/ar9av-obsidian-wiki.md`
+- `[[summaries/langchain-ai-rag-from-scratch]]` from `raw/framework-docs/langchain-ai-rag-from-scratch.md`
+- `[[summaries/x-twitter-2066530299467706495]]` from `raw/framework-docs/x-twitter-2066530299467706495.md`
+- `[[summaries/rohitg00-ai-engineering-from-scratch]]` from `raw/framework-docs/rohitg00-ai-engineering-from-scratch.md`
+
+**Framework pages created:**
+- `[[frameworks/framework-skillopt]]` — validation-gated optimization of agent skill documents; appropriate as staged-proposal workflow, not direct live mutation.
+- `[[frameworks/framework-headroom]]` — local-first reversible compression layer for agents and LLM apps.
+- `[[frameworks/framework-obsidian-wiki]]` — packaged Obsidian/LLM-wiki implementation with manifests, provenance, multi-agent ingest, and tiered retrieval.
+
+**Existing pages updated:**
+- `[[concepts/skills]]` — added skill discovery/logic/edge-case validation gates and SkillOpt-style validation-gated optimization.
+- `[[concepts/cost-optimization]]` — added reversible context compression and the risk that compression can hide eval/debug evidence.
+- `[[patterns/llm-wiki-pattern]]` — added obsidian-wiki as a packaged implementation, while preserving Agentic-KB's native schema and raw immutability stance.
+- `[[wiki/index]]` — updated framework and summary index entries.
+
+**Conservative skips:**
+- No framework page for LEANN; captured source is a tweet only and lacks the repo/paper. The 97% storage claim remains `[UNVERIFIED]` in the summary.
+- No atomic RAG updates from LangChain RAG From Scratch; captured README is too thin without notebook contents.
+- No broad framework page for AI Engineering from Scratch; treated as a curriculum/source corpus until specific lesson docs are ingested.
+
+**Contradictions flagged:** None new. One source-level caveat recorded: `obsidian-wiki`'s `_raw/` promotion/removal behavior conflicts with Agentic-KB scheduled-run rules that raw originals are immutable.
+
+**State:** hashes recorded in `.night-shift/state/refinery-processed.json`.
+
+---
+
 ## 2026-05-30 (Apple Notes Hermes/Obsidian link review)
 
 [2026-05-30] NEW FILE | wiki/patterns/pattern-agent-proof-of-work-loop.md — Captures the closed-loop verification pattern from the Apple Notes link review: output is not completion; agents must verify, leave receipts, surface exceptions, and update future runs. Added backlinks from mocs/orchestration and mocs/evaluation; added entry to wiki/recently-added.md.
