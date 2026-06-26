@@ -462,3 +462,85 @@ WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_err
   }
 }
  POST /api/query 200 in 505ms (next.js: 1926µs, application-code: 503ms)
+ GET /api/pending-count 200 in 6ms (next.js: 1545µs, application-code: 4ms)
+⨯ Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcQ7CYHjZR9Z57sL1zJjL"}
+    at async POST (src/app/api/lint/route.ts:124:22)
+  122 |
+  123 |   // Ask Claude for contradiction + gap analysis
+> 124 |   const aiResponse = await client.messages.create({
+      |                      ^
+  125 |     model: 'claude-sonnet-4-6',
+  126 |     max_tokens: 2048,
+  127 |     messages: [{ {
+  status: 400,
+  headers: {
+    'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': 'a11489371d2aeb1e-SJC',
+    connection: 'keep-alive',
+    'content-encoding': 'gzip',
+    'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
+    'content-type': 'application/json',
+    date: 'Thu, 25 Jun 2026 14:07:00 GMT',
+    'request-id': 'req_011CcQ7CYHjZR9Z57sL1zJjL',
+    server: 'cloudflare',
+    'set-cookie': '_cfuvid=YG.0E3SvwJ0X8WKafI6XONFRH68OYKZieMp._KKUPTs-1782396419.6931891-1.0.1.1-DfdM.qsC.Fv21jxAb87KX5Q83WQD8IUFIe20TzhbhgM; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    traceresponse: '00-60bb8da64aef820a66fad2bc81d31e6b-995e533f878ae5db-01',
+    'transfer-encoding': 'chunked',
+    vary: 'Accept-Encoding',
+    'x-robots-tag': 'none',
+    'x-should-retry': 'false'
+  },
+  request_id: 'req_011CcQ7CYHjZR9Z57sL1zJjL',
+  error: {
+    type: 'error',
+    error: {
+      type: 'invalid_request_error',
+      message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
+    },
+    request_id: 'req_011CcQ7CYHjZR9Z57sL1zJjL'
+  }
+}
+ POST /api/lint 500 in 826ms (next.js: 1367µs, application-code: 824ms)
+WikiQuery error: Error: 400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."},"request_id":"req_011CcRvJqSkiDCBTiTR7YvcH"}
+    at async identifyRelevantPages (src/app/api/query/route.ts:77:20)
+    at async Object.start (src/app/api/query/route.ts:248:27)
+  75 |  */
+  76 | async function identifyRelevantPages(question: string, indexContent: string, scope = 'publ...
+> 77 |   const response = await client.messages.create({
+     |                    ^
+  78 |     model: 'claude-sonnet-4-6',
+  79 |     max_tokens: 512,
+  80 |     messages: [ {
+  status: 400,
+  headers: {
+    'anthropic-organization-id': '69692b57-aa72-4e07-a9d8-5a70bbc2b74e',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': 'a11c6c4d3e800b82-SJC',
+    connection: 'keep-alive',
+    'content-encoding': 'gzip',
+    'content-security-policy': "default-src 'none'; frame-ancestors 'none'",
+    'content-type': 'application/json',
+    date: 'Fri, 26 Jun 2026 13:05:21 GMT',
+    'request-id': 'req_011CcRvJqSkiDCBTiTR7YvcH',
+    server: 'cloudflare',
+    'set-cookie': '_cfuvid=kNueU7w4ll940dsDAiPwpzg7iMBYBNvfW217Ck_ORLU-1782479121.479749-1.0.1.1-m9pLirUhjW4nXQ4eEZm2RXmFgD22KcEZjelsjVJ67UE; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    traceresponse: '00-37550159d7f54aeed2fac7268e65a2e1-e0ba4e1e1c0ef300-01',
+    'transfer-encoding': 'chunked',
+    vary: 'Accept-Encoding',
+    'x-robots-tag': 'none',
+    'x-should-retry': 'false'
+  },
+  request_id: 'req_011CcRvJqSkiDCBTiTR7YvcH',
+  error: {
+    type: 'error',
+    error: {
+      type: 'invalid_request_error',
+      message: 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'
+    },
+    request_id: 'req_011CcRvJqSkiDCBTiTR7YvcH'
+  }
+}
+ POST /api/query 200 in 308ms (next.js: 1744µs, application-code: 306ms)

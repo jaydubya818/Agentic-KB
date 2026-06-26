@@ -6,10 +6,11 @@ sources:
   - [[concepts/trajectory-evaluation]]
   - [[frameworks/framework-deepeval]]
   - [[syntheses/synthesis-eval-metrics-to-failure-modes]]
+  - [[summaries/chopratejas-headroom]]
 question: Why is ReAct uniquely cheap to evaluate compared to other agentic patterns, and what does that mean for pattern selection when evaluation is a first-order concern?
 tags: [agentic, evaluation, react, trajectory-evaluation, observability]
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-06-25
 reviewed: false
 reviewed_date: ""
 ---
@@ -34,6 +35,8 @@ For contrast: a Plan-Execute-Verify pipeline executes the plan as discrete subpr
 ## Counter-arguments & Gaps
 The free-evaluation claim weakens at scale. ReAct's verbose context grows linearly with loop iterations; production deployments often truncate or summarize earlier turns, which silently destroys the trajectory record that this synthesis claims is free. A team that adopts ReAct *for evaluability* and then turns on context compression to control costs has paid the verbosity tax without keeping the benefit.
 
+[[summaries/chopratejas-headroom]] makes the compression tradeoff sharper: reversible compression with a local retrieval cache is safer than one-way truncation, but it still must preserve an uncompressed trace or citation/eval log outside the compressed prompt. Otherwise the agent may be able to retrieve details during execution while the eval harness loses the exact evidence needed to score tool choice, argument correctness, and observation grounding.
+
 ReAct also underperforms on tasks with long-horizon planning, where Plan-Execute-Verify's separate planning phase produces measurably better plans (per the GSD framework's results in [[summaries/summary-gsd-framework-skills]]). Choosing ReAct purely for evaluability would be a regression on planning-heavy tasks. The honest framing is: *when planning depth is similar across candidate patterns, ReAct's eval-cheapness is a deciding factor; when it isn't, planning quality dominates.*
 
 The synthesis assumes DeepEval-style step metrics are the right evaluation target. If the actual evaluation harness is end-to-end (final-answer-only, e.g., a benchmark with a held-out answer key), ReAct's per-step record is irrelevant — any pattern is equally cheap to evaluate. The synthesis applies specifically to *trajectory* evaluation, not all evaluation.
@@ -49,3 +52,4 @@ ReAct is the default agentic pattern for any workflow where iterative evaluation
 - [[frameworks/framework-deepeval]]
 - [[syntheses/synthesis-eval-metrics-to-failure-modes]]
 - [[summaries/summary-gsd-framework-skills]]
+- [[summaries/chopratejas-headroom]] — raw source: `raw/framework-docs/chopratejas-headroom.md`

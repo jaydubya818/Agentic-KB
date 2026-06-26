@@ -96,6 +96,8 @@ This keeps the skill's footprint small and the behavior reliable.
 
 For Hermes, the practical rule is: **never let a nightly job directly mutate an important live skill just because a reflection pass produced a plausible edit.** Stage the patch, run fixtures, preserve rollback, then adopt.
 
+See [[syntheses/synthesis-skills-as-evaluable-artifacts]] for the cross-source synthesis that frames skills as tested, versioned artifacts rather than prose notes.
+
 ## Common Pitfalls
 
 - **Over-explaining**: Don't add context Claude already has from pretraining. Every token competes with real task content.
@@ -111,3 +113,4 @@ For Hermes, the practical rule is: **never let a nightly job directly mutate an 
 - [LLM-Owned Wiki](llm-owned-wiki.md)
 - [[summaries/mgechev-skills-best-practices]] — practitioner quality gates for authoring agent skills
 - [[frameworks/framework-skillopt]] — validation-gated optimization loop for skill documents
+- [[syntheses/synthesis-skills-as-evaluable-artifacts]] — synthesis of skill authoring, optimization, and artifact-first workflow discipline

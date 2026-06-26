@@ -254,7 +254,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Syntheses (15)
+## Syntheses (16)
 
 | Page | Question | Created |
 |------|----------|---------|
@@ -273,6 +273,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[syntheses/synthesis-permissions-as-single-compiled-policy]] | In a multi-tenant agentic system, should retrieval-side metadata filtering and tool-side allowlists be authored separately, or compiled from a single policy document? | 2026-05-25 |
 | [[syntheses/synthesis-deepeval-metrics-as-trajectory-vocabulary]] | Can DeepEval's named agent metrics (PlanQuality, ToolCalling, ArgumentCorrectness) serve as the operational vocabulary that turns trajectory evaluation into a measurable CI/CD gate? | 2026-05-25 |
 | [[syntheses/synthesis-rrf-as-rlm-fusion-stage]] | What algorithm fills the score-merging slot in the RLM Pipeline's multi-source retrieval stages (4–9), and why is it Reciprocal Rank Fusion? | 2026-05-27 |
+| [[syntheses/synthesis-skills-as-evaluable-artifacts]] | When should an agent skill be treated as a tested software artifact instead of a prose instruction file? | 2026-06-25 |
 
 ---
 

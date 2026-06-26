@@ -41,6 +41,24 @@ id: 01KNNVX2QX9QG2KH6FCT2ARV5Y
 
 **State:** hashes recorded in `.night-shift/state/refinery-processed.json`.
 
+### Editor follow-up — Agentic-KB Editor Run
+
+**Trigger:** Scheduled `agentic-kb-editor-run`.
+
+**Pages considered:** 16 wiki files changed in the last 24 hours, including 7 summaries, 3 framework pages, 3 updated concept/pattern pages, `wiki/index.md`, `wiki/log.md`, and `wiki/lint-report.md`.
+
+**Synthesis created:**
+- `[[syntheses/synthesis-skills-as-evaluable-artifacts]]` — bridges skill authoring quality gates, SkillOpt validation-gated optimization, and artifact-first AI-engineering curriculum discipline.
+
+**Synthesis updated:**
+- `[[syntheses/synthesis-react-as-native-trajectory-eval]]` — added Headroom context-compression caveat: reversible compression is safer than truncation, but trajectory-eval needs an uncompressed trace/citation/eval log preserved outside compressed prompt context.
+
+**Backlinks / index:**
+- `[[concepts/skills]]` now links to the new synthesis.
+- `[[wiki/index]]` synthesis count updated 15→16.
+
+**Contradictions flagged:** None new.
+
 ---
 
 ## 2026-05-30 (Apple Notes Hermes/Obsidian link review)
