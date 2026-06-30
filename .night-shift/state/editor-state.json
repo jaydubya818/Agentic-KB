@@ -1,39 +1,19 @@
 {
-  "last_run_timestamp": "2026-06-25T06:29:06-0700",
+  "last_run_timestamp": "2026-06-26T06:25:56-0700",
   "files_considered": [
-    "wiki/index.md",
     "wiki/log.md",
-    "wiki/patterns/llm-wiki-pattern.md",
-    "wiki/concepts/cost-optimization.md",
+    "wiki/index.md",
     "wiki/concepts/skills.md",
-    "wiki/frameworks/framework-obsidian-wiki.md",
-    "wiki/frameworks/framework-headroom.md",
-    "wiki/frameworks/framework-skillopt.md",
-    "wiki/summaries/mgechev-skills-best-practices.md",
-    "wiki/summaries/ar9av-obsidian-wiki.md",
-    "wiki/summaries/rohitg00-ai-engineering-from-scratch.md",
-    "wiki/summaries/chopratejas-headroom.md",
-    "wiki/summaries/microsoft-skillopt.md",
-    "wiki/summaries/langchain-ai-rag-from-scratch.md",
-    "wiki/summaries/x-twitter-2066530299467706495.md",
-    "wiki/lint-report.md"
-  ],
-  "outputs_written": [
-    "wiki/syntheses/synthesis-skills-as-evaluable-artifacts.md",
     "wiki/syntheses/synthesis-react-as-native-trajectory-eval.md",
-    "wiki/concepts/skills.md",
-    "wiki/index.md",
-    "wiki/log.md",
-    "briefings/2026-06-25.md",
-    ".night-shift/state/editor-state.json"
-  ],
-  "status": "success",
-  "briefing_path": "briefings/2026-06-25.md",
-  "synthesis_created": [
     "wiki/syntheses/synthesis-skills-as-evaluable-artifacts.md"
   ],
-  "synthesis_updated": [
-    "wiki/syntheses/synthesis-react-as-native-trajectory-eval.md"
+  "outputs_written": [
+    "briefings/2026-06-26.md",
+    ".night-shift/state/editor-state.json"
   ],
-  "notes": "Created one cross-source skill synthesis and targeted one existing synthesis with a Headroom compression caveat; no raw files modified."
+  "status": "noop",
+  "briefing_path": "briefings/2026-06-26.md",
+  "synthesis_created": [],
+  "synthesis_updated": [],
+  "notes": "No wiki files changed after the previous editor-state checkpoint; last-24h changes were already-handled outputs from the 2026-06-25 Editor Run. No raw files modified."
 }

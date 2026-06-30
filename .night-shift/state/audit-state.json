@@ -1,63 +1,36 @@
 {
-  "last_run_timestamp": "2026-06-21T22:05:56-0700",
+  "last_run_timestamp": "2026-06-29T00:05:38-0500",
   "files_considered": [
     "AGENTS.md",
     "house-rules.md",
     "playbooks/night-shift-map.md",
     "playbooks/audit-run.md",
     ".night-shift/state/audit-state.json",
-    "wiki/",
-    "raw/",
     "git status --porcelain"
   ],
   "outputs_written": [
-    "briefings/errors/agentic-kb-audit-run-2026-06-21-2205.md",
+    "briefings/errors/agentic-kb-audit-run-2026-06-29-0005.md",
     ".night-shift/state/audit-state.json"
   ],
   "status": "blocked_dirty_worktree",
-  "briefing_path": "briefings/errors/agentic-kb-audit-run-2026-06-21-2205.md",
-  "normal_audit_briefing_path": "briefings/audit-2026-06-21.md",
+  "briefing_path": "briefings/errors/agentic-kb-audit-run-2026-06-29-0005.md",
+  "normal_audit_briefing_path": "briefings/audit-2026-06-29.md",
   "normal_audit_written": false,
   "blocked_reason": "Pre-write dirty-worktree safety check found dirty files outside this audit job's expected write paths and outside the exact noisy-log allowlist.",
   "dirty_worktree_summary": {
     "modified": [
       ".night-shift/state/editor-state.json",
-      "logs/audit.log",
-      "logs/kb-dev-server.log",
-      "playbooks/editor-run.md",
-      "playbooks/refinery-run.md",
-      "playbooks/scout-run.md",
-      "raw/reading-list.md"
+      "logs/kb-dev-server.log"
     ],
     "untracked": [
-      ".night-shift/state/refinery-processed.json",
-      ".night-shift/state/scout-processed.json",
-      "briefings/2026-06-16.md",
-      "briefings/errors/agentic-kb-editor-run-2026-06-17-0626.md",
-      "briefings/errors/agentic-kb-editor-run-2026-06-18-0649.md",
-      "briefings/errors/agentic-kb-editor-run-2026-06-20-0626.md",
-      "briefings/errors/agentic-kb-editor-run-2026-06-21-0626.md",
-      "briefings/errors/agentic-kb-refinery-run-2026-06-17-0316.md",
-      "briefings/errors/agentic-kb-refinery-run-2026-06-18-0330.md",
-      "briefings/errors/agentic-kb-refinery-run-2026-06-19-0327.md",
-      "briefings/errors/agentic-kb-refinery-run-2026-06-20-0316.md",
-      "briefings/errors/agentic-kb-refinery-run-2026-06-21-0315.md",
-      "briefings/errors/agentic-kb-scout-run-2026-06-16-2306.md",
-      "briefings/errors/agentic-kb-scout-run-2026-06-17-2320.md",
-      "briefings/errors/agentic-kb-scout-run-2026-06-18-1157.md",
-      "briefings/errors/agentic-kb-scout-run-2026-06-18-2310.md",
-      "briefings/errors/agentic-kb-scout-run-2026-06-19-2305.md",
-      "briefings/errors/agentic-kb-scout-run-2026-06-20-2306.md",
-      "briefings/refinery-2026-06-16.md",
-      "briefings/scout-2026-06-15.md",
-      "briefings/scout-2026-06-18.md",
-      "raw/framework-docs/ar9av-obsidian-wiki.md",
-      "raw/framework-docs/chopratejas-headroom.md",
-      "raw/framework-docs/langchain-ai-rag-from-scratch.md",
-      "raw/framework-docs/mgechev-skills-best-practices.md",
-      "raw/framework-docs/microsoft-skillopt.md",
-      "raw/framework-docs/rohitg00-ai-engineering-from-scratch.md",
-      "raw/framework-docs/x-twitter-2066530299467706495.md"
+      "briefings/2026-06-26.md",
+      "briefings/errors/agentic-kb-refinery-run-2026-06-28-0557.md",
+      "briefings/scout-2026-06-26.md",
+      "briefings/scout-2026-06-28.md"
+    ],
+    "allowed_noisy_logs": [
+      "logs/web-server-error.log",
+      "logs/web-server.log"
     ]
   }
 }

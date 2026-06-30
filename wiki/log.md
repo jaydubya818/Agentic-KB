@@ -903,3 +903,37 @@ Source for resolution: WebSearch result during morning-review-daily 2026-05-16 f
 - Today's notes (CodeGraph article, ProgramBench) are strong 2nd-source candidates for `trajectory-evaluation` and `pattern-react` — ingest recommended.
 
 **Refuse list observed:** No deletes. No `reviewed: true` flips. No wiki/ page edits. Daily note append only.
+
+
+---
+
+## 2026-06-30 — morning-review-daily scheduled run
+
+**Trigger:** Scheduled task `morning-review-daily` @ 08:13 PDT.
+
+**Inputs processed:**
+- Apple Notes (24h): 1 note reviewed (Lake house note) — Morning Review pipeline exit 0, 1 finding (stub — LLM unavailable: low credit balance on separate API key), 0 auto-applied, 1 human-approval item.
+- KB captures: 0 new (KB Inbox: 1 old test note from 2026-05-16 already deduped; Snipd folder empty; sofie-watch found no pending meeting notes — exit 0).
+- KB intelligence queries: 5 (connections, patterns, tensions, leverage, proposals) — generated from direct wiki file reads (kb CLI `query` command hangs without server at :3002; executed via direct file reads per prior run pattern).
+
+**Pages created:** 0 (read-only run per refuse list — no wiki/ writes).
+
+**Actions taken:**
+- Morning Review pipeline: completed (exit 0) — 1 note, 1 finding (stub), 138 stale lifecycle alerts (46 action-required), 1 daily note written to `Daily Notes/2026-06-30.md`.
+- KB intelligence section appended to `Daily Notes/2026-06-30.md` in Obsidian Vault (only personal-vault write — Rule 13 preserved).
+- Obsidian Vault: will commit locally per standing preference (2026-06-10).
+- Agentic-KB: will commit locally per standing preference (2026-06-10).
+
+**Contradictions flagged:** None new. 0 open contradictions in ledger.
+
+**Graduates identified (still blocked by compile crash):**
+- `verification-before-completion` — corroborated by `summary-superpowers-framework` + `pattern-agent-proof-of-work-loop` (same as prior runs — compile still crashing).
+- `token-economics` — corroborated by `wiki/concepts/rlm-pipeline` (same as prior runs — compile still crashing).
+
+**Open threads:**
+- `compile-2source-gate.mjs --execute` crashes with `Error: undefined` — HIGH PRIORITY. Blocking 29 promote candidates + 2 confirmed graduates. Debug: `node scripts/compile-2source-gate.mjs --execute 2>&1 | head -50`.
+- Morning Review LLM calls failing: separate Anthropic API key has insufficient credits. Notes unclassified — manual review recommended.
+- 108 deferred candidates in HEAVY_BACKLOG — audit candidates.md to prune low-value themes recommended.
+- Cross-domain connections identified (not yet written as syntheses): (1) proof-of-work-loop ↔ trajectory-evaluation, (2) retrieval+permissions synthesis ↔ Inspect AI sandboxing, (3) RLM pipeline ↔ RAG systems (beyond RRF).
+
+**Refuse list observed:** No deletes. No `reviewed: true` flips. No wiki/ page edits. Daily note append only.
