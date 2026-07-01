@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-06-24 (lint failed — Anthropic API credits exhausted; last successful scan 2026-06-22) | Vault: Agentic-KB | Pages scanned: 603
+> Generated: 2026-07-01 14:43 | Vault: Agentic-KB | Pages scanned: 617
 
 ## Summary
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | Contradictions | 0 | 🟢 Clear |
 | Orphaned pages | 24 | 🟡 Medium |
-| Stale pages | 252 | 🟡 Medium |
+| Stale pages | 256 | 🟡 Medium |
 | Knowledge gaps | 0 | 🟢 Clear |
 
 ## 🟡 Orphaned Pages (no inbound links)
@@ -62,6 +62,7 @@
 - `agents/workers/gsd-verifier/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `agents/workers/perf-analyzer/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `agents/workers/security-reviewer/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `candidates.md` — last updated: Tue May 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/agent-evaluation.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/agent-failure-modes.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/agent-loops.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
@@ -76,7 +77,6 @@
 - `concepts/chain-of-thought.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/context-management.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/contradiction-handling-in-knowledge-bases.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
-- `concepts/cost-optimization.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/cross-linking-and-orphan-prevention.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/daily-note-template.md` — last updated: Mon Apr 20 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/enterprise-ai-governance.md` — last updated: Sun Apr 05 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
@@ -119,7 +119,6 @@
 - `concepts/sandboxed-execution.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/self-critique.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/server-sent-events-streaming.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
-- `concepts/skills.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/source-trust-tiers.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/state-persistence.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `concepts/system-prompt-design.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
@@ -169,7 +168,7 @@
 - `mocs/vault-foundation.md` — last updated: Sun Apr 12 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `mocs/visualization.md` — last updated: Sun Apr 12 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/fetch-readwise-highlights.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
-- `patterns/llm-wiki-pattern.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `patterns/pattern-agent-proof-of-work-loop.md` — last updated: Fri May 29 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-anchored-iterative-summarization.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-architecture-decision-record.md` — last updated: Tue Apr 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `patterns/pattern-clarification-task.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
@@ -279,11 +278,16 @@
 - `syntheses/lint-2026-04-18.md` — last updated: Fri Apr 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/oss-agent-ecosystem-map.md` — last updated: Sat Apr 04 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-access-boundary-codesign.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-deepeval-metrics-as-trajectory-vocabulary.md` — last updated: Sun May 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-episodic-judgment-as-contradiction-resolver-training.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-episodic-judgment-as-freshness-signal.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-episodic-judgment-log-to-trace-dataset.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-eval-metrics-to-failure-modes.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-judgment-events-as-confidence-labels.md` — last updated: Sun May 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-model-tier-eval-framework-matrix.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-per-claim-confidence-as-rag-precision-layer.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
+- `syntheses/synthesis-permissions-as-single-compiled-policy.md` — last updated: Sun May 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-rag-eval-to-llm-judge.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
-- `syntheses/synthesis-react-as-native-trajectory-eval.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-repo-aware-system-implementation.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
 - `system/policies/contradiction-policy.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time)
