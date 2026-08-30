@@ -2,6 +2,11 @@
 
 ## Persistent knowledge and context infrastructure for agent systems
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Interfaces](https://img.shields.io/badge/interfaces-web%20%7C%20CLI%20%7C%20MCP-informational.svg)](#quickstart)
+[![Articles](https://img.shields.io/badge/compiled%20articles-1000%2B-blueviolet.svg)](#what-it-includes)
+
 Agentic-KB is a persistent, cross-referenced engineering knowledge system for **agentic AI, autonomous software delivery, agent memory, evaluations, orchestration, and AI engineering patterns**.
 
 It contains 1,000+ compiled articles and exposes the knowledge through a Wikipedia-style web UI, CLI, graph/search interfaces, and an MCP server.
@@ -9,6 +14,52 @@ It contains 1,000+ compiled articles and exposes the knowledge through a Wikiped
 The core idea is simple:
 
 > Useful agent memory should be durable, inspectable, attributable, and continuously maintained—not trapped in one chat window or rebuilt from raw context on every run.
+
+## Quickstart
+
+Requires Node 20+.
+
+```bash
+git clone https://github.com/jaydubya818/Agentic-KB.git
+cd Agentic-KB
+npm install
+```
+
+**Browse the knowledge base in a browser**
+
+```bash
+cd web && npm install && npm run dev
+```
+
+Open <http://localhost:3002> for Wikipedia-style search, article rendering,
+backlinks, and graph navigation.
+
+**Query it from the terminal**
+
+```bash
+node cli/kb.js search "multi-agent orchestration"
+node cli/kb.js query "What is the best pattern for a supervisor-worker system?"
+node cli/kb.js read concepts/tool-use
+node cli/kb.js list concepts
+```
+
+The CLI talks to the web server; set `KB_API_URL` if you are not on the default
+`http://localhost:3002`.
+
+**Expose it to an agent runtime over MCP**
+
+```bash
+node mcp/server.js
+```
+
+Point any MCP client at that process to get bounded, policy-checked knowledge
+tools instead of raw filesystem access. See [mcp/README.md](mcp/README.md).
+
+**Run the tests**
+
+```bash
+npm test
+```
 
 ## Beyond RAG
 
@@ -158,3 +209,7 @@ execution + evidence
 ## Status
 
 Active and continuously maintained. The project combines a large compiled knowledge corpus with working web, CLI, MCP, graph, ingestion, linting, and maintenance paths. Current development emphasizes correctness, privacy boundaries, durable operations, and making the knowledge layer safer and more useful for autonomous agent systems.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
