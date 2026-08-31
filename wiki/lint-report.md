@@ -1,23 +1,23 @@
 # Wiki Lint Report
 
-> Generated: 2026-08-30 18:15 | Vault: Agentic-KB | Pages scanned: 829
+> Generated: 2026-08-31 14:07 | Vault: Agentic-KB | Pages scanned: 837
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 75 | ±0 | 🟡 Medium |
+| Orphaned pages | 71 | -4 | 🟡 Medium |
 | Stale pages | 312 | ±0 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 829 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~14 runs.
+**Analysis window:** 60 of 837 pages (7%) — 10 changed since last run, 50 from the rotating cursor. Full-vault coverage every ~14 runs.
 
 ## 🎯 Triage — start here
 
 **Substantial pages nothing links to** (≥100 words, largest first) — link these from a hub page or archive them:
 
-1. `_meta/proposals.md` — Foundry Proposals (6996 words)
+1. `_meta/proposals.md` — Foundry Proposals (7042 words)
 1. `syntheses/synthesis-repo-aware-system-implementation.md` — Repo-Aware Knowledge & Agent Memory System — Implementation Summary (1679 words)
 1. `reports/2026-08-28-nightly-ci-analysis-backfill.md` — 2026-08-28-nightly-ci-analysis-backfill (1025 words)
 1. `reports/2026-08-18-nightly-ci-analysis.md` — 2026-08-18-nightly-ci-analysis (906 words)
@@ -30,25 +30,25 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 100 inbound links, 148 days old
-1. `concepts/agent-failure-modes.md` — 86 inbound links, 51 days old
-1. `concepts/multi-agent-systems.md` — 63 inbound links, 143 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 144 days old
-1. `concepts/context-management.md` — 56 inbound links, 38 days old
-1. `concepts/human-in-the-loop.md` — 54 inbound links, 127 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 127 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 148 days old
-1. `entities/anthropic.md` — 42 inbound links, 148 days old
-1. `patterns/pattern-supervisor-worker.md` — 40 inbound links, 142 days old
+1. `concepts/agent-loops.md` — 100 inbound links, 149 days old
+1. `concepts/agent-failure-modes.md` — 87 inbound links, 52 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 144 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 145 days old
+1. `concepts/context-management.md` — 57 inbound links, 39 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 128 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 128 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 149 days old
+1. `entities/anthropic.md` — 42 inbound links, 149 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 143 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
+- `_meta/kb-health.md` — kb-health
 - `_meta/proposals.md` — Foundry Proposals
 - `_quarantine/wiki-wiki-stray-log-20260606.md` — Compile Log
 - `agents/leads/planning-agent/domain-standards.md` — Planning Agent — Domain Standards
 - `agents/leads/sofie/weekly-digest.md` — KB Digest — 2026-04-10
 - `concepts/agentic-engineering-stack.md` — Agentic AI Engineering Stack
-- `concepts/agentic-sdlc.md` — Agentic SDLC
 - `concepts/capture-pipeline.md` — Capture Pipeline (foundry-capture)
 - `concepts/compile-once-knowledge.md` — Compile-Once Knowledge (LLM Wiki Pattern)
 - `concepts/factory-memory-context-intelligence.md` — Factory Memory & Context Intelligence
@@ -62,23 +62,19 @@
 - `entities/gsd-ui-checker.md` — GSD UI Checker
 - `entities/hermes-agent.md` — Hermes Agent
 - `entities/seller-fi.md` — SellerFi
-- `frameworks/agent-orchestrator.md` — Agent Orchestrator (Untrivial-ai)
 - `frameworks/headroom.md` — Headroom
 - `frameworks/openconnector.md` — OpenConnector (OOMOL)
-- `patterns/pattern-filesystem-context.md` — Filesystem-Based Context Pattern
 - `patterns/pattern-incremental-compile-pipeline.md` — Incremental Compile Pipeline
 - `patterns/pattern-morning-review.md` — Morning-Review Pipeline
 - `patterns/pattern-playwright-e2e.md` — Playwright E2E Testing Pattern
 - `patterns/pattern-raw-inbox-workflow.md` — Raw Inbox Workflow
 - `patterns/pattern-react-component-refactoring.md` — React Component Refactoring
-- `patterns/pattern-software-factory.md` — Software Factory Pattern
 - `personal/book-to-interactive-ip-platform.md` — Book to Interactive IP Platform — Vertical on Mission Control
 - `personal/databricks-workspace-platform-role.md` — Databricks Workspace Platform Role — Strategy & Vision Notes
 - `personal/jay-software-factory-tiered-ux.md` — Jay: Tiered UX for Software Factory / Mission Control
 - `personal/workday-sem-opportunity.md` — Workday Agent Platform SEM Role — Opportunity Notes
 - `recipes/five-agent-business-ops.md` — Five-Agent Business Operations System
 - `recipes/obsidian-smart-vault-setup.md` — Obsidian Smart Vault: Automated Capture-to-Insight Pipeline
-- `recipes/production-ai-engineer-project-checklist.md` — Production AI Engineer Project Checklist
 - `recipes/readwise-to-wikiwise-ingest.md` — Readwise Reader → Wikiwise Ingest
 - `recipes/recipe-prd-generator.md` — PRD Generator Skill
 - `reports/2026-06-18-nightly-ci-analysis.md` — 2026-06-18-nightly-ci-analysis
