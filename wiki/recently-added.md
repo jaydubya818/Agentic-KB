@@ -9,6 +9,12 @@ type: meta
 
 ---
 
+## 2026-08-31 (morning-review-daily)
+
+- [[syntheses/synthesis-worker-tool-scope-ownership|The Worker's Tool Set Belongs to the Permission Layer, Not the Orchestration Topology]] — Bridges the Orchestration × Tool Use MoC gap: `hot.md` scopes worker tools by graph position while [[patterns/pattern-minimal-permissions]] scopes by task type, and [[patterns/pattern-supervisor-worker]] never mentions capability scoping at all. Unreviewed.
+
+---
+
 ## 2026-08-30 (promote-to-pages)
 
 - [[concepts/outcome-metrics|Outcome Metrics]] — generated draft from 5 sources (linkedin-com-posts-maryammiradi-forward-deployed-engineering-101-for-share-7491586783273603072-ov8f, linkedin-com-posts-reshmawithai-ai-isnt-failing-in-your-company-your-ai-share-7493986243802738688-w9, lumay-ai, sierra-ai-blog-ai-pilling-our-company-lessons-learned, www-linkedin-com-pulse-copy-netflix-ntech-sre-purpose-built-approach-reliability-scale-ozc). Unreviewed.

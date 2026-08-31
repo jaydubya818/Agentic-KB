@@ -3,7 +3,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 ---
 
 # Agentic Engineering KB — Master Index
-> Last updated: 2026-08-30 (editor run) | Maintained by LLM | Never edit manually
+> Last updated: 2026-08-31 (refinery run) | Maintained by LLM | Never edit manually
 
 ## Quick Navigation
 - [[wiki/home|Home]] — Visual front door: concept map, top 5 pages, KB roadmap
@@ -53,7 +53,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Concepts (98)
+## Concepts (100)
 
 | Page | Type | Tags | Confidence | Description |
 |------|------|------|------------|-------------|
@@ -83,10 +83,14 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[concepts/agent-evaluation-gaming]] | concept | agents, safety, evaluation, security | medium | Evaluation agents may pursue shortcut objectives, including escaping the benchmark boundary to obtain answers |
 | [[concepts/agent-observability]] | concept | agentic, observability, production, monitoring | medium | Action-level traces, replay, cost, latency, and cross-system correlation for debugging agent behavior |
 | [[concepts/deep-agents-harness]] | concept | agents, orchestration, architecture, tools, memory | high | LangChain Deep Agents reusable harness for planning, tool calls, filesystem state, and subagent delegation |
+| [[concepts/managed-agents]] | concept | agents, orchestration, architecture, deployment, infrastructure | medium | Agent harnesses on managed infrastructure; builders provide business logic while runtime handles durability, sandboxing, streaming, auth, memory, and eval |
+| [[concepts/agent-harness-model-context]] | concept | agents, architecture, context, orchestration, llm | medium | Diagnostic triad: agent failures usually live in harness/context/model fit, not model capability alone |
+| [[concepts/agentic-sdlc]] | concept | agents, orchestration, workflow, automation, architecture | medium | End-to-end software delivery lifecycle with specialized agents and human approval gates |
+| [[concepts/software-factory]] | concept | agents, orchestration, architecture, automation, workflow | medium | Agents plus code plus human direction assembled into a reusable software-delivery/product-building system |
 
 ---
 
-## Patterns (87)
+## Patterns (88)
 
 | Page | Category | Problem | Confidence |
 |------|----------|---------|------------|
@@ -106,6 +110,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[patterns/pattern-embedded-graduation-model]] | deployment | Central expert teams either stay too far from product teams to change behavior or embed permanently and become an unscalable dependency | medium |
 | [[patterns/pattern-backend-sandbox-separation]] | orchestration | Agent brains and execution hands become coupled, making local/cloud/chat frontends expensive to reuse safely | medium |
 | [[patterns/pattern-credential-gateway]] | safety | Agents need external credentials but raw secrets in prompts, env, or sandbox files create replay and exfiltration risk | medium |
+| [[patterns/pattern-software-factory]] | orchestration | Building one AI product by prompting resets to zero; building reusable primitives, promotion, memory, and human loops compounds across products | medium |
 
 ---
 
@@ -140,6 +145,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[frameworks/deepseek-harness]] | DeepSeek AI | developer preview | none | 2026-08-27 |
 | [[frameworks/framework-managed-deep-agents]] | LangChain | rolling | none | 2026-08-27 |
 | [[frameworks/framework-deepagents-code]] | LangChain | rolling | none | 2026-08-27 |
+| [[frameworks/agent-orchestrator]] | Untrivial-ai | rolling | none | 2026-08-31 |
 
 ---
 
@@ -176,6 +182,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[recipes/recipe-local-research-engine]] | intermediate | 1-2h setup | 6-lens research skill graph ([[framework-claude-code]] + Obsidian): 60% research cost reduction, compound knowledge base |
 | [[recipes/recipe-agent-cicd]] | advanced | 4-8h | CI/CD pipeline for agent systems: prompt changes gated like code changes, metric regression blocks merge |
 | [[recipes/recipe-production-deployment]] | advanced | 8-16h | FastAPI + Redis queue + PostgreSQL + vector store + Prometheus/Grafana production agent deployment topology |
+| [[recipes/production-ai-engineer-project-checklist]] | intermediate | reference checklist | 18 production AI engineering project types across RAG, routing, evals, observability, security, multi-tenancy, memory, inference, HITL, automation, and benchmarks |
 
 ---
 
@@ -188,7 +195,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 
 ---
 
-## Summaries (96)
+## Summaries (102)
 
 | Page | Source | Date Ingested | Key Concepts |
 |------|--------|--------------|-------------|
@@ -263,8 +270,14 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 - [[summaries/linkedin-com-posts-maryammiradi-forward-deployed-engineering-101-for-share-7491586783273603072-ov8f|Maryam Miradi — Forward Deployed Engineering for Production AI Agents]] — Social-source FDE roadmap: shared primitives first, configure-not-rebuild, outcome-backward workflow design, and production feedback loop.
 - [[summaries/linkedin-com-posts-reshmawithai-ai-isnt-failing-in-your-company-your-ai-share-7493986243802738688-w9|Reshma Sriraman — Warning Signs Your Company Is Stuck in AI Pilot Mode]] — Low-confidence market signal on demo-to-production failure modes: missing platform, late governance, weak integrations, manual handoffs, and late ROI definition.
 - [[summaries/linkedin-com-posts-ruben-hassid-stop-over-organizing-claude-it-slows-you-share-7493980931716939776-k|Ruben Hassid — Stop Over-Organizing Claude]] — Low-confidence context-hygiene heuristic: one about-me file, fresh task chats, self-critique, hard-task delegation, and pruning unused prompts/skills/connectors.
+- [[summaries/x-twitter-2084542353344282850|Suraj Sharma — Production AI Engineer Project Checklist]] — Low-confidence social checklist covering 18 production AI engineering project surfaces: RAG citations, model routing, evals, observability, guardrails, local dev, fine-tuning, multi-tenancy, CI/CD, vector scale, memory, inference, HITL, automation, benchmarks, and OSS.
+- [[summaries/untrivial-ai-agent-orchestrator|Agent Orchestrator — Local Agent Fleet Workspace]] — Primary repo/docs capture for AO: local desktop/daemon agent fleet workspace, per-worker worktrees, orchestrator/worker split, durable facts/derived status, CDC, review gateway, and TUI containment caveats.
+- [[summaries/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc|Pavan Belagatti — Agentic SDLC]] — Practitioner article on end-to-end agentic software delivery: planning, build, test, review, deploy, monitor, document, and improve under human decision gates.
+- [[summaries/x-twitter-2085780032031760694|Harrison Chase — Managed Agents Thesis]] — First-party LangChain founder thesis: production agents split into business logic, harness, and infrastructure; managed agents package harness plus runtime, sandbox, streaming, context, eval, memory, and auth.
+- [[summaries/x-twitter-2088782821535981815|Vartekx — Harrison Chase Harness/Model/Context Clip]] — Low-confidence social clip summary for the harness/model/context diagnostic frame and model-specific harness behavior.
+- [[summaries/x-twitter-2088359756096532965|Startup Ideas Podcast — Software Factory Arbitrage Tweet]] — Low-confidence software-factory business pattern: primitives, promotion, memory, human-heavy loops, and compounding speed.
 
-## Personal (17)s (6) (Jay's patterns)
+## Personal (24) (Jay's patterns)
 
 | Page | Category | Confidence | Description |
 |------|----------|------------|-------------|
@@ -345,6 +358,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[syntheses/synthesis-proof-of-work-receipts-vs-trajectory-eval]] | Proof-of-work receipts and trajectory evaluation collect the same evidence and differ only in authorship — receipts catch omission, trajectory eval catches fabrication. Which one should run where? | 2026-08-28 |
 | [[syntheses/synthesis-memory-selection-needs-a-benchmark-protocol]] | The hot cache's Letta-over-Mem0 default rests on a self-flagged-stale LoCoMo result, and no page defines the re-verification procedure its own caveat demands. | 2026-08-29 |
 | [[syntheses/synthesis-forward-message-is-a-permissions-decision]] | `forward_message` removes the only step where a worker's raw output is read before reaching the caller — an unscored permissions change filed as an orchestration fix. | 2026-08-30 |
+| [[syntheses/synthesis-worker-tool-scope-ownership]] | When a supervisor fans work out to workers, who owns the source of truth for a worker's allowed tool set — the orchestrator's topology, or the tool layer's permission policy? | 2026-08-31 |
 | [[syntheses/synthesis-durable-agent-state-is-not-prompt-context]] | Managed agents, LangGraph checkpoints, software-factory traces, Open SWE async tasks, and Playwright browser agents all point to the same rule: prompt context is a working view, not durable agent state. | 2026-08-30 |
 
 ---

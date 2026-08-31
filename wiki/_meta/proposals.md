@@ -1249,3 +1249,12 @@ purpose: Append-only ledger of actionable proposals surfaced by /foundry-propose
 - run: 2026-08-30T13:10:22.099Z
 - recommendation: Latest compile deferred 210 themes (>50). Consider: (a) running /foundry-compile more often, (b) auditing candidates.md for low-value themes to drop, or (c) seeding 2nd sources for the highest-leverage themes.
 
+
+## 2026-08-31T13:10:54.668Z
+
+### PROP-168 [HEAVY_BACKLOG] backlog:2026-08-31T13:10:52.151Z
+
+- defer count: 236 (threshold 50)
+- run: 2026-08-31T13:10:52.151Z
+- recommendation: Latest compile deferred 236 themes (>50). Consider: (a) running /foundry-compile more often, (b) auditing candidates.md for low-value themes to drop, or (c) seeding 2nd sources for the highest-leverage themes.
+

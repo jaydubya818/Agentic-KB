@@ -2308,3 +2308,63 @@ Ran the PROMOTE→page generator (PROP-157). Pages created: 2 (cap: 3).
 
 Eligible but not created this run (cap): 0. All pages born `reviewed: false`, `confidence: medium`, with verbatim-only evidence and an explicitly empty Counter-arguments & Gaps section for a human to complete.
 
+---
+
+## 2026-08-31 — Agentic-KB Refinery Run
+
+**Trigger:** Scheduled `agentic-kb-refinery-run`.
+
+**Pre-run safety:** `git status --porcelain` showed one pre-existing dirty file inside an expected Refinery write path: `briefings/scout-2026-08-30.md`. No dirty files outside the user-allowed Refinery paths or the two explicitly allowed noisy logs, so the run proceeded.
+
+**Sources processed:** 6 raw files marked `status: unprocessed`; `raw/inbox/README.md` skipped as operational intake guidance. Raw originals were not modified.
+
+**Summaries created:**
+- `[[summaries/x-twitter-2084542353344282850]]` from `raw/framework-docs/x-twitter-2084542353344282850.md`
+- `[[summaries/untrivial-ai-agent-orchestrator]]` from `raw/framework-docs/untrivial-ai-agent-orchestrator.md`
+- `[[summaries/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc]]` from `raw/framework-docs/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc.md`
+- `[[summaries/x-twitter-2085780032031760694]]` from `raw/framework-docs/x-twitter-2085780032031760694.md`
+- `[[summaries/x-twitter-2088782821535981815]]` from `raw/framework-docs/x-twitter-2088782821535981815.md`
+- `[[summaries/x-twitter-2088359756096532965]]` from `raw/framework-docs/x-twitter-2088359756096532965.md`
+
+**Existing pages updated:**
+- `[[recipes/production-ai-engineer-project-checklist]]` — linked the slugged Suraj Sharma checklist summary.
+- `[[frameworks/agent-orchestrator]]` — replaced partial-capture caveats with source-slug summary linkage and refined notes on durable facts/derived status plus TUI review-gateway containment caveats.
+- `[[concepts/agentic-sdlc]]` — linked the slugged Pavan Belagatti summary and sharpened the context-handoff / human-decision-rights framing.
+- `[[concepts/managed-agents]]` and `[[frameworks/framework-managed-deep-agents]]` — linked Harrison Chase's managed-agent thesis as an additional source for the business-logic / harness / infrastructure split.
+- `[[concepts/agent-harness-model-context]]` — linked the slugged Vartekx/Harrison Chase clip summary.
+- `[[patterns/pattern-software-factory]]` and `[[concepts/software-factory]]` — linked the slugged Startup Ideas Podcast software-factory summary.
+- `[[wiki/index]]` — updated counts and added missing rows/summary entries for the processed sources and their already-existing atomic homes.
+
+**Atomic-page handling:** No new concept/pattern/framework/recipe pages were created. Existing compiler-created pages already covered the durable atomic concepts. Refinery avoided duplicate pages and used slugged summaries plus backlinks to close provenance/state gaps.
+
+**Conservative treatment:** Social-source claims remained low confidence. Vendor/founder/product claims were treated as source-reported unless independently corroborated by primary docs already in the KB. No raw originals were edited or marked ingested.
+
+**Contradictions flagged:** None new.
+
+**State:** hashes recorded in `.night-shift/state/refinery-processed.json`.
+
+---
+
+## 2026-08-31 — morning-review-daily
+
+**Preflight:** `RESULT: clear` (exit 0). API funded, KB web server healthy, `raw/` clean of contact PII. One warning: worktree dirty on entry — 11 modified + 6 untracked files left behind by the 2026-08-30 night-shift Refinery run. Committed as part of this run (Step 5.8).
+
+**Morning Review pipeline:** completed, 0 errors. 8 Apple Notes / 0 links / 7 findings. 4 auto-apply, 3 approval-required. No AppleScript timeout this run. Daily note written to `Daily Notes/2026-08-31.md`; KB Intelligence section appended (single heading, verified no duplicate).
+
+**Capture staging:** `sofie-watch-obsidian --once` staged 0 new meeting notes. Apple Notes `KB Inbox` held only `test-capture-2026-05-16`, which already has **11 copies** in `raw/clippings/` — the known write-time hash-drift bug. Deliberately NOT re-captured. `Snipd` folder empty. `ingest-dedup` skipped (nothing new). One transcript remains `ingest_status: pending`: `raw/transcripts/obsidian-2026-04-21-2026-03-24.md` — pending since April, not force-ingested.
+
+**Compile (2-source gate):** ran with `--execute`, **exit code 0**. PROMOTE plan listed 42 themes, GRADUATE 3 (`multi-tenancy`, `software-factory`, `sandboxing`). **No pages were created or updated from the promote plan** — the script prints that the PROMOTE list is advisory and that `--execute` only writes `candidates.md`, appends the compile log, and runs `kb compile` (which reported all raw docs already compiled). Building the generator that would apply promotions is tracked as **PROP-157**. Recorded here so the promote count is not mistaken for applied work.
+
+**Proposals:** `foundry-propose --execute --top 3` persisted **PROP-168 [HEAVY_BACKLOG]** — 236 deferred candidates against a threshold of 50.
+
+**Contradictions:** tensions query re-surfaced two. (1) LoCoMo staleness (Letta 74% vs Mem0 68.5%) in [[wiki/hot]] vs [[evaluations/eval-memory-approaches]] — **no provenance edit applied**: `hot.md` already carries the "re-verify if comparing current versions" caveat, a prior run explicitly declined the downgrade, and the leverage question is already escalated as **PROP-166**. Not re-flagged, not re-proposed. (2) `forward_message` as orchestration fix vs permissions change — remains open with a nested unresolved counter-argument in [[syntheses/synthesis-forward-message-is-a-permissions-decision]]; no edit, as resolving it means adding evidence, not dropping a claim.
+
+**Connections verified before drafting:** query proposed 3. Two already had synthesis pages and were rejected — #1 (proof-of-work ↔ trajectory eval) is covered by [[syntheses/synthesis-proof-of-work-receipts-vs-trajectory-eval]] and [[syntheses/synthesis-verifier-as-goal-completion-benchmark]]; #3 (MCP-as-memory ↔ tool permissions) by [[syntheses/synthesis-mcp-as-tool-vs-memory-interface]] and [[syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary]].
+
+**Pages created:** [[syntheses/synthesis-worker-tool-scope-ownership]] — Orchestration × Tool Use, the one MoC pair with no prior synthesis. Verified gap: `hot.md` asserts "Orchestrator has full tools; workers have restricted sets" (topology-derived), [[patterns/pattern-minimal-permissions]] scopes by task type, and [[patterns/pattern-supervisor-worker]] does not mention capability scoping at all. Born `reviewed: false`. Contains one `[UNVERIFIED]` marker (no logged incident of worker over-privilege in the KB).
+
+**Pages updated:** `wiki/index.md` (synthesis table row), `wiki/mocs/orchestration.md` (inbound link — satisfies no-orphan rule), `wiki/recently-added.md` (2026-08-31 heading).
+
+**Leverage question:** "What is the durable, canonical event model for MissionControl/Hermes that every harness can replay, audit, and evaluate?" New — not a repeat of the prior two days (LoCoMo staleness ran 08-29 and 08-30). No escalation filed; the 3-day guard did not fire.
+
+**Contradictions flagged:** None new.

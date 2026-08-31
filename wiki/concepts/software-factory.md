@@ -4,7 +4,7 @@ title: "Software Factory"
 type: concept
 tags: [agents, orchestration, architecture, automation, workflow]
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-08-31
 visibility: public
 confidence: medium
 source: clippings/2026-08-15T20-57-05__apple-notes__software-factory-review-vs-super-simple-software-factory-tie__b1d28b23.md
@@ -37,6 +37,8 @@ This reframes the unit of value creation as three actors working together: **the
 A reference implementation, [super-simple-software-factory](https://github.com/disler/super-simple-software-factory), demonstrates multi-model orchestration (e.g. running different model backends side-by-side for cost/speed/quality trade-offs) inside an observable, swim-lane-style dashboard — conceptually similar to a "mission control" for agent workflows.
 
 ## See Also
+- [[summaries/x-twitter-2088359756096532965]]
+- [[patterns/pattern-software-factory]]
 - [agent-loops](../concepts/agent-loops.md)
 - [agent-layer-architecture](../concepts/agent-layer-architecture.md)
 - [agent-evaluation](../concepts/agent-evaluation.md)

@@ -4,10 +4,10 @@ title: "Agentic SDLC"
 type: concept
 tags: [agents, orchestration, workflow, automation, architecture]
 created: 2026-08-16
-updated: 2026-08-16
+updated: 2026-08-31
 visibility: public
 confidence: medium
-source: linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc.md
+source: [[summaries/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc]]
 related: [agent-loops, agent-layer-architecture, agent-observability]
 ---
 
@@ -29,11 +29,17 @@ This reframes the developer's role: less time on operational coordination, more 
 ## Example
 A feature request enters the pipeline: a planning agent scopes the work and drafts an approach, an implementation agent writes code, a testing agent runs and evaluates test suites, a review agent checks quality/security, a deployment agent ships the change, and a monitoring agent watches production — with a human approving at defined checkpoints (e.g., before deploy) rather than performing each step manually. This mirrors the [agent loops](../concepts/agent-loops.md) pattern applied at the scale of an entire delivery pipeline, and depends on solid [agent observability](../concepts/agent-observability.md) to track handoffs between specialized agents.
 
+## Refinery Notes (2026-08-31)
+- The slugged source summary is [[summaries/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc]].
+- The most reusable operating model is lifecycle-wide context handoff: intent, service/catalog context, requirements/planning, coding, tests, human review, CI/CD, monitoring/remediation, and documentation/context update.
+- The article is clearest on decision rights: humans retain goals, priorities, expected outcomes, security guardrails, policy, plan approval, code/diff review, and release approval; agents handle operational drafts, verification, simple repairs, documentation, incident triage, and service-record updates.
+
 ## Pitfalls
-- Source content is a promotional/opinion piece (LinkedIn article) rather than a technical spec — claims about maturity and adoption should be treated as speculative until corroborated.
-- The article's discussion of DevOps/DevSecOps was truncated in extraction; further capture may be needed to complete the historical framing.
+- Source content is a promotional/practitioner LinkedIn article rather than a technical spec; claims about maturity, productivity, and adoption should be treated as directional until corroborated.
+- The source names Port as an example platform, so separate general Agentic SDLC architecture from vendor-specific positioning.
 
 ## See Also
+- [[summaries/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc]]
 - [Agent Loops](../concepts/agent-loops.md)
 - [Agent Layer Architecture](../concepts/agent-layer-architecture.md)
 - [Agent Observability](../concepts/agent-observability.md)

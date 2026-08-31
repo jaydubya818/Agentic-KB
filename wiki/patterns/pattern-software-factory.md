@@ -4,10 +4,10 @@ title: "Software Factory Pattern"
 type: pattern
 tags: [agents, orchestration, automation, workflow, architecture]
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-31
 visibility: public
 confidence: medium
-source: x-twitter-2088359756096532965.md
+source: [[summaries/x-twitter-2088359756096532965]]
 ---
 
 # Software Factory Pattern
@@ -49,6 +49,7 @@ The example given: an "AI First Index" built for Fortune 500 clients (interviewi
 
 ## Related Patterns
 
+- [[summaries/x-twitter-2088359756096532965]] — slugged source summary for the startupideaspod software-factory tweet
 - [[concepts/agent-memory-architecture]] — the "memory" component of the factory overlaps with shared memory-bank concepts used in agent design
 - [[concepts/agent-layer-architecture]] — primitives-as-reusable-layers mirrors layered architecture thinking for agent systems
 - [[concepts/agent-loops]] — the "humans heavy-handed" loop design relates to human-in-the-loop variants of agent loops

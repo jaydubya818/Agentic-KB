@@ -4,7 +4,7 @@ title: "Managed Deep Agents (LangChain)"
 type: framework
 tags: [frameworks, agents, deployment, orchestration, mcp]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-31
 visibility: public
 confidence: high
 source: [[summaries/docs-langchain-com-langsmith-python-managed-deep-agents-overview]]
@@ -36,12 +36,16 @@ Developers write the agent's intelligence; MDA supplies the [Deep Agents harness
 - Agents that need filesystem-based planning, subagent delegation, and MCP tool integration out of the box.
 - Projects already in the LangSmith/LangChain ecosystem that want a fast path from local agent definition to hosted, restart-resilient runtime.
 
+## Refinery Notes (2026-08-31)
+[[summaries/x-twitter-2085780032031760694]] adds Harrison Chase's founder-level thesis for why Managed Deep Agents exists: builders should bring business logic, while managed products bundle the harness plus infrastructure. That source also positions MDA alongside Fleet, Claude Managed Agents, and Vercel Eve, and names LangSmith Deployments, Agent Server/Channels, Sandboxes, Context Hub, Harbor evals, memory, and AuthN as the managed infrastructure layer.
+
 ## Limitations
 - Tied to LangSmith's managed infrastructure — less control than self-hosting the harness.
 - Documentation excerpt is introductory; deeper operational details (scaling limits, pricing, sandboxing specifics) are not covered in this source and should be verified against the full docs before relying on them.
 - No information in this source on how skills are selected/ranked at runtime, or how subagent delegation is scoped — flagged as open questions for a future source.
 
 ## See Also
+- [[summaries/x-twitter-2085780032031760694]]
 - [[summaries/docs-langchain-com-langsmith-python-managed-deep-agents-overview]]
 - [Deep Agents Harness](../concepts/deep-agents-harness.md)
 - [Agent Loops](../concepts/agent-loops.md)

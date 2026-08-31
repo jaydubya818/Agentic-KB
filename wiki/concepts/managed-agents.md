@@ -4,11 +4,11 @@ title: "Managed Agents"
 type: concept
 tags: [agents, orchestration, architecture, deployment, infrastructure]
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-31
 visibility: public
 confidence: medium
 related: [agent-layer-architecture, agent-loops, agent-memory-runtime, agent-observability]
-source: framework-docs/x-twitter-2085780032031760694.md
+source: [[summaries/x-twitter-2085780032031760694]]
 ---
 
 # Managed Agents
@@ -35,6 +35,7 @@ Together, these let harnesses run on managed infrastructure while builders focus
 A builder using a managed Deep Agents offering supplies tools, instructions, and context (business logic), relies on Deep Agents as the harness (the loop + environment), and the platform handles durable runtime, resumability after failure, event streaming to a UI, sandboxing, auth, memory, and evaluation — the infrastructure layer they'd otherwise have to build themselves.
 
 ## See Also
+- [[summaries/x-twitter-2085780032031760694]]
 - [Agent Layer Architecture](agent-layer-architecture.md)
 - [Agent Loops](agent-loops.md)
 - [Agent Memory & Runtime](agent-memory-runtime.md)

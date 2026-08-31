@@ -4,11 +4,11 @@ title: "The Harness, Model, Context Triad"
 type: concept
 tags: [agents, architecture, context, orchestration, llm]
 created: 2026-08-18
-updated: 2026-08-18
+updated: 2026-08-31
 visibility: public
 confidence: medium
 related: [agent-layer-architecture, agent-failure-modes, agent-loops, agent-memory-architecture]
-source: x-twitter-2088782821535981815
+source: [[summaries/x-twitter-2088782821535981815]]
 ---
 
 # The Harness, Model, Context Triad
@@ -39,6 +39,8 @@ This aligns with and reinforces existing framing in [agent failure modes](agent-
 LangChain's own framework swaps its file-editing implementation depending on whether the underlying model is from OpenAI or Anthropic, because each provider trained its models with different conventions for how tool-call arguments and file edits should be structured. This is a harness-level adaptation done specifically to compensate for model-level differences — a concrete case of harness and model interacting rather than being independent.
 
 ## See Also
+- [[summaries/x-twitter-2088782821535981815]]
+- [[summaries/summary-harrison-chase-harness-model-context]]
 - [Agent Layer Architecture](agent-layer-architecture.md)
 - [Agent Failure Modes](agent-failure-modes.md)
 - [Agent Memory Architecture](agent-memory-architecture.md)

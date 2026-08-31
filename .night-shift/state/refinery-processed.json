@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "job": "agentic-kb-refinery-run",
-  "updated_at": "2026-08-30T03:17:09-07:00",
+  "updated_at": "2026-08-31T03:18:02-07:00",
   "processed": {
     "raw/framework-docs/mgechev-skills-best-practices.md": {
       "sha256": "18ada3a8eab879c132eeefafa0ea6fc23bba7258400cf50902f61add5a1a9210",
@@ -366,10 +366,78 @@
         "wiki/log.md",
         "wiki/patterns/pattern-minimal-context-setup.md"
       ]
+    },
+    "raw/framework-docs/x-twitter-2084542353344282850.md": {
+      "sha256": "117d5a06df29ec59b6d46f4d1dc7d284b8f434b47a9c5614457f338d0d625ac2",
+      "processed_at": "2026-08-31T03:18:02-07:00",
+      "outputs": [
+        "wiki/summaries/x-twitter-2084542353344282850.md",
+        "wiki/recipes/production-ai-engineer-project-checklist.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Refinery created source-slug summary and linked existing atomic page(s); no duplicate atomic page created."
+    },
+    "raw/framework-docs/untrivial-ai-agent-orchestrator.md": {
+      "sha256": "766bbaf9dd6d4bd7e773551720c639285013381509a35b785cd12f14d3265176",
+      "processed_at": "2026-08-31T03:18:02-07:00",
+      "outputs": [
+        "wiki/summaries/untrivial-ai-agent-orchestrator.md",
+        "wiki/frameworks/agent-orchestrator.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Refinery created source-slug summary and linked existing atomic page(s); no duplicate atomic page created."
+    },
+    "raw/framework-docs/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc.md": {
+      "sha256": "c9397973261f2c36b4e2f583cf9a01bc63b019664c625fb6b932819255251ec7",
+      "processed_at": "2026-08-31T03:18:02-07:00",
+      "outputs": [
+        "wiki/summaries/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc.md",
+        "wiki/concepts/agentic-sdlc.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Refinery created source-slug summary and linked existing atomic page(s); no duplicate atomic page created."
+    },
+    "raw/framework-docs/x-twitter-2085780032031760694.md": {
+      "sha256": "28217a8879cbffade6e5739b0a85179b547093facb9142d17a7900f77cf8fcb2",
+      "processed_at": "2026-08-31T03:18:02-07:00",
+      "outputs": [
+        "wiki/summaries/x-twitter-2085780032031760694.md",
+        "wiki/concepts/managed-agents.md",
+        "wiki/frameworks/framework-managed-deep-agents.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Refinery created source-slug summary and linked existing atomic page(s); no duplicate atomic page created."
+    },
+    "raw/framework-docs/x-twitter-2088782821535981815.md": {
+      "sha256": "c98d320bfd8f91fcdded07f5ba600c9b141f5b95169ae7c7b297d790afea943f",
+      "processed_at": "2026-08-31T03:18:02-07:00",
+      "outputs": [
+        "wiki/summaries/x-twitter-2088782821535981815.md",
+        "wiki/concepts/agent-harness-model-context.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Refinery created source-slug summary and linked existing atomic page(s); no duplicate atomic page created."
+    },
+    "raw/framework-docs/x-twitter-2088359756096532965.md": {
+      "sha256": "bcf0ffe01ec0713f722ac4e44962e61d69bc74cab236619029eae8005b579076",
+      "processed_at": "2026-08-31T03:18:02-07:00",
+      "outputs": [
+        "wiki/summaries/x-twitter-2088359756096532965.md",
+        "wiki/patterns/pattern-software-factory.md",
+        "wiki/concepts/software-factory.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ],
+      "note": "Refinery created source-slug summary and linked existing atomic page(s); no duplicate atomic page created."
     }
   },
   "last_run": {
-    "timestamp": "2026-08-30T03:17:09-07:00",
+    "timestamp": "2026-08-31T03:18:02-07:00",
     "result": "processed",
     "scanned": {
       "raw_inbox_files": [
@@ -384,22 +452,19 @@
         "sha256": "a393bcb302e6eb1f9a222fb837b07583e96e5d401f5022cf2909e4297ca36f87"
       }
     ],
-    "processed_count": 10,
+    "processed_count": 6,
     "processed_files": [
-      "raw/framework-docs/anthropic-com-engineering-managed-agents.md",
-      "raw/framework-docs/blume-codes.md",
-      "raw/framework-docs/dev-to-himanshuai-playwright-ai-agent-the-complete-engineering-guide-to-autonomous-browser-automatio.md",
-      "raw/framework-docs/disler-super-simple-software-factory.md",
-      "raw/framework-docs/handbook-vinodspattar-in-learn-modules-07-langgraph.md",
-      "raw/framework-docs/langchain-ai-open-swe.md",
-      "raw/framework-docs/linkedin-com-posts-danielnrocha-harness-meta-harness-self-improving-harness-share-749404682264734105.md",
-      "raw/framework-docs/linkedin-com-posts-maryammiradi-forward-deployed-engineering-101-for-share-7491586783273603072-ov8f.md",
-      "raw/framework-docs/linkedin-com-posts-reshmawithai-ai-isnt-failing-in-your-company-your-ai-share-7493986243802738688-w9.md",
-      "raw/framework-docs/linkedin-com-posts-ruben-hassid-stop-over-organizing-claude-it-slows-you-share-7493980931716939776-k.md"
+      "raw/framework-docs/x-twitter-2084542353344282850.md",
+      "raw/framework-docs/untrivial-ai-agent-orchestrator.md",
+      "raw/framework-docs/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc.md",
+      "raw/framework-docs/x-twitter-2085780032031760694.md",
+      "raw/framework-docs/x-twitter-2088782821535981815.md",
+      "raw/framework-docs/x-twitter-2088359756096532965.md"
     ],
     "notes": [
-      "Created source-slug summaries and linked them from wiki/index.md plus relevant existing framework/concept/pattern pages.",
-      "Several sources already had compiler-created atomic pages; Refinery avoided duplicate atomic pages and used summaries/backlinks for idempotent state closure."
+      "Created source-slug summaries for six previously untracked raw captures.",
+      "Existing compiler-created atomic pages already covered the durable concepts/frameworks; Refinery avoided duplicate atomic pages and added backlinks/source summaries instead.",
+      "Pre-existing dirty file inside allowed write path: briefings/scout-2026-08-30.md."
     ]
   }
 }

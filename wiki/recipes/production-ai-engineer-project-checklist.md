@@ -4,10 +4,10 @@ title: "Production AI Engineer Project Checklist"
 type: recipe
 tags: [agents, evaluation, deployment, architecture, memory]
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-31
 visibility: public
 confidence: medium
-source: https://x.com/suraj_sharma14/status/2084542353344282850
+source: [[summaries/x-twitter-2084542353344282850]]
 related: [agent-evaluation, agent-memory-architecture, agent-loops, agent-failure-modes]
 ---
 
@@ -47,6 +47,7 @@ The list is useful less as a set of novel ideas and more as a map of the **surfa
 This is an opinionated, unverified checklist (single-author social media post) rather than a benchmarked methodology — treat stack recommendations as illustrative, not prescriptive. Several items (#4, #6, #13) overlap directly with existing KB concepts and should be read alongside them rather than duplicated.
 
 ## See Also
+- [[summaries/x-twitter-2084542353344282850]]
 - [agent-evaluation](../concepts/agent-evaluation.md)
 - [agent-memory-architecture](../concepts/agent-memory-architecture.md)
 - [agent-loops](../concepts/agent-loops.md)

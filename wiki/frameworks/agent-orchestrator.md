@@ -4,10 +4,10 @@ title: "Agent Orchestrator (Untrivial-ai)"
 type: framework
 tags: [agents, orchestration, automation, tools, workflow]
 created: 2026-08-16
-updated: 2026-08-16
+updated: 2026-08-31
 visibility: public
 confidence: medium
-source: framework-docs/untrivial-ai-agent-orchestrator.md
+source: [[summaries/untrivial-ai-agent-orchestrator]]
 related: [concepts/agent-loops, concepts/agent-layer-architecture, concepts/agent-observability]
 ---
 
@@ -34,14 +34,20 @@ Agent Orchestrator provides a workspace for running many coding agents in parall
 - When the main friction in agentic coding workflows is *after* code generation — CI breakage, merge conflicts, and review cycles — since this is the orchestrator's specific value-add.
 - As a reference implementation for building custom orchestration layers (e.g., MissionControl/Hermes-style systems) that need worker-delegation and feedback-loop patterns for coding agents specifically.
 
+## Refinery Notes (2026-08-31)
+- The full raw capture includes repository metadata, README, status notes, architecture docs, backend structure docs, CLI docs, ADRs, and implementation plans; the slugged source summary is [[summaries/untrivial-ai-agent-orchestrator]].
+- The strongest architecture rule from the docs is **durable facts, derived status**: AO stores minimal durable session/PR/controller facts and computes Kanban/display status at read time.
+- The review-gateway ADR is a useful safety signal: prompt text, launch flags, or a terminal transport do not make an interactive TUI reviewer read-only; containment requires a capability gateway plus platform isolation.
+
 ## Limitations
 
-- This capture is based on GitHub repository metadata and a partial README/docs fetch (no clone or execution); implementation details on how isolation, planning, and conflict resolution actually work internally are not yet confirmed and should be verified against the full source before being relied upon.
-- Word count of the full captured document (~40k words) suggests substantially more detail exists in the original docs than is reflected here — this page should be revisited once the full document is processed.
-- No benchmark or evaluation data was captured, so claims about autonomous CI-fix/merge-conflict/review handling are the vendor's own description, not independently verified.
+- No local clone, build, or runtime execution has been performed in this KB; behavior remains source-reported.
+- Claims about autonomous CI fixes, merge-conflict handling, code review, adapter support, and browser-control behavior should be verified before adoption.
+- The raw capture includes in-flight plans and status notes; distinguish released behavior from planned behavior when mining implementation details.
 
 ## See Also
 
+- [[summaries/untrivial-ai-agent-orchestrator]]
 - [Agent Loops](../concepts/agent-loops.md)
 - [Agent Layer Architecture](../concepts/agent-layer-architecture.md)
 - [Agent Observability](../concepts/agent-observability.md)
