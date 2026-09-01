@@ -32,8 +32,8 @@ mcp/server.js                  MCP server (~30 tools)
 web/                           Next.js 16 app (web UI + API routes)
 wiki/                          LLM-owned compiled wiki (concepts, patterns, frameworks, decisions, ...)
 raw/                           IMMUTABLE source-of-truth (papers, transcripts, framework-docs)
-tests/agents/                  node:test suites — agent runtime (334 tests)
-tests/repos/, tests/*.test.mjs node:test suites — repo runtime + scripts (237 tests)
+tests/agents/                  node:test suites — agent runtime (351 tests)
+tests/repos/, tests/*.test.mjs node:test suites — repo runtime + scripts (251 tests)
 scripts/                       ingest, sync, audit, ttl, gate
 ```
 
@@ -52,7 +52,7 @@ Edit the contract to refine `context_policy.include`, `allowed_writes`, `forbidd
 ```bash
 unset NODE_ENV                                   # see the trap below — do this first
 npm ci
-npm test                                         # ALL 571 tests, all three globs
+npm test                                         # ALL 602 tests, all three globs
 node --test tests/agents/fuzz-paths.test.mjs     # path-safety fuzzer
 node --test tests/agents/context-snapshots.test.mjs  # context drift
 node cli/kb.js agent verify-audit                # audit chain OK
@@ -62,10 +62,10 @@ node cli/kb.js env check                         # env sanity
 
 Use `npm test`, not `node --test tests/agents/`. The suite is three globs
 (`tests/agents/*`, `tests/repos/*`, `tests/*`) and the `tests/agents/` glob alone
-is 334 of the 571 tests.
+is 351 of the 602 tests.
 
 **CI does not mirror all of the above.** `.github/workflows/test.yml:25` runs
-`node --test tests/agents/*.test.mjs`, so the 237 tests under `tests/repos/` and
+`node --test tests/agents/*.test.mjs`, so the 251 tests under `tests/repos/` and
 `tests/*.test.mjs` have never run in CI — they are local-only gates. `kb env check`
 is also local-only. Everything else in the list does run in CI. The PR template
 (`.github/pull_request_template.md`) lists each as a checkbox.
