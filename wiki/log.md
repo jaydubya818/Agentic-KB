@@ -2396,3 +2396,19 @@ Eligible but not created this run (cap): 0. All pages born `reviewed: false`, `c
 **Leverage question:** "What is the promotion/refresh policy that decides which of the KB's ~380+ pages earn a slot in `wiki/hot.md`, and how do we keep that cache from going stale as the KB grows?" — `hot.md` last updated 2026-04-04 against an index refined through 2026-08-31. New question; the 3-day repeat guard did not fire (08-29/08-30 ran LoCoMo staleness, 08-31 ran durable event model). No escalation filed.
 
 **Contradictions flagged:** None new. One prior contradiction (#2 above) recorded as resolved.
+
+---
+
+## 2026-09-01 — Agentic-KB Editor Run
+
+**Trigger:** Scheduled `agentic-kb-editor-run` at 06:28 PDT.
+
+**Pages considered:** 14 wiki files changed in the last 24 hours from commits `f407b60`, `d7650e9`, `4e1b0f8`, `eb387d6`, and `5e09fd4`, plus recent `wiki/log.md` entries and `.night-shift/state/editor-state.json`.
+
+**Synthesis updated:** `[[syntheses/synthesis-three-contradiction-protocols]]` received a targeted Editor verification note after inspecting `lib/agent-runtime/promotion-scorer.mjs` and searching the wiki/code paths for `[AUTO-RESOLVED]` / `attemptAutoResolution`. The documented Tier 1 auto-demotion path appears not to be implemented in the current runtime; the remaining issue is policy/runtime drift plus unresolved routing, not observed silent data loss.
+
+**Editorial judgment:** No new synthesis page created. The only synthesis-grade thread in the 24h window was already represented by `[[syntheses/synthesis-three-contradiction-protocols]]`; the Editor pass tightened it rather than duplicating it. Lint updates (`wiki/lint-report.md`, `_meta/kb-health.md`, `_meta/lint-alerts.md`, `lint-trend.csv`) did not add a new multi-source synthesis thread.
+
+**Contradictions Jay should resolve:** carry-forward unresolved friction remains `[[mocs/evaluation]]`'s `[FRICTION]` block contesting the "Promotion as Eval" framing via `[[syntheses/synthesis-promotion-scoring-without-a-judge]]`. New operational issue surfaced: Night Shift Scout and Refinery were blocked by an untracked `wiki/daily-systems/logs/2026-08-31.md`; this was fixed by the morning-review commit, but the scheduler/allowlist mismatch remains.
+
+**Briefing:** `briefings/2026-09-01.md`.

@@ -50,19 +50,21 @@ The practical consequence is a silent-loss surface. A factual claim — a versio
 
 **The strongest counter-argument is that the objects really are different, and this synthesis is a category error.** Bus items are pre-canonical drafts; wiki pages are published knowledge. Demoting a `learned` bus item to keep the graph clean is housekeeping, not overwriting a published claim — and Tier 1 explicitly refuses to touch `canonical` pages. If that reading is correct, the two protocols are complementary layers, not rivals. This synthesis rests on the detection scope reading wiki surfaces, which proves the policy *reads* wiki pages, not that it *writes* to them.
 
-**What the evidence does not show:** no observed Tier 1 auto-resolution. `wiki/log.md` contains no `[AUTO-RESOLVED]` entries that this synthesis located, so the divergence is documented-behaviour-versus-documented-behaviour, not a demonstrated data loss. It is possible `attemptAutoResolution` is specified but never wired into a live path — `contradiction-policy.md` names the implementation as `lib/agent-runtime/promotion-scorer.mjs`, which was not inspected here.
+**What the evidence does not show:** no observed Tier 1 auto-resolution. `wiki/log.md` contains no actual `[AUTO-RESOLVED]` audit entries beyond documentation text, so the divergence is documented-behaviour-versus-documented-behaviour, not a demonstrated data loss.
+
+**Editor verification — 2026-09-01:** the implementation named by the policy, `lib/agent-runtime/promotion-scorer.mjs`, was inspected after this synthesis was drafted. It implements scoring, `confirmed` contradiction blocking, `suspected` contradiction penalties, and `checkContradictions`, but it does **not** implement or call `attemptAutoResolution`, nor does it emit `[AUTO-RESOLVED]` / `[AUTO-REJECTED]` audit entries. That narrows the risk: the auto-demotion path appears to be documented but not live in the current runtime. The remaining defect is still real, but it is a policy/implementation mismatch plus confusing guidance, not observed silent data loss.
 
 **Unresolved questions:**
 
-1. Does `promotion-scorer.mjs` actually call `attemptAutoResolution`, and has it ever fired? A single grep of the runtime plus a scan of `wiki/log.md` for `[AUTO-RESOLVED]` would settle whether this is a live risk or a paper one.
-2. Is "demote to `learned`" reversible? If the demoted page's content survives intact and only its memory class changes, the conflict with "do not overwrite" is mostly terminological.
+1. Is `attemptAutoResolution` intentionally future-specified, or stale documentation that should be removed from [[system/policies/contradiction-policy]]?
+2. Is "demote to `learned`" reversible if Tier 1 is ever implemented? If the demoted page's content survives intact and only its memory class changes, the conflict with "do not overwrite" is mostly terminological.
 3. Which protocol governs a contradiction surfaced by a *research lens* that lands in a wiki page — the research protocol that produced it, or the runtime policy that scores it on promotion? No routing rule exists.
 
 **What would resolve it:** one owning page. Either `contradiction-policy.md` gains a scope clause explicitly disclaiming authority over published `wiki/` pages, or `contradiction-handling-in-knowledge-bases.md` gains a Tier 1 exception. A third option — an ADR declaring one protocol canonical and demoting the others to references — is cleaner but costs more.
 
 ## Conclusion
 
-Two of the three protocols agree; the memory-runtime policy is the outlier, and its Tier 1 path is the only mechanism in the KB that resolves a contradiction by removing one side rather than recording both. Whether that is a live defect or a documentation artifact is unresolved and cheap to check — inspect `lib/agent-runtime/promotion-scorer.mjs` for a live call to `attemptAutoResolution` and grep `wiki/log.md` for `[AUTO-RESOLVED]`. Until then the honest position is: the KB has three contradiction protocols, one dangling cross-reference, and no page that says which one wins.
+Two of the three protocols agree; the memory-runtime policy is the outlier, and its Tier 1 path is the only documented KB mechanism that resolves a contradiction by removing one side rather than recording both. The 2026-09-01 Editor verification narrows this from live-data-loss risk to documentation/runtime drift: `promotion-scorer.mjs` does not currently implement the auto-resolution path the policy describes. The honest position is: the KB has three contradiction protocols, one dangling cross-reference, a policy page that overstates current runtime behavior, and no page that says which protocol wins.
 
 Immediate low-cost fix, independent of the above: repair the dangling `knowledge-systems/research-engine/methodology/contradiction-protocol` reference, since the research protocol currently sits outside `wiki/` and is invisible to lint and to the 2-click reachability rule.
 
@@ -75,3 +77,4 @@ Immediate low-cost fix, independent of the above: repair the dangling `knowledge
 - [[summaries/summary-llm-wiki-v2]]
 - [[mocs/memory]]
 - [[mocs/advanced-techniques]]
+- `lib/agent-runtime/promotion-scorer.mjs` (implementation verification; no `attemptAutoResolution` or `[AUTO-RESOLVED]` emitter found)
