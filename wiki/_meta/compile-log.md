@@ -78,3 +78,8 @@ visibility: private
 - defer:    236
 - graduate: 3
 - graduated: multi-tenancy, software-factory, sandboxing
+
+## 2026-09-01T13:09:32.731Z
+- promote: 45 (ADVISORY — not applied; see PROP-157)
+- defer:    236
+- graduate: 0

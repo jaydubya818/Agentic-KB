@@ -9,6 +9,12 @@ type: meta
 
 ---
 
+## 2026-09-01 (morning-review-daily)
+
+- [[syntheses/synthesis-three-contradiction-protocols|The KB Runs Three Contradiction Protocols and Two of Them Disagree About Whether Losing Claims Survive]] — Bridges the Memory × Advanced Techniques MoC gap: [[system/policies/contradiction-policy]] Tier 1 demotes the losing page, while [[concepts/contradiction-handling-in-knowledge-bases]] and the research-engine protocol both preserve both claims. Also flags `knowledge-systems/research-engine/methodology/contradiction-protocol` as a dangling reference. Unreviewed.
+
+---
+
 ## 2026-08-31 (morning-review-daily)
 
 - [[syntheses/synthesis-worker-tool-scope-ownership|The Worker's Tool Set Belongs to the Permission Layer, Not the Orchestration Topology]] — Bridges the Orchestration × Tool Use MoC gap: `hot.md` scopes worker tools by graph position while [[patterns/pattern-minimal-permissions]] scopes by task type, and [[patterns/pattern-supervisor-worker]] never mentions capability scoping at all. Unreviewed.

@@ -2368,3 +2368,31 @@ Eligible but not created this run (cap): 0. All pages born `reviewed: false`, `c
 **Leverage question:** "What is the durable, canonical event model for MissionControl/Hermes that every harness can replay, audit, and evaluate?" New — not a repeat of the prior two days (LoCoMo staleness ran 08-29 and 08-30). No escalation filed; the 3-day guard did not fire.
 
 **Contradictions flagged:** None new.
+
+---
+
+## 2026-09-01 — morning-review-daily
+
+**Preflight:** `RESULT: clear` (exit 0). API reachable and funded, KB web server healthy (localhost:3002), `raw/` clean of contact PII. One warning: worktree dirty on entry — untracked `wiki/daily-systems/logs/2026-08-31.md` left by the 2026-08-31 run. Committed as part of this run (Step 5.8).
+
+**Morning Review pipeline:** completed, 0 errors, 06:03:33 → 06:09:09. 11 Apple Notes / 5 links crawled / 10 findings. 5 auto-apply, 4 needs-approval. **No AppleScript timeout** (Apple Notes read took 30s, extracted 11 notes). Daily note written to `Daily Notes/2026-09-01.md`; 6 wiki pages + 2 index pages updated by the pipeline's own writer. Also: 65 contradiction alerts vs open findings, 310 stale-knowledge alerts (231 action-required), 3 new proposed decision records, 21 local action files, 52 patch proposals (0 auto-applied).
+
+**Capture staging:** `sofie-watch-obsidian --once` staged 0 new meeting notes. Apple Notes `KB Inbox` held only `test-capture-2026-05-16`, which already has **11 copies** in `raw/clippings/` — the known write-time hash-drift bug, unchanged since 2026-08-31. Deliberately NOT re-captured. `Snipd` folder empty. `ingest-dedup` skipped (nothing new). One transcript still `ingest_status: pending`: `raw/transcripts/obsidian-2026-04-21-2026-03-24.md` — pending since April, not force-ingested.
+
+**Compile (2-source gate):** ran with `--execute`, **exit code 0**. PROMOTE plan listed 45 themes, GRADUATE 0. **No pages were created or updated from the promote plan** — the script itself prints that the PROMOTE list is advisory and that `--execute` only writes `candidates.md`, appends the compile log, and runs `kb compile` (which reported all raw docs already compiled). Generator to apply promotions remains **PROP-157**. Recorded so the promote count is not mistaken for applied work.
+
+**Proposals:** `foundry-propose --execute --top 3` persisted **PROP-169 [HEAVY_BACKLOG]** — 236 deferred candidates against a threshold of 50 (up from PROP-168's identical count on 08-31; the backlog is not draining).
+
+**Contradictions:** tensions query surfaced two, one of which was a **false positive caused by this log**. (1) Raw-immutability rule vs `obsidian-wiki`'s `_raw/` promotion/removal behaviour — **genuinely open**, first flagged 2026-06-25, never adjudicated. Needs Jay: does raw-immutability bind only Agentic-KB's own pipeline, or any third-party pattern being described? No edit applied. (2) `agentmemory` provenance gap — **ALREADY RESOLVED 2026-06-10** and should not have been re-reported. [[concepts/reciprocal-rank-fusion]] carries a `[PROVENANCE RESOLVED — 2026-06-10]` block closing it by corroboration (Cormack/Clarke/Buettcher SIGIR 2009 + [[summaries/siagian-agentic-engineer-roadmap-2026]]), confidence restored to `high`, superseding the 2026-05-23 `[UNVERIFIED PROVENANCE]` flag; [[patterns/pattern-per-claim-confidence]] sits at `confidence: medium`, the outcome that resolution prescribed. **No provenance edits applied** — re-flagging would regress resolved work. Root cause: the 06-10 resolution was written to the page but never appended here, so every log-anchored tensions query re-reports it as open. Recording it now closes that loop.
+
+**Connections verified before drafting:** query proposed 3. Two rejected as already synthesized — #1 (plan-execute-verify / proof-of-work ↔ llm-as-judge, trajectory eval) is covered by [[syntheses/synthesis-proof-of-work-receipts-vs-trajectory-eval]] and [[syntheses/synthesis-verifier-as-goal-completion-benchmark]]; #3 (MCP as memory substrate ↔ tool permissions) by [[syntheses/synthesis-mcp-as-tool-vs-memory-interface]]. #2 verified genuinely missing and drafted.
+
+**Pages created:** [[syntheses/synthesis-three-contradiction-protocols]] — Memory × Advanced Techniques, no prior synthesis. Verified divergence: [[system/policies/contradiction-policy]] v2.1 Tier 1 auto-resolution sets `resolution = supersedes` and demotes the conflicting page to `learned`, while [[concepts/contradiction-handling-in-knowledge-bases]] states "Do not overwrite — Both claims coexist" and the research-engine protocol escalates to `open-questions.md`. Born `reviewed: false`. Includes the mandatory Counter-arguments & Gaps section with the strongest opposing reading (bus items ≠ published pages) stated first.
+
+**Dangling reference found:** `knowledge-systems/research-engine/methodology/contradiction-protocol` is cited in [[recipes/recipe-local-research-engine]], [[mocs/advanced-techniques]], [[summaries/summary-research-skill-graph]] and this log, but no such page exists under `wiki/`. The real file is `research-skill-graph/methodology/contradiction-protocol.md`, outside `wiki/` — invisible to lint and to the 2-click reachability rule. Not fixed this run (would mean creating or moving a page beyond the day's one-synthesis budget); flagged here and in the new synthesis for the next lint pass.
+
+**Pages updated:** `wiki/index.md` (synthesis table row), `wiki/mocs/memory.md` (inbound link — satisfies no-orphan rule), `wiki/recently-added.md` (2026-09-01 heading).
+
+**Leverage question:** "What is the promotion/refresh policy that decides which of the KB's ~380+ pages earn a slot in `wiki/hot.md`, and how do we keep that cache from going stale as the KB grows?" — `hot.md` last updated 2026-04-04 against an index refined through 2026-08-31. New question; the 3-day repeat guard did not fire (08-29/08-30 ran LoCoMo staleness, 08-31 ran durable event model). No escalation filed.
+
+**Contradictions flagged:** None new. One prior contradiction (#2 above) recorded as resolved.

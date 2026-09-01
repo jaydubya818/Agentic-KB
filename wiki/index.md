@@ -360,6 +360,7 @@ id: 01KNNVX2QWD5ABN97BE6A2B2MN
 | [[syntheses/synthesis-forward-message-is-a-permissions-decision]] | `forward_message` removes the only step where a worker's raw output is read before reaching the caller — an unscored permissions change filed as an orchestration fix. | 2026-08-30 |
 | [[syntheses/synthesis-worker-tool-scope-ownership]] | When a supervisor fans work out to workers, who owns the source of truth for a worker's allowed tool set — the orchestrator's topology, or the tool layer's permission policy? | 2026-08-31 |
 | [[syntheses/synthesis-durable-agent-state-is-not-prompt-context]] | Managed agents, LangGraph checkpoints, software-factory traces, Open SWE async tasks, and Playwright browser agents all point to the same rule: prompt context is a working view, not durable agent state. | 2026-08-30 |
+| [[syntheses/synthesis-three-contradiction-protocols]] | Three contradiction protocols govern the KB — memory runtime, wiki ingest, research lenses. Two preserve both claims; the runtime's Tier 1 auto-resolution demotes the loser. Which one wins? | 2026-09-01 |
 
 ---
 
