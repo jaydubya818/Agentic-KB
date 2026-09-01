@@ -225,3 +225,15 @@ Jay asked for more commits and authorized three things by name: drain all 8 unme
 - No sweep lines appended anywhere: harvest rejection reasons unchanged from the prior run, per the 08-30 correction.
 - Hygiene: 1 worktree created in /tmp/ntf, removed and pruned. Pi-Harness worktree count 4 before, 4 after. 2 branches created and deleted. No pre-existing worktree or branch touched. MissionControl at 59, unchanged in kind, not acted on.
 - Carried to ACTION REQUIRED: Phase 2e exhaustion (new, dominant); Agentic-KB next 16.3.1 on main, five nights, re-verified tonight by reading the lockfile on origin/main; eight unmerged nightlies in Agentic-KB; the permanently-red-gate-item question; the two key-titled notes, tenth ask; Screen 4 in skill text, third ask; the additive-export rule.
+
+## 2026-09-01 (run 11)
+
+- HARVEST: 11 notes evaluated (6 new, 5 re-evaluated). 0 ingested, 0 work orders — eleventh consecutive zero, correct. 2 under 120 bytes; 8 interview/career prep (7 employer-internal, Screen 4 bound for the 4th run); 1 technical but not code-actionable (p7328, architecture position, names no repo/file/defect).
+- COVERAGE: re-derived against origin, 8/8 HAS (8th consecutive run).
+- RETRACTION: run 10's "Phase 2e is exhausted" was FALSE WITHIN HOURS. twinz went from `## Open` empty to 13 items overnight via daily-repo-improvement. The coverage probe is the only reason this was caught.
+- DRAIN: 1 work order taken — twinz "A first-ever Again is charged as a lapse". Sole entry in the fleet with no decision fork; measures against an external standard (upstream FSRS) rather than a preference.
+- MERGE: twinz 66aba0f (601fd54 fix + 0577c4d docs-close), --no-ff into master. Full code gate, all items observed: baseline green 1077 tests → 1078 after; typecheck/lint/build exit 0; lint warnings byte-identical to baseline; failing-then-passing observed red ("expected 1 to be +0", 2 failures) then green 25/25; acceptance evidence observed (fsrsLapses = 0; scheduled_days = 65 → reviewState = mastered, previously unreachable).
+- VERIFIED INDEPENDENTLY: merge present on origin/master; author string notes-to-factory only; worktrees 1 before / 1 after; Open count 13 → 12.
+- REVERT: git -C /Users/jaywest/Twinz revert -m 1 66aba0f && git -C /Users/jaywest/Twinz push
+- ACTION REQUIRED, new and dominant: LIVE VERCEL API TOKEN in twinz git history (.mcp.json, bc80237 2026-01-21 → redacted at HEAD today; redaction does not remediate). Revoke at vercel.com/account/tokens.
+- HYGIENE: 1 worktree created and removed, baseline restored, 0 pre-existing touched. Disk 28 GiB free — first time below the 30 GiB wave-split threshold.
