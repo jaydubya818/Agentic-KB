@@ -42,6 +42,11 @@ WHITELIST_FILES=(
   # the file says so at the top; that constraint is what keeps this exemption
   # narrow. Without it, the deny-list cannot have a regression test at all.
   "tests/pii-pattern-probe.sh"
+  # 2026-08-30: same category, same constraint. This one asserts that every
+  # non-contact pattern here has a counterpart in scrub-raw-pii.mjs's
+  # REPORT_ONLY list, so it necessarily carries one fixture per pattern. Its
+  # fixtures are synthetic by construction and the file says so at the top.
+  "tests/scrub-raw-pii.test.mjs"
 )
 
 # Patterns that indicate PII / sensitive personal context. Add over time.

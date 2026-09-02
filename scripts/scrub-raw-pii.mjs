@@ -67,7 +67,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const execFileAsync = promisify(execFile)
 
@@ -100,11 +100,37 @@ const REDACTABLE = [
 ]
 
 // Meaning-bearing sensitive content — reported, never auto-rewritten.
+//
+// This list must stay a *superset-or-equal* of the hook's non-contact
+// deny-list, because the documented exit-code contract says 0 means "nothing
+// blocking a commit". Until 2026-08-30 it was materially narrower: the hook
+// blocks a bare `\bwife\b` / `\bhusband\b` / `\bspouse\b`, a named person, a
+// company+interview co-occurrence, comp-negotiation phrasing and four therapy
+// variants, none of which had a counterpart here. A raw/ capture containing
+// any of them scored `flagged: 0`, printed "safe to commit" and exited 0,
+// while the hook rejected the very next commit — the deadlock this script
+// exists to break, with the operator told there was nothing to look at.
+// Reproduced 2026-08-30 with a synthetic vendor page: scrubber exit 0,
+// hook exit 1 on three separate patterns.
+//
+// Entries below are grouped to mirror `scripts/hooks/pre-commit` block for
+// block. Report-only means the worst case of a false positive is exit 2 and a
+// human glance — the same outcome the hook already forces — so mirroring the
+// hook's breadth costs nothing that the hook does not already cost.
 const REPORT_ONLY = [
   { name: 'compensation', re: /\$[0-9]{3},?[0-9]{3}\b|\$[0-9]+[kK]\b/ },
+  { name: 'compensation-negotiation', re: /\b(comp|compensation|salary|stock options|equity)\b.{0,80}(negotiat|offer|range|\$[0-9])/i },
   { name: 'personal-family', re: /\b(my|our) (kids|children|parents|spouse|wife|husband)\b/i },
+  { name: 'family-relation', re: /\b(spouse|wife|husband)\b/i },
+  { name: 'partner-household', re: /\bpartner\b.{0,30}(home|kid|family|raising)/i },
   { name: 'personal-therapy', re: /\b(my|our|jay'?s) therap(y|ist)\b|\bemdr\b/i },
+  { name: 'therapy-attendance', re: /\b(in|start(ed|ing)?|going to|back in|quit|quitting) therapy\b/i },
+  { name: 'therapy-contact', re: /\b(saw|see|seeing|met with|talked to|talking to) (my|a) therapist\b/i },
+  { name: 'therapy-session', re: /\btherap(y|ist) (appointment|session|homework)\b/i },
   { name: 'interview-context', re: /\b(hiring manager|interview) (cycle|prep|round|cheat ?sheet)\b/i },
+  { name: 'hiring-manager-interview', re: /hiring manager interview/i },
+  { name: 'company-interview', re: /(netflix|google|meta|amazon|apple|microsoft|openai|anthropic|adobe).{0,40}(interview|hiring|offer|recruit)/i },
+  { name: 'named-person', re: /\bmichelle\b/i },
 ]
 
 function parseArgs(argv) {
@@ -118,7 +144,15 @@ function parseArgs(argv) {
 
 /** Dirty (untracked or modified) files under raw/, per git. */
 async function dirtyRawFiles() {
-  const { stdout } = await execFileAsync('git', ['status', '--porcelain', '--', 'raw'], {
+  // `--untracked-files=all` is load-bearing. Porcelain's default (`normal`)
+  // collapses a wholly-untracked directory to a single entry ending in `/` —
+  // a capture into a new `raw/<category>/` reports as `?? raw/<category>/`,
+  // which fails the `.md` extension test below and is dropped. Every file in
+  // that directory then goes unscanned and the script prints "raw/ has no
+  // dirty files" and exits 0, which is the exact deadlock it exists to
+  // prevent. `=all` lists each file individually.
+  const args = ['status', '--porcelain', '--untracked-files=all', '--', 'raw']
+  const { stdout } = await execFileAsync('git', args, {
     cwd: REPO_ROOT,
     maxBuffer: 10 * 1024 * 1024,
   })
@@ -155,7 +189,7 @@ async function walkAll(dir, acc = []) {
   return acc
 }
 
-function findRedactable(content) {
+export function findRedactable(content) {
   const hits = []
   for (const { name, re } of REDACTABLE) {
     const matches = content.match(new RegExp(re.source, re.flags))
@@ -164,7 +198,7 @@ function findRedactable(content) {
   return hits
 }
 
-function findReportOnly(content) {
+export function findReportOnly(content) {
   return REPORT_ONLY.filter(({ re }) => re.test(content)).map(({ name }) => name)
 }
 
@@ -283,7 +317,23 @@ async function main() {
   process.exit(0)
 }
 
-main().catch((err) => {
-  console.error(`scrub-raw-pii failed: ${err.stack || err.message}`)
-  process.exit(1)
-})
+// Only run the CLI on direct invocation. Without this guard, importing the
+// module to unit-test its predicates runs main() against the real repository
+// and calls process.exit() on the test runner. Same resolved-file-URL
+// comparison scripts/lib/clipping-write.mjs settled on — `file://${argv[1]}`
+// is not a correctly encoded file URL, and a basename endsWith() fallback is
+// true for an empty argv[1] (node --eval, the REPL, loader/worker contexts).
+const isMain = (() => {
+  try {
+    const entry = process.argv[1]
+    if (!entry) return false
+    return import.meta.url === pathToFileURL(entry).href
+  } catch { return false }
+})()
+
+if (isMain) {
+  main().catch((err) => {
+    console.error(`scrub-raw-pii failed: ${err.stack || err.message}`)
+    process.exit(1)
+  })
+}
