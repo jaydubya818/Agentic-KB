@@ -9,6 +9,12 @@ type: meta
 
 ---
 
+## 2026-09-02 (morning-review-daily)
+
+- [[syntheses/synthesis-gsd-deviation-rules-as-permission-policy|GSD's Deviation Rules Are a Permission Policy — Evaluate Every Orchestrator Against Them]] — Bridges the Orchestration × Tool Use MoC gap: `hot.md`'s four GSD Deviation Rules map one-to-one onto [[concepts/guardrails]]' action layer and [[concepts/permission-modes]]' confirmation boundary, but classify by consequence rather than by tool. Proposes a four-column Deviation Rule coverage row in [[evaluations/eval-orchestration-frameworks]]. Unreviewed.
+
+---
+
 ## 2026-09-01 (morning-review-daily)
 
 - [[syntheses/synthesis-three-contradiction-protocols|The KB Runs Three Contradiction Protocols and Two of Them Disagree About Whether Losing Claims Survive]] — Bridges the Memory × Advanced Techniques MoC gap: [[system/policies/contradiction-policy]] Tier 1 demotes the losing page, while [[concepts/contradiction-handling-in-knowledge-bases]] and the research-engine protocol both preserve both claims. Also flags `knowledge-systems/research-engine/methodology/contradiction-protocol` as a dangling reference. Unreviewed.

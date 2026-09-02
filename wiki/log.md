@@ -2412,3 +2412,29 @@ Eligible but not created this run (cap): 0. All pages born `reviewed: false`, `c
 **Contradictions Jay should resolve:** carry-forward unresolved friction remains `[[mocs/evaluation]]`'s `[FRICTION]` block contesting the "Promotion as Eval" framing via `[[syntheses/synthesis-promotion-scoring-without-a-judge]]`. New operational issue surfaced: Night Shift Scout and Refinery were blocked by an untracked `wiki/daily-systems/logs/2026-08-31.md`; this was fixed by the morning-review commit, but the scheduler/allowlist mismatch remains.
 
 **Briefing:** `briefings/2026-09-01.md`.
+
+---
+
+## 2026-09-02 — morning-review-daily apply pass
+
+**Trigger:** Scheduled `morning-review-daily` at 07:19 PDT. Preflight exit 0 (API funded, no raw/ PII, worktree dirty on `wiki/daily-systems/logs/2026-09-01.md` — that dirty file blocked last night's Scout, Refinery and Editor runs; see `briefings/errors/*2026-09-02*`).
+
+**Morning Review:** completed — 2 notes, 8 links, 6 findings, 3 auto-applied, 2 needing approval, 0 errors, no AppleScript timeout. Daily note written to the vault and KB Intelligence section appended.
+
+**Capture/stage:** `sofie-watch-obsidian --once` — no new meetings. Apple Notes `KB Inbox` holds only the 2026-05-16 test note (already 8× in `raw/clippings/`; not re-captured). `Snipd` empty. 1 transcript still `ingest_status: pending` in `raw/transcripts/` — not ingested this run.
+
+**Compile:** `scripts/compile-2source-gate.mjs --execute` exit **0**. Plan: 45 PROMOTE / 236 DEFER / 0 GRADUATE. Per the script's own note the PROMOTE list is advisory — `kb compile` reported "all raw docs already compiled" and **no pages were promoted**. Page generation from the promote list remains PROP-157.
+
+**Proposals:** `foundry-propose --execute --top 3` wrote PROP-170 [HEAVY_BACKLOG] (236 deferred > 50).
+
+**Connection verification:** query nominated (1) memory promotion policy ↔ llm-as-judge promotion scoring — already covered by [[syntheses/synthesis-promotion-scoring-without-a-judge]]; (2) Telephone Game ↔ trajectory eval — partially covered by [[syntheses/synthesis-telephone-game-per-claim-confidence]] (per-claim confidence angle, not trajectory eval); (3) GSD Deviation Rules ↔ permission-modes/guardrails — verified missing (`grep -li "deviation rule" wiki/syntheses/*.md | xargs grep -li permission` → none).
+
+**Pages created:** [[syntheses/synthesis-gsd-deviation-rules-as-permission-policy]] — Orchestration × Tool Use. Argues the four Deviation Rules are a consequence-keyed action-guardrail policy that maps one-to-one onto [[concepts/guardrails]]' action layer and [[concepts/permission-modes]]' confirmation boundary. Two `[UNVERIFIED]` markers (exact four-part form in the GSD source; any recorded misclassification under Rules 1–3). Born `reviewed: false`, `confidence: medium`, with Counter-arguments & Gaps.
+
+**Pages updated:** `wiki/index.md` (synthesis table row), `wiki/mocs/tool-use.md` (inbound link — no-orphan rule), `wiki/recently-added.md` (2026-09-02 heading).
+
+**Provenance edits:** none. Tensions query re-reported the agentmemory gap (#1) — both pages already carry `[UNVERIFIED PROVENANCE]` since 2026-05-23; re-flagging would regress. Items #2–#4 are diagnosis/policy questions, not page provenance gaps.
+
+**Leverage question:** "Who owns the source of truth for a worker agent's tool permissions — orchestration topology or tool-layer permission policy?" — this is the question [[syntheses/synthesis-worker-tool-scope-ownership]] (2026-08-31) already answers; the query is re-surfacing an existing synthesis. Not a 3-day repeat (08-30 LoCoMo, 08-31 durable state, 09-01 hot.md refresh policy). No escalation filed, but flagged: the leverage query should exclude questions that already have a synthesis.
+
+**Contradictions flagged:** None new.
