@@ -123,6 +123,45 @@ describe('candidates-ttl', () => {
     assert.ok(tracker['flat-theme'])
   })
 
+  it('tracks and expires a theme whose name is an Object.prototype key', () => {
+    // THEME_SLUG admits `constructor`, and theme names come straight from
+    // wikilink / key_concepts targets — an entirely ordinary concept name in a
+    // KB about engineering. With a plain `{}` tracker the guard
+    // `!tracker['constructor']` resolved to the inherited Object constructor
+    // (truthy), so the init branch never ran: `first_seen` was never recorded,
+    // the `last_seen`/`count` writes landed on the global Object instead of the
+    // tracker, and `undefined < cutoff` was false on every subsequent run. The
+    // candidate was parsed and counted but never tracked, never aged and never
+    // expired — permanently exempt from the TTL this script exists to apply.
+    writeCandidates([
+      '- constructor  (1 source: notes-on-js)',
+      '- plain-theme  (1 source: fresh-note)',
+    ])
+    fs.writeFileSync(TRACKER(), JSON.stringify({}, null, 2))
+
+    run(['--apply'])
+    const t1 = JSON.parse(fs.readFileSync(TRACKER(), 'utf8'))
+    assert.ok(
+      Object.hasOwn(t1, 'constructor'),
+      'constructor must land as an own tracker key, or the theme can never age'
+    )
+    assert.match(t1['constructor'].first_seen, /^\d{4}-\d{2}-\d{2}$/)
+
+    // Age it and confirm it can actually reach expiry and archive.
+    t1['constructor'].first_seen = '2020-01-01'
+    fs.writeFileSync(TRACKER(), JSON.stringify(t1, null, 2))
+    const r = run(['--apply'])
+    assert.match(r.stdout, /Expired .*: 1/)
+    assert.match(fs.readFileSync(ARCHIVE('constructor.md'), 'utf8'), /first_seen: 2020-01-01/)
+
+    const remaining = fs.readFileSync(CANDIDATES(), 'utf8')
+    assert.ok(!remaining.includes('- constructor'))
+    assert.ok(remaining.includes('plain-theme'))
+    const t2 = JSON.parse(fs.readFileSync(TRACKER(), 'utf8'))
+    assert.ok(!Object.hasOwn(t2, 'constructor'))
+    assert.ok(Object.hasOwn(t2, 'plain-theme'))
+  })
+
   it('is a no-op without a candidates file', () => {
     fs.rmSync(CANDIDATES())
     const r = run()

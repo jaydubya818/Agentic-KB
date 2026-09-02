@@ -64,10 +64,27 @@ for (const line of body.split('\n')) {
   themes.push({ name: m[1], count: parseInt(m[2], 10), sources: m[3].trim() })
 }
 
-// Load / init tracker
-let tracker = {}
+// Load / init tracker.
+//
+// The tracker is keyed by theme name, and theme names come straight from
+// wikilink / key_concepts targets — THEME_SLUG admits `constructor`, which is
+// an inherited Object.prototype key. With a plain `{}` tracker that name is
+// invisible to every check below: `!tracker['constructor']` is false (it
+// resolves to the Object constructor, which is truthy), so the init branch
+// never runs and `first_seen` is never recorded; `tracker[name].last_seen = …`
+// then writes onto the global Object instead of the tracker; `first_seen`
+// reads back `undefined`, and `undefined < cutoff` is false forever. The
+// candidate is parsed and counted but never tracked, never aged and never
+// expired — the same "silently exempt from the TTL it exists to apply"
+// failure as the namespaced-slug bug above, by a different mechanism.
+// A null-prototype dictionary removes the whole inherited-key class at once.
+let tracker = Object.create(null)
 if (fs.existsSync(TRACKER)) {
-  try { tracker = JSON.parse(fs.readFileSync(TRACKER, 'utf8')) } catch { tracker = {} }
+  try {
+    const parsed = JSON.parse(fs.readFileSync(TRACKER, 'utf8'))
+    // Own enumerable keys only, onto the null-prototype dict.
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) Object.assign(tracker, parsed)
+  } catch { tracker = Object.create(null) }
 }
 const today = new Date().toISOString().slice(0, 10)
 const cutoff = new Date(Date.now() - TTL_DAYS * 86400000).toISOString().slice(0, 10)
