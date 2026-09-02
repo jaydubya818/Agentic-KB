@@ -39,6 +39,18 @@ export function parseCompileLog(text) {
     const deferMatch = block.match(/^- defer:\s*(\d+)/m)
     const graduateMatch = block.match(/^- graduate:\s*(\d+)/m)
     const graduatedMatch = block.match(/^- graduated:\s*(.+)$/m)
+    // The compile log has two producers: the gate appends these counted
+    // blocks, and morning-review / a human appends `## <yyyy-mm-dd>` prose
+    // sections that carry no counts. A prose section parses as a valid date,
+    // so without this guard it became a run with every count at 0 — and the
+    // detectors read positionally. If such a section is the newest heading,
+    // `detectHeavyBacklog` reads `defer: 0` and reports nothing however large
+    // the real backlog is; if it is the oldest, it becomes the first-seen
+    // proxy `detectStuckCandidates` measures every candidate's age against.
+    // A block is a run only if it carries the complete gate record. Accepting
+    // one count and inventing zeroes for the other two would turn a malformed
+    // or prose block into another phantom run.
+    if (!promoteMatch || !deferMatch || !graduateMatch) continue
     runs.push({
       ts,
       promote: promoteMatch ? Number(promoteMatch[1]) : 0,

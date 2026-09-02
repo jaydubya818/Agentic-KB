@@ -64,6 +64,53 @@ describe('parseCompileLog', () => {
     assert.equal(runs.length, 1)
     assert.equal(runs[0].promote, 1)
   })
+
+  // The live wiki/_meta/compile-log.md carries both producers: gate blocks
+  // with counts, and `## <yyyy-mm-dd>` prose sections written by
+  // morning-review. A prose section is a parseable date, so it used to become
+  // a run with every count at 0.
+  it('ignores a dated prose section that states no counts', () => {
+    const text = [
+      '## 2026-04-21T10:00:00.000Z\n- promote: 1\n- defer: 200\n- graduate: 0\n\n',
+      '## 2026-04-22\n- Source: `clippings/whatever.md`\n- Created `entities/mission-control.md`\n',
+    ].join('')
+    const runs = parseCompileLog(text)
+    assert.equal(runs.length, 1)
+    assert.equal(runs[0].ts.toISOString(), '2026-04-21T10:00:00.000Z')
+  })
+
+  it('ignores a dated block with an incomplete compile record', () => {
+    const text = [
+      '## 2026-04-21T10:00:00.000Z\n- promote: 1\n- defer: 20\n- graduate: 0\n\n',
+      '## 2026-04-22\n- defer: 999\n- Note: prose containing one compile-like count.\n',
+    ].join('')
+    const runs = parseCompileLog(text)
+    assert.equal(runs.length, 1)
+    assert.equal(runs[0].defer, 20)
+  })
+
+  it('a newer prose section does not zero out the heavy-backlog detector', () => {
+    const text = [
+      '## 2026-04-21T10:00:00.000Z\n- promote: 1\n- defer: 200\n- graduate: 0\n\n',
+      '## 2026-04-22\n- Created `entities/mission-control.md` — prose, not a gate run.\n',
+    ].join('')
+    const found = detectHeavyBacklog(parseCompileLog(text), { threshold: 50 })
+    assert.equal(found.length, 1)
+    assert.equal(found[0].deferCount, 200)
+  })
+
+  it('a prose section older than every run is not used as the first-seen proxy', () => {
+    const text = [
+      '## 2025-01-01\n- Created `entities/mission-control.md` — prose, not a gate run.\n\n',
+      '## 2026-04-21T10:00:00.000Z\n- promote: 1\n- defer: 1\n- graduate: 0\n',
+    ].join('')
+    const runs = parseCompileLog(text)
+    const now = new Date('2026-04-25T00:00:00.000Z')
+    const cands = [{ theme: 'acceptance-criteria', source: 's1' }]
+    // Against the 2026-04-21 gate run the candidate is 4 days old, not stuck.
+    // Against the 2025-01-01 prose date it would read as ~480 days stuck.
+    assert.equal(detectStuckCandidates(cands, runs, now, { stuckDays: 30 }).length, 0)
+  })
 })
 
 // ─── parseCandidates ────────────────────────────────────────────────────────
