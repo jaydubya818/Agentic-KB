@@ -1,0 +1,75 @@
+name: Nightly CI heartbeat
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Evaluate heartbeat
+        id: heartbeat
+        continue-on-error: true
+        run: node scripts/check-nightly-ci-heartbeat.mjs --max-age-hours 36
+
+      - name: Synchronize the watchdog issue
+        if: steps.heartbeat.outcome == 'success' || steps.heartbeat.outcome == 'failure'
+        uses: actions/github-script@v7
+        env:
+          HEARTBEAT_OUTCOME: ${{ steps.heartbeat.outcome }}
+          HEARTBEAT_MESSAGE: ${{ steps.heartbeat.outputs.message }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const marker = '<!-- nightly-ci-heartbeat-watchdog -->'
+            const healthy = process.env.HEARTBEAT_OUTCOME === 'success'
+            const message = process.env.HEARTBEAT_MESSAGE || 'heartbeat evaluation failed without a message'
+            const body = [
+              marker,
+              `Heartbeat watchdog ${healthy ? 'recovery' : 'alert'}: ${message}.`,
+              `[Latest watchdog run](${process.env.RUN_URL})`,
+            ].join('\n\n')
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              per_page: 100,
+            })
+            const issue = issues.find((candidate) =>
+              !candidate.pull_request && candidate.body?.includes(marker)
+            )
+
+            if (!issue && healthy) return
+
+            if (!issue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '[ci-nightly] heartbeat watchdog alert',
+                body,
+              })
+              return
+            }
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body,
+              state: healthy ? 'closed' : 'open',
+              state_reason: healthy ? 'completed' : 'reopened',
+            })
