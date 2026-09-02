@@ -143,8 +143,34 @@ export function canonicalHash({ source, sourceId = '', author = '', ts = '', tex
 }
 
 export function buildFilename({ ts, source, slug, hash }) {
-  const tsPart = ts ? new Date(ts).toISOString().replace(/[:.]/g, '-').slice(0, 19) : 'now'
-  return `${tsPart}__${source}__${slug}__${hash.slice(0, 8)}.md`
+  // normalizeTs deliberately passes an unparseable --ts through verbatim so the
+  // canonical hash stays defined (see its docstring, and the yamlScalar comment
+  // below which states "--ts is not safe by construction"). That value reaches
+  // here, and `new Date(<unparseable>).toISOString()` throws RangeError — which
+  // aborted the entire capture in buildBody before a single byte was written,
+  // reporting only "error: Invalid time value" with no mention of --ts. The raw
+  // value survives in `captured_at`, so the filename degrades to a sentinel
+  // rather than taking the clipping down with it. Distinct from the absent-ts
+  // sentinel: "no timestamp given" and "timestamp given but unreadable" are
+  // different facts and the filename is the only place either is visible.
+  let tsPart = 'now'
+  if (ts) {
+    const d = new Date(ts)
+    tsPart = Number.isNaN(d.getTime())
+      ? 'undated'
+      : d.toISOString().replace(/[:.]/g, '-').slice(0, 19)
+  }
+  // `source` was interpolated raw, and the filename is path.join()ed onto
+  // raw/clippings/ — so a `--source` containing `../` escaped the directory.
+  // Reproduced: `--source ../../../../../probe/pwned` wrote the clipping
+  // outside the repository while writeClipping still returned
+  // `{ written: true, path: 'raw/clippings/…' }` — the return value named a
+  // location the file was not in. slugify strips every separator and dot run,
+  // and leaves the real sources (slack, apple-notes, gmail) byte-identical.
+  // Only the *filename* is constrained; frontmatter `source` keeps the
+  // caller's exact value, since that is the field provenance is read from and
+  // yamlScalar already makes it safe there.
+  return `${tsPart}__${slugify(source, 40)}__${slug}__${hash.slice(0, 8)}.md`
 }
 
 // Plain-safe YAML scalars: start alphanumeric, no whitespace (so no ': '
@@ -246,8 +272,18 @@ export async function writeClipping(input) {
   if (input.dryRun) {
     return { dryRun: true, hash: built.hash, filename: built.filename, body: built.body }
   }
+  // The filename is assembled from caller-supplied parts (source, title-derived
+  // slug, ts). Each has its own sanitiser, but the invariant that actually
+  // matters is "one path segment, inside CLIPPINGS" — state it once, here,
+  // rather than trusting every component's sanitiser to stay correct. Without
+  // it a traversing component wrote outside the repo *and* this function still
+  // returned a `raw/clippings/…` path, so the caller could not tell.
+  const dest = path.join(CLIPPINGS, built.filename)
+  if (dest !== path.join(CLIPPINGS, path.basename(built.filename))) {
+    throw new Error(`refusing to write outside raw/clippings/: ${built.filename}`)
+  }
   await fs.mkdir(CLIPPINGS, { recursive: true })
-  await fs.writeFile(path.join(CLIPPINGS, built.filename), built.body)
+  await fs.writeFile(dest, built.body)
   return { written: true, hash: built.hash, filename: built.filename, path: `raw/clippings/${built.filename}` }
 }
 
