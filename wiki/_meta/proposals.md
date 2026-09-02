@@ -1276,3 +1276,16 @@ purpose: Append-only ledger of actionable proposals surfaced by /foundry-propose
 - run: 2026-09-02T14:24:37.074Z
 - recommendation: Latest compile deferred 236 themes (>50). Consider: (a) running /foundry-compile more often, (b) auditing candidates.md for low-value themes to drop, or (c) seeding 2nd sources for the highest-leverage themes.
 
+
+## 2026-09-02T15:05:00.000Z (manual, morning-review-daily follow-up)
+
+### PROP-171 [PROMOTE_COUNT_INFLATED] gate:hasPage-never-matched — resizes PROP-157
+
+- detector: manual (2026-09-02), while scoping PROP-157 after Jay's "address it"
+- finding: `classify()` in `scripts/lib/compile-gate-core.mjs` compared bare theme slugs (`guardrails`) against dir-qualified page keys (`concepts/guardrails`) and never matched. Every PROMOTE theme printed `[new]` since the gate was written. Sampled 13 `[new]` themes — all 13 already had pages (`concepts/guardrails`, `concepts/llm-as-judge`, `patterns/pattern-plan-execute-verify`, `frameworks/framework-mcp`, …).
+- fix (this commit): `themeHasPage()` in compile-gate-core.mjs — matches bare slug against `concepts/`, `patterns/`, `patterns/pattern-`, `frameworks/`, `frameworks/framework-`, `recipes/`, `recipes/recipe-`. Regression test `tests/compile-gate-has-page.test.mjs` (7 cases). Existing gate tests still pass (11/11).
+- corrected numbers (2026-09-02): PROMOTE 45 → **10 `[new]` / 35 `[update]`**. DEFER 236 → 189 with no page / 47 already have a page.
+- of the 10 `[new]`: 5 are slug variants of existing pages (`compile-pipeline`→`concepts/llm-wiki-compile-pipeline`, `knowledge-graph`→`concepts/knowledge-graphs`, `evaluation`→`concepts/agent-evaluation`, `sandboxing`→`concepts/agent-sandboxing`, `checkpoint-protocol`/`state-management`→`concepts/state-graph-checkpointing`). Real gaps: `wave-execution`, `context-budget`, `three-layer-architecture`, `ingest-query-lint`, and arguably `checkpoint-protocol` as GSD-specific — **≤5 pages**.
+- consequence for PROP-157: the "236 deferred + 45 promote" debt that justified building an LLM page generator was mostly a display bug. A generator for ≤5 pages is not worth a pipeline; the morning-review-daily one-synthesis-per-day budget already covers that volume. Recommend **closing PROP-157 as "won't build"** and replacing it with two small items: (a) a slug-alias map so `evaluation`/`sandboxing`/`knowledge-graph` resolve to their canonical pages instead of re-promoting forever; (b) drop deferred themes that already have a page from candidates.md (47 today) so HEAVY_BACKLOG stops firing on phantom debt.
+- not done this run: (a) and (b) change candidates.md semantics and GRADUATE detection — Jay's call. The daily HEAVY_BACKLOG proposal (PROP-153…170) will keep firing at 236 until (b) lands.
+- status: open — needs one-word verdict on closing PROP-157

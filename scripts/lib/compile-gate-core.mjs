@@ -51,6 +51,28 @@ export async function buildIndex(summariesDir) {
 }
 
 /**
+ * Does a theme slug already have a wiki page?
+ *
+ * Themes come from summary frontmatter as bare slugs (`guardrails`) or as
+ * dir-qualified links (`concepts/guardrails`). `existingPages` holds
+ * `${dir}/${file}` keys. Until 2026-09-02 this compared the bare slug against
+ * the qualified key and never matched, so every promoted theme printed as
+ * `[new]` even when its page had existed for months (PROP-157 follow-up).
+ * Type-prefixed filenames (`pattern-`, `framework-`, `recipe-`) count too.
+ */
+export function themeHasPage(theme, existingPages) {
+  if (existingPages.has(theme)) return true
+  const bare = theme.replace(/^(concepts|patterns|frameworks|recipes)\//, '')
+  const candidates = [
+    `concepts/${bare}`,
+    `patterns/${bare}`, `patterns/pattern-${bare}`,
+    `frameworks/${bare}`, `frameworks/framework-${bare}`,
+    `recipes/${bare}`, `recipes/recipe-${bare}`,
+  ]
+  return candidates.some((c) => existingPages.has(c))
+}
+
+/**
  * Classify themes into promote / defer / graduate.
  * @param {Map<string, Set<string>>} themes
  * @param {Set<string>} priorCandidates  themes that were single-source last run
@@ -64,7 +86,7 @@ export function classify(themes, priorCandidates, existingPages, opts = {}) {
   const graduate = []
   for (const [theme, summarySet] of themes) {
     const sources = [...summarySet]
-    const hasPage = existingPages.has(theme)
+    const hasPage = themeHasPage(theme, existingPages)
     if (sources.length >= MIN_SOURCES) {
       if (priorCandidates.has(theme)) graduate.push({ theme, sources })
       else promote.push({ theme, sources, hasPage })

@@ -2438,3 +2438,17 @@ Eligible but not created this run (cap): 0. All pages born `reviewed: false`, `c
 **Leverage question:** "Who owns the source of truth for a worker agent's tool permissions — orchestration topology or tool-layer permission policy?" — this is the question [[syntheses/synthesis-worker-tool-scope-ownership]] (2026-08-31) already answers; the query is re-surfacing an existing synthesis. Not a 3-day repeat (08-30 LoCoMo, 08-31 durable state, 09-01 hot.md refresh policy). No escalation filed, but flagged: the leverage query should exclude questions that already have a synthesis.
 
 **Contradictions flagged:** None new.
+
+---
+
+## 2026-09-02 — morning-review-daily follow-up ("address it")
+
+**Trigger:** Jay's reply to the 07:19 run report.
+
+**Worktree unblocked:** `wiki/daily-systems/logs/2026-09-01.md` was uncommittable (PII guard on an EOD open-item line). Line moved to `wiki/_private/eod-open-items-private.md` (gitignored, unlocked plaintext — run `npm run pin:lock`), replaced in the log with a redaction pointer. Also committed: `wiki/repos/agentic-kb/bus/escalation/escalation-2026-09-02-001.md` (nightly-ci-analysis heartbeat — third consecutive Track A sandbox-provisioning abort, CI status for sellerfi/missioncontrol/twinz unknown).
+
+**Pending transcript:** `raw/transcripts/obsidian-2026-04-21-2026-03-24.md` is a `daily-note` (not meeting-note): empty March template plus a stale auto-generated `/today` briefing. No agentic-engineering content; no summary/actions/decisions warranted. Frontmatter flipped `ingest_status: pending → skipped` with an `ingest_note` (the SOP's sanctioned frontmatter edit) so it stops surfacing every run. Deviation from SOP "leave pending on empty": that clause targets garbled transcripts where retry helps; this one is structurally empty.
+
+**PROP-157 scoped and resized:** found `hasPage` in `compile-gate-core.mjs` never matched (bare slug vs `dir/slug`), so all 45 PROMOTE themes printed `[new]`. Fixed + regression test. Corrected: 10 `[new]` (≤5 real gaps) / 35 `[update]`; 47 of 236 DEFER already have pages. Filed PROP-171 recommending PROP-157 be closed "won't build". Verdict is Jay's.
+
+**Contradictions flagged:** None new.
