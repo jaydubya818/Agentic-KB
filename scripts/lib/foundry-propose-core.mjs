@@ -47,8 +47,10 @@ export function parseCompileLog(text) {
     // `detectHeavyBacklog` reads `defer: 0` and reports nothing however large
     // the real backlog is; if it is the oldest, it becomes the first-seen
     // proxy `detectStuckCandidates` measures every candidate's age against.
-    // A block is a run only if it states at least one count.
-    if (!promoteMatch && !deferMatch && !graduateMatch) continue
+    // A block is a run only if it carries the complete gate record. Accepting
+    // one count and inventing zeroes for the other two would turn a malformed
+    // or prose block into another phantom run.
+    if (!promoteMatch || !deferMatch || !graduateMatch) continue
     runs.push({
       ts,
       promote: promoteMatch ? Number(promoteMatch[1]) : 0,

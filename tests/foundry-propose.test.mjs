@@ -79,6 +79,16 @@ describe('parseCompileLog', () => {
     assert.equal(runs[0].ts.toISOString(), '2026-04-21T10:00:00.000Z')
   })
 
+  it('ignores a dated block with an incomplete compile record', () => {
+    const text = [
+      '## 2026-04-21T10:00:00.000Z\n- promote: 1\n- defer: 20\n- graduate: 0\n\n',
+      '## 2026-04-22\n- defer: 999\n- Note: prose containing one compile-like count.\n',
+    ].join('')
+    const runs = parseCompileLog(text)
+    assert.equal(runs.length, 1)
+    assert.equal(runs[0].defer, 20)
+  })
+
   it('a newer prose section does not zero out the heavy-backlog detector', () => {
     const text = [
       '## 2026-04-21T10:00:00.000Z\n- promote: 1\n- defer: 200\n- graduate: 0\n\n',
