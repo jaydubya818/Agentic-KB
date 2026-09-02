@@ -29,7 +29,7 @@
 set -uo pipefail
 
 REPO="${KB_REPO:-/Users/jaywest/Agentic-KB}"
-PORT="${KB_PORT:-3009}"
+PORT="${KB_PORT:-3002}"
 BASE="http://localhost:${PORT}"
 LOG="${REPO}/logs/kb-dev-server.log"
 REPORT="wiki/lint-report.md"

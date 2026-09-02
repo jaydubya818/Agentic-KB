@@ -74,7 +74,7 @@ async function apiFetch(url, init = {}, timeoutMs = API_TIMEOUT_MS) {
     }
     // fetch's own failure message is just "fetch failed"; say where and why.
     const cause = err?.cause?.code || err?.cause?.message || err?.message
-    throw new Error(`KB API unreachable at ${API_URL} (${cause}). Is the web server running?`)
+    throw new Error(`Cannot reach the KB API at ${API_URL} (${cause}). Is the web server running? Set KB_API_URL to override.`)
   } finally {
     clearTimeout(timer)
   }
