@@ -14,16 +14,16 @@ export default [
     // web/ went unlinted from the Next 16 bump until 2026-08-30, so the first
     // real run surfaced 16 pre-existing findings. Fixing application code was
     // out of scope for the change that introduced this file, so the three rules
-    // that were error-level are downgraded to warnings: they still report on
+    // that were error-level were downgraded to warnings: they still report on
     // every run, they just do not fail the gate on violations that predate it.
-    // Re-promote each to 'error' once its existing occurrences are cleaned up.
+    // Re-promote each to 'error' once its existing occurrences are cleaned up
+    // (prefer-const was re-promoted on 2026-09-02 after its one occurrence
+    // was fixed).
     rules: {
       // 2 occurrences: src/app/agents/page.tsx, src/lib/private-mode-context.tsx
       'react-hooks/set-state-in-effect': 'warn',
       // 2 occurrences: src/app/repos/[repo]/page.tsx
       '@typescript-eslint/no-explicit-any': 'warn',
-      // 1 occurrence: src/app/api/repos/[repo]/search/route.ts
-      'prefer-const': 'warn',
     },
   },
 ]
