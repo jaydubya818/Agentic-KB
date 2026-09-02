@@ -349,6 +349,101 @@ test('closeRepoTask commits repo writes and bus publications atomically', () => 
   assert.equal(repoRt.listRepoBusItems(root, 'test-repo', 'escalation').length, 1)
 })
 
+test('closeRepoTask honours payload.dryRun and commits nothing', () => {
+  // Regression: the agent-runtime twin closeTask short-circuits on
+  // `payload.dryRun === true`, but closeRepoTask had no such branch, so
+  // `dryRun` was just an unrecognised key and the call took the repo lock and
+  // committed for real. Nothing in the return value revealed it either --
+  // `dryRun` was absent and `committed` was true. Pre-fix this test fails on
+  // the very first assertion with `committed: true`.
+  const root = makeFixture()
+  const contract = agentRt.validateContract({
+    agent_id: 'w1',
+    tier: 'worker',
+    domain: 'eng',
+    allowed_writes: ['wiki/repos/test-repo/**'],
+    forbidden_paths: [],
+    close_policy: {
+      required_fields: ['taskLogEntry'],
+      at_least_one_of: [],
+      require_active_task: true,
+    },
+  })
+
+  const result = repoRt.closeRepoTask(root, 'test-repo', contract, {
+    dryRun: true,
+    project: 'test-repo',
+    taskLogEntry: 'DRY RUN ONLY',
+    hotUpdate: 'DRY RUN hot memory',
+    discoveries: [{ body: 'DRY RUN discovery' }],
+    escalations: [{ to: 'l1', body: 'DRY RUN escalation' }],
+  })
+
+  // The call reports itself as a dry run and returns a plan, not a commit.
+  assert.equal(result.dryRun, true)
+  assert.equal(result.committed, undefined)
+  assert.equal(result.ok, true)
+  assert.equal(result.wouldSucceed, true)
+  assert.ok(Array.isArray(result.planned) && result.planned.length > 0)
+  assert.deepEqual(result.rejected, [])
+  assert.equal(result.summary.bus_publishes, 2)
+
+  // Nothing landed on disk, and no bus item was published.
+  assert.equal(fs.existsSync(path.join(root, 'wiki/repos/test-repo/progress.md')), false)
+  assert.equal(
+    fs.existsSync(path.join(root, 'wiki/repos/test-repo/agent-memory/worker/w1/hot.md')),
+    false,
+  )
+  assert.equal(repoRt.listRepoBusItems(root, 'test-repo', 'discovery').length, 0)
+  assert.equal(repoRt.listRepoBusItems(root, 'test-repo', 'escalation').length, 0)
+
+  // A dry run must not consume the ability to do the real close afterwards.
+  const real = repoRt.closeRepoTask(root, 'test-repo', contract, {
+    project: 'test-repo',
+    taskLogEntry: 'The real close',
+  })
+  assert.equal(real.ok, true)
+  assert.equal(real.committed, true)
+  assert.match(
+    fs.readFileSync(path.join(root, 'wiki/repos/test-repo/progress.md'), 'utf8'),
+    /The real close/,
+  )
+})
+
+test('a dry run that violates close policy reports ok:false without writing', () => {
+  // `ok` tracks the plan: a plan that would be rejected is not a successful
+  // call, matching closeTask's `ok: plan.wouldSucceed !== false`. Uses a
+  // close-policy violation (a missing required field) rather than a path
+  // rejection, because repo-scoped writes fall back to an implicit
+  // wiki/repos/<repo>/** allowance -- see the repo-scoped fallback tests below.
+  const root = makeFixture()
+  const contract = agentRt.validateContract({
+    agent_id: 'w1',
+    tier: 'worker',
+    domain: 'eng',
+    allowed_writes: ['wiki/repos/test-repo/**'],
+    forbidden_paths: [],
+    close_policy: {
+      required_fields: ['taskLogEntry'],
+      at_least_one_of: [],
+      require_active_task: true,
+    },
+  })
+
+  const result = repoRt.closeRepoTask(root, 'test-repo', contract, {
+    dryRun: true,
+    project: 'test-repo',
+    // taskLogEntry deliberately omitted -- required_fields violation.
+  })
+
+  assert.equal(result.dryRun, true)
+  assert.equal(result.ok, false)
+  assert.equal(result.wouldSucceed, false)
+  assert.equal(result.error, 'close-policy')
+  assert.ok(result.rejected.length > 0)
+  assert.equal(fs.existsSync(path.join(root, 'wiki/repos/test-repo/progress.md')), false)
+})
+
 test('closeRepoTask fails closed and rolls back when the repo lock is held', () => {
   const root = makeFixture()
   const contract = agentRt.validateContract({
