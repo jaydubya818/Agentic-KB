@@ -462,6 +462,38 @@ test('resolveIdentity fingerprints a bearer token stably and distinctly', () => 
   assert.notEqual(a1.id, b.id)
 })
 
+test('resolveIdentity accepts any casing of the Bearer auth-scheme token', () => {
+  // RFC 7235 §2.1 makes the scheme case-insensitive. A conformant client
+  // sending `bearer <token>` used to fall through to anonymous, so its
+  // requests were attributed to `anonymous` in the audit log and in the
+  // committed bus frontmatter instead of to its stable fingerprint.
+  const canonical = rt.resolveIdentity({ authorization: 'Bearer token-a' })
+  assert.equal(canonical.source, 'token')
+  for (const header of ['bearer token-a', 'BEARER token-a', 'BeArEr token-a']) {
+    const identity = rt.resolveIdentity({ authorization: header })
+    assert.equal(identity.id, canonical.id, header)
+    assert.equal(identity.source, 'token', header)
+  }
+})
+
+test('resolveIdentity tolerates extra separator whitespace before the token', () => {
+  const canonical = rt.resolveIdentity({ authorization: 'Bearer token-a' })
+  for (const header of ['Bearer  token-a', 'Bearer\ttoken-a']) {
+    assert.equal(rt.resolveIdentity({ authorization: header }).id, canonical.id, header)
+  }
+})
+
+test('resolveIdentity does not fingerprint an empty bearer credential', () => {
+  // An empty credential is not a credential. Fingerprinting it gave every
+  // such caller the same plausible-looking `token:…` service id in the audit
+  // log; they must be anonymous instead.
+  for (const header of ['Bearer', 'Bearer ', 'Bearer   ', 'Bearer\t']) {
+    const identity = rt.resolveIdentity({ authorization: header })
+    assert.equal(identity.id, 'anonymous', JSON.stringify(header))
+    assert.equal(identity.source, 'anonymous', JSON.stringify(header))
+  }
+})
+
 test('resolveIdentity reads headers case-insensitively from a Headers instance', () => {
   const identity = rt.resolveIdentity(new Headers({ 'X-Agent-Id': 'w1' }))
   assert.equal(identity.id, 'w1')

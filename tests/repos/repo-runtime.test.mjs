@@ -760,6 +760,37 @@ test('loadRepoContext source_files rejects traversal segments but keeps clean pa
   assert.ok(!paths.some(p => p.includes('secret') || p.includes('passwd')))
 })
 
+test('loadRepoContext admits a file once even when two sources resolve it', () => {
+  // The bus sweep and an include rule can both resolve the same path. Before
+  // the dedup the file was pushed twice AND charged against budget_bytes
+  // twice, so a repo with N doubly-matched files silently lost budget for
+  // other docs. loadAgentContext has always guarded this with a `seen` set.
+  const root = makeFixture()
+  const busItem = path.join(root, 'wiki/repos/test-repo/bus/discovery/item-1.md')
+  fs.writeFileSync(busItem, '---\nmemory_class: bus\nfrom: someone\nstatus: open\n---\n\nbody\n')
+  const bytes = fs.statSync(busItem).size
+
+  const contract = {
+    agent_id: 'w1',
+    tier: 'worker',
+    domain: 'eng',
+    context_policy: {
+      budget_bytes: 50000,
+      // A path glob that covers the whole repo tree, so it also matches the
+      // bus item the step-5 sweep delivers.
+      include: [{ path: 'wiki/repos/{{repo}}/**', priority: 70 }],
+    },
+  }
+  const result = repoRt.loadRepoContext(root, 'test-repo', contract)
+  const hits = result.files.filter(f => f.path.endsWith('bus/discovery/item-1.md'))
+
+  assert.equal(hits.length, 1, 'a doubly-matched file must appear once')
+  assert.equal(result.trace.bytes_used, bytes, 'its bytes must be charged once')
+  // A duplicate is not a loss, so it must not be reported as a dropped file.
+  assert.deepEqual(result.trace.excluded, [])
+  assert.equal(result.trace.truncated, false)
+})
+
 // ─── Sync: archive + commit sha provenance ────────────────────────────────
 
 test('archiveRemovedDoc moves the doc out of repo-docs (no live copy left behind)', () => {

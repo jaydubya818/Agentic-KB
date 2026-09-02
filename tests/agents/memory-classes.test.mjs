@@ -37,6 +37,19 @@ test('bus class only matches wiki/system/bus/ at the path root', () => {
   assert.notEqual(classFor('wiki/repos/x/wiki/system/bus/item.md'), 'bus')
 })
 
+test('repo-scoped bus items are bus, not learned', () => {
+  // repoBusRoot() emits wiki/repos/<repo>/bus/<channel>/, which is a second
+  // bus root the wiki/system/ anchor never covered. Classifying those items
+  // as 'learned' made a `class: learned` include rule pull repo bus traffic
+  // into an agent's durable-memory bucket, and made a `class: bus` rule (with
+  // its status filter) match nothing.
+  assert.equal(classFor('wiki/repos/agentic-kb/bus/discovery/item-1.md'), 'bus')
+  assert.equal(classFor('wiki/repos/agentic-kb/bus/escalation/e-1.md'), 'bus')
+  // Still anchored: only the segment immediately under the repo name counts.
+  assert.equal(classFor('wiki/repos/x/repo-docs/bus/README.md'), 'learned')
+  assert.equal(classFor('wiki/repos/x/canonical/PRD.md'), 'learned')
+})
+
 test('isValidClass accepts all declared classes and rejects others', () => {
   for (const c of Object.keys(CLASSES)) assert.ok(isValidClass(c), c)
   assert.ok(!isValidClass('nope'))
