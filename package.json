@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Root deps shared across cli/, mcp/, web/, and lib/agent-runtime/",
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "chokidar": "^5.0.0",
     "yaml": "^2.8.3"

@@ -4,6 +4,9 @@
   "description": "MCP server for Agentic Engineering KB",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "bin": {
     "agentic-kb-mcp": "./server.js"
   },
