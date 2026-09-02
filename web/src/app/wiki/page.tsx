@@ -13,7 +13,6 @@ import WikiLayout from '@/components/WikiLayout'
 import ArticleRenderer from '@/components/ArticleRenderer'
 import TableOfContents from '@/components/TableOfContents'
 import Link from 'next/link'
-import CompilePanel from '@/components/CompilePanel'
 
 export const dynamic = 'force-dynamic'
 

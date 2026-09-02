@@ -14,7 +14,7 @@
 import fs from 'fs'
 import path from 'path'
 import { DEFAULT_KB_ROOT } from '@/lib/articles'
-import { rankMultiplier, rankBreakdown } from '@/lib/ranking'
+import { rankBreakdown } from '@/lib/ranking'
 
 // ── Graph types ───────────────────────────────────────────────────────────────
 

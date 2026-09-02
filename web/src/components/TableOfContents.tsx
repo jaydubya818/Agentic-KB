@@ -60,7 +60,7 @@ interface HeadingListProps {
   parentLevel: number
 }
 
-function HeadingList({ headings, activeId, onHeadingClick, parentLevel }: HeadingListProps): React.ReactElement {
+function HeadingList({ headings, activeId, onHeadingClick }: HeadingListProps): React.ReactElement {
   const topLevel = Math.min(...headings.map(h => h.level))
 
   // Group headings into a nested structure

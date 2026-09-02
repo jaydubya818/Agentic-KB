@@ -51,7 +51,7 @@ export async function GET(
   { params }: { params: Promise<{ repo: string }> }
 ): Promise<NextResponse> {
   const { repo } = await params
-  try { validateSlug(repo, 'repo') } catch (e) {
+  try { validateSlug(repo, 'repo') } catch {
     return NextResponse.json({ error: 'Invalid repo', code: 'BAD_REQUEST' }, { status: 400 })
   }
   const { searchParams } = new URL(request.url)

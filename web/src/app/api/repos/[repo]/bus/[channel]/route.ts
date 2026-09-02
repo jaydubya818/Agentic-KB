@@ -9,7 +9,6 @@ import { resolveIdentity } from '../../../../../../../../lib/agent-runtime/ident
 
 export const dynamic = 'force-dynamic'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type BusListOptions = { status?: string; limit?: number }
 
 // GET: List bus items for a repo channel

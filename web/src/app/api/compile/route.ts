@@ -173,12 +173,10 @@ export async function POST(request: NextRequest): Promise<Response> {
   // x-private-pin would otherwise be rejected as missing).
   let pin = request.headers.get('x-private-pin') || ''
   let mode: 'incremental' | 'full' = 'incremental'
-  let vault: string | undefined
   try {
-    const body = await request.json() as { pin?: string; mode?: string; vault?: string }
+    const body = await request.json() as { pin?: string; mode?: string }
     pin = body.pin || pin
     mode = body.mode === 'full' ? 'full' : 'incremental'
-    vault = body.vault
   } catch { /* defaults */ }
 
   if (PRIVATE_PIN && !pinMatches(pin, PRIVATE_PIN)) {

@@ -31,7 +31,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       let fullPath: string
       try {
         fullPath = safeJoin(KB_ROOT, filePath)
-      } catch (e) {
+      } catch {
         return NextResponse.json(
           { error: 'Invalid path', code: 'BAD_REQUEST' },
           { status: 400 }

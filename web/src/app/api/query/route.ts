@@ -99,7 +99,7 @@ function encodeSSE(data: object): string {
 /**
  * Ask Claude to identify relevant wiki pages from the index.
  */
-async function identifyRelevantPages(question: string, indexContent: string, scope = 'public'): Promise<string[]> {
+async function identifyRelevantPages(question: string, indexContent: string): Promise<string[]> {
   const response = await client.messages.create({
     model: KB_MODEL,
     max_tokens: 512,

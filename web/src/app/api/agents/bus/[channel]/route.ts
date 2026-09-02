@@ -8,7 +8,6 @@ import { resolveIdentity } from '../../../../../../../lib/agent-runtime/identity
 
 export const dynamic = 'force-dynamic'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type BusListOptions = { status?: string; limit?: number }
 
 export async function GET(

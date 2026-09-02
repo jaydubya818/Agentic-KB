@@ -103,7 +103,7 @@ export async function GET(
   const wikiRoot = repoWikiRoot(repo)
   const searchBase = path.join(DEFAULT_KB_ROOT, wikiRoot)
 
-  let scanDirs: string[] = []
+  const scanDirs: string[] = []
 
   if (!section || section === 'canonical') {
     scanDirs.push(path.join(searchBase, 'canonical'))

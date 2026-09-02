@@ -15,10 +15,6 @@ function send(controller: ReadableStreamDefaultController, data: object): void {
   controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify(data)}\n\n`))
 }
 
-function slugify(title: string): string {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
-}
-
 function readSchema(): string {
   try {
     return fs.readFileSync(path.join(KB_ROOT, 'CLAUDE.md'), 'utf8').slice(0, 3000)
