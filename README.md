@@ -17,7 +17,7 @@ The core idea is simple:
 
 ## Quickstart
 
-Requires Node 20+.
+Requires Node 24.x.
 
 ```bash
 git clone https://github.com/jaydubya818/Agentic-KB.git
