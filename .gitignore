@@ -64,3 +64,4 @@ logs/lint-alerts.log
 # notes-to-factory per-run machine state — regenerated each run, can echo note content
 # through the PII deny-list. Ledger stays tracked; last-run.json does not.
 state/notes-to-factory/last-run.json
+autolink-report.md

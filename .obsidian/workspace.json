@@ -109,39 +109,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "cc98574bae13b033",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "2026-04-10.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks for 2026-04-10"
-            }
-          },
-          {
-            "id": "bb876386e30bf2f4",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "2026-04-10.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links from 2026-04-10"
-            }
-          },
-          {
             "id": "f90947747586f5a9",
             "type": "leaf",
             "state": {
@@ -196,7 +163,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
