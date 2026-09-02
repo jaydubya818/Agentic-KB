@@ -115,19 +115,26 @@ function usage() {
 Agentic KB CLI — Query your knowledge base from the terminal
 
 Commands:
-  kb search <query> [--scope public|private|all] [--limit N]
-  kb query <question> [--scope public|private|all] [--pin <pin>]
+  kb help                                      Show this command reference
+  kb search <query> [--scope public/private/all] [--limit N]
+  kb query <question> [--scope public/private/all] [--pin <pin>]
   kb read <slug>
-  kb list <section>
+  kb list <section> [--table]
   kb pending
-  kb compile [--mode full|incremental]
+  kb compile [--mode full/incremental]
   kb lint
-  kb reindex            Rebuild wiki/index.md from actual files on disk
-  kb session bootstrap <hermes|pi|universal>
-  kb session acceptance <hermes|pi>
-  kb ingest-file <path> Convert any file to markdown (via markitdown) and drop into raw/
+  kb reindex                                   Rebuild wiki/index.md from disk
+  kb session bootstrap <role>                 Print Hermes, Pi, or universal bootstrap
+  kb session acceptance <role>                Print Hermes or Pi acceptance contract
+  kb ingest-file <path> [--dir <raw-subdir>]   Convert and stage a local file
   kb ingest-youtube <url>
   kb ingest-twitter <archive.zip>
+  kb promote <channel> <item-id> [--target <path>] [--approver <name>]
+  kb env                                       Validate the local environment
+  kb bootstrap [role]                          List or print an agent bootstrap
+  kb redact preview <file>                     Preview redaction rules
+  kb cost                                      Show API cost totals
+  kb health                                    Run local health checks
 
 Repo commands:
   kb repo list                               List all tracked repos with status
@@ -136,7 +143,7 @@ Repo commands:
   kb repo sync-all [--token <pat>]           Sync all active repos
   kb repo search <name> <query>              Search within a specific repo's docs
   kb repo status <name>                      Show sync status, last SHA, doc count
-  kb repo docs <name> [--section <s>]        List imported docs for a repo
+  kb repo docs <name> [--section <section>]  List imported docs for a repo
   kb repo progress <name>                    Show progress.md for a repo
   kb repo close-task <name> <agent> --payload <file.json> [--dry-run]
 
@@ -149,16 +156,21 @@ Bus & Rewrite commands:
   kb canonical show <name> <doc>             Show a canonical doc (e.g., PRD, TECH_STACK)
 
 Agent runtime commands:
-  kb agent context <agent-id> [--project <p>]
-  kb agent start-task <agent-id> [--project <p>] [--description <d>] [--task-id <tid>]
+  kb agent list
+  kb agent show <agent-id>
+  kb agent context <agent-id> [--project <project>]
+  kb agent start-task <agent-id> [--project <project>] [--description <text>] [--task-id <id>]
   kb agent active-task <agent-id>
   kb agent status <agent-id> [--last <n>]
-  kb agent append-state <agent-id> <task-id> "<entry>"
+  kb agent append-state <agent-id> <task-id> <entry>
   kb agent verify-state <agent-id>
   kb agent repair-state <agent-id>
-  kb agent abandon-task <agent-id> <task-id> [--reason <r>]
+  kb agent abandon-task <agent-id> <task-id> [--reason <reason>]
   kb agent close-task <agent-id> --payload <file.json> [--dry-run]
   kb agent trace <agent-id> [--last <n>]
+  kb agent dry-run-close-task <agent-id> --payload <file.json>
+  kb agent new <agent-id> --tier <tier> [--domain <domain>] [--team <team>] [--force]
+  kb agent verify-audit
 
 Examples:
   kb search "multi-agent orchestration"
