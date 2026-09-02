@@ -32,8 +32,9 @@ mcp/server.js                  MCP server (~30 tools)
 web/                           Next.js 16 app (web UI + API routes)
 wiki/                          LLM-owned compiled wiki (concepts, patterns, frameworks, decisions, ...)
 raw/                           IMMUTABLE source-of-truth (papers, transcripts, framework-docs)
-tests/agents/                  node:test suites — agent runtime (351 tests)
-tests/repos/, tests/*.test.mjs node:test suites — repo runtime + scripts (251 tests)
+tests/agents/                  node:test suites — agent runtime (406 tests)
+tests/repos/, tests/*.test.mjs node:test suites — repo runtime + scripts (281 tests)
+web/tests/                     node:test suites for web/src/lib — run with `npm --prefix web test`
 scripts/                       ingest, sync, audit, ttl, gate
 ```
 
@@ -52,7 +53,8 @@ Edit the contract to refine `context_policy.include`, `allowed_writes`, `forbidd
 ```bash
 unset NODE_ENV                                   # see the trap below — do this first
 npm ci
-npm test                                         # ALL 602 tests, all three globs
+npm test                                         # ALL 687 tests, all three globs
+npm --prefix web ci && npm --prefix web test     # web/src/lib tests (18)
 node --test tests/agents/fuzz-paths.test.mjs     # path-safety fuzzer
 node --test tests/agents/context-snapshots.test.mjs  # context drift
 node cli/kb.js agent verify-audit                # audit chain OK
@@ -62,13 +64,20 @@ node cli/kb.js env check                         # env sanity
 
 Use `npm test`, not `node --test tests/agents/`. The suite is three globs
 (`tests/agents/*`, `tests/repos/*`, `tests/*`) and the `tests/agents/` glob alone
-is 351 of the 602 tests.
+is 406 of the 687 tests.
 
-**CI does not mirror all of the above.** `.github/workflows/test.yml:25` runs
-`node --test tests/agents/*.test.mjs`, so the 251 tests under `tests/repos/` and
-`tests/*.test.mjs` have never run in CI — they are local-only gates. `kb env check`
-is also local-only. Everything else in the list does run in CI. The PR template
-(`.github/pull_request_template.md`) lists each as a checkbox.
+**CI mirrors most of the above.** `.github/workflows/test.yml` runs `npm test`
+(all three globs, on Node 24) plus `verify-audit`, the tier-leak audit and the
+web lint/typecheck/build. It does **not** run `kb env check`, the fuzzer or the
+context-snapshot test as separate steps (the first is local-only; the other two
+are part of `npm test`), and it does not yet run `npm --prefix web test`. The PR
+template (`.github/pull_request_template.md`) lists each as a checkbox.
+
+`web/` tests import `src/*.ts` straight into `node --test` using Node 24's
+built-in type stripping plus a resolve hook for the `@/` alias
+(`web/tests/ts-hooks.mjs`) — no bundler, no extra dependency. They need
+`web/node_modules` to be present (`npm --prefix web ci`) because `src/lib`
+modules import `gray-matter` and friends.
 
 ### Trap: `NODE_ENV=production` silently removes every dev tool
 
