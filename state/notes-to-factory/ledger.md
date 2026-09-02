@@ -237,3 +237,14 @@ Jay asked for more commits and authorized three things by name: drain all 8 unme
 - REVERT: git -C /Users/jaywest/Twinz revert -m 1 66aba0f && git -C /Users/jaywest/Twinz push
 - ACTION REQUIRED, new and dominant: LIVE VERCEL API TOKEN in twinz git history (.mcp.json, bc80237 2026-01-21 → redacted at HEAD today; redaction does not remediate). Revoke at vercel.com/account/tokens.
 - HYGIENE: 1 worktree created and removed, baseline restored, 0 pre-existing touched. Disk 28 GiB free — first time below the 30 GiB wave-split threshold.
+
+## 2026-09-02 (run 12)
+
+- HARVEST: 2 notes in window (p7371, p7357), both X-post screenshot clippings under 120 bytes. 0 ingested, 0 work orders — twelfth consecutive zero, correct. 0 credential-shaped.
+- COVERAGE: re-derived against origin, 8/8 HAS (9th consecutive run). Open counts: KB 19, Pi 18, hermes 14, twinz 12, mr 0, asfm 2, MC 5, SellerFi 17.
+- DRAIN: 1 work order — Agentic-KB "assertReadAllowed never calls checkUnsafePath" (filed 2026-09-01). Only Open entry fleet-wide with no self-declared decision fork; measures against the write guard as the internal standard.
+- PR (not merge): Agentic-KB ntf/2026-09-02-read-guard-unsafe-path → PR #29 (e6ac783 fix + b07a574 docs-close on origin/main@aaea5af). Authorization guard → exclusion list. Gate otherwise complete and observed: baseline 694/694; inverted GAP-2 test red pre-change (actual: true, expected: false); after 694/694; acceptance by direct call: ../../etc/passwd → allowed:false "unsafe path: dot-segment traversal".
+- BACKLOG: entry moved Open → Closed on the PR branch, citing branch not SHA per the 09-01 correction. main unchanged until merge.
+- REJECTED (all already filed, no new entries): KB globToRegex (entry says wants review), recordApiCall (policy), scoreFreshness (design); Pi FanOutCounters (contract decision), Level C semantic (schema+golden); hermes actor/timestamps/bus (all response-shape or wire-vs-delete forks); twinz TOP_ERRORCODE_SPIKE (two-way fork — docs-only header fix flagged as cheap option), FSRS constants (product), .nvmrc (fork), overrides/lockfile/advisories (dependency class).
+- HYGIENE: 1 worktree created and removed; KB count 3 → 3. Branch kept (PR). 0 pre-existing touched. MissionControl 61 nested worktrees (was 59). Disk 17 GiB free (99%), second run under threshold.
+- ACTION REQUIRED carried: twinz Vercel token; SellerFi Stripe secret; nine unmerged KB heads incl. this PR; hermes PR #19/#20; key-titled notes (11th ask); Screen 4 (4th ask).
