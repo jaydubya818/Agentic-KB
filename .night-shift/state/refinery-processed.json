@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "job": "agentic-kb-refinery-run",
-  "updated_at": "2026-08-31T03:18:02-07:00",
+  "updated_at": "2026-09-03T03:16:51-07:00",
   "processed": {
     "raw/framework-docs/mgechev-skills-best-practices.md": {
       "sha256": "18ada3a8eab879c132eeefafa0ea6fc23bba7258400cf50902f61add5a1a9210",
@@ -437,13 +437,14 @@
     }
   },
   "last_run": {
-    "timestamp": "2026-08-31T03:18:02-07:00",
-    "result": "processed",
+    "timestamp": "2026-09-03T03:16:51-07:00",
+    "result": "no-op",
     "scanned": {
       "raw_inbox_files": [
         "raw/inbox/README.md"
       ],
-      "status_unprocessed_count": 41
+      "status_unprocessed_count": 41,
+      "status_unprocessed_hashes_verified": 41
     },
     "skipped": [
       {
@@ -452,19 +453,13 @@
         "sha256": "a393bcb302e6eb1f9a222fb837b07583e96e5d401f5022cf2909e4297ca36f87"
       }
     ],
-    "processed_count": 6,
-    "processed_files": [
-      "raw/framework-docs/x-twitter-2084542353344282850.md",
-      "raw/framework-docs/untrivial-ai-agent-orchestrator.md",
-      "raw/framework-docs/linkedin-com-pulse-agentic-sdlc-how-ai-agents-reshaping-software-pavan-belagatti-rsthc.md",
-      "raw/framework-docs/x-twitter-2085780032031760694.md",
-      "raw/framework-docs/x-twitter-2088782821535981815.md",
-      "raw/framework-docs/x-twitter-2088359756096532965.md"
-    ],
+    "processed_count": 0,
+    "processed_files": [],
     "notes": [
-      "Created source-slug summaries for six previously untracked raw captures.",
-      "Existing compiler-created atomic pages already covered the durable concepts/frameworks; Refinery avoided duplicate atomic pages and added backlinks/source summaries instead.",
-      "Pre-existing dirty file inside allowed write path: briefings/scout-2026-08-30.md."
+      "No new unhandled raw/inbox source material found; only raw/inbox/README.md was present and skipped as operational guidance.",
+      "All 41 raw files with frontmatter status: unprocessed matched hashes already recorded in the processed ledger, so no duplicate summaries or atomic pages were created.",
+      "Pre-existing dirty file inside allowed Refinery write path: briefings/scout-2026-09-02.md.",
+      "No wiki pages, raw files, or log files were modified in this no-op run."
     ]
   }
 }
