@@ -1,23 +1,23 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-02 14:19 | Vault: Agentic-KB | Pages scanned: 841
+> Generated: 2026-09-03 15:44 | Vault: Agentic-KB | Pages scanned: 838
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 71 | ±0 | 🟡 Medium |
+| Orphaned pages | 72 | +1 | 🟡 Medium |
 | Stale pages | 312 | ±0 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 841 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
+**Analysis window:** 60 of 838 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~14 runs.
 
 ## 🎯 Triage — start here
 
 **Substantial pages nothing links to** (≥100 words, largest first) — link these from a hub page or archive them:
 
-1. `_meta/proposals.md` — Foundry Proposals (7088 words)
+1. `_meta/proposals.md` — Foundry Proposals (7415 words)
 1. `syntheses/synthesis-repo-aware-system-implementation.md` — Repo-Aware Knowledge & Agent Memory System — Implementation Summary (1679 words)
 1. `reports/2026-08-28-nightly-ci-analysis-backfill.md` — 2026-08-28-nightly-ci-analysis-backfill (1025 words)
 1. `reports/2026-08-18-nightly-ci-analysis.md` — 2026-08-18-nightly-ci-analysis (906 words)
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 100 inbound links, 151 days old
-1. `concepts/agent-failure-modes.md` — 87 inbound links, 54 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 146 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 147 days old
-1. `concepts/context-management.md` — 57 inbound links, 41 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 130 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 130 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 151 days old
-1. `entities/anthropic.md` — 42 inbound links, 151 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 145 days old
+1. `concepts/agent-loops.md` — 100 inbound links, 152 days old
+1. `concepts/agent-failure-modes.md` — 87 inbound links, 55 days old
+1. `concepts/multi-agent-systems.md` — 63 inbound links, 147 days old
+1. `entities/mcp-ecosystem.md` — 60 inbound links, 148 days old
+1. `concepts/context-management.md` — 57 inbound links, 42 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 131 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 131 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 152 days old
+1. `entities/anthropic.md` — 41 inbound links, 152 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 146 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -103,6 +103,7 @@
 - `reports/2026-08-22-nightly-ci-analysis.md` — 2026-08-22-nightly-ci-analysis
 - `reports/2026-08-28-nightly-ci-analysis-backfill.md` — 2026-08-28-nightly-ci-analysis-backfill
 - `reports/2026-08-29-nightly-ci-analysis.md` — 2026-08-29-nightly-ci-analysis
+- `repos/agentic-kb/bus/escalation/escalation-2026-09-02-001.md` — [escalation] HEARTBEAT (substitute for state/nightly-ci/last-run.json — git unavailable)
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
