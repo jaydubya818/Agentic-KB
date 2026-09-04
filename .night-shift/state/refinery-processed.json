@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "job": "agentic-kb-refinery-run",
-  "updated_at": "2026-09-03T03:16:51-07:00",
+  "updated_at": "2026-09-04T09:20:09-07:00",
   "processed": {
     "raw/framework-docs/mgechev-skills-best-practices.md": {
       "sha256": "18ada3a8eab879c132eeefafa0ea6fc23bba7258400cf50902f61add5a1a9210",
@@ -437,7 +437,7 @@
     }
   },
   "last_run": {
-    "timestamp": "2026-09-03T03:16:51-07:00",
+    "timestamp": "2026-09-04T09:20:09-07:00",
     "result": "no-op",
     "scanned": {
       "raw_inbox_files": [
@@ -456,9 +456,9 @@
     "processed_count": 0,
     "processed_files": [],
     "notes": [
+      "Pre-run git status was clean.",
       "No new unhandled raw/inbox source material found; only raw/inbox/README.md was present and skipped as operational guidance.",
       "All 41 raw files with frontmatter status: unprocessed matched hashes already recorded in the processed ledger, so no duplicate summaries or atomic pages were created.",
-      "Pre-existing dirty file inside allowed Refinery write path: briefings/scout-2026-09-02.md.",
       "No wiki pages, raw files, or log files were modified in this no-op run."
     ]
   }
