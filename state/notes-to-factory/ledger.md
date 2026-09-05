@@ -282,3 +282,18 @@ Jay asked for more commits and authorized three things by name: drain all 8 unme
 - New finding, not acted on: /Users/jaywest/Twinz local checkout stuck mid-merge since apparently 2026-06-24 (stale `.git/HEAD.lock`, `.git/MERGE_HEAD` present, ~250 staged changes including real work in fsrs-scheduler.ts and several app pages). Not touched — flagged as ACTION REQUIRED for Jay to resolve by hand.
 - Held: Agentic-KB:ntf/2026-09-02-read-guard-unsafe-path (feeds PR #29, still open, now 3 days old, mergeable UNKNOWN, not touched).
 - Report: outputs/notes-to-factory-2026-09-05.md
+
+
+## 2026-09-05 08:20 PDT run — addendum: PR #10 merged, false red-master finding retracted
+
+Jay pushed back on the low commit count and said to use judgment rather than ask again. Investigated the one blocker from this morning's run (twinz PR #10 not auto-merging because master looked red) instead of leaving it as a PR.
+
+- ROOT CAUSE FOUND: `__tests__/browse-route.test.ts` "failure" was NOT a real bug. This job's own shell has `NODE_ENV` globally exported to `production` (same shell-discipline gotcha the SKILL.md already documents for `npm ci`, but it also silently affects `vitest`, `tsc`, `eslint`, `next build` — anything that branches on `NODE_ENV`). `isEmulatorContext()` short-circuits to `false` when `NODE_ENV === "production"`, so the emulator-bypass test could never pass under this job's default shell, regardless of the actual code.
+- Re-ran the full gate for the twinz worktree with `NODE_ENV=test` set explicitly: typecheck clean, lint 0 errors (125 pre-existing warnings, none in touched files), full suite 110 files / 1078 tests green, `build:ci` green.
+- Rebased `ntf/2026-09-05-errorcode-spike-volume-guard` onto latest `origin/master` (which had moved from the earlier docs commit), re-ran the gate clean on the rebased tree, merged `--no-ff` as `e4955ee`, pushed directly (local `/Users/jaywest/Twinz` checkout is unusable — still stuck mid-merge, see this morning's ACTION REQUIRED — so the merge was done from a worktree checked out to `origin/master` and pushed via `HEAD:master`).
+- Closed PR #10 with an explanatory comment.
+- Corrected `docs/NIGHTLY-BACKLOG.md`: moved the `TOP_ERRORCODE_SPIKE` item to Closed, and added a Closed entry retracting the false "red master" finding rather than silently deleting it, so a future run doesn't either re-treat it as open or repeat the same false claim. Pushed as `5a5b443`.
+- REVERT (if ever needed): `git -C /Users/jaywest/Twinz revert -m 1 e4955ee && git push` for the code merge; `git -C /Users/jaywest/Twinz revert 5a5b443 && git push` for the docs correction.
+- LESSON FOR THIS JOB, RECORDED IN THE REPO NOT JUST HERE: every `test:run` / `type-check` / `lint` / `build` invocation must set `NODE_ENV=test` explicitly, the same way `npm ci` already sets `NODE_ENV=development`. Relying on the shell default is what produced a false ACTION REQUIRED item and nearly left a good, gated fix sitting in a PR indefinitely.
+- Net result for the day: 2 commits landed on twinz `master` (the fix, the correction) plus the earlier fast-forward docs commit and the KB ledger commit = 4 total, and 0 items sitting in an unmerged PR by end of run (down from 1).
+- HYGIENE: 2 more worktrees created and removed this addendum (twinz-errorcode-volume-guard re-created, twinz-master-merge), both cleaned up, `git worktree list` back to baseline. Disk: 18 GiB free at end (13 GiB at the low point mid-build — tighter than ideal; worth noting the `next build` step for meeting-assistant is itself a non-trivial disk cost on top of `npm ci`'s ~3.2 GB, and this repo should probably not run two full gates back-to-back on a day disk is already constrained).
