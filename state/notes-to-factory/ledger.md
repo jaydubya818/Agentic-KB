@@ -257,3 +257,28 @@ Jay asked for more commits and authorized three things by name: drain all 8 unme
 - CONCLUSION: the specific stock Jay named on 2026-08-25 (metrics.json key order, safeRelativePath, actor filter, artifact dedupe) is now entirely Closed — three of four by hermes-harness-missioncontrol's own nightly job, one (assertReadAllowed, adjacent to "metrics.json key order" in spirit) by this job on 09-02. No replacement stock of the same shape has appeared. This is reported rather than papered over with a marginal pick.
 - HYGIENE: no worktree created this run (nothing reached IMPLEMENT). 0 pre-existing worktrees or branches touched. Disk 50 GiB free (well above the 30 GiB threshold — best reading since tracking started).
 - ACTION REQUIRED carried: Agentic-KB PR #29 still unmerged (1 day); MissionControl Open count 5→15 (not triaged item-by-item); twinz Vercel token; SellerFi Stripe secret; hermes PR #19/#20; key-titled notes (12th ask); Agentic-KB team-setup.sh heredoc injection (new flag, real security finding, not attempted).
+
+
+## 2026-09-04 08:20 PDT run
+
+- Kill switch: not set. Disk: 71 GiB free (no preflight concern).
+- Harvest: 7 Apple Notes in window (p7455, p7448, p7442, p7418, p7432, p7427, p7413), all employer-candidacy-prep content for a named tech employer (system design, code review, coding round, presentation, onsite plan), all not-code-actionable. 0 ingested. 0 credential-shaped.
+- Drain: all 8 backlog-bearing repos re-fetched from origin and re-read in full. Zero unambiguously-Small items fleet-wide (14th consecutive zero-harvest day, independently re-derived, not copied from 2026-09-03).
+- Work orders: 0. Merges: 0. PRs opened: 0.
+- Held: Agentic-KB:ntf/2026-09-02-read-guard-unsafe-path (feeds PR #29, still open, now 2 days old, not touched).
+- Report: outputs/notes-to-factory-2026-09-04.md
+
+
+## 2026-09-05 08:20 PDT run
+
+- Kill switch: not set. Disk: 24.6 GiB free at start (down from 71 GiB on 2026-09-04 — flagged in report as ACTION REQUIRED, cause not this job's own `npm ci`, which was fully cleaned up). 23 GiB free at end.
+- Note: the 2026-09-04 ledger entry above was written but never committed by that run; committed now alongside this entry rather than discarded.
+- Harvest: 6 new Apple Notes in window (p7494, p7495, p7489, p7472, p7458, p7457). 0 ingested (1 empty/screenshot, 2 interview-prep, 1 agent-prompt for a different system (FDLC/Codex), 2 link dumps). 0 credential-shaped. 15th consecutive zero-work-order harvest.
+- Drain: Agentic-Pi-Harness (12 Open) and hermes-harness-missioncontrol (9 Open) re-read fresh from origin — all self-declared decision forks / Large, none Small. twinz (12 Open) had one unambiguously Small, non-decision item: TOP_ERRORCODE_SPIKE bypasses its own volume guardrail.
+- Work orders: 1 (twinz). Merges: 0. PRs opened: 1 (twinz #10).
+- Not auto-merged: twinz `master`'s meeting-assistant suite has a pre-existing failing test (`browse-route.test.ts` emulator-bypass, confirmed red on origin/master itself, unrelated to this change) — new backlog entry added, this job's own gate correctly refused to merge into a red default branch.
+- Also pushed directly to twinz `master` (fast-forward, docs-only, parse-checked): backlog annotation recording PR #10's status and the new red-baseline finding. SHA 3125618.
+- Hygiene: 2 worktrees created (twinz), both removed, `git worktree list` back to baseline, no pre-existing worktree/branch touched.
+- New finding, not acted on: /Users/jaywest/Twinz local checkout stuck mid-merge since apparently 2026-06-24 (stale `.git/HEAD.lock`, `.git/MERGE_HEAD` present, ~250 staged changes including real work in fsrs-scheduler.ts and several app pages). Not touched — flagged as ACTION REQUIRED for Jay to resolve by hand.
+- Held: Agentic-KB:ntf/2026-09-02-read-guard-unsafe-path (feeds PR #29, still open, now 3 days old, mergeable UNKNOWN, not touched).
+- Report: outputs/notes-to-factory-2026-09-05.md
