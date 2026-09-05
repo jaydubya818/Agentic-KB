@@ -27,6 +27,14 @@ function withExtension(url) {
 }
 
 export async function resolve(specifier, context, nextResolve) {
+  // `next` has no `exports` map for its `./server` subpath, so plain Node ESM
+  // resolution (no bundler in this harness) can't find it without the
+  // explicit .js extension the package's own files use internally. Needed to
+  // import App Router route.ts files directly (they all start with
+  // `import { NextRequest, NextResponse } from 'next/server'`).
+  if (specifier === 'next/server') {
+    return nextResolve('next/server.js', context)
+  }
   if (specifier.startsWith('@/')) {
     const aliased = new URL(specifier.slice(2), SRC)
     const resolved = withExtension(aliased.href)
