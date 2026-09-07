@@ -45,4 +45,5 @@ Add URLs here, one per unchecked list item. Scout Run will preserve source text 
 - [ ] https://www.linkedin.com/posts/reshmawithai_ai-isnt-failing-in-your-company-your-ai-share-7493986243802738688-W9cG/ — Apple Notes 2026-08-14: enterprise AI failure/operating-model signal; extraction blocked, preserve for manual review.
 - [ ] https://www.lumay.ai/ — Apple Notes 2026-08-14: Lumay AI company/site paired with enterprise AI adoption note; inspect for AI operating model patterns.
 - [ ] https://www.linkedin.com/posts/ruben-hassid_stop-over-organizing-claude-it-slows-you-share-7493980931716939776-KWtr/ — Apple Notes 2026-08-14: Claude organization/context-management claim; extraction blocked, preserve for manual review.
+- [ ] https://www.linkedin.com/posts/samiran-sarkar-ai_agenticai-agentharness-aiagents-activity-7500938393292468225-2-zj — Apple Notes 2026-09-07 via https://lnkd.in/p/g2c2aNFR: Agent Harness / model-harness separation; mine context/state, tools/environment, execution loop, guardrails/permissions, reliability/recovery, observability/evaluation, human escalation, and execution-authority revalidation for Hermes/MissionControl.
 
