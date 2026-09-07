@@ -1,5 +1,5 @@
 {
-  "last_run_timestamp": "2026-09-06T06:25:19-07:00",
+  "last_run_timestamp": "2026-09-07T06:25:48-07:00",
   "files_considered": [
     "AGENTS.md",
     "house-rules.md",
@@ -7,12 +7,12 @@
     "playbooks/editor-run.md",
     "wiki/log.md",
     ".night-shift/state/editor-state.json",
-    "briefings/errors/agentic-kb-scout-run-2026-09-05-2306.md",
-    "briefings/refinery-2026-09-06.md",
     "wiki/index.md",
+    "wiki/_meta/kb-health.md",
     "wiki/lint-report.md",
     "wiki/lint-trend.csv",
-    "wiki/_meta/kb-health.md"
+    "briefings/errors/agentic-kb-scout-run-2026-09-06-2305.md",
+    "briefings/refinery-2026-09-07.md"
   ],
   "wiki_pages_changed_last_24h": [
     "wiki/_meta/kb-health.md",
@@ -20,12 +20,12 @@
     "wiki/lint-trend.csv"
   ],
   "outputs_written": [
-    "briefings/2026-09-06.md",
+    "briefings/2026-09-07.md",
     ".night-shift/state/editor-state.json"
   ],
   "status": "completed_no_editor_synthesis_changes",
-  "briefing_path": "briefings/2026-09-06.md",
+  "briefing_path": "briefings/2026-09-07.md",
   "synthesis_created": [],
   "synthesis_updated": [],
-  "notes": "Editor Run reviewed the 24h wiki changes from commits 9519391, d2099b1, and f58be06. The changes were lint/health metadata only: wiki/_meta/kb-health.md, wiki/lint-report.md, and wiki/lint-trend.csv. No real multi-source synthesis thread formed, so no wiki/syntheses page was created or updated. Scout had a pre-existing blocked error briefing from an unattended heredoc safety guard; Refinery no-oped. Raw files were not modified by this Editor run."
+  "notes": "Editor Run reviewed 3 wiki pages changed in the last 24 hours from commits 43f71a2, 3c77383, and 9050f67. The changes were lint/health metadata only: wiki/_meta/kb-health.md, wiki/lint-report.md, and wiki/lint-trend.csv. No real multi-source synthesis thread formed, so no wiki/syntheses page was created or updated. Scout produced a blocked error briefing before URL fetch or raw/state mutation; Refinery completed a no-op run with no wiki writes. Raw files were not modified by this Editor run."
 }
