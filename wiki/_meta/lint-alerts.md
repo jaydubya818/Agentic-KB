@@ -1,6 +1,6 @@
 # Lint Alert History
 
-> Rolled up from `logs/lint-alerts.log` (gitignored, machine-local) on 2026-08-31 07:07.
+> Rolled up from `logs/lint-alerts.log` (gitignored, machine-local) on 2026-09-07 07:06.
 > Most recent 40 alerts, newest last.
 
 ```
