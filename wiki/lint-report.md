@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-06 14:06 | Vault: Agentic-KB | Pages scanned: 847
+> Generated: 2026-09-07 14:06 | Vault: Agentic-KB | Pages scanned: 844
 
 ## Summary
 
@@ -8,10 +8,10 @@
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
 | Orphaned pages | 74 | ±0 | 🟡 Medium |
-| Stale pages | 312 | ±0 | 🟡 Medium |
+| Stale pages | 313 | +1 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 847 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
+**Analysis window:** 60 of 844 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 100 inbound links, 155 days old
-1. `concepts/agent-failure-modes.md` — 88 inbound links, 58 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 150 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 151 days old
-1. `concepts/context-management.md` — 57 inbound links, 45 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 134 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 134 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 155 days old
-1. `entities/anthropic.md` — 42 inbound links, 155 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 149 days old
+1. `concepts/agent-loops.md` — 100 inbound links, 156 days old
+1. `concepts/agent-failure-modes.md` — 87 inbound links, 59 days old
+1. `concepts/multi-agent-systems.md` — 63 inbound links, 151 days old
+1. `entities/mcp-ecosystem.md` — 60 inbound links, 152 days old
+1. `concepts/context-management.md` — 57 inbound links, 46 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 135 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 135 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 156 days old
+1. `entities/anthropic.md` — 41 inbound links, 156 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 150 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -410,6 +410,7 @@
 - `syntheses/oss-agent-ecosystem-map.md` — last updated: Sat Apr 04 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-access-boundary-codesign.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-compression-vs-trajectory-eval.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-context-compression-vs-compilation.md` — last updated: Fri Aug 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-deepeval-metrics-as-trajectory-vocabulary.md` — last updated: Sun May 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-episodic-judgment-as-contradiction-resolver-training.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-episodic-judgment-as-freshness-signal.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
