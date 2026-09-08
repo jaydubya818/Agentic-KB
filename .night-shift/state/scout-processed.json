@@ -286,6 +286,13 @@
       "captured_at": "2026-08-20T23:06:46-07:00",
       "sha256": "f3045c975901494d6c72e31aa411b780718e49c0988552227e9133cdc52f9385",
       "source_note": "Apple Notes 2026-08-16: local agent control plane / auto-improvement monitor; compare with Hermes/MissionControl observability and improvement recommendation loop."
+    },
+    {
+      "url": "https://www.linkedin.com/posts/samiran-sarkar-ai_agenticai-agentharness-aiagents-activity-7500938393292468225-2-zj",
+      "destination": "raw/framework-docs/linkedin-com-posts-samiran-sarkar-ai-agenticai-agentharness-aiagents-activity-7500938393292468225-2-zj.md",
+      "captured_at": "2026-09-07T23:06:12-07:00",
+      "sha256": "076b30f159e0b1a041e298ff6b5b4ad13a909c9bfe6482ce3e5f4a94ed0f102a",
+      "source_note": "Apple Notes 2026-09-07 via https://lnkd.in/p/g2c2aNFR: Agent Harness / model-harness separation; mine context/state, tools/environment, execution loop, guardrails/permissions, reliability/recovery, observability/evaluation, human escalation, and execution-authority revalidation for Hermes/MissionControl."
     }
   ]
 }
