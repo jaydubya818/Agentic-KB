@@ -1,31 +1,23 @@
 {
-  "last_run_timestamp": "2026-09-07T06:25:48-07:00",
+  "last_run_timestamp": "2026-09-08T08:03:59-07:00",
   "files_considered": [
     "AGENTS.md",
     "house-rules.md",
     "playbooks/night-shift-map.md",
     "playbooks/editor-run.md",
-    "wiki/log.md",
     ".night-shift/state/editor-state.json",
-    "wiki/index.md",
-    "wiki/_meta/kb-health.md",
-    "wiki/lint-report.md",
-    "wiki/lint-trend.csv",
-    "briefings/errors/agentic-kb-scout-run-2026-09-06-2305.md",
-    "briefings/refinery-2026-09-07.md"
+    "git status --porcelain",
+    "git log --oneline -5"
   ],
-  "wiki_pages_changed_last_24h": [
-    "wiki/_meta/kb-health.md",
-    "wiki/lint-report.md",
-    "wiki/lint-trend.csv"
-  ],
+  "wiki_pages_changed_last_24h": [],
   "outputs_written": [
-    "briefings/2026-09-07.md",
+    "briefings/errors/agentic-kb-editor-run-2026-09-08-0803.md",
     ".night-shift/state/editor-state.json"
   ],
-  "status": "completed_no_editor_synthesis_changes",
-  "briefing_path": "briefings/2026-09-07.md",
+  "status": "blocked_dirty_worktree",
+  "briefing_path": "briefings/errors/agentic-kb-editor-run-2026-09-08-0803.md",
   "synthesis_created": [],
   "synthesis_updated": [],
-  "notes": "Editor Run reviewed 3 wiki pages changed in the last 24 hours from commits 43f71a2, 3c77383, and 9050f67. The changes were lint/health metadata only: wiki/_meta/kb-health.md, wiki/lint-report.md, and wiki/lint-trend.csv. No real multi-source synthesis thread formed, so no wiki/syntheses page was created or updated. Scout produced a blocked error briefing before URL fetch or raw/state mutation; Refinery completed a no-op run with no wiki writes. Raw files were not modified by this Editor run."
+  "blocked_reason": "Dirty worktree gate failed. Three files outside Editor allowed write paths (`.night-shift/state/`, `briefings/`, `wiki/syntheses/`) and outside the two noisy-log exceptions: (1) `raw/framework-docs/linkedin-com-posts-samiran-sarkar-...md` untracked in protected raw/, (2) `wiki/lint-report.md` modified, (3) `wiki/repos/agentic-kb/bus/escalation/escalation-2026-09-08-001.md` untracked. Job halted before any wiki/synthesis/state mutation. No raw files modified. Error briefing written.",
+  "notes": "Pre-existing dirty files were NOT cleaned or modified. Jay must review the three blocking files (commit, remove, or assign to owning job) before re-running the Editor. Explicit approval required to override the dirty-worktree gate."
 }
