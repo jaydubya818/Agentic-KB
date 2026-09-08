@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-08 14:31 | Vault: Agentic-KB | Pages scanned: 855
+> Generated: 2026-09-08 15:03 | Vault: Agentic-KB | Pages scanned: 855
 
 > ⚠️ **DEGRADED RUN** — contradiction and knowledge-gap analysis did not run.
 > Orphan and stale counts below are current and complete; contradiction and
@@ -13,8 +13,8 @@
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 75 | +1 | 🟡 Medium |
-| Stale pages | 315 | +2 | 🟡 Medium |
+| Orphaned pages | 75 | ±0 | 🟡 Medium |
+| Stale pages | 315 | ±0 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
 **Analysis window:** none (degraded run).
