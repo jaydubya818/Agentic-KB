@@ -1,0 +1,8 @@
+.git
+.github
+.DS_Store
+.env
+.env.*
+**/node_modules
+logs
+wiki/_private/*.md
