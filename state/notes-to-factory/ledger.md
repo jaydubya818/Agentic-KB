@@ -334,3 +334,15 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Net result: 0 work orders, 0 merges, 0 PRs, 1 clippings commit (`7104b7d` on Agentic-KB, direct push, docs-only). No worktrees created (nothing reached Phase 3). Disk: 114 GiB free at start, no pressure.
 - Hygiene: 0 worktrees created or removed this run. MissionControl carries 81 pre-existing worktrees (was ~94 in earlier run notes; fluctuation from other jobs, not touched or re-counted in depth by this run).
 - Report: outputs/notes-to-factory-2026-09-08.md
+
+## 2026-09-09 08:20 PDT — notes-to-factory run
+
+- Kill switch: absent. Disk: 110 GiB free. PATH/git functional.
+- Apple Notes harvest: 0 new notes (window 2026-09-08T15:20:00Z..2026-09-09T15:20:00Z). The 2 most-recently-modified notes (p8562, p8444) were already in notesSeen from the prior run.
+- KB candidates (wiki/candidates.md, action-tracker.md, recently-added.md): 0 new commits since last run's cutoff.
+- Backlog file presence: re-verified fresh from origin, HAS_FILE in all 8 repos (Agentic-KB, Agentic-Pi-Harness, hermes-harness-missioncontrol, Twinz, morning-review, ai-software-factory-mastery, MissionControl, SellerFi).
+- Phase 2e drain: re-verified via `git log --since` that docs/NIGHTLY-BACKLOG.md is unchanged in all 8 repos since yesterday's run. Independently re-read Agentic-KB's Open section in full (17 entries) and confirmed each is self-declared Large/design-proposal/policy-call — consistent with yesterday's per-repo survey for the other 7. No drainable Small item found. workOrders = 0 (19th consecutive zero from either source).
+- Phase 3/4: not entered — nothing to implement. 0 worktrees created, 0 merges, 0 PRs opened.
+- Refreshed open-PR picture via `gh pr list --state open`: Agentic-KB #29 still open (2026-09-02), hermes-harness-missioncontrol #19 still open (2026-08-26). MissionControl #129 and SellerFi #203, cited in the 2026-08-22 baseline, no longer appear open — not re-investigated, presumed resolved.
+- MissionControl worktree count: 84 (fluctuating, not actioned, exceeds 40-item note threshold — cleanup recommendation for Jay only).
+- Report written to outputs folder: notes-to-factory-2026-09-09.md.
