@@ -1,18 +1,17 @@
 {
-  "date": "2026-08-29",
-  "finished_at": "2026-08-29T03:12:53Z",
+  "date": "2026-09-11",
+  "finished_at": "2026-09-11T19:17:12Z",
   "status": "partial",
   "repos_checked": [
     "sellerfi",
     "missioncontrol",
     "twinz"
   ],
-  "runs_total": 3,
-  "passed": 1,
-  "failed": 0,
-  "skipped": 2,
+  "runs_total": 20,
+  "passed": 15,
+  "failed": 5,
   "in_progress": 0,
   "prs_opened": 0,
-  "report_only": 1,
-  "note": "Sandbox provisioning failed 3x identically (useradd exit 12) - 5th+ occurrence since 2026-08-20, tracked in Agentic-KB#5. Completed via operator-local fallback (Desktop Commander on jays-MacBook-Pro). Auto-fix held to report-only due to changed execution environment. Heartbeat had been stale since 2026-08-22 (7 days dark)."
+  "report_only": 5,
+  "note": "Sandbox (mcp__workspace__bash) failed to provision 3/3 identically (useradd exit 12) - same failure logged 2026-08-20, 08-26, 09-02, 09-03, 09-04, 09-08, 09-09, 09-10, 09-11 (this run). No curl/git/python3 available. Completed via browser fallback: Claude-in-Chrome against github.com Actions UI per repo (created>=2026-09-09 window), no log-grep fingerprinting, no duration tracking, no auto-fix PRs attempted (needs git clone+push+actionlint). This is also the first real update to this file since 2026-08-29 (13-day gap) - daily 'aborted' escalations were being filed to wiki/repos/Agentic-KB/bus/escalation/ and autocommitted by the separate notes-to-factory pipeline, but never touched this heartbeat or wiki/reports/, so the gap was silent."
 }
