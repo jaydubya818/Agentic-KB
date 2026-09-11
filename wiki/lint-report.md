@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-10 14:07 | Vault: Agentic-KB | Pages scanned: 870
+> Generated: 2026-09-11 14:07 | Vault: Agentic-KB | Pages scanned: 872
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 79 | +1 | 🟡 Medium |
-| Stale pages | 320 | ±0 | 🟡 Medium |
+| Orphaned pages | 80 | +1 | 🟡 Medium |
+| Stale pages | 321 | +1 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 870 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
+**Analysis window:** 60 of 872 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 159 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 62 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 154 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 155 days old
-1. `concepts/context-management.md` — 58 inbound links, 49 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 138 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 138 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 159 days old
-1. `entities/anthropic.md` — 42 inbound links, 159 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 153 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 160 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 63 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 155 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 156 days old
+1. `concepts/context-management.md` — 58 inbound links, 50 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 139 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 139 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 160 days old
+1. `entities/anthropic.md` — 42 inbound links, 160 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 154 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -111,6 +111,7 @@
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-08-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-08 (UTC). Sandbox failed to provision — `use
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-09-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-09 (Track A: sandbox unavailable)
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-10-001.md` — [escalation] nightly-ci-analysis run ABORTED on 2026-09-10 (Track A — sandbox unavailable).
+- `repos/agentic-kb/bus/escalation/escalation-2026-09-11-001.md` — [escalation] nightly-ci-analysis run for 2026-09-11 ABORTED before preflight completed.
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
@@ -437,6 +438,7 @@
 - `syntheses/synthesis-repo-aware-system-implementation.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-rrf-as-rlm-fusion-stage.md` — last updated: Tue Jun 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-skillopt-gate-episodic-judgment-log.md` — last updated: Tue Aug 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-gate-obsidian-wiki-governance.md` — last updated: Sat Aug 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-pow-writeback.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skills-as-evaluable-artifacts.md` — last updated: Wed Jun 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
