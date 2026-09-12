@@ -369,3 +369,11 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Implemented `web/tests/pending-count-route.test.mjs` (9 tests, route 2/41), full gate: typecheck clean, lint 0 errors, full suite 36/36 (was 27), production build green, isolated worktree run green, genuine fresh-clone install+test+build green (after working around a registry.npmjs.org TLS-reset issue on this Mac by using the existing local npm cache -- see ACTION REQUIRED in today's addendum report). Merged `--no-ff` to `main` directly (`5ab7e55`; revert with `git revert -m 1 5ab7e55`). Backlog entry updated with a dated addendum (`74a13da`, docs-only, rebased past two intervening commits from other jobs and pushed clean).
 - Spot-checked Agentic-Pi-Harness, hermes-harness-missioncontrol and Twinz for an equivalent numbered-decomposition seam already in progress: none found. Their Open items remain genuinely blocked on a Jay decision or a chokepoint that "wants review, not a nightly" per their own entries -- did not force decomposition there.
 - Net: 1 real merge, 1 docs commit, both today, both outside the 08:20 schedule. 39 of 41 route handlers remain as a legitimate, sustainable source of small daily work in Agentic-KB going forward.
+
+## 2026-09-12 run
+- Kill switch: absent.
+- Harvest: 12 new notes evaluated, 7 skipped as link dumps (<120B), 5 skipped as not-actionable (interview prep). 0 ingested, 0 work orders. 22nd consecutive zero.
+- Phase 2e drain: re-verified the four 2026-08-25-survey candidate items in Agentic-Pi-Harness / hermes-harness-missioncontrol from origin/main. Two already closed since the survey (safeRelativePath, artifact dedupe), one no longer present (metrics.json key order), one (approvals actor filter) still open but documented by that repo's own triage as not a clean Small item. No drain performed.
+- Merges: none. PRs: none new. Carried: Agentic-KB #29, hermes-harness-missioncontrol #19 and #20, all untouched.
+- ANOMALY flagged: Agentic-KB commit 74a13da/5ab7e55, authored by notes-to-factory identity 2026-09-11 12:31 PDT, postdates prior run's lastRunAt but is absent from that run's recorded merges/workOrders. Reported to Jay as ACTION REQUIRED.
+- Hygiene: 0 worktrees created/removed. MissionControl's 83 pre-existing worktrees unchanged, flagged (not acted on).
