@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-11 14:07 | Vault: Agentic-KB | Pages scanned: 872
+> Generated: 2026-09-12 16:09 | Vault: Agentic-KB | Pages scanned: 874
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 80 | +1 | 🟡 Medium |
-| Stale pages | 321 | +1 | 🟡 Medium |
+| Orphaned pages | 81 | +1 | 🟡 Medium |
+| Stale pages | 322 | +1 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 872 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
+**Analysis window:** 60 of 874 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
 
 ## 🎯 Triage — start here
 
@@ -24,22 +24,22 @@
 1. `syntheses/lint-2026-04-18.md` — Lint Report — 2026-04-18 (897 words)
 1. `reports/2026-08-29-nightly-ci-analysis.md` — 2026-08-29-nightly-ci-analysis (867 words)
 1. `personal/code-review-architecture-at-scale.md` — Code Review Architecture for Agentic Systems at Enterprise Scale (775 words)
+1. `reports/2026-09-11-nightly-ci-analysis.md` — 2026-09-11-nightly-ci-analysis (708 words)
 1. `reports/2026-08-21-nightly-ci-analysis.md` — 2026-08-21-nightly-ci-analysis (707 words)
 1. `reports/2026-08-17-nightly-ci-analysis.md` — 2026-08-17-nightly-ci-analysis (684 words)
-1. `concepts/agentic-engineering-stack.md` — Agentic AI Engineering Stack (682 words)
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 160 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 63 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 155 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 156 days old
-1. `concepts/context-management.md` — 58 inbound links, 50 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 139 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 139 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 160 days old
-1. `entities/anthropic.md` — 42 inbound links, 160 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 154 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 161 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 64 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 156 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 157 days old
+1. `concepts/context-management.md` — 58 inbound links, 51 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 140 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 140 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 161 days old
+1. `entities/anthropic.md` — 42 inbound links, 161 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 155 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -105,6 +105,7 @@
 - `reports/2026-08-22-nightly-ci-analysis.md` — 2026-08-22-nightly-ci-analysis
 - `reports/2026-08-28-nightly-ci-analysis-backfill.md` — 2026-08-28-nightly-ci-analysis-backfill
 - `reports/2026-08-29-nightly-ci-analysis.md` — 2026-08-29-nightly-ci-analysis
+- `reports/2026-09-11-nightly-ci-analysis.md` — 2026-09-11-nightly-ci-analysis
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-02-001.md` — [escalation] HEARTBEAT (substitute for state/nightly-ci/last-run.json — git unavailable)
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-03-001.md` — [escalation] nightly-ci-analysis run for 2026-09-03 ABORTED at preflight §1a (sandbox livenes
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-04-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-04 (UTC)
@@ -425,6 +426,7 @@
 - `syntheses/synthesis-episodic-judgment-as-contradiction-resolver-training.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-episodic-judgment-as-freshness-signal.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-episodic-judgment-log-to-trace-dataset.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-episodic-judgment-obsidian-wiki-gate.md` — last updated: Wed Aug 12 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-eval-metrics-to-failure-modes.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-episodic-judgment-signal.md` — last updated: Sun Aug 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-skillopt-signal.md` — last updated: Sat Aug 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
