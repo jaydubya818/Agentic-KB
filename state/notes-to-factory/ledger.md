@@ -377,3 +377,9 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Merges: none. PRs: none new. Carried: Agentic-KB #29, hermes-harness-missioncontrol #19 and #20, all untouched.
 - ANOMALY flagged: Agentic-KB commit 74a13da/5ab7e55, authored by notes-to-factory identity 2026-09-11 12:31 PDT, postdates prior run's lastRunAt but is absent from that run's recorded merges/workOrders. Reported to Jay as ACTION REQUIRED.
 - Hygiene: 0 worktrees created/removed. MissionControl's 83 pre-existing worktrees unchanged, flagged (not acted on).
+
+## 2026-09-13T15:36:29Z run
+- Harvest: 0 new/modified Apple Notes (newest note p8577 predates run window; all top-50 already in notesSeen).
+- Backlog drain (Phase 2e) checked: Agentic-Pi-Harness (skipped, owned by separate active nightly job), Twinz (11 open items reviewed, all excluded-category or self-declared deliberate/product decisions), morning-review (0 open items), ai-software-factory-mastery (1 open item, self-declared content decision, skipped), hermes-harness-missioncontrol (14 open items reviewed, all self-declared design/contract decisions by existing nightly job, skipped). Agentic-KB, agentic_hr, AI-FDE-Agent, obsidian-vault, MissionControl, SellerFi not re-checked this run (see actionRequired).
+- Decision: 0 work orders (23rd consecutive zero-harvest run). Correct zero per Jay's 2026-08-25 directive -- reached only after executing the Phase 2e drain against 5 repos' real backlogs.
+- Merges: none. PRs opened: none.
