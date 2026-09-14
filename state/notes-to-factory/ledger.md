@@ -383,3 +383,12 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Backlog drain (Phase 2e) checked: Agentic-Pi-Harness (skipped, owned by separate active nightly job), Twinz (11 open items reviewed, all excluded-category or self-declared deliberate/product decisions), morning-review (0 open items), ai-software-factory-mastery (1 open item, self-declared content decision, skipped), hermes-harness-missioncontrol (14 open items reviewed, all self-declared design/contract decisions by existing nightly job, skipped). Agentic-KB, agentic_hr, AI-FDE-Agent, obsidian-vault, MissionControl, SellerFi not re-checked this run (see actionRequired).
 - Decision: 0 work orders (23rd consecutive zero-harvest run). Correct zero per Jay's 2026-08-25 directive -- reached only after executing the Phase 2e drain against 5 repos' real backlogs.
 - Merges: none. PRs opened: none.
+
+## 2026-09-14
+- Harvest: 7 notes modified since last run (2026-09-13T15:36:29Z). 2 skipped (near-empty/screenshot: p8616, p8582). 5 ingested as clippings (4 personal career-prep notes, 1 "Enterprise Multi-Factory Software Architecture" note). All 5 tripped the Agentic-KB PII pre-commit guard on first commit attempt; moved to wiki/_private/clippings/ (gitignored) instead of forcing --no-verify, since the content is Jay's personal, sensitive material. No commit made to raw/clippings/ this run.
+- 0 credential-shaped notes found (title or body).
+- Triage: 0 actionable code work orders. All 5 substantive notes are personal prep material or architecture musings/talking points, not code requests mapped to a repo (cheap filter 1 fail).
+- KB candidates (wiki/candidates.md) reviewed: stale topic list (last modified 2026-09-02), no items map cleanly to a repo.
+- Phase 2e backlog drain: surveyed origin/<default> docs/NIGHTLY-BACKLOG.md on all 8 locally-available repos (Agentic-KB, Agentic-Pi-Harness, hermes-harness-missioncontrol, Twinz, morning-review, ai-software-factory-mastery, MissionControl, SellerFi). Every Open item is self-declared blocked: product/design decision required, missing workflow scope, auth/security redesign, or "ACTION REQUIRED: merge decision for Jay". Zero items met the unambiguously-Small bar. No drain performed.
+- No worktrees created, no merges, no PRs opened.
+- Not cloned this run (time budget): agentic_hr, AI-FDE-Agent, obsidian-vault.
