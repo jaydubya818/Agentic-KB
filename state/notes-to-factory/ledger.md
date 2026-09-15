@@ -392,3 +392,14 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Phase 2e backlog drain: surveyed origin/<default> docs/NIGHTLY-BACKLOG.md on all 8 locally-available repos (Agentic-KB, Agentic-Pi-Harness, hermes-harness-missioncontrol, Twinz, morning-review, ai-software-factory-mastery, MissionControl, SellerFi). Every Open item is self-declared blocked: product/design decision required, missing workflow scope, auth/security redesign, or "ACTION REQUIRED: merge decision for Jay". Zero items met the unambiguously-Small bar. No drain performed.
 - No worktrees created, no merges, no PRs opened.
 - Not cloned this run (time budget): agentic_hr, AI-FDE-Agent, obsidian-vault.
+
+## 2026-09-15T15:10:00Z run
+
+- Kill switch: absent, ran to completion.
+- Harvest: 7 notes evaluated (modified since last run or unseen). 3 ingested to raw/clippings (1 committed to main as ebe5833, 2 routed to wiki/_private/clippings/ after tripping the PII pre-commit guard, gitignored/local-only). 4 skipped (1 under 120-byte floor, 1 image-only, 2 already-seen re-touched interview prep, no re-ingest).
+- Proposals: 0 reached the improvement gate. All harvested items failed cheap filter 2a (link dumps / interview prep, none map to a repo).
+- Backlog coverage: re-verified against origin/<default-branch> for all 8 locally-available repos. All 8 HAS docs/NIGHTLY-BACKLOG.md.
+- Phase 2e drain: read every Open section in full across all 8 repos. Zero items unambiguously Small -- every open item is a design proposal, a product/security decision for Jay, or blocked on missing workflow scope. Second consecutive run with nothing drainable.
+- Work orders: 0. No subagents spawned, no worktrees created, no merges, no new PRs.
+- Carried-over PRs re-verified via gh pr view, all still OPEN, unchanged: Agentic-KB #29, hermes-harness-missioncontrol #19 and #20.
+- Report: notes-to-factory-2026-09-15.md written to outputs folder.
