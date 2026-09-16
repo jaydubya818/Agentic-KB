@@ -403,3 +403,9 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Work orders: 0. No subagents spawned, no worktrees created, no merges, no new PRs.
 - Carried-over PRs re-verified via gh pr view, all still OPEN, unchanged: Agentic-KB #29, hermes-harness-missioncontrol #19 and #20.
 - Report: notes-to-factory-2026-09-15.md written to outputs folder.
+
+## 2026-09-16 run
+- Harvest: 6 new Apple Notes reviewed (p8731, p8674, p8681, p8680, p8679, p8672). p8674 skipped as junk (<120 bytes). Remaining 5 ingested then triaged NOT_APPLICABLE (career/interview-prep content, no repo mapping) and stored at wiki/_private/clippings/ (gitignored) after tripping the pre-commit PII guard.
+- Backlog: read Agentic-KB docs/NIGHTLY-BACKLOG.md fresh from origin/main. Drained "web/ has no test suite" -> added 9 characterization tests for web/api/articles route (route handler 3/34).
+- Merge: Agentic-KB 6d37f5f (test addition), Agentic-KB 2527885 (backlog doc update). Full gate green (typecheck, lint, 45/45 tests, build, fresh clone install+test).
+- Action required: system git blocked by unaccepted Xcode license (worked around via /opt/homebrew/bin/git); multi-repo backlog sweep cut short by a hung shell session, only Agentic-KB re-verified fresh this run.
