@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-15 14:06 | Vault: Agentic-KB | Pages scanned: 876
+> Generated: 2026-09-16 14:06 | Vault: Agentic-KB | Pages scanned: 886
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 83 | +1 | 🟡 Medium |
-| Stale pages | 338 | +10 | 🟡 Medium |
+| Orphaned pages | 84 | +1 | 🟡 Medium |
+| Stale pages | 338 | ±0 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 876 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
+**Analysis window:** 60 of 886 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 164 days old
-1. `concepts/agent-failure-modes.md` — 88 inbound links, 67 days old
-1. `concepts/multi-agent-systems.md` — 63 inbound links, 159 days old
-1. `entities/mcp-ecosystem.md` — 60 inbound links, 160 days old
-1. `concepts/context-management.md` — 58 inbound links, 54 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 143 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 143 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 164 days old
-1. `entities/anthropic.md` — 41 inbound links, 164 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 158 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 165 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 68 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 160 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 161 days old
+1. `concepts/context-management.md` — 58 inbound links, 55 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 144 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 144 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 165 days old
+1. `entities/anthropic.md` — 42 inbound links, 165 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 159 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -115,6 +115,7 @@
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-11-001.md` — [escalation] nightly-ci-analysis run for 2026-09-11 ABORTED before preflight completed.
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-14-001.md` — [escalation] nightly-ci-analysis run aborted 2026-09-14 (UTC). Sandbox failed to provision — 
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-15-001.md` — [escalation] ## Nightly CI Analysis — ABORTED — 2026-09-15 (UTC)
+- `repos/agentic-kb/bus/escalation/escalation-2026-09-16-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-16 (UTC)
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
