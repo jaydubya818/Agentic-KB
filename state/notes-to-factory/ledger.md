@@ -409,3 +409,10 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Backlog: read Agentic-KB docs/NIGHTLY-BACKLOG.md fresh from origin/main. Drained "web/ has no test suite" -> added 9 characterization tests for web/api/articles route (route handler 3/34).
 - Merge: Agentic-KB 6d37f5f (test addition), Agentic-KB 2527885 (backlog doc update). Full gate green (typecheck, lint, 45/45 tests, build, fresh clone install+test).
 - Action required: system git blocked by unaccepted Xcode license (worked around via /opt/homebrew/bin/git); multi-repo backlog sweep cut short by a hung shell session, only Agentic-KB re-verified fresh this run.
+
+## 2026-09-17
+- Harvest: 15 notes in window; 9 ingested to wiki/_private/clippings (PII-guard tripped, not committed), 5 screened out (short body), 1 duplicate. Zero code-actionable items -- all interview-prep/career content (expected/correct per calibration).
+- Drain sweep (Phase 2e): verified docs/NIGHTLY-BACKLOG.md present on origin for all 8 checked-out repos; read Open sections of Agentic-Pi-Harness, hermes-harness-missioncontrol, ai-software-factory-mastery, Twinz, MissionControl, SellerFi. Zero unambiguously-Small items found -- every candidate self-declared as needing a decision or on the exclusion list.
+- Merges: 0. PRs opened: 0. Worktrees created: 0.
+- Carried-open PRs re-verified OPEN: Agentic-KB #29, hermes-harness-missioncontrol #19, #20.
+- Report: notes-to-factory-2026-09-17.md
