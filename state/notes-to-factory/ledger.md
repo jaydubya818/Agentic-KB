@@ -416,3 +416,13 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Merges: 0. PRs opened: 0. Worktrees created: 0.
 - Carried-open PRs re-verified OPEN: Agentic-KB #29, hermes-harness-missioncontrol #19, #20.
 - Report: notes-to-factory-2026-09-17.md
+
+## 2026-09-18 run
+- Kill switch: absent, proceeded. Disk free 11 GB (below 30 GB preflight threshold) -- ran serial, no parallel multi-repo installs.
+- Harvest: 2 notes not in notesSeen (p8657, p8606; both predate the 09-17 lastRunAt cutoff but were missing from notesSeen). Neither credential-shaped, neither under 120 bytes. Both ingested to raw/clippings via clipping-write.mjs, committed clean (no PII-guard trip this time) as Agentic-KB b0125a6, pushed to origin/main. Both triaged NOT_APPLICABLE at cheap filter 2a (career/interview-prep content, no repo mapping) -- no ImprovementProposal written.
+- KB candidates (wiki/candidates.md, action-tracker.md, recently-added.md): unchanged since 2026-09-02 / 2026-04-20; nothing new maps to a repo.
+- Phase 2e drain: full in-depth read of Open sections for Agentic-Pi-Harness (14 items) and hermes-harness-missioncontrol (11 items) -- all design proposals / contract-change decisions / workflow-scope-blocked. Spot-checked MissionControl (14 open, mostly Large multi-phase or exclusion-category) and SellerFi (17 open, all dependency bumps, auth/access-boundary items, or self-declared "not nightly-sized"). Twinz (11) and ai-software-factory-mastery (1) not re-read line-by-line, relying on last week's full review (unchanged counts). Zero drainable items found.
+- Merges: 1 (Agentic-KB b0125a6, docs-only). Work orders: 0. Worktrees created/removed: 0.
+- Carried PRs re-verified OPEN via gh: Agentic-KB #29, hermes-harness-missioncontrol #19, #20.
+- MissionControl worktrees: 83, unchanged, not touched.
+- Report: notes-to-factory-2026-09-18.md written to outputs folder.
