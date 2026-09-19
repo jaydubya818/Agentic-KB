@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-18 15:43 | Vault: Agentic-KB | Pages scanned: 902
+> Generated: 2026-09-19 14:06 | Vault: Agentic-KB | Pages scanned: 898
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
-| Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 85 | ±0 | 🟡 Medium |
-| Stale pages | 360 | ±0 | 🟡 Medium |
-| Knowledge gaps | 0 | ±0 | 🟢 Clear |
+| Contradictions | 2 | +2 | 🔴 High |
+| Orphaned pages | 86 | +1 | 🟡 Medium |
+| Stale pages | 361 | +1 | 🟡 Medium |
+| Knowledge gaps | 5 | +5 | 🟡 Medium |
 
-**Analysis window:** 60 of 902 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 898 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,30 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 167 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 70 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 162 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 163 days old
-1. `concepts/context-management.md` — 58 inbound links, 57 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 146 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 146 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 167 days old
-1. `entities/anthropic.md` — 42 inbound links, 167 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 161 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 168 days old
+1. `concepts/agent-failure-modes.md` — 88 inbound links, 71 days old
+1. `concepts/multi-agent-systems.md` — 63 inbound links, 163 days old
+1. `entities/mcp-ecosystem.md` — 60 inbound links, 164 days old
+1. `concepts/context-management.md` — 58 inbound links, 58 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 147 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 147 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 168 days old
+1. `entities/anthropic.md` — 41 inbound links, 168 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 162 days old
+
+## 🔴 Contradictions
+
+### concepts/tool-use-verify.md vs concepts/tool-use.md
+
+Two separate pages titled 'Tool Use' exist with overlapping tags (tools, llm, agents) — tool-use-verify.md is an 82-word stub while tool-use.md is a 1358-word full treatment, creating duplicate/conflicting canonical sources for the same concept.
+
+**Pages:** `concepts/tool-use-verify.md`, `concepts/tool-use.md` | **Open since:** 2026-09-19
+
+### concepts/reciprocal-rank-fusion.md vs concepts/rlm-pipeline.md
+
+reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unlocatable github.com/agentmemory attribution' resolved via corroboration, while rlm-pipeline.md cites RRF as part of its pipeline without flagging this provenance issue — inconsistent confidence/status treatment of the same underlying claim across pages.
+
+**Pages:** `concepts/reciprocal-rank-fusion.md`, `concepts/rlm-pipeline.md` | **Open since:** 2026-09-19
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -117,6 +131,7 @@
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-15-001.md` — [escalation] ## Nightly CI Analysis — ABORTED — 2026-09-15 (UTC)
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-16-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-16 (UTC)
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-17-001.md` — [escalation] ABORTED 2026-09-17T (UTC, exact time unavailable — no bash/date access).
+- `repos/agentic-kb/bus/escalation/escalation-2026-09-18-001.md` — [escalation] nightly-ci-analysis run 2026-09-18: ABORTED (Track A — sandbox unavailable).
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
@@ -482,6 +497,7 @@
 - `syntheses/synthesis-repo-aware-system-implementation.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-rrf-as-rlm-fusion-stage.md` — last updated: Tue Jun 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-rrf-proof-of-work-receipts.md` — last updated: Wed Aug 19 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-gate-episodic-judgment-log.md` — last updated: Tue Aug 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-gate-obsidian-wiki-governance.md` — last updated: Sat Aug 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-pow-writeback.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -491,3 +507,45 @@
 - `system/policies/promotion-rules.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `system/policies/source-trust-policy.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `transcript-ingest.md` — last updated: Sun Apr 19 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+
+## 💡 Knowledge Gaps
+
+### context-management
+
+Referenced heavily in 'related' fields (rag-systems.md, rlm-pipeline.md, progressive-disclosure.md, reciprocal-rank-fusion.md) and as a tag, but no dedicated concepts/context-management.md page appears in the wiki.
+
+_Open since 2026-09-19._
+
+### memory-systems
+
+Listed as a related concept in rag-systems.md ([[concepts/memory-systems]]) but no corresponding page exists in the overview.
+
+_Open since 2026-09-19._
+
+### agent-loops / multi-agent-systems
+
+prd-to-json-conversion.md and self-critique.md reference 'agent-loops' and 'multi-agent-systems' as related concepts, but neither has a dedicated page.
+
+_Open since 2026-09-19._
+
+### llm-as-judge / guardrails
+
+Both rag-systems.md and self-critique.md/sandboxed-execution.md reference [[concepts/llm-as-judge]] and [[concepts/guardrails]] as related concepts, but no dedicated pages exist for these frequently-cited topics.
+
+_Open since 2026-09-19._
+
+### agent-observability / permission-modes / agent-failure-modes
+
+sandboxed-execution.md and progressive-disclosure.md reference agent-observability, permission-modes, and agent-failure-modes as related concepts with no dedicated pages found.
+
+_Open since 2026-09-19._
+
+## ✨ Suggestions
+
+- Merge or clearly differentiate the two 'Tool Use' pages (tool-use.md and tool-use-verify.md) — likely tool-use-verify.md should be deleted or redirected, or its purpose (verification-specific) clarified in the title.
+- Create stub or full pages for frequently-referenced but missing concepts: context-management, memory-systems, agent-loops, llm-as-judge, guardrails, agent-observability, permission-modes, and agent-failure-modes, since these are linked from multiple existing pages.
+- Standardize front-matter schema across concept pages — some use 'id' (ULID) + flat 'related' lists (prd-to-json-conversion.md, query-pipeline.md), others use 'sources'/'claims'/'status' structured metadata (rag-systems.md, rlm-pipeline.md, reciprocal-rank-fusion.md). Inconsistent schema complicates automated tooling and cross-page validation.
+- Audit the large volume of daily log pages (2026-05-23 through 2026-09-18, ~35 entries) for a consolidated index or summary page beyond daily-systems/index.md, since the raw logs are word-heavy (many 700-1500 words) and may need periodic synthesis rollups to avoid knowledge fragmentation.
+- Resolve the RRF provenance/contradiction note in reciprocal-rank-fusion.md by ensuring dependent pages (rlm-pipeline.md, rag-systems.md) reference the same resolved confidence status rather than treating it as settled elsewhere.
+- Consider consolidating overlapping tag taxonomies — e.g., 'context-management' vs 'context', 'agentic' vs 'agents' vs 'agent' are used inconsistently across pages, which will degrade tag-based retrieval and the Query Pipeline's hybrid retrieval accuracy.
+- There is a large gap between the daily-systems index (286 words) and the ~35 detailed daily logs; consider adding periodic (weekly/monthly) rollup pages to bridge high-level navigation and low-level daily detail, consistent with the Progressive Disclosure pattern documented elsewhere in this same wiki.
