@@ -437,3 +437,13 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - No worktrees created this run (nothing reached IMPLEMENT), so none to clean up. MissionControl worktree count re-checked: 83, stable.
 - branchesHeld carried unchanged: Agentic-KB PR #29, hermes-harness-missioncontrol PR #19 and PR #20, all still open awaiting human review -- not touched.
 - Noted for Jay: hermes-harness-missioncontrol has 3 additional unmerged nightly/2026-08-2{6,7,8}-improvements branches from daily-repo-improvement, piling up unreviewed.
+
+
+## 2026-09-20 run
+- Kill switch: not present, proceeded.
+- Harvest: 1 Apple Note not in notesSeen (p8872, "New Note", created 2026-09-19 23:53). Body is a single object-replacement character (<120 bytes) -- skipped as empty. 0 credential-shaped titles/bodies encountered. 0 notes ingested.
+- KB candidates: wiki/candidates.md is topic taxonomy only (no actionable items). wiki/action-tracker.md Open/Blocked sections both empty. 0 KB-sourced work orders.
+- Phase 2 triage: 0 work orders from harvest (nothing survived the cheap filters).
+- BLOCKER: `git` is non-functional machine-wide -- every git invocation (status, fetch, cat-file) fails with "You have not agreed to the Xcode license agreements. Please run 'sudo xcodebuild -license'...". Confirmed via `git --version`, `git status` in Agentic-KB, and `git fetch` in all 8 routing-table repos with local checkouts. This blocks Phase 1b backlog-coverage re-verification, Phase 2e drain (cannot read origin/<default-branch> backlog files -- any "MISSING" result during this run is a git failure, not a verified absence), Phase 3 worktrees, and Phase 4 merges in full. No commits, merges, or PRs were made this run. Did not run `sudo xcodebuild -license` -- accepting a system license non-interactively/unattended was judged out of scope for this job's authority.
+- Merges: 0. Work orders: 0. Worktrees created/removed: 0.
+- Report: notes-to-factory-2026-09-20.md written to outputs folder, blocker flagged at top.
