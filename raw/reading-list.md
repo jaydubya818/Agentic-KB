@@ -61,4 +61,8 @@ Add URLs here, one per unchecked list item. Scout Run will preserve source text 
 - [ ] https://github.com/obra/superpowers — Apple Notes 2026-09-14 via @beamnxw: subagent-driven-development / agentic methodology reference; reconcile with existing imported OpenClaw superpowers before adopting anything.
 - [ ] https://x.com/DanKornas/status/2099215030642249897 — Apple Notes 2026-09-14: Awesome DeepSeek Harness directory signal; reply link unresolved in cron, preserve for authenticated/manual extraction.
 - [ ] https://x.com/techyoutbe/status/2099155030477828585 — Apple Notes 2026-09-14: AI workflow cost multiplier warning; mine cost-per-successful-outcome, per-request budgets, loop caps, caching, history summarization, feature-level token tracking for Hermes/MissionControl.
+- [ ] https://github.com/typesafe-ai/skills — Apple Notes 2026-09-20 via @LLMpsycho: TypeSafe System One skill pack; mine typed decide/tool/evaluate loops and compare to Hermes skill validation patterns.
+- [ ] https://x.com/LLMpsycho/status/2101341190150852677 — Apple Notes 2026-09-20: source tweet for typesafe-ai/skills; preserve tweet context and extracted GitHub card.
+- [ ] https://x.com/0xCarnagee/status/2101456270909690202 — Apple Notes 2026-09-20: agent tool-call cost routing claim; mine cheap yes/no classifier, router, per-decision cost tracking, and verify Jev/TypeSafe/langchain-typesafe claims before adopting.
+- [ ] https://x.com/res1dualedge/status/2101403030646145438 — Apple Notes 2026-09-20: Jeff Dean AI engineering / graph coordination lecture signal; mine graph/loop/100-agent coordination patterns only after resolving the primary video/source.
 
