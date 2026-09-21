@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-20 14:06 | Vault: Agentic-KB | Pages scanned: 904
+> Generated: 2026-09-21 14:56 | Vault: Agentic-KB | Pages scanned: 898
 
 ## Summary
 
@@ -8,10 +8,10 @@
 |---|---|---|---|
 | Contradictions | 2 | ±0 | 🔴 High |
 | Orphaned pages | 86 | ±0 | 🟡 Medium |
-| Stale pages | 365 | +4 | 🟡 Medium |
+| Stale pages | 367 | +2 | 🟡 Medium |
 | Knowledge gaps | 5 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 904 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 898 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 169 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 72 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 164 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 165 days old
-1. `concepts/context-management.md` — 58 inbound links, 59 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 148 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 148 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 169 days old
-1. `entities/anthropic.md` — 42 inbound links, 169 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 163 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 170 days old
+1. `concepts/agent-failure-modes.md` — 88 inbound links, 73 days old
+1. `concepts/multi-agent-systems.md` — 63 inbound links, 165 days old
+1. `entities/mcp-ecosystem.md` — 60 inbound links, 166 days old
+1. `concepts/context-management.md` — 58 inbound links, 60 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 149 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 149 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 170 days old
+1. `entities/anthropic.md` — 41 inbound links, 170 days old
+1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 164 days old
 
 ## 🔴 Contradictions
 
@@ -470,6 +470,7 @@ reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unl
 - `summaries/summary-sierra-ai-pilling-lessons.md` — last updated: Thu Jul 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `summaries/summary-super-simple-software-factory.md` — last updated: Fri Aug 14 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `summaries/vault-3tier-architecture.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/harness-vs-meta-harness-vs-self-improving-harness.md` — last updated: Fri Aug 21 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/lint-2026-04-06.md` — last updated: Sun Apr 05 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/lint-2026-04-12.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/lint-2026-04-18.md` — last updated: Fri Apr 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -506,6 +507,7 @@ reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unl
 - `syntheses/synthesis-skillopt-pow-writeback.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skills-as-evaluable-artifacts.md` — last updated: Wed Jun 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-telephone-game-per-claim-confidence.md` — last updated: Thu Aug 20 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-verifier-as-goal-completion-benchmark.md` — last updated: Fri Aug 21 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `system/policies/contradiction-policy.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `system/policies/freshness-policy.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `system/policies/promotion-rules.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
