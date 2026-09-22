@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-21 14:56 | Vault: Agentic-KB | Pages scanned: 898
+> Generated: 2026-09-22 14:02 | Vault: Agentic-KB | Pages scanned: 907
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 2 | ±0 | 🔴 High |
-| Orphaned pages | 86 | ±0 | 🟡 Medium |
-| Stale pages | 367 | +2 | 🟡 Medium |
+| Orphaned pages | 88 | +2 | 🟡 Medium |
+| Stale pages | 370 | +3 | 🟡 Medium |
 | Knowledge gaps | 5 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 898 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~15 runs.
+**Analysis window:** 60 of 907 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 170 days old
-1. `concepts/agent-failure-modes.md` — 88 inbound links, 73 days old
-1. `concepts/multi-agent-systems.md` — 63 inbound links, 165 days old
-1. `entities/mcp-ecosystem.md` — 60 inbound links, 166 days old
-1. `concepts/context-management.md` — 58 inbound links, 60 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 149 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 149 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 170 days old
-1. `entities/anthropic.md` — 41 inbound links, 170 days old
-1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 164 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 171 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 74 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 166 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 167 days old
+1. `concepts/context-management.md` — 58 inbound links, 61 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 150 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 150 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 171 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 30 days old
+1. `entities/anthropic.md` — 42 inbound links, 171 days old
 
 ## 🔴 Contradictions
 
@@ -132,6 +132,8 @@ reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unl
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-16-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-16 (UTC)
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-17-001.md` — [escalation] ABORTED 2026-09-17T (UTC, exact time unavailable — no bash/date access).
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-18-001.md` — [escalation] nightly-ci-analysis run 2026-09-18: ABORTED (Track A — sandbox unavailable).
+- `repos/agentic-kb/bus/escalation/escalation-2026-09-21-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-21T00:00:00Z. Sandbox unavailable: bash fail
+- `repos/agentic-kb/bus/escalation/escalation-2026-09-22-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-22 — sandbox failed to provision (useradd: c
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
@@ -172,6 +174,7 @@ reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unl
 - `agents/workers/security-reviewer/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-evaluation.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-failure-modes.md` — last updated: Thu Jul 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `concepts/agent-layer-architecture.md` — last updated: Sat Aug 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-loops.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-memory-architecture.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-memory-runtime.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -223,6 +226,7 @@ reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unl
 - `concepts/metadata-filtering.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/minimal-worker-context.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/morning-review-pipeline.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `concepts/multi-agent-orchestration.md` — last updated: Sat Aug 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/multi-agent-systems.md` — last updated: Wed Apr 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/multi-tenancy-agents.md` — last updated: Sat Apr 04 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/multi-tenancy.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -395,6 +399,7 @@ reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unl
 - `patterns/vitest-best-practices.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/wiki-ingest-workflow.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/agentic-pi-harness-project-plan.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/book-to-interactive-ip-platform.md` — last updated: Sat Aug 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/databricks-workspace-platform-role.md` — last updated: Wed Jul 29 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/idea-books-as-agents-author-partnerships.md` — last updated: Thu Aug 13 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/jay-agentic-software-factory.md` — last updated: Thu Jul 30 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
