@@ -476,3 +476,18 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - agentic_hr, AI-FDE-Agent, obsidian-vault, MissionControl not surveyed this run.
 - No worktrees created/removed. State written even though the run produced no code changes.
 - Report: notes-to-factory-2026-09-23.md (outputs folder).
+
+## 2026-09-24 run
+- Kill switch: not present. Proceeded.
+- Harvest: 1 note modified since lastRunAt (p8899, "Zach Lloyd" tweet screenshot) — plaintext body was 5 object-replacement characters, under the 120-byte floor. Skipped. 0 notes ingested to raw/clippings/.
+- KB candidates: wiki/candidates.md (200+ single-source themes) and wiki/action-tracker.md (empty Open/Blocked) surveyed — no actionable code items, all single-source knowledge themes or empty.
+- Harvest total: 0 work orders. Proceeded to Phase 2e drain per 2026-08-25 standing directive.
+- Backlog coverage re-verified against origin/<default-branch> (not local tree) for 7 repos: Agentic-Pi-Harness, hermes-harness-missioncontrol, Twinz, MissionControl, SellerFi, morning-review, ai-software-factory-mastery — all HAS docs/NIGHTLY-BACKLOG.md.
+- Drain survey (Open sections read in full, origin/<default-branch>):
+  - Agentic-Pi-Harness (origin/main): 13 Open entries, all self-declared design proposals / Tier B / "not a nightly's call". None unambiguously Small.
+  - hermes-harness-missioncontrol (origin/main): 8 Open entries (incl. the 2026-08-25 actor-filter item flagged in a prior run's calibration note) — re-checked, still explicitly gated as "a decision, not a patch" (response-shape change). None unambiguously Small.
+  - MissionControl (origin/main): 11 Open entries, all Large product/architecture decisions or security-pin monitoring items. None Small. (Repo is PR-only regardless.)
+  - SellerFi (origin/main): surveyed first ~80 Open lines — dominated by a 6+-night-unmerged critical Next.js CVE fix (human-merge blocker) and an uncommitted-secret-rotation action item, both ACTION REQUIRED, neither a nightly work order.
+  - Twinz (origin/master): surveyed first ~70 Open lines — leaked Vercel token (unrotated, ACTION REQUIRED), untracked-.mcp.json fix (explicitly "should be a deliberate call"), and an `overrides`-ignored dependency problem with bumps already parked on an unmerged branch. None unambiguously Small and mergeable today.
+- Decision: 0 work orders, 0 drained items. No worktrees created, no merges, no PRs opened. agentic_hr, AI-FDE-Agent, obsidian-vault (clone-required) not surveyed this run — deprioritized in favor of depth on the 5 local repos above, given the fleet-wide pattern that easy items are already drained.
+- Report: notes-to-factory-2026-09-24.md written to outputs.
