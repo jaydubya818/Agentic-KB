@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-23 14:02 | Vault: Agentic-KB | Pages scanned: 909
+> Generated: 2026-09-24 14:02 | Vault: Agentic-KB | Pages scanned: 911
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
-| Contradictions | 4 | +2 | 🔴 High |
-| Orphaned pages | 89 | +1 | 🟡 Medium |
-| Stale pages | 371 | +1 | 🟡 Medium |
-| Knowledge gaps | 10 | +5 | 🟡 Medium |
+| Contradictions | 4 | ±0 | 🔴 High |
+| Orphaned pages | 90 | +1 | 🟡 Medium |
+| Stale pages | 372 | +1 | 🟡 Medium |
+| Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 909 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 911 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 172 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 75 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 167 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 168 days old
-1. `concepts/context-management.md` — 58 inbound links, 62 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 151 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 151 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 172 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 31 days old
-1. `entities/anthropic.md` — 42 inbound links, 172 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 173 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 76 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 168 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 169 days old
+1. `concepts/context-management.md` — 58 inbound links, 63 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 152 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 152 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 173 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 32 days old
+1. `entities/anthropic.md` — 42 inbound links, 173 days old
 
 ## 🔴 Contradictions
 
@@ -147,6 +147,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-21-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-21T00:00:00Z. Sandbox unavailable: bash fail
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-22-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-22 — sandbox failed to provision (useradd: c
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-23-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-23T (sandbox provisioning failure, Track A).
+- `repos/agentic-kb/bus/escalation/escalation-2026-09-24-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-24 (UTC)
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
@@ -502,6 +503,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `syntheses/synthesis-episodic-judgment-log-to-trace-dataset.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-episodic-judgment-obsidian-wiki-gate.md` — last updated: Wed Aug 12 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-eval-metrics-to-failure-modes.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-harness-self-improvement-as-memory-promotion.md` — last updated: Mon Aug 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-episodic-judgment-signal.md` — last updated: Sun Aug 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-obsidian-wiki-vault.md` — last updated: Mon Aug 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-proof-of-work-receipts.md` — last updated: Sat Aug 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -594,13 +596,3 @@ _Open since 2026-09-23._
 projects/example-project/ pages (implementation-plan.md, prd.md, specs.md) have no tags and minimal word counts (20-38 words), suggesting placeholder/template content with no real documentation.
 
 _Open since 2026-09-23._
-
-## ✨ Suggestions
-
-- Add tags to the three untagged 'Example Project' pages and 'recipe-build-tool-agent', 'recipe-mcp-server' pages, or explicitly mark them as templates/stubs.
-- Consolidate the cluster of near-duplicate 2026-09-08 architecture/taxonomy pages (agent-harness-runtime-taxonomy, agentic-software-factory-architecture, agentic-software-development-execution-model, agentic-coding-implementation-patterns) into a cross-linked series with a single canonical glossary to avoid definitional drift.
-- Create a dedicated Sofie bootstrap/role page mirroring pi.md and a Hermes-equivalent append page, since Universal Agent Bootstrap Prompt implies parity across Hermes/Pi/Sofie but only Pi has full bootstrap docs.
-- Merge or clearly differentiate the three sequential 'Hermes Apple Notes Setup Review' pages (2026-05-31, 2026-06-01, 2026-06-04) — consider archiving older reviews once superseded to reduce redundancy.
-- Review 'Private Test Note' and 'Example Project' pages for removal or archival since they appear to be test/placeholder content cluttering the KB overview.
-- Add a 'related' cross-link from pi.md to agentic-pi-harness-project-plan.md to clarify the relationship/status between the interim gsd-executor contract and the planned dedicated Pi harness.
-- Define 'gsd-executor' explicitly (perhaps within personal-jays-framework-philosophy.md or a new page) since it's referenced as a load-bearing contract in the Pi bootstrap flow.
