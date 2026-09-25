@@ -491,3 +491,17 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
   - Twinz (origin/master): surveyed first ~70 Open lines — leaked Vercel token (unrotated, ACTION REQUIRED), untracked-.mcp.json fix (explicitly "should be a deliberate call"), and an `overrides`-ignored dependency problem with bumps already parked on an unmerged branch. None unambiguously Small and mergeable today.
 - Decision: 0 work orders, 0 drained items. No worktrees created, no merges, no PRs opened. agentic_hr, AI-FDE-Agent, obsidian-vault (clone-required) not surveyed this run — deprioritized in favor of depth on the 5 local repos above, given the fleet-wide pattern that easy items are already drained.
 - Report: notes-to-factory-2026-09-24.md written to outputs.
+
+## 2026-09-25T15:26:22Z
+- Kill switch checked first: not present.
+- Harvest: 3 notes modified/new since lastRunAt (2026-09-24T15:34:19Z) -- p8887 (title matches credential-shape screen: 44-char high-entropy string, body has a home address and a linear.app link -- skipped, not ingested, not itemized further), p8913 and p8910 (both "New Note", body is a single object-replacement character, under the 120-byte floor -- skipped). 0 notes ingested to raw/clippings/.
+- Attempted a repo-wide grep for the p8887 credential-shaped string across Agentic-KB, Agentic-Pi-Harness, hermes-harness-missioncontrol, Twinz, MissionControl, SellerFi to rule out committed exposure. The search process stalled past a reasonable time budget and was terminated before returning a result -- flagged in the report as UNVERIFIED rather than reported clean.
+- KB candidates: wiki/candidates.md still single-source topic taxonomy only. wiki/action-tracker.md Open/Blocked both empty. 0 KB-sourced work orders.
+- Harvest total: 0 work orders. Proceeded to Phase 2e drain per standing directive.
+- Backlog coverage re-verified via origin/<default-branch> for all 8 local-checkout repos (Agentic-KB, Agentic-Pi-Harness, hermes-harness-missioncontrol, Twinz, MissionControl, SellerFi, morning-review, ai-software-factory-mastery) -- all HAS docs/NIGHTLY-BACKLOG.md.
+- Drain survey: checked last-commit date of docs/NIGHTLY-BACKLOG.md on origin/<default-branch> for the 5 repos most likely to hold Small items (Agentic-Pi-Harness: unchanged since 2026-09-11; hermes-harness-missioncontrol: unchanged since 2026-09-02; Twinz: unchanged since 2026-09-05; MissionControl: unchanged since 2026-09-04; SellerFi: unchanged since 2026-09-05) -- all predate 2026-09-24's exhaustive line-by-line read, which itself matched 6 prior runs' zero-drainable-stock finding. Skipped a 7th consecutive full re-read of byte-for-byte unchanged files as redundant.
+- PR audit via gh: Agentic-KB #29 (OPEN, unchanged since 2026-09-02), hermes-harness-missioncontrol #19 (OPEN, unchanged since 2026-08-26) and #20 (OPEN, unchanged since 2026-09-01).
+- MissionControl worktree count: 83, stable vs. last run.
+- Disk: 52GiB free on / at preflight.
+- 0 work orders, 0 drained items, 0 merges, 0 PRs this run. agentic_hr, AI-FDE-Agent, obsidian-vault not surveyed (clone-required, deprioritized).
+- Report: notes-to-factory-2026-09-25.md written to outputs folder.
