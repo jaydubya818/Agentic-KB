@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-24 14:02 | Vault: Agentic-KB | Pages scanned: 911
+> Generated: 2026-09-25 14:14 | Vault: Agentic-KB | Pages scanned: 906
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 4 | ±0 | 🔴 High |
-| Orphaned pages | 90 | +1 | 🟡 Medium |
-| Stale pages | 372 | +1 | 🟡 Medium |
+| Orphaned pages | 90 | ±0 | 🟡 Medium |
+| Stale pages | 373 | +1 | 🟡 Medium |
 | Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 911 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 906 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 173 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 76 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 168 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 169 days old
-1. `concepts/context-management.md` — 58 inbound links, 63 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 152 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 152 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 173 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 32 days old
-1. `entities/anthropic.md` — 42 inbound links, 173 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 174 days old
+1. `concepts/agent-failure-modes.md` — 88 inbound links, 77 days old
+1. `concepts/multi-agent-systems.md` — 63 inbound links, 169 days old
+1. `entities/mcp-ecosystem.md` — 60 inbound links, 170 days old
+1. `concepts/context-management.md` — 58 inbound links, 64 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 153 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 153 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 174 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 33 days old
+1. `entities/anthropic.md` — 41 inbound links, 174 days old
 
 ## 🔴 Contradictions
 
@@ -514,6 +514,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `syntheses/synthesis-model-tier-eval-framework-matrix.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-per-claim-confidence-as-rag-precision-layer.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-permissions-as-single-compiled-policy.md` — last updated: Sun May 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-promotion-scoring-without-a-judge.md` — last updated: Tue Aug 25 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-proof-of-work-receipts-episodic-judgment-ingestion.md` — last updated: Thu Aug 13 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-proof-of-work-receipts-obsidian-wiki-audit-trail.md` — last updated: Fri Aug 14 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-provenance-freshness-infrastructure.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
