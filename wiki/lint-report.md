@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-25 14:14 | Vault: Agentic-KB | Pages scanned: 906
+> Generated: 2026-09-26 14:04 | Vault: Agentic-KB | Pages scanned: 913
 
 ## Summary
 
@@ -8,10 +8,10 @@
 |---|---|---|---|
 | Contradictions | 4 | ±0 | 🔴 High |
 | Orphaned pages | 90 | ±0 | 🟡 Medium |
-| Stale pages | 373 | +1 | 🟡 Medium |
+| Stale pages | 385 | +12 | 🟡 Medium |
 | Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 906 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 913 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 174 days old
-1. `concepts/agent-failure-modes.md` — 88 inbound links, 77 days old
-1. `concepts/multi-agent-systems.md` — 63 inbound links, 169 days old
-1. `entities/mcp-ecosystem.md` — 60 inbound links, 170 days old
-1. `concepts/context-management.md` — 58 inbound links, 64 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 153 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 153 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 174 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 33 days old
-1. `entities/anthropic.md` — 41 inbound links, 174 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 175 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 78 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 170 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 171 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 30 days old
+1. `concepts/context-management.md` — 58 inbound links, 65 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 154 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 154 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 175 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 34 days old
 
 ## 🔴 Contradictions
 
@@ -186,12 +186,14 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `agents/workers/gsd-verifier/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `agents/workers/perf-analyzer/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `agents/workers/security-reviewer/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `concepts/agent-evaluation-gaming.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-evaluation.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-failure-modes.md` — last updated: Thu Jul 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-layer-architecture.md` — last updated: Sat Aug 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-loops.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-memory-architecture.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-memory-runtime.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `concepts/agent-observability.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-resources-platform.md` — last updated: Mon Apr 20 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-sandboxing.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-vault.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -208,6 +210,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `concepts/cost-optimization.md` — last updated: Wed Jun 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/cross-linking-and-orphan-prevention.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/daily-note-template.md` — last updated: Mon Apr 20 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `concepts/deep-agents-harness.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/enterprise-ai-governance.md` — last updated: Sun Apr 05 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/factory-memory-context-intelligence.md` — last updated: Fri Aug 14 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/few-shot-prompting.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -258,6 +261,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `concepts/react-nextjs-performance.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/reciprocal-rank-fusion.md` — last updated: Tue Jun 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/rlm-pipeline.md` — last updated: Sat Apr 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `concepts/sandboxed-execution.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/self-critique.md` — last updated: Fri Apr 03 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/self-improving-harness.md` — last updated: Thu Aug 20 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/server-sent-events-streaming.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -303,6 +307,8 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `frameworks/12-layer-agent-map.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/blume-codes.md` — last updated: Thu Aug 20 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/claude-managed-agents.md` — last updated: Tue Aug 18 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `frameworks/deepseek-harness.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `frameworks/framework-deepagents-code.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/framework-deepagents.md` — last updated: Tue Aug 18 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/framework-deepeval.md` — last updated: Fri Apr 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/framework-gsd.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -315,7 +321,9 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `frameworks/inspect-ai.md` — last updated: Fri Apr 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/langgraph.md` — last updated: Tue Aug 18 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/langsmith.md` — last updated: Fri Apr 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `frameworks/lumay-ai.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/openconnector.md` — last updated: Wed Jul 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `frameworks/opensandbox.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/playwright.md` — last updated: Tue Aug 18 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/promptfoo.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `frameworks/remember-cite-forget.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -345,6 +353,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `patterns/pattern-agent-skill-authoring.md` — last updated: Wed Jun 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/pattern-anchored-iterative-summarization.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/pattern-architecture-decision-record.md` — last updated: Tue Apr 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `patterns/pattern-backend-sandbox-separation.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/pattern-browser-automation-agent.md` — last updated: Tue Aug 18 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/pattern-clarification-task.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/pattern-code-owns-control-plane.md` — last updated: Mon Aug 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -418,6 +427,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `personal/idea-books-as-agents-author-partnerships.md` — last updated: Thu Aug 13 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/jay-agentic-software-factory.md` — last updated: Thu Jul 30 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/jay-software-factory-tiered-ux.md` — last updated: Fri Aug 14 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/roofclaim-recovery-business-plan.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/workday-sem-opportunity.md` — last updated: Thu Jul 30 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `prompt-library/index.md` — last updated: Sun Apr 12 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `recipes/five-agent-business-ops.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -503,6 +513,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `syntheses/synthesis-episodic-judgment-log-to-trace-dataset.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-episodic-judgment-obsidian-wiki-gate.md` — last updated: Wed Aug 12 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-eval-metrics-to-failure-modes.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-failure-escalation-as-mistake-log-trigger.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-harness-self-improvement-as-memory-promotion.md` — last updated: Mon Aug 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-episodic-judgment-signal.md` — last updated: Sun Aug 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-obsidian-wiki-vault.md` — last updated: Mon Aug 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -524,6 +535,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `syntheses/synthesis-retrieval-and-tool-permissions-as-co-enforced-boundary.md` — last updated: Fri May 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-rrf-as-rlm-fusion-stage.md` — last updated: Tue Jun 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-rrf-proof-of-work-receipts.md` — last updated: Wed Aug 19 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-sandbox-safety-is-policy-not-place.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-gate-episodic-judgment-log.md` — last updated: Tue Aug 11 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-gate-obsidian-wiki-governance.md` — last updated: Sat Aug 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-skillopt-pow-writeback.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
