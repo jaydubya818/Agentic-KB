@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-26 14:04 | Vault: Agentic-KB | Pages scanned: 913
+> Generated: 2026-09-27 14:04 | Vault: Agentic-KB | Pages scanned: 913
 
 ## Summary
 
@@ -8,7 +8,7 @@
 |---|---|---|---|
 | Contradictions | 4 | ±0 | 🔴 High |
 | Orphaned pages | 90 | ±0 | 🟡 Medium |
-| Stale pages | 385 | +12 | 🟡 Medium |
+| Stale pages | 386 | +1 | 🟡 Medium |
 | Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
 **Analysis window:** 60 of 913 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 175 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 78 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 170 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 171 days old
-1. `concepts/agent-observability.md` — 60 inbound links, 30 days old
-1. `concepts/context-management.md` — 58 inbound links, 65 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 154 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 154 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 175 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 34 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 176 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 79 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 171 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 172 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 31 days old
+1. `concepts/context-management.md` — 58 inbound links, 66 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 155 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 155 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 176 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 35 days old
 
 ## 🔴 Contradictions
 
@@ -528,6 +528,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `syntheses/synthesis-promotion-scoring-without-a-judge.md` — last updated: Tue Aug 25 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-proof-of-work-receipts-episodic-judgment-ingestion.md` — last updated: Thu Aug 13 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-proof-of-work-receipts-obsidian-wiki-audit-trail.md` — last updated: Fri Aug 14 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-proof-of-work-receipts-vs-trajectory-eval.md` — last updated: Thu Aug 27 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-provenance-freshness-infrastructure.md` — last updated: Fri Jul 10 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-rag-eval-to-llm-judge.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-react-as-native-trajectory-eval.md` — last updated: Wed Jun 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
