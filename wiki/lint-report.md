@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-09-27 14:04 | Vault: Agentic-KB | Pages scanned: 913
+> Generated: 2026-09-28 14:19 | Vault: Agentic-KB | Pages scanned: 913
 
 ## Summary
 
@@ -8,7 +8,7 @@
 |---|---|---|---|
 | Contradictions | 4 | ±0 | 🔴 High |
 | Orphaned pages | 90 | ±0 | 🟡 Medium |
-| Stale pages | 386 | +1 | 🟡 Medium |
+| Stale pages | 387 | +1 | 🟡 Medium |
 | Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
 **Analysis window:** 60 of 913 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 176 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 79 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 171 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 172 days old
-1. `concepts/agent-observability.md` — 60 inbound links, 31 days old
-1. `concepts/context-management.md` — 58 inbound links, 66 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 155 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 155 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 176 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 35 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 177 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 80 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 172 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 173 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 32 days old
+1. `concepts/context-management.md` — 58 inbound links, 67 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 156 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 156 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 177 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 36 days old
 
 ## 🔴 Contradictions
 
@@ -522,6 +522,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `syntheses/synthesis-headroom-compression-skillopt-signal.md` — last updated: Sat Aug 08 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-judgment-events-as-confidence-labels.md` — last updated: Sun May 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-mcp-as-tool-vs-memory-interface.md` — last updated: Sun Aug 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-memory-selection-needs-a-benchmark-protocol.md` — last updated: Fri Aug 28 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-model-tier-eval-framework-matrix.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-per-claim-confidence-as-rag-precision-layer.md` — last updated: Sat May 23 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-permissions-as-single-compiled-policy.md` — last updated: Sun May 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
