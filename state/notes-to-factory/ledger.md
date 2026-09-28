@@ -533,3 +533,11 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - MissionControl worktree count: 83 (stable vs. last run's 82, within normal drift, not touched by this job).
 - 0 work orders, 0 drained items, 0 merges, 0 PRs this run. agentic_hr, AI-FDE-Agent, obsidian-vault not surveyed (clone-required, deprioritized).
 - Report: notes-to-factory-2026-09-27.md delivered via Cowork session output.
+
+## 2026-09-28T16:30:19Z run
+- Kill switch: not present. Disk: 169GiB free (no pressure).
+- Harvest: list_notes returned 2 notes modified after lastRunAt (2026-09-27T15:23:36Z) not in notesSeen: p8943, p8942. Both fetched by x-coredata id; both are bare `https://lnkd.in/...` URLs, plaintext under 30 bytes -- Screen 2 (empty body, <120 bytes) applied, skipped. p8887 (credential-shaped title) left un-refetched per Screen 1 policy, unchanged since 2026-09-26. 0 notes ingested. 0 work orders from harvest.
+- Phase 2e drain: harvest yielded <2 work orders, so surveyed docs/NIGHTLY-BACKLOG.md on origin/<default-branch> for all 6 repos that have one -- Agentic-Pi-Harness, hermes-harness-missioncontrol, Agentic-KB, Twinz, MissionControl, SellerFi. Read every Open-section entry in full (not sampled). Every entry is self-declared Large, a design proposal, blocked on a human decision, or ACTION REQUIRED (credential rotation / merge-only-a-human-can-do). Zero unambiguously-Small items with no attached governance question. 0 drained.
+- agentic_hr, AI-FDE-Agent, obsidian-vault: not cloned/surveyed (deprioritized again, 4th consecutive run).
+- Open PRs re-verified via `gh pr view`: Agentic-KB #29 OPEN, hermes-harness-missioncontrol #19 OPEN, #20 OPEN. No branches touched, no worktrees created.
+- Result: 0 merges, 0 PRs opened, 0 backlog changes. Report written and sent to Jay.
