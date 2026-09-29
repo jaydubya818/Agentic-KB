@@ -541,3 +541,11 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - agentic_hr, AI-FDE-Agent, obsidian-vault: not cloned/surveyed (deprioritized again, 4th consecutive run).
 - Open PRs re-verified via `gh pr view`: Agentic-KB #29 OPEN, hermes-harness-missioncontrol #19 OPEN, #20 OPEN. No branches touched, no worktrees created.
 - Result: 0 merges, 0 PRs opened, 0 backlog changes. Report written and sent to Jay.
+
+## 2026-09-29
+- Harvest: 3 new notes (p8951, p8945, p8944), all skipped under Screen 2 (<120 bytes plaintext). 0 ingested.
+- KB candidates/action-tracker: nothing actionable (candidates.md is topic-only; action-tracker Open is empty).
+- Phase 2e drain sweep: re-run independently across all 6 backlog repos (Agentic-KB, Agentic-Pi-Harness, hermes-harness-missioncontrol read in full; Twinz/MissionControl/SellerFi by headline). 0 drained -- confirms 2026-09-28 finding.
+- Merges: 0. PRs opened: 0.
+- Reverified via gh, unchanged: Agentic-KB #29 OPEN, hermes-harness-missioncontrol #19 OPEN, hermes-harness-missioncontrol #20 OPEN.
+- Report: state/notes-to-factory/reports/notes-to-factory-2026-09-29.md
