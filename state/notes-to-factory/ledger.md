@@ -549,3 +549,14 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - Merges: 0. PRs opened: 0.
 - Reverified via gh, unchanged: Agentic-KB #29 OPEN, hermes-harness-missioncontrol #19 OPEN, hermes-harness-missioncontrol #20 OPEN.
 - Report: state/notes-to-factory/reports/notes-to-factory-2026-09-29.md
+
+## 2026-09-30T15:24:04Z
+- Kill switch checked first: not present. Disk: 162GiB free / 926GiB (no pressure).
+- Harvest: list_notes (limit 200, back to 2026-06-20) returned zero notes modified/new since lastRunAt (2026-09-29T15:48:20Z) not already in notesSeen -- the newest note on the Mac (p8951) was already captured by the 2026-09-29 run. Genuinely empty harvest. 0 ingested, 0 work orders.
+- KB candidates/action-tracker: candidates.md still single-source topic taxonomy only; action-tracker.md Open/Blocked both empty. 0 KB-sourced work orders.
+- Phase 2e drain: checked docs/NIGHTLY-BACKLOG.md commit date on origin/<default-branch> for all 8 repos -- every date matches exactly what was recorded as "unchanged, all entries self-declared Large/blocked" in the 2026-09-24 through 2026-09-29 runs (Agentic-Pi-Harness 2026-09-11, hermes-harness-missioncontrol 2026-09-02, Twinz 2026-09-05, MissionControl 2026-09-04, SellerFi 2026-09-05, Agentic-KB 2026-09-16, ai-software-factory-mastery 2026-09-07, morning-review 2026-08-22). No file changed, so no re-read performed and no item's sizing could have changed. 0 drained.
+- agentic_hr, AI-FDE-Agent, obsidian-vault not surveyed (clone-required, deprioritized 6th consecutive run).
+- PR audit via gh: Agentic-KB #29 OPEN (unchanged, 28 days), hermes-harness-missioncontrol #19 OPEN (unchanged, 35 days) and #20 OPEN (unchanged, 29 days).
+- MissionControl worktree count: 83 (stable vs. last run's 83, not touched by this job).
+- 0 work orders, 0 drained items, 0 merges, 0 PRs this run.
+- Report: state/notes-to-factory/reports/notes-to-factory-2026-09-30.md
