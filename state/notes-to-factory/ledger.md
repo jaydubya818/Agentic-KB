@@ -560,3 +560,18 @@ Jay pushed back on the low commit count and said to use judgment rather than ask
 - MissionControl worktree count: 83 (stable vs. last run's 83, not touched by this job).
 - 0 work orders, 0 drained items, 0 merges, 0 PRs this run.
 - Report: state/notes-to-factory/reports/notes-to-factory-2026-09-30.md
+
+## 2026-10-01T15:27:33Z
+
+- Kill switch: clear.
+- Harvest: 1 candidate note since last run (p8954 "Celastrina Calea", created/modified 2026-09-30 11:00-11:03pm local). Title clean (Screen 1). Body is two object-replacement characters only, under the 120-byte floor (Screen 2) -- a plant photo. 0 ingested, 0 work orders.
+- KB candidates / repo backlogs: all 8 repos confirmed HAS docs/NIGHTLY-BACKLOG.md on origin (re-verified via git fetch + cat-file, not assumed).
+- Phase 2e drain (harvest was empty): read Agentic-Pi-Harness's Open section in full (14 entries) -- every one is explicitly a design proposal, a Tier-B/review item, or blocked on a decision for Jay; none is unambiguously Small. Read hermes-harness-missioncontrol's Open section in full (9 entries, several with long multi-day addenda) -- same shape, all design-decision or auth-redesign items. Neither repo had a drain candidate this run.
+- Agentic-KB's "web/ has no test suite" item (2026-08-20, repeating drain target since 2026-09-02) did have a candidate: route handler 4 of 36 (`web/src/app/api/repos/route.ts`). Re-measured the route count directly (`git ls-tree -r origin/main web/src/app/api | grep route.ts`) rather than trusting the backlog's stated "34" -- actual count is 36 and was already 36 on 2026-09-16, so that was a miscount in that run, not two new files since.
+- Implemented in isolated worktree `/tmp/ntf/Agentic-KB-repos-route` off `origin/main` (49c1c8f): `web/tests/repos-route.test.mjs`, 9 characterization tests for GET/POST /api/repos. Pinned two previously-undocumented gaps (status silently resets to 'new' and description silently clears on an update that omits them, both via upsertRepo's object-spread merge reading an explicit `undefined` from the route). Baseline suite 45/45 before; 54/54 after. Typecheck clean, lint 0 errors (5 pre-existing warnings, unrelated files), production build green.
+- Merged `--no-ff` into `origin/main` as `4267c84` (full gate re-run on the merged tree: typecheck, lint, 54/54 tests, build, all green). Fresh `git clone` into `/tmp/ntf/akb-fresh-clone`: install + test (54/54) + build all green. Revert: `git -C /Users/jaywest/Agentic-KB revert -m 1 4267c84b7641551f0e728d42036cb16eb4defeaf && git -C /Users/jaywest/Agentic-KB push`.
+- Updated docs/NIGHTLY-BACKLOG.md's drain entry with the 4th-handler summary; committed+pushed directly as `56272e3` (docs-only, parse-checked, referenced paths verified to exist).
+- Worktree hygiene: created 3 (`Agentic-KB-repos-route`, `Agentic-KB-main-merge`, `akb-backlog-update`), all removed with `git worktree remove --force` + `git worktree prune`. Local branch `ntf/2026-10-01-repos-route-tests` deleted (merged into origin/main, never pushed as its own remote ref since the merge went straight to main). Worktree count back to the pre-existing baseline of 2 (`Agentic-KB-sofie-writeback-hardening`, `.claude/worktrees/affectionate-swanson-41d555` -- both pre-existing, untouched).
+- PRs re-verified via `gh pr view` (not re-gated): Agentic-KB #29 OPEN (29 days), hermes-harness-missioncontrol #19 OPEN (36 days), #20 OPEN (32 days).
+- Twinz Open backlog skimmed while present in context (not a planned drain target this run): all remaining items are credential rotation / dependency-override, exclusion-listed regardless of size.
+- Report: notes-to-factory-2026-10-01.md, written to outputs and to this reports/ directory.
