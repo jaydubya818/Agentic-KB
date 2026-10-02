@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-01 14:12 | Vault: Agentic-KB | Pages scanned: 916
+> Generated: 2026-10-02 14:13 | Vault: Agentic-KB | Pages scanned: 917
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 4 | ±0 | 🔴 High |
-| Orphaned pages | 91 | +1 | 🟡 Medium |
-| Stale pages | 402 | +1 | 🟡 Medium |
+| Orphaned pages | 91 | ±0 | 🟡 Medium |
+| Stale pages | 404 | +2 | 🟡 Medium |
 | Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 916 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 917 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 180 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 83 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 175 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 176 days old
-1. `concepts/agent-observability.md` — 60 inbound links, 35 days old
-1. `concepts/context-management.md` — 58 inbound links, 70 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 159 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 159 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 180 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 39 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 181 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 84 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 176 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 177 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 36 days old
+1. `concepts/context-management.md` — 58 inbound links, 71 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 160 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 160 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 181 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 40 days old
 
 ## 🔴 Contradictions
 
@@ -187,6 +187,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `agents/workers/gsd-verifier/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `agents/workers/perf-analyzer/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `agents/workers/security-reviewer/profile.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `candidates.md` — last updated: Tue Sep 01 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-evaluation-gaming.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-evaluation.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `concepts/agent-failure-modes.md` — last updated: Thu Jul 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
@@ -528,6 +529,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `syntheses/synthesis-eval-metrics-to-failure-modes.md` — last updated: Fri May 15 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-failure-escalation-as-mistake-log-trigger.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-forward-message-is-a-permissions-decision.md` — last updated: Sat Aug 29 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `syntheses/synthesis-gsd-deviation-rules-as-permission-policy.md` — last updated: Tue Sep 01 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-harness-self-improvement-as-memory-promotion.md` — last updated: Mon Aug 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-episodic-judgment-signal.md` — last updated: Sun Aug 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `syntheses/synthesis-headroom-compression-obsidian-wiki-vault.md` — last updated: Mon Aug 17 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
