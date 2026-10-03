@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-02 14:13 | Vault: Agentic-KB | Pages scanned: 917
+> Generated: 2026-10-03 18:20 | Vault: Agentic-KB | Pages scanned: 912
 
 ## Summary
 
@@ -8,10 +8,10 @@
 |---|---|---|---|
 | Contradictions | 4 | ±0 | 🔴 High |
 | Orphaned pages | 91 | ±0 | 🟡 Medium |
-| Stale pages | 404 | +2 | 🟡 Medium |
+| Stale pages | 404 | ±0 | 🟡 Medium |
 | Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 917 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 912 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 181 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 84 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 176 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 177 days old
-1. `concepts/agent-observability.md` — 60 inbound links, 36 days old
-1. `concepts/context-management.md` — 58 inbound links, 71 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 160 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 160 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 181 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 40 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 182 days old
+1. `concepts/agent-failure-modes.md` — 88 inbound links, 85 days old
+1. `concepts/multi-agent-systems.md` — 63 inbound links, 177 days old
+1. `entities/mcp-ecosystem.md` — 60 inbound links, 178 days old
+1. `concepts/agent-observability.md` — 59 inbound links, 37 days old
+1. `concepts/context-management.md` — 58 inbound links, 72 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 161 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 161 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 182 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 41 days old
 
 ## 🔴 Contradictions
 
