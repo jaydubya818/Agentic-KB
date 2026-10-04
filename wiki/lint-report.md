@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-03 18:20 | Vault: Agentic-KB | Pages scanned: 912
+> Generated: 2026-10-04 14:03 | Vault: Agentic-KB | Pages scanned: 919
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
-| Contradictions | 4 | ±0 | 🔴 High |
-| Orphaned pages | 91 | ±0 | 🟡 Medium |
+| Contradictions | 2 | -2 | 🔴 High |
+| Orphaned pages | 92 | +1 | 🟡 Medium |
 | Stale pages | 404 | ±0 | 🟡 Medium |
 | Knowledge gaps | 10 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 912 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 919 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,30 +30,18 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 182 days old
-1. `concepts/agent-failure-modes.md` — 88 inbound links, 85 days old
-1. `concepts/multi-agent-systems.md` — 63 inbound links, 177 days old
-1. `entities/mcp-ecosystem.md` — 60 inbound links, 178 days old
-1. `concepts/agent-observability.md` — 59 inbound links, 37 days old
-1. `concepts/context-management.md` — 58 inbound links, 72 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 161 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 161 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 182 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 41 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 183 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 86 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 178 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 179 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 38 days old
+1. `concepts/context-management.md` — 58 inbound links, 73 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 162 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 162 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 183 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 42 days old
 
 ## 🔴 Contradictions
-
-### concepts/tool-use-verify.md vs concepts/tool-use.md
-
-Two separate pages titled 'Tool Use' exist with overlapping tags (tools, llm, agents) — tool-use-verify.md is an 82-word stub while tool-use.md is a 1358-word full treatment, creating duplicate/conflicting canonical sources for the same concept.
-
-**Pages:** `concepts/tool-use-verify.md`, `concepts/tool-use.md` | **Open since:** 2026-09-19
-
-### concepts/reciprocal-rank-fusion.md vs concepts/rlm-pipeline.md
-
-reciprocal-rank-fusion.md contains a provenance dispute note referencing an 'unlocatable github.com/agentmemory attribution' resolved via corroboration, while rlm-pipeline.md cites RRF as part of its pipeline without flagging this provenance issue — inconsistent confidence/status treatment of the same underlying claim across pages.
-
-**Pages:** `concepts/reciprocal-rank-fusion.md`, `concepts/rlm-pipeline.md` | **Open since:** 2026-09-19
 
 ### personal/agent-bootstrap/pi.md vs personal/agentic-pi-harness-project-plan.md
 
@@ -149,6 +137,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-23-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-23T (sandbox provisioning failure, Track A).
 - `repos/agentic-kb/bus/escalation/escalation-2026-09-24-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-24 (UTC)
 - `repos/agentic-kb/bus/escalation/escalation-2026-10-01-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-10-01 (UTC)
+- `repos/agentic-kb/bus/escalation/escalation-2026-10-04-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-10-04 (UTC)
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
