@@ -1,15 +1,15 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-04 14:03 | Vault: Agentic-KB | Pages scanned: 919
+> Generated: 2026-10-05 14:18 | Vault: Agentic-KB | Pages scanned: 919
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
-| Contradictions | 2 | -2 | 🔴 High |
-| Orphaned pages | 92 | +1 | 🟡 Medium |
+| Contradictions | 2 | ±0 | 🔴 High |
+| Orphaned pages | 92 | ±0 | 🟡 Medium |
 | Stale pages | 404 | ±0 | 🟡 Medium |
-| Knowledge gaps | 10 | ±0 | 🟡 Medium |
+| Knowledge gaps | 5 | -5 | 🟡 Medium |
 
 **Analysis window:** 60 of 919 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 183 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 86 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 178 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 179 days old
-1. `concepts/agent-observability.md` — 60 inbound links, 38 days old
-1. `concepts/context-management.md` — 58 inbound links, 73 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 162 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 162 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 183 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 42 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 184 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 87 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 179 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 180 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 39 days old
+1. `concepts/context-management.md` — 58 inbound links, 74 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 163 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 163 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 184 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 43 days old
 
 ## 🔴 Contradictions
 
@@ -558,36 +558,6 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `transcript-ingest.md` — last updated: Sun Apr 19 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 
 ## 💡 Knowledge Gaps
-
-### context-management
-
-Referenced heavily in 'related' fields (rag-systems.md, rlm-pipeline.md, progressive-disclosure.md, reciprocal-rank-fusion.md) and as a tag, but no dedicated concepts/context-management.md page appears in the wiki.
-
-_Open since 2026-09-19._
-
-### memory-systems
-
-Listed as a related concept in rag-systems.md ([[concepts/memory-systems]]) but no corresponding page exists in the overview.
-
-_Open since 2026-09-19._
-
-### agent-loops / multi-agent-systems
-
-prd-to-json-conversion.md and self-critique.md reference 'agent-loops' and 'multi-agent-systems' as related concepts, but neither has a dedicated page.
-
-_Open since 2026-09-19._
-
-### llm-as-judge / guardrails
-
-Both rag-systems.md and self-critique.md/sandboxed-execution.md reference [[concepts/llm-as-judge]] and [[concepts/guardrails]] as related concepts, but no dedicated pages exist for these frequently-cited topics.
-
-_Open since 2026-09-19._
-
-### agent-observability / permission-modes / agent-failure-modes
-
-sandboxed-execution.md and progressive-disclosure.md reference agent-observability, permission-modes, and agent-failure-modes as related concepts with no dedicated pages found.
-
-_Open since 2026-09-19._
 
 ### Hermes bootstrap append
 
