@@ -123,18 +123,27 @@ test('a null or undefined contract throws rather than allowing the write', () =>
   assert.throws(() => assertWriteAllowed('wiki/a.md', undefined), TypeError)
 })
 
-// ─── GAP 2: assertReadAllowed does not check path safety ──────────────────
+// ─── assertReadAllowed checks path safety like its write twin ─────────────
 
-test('GAP: assertReadAllowed never calls checkUnsafePath, unlike its write twin', () => {
-  // The write guard rejects dot-segment traversal outright; the read guard has
-  // no such call, so the same string is allowed if any allowed_reads rule
-  // matches it. Currently unreachable in-tree -- assertReadAllowed has no
-  // callers (it is exported public API, declared in index.d.ts, and reads are
-  // actually evaluated by context_policy in context-loader.mjs) -- but it is
-  // the asymmetry that matters if anything ever wires it up.
+test('assertReadAllowed rejects unsafe paths before any rule is consulted, like its write twin', () => {
+  // Was filed as GAP 2 (backlog 2026-09-01): the read guard skipped
+  // checkUnsafePath, so a traversal string the write guard rejected outright
+  // was allowed for a read whenever an allowed_reads rule matched it. Both
+  // guards now open with the same check. assertReadAllowed still has no
+  // in-tree callers (reads are evaluated by context_policy in
+  // context-loader.mjs), so this pins the exported contract, not a live path.
   const traversal = '../../etc/passwd'
   assert.equal(assertWriteAllowed(traversal, { allowed_writes: ['**'] }).allowed, false)
-  assert.equal(assertReadAllowed(traversal, { allowed_reads: ['**'] }).allowed, true)
+  const r = assertReadAllowed(traversal, { allowed_reads: ['**'] })
+  assert.equal(r.allowed, false)
+  assert.equal(r.reason, 'unsafe path: dot-segment traversal')
+  // The safety check runs before forbidden_paths / allowed_reads, and with no
+  // read restrictions configured at all -- the branch that otherwise allows.
+  assert.equal(assertReadAllowed('/etc/passwd', {}).allowed, false)
+  assert.equal(assertReadAllowed('/etc/passwd', {}).reason, 'unsafe path: absolute path (leading slash)')
+  assert.equal(assertReadAllowed('wiki/a\0.md', { forbidden_paths: ['wiki/**'] }).reason, 'unsafe path: null byte in path')
+  // A clean path is unaffected.
+  assert.equal(assertReadAllowed('wiki/a.md', { allowed_reads: ['wiki/**'] }).allowed, true)
 })
 
 test('assertReadAllowed defaults to allow when no allowed_reads are configured', () => {
