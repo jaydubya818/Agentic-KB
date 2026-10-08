@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-07 14:16 | Vault: Agentic-KB | Pages scanned: 923
+> Generated: 2026-10-08 14:12 | Vault: Agentic-KB | Pages scanned: 925
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
-| Contradictions | 2 | ±0 | 🔴 High |
-| Orphaned pages | 94 | +1 | 🟡 Medium |
-| Stale pages | 404 | ±0 | 🟡 Medium |
+| Contradictions | 0 | -2 | 🟢 Clear |
+| Orphaned pages | 95 | +1 | 🟡 Medium |
+| Stale pages | 410 | +6 | 🟡 Medium |
 | Knowledge gaps | 5 | ±0 | 🟡 Medium |
 
-**Analysis window:** 60 of 923 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 925 pages (6%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,30 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 186 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 89 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 181 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 182 days old
-1. `concepts/agent-observability.md` — 60 inbound links, 41 days old
-1. `concepts/context-management.md` — 58 inbound links, 76 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 165 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 165 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 186 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 45 days old
-
-## 🔴 Contradictions
-
-### personal/agent-bootstrap/pi.md vs personal/agentic-pi-harness-project-plan.md
-
-pi.md states the Pi worker contract on this machine is 'gsd-executor' as a stand-in until a dedicated 'pi' contract exists, implying Pi harness is not fully built, while agentic-pi-harness-project-plan.md describes a 5-week plan to ship v0.1 of a Claude-Code-grade Pi harness extension — unclear if that plan was completed or superseded, creating ambiguity about current Pi harness status.
-
-**Pages:** `personal/agent-bootstrap/pi.md`, `personal/agentic-pi-harness-project-plan.md` | **Open since:** 2026-09-23
-
-### personal/agent-harness-runtime-taxonomy.md vs personal/agentic-software-factory-architecture.md vs personal/agentic-software-development-execution-model.md
-
-Multiple pages (all dated 2026-09-08, same source clipping batch) independently define overlapping terms like 'harness', 'agent loop', and 'orchestrator' — risk of definitional drift/duplication rather than a single canonical taxonomy source.
-
-**Pages:** `personal/agent-harness-runtime-taxonomy.md`, `personal/agentic-software-factory-architecture.md`, `personal/agentic-software-development-execution-model.md` | **Open since:** 2026-09-23
+1. `concepts/agent-loops.md` — 102 inbound links, 187 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 90 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 182 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 183 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 42 days old
+1. `concepts/context-management.md` — 58 inbound links, 77 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 166 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 166 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 187 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 46 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -140,6 +126,7 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `repos/agentic-kb/bus/escalation/escalation-2026-10-04-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-10-04 (UTC)
 - `repos/agentic-kb/bus/escalation/escalation-2026-10-06-001.md` — [escalation] Title: nightly-ci-analysis aborted — Track C (session GitHub access gated) — 202
 - `repos/agentic-kb/bus/escalation/escalation-2026-10-07-001.md` — [escalation] title: nightly-ci-analysis aborted 2026-10-07 — GitHub session access gate (Trac
+- `repos/agentic-kb/bus/escalation/escalation-2026-10-08-001.md` — [escalation] title: Nightly CI analysis aborted — session-level GitHub access gate (Track C)
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
@@ -423,12 +410,18 @@ Multiple pages (all dated 2026-09-08, same source clipping batch) independently 
 - `patterns/pattern-write-to-disk-worker.md` — last updated: Mon Apr 06 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/vitest-best-practices.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `patterns/wiki-ingest-workflow.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/agent-harness-runtime-taxonomy.md` — last updated: Mon Sep 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/agentic-coding-implementation-patterns.md` — last updated: Mon Sep 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/agentic-pi-harness-project-plan.md` — last updated: Fri Apr 24 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/agentic-software-development-execution-model.md` — last updated: Mon Sep 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/agentic-software-factory-architecture.md` — last updated: Mon Sep 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/book-to-interactive-ip-platform.md` — last updated: Sat Aug 22 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/code-review-architecture-at-scale.md` — last updated: Mon Sep 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/databricks-workspace-platform-role.md` — last updated: Wed Jul 29 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/idea-books-as-agents-author-partnerships.md` — last updated: Thu Aug 13 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/jay-agentic-software-factory.md` — last updated: Thu Jul 30 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/jay-software-factory-tiered-ux.md` — last updated: Fri Aug 14 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
+- `personal/production-reliability-operational-judgment.md` — last updated: Mon Sep 07 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/roofclaim-recovery-business-plan.md` — last updated: Wed Aug 26 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `personal/workday-sem-opportunity.md` — last updated: Thu Jul 30 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `prompt-library/index.md` — last updated: Sun Apr 12 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
