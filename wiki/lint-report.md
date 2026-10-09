@@ -1,17 +1,17 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-08 14:12 | Vault: Agentic-KB | Pages scanned: 925
+> Generated: 2026-10-09 14:19 | Vault: Agentic-KB | Pages scanned: 921
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
-| Contradictions | 0 | -2 | 🟢 Clear |
-| Orphaned pages | 95 | +1 | 🟡 Medium |
-| Stale pages | 410 | +6 | 🟡 Medium |
-| Knowledge gaps | 5 | ±0 | 🟡 Medium |
+| Contradictions | 0 | ±0 | 🟢 Clear |
+| Orphaned pages | 96 | +1 | 🟡 Medium |
+| Stale pages | 410 | ±0 | 🟡 Medium |
+| Knowledge gaps | 0 | -5 | 🟢 Clear |
 
-**Analysis window:** 60 of 925 pages (6%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 921 pages (7%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
@@ -30,16 +30,16 @@
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 187 days old
-1. `concepts/agent-failure-modes.md` — 89 inbound links, 90 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 182 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 183 days old
-1. `concepts/agent-observability.md` — 60 inbound links, 42 days old
-1. `concepts/context-management.md` — 58 inbound links, 77 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 166 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 166 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 187 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 46 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 188 days old
+1. `concepts/agent-failure-modes.md` — 88 inbound links, 91 days old
+1. `concepts/multi-agent-systems.md` — 63 inbound links, 183 days old
+1. `entities/mcp-ecosystem.md` — 60 inbound links, 184 days old
+1. `concepts/agent-observability.md` — 59 inbound links, 43 days old
+1. `concepts/context-management.md` — 58 inbound links, 78 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 167 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 167 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 188 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 47 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
@@ -127,6 +127,7 @@
 - `repos/agentic-kb/bus/escalation/escalation-2026-10-06-001.md` — [escalation] Title: nightly-ci-analysis aborted — Track C (session GitHub access gated) — 202
 - `repos/agentic-kb/bus/escalation/escalation-2026-10-07-001.md` — [escalation] title: nightly-ci-analysis aborted 2026-10-07 — GitHub session access gate (Trac
 - `repos/agentic-kb/bus/escalation/escalation-2026-10-08-001.md` — [escalation] title: Nightly CI analysis aborted — session-level GitHub access gate (Track C)
+- `repos/agentic-kb/bus/escalation/escalation-2026-10-09-001.md` — [escalation] ---
 - `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
 - `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
 - `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
@@ -551,35 +552,3 @@
 - `system/policies/promotion-rules.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `system/policies/source-trust-policy.md` — last updated: Thu Apr 09 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
 - `transcript-ingest.md` — last updated: Sun Apr 19 2026 17:00:00 GMT-0700 (Pacific Daylight Time) (cadence: 30d)
-
-## 💡 Knowledge Gaps
-
-### Hermes bootstrap append
-
-Universal Agent Bootstrap Prompt references appending a role-specific block from [[hermes]] similar to [[pi]], but no dedicated 'Hermes Bootstrap Append' page (analogous to pi.md) appears in the KB — only setup review notes and operating context exist.
-
-_Open since 2026-09-23._
-
-### Sofie
-
-Sofie is tagged/referenced in Universal Agent Bootstrap Prompt as one of the three agent surfaces (Hermes, Pi, Sofie) but there is no dedicated page describing Sofie's role, contract, or bootstrap append, unlike Pi and Hermes.
-
-_Open since 2026-09-23._
-
-### gsd-executor contract
-
-pi.md references the 'gsd-executor' agent contract as the interim Pi worker identity, but there's no page defining what gsd-executor is, its allowed_writes scope, or its relationship to the GSD framework mentioned elsewhere (personal-jays-framework-philosophy.md).
-
-_Open since 2026-09-23._
-
-### Mission Control / Software Factory canonical architecture
-
-Multiple pages (book-to-interactive-ip-platform, jay-software-factory-tiered-ux, databricks-workspace-platform-role) reference 'Mission Control' and 'Software Factory' as an existing architecture, but it's unclear which single page is the canonical source of truth versus jay-agentic-software-factory.md or agentic-software-factory-architecture.md.
-
-_Open since 2026-09-23._
-
-### Example Project pages
-
-projects/example-project/ pages (implementation-plan.md, prd.md, specs.md) have no tags and minimal word counts (20-38 words), suggesting placeholder/template content with no real documentation.
-
-_Open since 2026-09-23._
