@@ -12,6 +12,9 @@
     ["patterns/pattern-morning-review", "the daily review pipeline"],
     ["recipes/readwise-to-wikiwise-ingest", "ingesting Readwise highlights"]
   ],
+  "mocs/automation": [
+    ["recipes/recipe-prd-generator", "PRD generator skill"]
+  ],
   "mocs/vault-foundation": [
     ["recipes/obsidian-smart-vault-setup", "automated capture-to-insight vault setup"]
   ],

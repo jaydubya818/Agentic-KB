@@ -1,122 +1,108 @@
 #!/usr/bin/env bash
-# scripts/daily-lint.sh — daily Agentic-KB wiki health check
+# scripts/daily-lint.sh — daily Agentic-KB wiki health check and self-maintenance
 #
-# Replaces the ~40 lines of bash that used to live inline in the scheduled-task
-# prose, where it was re-interpreted by the agent every morning and free to
-# drift. The scheduled task should now be: run this script, relay its summary.
+# The scheduled task is: run this script, relay its summary. All logic lives
+# here so it is version-controlled and testable, not re-interpreted by an agent.
 #
 #   ./scripts/daily-lint.sh
 #
-# Guarantees:
-#   - at least one commit is pushed on EVERY run (heartbeat), success or failure
-#   - every artifact is PII-redacted and committed SEPARATELY, so a guard
-#     rejection on one file cannot suppress the others
-#   - only the artifacts listed below are ever staged, never other pending work
+# Pipeline:
+#   1. measure (offline)      scripts/kb-quality.mjs      -> BEFORE
+#   2. remediate (safe only)  scripts/kb-remediate.mjs    hubs, MoC placements, unambiguous link repair
+#   3. validate               unit tests + hub link check + no-regression gate; roll back on failure
+#   4. lint (authoritative)   POST /api/lint              contradictions, gaps, final orphan/stale counts
+#   5. alert lifecycle        scripts/kb-alerts.mjs       NEW / REGRESSION / WORSENING notify;
+#                                                         STANDING / BLOCKED stay on the dashboard
+#   6. commit                 only when something meaningful changed
 #
-# Artifacts committed (one commit each, when changed):
-#   wiki/lint-report.md          full report + triage (written by the API)
-#   wiki/lint-trend.csv          one row per run — makes regressions visible
-#                                without diffing commit messages
-#   wiki/_meta/kb-health.md      human-readable scorecard + threshold status
-#   wiki/_meta/lint-alerts.md    durable alert history (weekly rollup)
+# Commits (history is NOT a heartbeat):
+#   A commit lands only for a substantive change: remediation applied, a report
+#   whose findings differ, a changed trend/alert state, or a new quality finding
+#   set. A healthy unchanged day creates NO commit. Execution history is kept in
+#   logs/lint-runs.jsonl (machine-local, one JSON line per run, success or failure).
 #
-# Exit codes (the caller alerts on anything non-zero):
-#   0  healthy
-#   1  attention needed  (contradictions open, orphans grew by > ORPHAN_ALERT,
-#                         or an absolute ceiling was breached)
-#   2  degraded          (lint ran, AI analysis failed; counts still valid)
-#   3  failed            (server unreachable or lint call failed entirely)
+# Safety, unchanged: PII lines are stripped from generated artifacts, the
+# pre-commit guard is never bypassed (no --no-verify), pushes never force, and
+# a rejected artifact is dropped on its own without losing the rest of the run.
+#
+# Exit codes:
+#   0  healthy, or only STANDING/BLOCKED findings already reported
+#   1  attention needed: a NEW, REGRESSION or WORSENING finding
+#   2  degraded: lint ran, AI analysis failed (first time / newly regressed)
+#   3  failed: server unreachable or lint call errored
 set -uo pipefail
 
 REPO="${KB_REPO:-/Users/jaywest/Agentic-KB}"
 PORT="${KB_PORT:-3002}"
 BASE="http://localhost:${PORT}"
 LOG="${REPO}/logs/kb-dev-server.log"
+RUNLOG="${REPO}/logs/lint-runs.jsonl"
 REPORT="wiki/lint-report.md"
 TREND="wiki/lint-trend.csv"
 HEALTH="wiki/_meta/kb-health.md"
+ALERTSTATE="wiki/_meta/alert-state.json"
 ALERTDOC="wiki/_meta/lint-alerts.md"
-ORPHAN_ALERT="${ORPHAN_ALERT:-5}"
+QUALITY="wiki/_meta/kb-quality.md"
+REMEDIATION="${REPO}/logs/last-remediation.json"
 
-# Absolute ceilings, added 2026-08-30. The growth-only alert above is blind to a
-# large *steady* backlog: 75 orphans and 311 stale pages (38% of the vault) sat
-# unchanged day over day and never once fired. These are deliberately set just
-# above the current levels so they act as a ratchet against getting worse rather
-# than as permanent noise — an alert that fires every single day is an alert
-# nobody reads. Tighten them as the backlog is actually worked down.
-ORPHAN_MAX="${ORPHAN_MAX:-80}"
-STALE_PCT_MAX="${STALE_PCT_MAX:-40}"
+# Thresholds are consumed by scripts/kb-alerts.mjs. They are a ratchet against
+# the backlog growing, and are never relaxed to silence a finding: a standing
+# breach stays red on the dashboard until the number actually comes down.
+export ORPHAN_ALERT="${ORPHAN_ALERT:-5}"
+export ORPHAN_MAX="${ORPHAN_MAX:-80}"
+export STALE_PCT_MAX="${STALE_PCT_MAX:-40}"
+export KB_REPO="$REPO"
 
-# The 2026-08-13 run failed because a 180s client timeout cut off a server call
-# that went on to finish in 4.4 minutes. Give it real headroom.
 LINT_TIMEOUT="${LINT_TIMEOUT:-600}"
 SERVER_TRIES="${SERVER_TRIES:-30}"
 SERVER_WAIT="${SERVER_WAIT:-3}"
+AUTO_REMEDIATE="${AUTO_REMEDIATE:-1}"
 
 cd "$REPO" || { echo "FATAL: cannot cd to $REPO"; exit 3; }
 mkdir -p "${REPO}/logs" "${REPO}/wiki/_meta"
 
-# The daily commit is a heartbeat: it must happen even if this script dies on an
-# unexpected error. The first version aborted on an unbound variable partway
-# through and silently produced no commit at all, which is precisely the failure
-# the heartbeat exists to make visible.
-#
-# 2026-08-30: this became a counter rather than a flag when the run started
-# producing several independent artifacts. The heartbeat condition is now "did
-# ANY content commit land", so the empty marker is written only when the run
-# genuinely produced nothing.
 COMMITS_MADE=0
-MARKER_MSG="chore: daily wiki lint $(date +%F) — SKIPPED (script aborted)"
+RUN_STATUS="started"
+DSTAMP="$(date +%F)"
 
-# A second writer pushed to main between runs on 2026-08-26 and the daily push
-# died on a non-fast-forward, which would have silently broken the heartbeat for
-# every run after it. Our commits are always small artifact-or-marker commits,
-# so rebasing them onto whatever landed remotely is safe and mechanical. One
-# retry, never a force-push: if the rebase itself conflicts, that needs a human.
+record_run() {
+  # One JSON line per run, success or failure: execution history without commits.
+  printf '{"date":"%s","at":"%s","status":"%s","exit":%s,"commits":%s}\n' \
+    "$DSTAMP" "$(date -Iseconds)" "$RUN_STATUS" "${1:-0}" "$COMMITS_MADE" >> "$RUNLOG" 2>/dev/null || true
+}
+
+# One rebase retry, never a force-push: a conflicting rebase needs a human.
 push_main() {
   git push -q origin main 2>/dev/null && return 0
   echo "push rejected — rebasing onto origin/main and retrying"
   if ! git pull --rebase --autostash -q origin main 2>&1; then
-    git rebase --abort 2>/dev/null || true   # also restores the autostash
+    git rebase --abort 2>/dev/null || true
     return 1
   fi
   git push -q origin main 2>/dev/null
 }
 
-# Single push path for the whole script. Every exit route — success, fail(), or
-# an unexpected abort — lands here, so there is exactly one place where the
-# heartbeat can be missed, and it is this function.
+# Single exit path. Pushes only when there is something to push; a quiet day
+# makes no commit and therefore no push.
 on_exit() {
   local rc=$?
-  if [ "$COMMITS_MADE" -eq 0 ]; then
-    echo "ALERT: no content commits this run (rc=${rc}) — writing marker"
-    git commit -q --allow-empty -m "${MARKER_MSG} (rc=${rc})" 2>/dev/null \
-      && COMMITS_MADE=1
-  fi
+  record_run "$rc"
   if [ -n "$(git log origin/main..HEAD --oneline 2>/dev/null)" ]; then
     if push_main; then
       echo "pushed ${COMMITS_MADE} commit(s), head: $(git log -1 --format=%h)"
-      # Idempotent: self-skips unless a 'mirror' remote is configured.
       bash "${REPO}/scripts/mirror-push.sh" >/dev/null 2>&1 || true
     else
       alert "push failed even after rebase onto origin/main — resolve manually"
       echo "PUSH FAILED (not force-pushing; resolve manually)"
     fi
+  else
+    echo "no commits this run (nothing meaningful changed)"
   fi
 }
 trap on_exit EXIT
 
 http_code() { curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$1" 2>/dev/null || echo "000"; }
 
-# --- alerting ---------------------------------------------------------------
-# Deliberately zero-config and local. A daily job whose failures are only
-# visible by reading the scheduler's transcript is a job that fails unnoticed —
-# 2 of the 15 runs before 2026-08-20 were dead and nobody found out. macOS
-# notifications need no credentials and cannot spam anyone but the user.
-#
-# 2026-08-30: notifications vanish if the Mac is asleep and logs/lint-alerts.log
-# is gitignored, so the only durable record of a bad run lived on one machine.
-# Alerts are now also rolled up into a tracked wiki page (see rollup_alerts).
 alert() {
   local msg="$1"
   echo "ALERT: ${msg}"
@@ -124,13 +110,10 @@ alert() {
   osascript -e "display notification \"${msg//\"/}\" with title \"KB daily lint\"" 2>/dev/null || true
 }
 
-# Cheapest possible probe: 1 output token. Catches an exhausted credit balance
-# in ~1s instead of walking 826 pages and burning 30s to reach the same answer.
-# Mirrors the check in scripts/morning-review-preflight.sh.
 credits_exhausted() {
   local key body
   key="$(grep '^ANTHROPIC_API_KEY=' "${REPO}/web/.env.local" 2>/dev/null | cut -d= -f2- | tr -d '\r\n')"
-  [ -n "$key" ] || return 1   # can't tell; let the real call decide
+  [ -n "$key" ] || return 1
   body="$(curl -s --max-time 20 https://api.anthropic.com/v1/messages \
     -H "x-api-key: ${key}" -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -139,34 +122,40 @@ credits_exhausted() {
 }
 
 # --- commit helpers ---------------------------------------------------------
-# One artifact per commit. Splitting these apart is not cosmetic: when the PII
-# guard rejected the combined commit, the report AND the counts AND the
-# heartbeat all died together. Now a rejected artifact is dropped on its own and
-# the rest of the run still lands.
+# One concern per commit. Never --no-verify: a guard rejection drops that one
+# artifact and the rest of the run still lands.
 commit_file() {
   local path="$1" msg="$2"
-
   [ -f "${REPO}/${path}" ] || return 1
-
-  # Pre-commit PII guard blocks any line referencing _private/. Cheaper to strip
-  # it here than to have the hook reject the whole artifact.
   sed -i '' '/_private\//d' "${REPO}/${path}" 2>/dev/null || true
-
   git add -- "$path" 2>/dev/null || return 1
   if git diff --cached --quiet -- "$path"; then
     git reset -q HEAD -- "$path" 2>/dev/null || true
-    return 1   # unchanged; not an error
+    return 1
   fi
-
   if git commit -q -m "$msg" -- "$path"; then
-    COMMITS_MADE=$((COMMITS_MADE + 1))
-    echo "commit: $(git log -1 --format=%h) ${msg}"
-    return 0
+    COMMITS_MADE=$((COMMITS_MADE + 1)); echo "commit: $(git log -1 --format=%h) ${msg}"; return 0
   fi
-
-  # Never --no-verify past the guard. Drop this one artifact, keep the run.
   git reset -q HEAD -- "$path" 2>/dev/null || true
   alert "pre-commit guard rejected ${path} — left uncommitted"
+  return 1
+}
+
+commit_paths() {
+  local msg="$1"; shift
+  local existing=() p
+  for p in "$@"; do [ -e "${REPO}/${p}" ] && existing+=("$p"); done
+  [ "${#existing[@]}" -gt 0 ] || return 1
+  git add -- "${existing[@]}" 2>/dev/null || return 1
+  if git diff --cached --quiet -- "${existing[@]}"; then
+    git reset -q HEAD -- "${existing[@]}" 2>/dev/null || true
+    return 1
+  fi
+  if git commit -q -m "$msg" -- "${existing[@]}"; then
+    COMMITS_MADE=$((COMMITS_MADE + 1)); echo "commit: $(git log -1 --format=%h) ${msg}"; return 0
+  fi
+  git reset -q HEAD -- "${existing[@]}" 2>/dev/null || true
+  alert "pre-commit guard rejected remediation — left uncommitted"
   return 1
 }
 
@@ -174,18 +163,17 @@ fail() {
   echo "$1"
   echo "--- last 20 lines of ${LOG} ---"
   tail -20 "$LOG" 2>/dev/null || echo "(no server log)"
-  MARKER_MSG="chore: daily wiki lint $(date +%F) — SKIPPED ($2)"
-  exit 3   # trap writes the marker and pushes
+  RUN_STATUS="failed: $2"
+  exit 3
 }
+
+q() { node "${REPO}/scripts/kb-quality.mjs" --json 2>/dev/null || echo '{}'; }
+qf() { echo "$1" | jq -r "${2} // ${3}" 2>/dev/null || echo "$3"; }
 
 # --- 1. ensure the dev server is up -----------------------------------------
 if [ "$(http_code "${BASE}/api/pending-count")" != "200" ]; then
   echo "server down, starting..."
   ( cd "${REPO}/web" && nohup npm run dev > "$LOG" 2>&1 < /dev/null & disown ) || true
-
-  # Tries/interval are env-overridable purely so this branch is testable: at the
-  # hardcoded 30x3s the "server never came up" path took 90s to reach, which is
-  # long enough that it was never actually exercised before shipping.
   up=""
   for _ in $(seq 1 "$SERVER_TRIES"); do
     sleep "$SERVER_WAIT"
@@ -195,21 +183,42 @@ if [ "$(http_code "${BASE}/api/pending-count")" != "200" ]; then
   echo "server up"
 fi
 
-# --- 2. run the lint --------------------------------------------------------
-# Fail fast on an exhausted balance. The lint would still produce valid orphan
-# and stale counts via the degraded path, so this is not a hard stop — but it
-# turns a vague 502 buried in JSON into an unambiguous "top up your credits".
 if credits_exhausted; then
   alert "Anthropic credits exhausted — contradiction/gap analysis will be skipped. Top up at console.anthropic.com"
 fi
 
-# 2026-08-30: a malformed or renamed line in web/.env.local yields an empty PIN,
-# the API returns 401, and the script reported it as the generic "lint API
-# error" — sending you to read server logs for a one-line config problem.
-# Assert the precondition instead of diagnosing its symptom.
 PIN="$(grep '^PRIVATE_PIN=' "${REPO}/web/.env.local" 2>/dev/null | cut -d= -f2- | tr -d '\r\n')"
 [ -n "$PIN" ] || fail "PRIVATE_PIN missing or empty in web/.env.local — the lint call would 401" "PIN not configured"
 
+# --- 2. measure BEFORE, remediate, validate ---------------------------------
+PRE_Q="$(q)"
+B_ORPH=$(qf "$PRE_Q" .orphans 0); B_STALE=$(qf "$PRE_Q" .stale 0); B_BROKEN=$(qf "$PRE_Q" .brokenLinks 0)
+REMEDIATED_N=0
+rm -f "$REMEDIATION"
+
+if [ "$AUTO_REMEDIATE" = "1" ]; then
+  # Quality report first so MoC placements pointing at it resolve.
+  node scripts/kb-quality.mjs --write >/dev/null 2>&1 || true
+  if node scripts/kb-remediate.mjs --apply > "$REMEDIATION" 2>/dev/null; then
+    REMEDIATED_N=$(jq -r '((.modified|length) + (.created|length))' "$REMEDIATION" 2>/dev/null || echo 0)
+  fi
+
+  if [ "$REMEDIATED_N" -gt 0 ]; then
+    POST_Q="$(q)"
+    A_ORPH=$(qf "$POST_Q" .orphans 0); A_BROKEN=$(qf "$POST_Q" .brokenLinks 0)
+    if node --test tests/agents/wiki-lint.test.mjs tests/agents/freshness-policy.test.mjs tests/alert-lifecycle.test.mjs >/dev/null 2>&1 \
+       && node scripts/rebuild-orphan-hubs.mjs --check >/dev/null 2>&1 \
+       && [ "$A_ORPH" -le "$B_ORPH" ] && [ "$A_BROKEN" -le "$B_BROKEN" ]; then
+      echo "remediation validated: ${REMEDIATED_N} file(s) changed, orphans ${B_ORPH}->${A_ORPH}, broken links ${B_BROKEN}->${A_BROKEN}"
+    else
+      alert "remediation failed validation — rolling back ${REMEDIATED_N} file(s)"
+      node scripts/kb-remediate.mjs --rollback "$REMEDIATION" >/dev/null 2>&1 || true
+      REMEDIATED_N=0
+    fi
+  fi
+fi
+
+# --- 3. authoritative lint ---------------------------------------------------
 RESP="$(curl -s --max-time "$LINT_TIMEOUT" -X POST \
   -H "Content-Type: application/json" \
   -d "{\"pin\":\"${PIN}\"}" "${BASE}/api/lint" 2>/dev/null)"
@@ -217,133 +226,100 @@ RESP="$(curl -s --max-time "$LINT_TIMEOUT" -X POST \
 echo "$RESP" | jq -e '.ok == true' >/dev/null 2>&1 \
   || fail "lint call failed: ${RESP:0:400}" "lint API error"
 
-# --- 3. summarise -----------------------------------------------------------
-# One jq call per field. A single @sh template is denser but nests shell quotes
-# inside a jq string literal, which is how the first version of this script
-# silently produced a compile error and skipped the heartbeat commit entirely.
 jqf() { echo "$RESP" | jq -r "${1} // ${2}" 2>/dev/null || echo "$2"; }
-
-PAGES=$(jqf '.pagesScanned' 0)
-CONTRA=$(jqf '.contradictions' 0)
-ORPHANS=$(jqf '.orphans' 0)
-STALE=$(jqf '.stalePages' 0)
-GAPS=$(jqf '.gaps' 0)
-ODELTA=$(jqf '.orphanDelta' 0)
-EXAMINED=$(jqf '.analysisWindow.examined' 0)
-CURSOR=$(jqf '.analysisWindow.cursor' 0)
-DEGRADED=$(jqf '.degraded' false)
+PAGES=$(jqf '.pagesScanned' 0);  CONTRA=$(jqf '.contradictions' 0); ORPHANS=$(jqf '.orphans' 0)
+STALE=$(jqf '.stalePages' 0);    GAPS=$(jqf '.gaps' 0);             ODELTA=$(jqf '.orphanDelta' 0)
+EXAMINED=$(jqf '.analysisWindow.examined' 0); CURSOR=$(jqf '.analysisWindow.cursor' 0)
+DEGRADED=$(jqf '.degraded' false);  VERIFIED=$(jqf '.verifiedPages' 0)
 REASON=$(echo "$RESP" | jq -r '.degradedReason // ""' 2>/dev/null | tr -d '\n' | cut -c1-200)
 
-STALE_PCT=0
-[ "$PAGES" -gt 0 ] 2>/dev/null && STALE_PCT=$(( STALE * 100 / PAGES ))
-COVER_PCT=0
-[ "$PAGES" -gt 0 ] 2>/dev/null && COVER_PCT=$(( EXAMINED * 100 / PAGES ))
+STALE_PCT=0;  [ "$PAGES" -gt 0 ] 2>/dev/null && STALE_PCT=$(( STALE * 100 / PAGES ))
+COVER_PCT=0;  [ "$PAGES" -gt 0 ] 2>/dev/null && COVER_PCT=$(( EXAMINED * 100 / PAGES ))
 
-echo "pages=${PAGES} contradictions=${CONTRA} orphans=${ORPHANS} (Δ${ODELTA}) stale=${STALE} (${STALE_PCT}%) gaps=${GAPS}"
+FINAL_Q="$(q)"
+BROKEN=$(qf "$FINAL_Q" .brokenLinks 0); PGAPS=$(qf "$FINAL_Q" .projectGaps 0)
+
+echo "pages=${PAGES} contradictions=${CONTRA} orphans=${ORPHANS} (Δ${ODELTA}) stale=${STALE} (${STALE_PCT}%) gaps=${GAPS} broken_links=${BROKEN} project_gaps=${PGAPS} verified=${VERIFIED}"
+echo "BEFORE -> AFTER: orphans ${B_ORPH}->${ORPHANS}, stale ${B_STALE}->${STALE}, broken links ${B_BROKEN}->${BROKEN} (${REMEDIATED_N} file(s) remediated)"
 echo "analysis window: ${EXAMINED}/${PAGES} pages (${COVER_PCT}%), cursor at ${CURSOR}"
 
+# --- 4. alert lifecycle ------------------------------------------------------
+METRICS="$(jq -nc \
+  --arg today "$DSTAMP" --arg reason "$REASON" --argjson degraded "$DEGRADED" \
+  --argjson pages "$PAGES" --argjson contradictions "$CONTRA" --argjson orphans "$ORPHANS" \
+  --argjson orphanDelta "$ODELTA" --argjson stale "$STALE" --argjson stalePct "$STALE_PCT" \
+  --argjson gaps "$GAPS" --argjson examined "$EXAMINED" --argjson brokenLinks "$BROKEN" \
+  --argjson projectGaps "$PGAPS" --argjson verified "$VERIFIED" \
+  --argjson bo "$B_ORPH" --argjson bs "$B_STALE" --argjson bb "$B_BROKEN" \
+  '{today:$today,reason:$reason,degraded:$degraded,pages:$pages,contradictions:$contradictions,orphans:$orphans,
+    orphanDelta:$orphanDelta,stale:$stale,stalePct:$stalePct,gaps:$gaps,examined:$examined,brokenLinks:$brokenLinks,
+    projectGaps:$projectGaps,verified:$verified,before:{orphans:$bo,stale:$bs,brokenLinks:$bb}}')"
+LC="$(node scripts/kb-alerts.mjs "$METRICS" 2>/dev/null || echo '{}')"
+
 status=0
-if [ "$DEGRADED" = "true" ]; then
-  alert "degraded run — ${REASON}"
-  status=2
-else
-  [ "$CONTRA" -gt 0 ] && { alert "${CONTRA} open contradiction(s) in the wiki"; status=1; }
-  [ "$ODELTA" -gt "$ORPHAN_ALERT" ] && { alert "orphans grew by ${ODELTA} since the last run"; status=1; }
-  [ "$ORPHANS" -gt "$ORPHAN_MAX" ] && { alert "orphans at ${ORPHANS}, over the ${ORPHAN_MAX} ceiling"; status=1; }
-  [ "$STALE_PCT" -gt "$STALE_PCT_MAX" ] && { alert "stale pages at ${STALE_PCT}% of the vault, over the ${STALE_PCT_MAX}% ceiling"; status=1; }
+NONDEG=$(echo "$LC" | jq '[.actionable[]? | select(.key != "degraded")] | length' 2>/dev/null || echo 0)
+DEGACT=$(echo "$LC" | jq '[.actionable[]? | select(.key == "degraded")] | length' 2>/dev/null || echo 0)
+echo "$LC" | jq -r '.actionable[]? | "\(.status) \(.label): \(.value) (threshold \(.threshold), was \(.previous // "n/a"))"' 2>/dev/null \
+  | while IFS= read -r line; do alert "$line"; done
+echo "$LC" | jq -r '.remediated[]? | "REMEDIATED: \(.label) is now \(.value)"' 2>/dev/null
+echo "$LC" | jq -r '.standing[]? | "\(.status): \(.label) = \(.value) (threshold \(.threshold), open \(.standingDays)d) — no new alert"' 2>/dev/null
+[ "$NONDEG" -gt 0 ] && status=1
+[ "$status" -eq 0 ] && [ "$DEGACT" -gt 0 ] && status=2
+RUN_STATUS="exit-${status}"
+
+# --- 5. artifacts: write only what differs ----------------------------------
+# lint-report.md is rewritten by the API every run with a fresh timestamp. If
+# nothing but that timestamp differs from HEAD, restore it: a new timestamp is
+# not new information.
+if [ -f "$REPORT" ] && git cat-file -e "HEAD:${REPORT}" 2>/dev/null; then
+  if diff -q <(git show "HEAD:${REPORT}" | grep -v '^> Generated:') <(grep -v '^> Generated:' "$REPORT") >/dev/null 2>&1; then
+    git checkout -q -- "$REPORT" 2>/dev/null || true
+  fi
 fi
 
-# --- 4. trend history -------------------------------------------------------
-# One row per run. Each daily snapshot previously existed only as a commit
-# message, so answering "when did stale start climbing?" meant reading git log
-# by eye. Re-running on the same day replaces that day's row rather than
-# appending a duplicate, so the file stays one-row-per-day and idempotent.
+# Trend: one row per CHANGE, not per day (run history is in lint-runs.jsonl).
 write_trend() {
-  local today; today="$(date +%F)"
   local hdr="date,pages,contradictions,orphans,orphan_delta,stale,stale_pct,gaps,examined,cursor,degraded"
-  local row="${today},${PAGES},${CONTRA},${ORPHANS},${ODELTA},${STALE},${STALE_PCT},${GAPS},${EXAMINED},${CURSOR},${DEGRADED}"
-
-  if [ -f "${REPO}/${TREND}" ]; then
-    grep -v "^${today}," "${REPO}/${TREND}" > "${REPO}/${TREND}.tmp" 2>/dev/null || true
-    mv "${REPO}/${TREND}.tmp" "${REPO}/${TREND}"
-  else
-    echo "$hdr" > "${REPO}/${TREND}"
-  fi
+  local row="${DSTAMP},${PAGES},${CONTRA},${ORPHANS},${ODELTA},${STALE},${STALE_PCT},${GAPS},${EXAMINED},${CURSOR},${DEGRADED}"
+  [ -f "${REPO}/${TREND}" ] || echo "$hdr" > "${REPO}/${TREND}"
+  local last old new
+  last="$(tail -1 "${REPO}/${TREND}")"
+  old="$(echo "$last" | awk -F, '{print $2","$3","$4","$6","$7","$8","$11}')"
+  new="${PAGES},${CONTRA},${ORPHANS},${STALE},${STALE_PCT},${GAPS},${DEGRADED}"
+  [ "$old" = "$new" ] && return 0
+  grep -v "^${DSTAMP}," "${REPO}/${TREND}" > "${REPO}/${TREND}.tmp" 2>/dev/null || true
+  mv "${REPO}/${TREND}.tmp" "${REPO}/${TREND}"
   echo "$row" >> "${REPO}/${TREND}"
 }
 write_trend
 
-# --- 5. health scorecard ----------------------------------------------------
-# Deliberately numbers-only, with the page-level triage left in lint-report.md.
-# Keeping vault page paths out of this file keeps its PII-guard surface at zero,
-# which matters because it is regenerated unattended every single day.
-write_health() {
-  local badge="🟢 healthy"
-  [ "$status" -eq 1 ] && badge="🟡 attention"
-  [ "$status" -eq 2 ] && badge="🟠 degraded"
-
-  {
-    echo "# KB Health"
-    echo ""
-    echo "> Generated by \`scripts/daily-lint.sh\` on $(date +'%F %H:%M') — **${badge}**"
-    echo ""
-    echo "| Metric | Value | Ceiling | Status |"
-    echo "|---|---|---|---|"
-    echo "| Pages | ${PAGES} | — | — |"
-    echo "| Contradictions | ${CONTRA} | 0 | $([ "$CONTRA" -gt 0 ] && echo '🔴 over' || echo '🟢 ok') |"
-    echo "| Orphans | ${ORPHANS} (Δ${ODELTA}) | ${ORPHAN_MAX} | $([ "$ORPHANS" -gt "$ORPHAN_MAX" ] && echo '🔴 over' || echo '🟢 ok') |"
-    echo "| Stale | ${STALE} (${STALE_PCT}%) | ${STALE_PCT_MAX}% | $([ "$STALE_PCT" -gt "$STALE_PCT_MAX" ] && echo '🔴 over' || echo '🟢 ok') |"
-    echo "| Gaps | ${GAPS} | — | — |"
-    echo ""
-    echo "**Analysis coverage:** ${EXAMINED}/${PAGES} pages (${COVER_PCT}%) this run, cursor at ${CURSOR}."
-    echo "The window rotates each run, so contradiction and gap findings reflect a"
-    echo "rolling sample rather than a full-vault sweep — a \`0\` here means \"none in"
-    echo "this window\", not \"none in the vault\"."
-    echo ""
-    [ "$DEGRADED" = "true" ] && { echo "> ⚠️ Degraded run: \`${REASON}\`"; echo "> Contradiction and gap counts are stale carry-over from the last good run."; echo ""; }
-    echo "See [lint-report.md](../lint-report.md) for page-level triage,"
-    echo "[lint-trend.csv](../lint-trend.csv) for the full history, and"
-    # Not decoration: this page is generated into the vault, so without an
-    # inbound link it lands in the very orphan count this file reports on.
-    echo "[lint-alerts.md](./lint-alerts.md) for the alert log."
-  } > "${REPO}/${HEALTH}"
-}
-write_health
-
-# --- 6. durable alert history ----------------------------------------------
-# logs/lint-alerts.log is gitignored and machine-local, so every alert this job
-# has ever raised was invisible from anywhere but this Mac. Roll the recent
-# window into a tracked page. Weekly (Mondays) plus any day that raised an
-# alert — daily would churn a file whose content rarely changes.
-rollup_alerts() {
-  [ -f "${REPO}/logs/lint-alerts.log" ] || return 0
+# Alert log rollup only on a day that actually raised something.
+if [ "$NONDEG" -gt 0 ] || [ "$DEGACT" -gt 0 ]; then
   {
     echo "# Lint Alert History"
     echo ""
-    echo "> Rolled up from \`logs/lint-alerts.log\` (gitignored, machine-local) on $(date +'%F %H:%M')."
-    echo "> Most recent 40 alerts, newest last."
+    echo "> Rolled up from \`logs/lint-alerts.log\` (gitignored, machine-local). Most recent 40 alerts, newest last."
     echo ""
     echo '```'
     tail -40 "${REPO}/logs/lint-alerts.log"
     echo '```'
   } > "${REPO}/${ALERTDOC}"
-}
-if [ "$(date +%u)" = "1" ] || [ "$status" -ne 0 ]; then
-  rollup_alerts
 fi
 
-# --- 7. commit --------------------------------------------------------------
-# Separate commits, most-substantive first. The trap pushes them as one batch.
-DSTAMP="$(date +%F)"
+# --- 6. commit (meaningful changes only) ------------------------------------
+if [ "$REMEDIATED_N" -gt 0 ]; then
+  REM_FILES=$(jq -r '(.modified + .created)[]' "$REMEDIATION" 2>/dev/null)
+  # shellcheck disable=SC2086
+  commit_paths "docs(kb): connect ${REMEDIATED_N} page(s) into navigation, rebuild CI/escalation hubs (orphans ${B_ORPH}->${ORPHANS}, broken links ${B_BROKEN}->${BROKEN})" $REM_FILES
+fi
+commit_file "$QUALITY" "docs(kb-quality): knowledge-quality findings ${DSTAMP} — ${BROKEN} broken links, ${PGAPS} project gaps"
 if [ "$DEGRADED" = "true" ]; then
   commit_file "$REPORT" "chore(lint): wiki report ${DSTAMP} — DEGRADED, ${PAGES} pages, ${ORPHANS} orphans, ${STALE} stale"
 else
   commit_file "$REPORT" "chore(lint): wiki report ${DSTAMP} — ${PAGES} pages, ${CONTRA} contradictions, ${ORPHANS} orphans, ${STALE} stale"
 fi
-commit_file "$TREND"  "chore(lint): trend row ${DSTAMP} — orphans ${ORPHANS} (Δ${ODELTA}), stale ${STALE_PCT}%"
-commit_file "$HEALTH" "docs(kb-health): scorecard ${DSTAMP} — status ${status}, coverage ${COVER_PCT}%"
+commit_file "$TREND" "chore(lint): trend ${DSTAMP} — orphans ${ORPHANS} (Δ${ODELTA}), stale ${STALE_PCT}%"
+commit_paths "docs(kb-health): dashboard ${DSTAMP} — alert state changed" "$HEALTH" "$ALERTSTATE"
 commit_file "$ALERTDOC" "docs(lint): refresh alert history ${DSTAMP}"
-
-MARKER_MSG="chore: daily wiki lint ${DSTAMP} — SKIPPED (all artifacts unchanged)"
 
 exit $status
