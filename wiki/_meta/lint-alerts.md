@@ -1,11 +1,9 @@
 # Lint Alert History
 
-> Rolled up from `logs/lint-alerts.log` (gitignored, machine-local) on 2026-10-10 07:04.
+> Rolled up from `logs/lint-alerts.log` (gitignored, machine-local) on 2026-10-11 07:04.
 > Most recent 40 alerts, newest last.
 
 ```
-2026-09-26T07:04:37-07:00	stale pages at 42% of the vault, over the 40% ceiling
-2026-09-27T07:04:14-07:00	4 open contradiction(s) in the wiki
 2026-09-27T07:04:14-07:00	orphans at 90, over the 80 ceiling
 2026-09-27T07:04:14-07:00	stale pages at 42% of the vault, over the 40% ceiling
 2026-09-28T07:19:51-07:00	4 open contradiction(s) in the wiki
@@ -44,4 +42,6 @@
 2026-10-09T07:19:34-07:00	stale pages at 44% of the vault, over the 40% ceiling
 2026-10-10T07:04:11-07:00	orphans at 96, over the 80 ceiling
 2026-10-10T07:04:11-07:00	stale pages at 44% of the vault, over the 40% ceiling
+2026-10-11T07:04:24-07:00	orphans at 96, over the 80 ceiling
+2026-10-11T07:04:24-07:00	stale pages at 44% of the vault, over the 40% ceiling
 ```
