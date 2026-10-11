@@ -1,0 +1,29 @@
+{
+  "findings": {
+    "stale_pct": {
+      "status": "NEW",
+      "value": 43,
+      "threshold": 40,
+      "label": "Stale pages (% of vault)",
+      "firstSeen": "2026-10-11",
+      "lastChanged": "2026-10-11"
+    },
+    "broken_links": {
+      "status": "NEW",
+      "value": 37,
+      "threshold": 0,
+      "label": "Broken cross-references",
+      "firstSeen": "2026-10-11",
+      "lastChanged": "2026-10-11"
+    },
+    "project_gaps": {
+      "status": "NEW",
+      "value": 8,
+      "threshold": 0,
+      "label": "Active-project documentation gaps",
+      "firstSeen": "2026-10-11",
+      "lastChanged": "2026-10-11"
+    }
+  },
+  "blocked": {}
+}
