@@ -115,3 +115,7 @@ Raw source files (PDFs, audio transcripts) land in `raw/` subdirectories:
 - [[home]] — Visual front door
 - [[index]] — Master catalog
 - [[concepts/agent-vault]] — Vault-as-agent-memory architecture
+
+## Additional pages
+
+- [[recipes/obsidian-smart-vault-setup]] — automated capture-to-insight vault setup

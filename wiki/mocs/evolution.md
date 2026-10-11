@@ -113,3 +113,7 @@ Where the KB is headed:
 - [[personal/hermes-operating-context]] — Current priority stack and open blockers
 - [[knowledge-systems/research-engine/methodology/ontology-lite|Ontology-Lite]] — Graph DB migration path
 - [[concepts/rlm-pipeline]] — Semantic search architecture
+
+## Additional pages
+
+- [[mocs/personal-notes]] — personal strategy and role notes

@@ -128,3 +128,17 @@ The KB is also optimized as a context source for Claude. Key principles (detaile
 - [[log]] — Append-only audit trail
 - [[syntheses/lint-2026-04-12]] — Most recent lint report
 - [[concepts/pin-lock-system]] — PIN-protected private layer for sensitive content
+
+## Additional pages
+
+- [[_meta/kb-health]] — daily health scorecard
+- [[_meta/kb-quality]] — knowledge-quality checks beyond orphan/stale counts
+- [[_meta/proposals]] — Foundry proposals queue
+- [[mocs/nightly-ci-reports]] — index of nightly CI analysis reports
+- [[mocs/bus-escalations]] — index of bus escalations
+- [[syntheses/synthesis-provenance-freshness-infrastructure]] — provenance tagging and delta tracking behind the freshness policy
+- [[syntheses/lint-2026-04-18]] — historical lint snapshot
+- [[system/reports/static-lint-2026-04-25]] — static lint report
+- [[system/reports/tier-leak-audit-2026-04-25]] — tier read-leak audit
+- [[system/reports/tier-leak-audit-2026-04-26]] — tier read-leak audit
+- [[agents/leads/sofie/weekly-digest]] — Sofie KB digest

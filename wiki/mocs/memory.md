@@ -115,3 +115,9 @@ See [[system/policies/freshness-policy]] and [[system/policies/source-trust-poli
 - [[summaries/summary-nate-herk-llm-wiki]] — 95% token reduction vs RAG; [[pattern-hot-cache]] pattern
 - [[summaries/agentic-kb-rlm-pipeline]] — RLM pipeline stages and implementation status
 - [[summaries/vault-3tier-architecture]] — Jay's production vault: tier-scoped memory and inter-tier bus
+
+## Additional pages
+
+- [[concepts/compile-once-knowledge]] — compile once, query many: the LLM-wiki memory model
+- [[concepts/factory-memory-context-intelligence]] — how the software factory remembers and retrieves context
+- [[summaries/summary-langchain-rag-from-scratch]] — RAG fundamentals: indexing, retrieval, generation

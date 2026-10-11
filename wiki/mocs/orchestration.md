@@ -104,3 +104,15 @@ updated: 2026-04-10
 
 - [[personal/personal-jays-framework-philosophy]] — Three-framework selection system with decision tree
 - [[personal/personal-agent-design-observations]] — 10 observed patterns across 32 agent definitions
+
+## Additional pages
+
+- [[concepts/agentic-engineering-stack]] — the layered agentic engineering stack
+- [[entities/gsd-ui-checker]] — GSD agent that verifies UI work
+- [[summaries/summary-gsd-project-researcher]] — GSD project-researcher role definition
+- [[summaries/summary-hwchase17-managed-agents-thesis]] — why managed agents are the next shift
+- [[recipes/five-agent-business-ops]] — a five-agent business operations setup
+- [[syntheses/synthesis-repo-aware-system-implementation]] — repo-aware knowledge and agent memory, as built
+- [[personal/jay-software-factory-tiered-ux]] — tiered UX for the software factory / MissionControl
+- [[personal/book-to-interactive-ip-platform]] — a vertical built on MissionControl
+- [[agents/leads/planning-agent/domain-standards]] — planning agent domain standards

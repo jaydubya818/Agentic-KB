@@ -122,3 +122,9 @@ See: [[patterns/pattern-external-memory]] · [[patterns/pattern-rolling-summary]
 - [[frameworks/framework-claude-code]] — [[framework-claude-code]] reference
 - [[frameworks/framework-mcp]] — [[mcp-ecosystem]] reference
 - [[mocs/advanced-techniques|Advanced Techniques]] — Vault-as-context engineering
+
+## Additional pages
+
+- [[concepts/html-as-agent-output-format]] — HTML as an agent output format
+- [[entities/hermes-agent]] — Hermes agent profile
+- [[summaries/summary-fable-prompting-tutorial-linkedin]] — prompting tutorial summary

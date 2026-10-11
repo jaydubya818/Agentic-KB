@@ -134,3 +134,11 @@ QUERY workflow: for questions against existing KB content, run [[CLAUDE.md#QUERY
 - [[concepts/query-pipeline]] — Wiki retrieval pipeline architecture
 - [[concepts/daily-note-template]] — Daily capture template (Obsidian)
 - [[patterns/pattern-anchored-iterative-summarization]] — Iterative summarization anchored on a stable thesis
+
+## Additional pages
+
+- [[concepts/capture-pipeline]] — capture to wiki via foundry-capture
+- [[patterns/pattern-raw-inbox-workflow]] — how raw inbox material becomes pages
+- [[patterns/pattern-incremental-compile-pipeline]] — compiling only what changed
+- [[patterns/pattern-morning-review]] — the daily review pipeline
+- [[recipes/readwise-to-wikiwise-ingest]] — ingesting Readwise highlights

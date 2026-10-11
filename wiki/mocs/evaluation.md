@@ -100,3 +100,9 @@ The V2 runtime uses promotion scoring as an inline evaluation mechanism:
 > before its claims can be relied on.
 
 - [[concepts/outcome-metrics]] — Outcome Metrics _(generated draft, unreviewed)_
+
+## Additional pages
+
+- [[personal/code-review-architecture-at-scale]] — code review architecture for agentic systems
+- [[concepts/frontend-code-review-skill]] — frontend code review skill
+- [[patterns/pattern-playwright-e2e]] — Playwright end-to-end testing pattern
