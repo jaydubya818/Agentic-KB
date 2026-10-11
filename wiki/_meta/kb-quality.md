@@ -12,7 +12,7 @@ updated: 2026-10-11
 
 | Check | Count |
 |---|---|
-| Broken cross-references | 162 |
+| Broken cross-references | 37 |
 | Duplicate / overlapping topics | 30 |
 | Decisions nothing references | 0 |
 | Agent instruction pages >2× past cadence | 21 |
@@ -24,30 +24,30 @@ updated: 2026-10-11
 
 | Project | Own pages | Mentions | Home page | Concept links | Gaps |
 |---|---|---|---|---|---|
-| MyFactory | 12 | 62 | no | 42 | no home/overview page; heavily mentioned elsewhere but thinly documented |
-| MyEve | 0 | 6 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
-| Relay | 0 | 11 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
-| MissionControl | 132 | 308 | yes | 17 | — |
-| FDLC | 0 | 13 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
+| MyFactory | 12 | 64 | no | 42 | no home/overview page; heavily mentioned elsewhere but thinly documented |
+| MyEve | 0 | 7 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
+| Relay | 0 | 12 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
+| MissionControl | 132 | 310 | yes | 17 | — |
+| FDLC | 0 | 14 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
 
 ## Broken cross-references (active projects first)
 
 - `frameworks/super-simple-software-factory.md` → `gsd-executor`
 - `repos/MissionControl/repo-docs/docs/changelog/ALL_PHASES_COMPLETE.md` → `../packages/telegram-bot/DEPLOY.md`
 - `repos/MissionControl/repo-docs/docs/guides/DEPLOY_NOW.md` → `packages/telegram-bot/DEPLOY.md`
-- `_meta/proposals.md` → `18-month-horizon`
-- `_meta/proposals.md` → `acceptance-criteria`
-- `_meta/proposals.md` → `adr-format`
-- `_meta/proposals.md` → `atomic-commits`
-- `_meta/proposals.md` → `atomic-tasks`
-- `_meta/proposals.md` → `attacker-mindset`
-- `_meta/proposals.md` → `automated-scan-commands`
-- `_meta/proposals.md` → `autonomous-deviation`
-- `_meta/proposals.md` → `behavioral-spot-checks`
-- `_meta/proposals.md` → `boring-technology`
-- `_meta/proposals.md` → `browser-mcp`
-- `_meta/proposals.md` → `cognitive-bias-avoidance`
-- …and 147 more
+- `concepts/agent-loops.md` → `claude-code`
+- `concepts/tool-design.md` → `../tags/mcp.md`
+- `concepts/tool-use-verify.md` → `../patterns/pattern-tool-design.md`
+- `entities/jay-west-agent-stack.md` → `frameworks/framework-gstack\`
+- `entities/jay-west-agent-stack.md` → `frameworks/framework-gstack`
+- `frameworks/framework-inspect-ai.md` → `framework-langchain`
+- `frameworks/framework-langsmith.md` → `framework-langchain`
+- `frameworks/web-interface-guidelines.md` → `../entities/vercel.md`
+- `frameworks/web-interface-guidelines.md` → `../concepts/webfetch.md`
+- `frameworks/web-interface-guidelines.md` → `../patterns/pattern-file-line-output-format.md`
+- `patterns/pattern-raw-inbox-workflow.md` → `../concepts/source-material.md`
+- `prompt-library/thinking-tools.md` → `patterns/pattern-task-decomposition`
+- …and 22 more
 
 ## Possible duplicates
 
