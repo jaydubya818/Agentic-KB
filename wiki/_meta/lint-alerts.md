@@ -3,7 +3,6 @@
 > Rolled up from `logs/lint-alerts.log` (gitignored, machine-local). Most recent 40 alerts, newest last.
 
 ```
-2026-09-28T07:19:51-07:00	orphans at 90, over the 80 ceiling
 2026-09-28T07:19:51-07:00	stale pages at 42% of the vault, over the 40% ceiling
 2026-09-29T08:49:12-07:00	4 open contradiction(s) in the wiki
 2026-09-29T08:49:12-07:00	orphans at 90, over the 80 ceiling
@@ -43,4 +42,5 @@
 2026-10-11T12:02:02-07:00	NEW Stale pages (% of vault): 43 (threshold 40, was n/a)
 2026-10-11T12:02:02-07:00	NEW Broken cross-references: 37 (threshold 0, was n/a)
 2026-10-11T12:02:02-07:00	NEW Active-project documentation gaps: 8 (threshold 0, was n/a)
+2026-10-11T12:02:55-07:00	WORSENING Stale pages (% of vault): 44 (threshold 40, was 43)
 ```
