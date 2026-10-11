@@ -93,7 +93,9 @@ export function brokenLinks(pages, root) {
   const keys = buildKeyIndex(pages)
   const out = []
   for (const p of pages) {
-    if (/^(_private|archive|_quarantine)\//.test(p.relPath)) continue
+    // _meta/proposals.md lists proposed pages that do not exist yet: its red
+    // links are the proposals themselves, not breakage.
+    if (/^(_private|archive|_quarantine)\//.test(p.relPath) || p.relPath === '_meta/proposals.md') continue
     for (const raw of new Set(p.cleanLinks)) {
       const r = resolveLink(raw, keys)
       if (r.skip || r.targets.length) continue
