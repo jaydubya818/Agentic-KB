@@ -61,6 +61,7 @@ logs/lint-state.json
 logs/lint-alerts.log
 logs/lint-runs.jsonl
 logs/last-remediation.json
+logs/web-build.log
 .env.bak*
 
 # notes-to-factory per-run machine state — regenerated each run, can echo note content

@@ -170,7 +170,36 @@ fail() {
 q() { node "${REPO}/scripts/kb-quality.mjs" --json 2>/dev/null || echo '{}'; }
 qf() { echo "$1" | jq -r "${2} // ${3}" 2>/dev/null || echo "$3"; }
 
-# --- 1. ensure the dev server is up -----------------------------------------
+# --- 1. ensure the dev server is up (and running the current lint code) ------
+# A long-lived `next dev` keeps the lib/ modules it first loaded. After
+# lib/wiki-lint.mjs or the lint route change, it would keep reporting numbers
+# from the OLD logic (observed 2026-10-11: 410 stale vs 219 under the new
+# policy). Restart it when those files are newer than the process.
+#
+# On this machine :3002 is a launchd-managed PRODUCTION server (`next start`,
+# com.jaywest.agentic-kb-web, KeepAlive) serving a prebuilt web/.next. It never
+# hot-reloads, so lint code changes only take effect after a rebuild + restart.
+server_pid() { lsof -ti "tcp:${PORT}" -sTCP:LISTEN 2>/dev/null | head -1; }
+build_is_stale() {
+  [ -f web/.next/BUILD_ID ] || return 1   # no production build: dev-server path
+  local built newest
+  built="$(stat -f %m web/.next/BUILD_ID 2>/dev/null)" || return 1
+  newest="$(stat -f %m lib/wiki-lint.mjs lib/freshness-policy.mjs web/src/app/api/lint/route.ts 2>/dev/null | sort -n | tail -1)"
+  [ -n "$newest" ] && [ "$newest" -gt "$built" ]
+}
+if build_is_stale; then
+  echo "web build predates lint code changes — rebuilding"
+  ( cd "${REPO}/web" && npm run build >> "${REPO}/logs/web-build.log" 2>&1 ) \
+    || fail "web build failed (see logs/web-build.log)" "web build failed"
+  if [ -n "$(server_pid)" ]; then
+    kill "$(server_pid)" 2>/dev/null || true   # launchd KeepAlive restarts it on the new build
+    for _ in $(seq 1 20); do
+      sleep 3
+      [ "$(http_code "${BASE}/api/pending-count")" = "200" ] && break
+    done
+  fi
+fi
+
 if [ "$(http_code "${BASE}/api/pending-count")" != "200" ]; then
   echo "server down, starting..."
   ( cd "${REPO}/web" && nohup npm run dev > "$LOG" 2>&1 < /dev/null & disown ) || true
