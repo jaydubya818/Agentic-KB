@@ -1,32 +1,19 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-11 14:04 | Vault: Agentic-KB | Pages scanned: 928
+> Generated: 2026-10-11 19:02 | Vault: Agentic-KB | Pages scanned: 933
 
 ## Summary
 
 | Check | Count | Δ vs last run | Severity |
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
-| Orphaned pages | 96 | ±0 | 🟡 Medium |
+| Orphaned pages | 1 | -95 | 🟢 Clear |
 | Stale pages | 410 | ±0 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 928 pages (6%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 933 pages (6%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
-
-**Substantial pages nothing links to** (≥100 words, largest first) — link these from a hub page or archive them:
-
-1. `_meta/proposals.md` — Foundry Proposals (7415 words)
-1. `syntheses/synthesis-repo-aware-system-implementation.md` — Repo-Aware Knowledge & Agent Memory System — Implementation Summary (1679 words)
-1. `reports/2026-08-28-nightly-ci-analysis-backfill.md` — 2026-08-28-nightly-ci-analysis-backfill (1025 words)
-1. `reports/2026-08-18-nightly-ci-analysis.md` — 2026-08-18-nightly-ci-analysis (906 words)
-1. `syntheses/lint-2026-04-18.md` — Lint Report — 2026-04-18 (897 words)
-1. `reports/2026-08-29-nightly-ci-analysis.md` — 2026-08-29-nightly-ci-analysis (867 words)
-1. `personal/code-review-architecture-at-scale.md` — Code Review Architecture for Agentic Systems at Enterprise Scale (775 words)
-1. `reports/2026-09-11-nightly-ci-analysis.md` — 2026-09-11-nightly-ci-analysis (708 words)
-1. `reports/2026-08-21-nightly-ci-analysis.md` — 2026-08-21-nightly-ci-analysis (707 words)
-1. `reports/2026-08-17-nightly-ci-analysis.md` — 2026-08-17-nightly-ci-analysis (684 words)
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
@@ -43,102 +30,7 @@
 
 ## 🟡 Orphaned Pages (no inbound links)
 
-- `_meta/kb-health.md` — kb-health
-- `_meta/proposals.md` — Foundry Proposals
 - `_quarantine/wiki-wiki-stray-log-20260606.md` — Compile Log
-- `agents/leads/planning-agent/domain-standards.md` — Planning Agent — Domain Standards
-- `agents/leads/sofie/weekly-digest.md` — KB Digest — 2026-04-10
-- `concepts/agentic-engineering-stack.md` — Agentic AI Engineering Stack
-- `concepts/capture-pipeline.md` — Capture Pipeline (foundry-capture)
-- `concepts/compile-once-knowledge.md` — Compile-Once Knowledge (LLM Wiki Pattern)
-- `concepts/factory-memory-context-intelligence.md` — Factory Memory & Context Intelligence
-- `concepts/frontend-code-review-skill.md` — Frontend Code Review Skill
-- `concepts/frontend-testing.md` — Frontend Testing with Vitest & React Testing Library
-- `concepts/html-as-agent-output-format.md` — HTML as an Agent Output Format
-- `concepts/mysql-innodb-best-practices.md` — MySQL / InnoDB Best Practices
-- `concepts/postgresql-operations.md` — PostgreSQL Operations Reference
-- `concepts/react-nextjs-performance.md` — React & Next.js Performance Optimization
-- `concepts/solo-founder-ai-leverage.md` — Solo Founder AI Leverage
-- `entities/gsd-ui-checker.md` — GSD UI Checker
-- `entities/hermes-agent.md` — Hermes Agent
-- `entities/seller-fi.md` — SellerFi
-- `frameworks/headroom.md` — Headroom
-- `frameworks/openconnector.md` — OpenConnector (OOMOL)
-- `patterns/pattern-incremental-compile-pipeline.md` — Incremental Compile Pipeline
-- `patterns/pattern-morning-review.md` — Morning-Review Pipeline
-- `patterns/pattern-playwright-e2e.md` — Playwright E2E Testing Pattern
-- `patterns/pattern-raw-inbox-workflow.md` — Raw Inbox Workflow
-- `patterns/pattern-react-component-refactoring.md` — React Component Refactoring
-- `personal/agentic-coding-implementation-patterns.md` — Agentic Coding Implementation Patterns (Model Router, Tool Registry, Bounded Agent Loop)
-- `personal/book-to-interactive-ip-platform.md` — Book to Interactive IP Platform — Vertical on Mission Control
-- `personal/code-review-architecture-at-scale.md` — Code Review Architecture for Agentic Systems at Enterprise Scale
-- `personal/databricks-workspace-platform-role.md` — Databricks Workspace Platform Role — Strategy & Vision Notes
-- `personal/jay-software-factory-tiered-ux.md` — Jay: Tiered UX for Software Factory / Mission Control
-- `personal/workday-sem-opportunity.md` — Workday Agent Platform SEM Role — Opportunity Notes
-- `recipes/five-agent-business-ops.md` — Five-Agent Business Operations System
-- `recipes/obsidian-smart-vault-setup.md` — Obsidian Smart Vault: Automated Capture-to-Insight Pipeline
-- `recipes/readwise-to-wikiwise-ingest.md` — Readwise Reader → Wikiwise Ingest
-- `recipes/recipe-prd-generator.md` — PRD Generator Skill
-- `reports/2026-06-18-nightly-ci-analysis.md` — 2026-06-18-nightly-ci-analysis
-- `reports/2026-07-02-nightly-ci-analysis.md` — 2026-07-02-nightly-ci-analysis
-- `reports/2026-07-07-nightly-ci-analysis.md` — 2026-07-07-nightly-ci-analysis
-- `reports/2026-07-08-nightly-ci-analysis.md` — 2026-07-08-nightly-ci-analysis
-- `reports/2026-07-09-nightly-ci-analysis.md` — 2026-07-09-nightly-ci-analysis
-- `reports/2026-07-10-nightly-ci-analysis.md` — 2026-07-10-nightly-ci-analysis
-- `reports/2026-07-23-nightly-ci-analysis.md` — 2026-07-23-nightly-ci-analysis
-- `reports/2026-07-30-nightly-ci-analysis.md` — 2026-07-30-nightly-ci-analysis
-- `reports/2026-07-31-nightly-ci-analysis.md` — 2026-07-31-nightly-ci-analysis
-- `reports/2026-08-03-nightly-ci-analysis.md` — 2026-08-03-nightly-ci-analysis
-- `reports/2026-08-04-nightly-ci-analysis.md` — 2026-08-04-nightly-ci-analysis
-- `reports/2026-08-05-nightly-ci-analysis.md` — 2026-08-05-nightly-ci-analysis
-- `reports/2026-08-06-nightly-ci-analysis.md` — 2026-08-06-nightly-ci-analysis
-- `reports/2026-08-07-nightly-ci-analysis.md` — 2026-08-07-nightly-ci-analysis
-- `reports/2026-08-10-nightly-ci-analysis.md` — 2026-08-10-nightly-ci-analysis
-- `reports/2026-08-11-nightly-ci-analysis.md` — 2026-08-11-nightly-ci-analysis
-- `reports/2026-08-12-nightly-ci-analysis.md` — 2026-08-12-nightly-ci-analysis
-- `reports/2026-08-13-nightly-ci-analysis.md` — 2026-08-13-nightly-ci-analysis
-- `reports/2026-08-14-nightly-ci-analysis.md` — 2026-08-14-nightly-ci-analysis
-- `reports/2026-08-17-nightly-ci-analysis.md` — 2026-08-17-nightly-ci-analysis
-- `reports/2026-08-18-nightly-ci-analysis.md` — 2026-08-18-nightly-ci-analysis
-- `reports/2026-08-19-nightly-ci-analysis.md` — 2026-08-19-nightly-ci-analysis
-- `reports/2026-08-21-nightly-ci-analysis.md` — 2026-08-21-nightly-ci-analysis
-- `reports/2026-08-22-nightly-ci-analysis.md` — 2026-08-22-nightly-ci-analysis
-- `reports/2026-08-28-nightly-ci-analysis-backfill.md` — 2026-08-28-nightly-ci-analysis-backfill
-- `reports/2026-08-29-nightly-ci-analysis.md` — 2026-08-29-nightly-ci-analysis
-- `reports/2026-09-11-nightly-ci-analysis.md` — 2026-09-11-nightly-ci-analysis
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-02-001.md` — [escalation] HEARTBEAT (substitute for state/nightly-ci/last-run.json — git unavailable)
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-03-001.md` — [escalation] nightly-ci-analysis run for 2026-09-03 ABORTED at preflight §1a (sandbox livenes
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-04-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-04 (UTC)
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-08-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-08 (UTC). Sandbox failed to provision — `use
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-09-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-09 (Track A: sandbox unavailable)
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-10-001.md` — [escalation] nightly-ci-analysis run ABORTED on 2026-09-10 (Track A — sandbox unavailable).
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-11-001.md` — [escalation] nightly-ci-analysis run for 2026-09-11 ABORTED before preflight completed.
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-14-001.md` — [escalation] nightly-ci-analysis run aborted 2026-09-14 (UTC). Sandbox failed to provision — 
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-15-001.md` — [escalation] ## Nightly CI Analysis — ABORTED — 2026-09-15 (UTC)
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-16-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-16 (UTC)
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-17-001.md` — [escalation] ABORTED 2026-09-17T (UTC, exact time unavailable — no bash/date access).
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-18-001.md` — [escalation] nightly-ci-analysis run 2026-09-18: ABORTED (Track A — sandbox unavailable).
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-21-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-21T00:00:00Z. Sandbox unavailable: bash fail
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-22-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-22 — sandbox failed to provision (useradd: c
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-23-001.md` — [escalation] nightly-ci-analysis ABORTED 2026-09-23T (sandbox provisioning failure, Track A).
-- `repos/agentic-kb/bus/escalation/escalation-2026-09-24-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-09-24 (UTC)
-- `repos/agentic-kb/bus/escalation/escalation-2026-10-01-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-10-01 (UTC)
-- `repos/agentic-kb/bus/escalation/escalation-2026-10-04-001.md` — [escalation] ## nightly-ci-analysis ABORTED — 2026-10-04 (UTC)
-- `repos/agentic-kb/bus/escalation/escalation-2026-10-06-001.md` — [escalation] Title: nightly-ci-analysis aborted — Track C (session GitHub access gated) — 202
-- `repos/agentic-kb/bus/escalation/escalation-2026-10-07-001.md` — [escalation] title: nightly-ci-analysis aborted 2026-10-07 — GitHub session access gate (Trac
-- `repos/agentic-kb/bus/escalation/escalation-2026-10-08-001.md` — [escalation] title: Nightly CI analysis aborted — session-level GitHub access gate (Track C)
-- `repos/agentic-kb/bus/escalation/escalation-2026-10-09-001.md` — [escalation] ---
-- `summaries/summary-fable-prompting-tutorial-linkedin.md` — Summary: Fable Prompting Tutorial (LinkedIn thread, Eduardo Ordax)
-- `summaries/summary-garrytan-meta-meta-prompting.md` — Meta-Meta-Prompting: The Secret to Making AI Agents Work
-- `summaries/summary-gsd-project-researcher.md` — GSD Project Researcher Agent — Role Definition
-- `summaries/summary-hwchase17-managed-agents-thesis.md` — Summary: Why Managed Agents Are the Next Big Thing in Agent Building
-- `summaries/summary-langchain-rag-from-scratch.md` — RAG From Scratch (LangChain AI)
-- `syntheses/lint-2026-04-18.md` — Lint Report — 2026-04-18
-- `syntheses/synthesis-provenance-freshness-infrastructure.md` — Delta Tracking and Provenance Tagging Operationalize the Freshness Policy
-- `syntheses/synthesis-repo-aware-system-implementation.md` — Repo-Aware Knowledge & Agent Memory System — Implementation Summary
-- `system/reports/static-lint-2026-04-25.md` — Static Wiki Lint — 2026-04-25
-- `system/reports/tier-leak-audit-2026-04-25.md` — Tier Read-Leak Audit — 2026-04-25
-- `system/reports/tier-leak-audit-2026-04-26.md` — Tier Read-Leak Audit — 2026-04-26
 
 ## 🟡 Stale Pages (past their review cadence; default 30 days)
 
