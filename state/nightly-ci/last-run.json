@@ -1,17 +1,17 @@
 {
-  "date": "2026-09-11",
-  "finished_at": "2026-09-11T19:17:12Z",
-  "status": "partial",
+  "date": "2026-10-12",
+  "finished_at": "2026-10-12T13:06:08Z",
+  "status": "ok",
   "repos_checked": [
     "sellerfi",
     "missioncontrol",
     "twinz"
   ],
-  "runs_total": 20,
-  "passed": 15,
-  "failed": 5,
+  "runs_total": 10,
+  "passed": 8,
+  "failed": 2,
   "in_progress": 0,
   "prs_opened": 0,
-  "report_only": 5,
-  "note": "Sandbox (mcp__workspace__bash) failed to provision 3/3 identically (useradd exit 12) - same failure logged 2026-08-20, 08-26, 09-02, 09-03, 09-04, 09-08, 09-09, 09-10, 09-11 (this run). No curl/git/python3 available. Completed via browser fallback: Claude-in-Chrome against github.com Actions UI per repo (created>=2026-09-09 window), no log-grep fingerprinting, no duration tracking, no auto-fix PRs attempted (needs git clone+push+actionlint). This is also the first real update to this file since 2026-08-29 (13-day gap) - daily 'aborted' escalations were being filed to wiki/repos/Agentic-KB/bus/escalation/ and autocommitted by the separate notes-to-factory pipeline, but never touched this heartbeat or wiki/reports/, so the gap was silent."
+  "report_only": 2,
+  "note": "First clean run since 2026-09-11 (31 days stale heartbeat). Track C session-access gate (403 'not enabled for this session' seen 2026-09-28 through at least 2026-10-09) did not recur today - all preflight repo reads returned 200 and the KB push succeeded."
 }

@@ -1,109 +1,133 @@
 {
-  "4a7e8e5e": {
+  "2d5a5d9e": {
+    "branches": [
+      "codex/unified-beta-missioncontrol-20261011"
+    ],
+    "count": 1,
+    "error": "Convex authorization ratchet: ERROR \u2014 Base commit 0000000000000000000000000000000000000000 is unavailable (scripts/check-convex-authorization.mjs)",
+    "first_seen": "2026-10-12",
+    "last_seen": "2026-10-12",
+    "repo": "missioncontrol",
+    "status": "open",
+    "workflow": "CI \u2014 Mission Control"
+  },
+  "37d1af29": {
+    "branches": [
+      "main"
+    ],
+    "category": "permissions/config",
+    "count": 1,
+    "error": "Error! Could not retrieve Project Settings. To link your Project, remove the .vercel directory and deploy again.",
+    "first_seen": "2026-08-23",
+    "last_seen": "2026-08-23",
+    "note": "Vercel project linkage/credentials. Same root as 4a7e8e5e (VERCEL_TOKEN invalidToken 8/21-8/22). Cascaded: failed deploy -> Post-Deploy Smoke 'Homepage loads correctly' failed at 19:36. RESOLVED - Vercel Environment Check green 8/24-8/28.",
+    "pr": null,
     "repo": "SellerFi",
-    "workflow": "Vercel Environment Check",
+    "status": "fixed",
+    "workflow": "Production CI/CD Pipeline"
+  },
+  "4a7e8e5e": {
+    "branches": [
+      "main"
+    ],
+    "category": "permissions/config",
+    "count": 2,
     "error": "{\"error\":{\"code\":\"forbidden\",\"message\":\"Not authorized\",\"invalidToken\":true}}",
     "first_seen": "2026-08-21",
     "last_seen": "2026-08-22",
-    "count": 2,
+    "note": "VERCEL_TOKEN secret rejected by Vercel API (403, invalidToken). RESOLVED: 'Vercel Environment Check' passed on main 2026-08-28T12:53:56Z (23s). Token appears to have been rotated. No action needed.",
+    "pr": null,
+    "repo": "SellerFi",
+    "resolved_on": "2026-08-29",
+    "status": "fixed",
+    "workflow": "Vercel Environment Check"
+  },
+  "6ad700bc": {
     "branches": [
       "main"
     ],
-    "status": "fixed",
-    "pr": null,
-    "category": "permissions/config",
-    "note": "VERCEL_TOKEN secret rejected by Vercel API (403, invalidToken). RESOLVED: 'Vercel Environment Check' passed on main 2026-08-28T12:53:56Z (23s). Token appears to have been rotated. No action needed.",
-    "resolved_on": "2026-08-29"
-  },
-  "e90110b2": {
-    "repo": "twinz",
-    "workflow": "Auto Version Bump",
-    "error": "remote: Write access to repository not granted. / fatal: ... error: 403",
-    "first_seen": "2026-05-28",
-    "last_seen": "2026-08-22",
-    "count": 2,
-    "branches": [
-      "master"
-    ],
-    "status": "pr_open",
-    "pr": "https://github.com/jaydubya818/twinz/pull/7",
-    "category": "permissions/config",
-    "note": "version-bump.yml declares no permissions: block, so GITHUB_TOKEN is read-only and 'git push origin master' 403s. Fix ALREADY WRITTEN in PR #7 (open since 2026-05-20, unreviewed 101 days). Failure recurred 2026-08-22 BECAUSE #7 was never merged. Out of 24h window (twinz dormant since 2026-08-22) - surfaced via unfiltered check. No new PR opened: \u00a75 dedupe = open PR -> skip."
-  },
-  "9172abb4": {
-    "repo": "SellerFi",
-    "workflow": "Auto Version Bump",
-    "error": "remote: error: GH013: Repository rule violations found for refs/heads/main. push declined due to repository rule violations",
+    "category": "flaky test",
+    "count": 1,
+    "error": "E2E Full Chromium: 6 flaky, 493 passed (2.1h)",
     "first_seen": "2026-08-23",
     "last_seen": "2026-08-23",
-    "count": 1,
-    "branches": [
-      "main"
-    ],
-    "status": "open",
+    "note": "6 flaky across auth-session-continuity, seller-listing-workflows, deal-close-full-flow, analytics-verified-traffic, entitlements, tier-validation. Flaky = report-only per \u00a75, never auto-fix.",
     "pr": null,
-    "category": "permissions/config",
-    "note": "Ruleset on main blocks the version-bump bot's push. Distinct from twinz e90110b2 (token perms). Tier B: fix is a repo RULESET bypass for the bot actor, not a workflow-file edit. Report-only."
+    "repo": "SellerFi",
+    "status": "open",
+    "workflow": "Production CI/CD Pipeline"
   },
   "7a81dce6": {
-    "repo": "MissionControl",
-    "workflow": "CI \u2014 Mission Control",
-    "error": "Runtime contract guard: FAIL \u2014 Public Convex contracts changed without incrementing RUNTIME_CONTRACT_VERSION (base v33, current v33)",
-    "first_seen": "2026-08-26",
-    "last_seen": "2026-08-27",
-    "count": 2,
     "branches": [
       "codex/software-factory-production-convergence",
       "codex/remove-uncalled-public-actions"
     ],
-    "status": "open",
-    "pr": null,
     "category": "build error",
-    "note": "Guard working as designed. qcRuns:execute, webhooks:deliverPending, workflows:install removed without bumping RUNTIME_CONTRACT_VERSION in convex/lib/runtimeContract.ts. Tier B (source). One-line fix: bump v33 -> v34 on the branch."
+    "count": 2,
+    "error": "Runtime contract guard: FAIL \u2014 Public Convex contracts changed without incrementing RUNTIME_CONTRACT_VERSION (base v33, current v33)",
+    "first_seen": "2026-08-26",
+    "last_seen": "2026-08-27",
+    "note": "Guard working as designed. qcRuns:execute, webhooks:deliverPending, workflows:install removed without bumping RUNTIME_CONTRACT_VERSION in convex/lib/runtimeContract.ts. Tier B (source). One-line fix: bump v33 -> v34 on the branch.",
+    "pr": null,
+    "repo": "MissionControl",
+    "status": "open",
+    "workflow": "CI \u2014 Mission Control"
+  },
+  "9172abb4": {
+    "branches": [
+      "main"
+    ],
+    "category": "permissions/config",
+    "count": 1,
+    "error": "remote: error: GH013: Repository rule violations found for refs/heads/main. push declined due to repository rule violations",
+    "first_seen": "2026-08-23",
+    "last_seen": "2026-08-23",
+    "note": "Ruleset on main blocks the version-bump bot's push. Distinct from twinz e90110b2 (token perms). Tier B: fix is a repo RULESET bypass for the bot actor, not a workflow-file edit. Report-only.",
+    "pr": null,
+    "repo": "SellerFi",
+    "status": "open",
+    "workflow": "Auto Version Bump"
   },
   "9239b89f": {
-    "repo": "MissionControl",
-    "workflow": "CI \u2014 Mission Control",
-    "error": "skill-lint --min-score 80: 3 skills scored 38/100 (validation 40)",
-    "first_seen": "2026-08-26",
-    "last_seen": "2026-08-26",
-    "count": 1,
     "branches": [
       "codex/v1-factory-safety-golden-path-closeout"
     ],
-    "status": "fixed",
-    "pr": null,
     "category": "lint error",
-    "note": "record-memory / request-approval / task-lifecycle scored 38/100. All 10 skills scored 100/100 by 2026-08-27. Self-resolved on-branch; no action needed."
-  },
-  "37d1af29": {
-    "repo": "SellerFi",
-    "workflow": "Production CI/CD Pipeline",
-    "error": "Error! Could not retrieve Project Settings. To link your Project, remove the .vercel directory and deploy again.",
-    "first_seen": "2026-08-23",
-    "last_seen": "2026-08-23",
     "count": 1,
-    "branches": [
-      "main"
-    ],
+    "error": "skill-lint --min-score 80: 3 skills scored 38/100 (validation 40)",
+    "first_seen": "2026-08-26",
+    "last_seen": "2026-08-26",
+    "note": "record-memory / request-approval / task-lifecycle scored 38/100. All 10 skills scored 100/100 by 2026-08-27. Self-resolved on-branch; no action needed.",
+    "pr": null,
+    "repo": "MissionControl",
     "status": "fixed",
-    "pr": null,
-    "category": "permissions/config",
-    "note": "Vercel project linkage/credentials. Same root as 4a7e8e5e (VERCEL_TOKEN invalidToken 8/21-8/22). Cascaded: failed deploy -> Post-Deploy Smoke 'Homepage loads correctly' failed at 19:36. RESOLVED - Vercel Environment Check green 8/24-8/28."
+    "workflow": "CI \u2014 Mission Control"
   },
-  "6ad700bc": {
-    "repo": "SellerFi",
-    "workflow": "Production CI/CD Pipeline",
-    "error": "E2E Full Chromium: 6 flaky, 493 passed (2.1h)",
-    "first_seen": "2026-08-23",
-    "last_seen": "2026-08-23",
-    "count": 1,
+  "e90110b2": {
     "branches": [
-      "main"
+      "master"
     ],
+    "category": "permissions/config",
+    "count": 2,
+    "error": "remote: Write access to repository not granted. / fatal: ... error: 403",
+    "first_seen": "2026-05-28",
+    "last_seen": "2026-08-22",
+    "note": "version-bump.yml declares no permissions: block, so GITHUB_TOKEN is read-only and 'git push origin master' 403s. Fix ALREADY WRITTEN in PR #7 (open since 2026-05-20, unreviewed 101 days). Failure recurred 2026-08-22 BECAUSE #7 was never merged. Out of 24h window (twinz dormant since 2026-08-22) - surfaced via unfiltered check. No new PR opened: \u00a75 dedupe = open PR -> skip.",
+    "pr": "https://github.com/jaydubya818/twinz/pull/7",
+    "repo": "twinz",
+    "status": "pr_open",
+    "workflow": "Auto Version Bump"
+  },
+  "f45172d5": {
+    "branches": [
+      "codex/unified-beta-missioncontrol-20261011"
+    ],
+    "count": 1,
+    "error": "AssertionError: expected +0 to be 1 (factoryAttemptWorker.test.ts: retains the normalized result when Fab exhausts its turn budget)",
+    "first_seen": "2026-10-12",
+    "last_seen": "2026-10-12",
+    "repo": "missioncontrol",
     "status": "open",
-    "pr": null,
-    "category": "flaky test",
-    "note": "6 flaky across auth-session-continuity, seller-listing-workflows, deal-close-full-flow, analytics-verified-traffic, entitlements, tier-validation. Flaky = report-only per \u00a75, never auto-fix."
+    "workflow": "CI \u2014 Mission Control"
   }
 }
