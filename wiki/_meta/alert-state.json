@@ -1,12 +1,12 @@
 {
   "findings": {
     "stale_pct": {
-      "status": "WORSENING",
-      "value": 44,
+      "status": "STANDING",
+      "value": 43,
       "threshold": 40,
       "label": "Stale pages (% of vault)",
       "firstSeen": "2026-10-11",
-      "lastChanged": "2026-10-11"
+      "lastChanged": "2026-10-12"
     },
     "broken_links": {
       "status": "STANDING",
