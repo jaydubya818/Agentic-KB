@@ -3,7 +3,7 @@ title: KB Quality
 type: moc
 category: structure
 tags: [maintenance, quality, generated]
-updated: 2026-10-11
+updated: 2026-10-12
 ---
 
 # KB Quality
@@ -27,7 +27,7 @@ updated: 2026-10-11
 | MyFactory | 12 | 64 | no | 42 | no home/overview page; heavily mentioned elsewhere but thinly documented |
 | MyEve | 0 | 7 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
 | Relay | 0 | 12 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
-| MissionControl | 132 | 310 | yes | 17 | — |
+| MissionControl | 132 | 311 | yes | 17 | — |
 | FDLC | 0 | 14 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
 
 ## Broken cross-references (active projects first)
@@ -70,21 +70,21 @@ updated: 2026-10-11
 
 ## Agent instructions likely obsolete
 
-- `agents/leads/planning-agent/gotchas.md` (185d old)
-- `agents/leads/sofie/hot.md` (184d old)
-- `agents/leads/sofie/profile.md` (184d old)
-- `agents/leads/sofie/task-log.md` (184d old)
-- `agents/orchestrators/architecture-agent/gotchas.md` (185d old)
+- `agents/leads/planning-agent/gotchas.md` (186d old)
+- `agents/leads/sofie/hot.md` (185d old)
+- `agents/leads/sofie/profile.md` (185d old)
+- `agents/leads/sofie/task-log.md` (185d old)
+- `agents/orchestrators/architecture-agent/gotchas.md` (186d old)
 - `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (169d old)
-- `agents/workers/code-reviewer/profile.md` (169d old)
-- `agents/workers/gsd-executor/hot.md` (185d old)
+- `agents/workers/code-reviewer/profile.md` (170d old)
+- `agents/workers/gsd-executor/hot.md` (186d old)
 - `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (169d old)
 - `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (169d old)
-- `agents/workers/gsd-nyquist-auditor/profile.md` (169d old)
-- `agents/workers/gsd-phase-researcher/profile.md` (169d old)
-- `agents/workers/gsd-planner/profile.md` (169d old)
-- `agents/workers/gsd-research-synthesizer/profile.md` (169d old)
-- `agents/workers/gsd-roadmapper/profile.md` (169d old)
+- `agents/workers/gsd-nyquist-auditor/profile.md` (170d old)
+- `agents/workers/gsd-phase-researcher/profile.md` (170d old)
+- `agents/workers/gsd-planner/profile.md` (170d old)
+- `agents/workers/gsd-research-synthesizer/profile.md` (170d old)
+- `agents/workers/gsd-roadmapper/profile.md` (170d old)
 - …and 6 more
 
 ## Patterns awaiting verification
