@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-11 19:02 | Vault: Agentic-KB | Pages scanned: 927
+> Generated: 2026-10-12 14:27 | Vault: Agentic-KB | Pages scanned: 934
 
 ## Summary
 
@@ -11,22 +11,22 @@
 | Stale pages | 410 | ±0 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 927 pages (6%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~16 runs.
+**Analysis window:** 60 of 934 pages (6%) — 2 changed since last run, 58 from the rotating cursor. Full-vault coverage every ~16 runs.
 
 ## 🎯 Triage — start here
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 190 days old
-1. `concepts/agent-failure-modes.md` — 88 inbound links, 93 days old
-1. `concepts/multi-agent-systems.md` — 63 inbound links, 185 days old
-1. `entities/mcp-ecosystem.md` — 60 inbound links, 186 days old
-1. `concepts/agent-observability.md` — 59 inbound links, 45 days old
-1. `concepts/context-management.md` — 58 inbound links, 80 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 169 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 169 days old
-1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 190 days old
-1. `concepts/agent-layer-architecture.md` — 43 inbound links, 49 days old
+1. `concepts/agent-loops.md` — 102 inbound links, 191 days old
+1. `concepts/agent-failure-modes.md` — 89 inbound links, 94 days old
+1. `concepts/multi-agent-systems.md` — 64 inbound links, 186 days old
+1. `entities/mcp-ecosystem.md` — 61 inbound links, 187 days old
+1. `concepts/agent-observability.md` — 60 inbound links, 46 days old
+1. `concepts/context-management.md` — 58 inbound links, 81 days old
+1. `concepts/human-in-the-loop.md` — 56 inbound links, 170 days old
+1. `patterns/pattern-hot-cache.md` — 45 inbound links, 170 days old
+1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 191 days old
+1. `concepts/agent-layer-architecture.md` — 43 inbound links, 50 days old
 
 ## 🟡 Orphaned Pages (no inbound links)
 
