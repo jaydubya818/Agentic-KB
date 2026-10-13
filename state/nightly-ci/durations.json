@@ -1,5 +1,5 @@
 {
-  "missioncontrol/CI \u2014 Mission Control": [
+  "missioncontrol/CI — Mission Control": [
     {
       "date": "2026-10-12",
       "seconds": 536.0
@@ -27,12 +27,24 @@
     {
       "date": "2026-10-12",
       "seconds": 584.0
+    },
+    {
+      "date": "2026-10-13",
+      "seconds": 431.0
+    },
+    {
+      "date": "2026-10-13",
+      "seconds": 627.0
     }
   ],
   "sellerfi/Vercel Environment Check": [
     {
       "date": "2026-10-12",
       "seconds": 26.0
+    },
+    {
+      "date": "2026-10-13",
+      "seconds": 18.0
     }
   ]
 }

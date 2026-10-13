@@ -1,17 +1,13 @@
 {
-  "date": "2026-10-12",
-  "finished_at": "2026-10-12T13:06:08Z",
+  "date": "2026-10-13",
+  "finished_at": "2026-10-13T13:05:00Z",
   "status": "ok",
-  "repos_checked": [
-    "sellerfi",
-    "missioncontrol",
-    "twinz"
-  ],
-  "runs_total": 10,
-  "passed": 8,
-  "failed": 2,
+  "repos_checked": ["sellerfi", "missioncontrol", "twinz"],
+  "runs_total": 3,
+  "passed": 3,
+  "failed": 0,
   "in_progress": 0,
   "prs_opened": 0,
-  "report_only": 2,
-  "note": "First clean run since 2026-09-11 (31 days stale heartbeat). Track C session-access gate (403 'not enabled for this session' seen 2026-09-28 through at least 2026-10-09) did not recur today - all preflight repo reads returned 200 and the KB push succeeded."
+  "report_only": 0,
+  "note": "All clear. twinz had zero runs in the 24h window (dormant). Mid-run the remote-devices MCP bridge dropped and reconnected on its own after a RefreshMcpTools call; no data was lost, run continued normally."
 }
