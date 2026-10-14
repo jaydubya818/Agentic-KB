@@ -6,15 +6,15 @@
 |---|---|---|---|---|
 | Open contradictions | 0 | 0 | 🟢 OK | — |
 | Orphaned pages | 0 | 80 | 🟢 OK | — |
-| Orphan growth per run (> 5) | -1 | 5 | 🟢 OK | — |
-| Stale pages (% of vault) | 23 | 40 | ✅ REMEDIATED | 2026-10-11 (2d) |
-| Broken cross-references | 37 | 0 | 🟡 STANDING | 2026-10-11 (2d) |
-| Active-project documentation gaps | 8 | 0 | 🟡 STANDING | 2026-10-11 (2d) |
+| Orphan growth per run (> 5) | 0 | 5 | 🟢 OK | — |
+| Stale pages (% of vault) | 23 | 40 | 🟢 OK | — |
+| Broken cross-references | 37 | 0 | 🟡 STANDING | 2026-10-11 (3d) |
+| Active-project documentation gaps | 8 | 0 | 🟡 STANDING | 2026-10-11 (3d) |
 | Degraded analysis run | 0 | 0 | 🟢 OK | — |
 
-Pages: 930 · Stale: 219 (23%) · Pages with `last_verified`: 0 · Gaps: 0
+Pages: 931 · Stale: 219 (23%) · Pages with `last_verified`: 0 · Gaps: 0
 
-**Analysis coverage:** 60/930 pages this run. The window rotates each run, so contradiction and gap findings reflect a rolling sample, not a full-vault sweep.
+**Analysis coverage:** 60/931 pages this run. The window rotates each run, so contradiction and gap findings reflect a rolling sample, not a full-vault sweep.
 
 ## Last remediation
 
