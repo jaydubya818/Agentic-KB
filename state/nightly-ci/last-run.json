@@ -1,13 +1,13 @@
 {
-  "date": "2026-10-13",
-  "finished_at": "2026-10-13T13:05:00Z",
+  "date": "2026-10-14",
+  "finished_at": "2026-10-14T13:10:00Z",
   "status": "ok",
   "repos_checked": ["sellerfi", "missioncontrol", "twinz"],
-  "runs_total": 3,
-  "passed": 3,
+  "runs_total": 1,
+  "passed": 1,
   "failed": 0,
   "in_progress": 0,
   "prs_opened": 0,
   "report_only": 0,
-  "note": "All clear. twinz had zero runs in the 24h window (dormant). Mid-run the remote-devices MCP bridge dropped and reconnected on its own after a RefreshMcpTools call; no data was lost, run continued normally."
+  "note": "Quiet night: only 1 run in the 24h window (sellerfi/Vercel Environment Check, success, 17s). missioncontrol and twinz had zero runs (dormant). No new or recurring failures. 9 historical fingerprints in failures.json unchanged (none recurred in this window)."
 }
