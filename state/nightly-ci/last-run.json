@@ -1,13 +1,17 @@
 {
-  "date": "2026-10-14",
-  "finished_at": "2026-10-14T13:10:00Z",
+  "date": "2026-10-15",
+  "finished_at": "2026-10-15T12:59:43Z",
   "status": "ok",
-  "repos_checked": ["sellerfi", "missioncontrol", "twinz"],
+  "repos_checked": [
+    "sellerfi",
+    "missioncontrol",
+    "twinz"
+  ],
   "runs_total": 1,
   "passed": 1,
   "failed": 0,
   "in_progress": 0,
   "prs_opened": 0,
   "report_only": 0,
-  "note": "Quiet night: only 1 run in the 24h window (sellerfi/Vercel Environment Check, success, 17s). missioncontrol and twinz had zero runs (dormant). No new or recurring failures. 9 historical fingerprints in failures.json unchanged (none recurred in this window)."
+  "note": "Quiet night again: only 1 run in the 24h window (sellerfi/Vercel Environment Check, success, 24s, +6s vs 14-day median of 18s but under the 1.5x regression threshold). missioncontrol and twinz had zero runs (dormant). No new or recurring failures. 9 historical fingerprints in failures.json unchanged."
 }
