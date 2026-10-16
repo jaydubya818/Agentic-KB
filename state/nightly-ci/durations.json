@@ -1,5 +1,5 @@
 {
-  "missioncontrol/CI — Mission Control": [
+  "missioncontrol/CI \u2014 Mission Control": [
     {
       "date": "2026-10-12",
       "seconds": 536.0
@@ -53,6 +53,10 @@
     {
       "date": "2026-10-15",
       "seconds": 24.0
+    },
+    {
+      "date": "2026-10-16",
+      "seconds": 17.0
     }
   ]
 }
