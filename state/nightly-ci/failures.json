@@ -73,6 +73,21 @@
     "status": "open",
     "workflow": "CI \u2014 Mission Control"
   },
+  "8d50de40": {
+    "branches": [
+      "master"
+    ],
+    "category": "dependency issue",
+    "count": 1,
+    "error": "Error: Cannot find module @rollup/rollup-linux-x64-gnu. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.",
+    "first_seen": "2026-10-18",
+    "last_seen": "2026-10-18",
+    "note": "Job 'Bump Version', step 'Determine version bump type' (run 39051380574, run_id job 117450501057). vitest run failed before version-bump logic even executes: node_modules/rollup/dist/native.js cannot find @rollup/rollup-linux-x64-gnu, a known npm optional-dependency resolution bug (npm/cli#4828). Tier B (dependency issue) per \u00a75 -- report-only, no auto-fix. Suggested fix (one step): switch 'npm ci' to 'npm ci --include=optional' or delete package-lock.json + node_modules and regenerate the lockfile on this platform, OR pin rollup to a version without native optional binaries. Blocks: yes, this runs on push to master.",
+    "pr": null,
+    "repo": "twinz",
+    "status": "open",
+    "workflow": "Auto Version Bump"
+  },
   "9172abb4": {
     "branches": [
       "main"
@@ -112,10 +127,10 @@
     "error": "remote: Write access to repository not granted. / fatal: ... error: 403",
     "first_seen": "2026-05-28",
     "last_seen": "2026-08-22",
-    "note": "version-bump.yml declares no permissions: block, so GITHUB_TOKEN is read-only and 'git push origin master' 403s. Fix ALREADY WRITTEN in PR #7 (open since 2026-05-20, unreviewed 101 days). Failure recurred 2026-08-22 BECAUSE #7 was never merged. Out of 24h window (twinz dormant since 2026-08-22) - surfaced via unfiltered check. No new PR opened: \u00a75 dedupe = open PR -> skip.",
+    "note": "version-bump.yml declares no permissions: block, so GITHUB_TOKEN is read-only and 'git push origin master' 403s. Fix ALREADY WRITTEN in PR #7 (open since 2026-05-20, unreviewed 101 days). Failure recurred 2026-08-22 BECAUSE #7 was never merged. Out of 24h window (twinz dormant since 2026-08-22) - surfaced via unfiltered check. No new PR opened: \u00a75 dedupe = open PR -> skip. | UPDATE 2026-10-18: PR #7 closed (not merged) by Jay on 2026-10-17T16:54:52Z, ~1min after this run's failed Auto Version Bump run (39051380574) was created. Per dedupe rule: closed-not-merged = rejected fix -> status set to wontfix. Never reopen/re-propose this fix.",
     "pr": "https://github.com/jaydubya818/twinz/pull/7",
     "repo": "twinz",
-    "status": "pr_open",
+    "status": "wontfix",
     "workflow": "Auto Version Bump"
   },
   "f45172d5": {

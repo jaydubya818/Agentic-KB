@@ -1,17 +1,18 @@
 {
-  "date": "2026-10-17",
-  "finished_at": "2026-10-17T12:59:09Z",
+  "date": "2026-10-18",
+  "finished_at": "2026-10-18T16:58:00Z",
   "status": "ok",
   "repos_checked": [
     "sellerfi",
     "missioncontrol",
     "twinz"
   ],
-  "runs_total": 1,
-  "passed": 1,
-  "failed": 0,
+  "runs_total": 32,
+  "passed": 19,
+  "failed": 1,
   "in_progress": 0,
+  "skipped_or_other": 12,
   "prs_opened": 0,
-  "report_only": 0,
-  "note": "Quiet night: only 1 run in the 24h window (sellerfi/Vercel Environment Check, success, 16s, under 14-day median of 18s, no regression). missioncontrol and twinz had zero runs (dormant). No new or recurring failures. 9 historical fingerprints in failures.json unchanged."
+  "report_only": 1,
+  "note": "1 new failure: twinz 'Auto Version Bump' (fingerprint 8d50de40) failed on a rollup optional-dependency module resolution bug during its pre-bump test step -- Tier B (dependency issue), report-only. Separately, PR #7 (the long-open fix for recurring fingerprint e90110b2, 'push declined / write access not granted') was closed without merge by Jay on 2026-10-17, ~1min before/around this run -- per dedupe rule, e90110b2 is now marked wontfix and will not be re-proposed. missioncontrol had zero runs in the 24h window (dormant, consistent with prior nights). No duration regressions (only 1 workflow, sellerfi/Vercel Environment Check, had enough 14-day history to compare; today's 17s was in line with its 17.5s median)."
 }
