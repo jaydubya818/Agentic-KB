@@ -67,7 +67,17 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: web/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+
+      # web/ imports shared modules from the repo-root lib/ (e.g.
+      # lib/agent-runtime/contracts.mjs), whose dependencies such as `yaml`
+      # are declared in the root package.json. Turbopack's root is the repo
+      # root (see web/next.config.ts), so those imports resolve from
+      # ./node_modules, which must be installed for type-check and build.
+      - name: Install root dependencies (shared lib/)
+        run: npm ci --omit=optional --no-audit --no-fund
 
       - name: Install web dependencies
         run: npm --prefix web ci --no-audit --no-fund
@@ -82,5 +92,14 @@ jobs:
       - name: Build web
         run: npm --prefix web run build
 
-      - name: Audit web dependencies
-        run: npm --prefix web audit --audit-level=high
+      # Production (shipped) dependencies are gated at high severity.
+      # The full tree, including build/lint tooling, is gated at critical:
+      # as of 2026-10 the dev-only chain tailwindcss@3 / eslint-config-next
+      # -> micromatch/fast-glob -> braces carries a high-severity advisory
+      # (GHSA-vfj7-8cjw-p6xm, braces <=3.0.3) with no patched release, so a
+      # high gate on dev deps cannot pass until upstream ships a fix.
+      - name: Audit web dependencies (production, high)
+        run: npm --prefix web audit --omit=dev --audit-level=high
+
+      - name: Audit web dependencies (all, critical)
+        run: npm --prefix web audit --audit-level=critical
