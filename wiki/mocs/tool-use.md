@@ -71,3 +71,8 @@ updated: 2026-04-10
 - [[syntheses/synthesis-mcp-as-tool-vs-memory-interface]] — MCP carries both action execution and memory retrieval; only the action half has a permission model
 - [[syntheses/synthesis-forward-message-is-a-permissions-decision]] — `forward_message` deletes the supervisor's read of worker output; an unscored permissions change filed under orchestration
 - [[syntheses/synthesis-gsd-deviation-rules-as-permission-policy]] — GSD's Deviation Rules are a consequence-keyed permission policy; the canonical worked example of permission-modes + guardrails at orchestration level
+
+## Additional pages
+
+- [[frameworks/openconnector]] — OpenConnector: connecting agents to tools
+- [[frameworks/headroom]] — Headroom: context compression for tool output

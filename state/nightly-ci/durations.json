@@ -1,148 +1,154 @@
 {
-  "missioncontrol/Remote Sandbox Image Candidate": [
-    {
-      "date": "2026-08-21",
-      "seconds": 235
-    },
-    {
-      "date": "2026-08-21",
-      "seconds": 516
-    }
-  ],
   "missioncontrol/CI \u2014 Mission Control": [
     {
-      "date": "2026-08-21",
-      "seconds": 394
+      "date": "2026-10-12",
+      "seconds": 536.0
     },
     {
-      "date": "2026-08-21",
-      "seconds": 382
+      "date": "2026-10-12",
+      "seconds": 563.0
     },
     {
-      "date": "2026-08-22",
-      "seconds": 404
+      "date": "2026-10-12",
+      "seconds": 557.0
     },
     {
-      "date": "2026-08-23",
-      "seconds": 391
+      "date": "2026-10-12",
+      "seconds": 725.0
     },
     {
-      "date": "2026-08-23",
-      "seconds": 324
+      "date": "2026-10-12",
+      "seconds": 416.0
     },
     {
-      "date": "2026-08-26",
-      "seconds": 408
+      "date": "2026-10-12",
+      "seconds": 360.0
     },
     {
-      "date": "2026-08-26",
-      "seconds": 387
+      "date": "2026-10-12",
+      "seconds": 584.0
     },
     {
-      "date": "2026-08-26",
-      "seconds": 392
+      "date": "2026-10-13",
+      "seconds": 431.0
     },
     {
-      "date": "2026-08-26",
-      "seconds": 459
-    },
-    {
-      "date": "2026-08-26",
-      "seconds": 391
-    },
-    {
-      "date": "2026-08-26",
-      "seconds": 421
-    },
-    {
-      "date": "2026-08-26",
-      "seconds": 413
-    },
-    {
-      "date": "2026-08-26",
-      "seconds": 393
-    },
-    {
-      "date": "2026-08-26",
-      "seconds": 311
-    },
-    {
-      "date": "2026-08-26",
-      "seconds": 350
-    },
-    {
-      "date": "2026-08-27",
-      "seconds": 412
-    },
-    {
-      "date": "2026-08-27",
-      "seconds": 428
-    },
-    {
-      "date": "2026-08-27",
-      "seconds": 390
-    },
-    {
-      "date": "2026-08-27",
-      "seconds": 411
-    },
-    {
-      "date": "2026-08-27",
-      "seconds": 298
+      "date": "2026-10-13",
+      "seconds": 627.0
     }
   ],
-  "Agentic-KB/test": [
+  "sellerfi/Production CI/CD Pipeline": [
     {
-      "date": "2026-08-22",
-      "seconds": 17
+      "date": "2026-10-18",
+      "seconds": 560.0
     },
     {
-      "date": "2026-08-22",
-      "seconds": 22
-    }
-  ],
-  "Agentic-Pi-Harness/ci": [
-    {
-      "date": "2026-08-22",
-      "seconds": 64
-    }
-  ],
-  "sellerfi/Vercel Environment Check": [
-    {
-      "date": "2026-08-29",
-      "seconds": 23
+      "date": "2026-10-18",
+      "seconds": 542.0
     },
     {
-      "date": "2026-08-27",
-      "seconds": 17
+      "date": "2026-10-18",
+      "seconds": 541.0
     },
     {
-      "date": "2026-08-26",
-      "seconds": 18
-    },
-    {
-      "date": "2026-08-25",
-      "seconds": 18
-    },
-    {
-      "date": "2026-08-24",
-      "seconds": 19
-    },
-    {
-      "date": "2026-08-23",
-      "seconds": 19
+      "date": "2026-10-18",
+      "seconds": 557.0
     }
   ],
   "sellerfi/Production Validation": [
     {
-      "date": "2026-08-23",
-      "seconds": 162
+      "date": "2026-10-18",
+      "seconds": 159.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 157.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 158.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 150.0
     }
   ],
   "sellerfi/Test Suite": [
     {
-      "date": "2026-08-23",
-      "seconds": 713
+      "date": "2026-10-18",
+      "seconds": 708.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 556.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 547.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 487.0
+    }
+  ],
+  "sellerfi/Vercel Environment Check": [
+    {
+      "date": "2026-10-12",
+      "seconds": 26.0
+    },
+    {
+      "date": "2026-10-13",
+      "seconds": 18.0
+    },
+    {
+      "date": "2026-10-14",
+      "seconds": 17.0
+    },
+    {
+      "date": "2026-10-15",
+      "seconds": 24.0
+    },
+    {
+      "date": "2026-10-16",
+      "seconds": 17.0
+    },
+    {
+      "date": "2026-10-17",
+      "seconds": 16.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 17.0
+    }
+  ],
+  "twinz/Production CI/CD Pipeline": [
+    {
+      "date": "2026-10-18",
+      "seconds": 667.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 693.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 660.0
+    },
+    {
+      "date": "2026-10-18",
+      "seconds": 711.0
+    }
+  ],
+  "twinz/Test Suite": [
+    {
+      "date": "2026-10-18",
+      "seconds": 233.0
+    }
+  ],
+  "twinz/Tier Validation Tests": [
+    {
+      "date": "2026-10-18",
+      "seconds": 12.0
     }
   ]
 }

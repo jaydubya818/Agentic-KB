@@ -112,3 +112,7 @@ The Agentic-KB is itself a shareable template for any engineer who wants an LLM-
 - [[mocs/core-plugins|Core Plugins]] — Plugin setup guide
 - [[mocs/evolution|Evolution & Scaling]] — Long-term KB growth patterns
 - [[index]] — Master catalog
+
+## Additional pages
+
+- [[mocs/engineering-reference]] — databases and frontend engineering reference

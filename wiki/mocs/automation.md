@@ -141,3 +141,7 @@ Packages: CLI (`packages/cli`), [[mcp-ecosystem]] server (`packages/mcp`), core 
 > before its claims can be relied on.
 
 - [[concepts/eval-first-rag]] — Eval First RAG _(generated draft, unreviewed)_
+
+## Additional pages
+
+- [[recipes/recipe-prd-generator]] — PRD generator skill

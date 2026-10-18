@@ -112,3 +112,8 @@ See [[concepts/context-management]] and [[patterns/pattern-tiered-agent-memory]]
 - [[concepts/context-management]] — Context window mechanics
 - [[patterns/pattern-hot-cache]] — [[pattern-hot-cache]] pattern
 - [[concepts/server-sent-events-streaming]] — SSE for streaming LLM output
+
+## Additional pages
+
+- [[personal/agentic-coding-implementation-patterns]] — model router, tool registry, bounded agent loop
+- [[summaries/summary-garrytan-meta-meta-prompting]] — meta-meta-prompting for agents

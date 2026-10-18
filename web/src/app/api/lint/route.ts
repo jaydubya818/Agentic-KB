@@ -22,6 +22,8 @@ import {
   buildInboundLinkMap,
   isOrphanCandidate,
   isStalePage,
+  evaluateFreshness,
+  freshnessBreakdown,
   selectAnalysisPages,
   reconcileFindings,
   rankOrphans,
@@ -84,6 +86,8 @@ interface PageSummary {
   title: string
   tags: string[]
   updated?: string
+  /** Separate from `updated`: when the content was last checked, not edited. */
+  lastVerified?: string
   staleAfterDays?: number
   reviewCadenceDays?: number
   links: string[]   // markdown links found in content
@@ -117,7 +121,9 @@ function collectWikiSummaries(wikiRoot: string): PageSummary[] {
           relPath,
           title: (data.title as string) || entry.name.replace('.md', ''),
           tags: Array.isArray(data.tags) ? data.tags as string[] : [],
-          updated: data.updated as string | undefined,
+          // gray-matter parses bare YAML dates into Date objects; keep them as ISO strings.
+          updated: data.updated instanceof Date ? data.updated.toISOString() : (data.updated as string | undefined),
+          lastVerified: data.last_verified instanceof Date ? data.last_verified.toISOString() : (data.last_verified as string | undefined),
           staleAfterDays: typeof data.stale_after_days === 'number' ? data.stale_after_days as number : undefined,
           reviewCadenceDays: typeof data.review_cadence_days === 'number' ? data.review_cadence_days as number : undefined,
           links: [...mdLinks, ...wikiLinks],
@@ -340,6 +346,20 @@ Be specific. Return ONLY the JSON object.`,
     ``,
   )
 
+  // Freshness is judged per category (lib/freshness-policy.mjs). "Verified" is
+  // counted separately from "updated": a page is current because its content
+  // was checked, never because a timestamp was bumped.
+  const freshness = freshnessBreakdown(pages)
+  reportLines.push(
+    `## Freshness by category`,
+    ``,
+    `| Category | Pages | Fresh | Stale | Event-driven | Verified (last_verified) |`,
+    `|---|---|---|---|---|---|`,
+    ...Object.entries(freshness).sort().map(([cat, r]) =>
+      `| ${cat} | ${r.total} | ${r.fresh} | ${r.stale} | ${r.eventDriven} | ${r.verified} |`),
+    ``,
+  )
+
   // Lead with the short actionable list. The exhaustive sections below are
   // reference material; this is the part meant to be read and acted on.
   const topOrphans = rankOrphans(orphans, 10)
@@ -401,12 +421,15 @@ Be specific. Return ONLY the JSON object.`,
     // stale_after_days front matter, falling back to the default. It used to
     // hard-code "30+ days" regardless of what the logic actually applied.
     reportLines.push(
-      `## 🟡 Stale Pages (past their review cadence; default ${DEFAULT_STALE_AFTER_DAYS} days)`,
+      `## 🟡 Stale Pages (past their category review cadence; see Freshness by category)`,
       ``,
     )
     for (const p of stalePages) {
-      const cadence = p.staleAfterDays ?? p.reviewCadenceDays ?? DEFAULT_STALE_AFTER_DAYS
-      reportLines.push(`- \`${p.relPath}\` — last updated: ${p.updated} (cadence: ${cadence}d)`)
+      const f = evaluateFreshness(p)
+      reportLines.push(
+        `- \`${p.relPath}\` — ${f.basis === 'verified' ? 'last verified' : 'last updated'}: ${p.lastVerified && f.basis === 'verified' ? p.lastVerified : p.updated} ` +
+        `(${f.category}, cadence: ${f.days}d, ${f.ageDays}d old)`,
+      )
     }
     reportLines.push(``)
   }
@@ -469,6 +492,8 @@ Be specific. Return ONLY the JSON object.`,
     contradictions: openContradictions.length,
     orphans: orphans.length,
     stalePages: stalePages.length,
+    freshness,
+    verifiedPages: pages.filter(p => p.lastVerified).length,
     gaps: openGaps.length,
     orphanDelta,
     analysisWindow: {

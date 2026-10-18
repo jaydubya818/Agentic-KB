@@ -1,0 +1,69 @@
+{
+  "_comment": "Curated placements of otherwise-unlinked pages into the MoC where a reader would look for them. Applied idempotently by scripts/kb-remediate.mjs under '## Additional pages'. Add an entry only when the page genuinely belongs in that MoC.",
+  "mocs/memory": [
+    ["concepts/compile-once-knowledge", "compile once, query many: the LLM-wiki memory model"],
+    ["concepts/factory-memory-context-intelligence", "how the software factory remembers and retrieves context"],
+    ["summaries/summary-langchain-rag-from-scratch", "RAG fundamentals: indexing, retrieval, generation"]
+  ],
+  "mocs/knowledge-workflows": [
+    ["concepts/capture-pipeline", "capture to wiki via foundry-capture"],
+    ["patterns/pattern-raw-inbox-workflow", "how raw inbox material becomes pages"],
+    ["patterns/pattern-incremental-compile-pipeline", "compiling only what changed"],
+    ["patterns/pattern-morning-review", "the daily review pipeline"],
+    ["recipes/readwise-to-wikiwise-ingest", "ingesting Readwise highlights"]
+  ],
+  "mocs/automation": [
+    ["recipes/recipe-prd-generator", "PRD generator skill"]
+  ],
+  "mocs/vault-foundation": [
+    ["recipes/obsidian-smart-vault-setup", "automated capture-to-insight vault setup"]
+  ],
+  "mocs/orchestration": [
+    ["concepts/agentic-engineering-stack", "the layered agentic engineering stack"],
+    ["entities/gsd-ui-checker", "GSD agent that verifies UI work"],
+    ["summaries/summary-gsd-project-researcher", "GSD project-researcher role definition"],
+    ["summaries/summary-hwchase17-managed-agents-thesis", "why managed agents are the next shift"],
+    ["recipes/five-agent-business-ops", "a five-agent business operations setup"],
+    ["syntheses/synthesis-repo-aware-system-implementation", "repo-aware knowledge and agent memory, as built"],
+    ["personal/jay-software-factory-tiered-ux", "tiered UX for the software factory / MissionControl"],
+    ["personal/book-to-interactive-ip-platform", "a vertical built on MissionControl"],
+    ["agents/leads/planning-agent/domain-standards", "planning agent domain standards"]
+  ],
+  "mocs/claude-integration": [
+    ["concepts/html-as-agent-output-format", "HTML as an agent output format"],
+    ["entities/hermes-agent", "Hermes agent profile"],
+    ["summaries/summary-fable-prompting-tutorial-linkedin", "prompting tutorial summary"]
+  ],
+  "mocs/tool-use": [
+    ["frameworks/openconnector", "OpenConnector: connecting agents to tools"],
+    ["frameworks/headroom", "Headroom: context compression for tool output"]
+  ],
+  "mocs/evaluation": [
+    ["personal/code-review-architecture-at-scale", "code review architecture for agentic systems"],
+    ["concepts/frontend-code-review-skill", "frontend code review skill"],
+    ["patterns/pattern-playwright-e2e", "Playwright end-to-end testing pattern"]
+  ],
+  "mocs/advanced-techniques": [
+    ["personal/agentic-coding-implementation-patterns", "model router, tool registry, bounded agent loop"],
+    ["summaries/summary-garrytan-meta-meta-prompting", "meta-meta-prompting for agents"]
+  ],
+  "mocs/maintenance": [
+    ["_meta/kb-health", "daily health scorecard"],
+    ["_meta/kb-quality", "knowledge-quality checks beyond orphan/stale counts"],
+    ["_meta/proposals", "Foundry proposals queue"],
+    ["mocs/nightly-ci-reports", "index of nightly CI analysis reports"],
+    ["mocs/bus-escalations", "index of bus escalations"],
+    ["syntheses/synthesis-provenance-freshness-infrastructure", "provenance tagging and delta tracking behind the freshness policy"],
+    ["syntheses/lint-2026-04-18", "historical lint snapshot"],
+    ["system/reports/static-lint-2026-04-25", "static lint report"],
+    ["system/reports/tier-leak-audit-2026-04-25", "tier read-leak audit"],
+    ["system/reports/tier-leak-audit-2026-04-26", "tier read-leak audit"],
+    ["agents/leads/sofie/weekly-digest", "Sofie KB digest"]
+  ],
+  "mocs/resources": [
+    ["mocs/engineering-reference", "databases and frontend engineering reference"]
+  ],
+  "mocs/evolution": [
+    ["mocs/personal-notes", "personal strategy and role notes"]
+  ]
+}
