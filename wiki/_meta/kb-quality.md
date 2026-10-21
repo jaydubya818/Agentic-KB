@@ -3,7 +3,7 @@ title: KB Quality
 type: moc
 category: structure
 tags: [maintenance, quality, generated]
-updated: 2026-10-20
+updated: 2026-10-21
 ---
 
 # KB Quality
@@ -27,8 +27,8 @@ updated: 2026-10-20
 | MyFactory | 12 | 67 | no | 42 | no home/overview page; heavily mentioned elsewhere but thinly documented |
 | MyEve | 0 | 8 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
 | Relay | 0 | 13 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
-| MissionControl | 132 | 320 | yes | 17 | — |
-| FDLC | 0 | 14 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
+| MissionControl | 132 | 323 | yes | 17 | — |
+| FDLC | 0 | 16 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
 
 ## Broken cross-references (active projects first)
 
@@ -70,21 +70,21 @@ updated: 2026-10-20
 
 ## Agent instructions likely obsolete
 
-- `agents/leads/planning-agent/gotchas.md` (194d old)
-- `agents/leads/sofie/hot.md` (193d old)
-- `agents/leads/sofie/profile.md` (193d old)
-- `agents/leads/sofie/task-log.md` (193d old)
-- `agents/orchestrators/architecture-agent/gotchas.md` (194d old)
-- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (177d old)
-- `agents/workers/code-reviewer/profile.md` (178d old)
-- `agents/workers/gsd-executor/hot.md` (194d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (177d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (177d old)
-- `agents/workers/gsd-nyquist-auditor/profile.md` (178d old)
-- `agents/workers/gsd-phase-researcher/profile.md` (178d old)
-- `agents/workers/gsd-planner/profile.md` (178d old)
-- `agents/workers/gsd-research-synthesizer/profile.md` (178d old)
-- `agents/workers/gsd-roadmapper/profile.md` (178d old)
+- `agents/leads/planning-agent/gotchas.md` (195d old)
+- `agents/leads/sofie/hot.md` (194d old)
+- `agents/leads/sofie/profile.md` (194d old)
+- `agents/leads/sofie/task-log.md` (194d old)
+- `agents/orchestrators/architecture-agent/gotchas.md` (195d old)
+- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (179d old)
+- `agents/workers/code-reviewer/profile.md` (179d old)
+- `agents/workers/gsd-executor/hot.md` (195d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (179d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (178d old)
+- `agents/workers/gsd-nyquist-auditor/profile.md` (179d old)
+- `agents/workers/gsd-phase-researcher/profile.md` (179d old)
+- `agents/workers/gsd-planner/profile.md` (179d old)
+- `agents/workers/gsd-research-synthesizer/profile.md` (179d old)
+- `agents/workers/gsd-roadmapper/profile.md` (179d old)
 - …and 6 more
 
 ## Patterns awaiting verification
