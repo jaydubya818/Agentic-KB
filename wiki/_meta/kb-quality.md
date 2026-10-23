@@ -3,7 +3,7 @@ title: KB Quality
 type: moc
 category: structure
 tags: [maintenance, quality, generated]
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # KB Quality
@@ -16,7 +16,7 @@ updated: 2026-10-22
 | Duplicate / overlapping topics | 30 |
 | Decisions nothing references | 0 |
 | Agent instruction pages >2× past cadence | 21 |
-| Patterns past review cadence | 57 |
+| Patterns past review cadence | 58 |
 | Pages with malformed front matter | 6 |
 | Pages with `last_verified` | 0 |
 
@@ -27,7 +27,7 @@ updated: 2026-10-22
 | MyFactory | 12 | 68 | no | 42 | no home/overview page; heavily mentioned elsewhere but thinly documented |
 | MyEve | 0 | 8 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
 | Relay | 0 | 13 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
-| MissionControl | 132 | 329 | yes | 17 | — |
+| MissionControl | 132 | 330 | yes | 17 | — |
 | FDLC | 0 | 18 | no | 0 | no dedicated wiki pages; heavily mentioned elsewhere but thinly documented |
 
 ## Broken cross-references (active projects first)
@@ -70,27 +70,28 @@ updated: 2026-10-22
 
 ## Agent instructions likely obsolete
 
-- `agents/leads/planning-agent/gotchas.md` (196d old)
-- `agents/leads/sofie/hot.md` (195d old)
-- `agents/leads/sofie/profile.md` (195d old)
-- `agents/leads/sofie/task-log.md` (195d old)
-- `agents/orchestrators/architecture-agent/gotchas.md` (196d old)
-- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (179d old)
-- `agents/workers/code-reviewer/profile.md` (180d old)
-- `agents/workers/gsd-executor/hot.md` (196d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (179d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (179d old)
-- `agents/workers/gsd-nyquist-auditor/profile.md` (180d old)
-- `agents/workers/gsd-phase-researcher/profile.md` (180d old)
-- `agents/workers/gsd-planner/profile.md` (180d old)
-- `agents/workers/gsd-research-synthesizer/profile.md` (180d old)
-- `agents/workers/gsd-roadmapper/profile.md` (180d old)
+- `agents/leads/planning-agent/gotchas.md` (197d old)
+- `agents/leads/sofie/hot.md` (196d old)
+- `agents/leads/sofie/profile.md` (196d old)
+- `agents/leads/sofie/task-log.md` (196d old)
+- `agents/orchestrators/architecture-agent/gotchas.md` (197d old)
+- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (180d old)
+- `agents/workers/code-reviewer/profile.md` (181d old)
+- `agents/workers/gsd-executor/hot.md` (197d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (180d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (180d old)
+- `agents/workers/gsd-nyquist-auditor/profile.md` (181d old)
+- `agents/workers/gsd-phase-researcher/profile.md` (181d old)
+- `agents/workers/gsd-planner/profile.md` (181d old)
+- `agents/workers/gsd-research-synthesizer/profile.md` (181d old)
+- `agents/workers/gsd-roadmapper/profile.md` (181d old)
 - …and 6 more
 
 ## Patterns awaiting verification
 
 - `patterns/fetch-readwise-highlights.md`
 - `patterns/layer-evidence-verification.md`
+- `patterns/llm-wiki-pattern.md`
 - `patterns/pattern-agent-proof-of-work-loop.md`
 - `patterns/pattern-agent-skill-authoring.md`
 - `patterns/pattern-anchored-iterative-summarization.md`
@@ -103,8 +104,7 @@ updated: 2026-10-22
 - `patterns/pattern-external-memory.md`
 - `patterns/pattern-fan-out-worker.md`
 - `patterns/pattern-filesystem-context.md`
-- `patterns/pattern-goal-backward-planning.md`
-- …and 42 more
+- …and 43 more
 
 ## Malformed front matter
 
