@@ -1,18 +1,18 @@
 {
-  "date": "2026-10-24",
-  "failed": 0,
-  "finished_at": "2026-10-24T13:10:00Z",
-  "in_progress": 0,
-  "note": "All clear. sellerfi: 1 run (Vercel Environment Check, success, 20s, 1.14x 14-day median of 17.5s -- within the 1.5x regression threshold). missioncontrol: 0 runs in window (dormant). twinz: 0 runs in window (dormant). No new or recurring CI failures. Existing open items unchanged: missioncontrol fingerprints 2d5a5d9e and f45172d5 (open, from 2026-10-12, no new occurrence), 7a81dce6 (open, build error, one-line RUNTIME_CONTRACT_VERSION bump suggested), 9172abb4 (open, ruleset blocks bot push, report-only); SellerFi 6ad700bc (flaky tests, open, report-only); twinz 8d50de40 (rollup optional-dep bug, Tier B report-only, no new occurrence) and e90110b2 (wontfix, PR #7 closed-not-merged 2026-10-17, never re-propose).",
-  "passed": 1,
-  "prs_opened": 0,
-  "report_only": 0,
+  "date": "2026-10-25",
+  "finished_at": "2026-10-25T00:00:00Z",
+  "status": "ok",
   "repos_checked": [
     "sellerfi",
     "missioncontrol",
     "twinz"
   ],
   "runs_total": 1,
+  "passed": 1,
+  "failed": 0,
+  "in_progress": 0,
   "skipped_or_other": 0,
-  "status": "ok"
+  "prs_opened": 0,
+  "report_only": 0,
+  "note": "All clear. sellerfi: 1 run (Vercel Environment Check, success, 17s, no 14-day regression). missioncontrol: 0 runs in window (dormant). twinz: 0 runs in window (dormant). No new or recurring CI failures. Existing open items unchanged: missioncontrol fingerprints 2d5a5d9e and f45172d5 (open, from 2026-10-12, no new occurrence), 7a81dce6 (open, build error, one-line RUNTIME_CONTRACT_VERSION bump suggested), 9172abb4 (open, ruleset blocks bot push, report-only); SellerFi 6ad700bc (flaky tests, open, report-only); twinz 8d50de40 (rollup optional-dep bug, Tier B report-only, no new occurrence) and e90110b2 (wontfix, PR #7 closed-not-merged 2026-10-17, never re-propose)."
 }
