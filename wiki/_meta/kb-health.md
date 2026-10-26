@@ -8,8 +8,8 @@
 | Orphaned pages | 0 | 80 | 🟢 OK | — |
 | Orphan growth per run (> 5) | 0 | 5 | 🟢 OK | — |
 | Stale pages (% of vault) | 26 | 40 | 🟢 OK | — |
-| Broken cross-references | 37 | 0 | 🟡 STANDING | 2026-10-11 (14d) |
-| Active-project documentation gaps | 8 | 0 | 🟡 STANDING | 2026-10-11 (14d) |
+| Broken cross-references | 37 | 0 | 🟡 STANDING | 2026-10-11 (15d) |
+| Active-project documentation gaps | 8 | 0 | 🟡 STANDING | 2026-10-11 (15d) |
 | Degraded analysis run | 0 | 0 | 🟢 OK | — |
 
 Pages: 982 · Stale: 258 (26%) · Pages with `last_verified`: 0 · Gaps: 0
@@ -20,7 +20,7 @@ Pages: 982 · Stale: 258 (26%) · Pages with `last_verified`: 0 · Gaps: 0
 
 | | Before | After |
 |---|---|---|
-| Orphans | 1 | 0 |
+| Orphans | 0 | 0 |
 | Stale | 258 | 258 |
 | Broken cross-references | 37 | 37 |
 
