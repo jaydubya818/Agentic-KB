@@ -4,7 +4,8 @@ title: Multi-Agent Systems
 type: concept
 tags: [agents, orchestration, architecture, patterns, workflow]
 created: 2026-04-08
-updated: 2026-04-09
+updated: 2026-10-28
+last_verified: 2026-10-28
 visibility: public
 confidence: high
 related: [pattern-supervisor-worker, pattern-fan-out, agent-loops, context-management, agent-failure-modes]

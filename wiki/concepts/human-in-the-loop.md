@@ -4,7 +4,8 @@ title: "Human-in-the-Loop"
 type: concept
 tags: [agents, safety, workflow, automation, orchestration]
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-10-28
+last_verified: 2026-10-28
 visibility: public
 confidence: high
 related: [guardrails, agent-failure-modes, fetch-readwise-highlights]
@@ -27,9 +28,7 @@ Key motivations:
 
 ## Example
 
-The [fetch-readwise-highlights](../patterns/fetch-readwise-highlights.md) skill mandates a user confirmation step before executing any vector search against the Readwise library:
-
-> The user's highlight library may have thousands of entries. Running a broad query wastes compute and produces noise. Get the specific angle the user wants before searching.
+The [fetch-readwise-highlights](../patterns/fetch-readwise-highlights.md) pattern mandates a user confirmation step before executing any vector search against the Readwise library. (Verified 2026-10-28: the quote previously here no longer matches that page's current wording, which was restructured into a trade-offs table — the substance is unchanged.) Per that page: "Narrow, user-confirmed queries produce higher signal; broad queries waste compute and introduce noise across a library that may contain thousands of entries," and "the mandatory confirmation step slows the loop but prevents the agent from autonomously deciding what knowledge is relevant."
 
 The agent proposes a query set; the user approves or refines it; only then does the search execute. This is a lightweight but meaningful HITL gate — the agent cannot silently decide what knowledge is relevant.
 

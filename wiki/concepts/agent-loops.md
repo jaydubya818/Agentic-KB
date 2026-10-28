@@ -9,7 +9,8 @@ sources:
   - "Anthropic: Extended Thinking documentation (2025)"
   - "LangChain agent executor documentation"
 created: 2026-04-04
-updated: 2026-04-04
+updated: 2026-10-28
+last_verified: 2026-10-28
 related:
   - "[[concepts/chain-of-thought]]"
   - "[[concepts/tool-use]]"
@@ -178,7 +179,7 @@ for iteration in range(MAX_ITERATIONS):
 
 ReAct is not the only viable loop, and may not be the best one for many tasks. Tree-of-Thoughts (Yao 2023) and graph-structured deliberation outperform linear ReAct on planning-heavy problems, at the cost of token volume. Treating ReAct as the default without benchmarking the task is a common over-commitment.
 
-The "infinite loop" concern is mostly solved for production. Hard iteration caps, termination-timeout budgets, and judge-checked "did this iteration make progress" checks are standard in [[claude-code]], [[framework-langgraph]], and [[openai]]'s Assistants. The interesting failure mode is not runaway loops but *short* loops that terminate prematurely because the model mistakes partial output for completion — sycophantic stopping, not infinite reasoning.
+The "infinite loop" concern is mostly solved for production. Hard iteration caps, termination-timeout budgets, and judge-checked "did this iteration make progress" checks are standard in [[claude-code]] and [[framework-langgraph]]. (Verified 2026-10-28: the earlier reference here to "OpenAI's Assistants" is stale — the Assistants API was shut down on 2026-08-26 in favor of OpenAI's Responses API, which carries forward the same loop-control conventions.) The interesting failure mode is not runaway loops but *short* loops that terminate prematurely because the model mistakes partial output for completion — sycophantic stopping, not infinite reasoning.
 
 Long-context models weaken the rationale for tight loops. When a model can hold 200k+ tokens in context, aggressive tool-output compression and loop summarisation may hurt more than they help by discarding signal. The primacy-recency curve is real but the mitigation (summarise-and-restart) trades one failure mode for another.
 
