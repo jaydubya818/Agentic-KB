@@ -16,9 +16,9 @@ updated: 2026-10-28
 | Duplicate / overlapping topics | 30 |
 | Decisions nothing references | 0 |
 | Agent instruction pages >2× past cadence | 21 |
-| Patterns past review cadence | 58 |
+| Patterns past review cadence | 57 |
 | Pages with malformed front matter | 6 |
-| Pages with `last_verified` | 0 |
+| Pages with `last_verified` | 5 |
 
 ## Active projects
 
@@ -75,11 +75,11 @@ updated: 2026-10-28
 - `agents/leads/sofie/profile.md` (201d old)
 - `agents/leads/sofie/task-log.md` (201d old)
 - `agents/orchestrators/architecture-agent/gotchas.md` (202d old)
-- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (185d old)
+- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (186d old)
 - `agents/workers/code-reviewer/profile.md` (186d old)
 - `agents/workers/gsd-executor/hot.md` (202d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (185d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (185d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (186d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (186d old)
 - `agents/workers/gsd-nyquist-auditor/profile.md` (186d old)
 - `agents/workers/gsd-phase-researcher/profile.md` (186d old)
 - `agents/workers/gsd-planner/profile.md` (186d old)
@@ -104,7 +104,7 @@ updated: 2026-10-28
 - `patterns/pattern-external-memory.md`
 - `patterns/pattern-fan-out-worker.md`
 - `patterns/pattern-filesystem-context.md`
-- …and 43 more
+- …and 42 more
 
 ## Malformed front matter
 
