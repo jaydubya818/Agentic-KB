@@ -1,6 +1,6 @@
 # Wiki Lint Report
 
-> Generated: 2026-10-28 14:25 | Vault: Agentic-KB | Pages scanned: 982
+> Generated: 2026-10-28 16:48 | Vault: Agentic-KB | Pages scanned: 982
 
 ## Summary
 
@@ -8,10 +8,10 @@
 |---|---|---|---|
 | Contradictions | 0 | ±0 | 🟢 Clear |
 | Orphaned pages | 0 | ±0 | 🟢 Clear |
-| Stale pages | 259 | +1 | 🟡 Medium |
+| Stale pages | 254 | -5 | 🟡 Medium |
 | Knowledge gaps | 0 | ±0 | 🟢 Clear |
 
-**Analysis window:** 60 of 982 pages (6%) — 1 changed since last run, 59 from the rotating cursor. Full-vault coverage every ~17 runs.
+**Analysis window:** 60 of 982 pages (6%) — 0 changed since last run, 60 from the rotating cursor. Full-vault coverage every ~17 runs.
 
 ## Freshness by category
 
@@ -21,22 +21,22 @@
 | architecture | 56 | 28 | 27 | 0 | 0 |
 | historical | 168 | 0 | 0 | 30 | 0 |
 | operational | 396 | 1 | 44 | 0 | 0 |
-| reference | 327 | 97 | 167 | 0 | 0 |
+| reference | 327 | 102 | 162 | 0 | 5 |
 
 ## 🎯 Triage — start here
 
 **Stale pages others depend on** (most inbound links first) — these propagate outdated information:
 
-1. `concepts/agent-loops.md` — 102 inbound links, 207 days old
-1. `concepts/multi-agent-systems.md` — 64 inbound links, 202 days old
-1. `entities/mcp-ecosystem.md` — 61 inbound links, 203 days old
-1. `concepts/human-in-the-loop.md` — 56 inbound links, 186 days old
-1. `patterns/pattern-hot-cache.md` — 45 inbound links, 186 days old
 1. `patterns/pattern-fan-out-worker.md` — 44 inbound links, 207 days old
 1. `entities/anthropic.md` — 42 inbound links, 207 days old
 1. `patterns/pattern-supervisor-worker.md` — 41 inbound links, 201 days old
 1. `frameworks/framework-langgraph.md` — 40 inbound links, 206 days old
 1. `concepts/llm-as-judge.md` — 36 inbound links, 186 days old
+1. `concepts/llm-wiki.md` — 36 inbound links, 186 days old
+1. `concepts/memory-systems.md` — 34 inbound links, 186 days old
+1. `entities/andrej-karpathy.md` — 32 inbound links, 158 days old
+1. `concepts/agent-memory-runtime.md` — 30 inbound links, 186 days old
+1. `concepts/guardrails.md` — 29 inbound links, 207 days old
 
 ## 🟡 Stale Pages (past their category review cadence; see Freshness by category)
 
@@ -47,11 +47,11 @@
 - `agents/leads/sofie/profile.md` — last updated: 2026-04-10T00:00:00.000Z (agent-memory, cadence: 30d, 201d old)
 - `agents/leads/sofie/task-log.md` — last updated: 2026-04-10T00:00:00.000Z (agent-memory, cadence: 30d, 201d old)
 - `agents/orchestrators/architecture-agent/gotchas.md` — last updated: 2026-04-09T00:00:00.000Z (agent-memory, cadence: 30d, 202d old)
-- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` — last updated: 2026-04-25T15:57:32.779Z (agent-memory, cadence: 30d, 185d old)
+- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` — last updated: 2026-04-25T15:57:32.779Z (agent-memory, cadence: 30d, 186d old)
 - `agents/workers/code-reviewer/profile.md` — last updated: 2026-04-25T00:00:00.000Z (agent-memory, cadence: 30d, 186d old)
 - `agents/workers/gsd-executor/hot.md` — last updated: 2026-04-09T07:40:09.804Z (agent-memory, cadence: 30d, 202d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` — last updated: 2026-04-25T16:04:03.063Z (agent-memory, cadence: 30d, 185d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` — last updated: 2026-04-25T16:20:41.647Z (agent-memory, cadence: 30d, 185d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` — last updated: 2026-04-25T16:04:03.063Z (agent-memory, cadence: 30d, 186d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` — last updated: 2026-04-25T16:20:41.647Z (agent-memory, cadence: 30d, 186d old)
 - `agents/workers/gsd-nyquist-auditor/profile.md` — last updated: 2026-04-25T00:00:00.000Z (agent-memory, cadence: 30d, 186d old)
 - `agents/workers/gsd-phase-researcher/profile.md` — last updated: 2026-04-25T00:00:00.000Z (agent-memory, cadence: 30d, 186d old)
 - `agents/workers/gsd-planner/profile.md` — last updated: 2026-04-25T00:00:00.000Z (agent-memory, cadence: 30d, 186d old)
@@ -65,7 +65,6 @@
 - `agents/workers/security-reviewer/profile.md` — last updated: 2026-04-25T00:00:00.000Z (agent-memory, cadence: 30d, 186d old)
 - `candidates.md` — last updated: 2026-09-02T00:00:00.000Z (operational, cadence: 30d, 56d old)
 - `concepts/agent-evaluation.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
-- `concepts/agent-loops.md` — last updated: 2026-04-04T00:00:00.000Z (reference, cadence: 180d, 207d old)
 - `concepts/agent-memory-runtime.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/agent-resources-platform.md` — last updated: 2026-04-21T00:00:00.000Z (reference, cadence: 180d, 190d old)
 - `concepts/agent-sandboxing.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
@@ -85,7 +84,6 @@
 - `concepts/goal-vs-task-completion.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/gstack.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/guardrails.md` — last updated: 2026-04-04T00:00:00.000Z (reference, cadence: 180d, 207d old)
-- `concepts/human-in-the-loop.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/ingest-pipeline.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/integration-verification.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/knowledge-compilation.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
@@ -97,7 +95,6 @@
 - `concepts/llm-wiki.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/memory-systems.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
 - `concepts/minimal-worker-context.md` — last updated: 2026-04-10T00:00:00.000Z (reference, cadence: 180d, 201d old)
-- `concepts/multi-agent-systems.md` — last updated: 2026-04-09T00:00:00.000Z (reference, cadence: 180d, 202d old)
 - `concepts/multi-tenancy-agents.md` — last updated: 2026-04-05T00:00:00.000Z (reference, cadence: 180d, 206d old)
 - `concepts/multi-tenancy.md` — last updated: 2026-04-07T00:00:00.000Z (reference, cadence: 180d, 204d old)
 - `concepts/mysql-innodb-best-practices.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 180d, 186d old)
@@ -135,7 +132,6 @@
 - `entities/key-agentic-researchers.md` — last updated: 2026-04-04T00:00:00.000Z (reference, cadence: 90d, 207d old)
 - `entities/langchain-ecosystem.md` — last updated: 2026-04-04T00:00:00.000Z (reference, cadence: 90d, 207d old)
 - `entities/leann.md` — last updated: 2026-06-18T00:00:00.000Z (reference, cadence: 90d, 132d old)
-- `entities/mcp-ecosystem.md` — last updated: 2026-04-08T00:00:00.000Z (reference, cadence: 90d, 203d old)
 - `entities/model-landscape.md` — last updated: 2026-04-04T00:00:00.000Z (reference, cadence: 90d, 207d old)
 - `entities/oh-my-mermaid.md` — last updated: 2026-04-08T00:00:00.000Z (reference, cadence: 90d, 203d old)
 - `entities/openai.md` — last updated: 2026-04-04T00:00:00.000Z (reference, cadence: 90d, 207d old)
@@ -191,7 +187,6 @@
 - `patterns/pattern-goal-backward-planning.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 120d, 186d old)
 - `patterns/pattern-grounded-generation.md` — last updated: 2026-05-16T00:00:00.000Z (reference, cadence: 120d, 165d old)
 - `patterns/pattern-hosted-agent-infrastructure.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 120d, 186d old)
-- `patterns/pattern-hot-cache.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 120d, 186d old)
 - `patterns/pattern-hybrid-search-retrieval.md` — last updated: 2026-05-16T00:00:00.000Z (reference, cadence: 120d, 165d old)
 - `patterns/pattern-idempotent-tools.md` — last updated: 2026-04-04T00:00:00.000Z (reference, cadence: 120d, 207d old)
 - `patterns/pattern-import-readwise-skill.md` — last updated: 2026-04-25T00:00:00.000Z (reference, cadence: 120d, 186d old)
