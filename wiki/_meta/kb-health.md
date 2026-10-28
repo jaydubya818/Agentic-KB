@@ -7,12 +7,12 @@
 | Open contradictions | 0 | 0 | 🟢 OK | — |
 | Orphaned pages | 0 | 80 | 🟢 OK | — |
 | Orphan growth per run (> 5) | 0 | 5 | 🟢 OK | — |
-| Stale pages (% of vault) | 26 | 40 | 🟢 OK | — |
+| Stale pages (% of vault) | 25 | 40 | 🟢 OK | — |
 | Broken cross-references | 37 | 0 | 🟡 STANDING | 2026-10-11 (17d) |
 | Active-project documentation gaps | 8 | 0 | 🟡 STANDING | 2026-10-11 (17d) |
 | Degraded analysis run | 0 | 0 | 🟢 OK | — |
 
-Pages: 982 · Stale: 259 (26%) · Pages with `last_verified`: 0 · Gaps: 0
+Pages: 982 · Stale: 254 (25%) · Pages with `last_verified`: 5 · Gaps: 0
 
 **Analysis coverage:** 60/982 pages this run. The window rotates each run, so contradiction and gap findings reflect a rolling sample, not a full-vault sweep.
 
@@ -21,7 +21,7 @@ Pages: 982 · Stale: 259 (26%) · Pages with `last_verified`: 0 · Gaps: 0
 | | Before | After |
 |---|---|---|
 | Orphans | 0 | 0 |
-| Stale | 259 | 259 |
+| Stale | 254 | 254 |
 | Broken cross-references | 37 | 37 |
 
 **Status key:** NEW · REGRESSION · WORSENING notify. STANDING and BLOCKED are shown here without re-alerting. REMEDIATED is reported once.
