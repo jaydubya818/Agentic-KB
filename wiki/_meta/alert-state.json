@@ -2,11 +2,11 @@
   "findings": {
     "stale_pct": {
       "status": "REMEDIATED",
-      "value": 25,
+      "value": 26,
       "threshold": 40,
       "label": "Stale pages (% of vault)",
       "firstSeen": "2026-10-11",
-      "lastChanged": "2026-10-28",
+      "lastChanged": "2026-10-29",
       "resolvedAt": "2026-10-13"
     },
     "broken_links": {
