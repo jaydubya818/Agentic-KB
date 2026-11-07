@@ -3,7 +3,7 @@ title: KB Quality
 type: moc
 category: structure
 tags: [maintenance, quality, generated]
-updated: 2026-11-06
+updated: 2026-11-07
 ---
 
 # KB Quality
@@ -16,7 +16,7 @@ updated: 2026-11-06
 | Duplicate / overlapping topics | 30 |
 | Decisions nothing references | 0 |
 | Agent instruction pages >2× past cadence | 21 |
-| Patterns past review cadence | 57 |
+| Patterns past review cadence | 59 |
 | Pages with malformed front matter | 6 |
 | Pages with `last_verified` | 5 |
 
@@ -70,21 +70,21 @@ updated: 2026-11-06
 
 ## Agent instructions likely obsolete
 
-- `agents/leads/planning-agent/gotchas.md` (211d old)
-- `agents/leads/sofie/hot.md` (210d old)
-- `agents/leads/sofie/profile.md` (210d old)
-- `agents/leads/sofie/task-log.md` (210d old)
-- `agents/orchestrators/architecture-agent/gotchas.md` (211d old)
-- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (194d old)
-- `agents/workers/code-reviewer/profile.md` (195d old)
-- `agents/workers/gsd-executor/hot.md` (211d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (194d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (194d old)
-- `agents/workers/gsd-nyquist-auditor/profile.md` (195d old)
-- `agents/workers/gsd-phase-researcher/profile.md` (195d old)
-- `agents/workers/gsd-planner/profile.md` (195d old)
-- `agents/workers/gsd-research-synthesizer/profile.md` (195d old)
-- `agents/workers/gsd-roadmapper/profile.md` (195d old)
+- `agents/leads/planning-agent/gotchas.md` (212d old)
+- `agents/leads/sofie/hot.md` (211d old)
+- `agents/leads/sofie/profile.md` (211d old)
+- `agents/leads/sofie/task-log.md` (211d old)
+- `agents/orchestrators/architecture-agent/gotchas.md` (212d old)
+- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (195d old)
+- `agents/workers/code-reviewer/profile.md` (196d old)
+- `agents/workers/gsd-executor/hot.md` (212d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (195d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (195d old)
+- `agents/workers/gsd-nyquist-auditor/profile.md` (196d old)
+- `agents/workers/gsd-phase-researcher/profile.md` (196d old)
+- `agents/workers/gsd-planner/profile.md` (196d old)
+- `agents/workers/gsd-research-synthesizer/profile.md` (196d old)
+- `agents/workers/gsd-roadmapper/profile.md` (196d old)
 - …and 6 more
 
 ## Patterns awaiting verification
@@ -104,7 +104,7 @@ updated: 2026-11-06
 - `patterns/pattern-external-memory.md`
 - `patterns/pattern-fan-out-worker.md`
 - `patterns/pattern-filesystem-context.md`
-- …and 42 more
+- …and 44 more
 
 ## Malformed front matter
 
