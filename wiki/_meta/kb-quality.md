@@ -3,7 +3,7 @@ title: KB Quality
 type: moc
 category: structure
 tags: [maintenance, quality, generated]
-updated: 2026-11-11
+updated: 2026-11-12
 ---
 
 # KB Quality
@@ -70,21 +70,21 @@ updated: 2026-11-11
 
 ## Agent instructions likely obsolete
 
-- `agents/leads/planning-agent/gotchas.md` (216d old)
-- `agents/leads/sofie/hot.md` (215d old)
-- `agents/leads/sofie/profile.md` (215d old)
-- `agents/leads/sofie/task-log.md` (215d old)
-- `agents/orchestrators/architecture-agent/gotchas.md` (216d old)
-- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (199d old)
-- `agents/workers/code-reviewer/profile.md` (200d old)
-- `agents/workers/gsd-executor/hot.md` (216d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (199d old)
-- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (199d old)
-- `agents/workers/gsd-nyquist-auditor/profile.md` (200d old)
-- `agents/workers/gsd-phase-researcher/profile.md` (200d old)
-- `agents/workers/gsd-planner/profile.md` (200d old)
-- `agents/workers/gsd-research-synthesizer/profile.md` (200d old)
-- `agents/workers/gsd-roadmapper/profile.md` (200d old)
+- `agents/leads/planning-agent/gotchas.md` (217d old)
+- `agents/leads/sofie/hot.md` (216d old)
+- `agents/leads/sofie/profile.md` (216d old)
+- `agents/leads/sofie/task-log.md` (216d old)
+- `agents/orchestrators/architecture-agent/gotchas.md` (217d old)
+- `agents/orchestrators/architecture-agent/working-memory/task-2026-04-25T15-57-32-778Z-0001.md` (200d old)
+- `agents/workers/code-reviewer/profile.md` (201d old)
+- `agents/workers/gsd-executor/hot.md` (217d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-04-00-464Z-0001.md` (200d old)
+- `agents/workers/gsd-executor/working-memory/task-2026-04-25T16-20-41-496Z-0001.md` (200d old)
+- `agents/workers/gsd-nyquist-auditor/profile.md` (201d old)
+- `agents/workers/gsd-phase-researcher/profile.md` (201d old)
+- `agents/workers/gsd-planner/profile.md` (201d old)
+- `agents/workers/gsd-research-synthesizer/profile.md` (201d old)
+- `agents/workers/gsd-roadmapper/profile.md` (201d old)
 - …and 6 more
 
 ## Patterns awaiting verification
